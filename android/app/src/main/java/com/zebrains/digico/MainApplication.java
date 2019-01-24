@@ -1,4 +1,4 @@
-package com.digicomob;
+package com.zebrains.digico;
 
 import android.app.Application;
 
