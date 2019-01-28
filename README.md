@@ -2,7 +2,10 @@
 
 ## Android fixes ##
 
-### Навигация ###
+### Навигация ###  
+
+[rn-video 4.2.0+ issue](https://github.com/react-native-community/react-native-video/issues/1417)
+
 [issue](https://github.com/wix/react-native-navigation/issues/4524)
 >/node_modules/react-native-navigation/lib/android/app/build.gradle  
 
