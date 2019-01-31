@@ -13,6 +13,7 @@ import com.reactnativenavigation.react.NavigationReactNativeHost;
 import com.reactnativenavigation.react.ReactGateway;
 
 import com.brentvatne.react.ReactVideoPackage;
+import com.tanguyantoine.react.MusicControl;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,7 +38,8 @@ public class MainApplication extends NavigationApplication {
 
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
-            new ReactVideoPackage()
+            new ReactVideoPackage(),
+            new MusicControl()
         );
     }
   
