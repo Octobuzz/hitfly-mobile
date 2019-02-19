@@ -10,56 +10,14 @@ import {
 import RNVideo from 'react-native-video';
 import RNMusicControl from 'react-native-music-control';
 import SeekBar from './SeekBar';
+import playlist from './playlist';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       paused: true,
-      playlist: [
-        {
-          artwork: require('./src/resources/images/artwork_0.png'),
-          title: 'TwOnPs - Message Man (local mp3)',
-          file: require('./src/resources/music/MessageMan.mp3')
-        },
-        {
-          artwork: require('./src/resources/images/artwork_1.png'),
-          title: 'TwOnPs - Stressed Out (server mp3)',
-          uri: 'https://rejjer.io/music/top/02%20-%20Stressed%20Out.mp3'
-        },
-        {
-          artwork: require('./src/resources/images/artwork_2.png'),
-          title: 'TwOnPs - Ride (server mp3)',
-          uri: 'https://rejjer.io/music/top/03%20-%20Ride.mp3'
-        },
-        {
-          artwork: require('./src/resources/images/artwork_3.png'),
-          title: 'TwOnPs - Tear In My Heart (server mp3)',
-          uri: 'https://rejjer.io/music/top/05%20-%20Tear%20In%20My%20Heart.mp3'
-        },
-        {
-          artwork: require('./src/resources/images/artwork_4.png'),
-          title: 'Queen - We Will Rock You (deezer.com)',
-          uri:
-            'https://e-cdns-proxy-0.dzcdn.net/mobile/1/9e982cae4291ca4c0853f88896d5a153357f53b1616fa9f728fa52b8b32f8915feaba9aef6de4ee12ee9c6c2c4537e6b37787842a3e21693cdaaeb37871d19b4e094fc074a0b6745fdee73be7d5b94fe'
-        },
-        {
-          artwork: require('./src/resources/images/artwork_5.png'),
-          title: 'Stream 1',
-          uri: 'http://46.146.214.204:8001/;stream/1'
-        },
-        {
-          artwork: require('./src/resources/images/artwork_6.png'),
-          title: 'Stream 2',
-          uri: 'https://radio.promodj.com/channel5-192'
-        },
-        {
-          artwork: require('./src/resources/images/artwork_7.png'),
-          title: 'КИНО! (server mp4)',
-          uri:
-            'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
-        }
-      ],
+      playlist: playlist,
       selected: 0,
       currentPosition: 0,
       totalLength: 1,
@@ -260,9 +218,9 @@ export default class App extends Component {
           ignoreSilentSwitch={'ignore'}
           audioOnly={true}
           source={
-            playlist[selected].uri
+            playlist[selected].url
               ? {
-                  uri: playlist[selected].uri
+                  uri: playlist[selected].url
                 }
               : playlist[selected].file
           }

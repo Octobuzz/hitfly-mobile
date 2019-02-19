@@ -14,6 +14,7 @@ import com.reactnativenavigation.react.ReactGateway;
 
 import com.brentvatne.react.ReactVideoPackage;
 import com.tanguyantoine.react.MusicControl;
+import com.guichaguri.trackplayer.TrackPlayer;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,7 +40,8 @@ public class MainApplication extends NavigationApplication {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new ReactVideoPackage(),
-            new MusicControl()
+            new MusicControl(),
+            new TrackPlayer()
         );
     }
   

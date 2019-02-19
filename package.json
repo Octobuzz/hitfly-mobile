@@ -20,6 +20,8 @@
     "react-native-music-control": "^0.9.7",
     "react-native-navigation": "^2.7.1",
     "react-native-slider": "^0.11.0",
+    "react-native-swift": "^1.2.2",
+    "react-native-track-player": "^1.1.2",
     "react-native-video": "^4.2.0"
   },
   "devDependencies": {
@@ -30,5 +32,6 @@
   },
   "jest": {
     "preset": "react-native"
-  }
+  },
+  "isSwift": true
 }
