@@ -1,18 +1,7 @@
 import {Navigation} from 'react-native-navigation';
-import App1 from './App1';
-import App2 from './App2';
-import RNTrackPlayer from 'react-native-track-player';
+import Navigator from './src/navigation/Navigator';
+import registerScreens from './src/navigation/registerScreens';
 
-Navigation.registerComponent(`navigation.playground.WelcomeScreen`, () => App2);
+registerScreens();
 
-RNTrackPlayer.registerPlaybackService(() => require('./TrackService'));
-
-Navigation.events().registerAppLaunchedListener(() => {
-  Navigation.setRoot({
-    root: {
-      component: {
-        name: "navigation.playground.WelcomeScreen"
-      }
-    }
-  });
-});
+Navigation.events().registerAppLaunchedListener(() => Navigator.startSplashScreen());

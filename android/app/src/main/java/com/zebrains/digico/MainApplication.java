@@ -11,10 +11,9 @@ import com.facebook.soloader.SoLoader;
 import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.react.NavigationReactNativeHost;
 import com.reactnativenavigation.react.ReactGateway;
-
-import com.brentvatne.react.ReactVideoPackage;
-import com.tanguyantoine.react.MusicControl;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.guichaguri.trackplayer.TrackPlayer;
+import com.BV.LinearGradient.LinearGradientPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,9 +38,9 @@ public class MainApplication extends NavigationApplication {
 
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
-            new ReactVideoPackage(),
-            new MusicControl(),
-            new TrackPlayer()
+            new SplashScreenReactPackage(),
+            new TrackPlayer(),
+            new LinearGradientPackage()
         );
     }
   
