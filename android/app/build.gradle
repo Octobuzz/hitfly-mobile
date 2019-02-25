@@ -167,6 +167,8 @@ dependencies {
     implementation project(':react-native-splash-screen')
     implementation project(':react-native-track-player')
     implementation project(':react-native-linear-gradient')
+    implementation project(':react-native-text-input-mask')
+    implementation project(':react-native-fast-image')
 }
 
 // Run this once to be able to run the application with BUCK

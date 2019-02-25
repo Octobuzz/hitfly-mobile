@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
   title: {
     ...style.text.navBarTitle,
-    color: colors.WHITE,
+    color: colors.BLACK_LABEL,
   },
 })
 

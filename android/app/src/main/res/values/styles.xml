@@ -6,6 +6,6 @@
 
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:background">@color/pinkSplash</item>
-        <item name="android:statusBarColor">@color/pinkSplash</item>
+        <item name="android:statusBarColor">@color/blackSplash</item>
     </style>
 </resources>

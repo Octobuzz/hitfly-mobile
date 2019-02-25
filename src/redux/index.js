@@ -27,6 +27,7 @@ const transformerConfig = {
 const persistConfig = {
   key: 'primary',
   storage: AsyncStorage,
+  timeout: 0,
   // whitelist: ['profile'],
   stateReconciler: seamlessImmutableReconciler,
   transforms: [seamlessImmutableTransformCreator(transformerConfig)],

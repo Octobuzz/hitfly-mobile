@@ -14,6 +14,8 @@ import com.reactnativenavigation.react.ReactGateway;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.guichaguri.trackplayer.TrackPlayer;
 import com.BV.LinearGradient.LinearGradientPackage;
+import com.RNTextInputMask.RNTextInputMaskPackage;
+import com.dylanvann.fastimage.FastImageViewPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,9 +40,11 @@ public class MainApplication extends NavigationApplication {
 
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
-            new SplashScreenReactPackage(),
-            new TrackPlayer(),
-            new LinearGradientPackage()
+            new SplashScreenReactPackage()
+            ,new TrackPlayer()
+            ,new LinearGradientPackage()
+            ,new FastImageViewPackage()
+            ,new RNTextInputMaskPackage()
         );
     }
   

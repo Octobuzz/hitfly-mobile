@@ -2,13 +2,17 @@ import R from 'ramda'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { StyleSheet, View, Image } from 'react-native'
+import { StyleSheet, View, Image, Platform } from 'react-native'
+import SplashScreen from 'react-native-splash-screen'
 import Navigator from '../navigation/Navigator'
 import { colors, images } from '../constants'
 import { profileSelectors } from '../redux/profile'
 
 class Splash extends Component {
   componentDidMount() {
+    if (Platform.OS === 'android') {
+      SplashScreen.hide()
+    }
     if (this.props.userName) {
       Navigator.startTabBasedApp()
     } else {

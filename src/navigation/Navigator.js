@@ -1,4 +1,5 @@
 import { Navigation } from 'react-native-navigation'
+import { Platform } from 'react-native'
 
 import * as screens from './screens'
 import { colors, images } from '../constants'
@@ -11,10 +12,46 @@ import {
   NAV_BAR_BUTTON_USER_AVATAR,
 } from '../screens/NavBarButton'
 
+const STATUS_BAR_STYLE = {
+  style: 'light', // | 'dark',
+  // ios
+  hideWithTopBar: false,
+  blur: true,
+  // android
+  backgroundColor: colors.BLACK,
+  drawBehind: false,
+  visible: true,
+}
+
+const TOP_BAR_STYLE = {
+  visible: true,
+  animate: false,
+  hideOnScroll: true,
+  // buttonColor: colors.BLACK,
+  drawBehind: false,
+  backButton: {
+    title: '',
+    icon: images.NAVBAR_BACK_ARROW_WHITE,
+    visible: false,
+  },
+  background: {
+    color: colors.WHITE,
+  },
+  // ios
+  noBorder: true,
+  // searchBar: false,
+  // android
+  height: 60, // TopBar height in dp
+  // borderColor: colors.WHITE,
+  borderHeight: 0,
+  elevation: 0, // TopBar elevation in dp
+  topMargin: 0, // top margin in dp
+}
+
 const BOTTOM_TABS_STYLE = {
   visible: true,
-  animate: true,
-  currentTabIndex: 0,
+  animate: false,
+  // currentTabIndex: 0,
   // currentTabId: 'currentTabId',
   // testID: 'bottomTabsTestID',
   drawBehind: false,
@@ -29,7 +66,13 @@ const BOTTOM_TABS_STYLE = {
 }
 
 const BOTTOM_TAB_STYLE = {
-  textColor: colors.GRAY_LABEL,
+  ...Platform.select({
+    android: {
+      iconColor: colors.EXTRA_GRAY_LABEL,
+      selectedIconColor: colors.BLACK_LABEL,
+    },
+  }),
+  textColor: colors.EXTRA_GRAY_LABEL,
   selectedTextColor: colors.BLACK_LABEL,
   fontFamily: style.text.regular.fontFamily,
   fontSize: 8,
@@ -44,7 +87,7 @@ const BOTTOM_TAB_STYLE = {
 const topBarTitle = (title = '') => {
   return {
     title: {
-      color: colors.BRAND_BLUE,
+      // color: colors.BRAND_BLUE,
       text: '',
       alignment: 'fill',
       component: {
@@ -71,26 +114,16 @@ const navBarButton = type => {
   }
 }
 
-const startSplashScreen = () => {
+const startSplashScreen = async () => {
   Navigation.setDefaultOptions({
-    statusBar: {
-      visible: true,
-      style: 'dark',
-      // backgroundColor: colors.WHITE, android
-    },
+    statusBar: STATUS_BAR_STYLE,
     topBar: {
-      background: {
-        // color: colors.TRANSPARENT,
-        color: colors.BLACK,
-      },
-      ...topBarTitle(''),
-      backButton: {
-        title: '',
-        color: 'white',
-      },
-      buttonColor: 'white',
+      visible: false,
+      height: 0,
     },
     layout: {
+      backgroundColor: colors.WHITE,
+      topMargin: 0,
       orientation: ['portrait'],
     },
     bottomTabs: {
@@ -112,9 +145,7 @@ const startSplashScreen = () => {
                 topBar: {
                   visible: false,
                 },
-                statusBar: {
-                  style: 'dark',
-                },
+                statusBar: STATUS_BAR_STYLE,
               },
             },
           },
@@ -134,15 +165,8 @@ const startLoginScreen = () => {
               name: screens.LOGIN.screen,
               options: {
                 topBar: {
+                  ...TOP_BAR_STYLE,
                   ...topBarTitle('Вход'),
-                  leftButtons: [
-                    // navBarButton(NAV_BAR_BUTTON_ARROW_BACK_WHITE),
-                    // navBarButton(NAV_BAR_BUTTON_SHEVRON_DOWN_WHITE),
-                  ],
-                  rightButtons: [
-                    // navBarButton(NAV_BAR_BUTTON_SETTINGS_WHITE),
-                    navBarButton(NAV_BAR_BUTTON_USER_AVATAR),
-                  ],
                 },
               },
             },
@@ -166,6 +190,7 @@ const startTabBasedApp = () => {
                     name: screens.TAB_HOME.screen,
                     options: {
                       topBar: {
+                        ...TOP_BAR_STYLE,
                         ...topBarTitle('Главное'),
                         rightButtons: [
                           navBarButton(NAV_BAR_BUTTON_USER_AVATAR),
@@ -177,10 +202,11 @@ const startTabBasedApp = () => {
               ],
               options: {
                 bottomTab: {
+                  ...BOTTOM_TAB_STYLE,
                   text: 'Главное',
                   icon: images.TAB_HOME,
                   selectedIcon: images.TAB_HOME_SELECTED,
-                  testID: screens.TAB_HOME.screen,
+                  testID: `${screens.TAB_HOME.screen}_id`,
                 },
               },
             },
@@ -193,6 +219,7 @@ const startTabBasedApp = () => {
                     name: screens.TAB_SELECTIONS.screen,
                     options: {
                       topBar: {
+                        ...TOP_BAR_STYLE,
                         ...topBarTitle('Подборки'),
                       },
                     },
@@ -201,10 +228,11 @@ const startTabBasedApp = () => {
               ],
               options: {
                 bottomTab: {
+                  ...BOTTOM_TAB_STYLE,
                   text: 'Подборки',
                   icon: images.TAB_SELECTIONS,
                   selectedIcon: images.TAB_SELECTIONS_SELECTED,
-                  testID: screens.TAB_SELECTIONS.screen,
+                  testID: `${screens.TAB_SELECTIONS.screen}_id`,
                 },
               },
             },
@@ -217,6 +245,7 @@ const startTabBasedApp = () => {
                     name: screens.TAB_RADIO.screen,
                     options: {
                       topBar: {
+                        ...TOP_BAR_STYLE,
                         ...topBarTitle('Радиостанция'),
                       },
                     },
@@ -225,10 +254,11 @@ const startTabBasedApp = () => {
               ],
               options: {
                 bottomTab: {
+                  ...BOTTOM_TAB_STYLE,
                   text: 'Радиостанция',
                   icon: images.TAB_RADIO,
                   selectedIcon: images.TAB_RADIO_SELECTED,
-                  testID: screens.TAB_RADIO.screen,
+                  testID: `${screens.TAB_RADIO.screen}_id`,
                 },
               },
             },
@@ -241,6 +271,7 @@ const startTabBasedApp = () => {
                     name: screens.TAB_BLOG.screen,
                     options: {
                       topBar: {
+                        ...TOP_BAR_STYLE,
                         ...topBarTitle('Блог'),
                       },
                     },
@@ -249,10 +280,11 @@ const startTabBasedApp = () => {
               ],
               options: {
                 bottomTab: {
+                  ...BOTTOM_TAB_STYLE,
                   text: 'Блог',
                   icon: images.TAB_BLOG,
                   selectedIcon: images.TAB_BLOG_SELECTED,
-                  testID: screens.TAB_BLOG.screen,
+                  testID: `${screens.TAB_BLOG.screen}_id`,
                 },
               },
             },
@@ -265,6 +297,7 @@ const startTabBasedApp = () => {
                     name: screens.TAB_SEARCH.screen,
                     options: {
                       topBar: {
+                        ...TOP_BAR_STYLE,
                         ...topBarTitle('Поиск'),
                       },
                     },
@@ -273,10 +306,11 @@ const startTabBasedApp = () => {
               ],
               options: {
                 bottomTab: {
+                  ...BOTTOM_TAB_STYLE,
                   text: 'Поиск',
                   icon: images.TAB_SEARCH,
                   selectedIcon: images.TAB_SEARCH_SELECTED,
-                  testID: screens.TAB_SEARCH.screen,
+                  testID: `${screens.TAB_SEARCH.screen}_id`,
                 },
               },
             },
