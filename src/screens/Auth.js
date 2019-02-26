@@ -8,6 +8,7 @@ import { profileSelectors, requestLogIn } from '../redux/profile'
 import Button from '../components/Button'
 import InputText from '../components/InputText'
 import TextWithLines from '../components/TextWithLines'
+import Wrapper from '../containers/Wrapper'
 import { images, colors, sizes, style } from '../constants'
 
 class Auth extends Component {
@@ -40,7 +41,7 @@ class Auth extends Component {
 
   render() {
     return (
-      <View style={styles.wrapper}>
+      <Wrapper style={styles.wrapper} scroll isFetching={this.props.isFetching}>
         <View style={styles.authControls}>
           <View style={styles.socialRow}>
             <Button
@@ -115,18 +116,13 @@ class Auth extends Component {
           <Text style={styles.licenseLink}> Условия использования</Text> и
           <Text style={styles.licenseLink}> Политику конфиденциальности</Text>
         </Text>
-      </View>
+      </Wrapper>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 16,
-  },
+  wrapper: {},
   authControls: {
     width: '100%',
   },
