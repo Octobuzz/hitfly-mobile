@@ -2,8 +2,7 @@ import { Navigation } from 'react-native-navigation'
 import { Platform } from 'react-native'
 
 import * as screens from './screens'
-import { colors, images } from '../constants'
-import style from '../style'
+import { colors, images, style } from '../constants'
 import {
   // NAV_BAR_BUTTON_ARROW_BACK_WHITE,
   // NAV_BAR_BUTTON_ARROW_BACK_BLACK,
@@ -26,7 +25,7 @@ const STATUS_BAR_STYLE = {
 const TOP_BAR_STYLE = {
   visible: true,
   animate: false,
-  hideOnScroll: true,
+  hideOnScroll: false,
   // buttonColor: colors.BLACK,
   drawBehind: false,
   backButton: {
@@ -155,14 +154,14 @@ const startSplashScreen = async () => {
   })
 }
 
-const startLoginScreen = () => {
+const startAuthScreen = () => {
   Navigation.setRoot({
     root: {
       stack: {
         children: [
           {
             component: {
-              name: screens.LOGIN.screen,
+              name: screens.AUTH.screen,
               options: {
                 topBar: {
                   ...TOP_BAR_STYLE,
@@ -323,6 +322,6 @@ const startTabBasedApp = () => {
 
 export default {
   startSplashScreen,
-  startLoginScreen,
+  startAuthScreen,
   startTabBasedApp,
 }

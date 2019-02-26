@@ -1,5 +1,5 @@
 import { Platform } from 'react-native'
-import { colors } from './constants'
+import * as colors from './colors'
 
 const baseFont = {
   color: colors.BLACK_LABEL,

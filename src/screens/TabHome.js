@@ -5,12 +5,11 @@ import { connect } from 'react-redux'
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import Navigator from '../navigation/Navigator'
 import { profileSelectors, requestLogOut } from '../redux/profile'
-// import style from '../style'
 
 class TabHome extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps.userName && !this.props.userName) {
-      Navigator.startLoginScreen()
+      Navigator.startAuthScreen()
     }
   }
 

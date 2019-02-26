@@ -12,8 +12,8 @@ export const SPLASH = {
   screen: `${appName}.SplashScreen`,
 }
 
-export const LOGIN = {
-  screen: `${appName}.LoginScreen`,
+export const AUTH = {
+  screen: `${appName}.AuthScreen`,
 }
 
 export const TAB_HOME = {

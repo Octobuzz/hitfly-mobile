@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import NavBarButton from '../screens/NavBarButton'
 import NavBarTitle from '../screens/NavBarTitle'
 import Splash from '../screens/Splash'
-import Login from '../screens/Login'
+import Auth from '../screens/Auth'
 import TabHome from '../screens/TabHome'
 import TabSelections from '../screens/TabSelections'
 import TabRadio from '../screens/TabRadio'
@@ -40,8 +40,8 @@ export default function() {
   Navigation.registerComponent(screens.SPLASH.screen, () =>
     WrappedComponent(Splash),
   )
-  Navigation.registerComponent(screens.LOGIN.screen, () =>
-    WrappedComponent(Login),
+  Navigation.registerComponent(screens.AUTH.screen, () =>
+    WrappedComponent(Auth),
   )
   Navigation.registerComponent(screens.TAB_HOME.screen, () =>
     WrappedComponent(TabHome),

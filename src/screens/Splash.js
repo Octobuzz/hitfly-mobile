@@ -16,7 +16,7 @@ class Splash extends Component {
     if (this.props.userName) {
       Navigator.startTabBasedApp()
     } else {
-      Navigator.startLoginScreen()
+      Navigator.startAuthScreen()
     }
   }
 
