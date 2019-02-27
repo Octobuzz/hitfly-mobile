@@ -35,7 +35,7 @@ const Button = props => {
   const type = _type && [_type] && styles[_type] ? _type : BUTTON_DEFAULT
   const wrapperStyle = [
     styles[type].wrapper,
-    disabled ? { opacity: 0.3 } : { opacity: 1 },
+    disabled ? { opacity: 0.4 } : { opacity: 1 },
     styleWrapper,
   ]
   const touchableStyle = [styles[type].touchable, styleTouchable]
@@ -204,6 +204,7 @@ const styles = {
     ...base_styles,
     touchable: {
       ...base_styles.touchable,
+      maxWidth: '100%',
       backgroundColor: colors.TRANSPARENT,
       paddingHorizontal: sizes.BUTTON_HEIGHT / 2,
     },

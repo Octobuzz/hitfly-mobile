@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { StyleSheet, View, Image, Platform } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
-import Navigator from '../navigation/Navigator'
+import { Navigator } from '../navigation'
 import { colors, images } from '../constants'
 import { profileSelectors } from '../redux/profile'
 

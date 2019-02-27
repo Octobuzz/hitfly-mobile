@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     ...style.text.regular,
     color: colors.GRAY_LABEL,
     fontSize: 16,
-    lineHeight: 18,
+    lineHeight: 20,
     textAlign: 'center',
     paddingHorizontal: 8,
     maxWidth: '80%',

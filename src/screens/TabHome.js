@@ -2,9 +2,11 @@ import R from 'ramda'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
-import Navigator from '../navigation/Navigator'
+import { StyleSheet } from 'react-native'
+import { Navigator } from '../navigation'
 import { profileSelectors, requestLogOut } from '../redux/profile'
+import Button from '../components/Button'
+import Wrapper from '../containers/Wrapper'
 
 class TabHome extends Component {
   componentDidUpdate(prevProps) {
@@ -19,12 +21,13 @@ class TabHome extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Главное</Text>
-        <TouchableOpacity onPress={this._onPressLogOut}>
-          <Text>Выйти</Text>
-        </TouchableOpacity>
-      </View>
+      <Wrapper isFetching={this.props.isFetching}>
+        <Button
+          label="Выйти"
+          styleWrapper={styles.roundedButtonWrapper}
+          onPress={this._onPressLogOut}
+        />
+      </Wrapper>
     )
   }
 }

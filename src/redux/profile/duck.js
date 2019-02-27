@@ -33,7 +33,7 @@ const profile = handleActions(
       (state, userName) => ({ userName, isFetching: false }),
       [R.identity, R.path(['payload', 'userName'])],
     ),
-    [REQUEST_LOGIN]: state => ({ ...state, isFetching: true }),
+    [REQUEST_LOGOUT]: state => ({ ...state, isFetching: true }),
     [LOGOUT_SUCCESS]: state => ({ isFetching: false, userName: null }),
   },
   {

@@ -1,17 +1,15 @@
 import R from 'ramda'
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { StyleSheet, View, Text } from 'react-native'
 import { Navigator, screens } from '../navigation'
-import { profileSelectors, requestLogIn } from '../redux/profile'
 import Button from '../components/Button'
 import InputText from '../components/InputText'
 import TextWithLines from '../components/TextWithLines'
 import Wrapper from '../containers/Wrapper'
 import { images, colors, sizes, style } from '../constants'
 
-class Auth extends Component {
+class AuthCreateAccount extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -20,22 +18,8 @@ class Auth extends Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (!prevProps.userName && this.props.userName) {
-      Navigator.startTabBasedApp()
-    }
-  }
-
-  _onPressLogin = () => {
-    this.props.requestLogIn('Some User Name')
-  }
-
   _onPressCreateAccount = () => {
-    Navigator.push(this, screens.AUTH_CREATE_ACCOUNT)
-  }
-
-  _onPressForgotPassword = () => {
-    Navigator.push(this, screens.AUTH_FORGOT_PASSWORD)
+    Navigator.push(this, screens.AUTH_CREATE_ACCOUNT_PARAMS)
   }
 
   _onChangeEmail = value => this._onChangeText(value, 'email')
@@ -49,7 +33,7 @@ class Auth extends Component {
 
   render() {
     return (
-      <Wrapper scroll isFetching={this.props.isFetching}>
+      <Wrapper scroll>
         <View style={styles.authControls}>
           <View style={styles.socialRow}>
             <Button
@@ -82,7 +66,7 @@ class Auth extends Component {
             />
           </View>
           <TextWithLines
-            text="или войдите через почту"
+            text="или зарегистрируйтесь через почту"
             styleWrapper={styles.textWithLinesWrapper}
           />
           <InputText
@@ -101,18 +85,7 @@ class Auth extends Component {
             password
           />
           <Button
-            type={Button.types.BUTTON_LINK}
-            label="Я не помню пароль"
-            onPress={this._onPressForgotPassword}
-          />
-          <Button
             type={Button.types.BUTTON_DEFAULT}
-            label="Войти"
-            styleWrapper={styles.roundedButtonWrapper}
-            onPress={this._onPressLogin}
-          />
-          <Button
-            type={Button.types.BUTTON_BORDERED}
             label="Создать аккаунт"
             styleWrapper={styles.roundedButtonWrapper}
             onPress={this._onPressCreateAccount}
@@ -159,29 +132,20 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: colors.EXTRA_GRAY_LABEL,
     textAlign: 'center',
-    paddingTop: 48,
+    paddingTop: 64,
   },
   licenseLink: {
     color: colors.BRAND_PINK,
   },
 })
 
-Auth.propTypes = {
-  requestLogIn: PropTypes.func,
-  userName: PropTypes.string,
-  isFetching: PropTypes.bool,
-}
+AuthCreateAccount.propTypes = {}
 
-const mapStateToProps = R.applySpec({
-  userName: profileSelectors.getUserName,
-  isFetching: profileSelectors.getIsFetching,
-})
+const mapStateToProps = R.applySpec({})
 
-const mapDispatchToProps = {
-  requestLogIn,
-}
+const mapDispatchToProps = {}
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Auth)
+)(AuthCreateAccount)

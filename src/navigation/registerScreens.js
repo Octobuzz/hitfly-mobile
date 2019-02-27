@@ -6,6 +6,11 @@ import NavBarButton from '../screens/NavBarButton'
 import NavBarTitle from '../screens/NavBarTitle'
 import Splash from '../screens/Splash'
 import Auth from '../screens/Auth'
+import AuthCreateAccount from '../screens/AuthCreateAccount'
+import AuthCreateAccountParams from '../screens/AuthCreateAccountParams'
+import AuthCreateAccountCategories from '../screens/AuthCreateAccountCategories'
+import AuthForgotPassword from '../screens/AuthForgotPassword'
+import AuthRecoveryPassword from '../screens/AuthRecoveryPassword'
 import TabHome from '../screens/TabHome'
 import TabSelections from '../screens/TabSelections'
 import TabRadio from '../screens/TabRadio'
@@ -42,6 +47,22 @@ export default function() {
   )
   Navigation.registerComponent(screens.AUTH.screen, () =>
     WrappedComponent(Auth),
+  )
+  Navigation.registerComponent(screens.AUTH_CREATE_ACCOUNT.screen, () =>
+    WrappedComponent(AuthCreateAccount),
+  )
+  Navigation.registerComponent(screens.AUTH_CREATE_ACCOUNT_PARAMS.screen, () =>
+    WrappedComponent(AuthCreateAccountParams),
+  )
+  Navigation.registerComponent(
+    screens.AUTH_CREATE_ACCOUNT_CATEGORIES.screen,
+    () => WrappedComponent(AuthCreateAccountCategories),
+  )
+  Navigation.registerComponent(screens.AUTH_FORGOT_PASSWORD.screen, () =>
+    WrappedComponent(AuthForgotPassword),
+  )
+  Navigation.registerComponent(screens.AUTH_RECOVERY_PASSWORD.screen, () =>
+    WrappedComponent(AuthRecoveryPassword),
   )
   Navigation.registerComponent(screens.TAB_HOME.screen, () =>
     WrappedComponent(TabHome),

@@ -34,3 +34,18 @@ export const FORM_EMAIL = require('../assets/images/form/email.png')
 export const FORM_PASSWORD = require('../assets/images/form/password.png')
 export const FORM_SEARCH = require('../assets/images/form/search.png')
 export const FORM_SHEVRON_DOWN = require('../assets/images/form/shevron_down.png')
+
+// control
+export const CONTROL_HEART_BLACK = require('../assets/images/control/heart_black.png')
+export const CONTROL_HEART_WHITE = require('../assets/images/control/heart_white.png')
+export const CONTROL_HEART_GRADIENT = require('../assets/images/control/heart_gradient.png')
+
+// temp categories
+export const TEMP_CATEGORY_1 = require('../assets/images/temp/categories/category_1.png')
+export const TEMP_CATEGORY_2 = require('../assets/images/temp/categories/category_2.png')
+export const TEMP_CATEGORY_3 = require('../assets/images/temp/categories/category_3.png')
+export const TEMP_CATEGORY_4 = require('../assets/images/temp/categories/category_4.png')
+export const TEMP_CATEGORY_5 = require('../assets/images/temp/categories/category_5.png')
+export const TEMP_CATEGORY_6 = require('../assets/images/temp/categories/category_6.png')
+export const TEMP_CATEGORY_7 = require('../assets/images/temp/categories/category_7.png')
+export const TEMP_CATEGORY_8 = require('../assets/images/temp/categories/category_8.png')

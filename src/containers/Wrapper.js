@@ -33,7 +33,6 @@ class Wrapper extends Component {
 
 const styles = StyleSheet.create({
   wrapper: {
-    alignItems: 'center',
     paddingHorizontal: 16,
     paddingVertical: 16,
   },

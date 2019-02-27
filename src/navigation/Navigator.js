@@ -1,14 +1,17 @@
+// import R from 'ramda'
 import { Navigation } from 'react-native-navigation'
 import { Platform } from 'react-native'
 
 import * as screens from './screens'
 import { colors, images, style } from '../constants'
+import { helpers } from '../utils'
 import {
   // NAV_BAR_BUTTON_ARROW_BACK_WHITE,
-  // NAV_BAR_BUTTON_ARROW_BACK_BLACK,
+  NAV_BAR_BUTTON_ARROW_BACK_BLACK,
   // NAV_BAR_BUTTON_SHEVRON_DOWN_WHITE,
   // NAV_BAR_BUTTON_SETTINGS_WHITE,
   NAV_BAR_BUTTON_USER_AVATAR,
+  // NAV_BAR_BUTTON_ANDROID_OFFSET,
 } from '../screens/NavBarButton'
 
 const STATUS_BAR_STYLE = {
@@ -30,7 +33,6 @@ const TOP_BAR_STYLE = {
   drawBehind: false,
   backButton: {
     title: '',
-    icon: images.NAVBAR_BACK_ARROW_WHITE,
     visible: false,
   },
   background: {
@@ -54,7 +56,7 @@ const BOTTOM_TABS_STYLE = {
   // currentTabId: 'currentTabId',
   // testID: 'bottomTabsTestID',
   drawBehind: false,
-  backgroundColor: 'white',
+  backgroundColor: colors.WHITE,
   // ios
   barStyle: 'default',
   translucent: true,
@@ -83,7 +85,7 @@ const BOTTOM_TAB_STYLE = {
   selectedFontSize: 8,
 }
 
-const topBarTitle = (title = '') => {
+const topBarTitle = (title = '', props = {}) => {
   return {
     title: {
       // color: colors.BRAND_BLUE,
@@ -93,21 +95,24 @@ const topBarTitle = (title = '') => {
         name: screens.NAV_BAR_TITLE.screen,
         alignment: 'fill',
         passProps: {
+          ...props,
           title,
+          someProp: 'qq',
         },
       },
     },
   }
 }
 
-const navBarButton = type => {
+const navBarButton = (type, props = {}) => {
   return {
-    id: `${type}_id`,
+    id: `${type}_${helpers.generateUID}`,
     component: {
       name: screens.NAV_BAR_BUTTON.screen,
       alignment: 'fill',
       passProps: {
         type,
+        ...props,
       },
     },
   }
@@ -190,7 +195,7 @@ const startTabBasedApp = () => {
                     options: {
                       topBar: {
                         ...TOP_BAR_STYLE,
-                        ...topBarTitle('Главное'),
+                        ...topBarTitle(screens.TAB_HOME.title),
                         rightButtons: [
                           navBarButton(NAV_BAR_BUTTON_USER_AVATAR),
                         ],
@@ -202,7 +207,7 @@ const startTabBasedApp = () => {
               options: {
                 bottomTab: {
                   ...BOTTOM_TAB_STYLE,
-                  text: 'Главное',
+                  text: screens.TAB_HOME.title,
                   icon: images.TAB_HOME,
                   selectedIcon: images.TAB_HOME_SELECTED,
                   testID: `${screens.TAB_HOME.screen}_id`,
@@ -219,7 +224,7 @@ const startTabBasedApp = () => {
                     options: {
                       topBar: {
                         ...TOP_BAR_STYLE,
-                        ...topBarTitle('Подборки'),
+                        ...topBarTitle(screens.TAB_SELECTIONS.title),
                       },
                     },
                   },
@@ -228,7 +233,7 @@ const startTabBasedApp = () => {
               options: {
                 bottomTab: {
                   ...BOTTOM_TAB_STYLE,
-                  text: 'Подборки',
+                  text: screens.TAB_SELECTIONS.title,
                   icon: images.TAB_SELECTIONS,
                   selectedIcon: images.TAB_SELECTIONS_SELECTED,
                   testID: `${screens.TAB_SELECTIONS.screen}_id`,
@@ -245,7 +250,7 @@ const startTabBasedApp = () => {
                     options: {
                       topBar: {
                         ...TOP_BAR_STYLE,
-                        ...topBarTitle('Радиостанция'),
+                        ...topBarTitle(screens.TAB_RADIO.title),
                       },
                     },
                   },
@@ -254,7 +259,7 @@ const startTabBasedApp = () => {
               options: {
                 bottomTab: {
                   ...BOTTOM_TAB_STYLE,
-                  text: 'Радиостанция',
+                  text: screens.TAB_RADIO.title,
                   icon: images.TAB_RADIO,
                   selectedIcon: images.TAB_RADIO_SELECTED,
                   testID: `${screens.TAB_RADIO.screen}_id`,
@@ -271,7 +276,7 @@ const startTabBasedApp = () => {
                     options: {
                       topBar: {
                         ...TOP_BAR_STYLE,
-                        ...topBarTitle('Блог'),
+                        ...topBarTitle(screens.TAB_BLOG.title),
                       },
                     },
                   },
@@ -280,7 +285,7 @@ const startTabBasedApp = () => {
               options: {
                 bottomTab: {
                   ...BOTTOM_TAB_STYLE,
-                  text: 'Блог',
+                  text: screens.TAB_BLOG.title,
                   icon: images.TAB_BLOG,
                   selectedIcon: images.TAB_BLOG_SELECTED,
                   testID: `${screens.TAB_BLOG.screen}_id`,
@@ -297,7 +302,7 @@ const startTabBasedApp = () => {
                     options: {
                       topBar: {
                         ...TOP_BAR_STYLE,
-                        ...topBarTitle('Поиск'),
+                        ...topBarTitle(screens.TAB_SEARCH.title),
                       },
                     },
                   },
@@ -306,7 +311,7 @@ const startTabBasedApp = () => {
               options: {
                 bottomTab: {
                   ...BOTTOM_TAB_STYLE,
-                  text: 'Поиск',
+                  text: screens.TAB_SEARCH.title,
                   icon: images.TAB_SEARCH,
                   selectedIcon: images.TAB_SEARCH_SELECTED,
                   testID: `${screens.TAB_SEARCH.screen}_id`,
@@ -320,8 +325,84 @@ const startTabBasedApp = () => {
   })
 }
 
+const getComponentId = screen => {
+  let componentId
+  if (typeof screen === 'object') {
+    componentId =
+      screen.props && screen.props.componentId ? screen.props.componentId : ''
+  } else {
+    componentId = screen
+  }
+  return componentId
+}
+
+const push = (
+  { props: { componentId = '' } },
+  screen = {},
+  passProps = {},
+  navOptions = {},
+) => {
+  const screenId = `${screen.screen}_${helpers.generateUID}`
+  Navigation.push(componentId, {
+    component: {
+      id: screenId,
+      name: screen.screen,
+      passProps,
+      options: {
+        topBar: {
+          ...TOP_BAR_STYLE,
+          ...Platform.select({
+            ios: {
+              ...topBarTitle(screen.title || ''),
+              leftButtons: [
+                navBarButton(NAV_BAR_BUTTON_ARROW_BACK_BLACK, { screenId }),
+              ],
+            },
+            // TODO: фикс для android https://github.com/wix/react-native-navigation/issues/4449
+            android: {
+              ...topBarTitle(screen.title || '', {
+                androidLeftButtons: [
+                  {
+                    type: NAV_BAR_BUTTON_ARROW_BACK_BLACK,
+                  },
+                ],
+                screenId,
+              }),
+            },
+          }),
+          // rightButtons: R.filter(R.complement(R.isNil), [
+          //   Platform.OS === 'android' ? navBarButton(NAV_BAR_BUTTON_ANDROID_OFFSET) : null,
+          //   navBarButton(NAV_BAR_BUTTON_USER_AVATAR, {screenId}),
+          //   navBarButton(NAV_BAR_BUTTON_ARROW_BACK_BLACK, {screenId}),
+          // ]),
+        },
+        bottomTabs: {
+          ...BOTTOM_TABS_STYLE,
+        },
+        bottomTab: {
+          ...BOTTOM_TAB_STYLE,
+        },
+        ...navOptions,
+      },
+    },
+  })
+}
+
+const pop = screen => {
+  let screenId = getComponentId(screen)
+  screenId && Navigation.pop(screenId)
+}
+
+const popToRoot = screen => {
+  let screenId = getComponentId(screen)
+  Navigation.popToRoot(screenId)
+}
+
 export default {
   startSplashScreen,
   startAuthScreen,
   startTabBasedApp,
+  push,
+  pop,
+  popToRoot,
 }

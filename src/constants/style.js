@@ -81,6 +81,11 @@ export default {
       ...fonts.bold,
       fontSize: 20,
       lineHeight: 22,
+      ...Platform.select({
+        ios: {
+          paddingTop: 2,
+        },
+      }),
     },
   },
 }

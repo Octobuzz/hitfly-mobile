@@ -16,11 +16,13 @@ import { colors, sizes, images, style } from '../constants'
 const MASK_PHONE = '+7 ([999]) [999]-[99]-[99]'
 const MASK_NUMBERS_5_DOT_2 = '[99990].[99]'
 const MASK_NUMBERS_3 = '[099]'
+const MASK_NUMBERS_2 = '[00]'
 
 const ICON_CALENDAR = images.FORM_CALENDAR
 const ICON_EMAIL = images.FORM_EMAIL
 const ICON_PASSWORD = images.FORM_PASSWORD
 const ICON_SEARCH = images.FORM_SEARCH
+const ICON_SHEVRON_DOWN = images.FORM_SHEVRON_DOWN
 
 const InputText = props => {
   let InputContainer = TextInput
@@ -106,6 +108,13 @@ const InputText = props => {
           maxLength: 3,
         }
         break
+      case MASK_NUMBERS_2:
+        inputProps = {
+          ...inputProps,
+          keyboardType: 'numeric',
+          maxLength: 2,
+        }
+        break
       default:
         break
     }
@@ -165,6 +174,7 @@ InputText.masks = {
   MASK_PHONE,
   MASK_NUMBERS_5_DOT_2,
   MASK_NUMBERS_3,
+  MASK_NUMBERS_2,
 }
 
 InputText.icons = {
@@ -172,6 +182,7 @@ InputText.icons = {
   ICON_EMAIL,
   ICON_PASSWORD,
   ICON_SEARCH,
+  ICON_SHEVRON_DOWN,
 }
 
 InputText.propTypes = {
