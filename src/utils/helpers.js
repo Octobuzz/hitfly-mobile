@@ -13,3 +13,5 @@ export const generateUID = (count = 10) => {
     text += possible.charAt(Math.floor(Math.random() * possible.length))
   return text
 }
+
+export const hasValue = value => value !== undefined && value !== ''

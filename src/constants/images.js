@@ -39,6 +39,8 @@ export const FORM_SHEVRON_DOWN = require('../assets/images/form/shevron_down.png
 export const CONTROL_HEART_BLACK = require('../assets/images/control/heart_black.png')
 export const CONTROL_HEART_WHITE = require('../assets/images/control/heart_white.png')
 export const CONTROL_HEART_GRADIENT = require('../assets/images/control/heart_gradient.png')
+export const CONTROL_RIGHT_ARROW_BLACK = require('../assets/images/control/right_arrow_black.png')
+export const CONTROL_HOT = require('../assets/images/control/hot.png')
 
 // temp categories
 export const TEMP_CATEGORY_1 = require('../assets/images/temp/categories/category_1.png')
@@ -49,3 +51,6 @@ export const TEMP_CATEGORY_5 = require('../assets/images/temp/categories/categor
 export const TEMP_CATEGORY_6 = require('../assets/images/temp/categories/category_6.png')
 export const TEMP_CATEGORY_7 = require('../assets/images/temp/categories/category_7.png')
 export const TEMP_CATEGORY_8 = require('../assets/images/temp/categories/category_8.png')
+
+//temp main
+export const TEMP_EVENT = require('../assets/images/temp/main/event.png')

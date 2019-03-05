@@ -13,6 +13,7 @@ export const BLACK_LABEL = '#313131'
 export const GRAY_LABEL = '#606060'
 export const EXTRA_GRAY_LABEL = '#A6A6A6'
 export const FUCKING_ANDROID = '#ffffff01'
+export const BLUE = '#232D7D'
 
 // form
 export const INPUT_BORDER = '#E4E4E4'
