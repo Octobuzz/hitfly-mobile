@@ -75,8 +75,13 @@ const TEMPDATA2 = [
 ]
 
 class TabHome extends Component {
+  componentDidMount() {
+    Navigator.showPlayerOverlay()
+  }
+
   componentDidUpdate(prevProps) {
     if (prevProps.userName && !this.props.userName) {
+      Navigator.dismissPlayerOverlay()
       Navigator.startAuthScreen()
     }
   }

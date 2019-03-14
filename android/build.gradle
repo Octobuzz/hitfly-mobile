@@ -46,6 +46,8 @@ subprojects { subproject ->
                         setIgnore(true)
                     }
                 }
+                compileSdkVersion rootProject.ext.compileSdkVersion
+                buildToolsVersion rootProject.ext.buildToolsVersion
             }
         }
     }

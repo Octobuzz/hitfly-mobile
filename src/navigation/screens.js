@@ -12,6 +12,10 @@ export const SPLASH = {
   screen: `${appName}.SplashScreen`,
 }
 
+export const PLAYER = {
+  screen: `${appName}.PlayerScreen`,
+}
+
 export const AUTH = {
   title: 'Вход',
   screen: `${appName}.AuthScreen`,

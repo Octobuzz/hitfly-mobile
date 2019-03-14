@@ -59,8 +59,8 @@ const BOTTOM_TABS_STYLE = {
   backgroundColor: colors.WHITE,
   // ios
   barStyle: 'default',
-  translucent: true,
-  hideShadow: true,
+  translucent: false,
+  hideShadow: false,
   // android
   elevation: 0,
   titleDisplayMode: 'alwaysShow',
@@ -325,6 +325,27 @@ const startTabBasedApp = () => {
   })
 }
 
+export const showPlayerOverlay = () => {
+  Navigation.showOverlay({
+    component: {
+      id: screens.PLAYER.screen,
+      name: screens.PLAYER.screen,
+      options: {
+        layout: {
+          backgroundColor: colors.TRANSPARENT,
+        },
+        overlay: {
+          interceptTouchOutside: false,
+        },
+      },
+    },
+  })
+}
+
+export const dismissPlayerOverlay = () => {
+  Navigation.dismissOverlay(screens.PLAYER.screen)
+}
+
 const getComponentId = screen => {
   let componentId
   if (typeof screen === 'object') {
@@ -336,14 +357,10 @@ const getComponentId = screen => {
   return componentId
 }
 
-const push = (
-  { props: { componentId = '' } },
-  screen = {},
-  passProps = {},
-  navOptions = {},
-) => {
+const push = (currentScreen, screen = {}, passProps = {}, navOptions = {}) => {
+  const currentScreenId = getComponentId(currentScreen)
   const screenId = `${screen.screen}_${helpers.generateUID}`
-  Navigation.push(componentId, {
+  Navigation.push(currentScreenId, {
     component: {
       id: screenId,
       name: screen.screen,
@@ -389,20 +406,41 @@ const push = (
 }
 
 const pop = screen => {
-  let screenId = getComponentId(screen)
+  const screenId = getComponentId(screen)
   screenId && Navigation.pop(screenId)
 }
 
 const popToRoot = screen => {
-  let screenId = getComponentId(screen)
+  const screenId = getComponentId(screen)
   Navigation.popToRoot(screenId)
 }
+
+const showModal = screen => {
+  Navigation.showModal({
+    stack: {
+      children: [
+        {
+          component: {
+            name: screen.screen,
+            passProps: {},
+          },
+        },
+      ],
+    },
+  })
+}
+
+const constants = Navigation.constants
 
 export default {
   startSplashScreen,
   startAuthScreen,
   startTabBasedApp,
+  showPlayerOverlay,
+  dismissPlayerOverlay,
   push,
   pop,
   popToRoot,
+  showModal,
+  constants,
 }

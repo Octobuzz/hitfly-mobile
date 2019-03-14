@@ -41,6 +41,16 @@ export const CONTROL_HEART_WHITE = require('../assets/images/control/heart_white
 export const CONTROL_HEART_GRADIENT = require('../assets/images/control/heart_gradient.png')
 export const CONTROL_RIGHT_ARROW_BLACK = require('../assets/images/control/right_arrow_black.png')
 export const CONTROL_HOT = require('../assets/images/control/hot.png')
+export const CONTROL_BOTTOM_PLAYER_PLAY = require('../assets/images/control/bottom_player_play.png')
+export const CONTROL_BOTTOM_PLAYER_PAUSE = require('../assets/images/control/bottom_player_pause.png')
+export const CONTROL_DOTS_WHITE = require('../assets/images/control/dots_white.png')
+export const CONTROL_DOTS_BLACK = require('../assets/images/control/dots_black.png')
+export const CONTROL_PLAYLIST_BLACK = require('../assets/images/control/playlist_black.png')
+export const CONTROL_PLAYLIST_WHITE = require('../assets/images/control/playlist_white.png')
+export const CONTROL_PLUS_BLACK = require('../assets/images/control/plus_black.png')
+export const CONTROL_PLUS_WHITE = require('../assets/images/control/plus_white.png')
+export const CONTROL_SHUFFLE_BLACK = require('../assets/images/control/shuffle_black.png')
+export const CONTROL_SHUFFLE_WHITE = require('../assets/images/control/shuffle_white.png')
 
 // temp categories
 export const TEMP_CATEGORY_1 = require('../assets/images/temp/categories/category_1.png')
@@ -52,5 +62,8 @@ export const TEMP_CATEGORY_6 = require('../assets/images/temp/categories/categor
 export const TEMP_CATEGORY_7 = require('../assets/images/temp/categories/category_7.png')
 export const TEMP_CATEGORY_8 = require('../assets/images/temp/categories/category_8.png')
 
-//temp main
+// temp main
 export const TEMP_EVENT = require('../assets/images/temp/main/event.png')
+// temp player
+export const TEMP_ARTWORK_MIN = require('../assets/images/temp/player/artwork_min.png')
+export const TEMP_ARTWORK_MAX = require('../assets/images/temp/player/artwork_max.png')

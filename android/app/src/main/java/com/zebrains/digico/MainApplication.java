@@ -11,6 +11,7 @@ import com.facebook.soloader.SoLoader;
 import com.reactnativenavigation.NavigationApplication;
 import com.reactnativenavigation.react.NavigationReactNativeHost;
 import com.reactnativenavigation.react.ReactGateway;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.guichaguri.trackplayer.TrackPlayer;
 import com.BV.LinearGradient.LinearGradientPackage;
@@ -41,6 +42,7 @@ public class MainApplication extends NavigationApplication {
     protected List<ReactPackage> getPackages() {
         return Arrays.<ReactPackage>asList(
             new SplashScreenReactPackage()
+            ,new RNGestureHandlerPackage()
             ,new TrackPlayer()
             ,new LinearGradientPackage()
             ,new FastImageViewPackage()

@@ -45,6 +45,7 @@
 		533CAED92211535700958686 /* libRNTrackPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 533CAED82211532500958686 /* libRNTrackPlayer.a */; };
 		5353AB9B2223CE51009014E1 /* libFastImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5353AB712223CE49009014E1 /* libFastImage.a */; };
 		5392815B21FA015B001DC4F3 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5392815821FA0119001DC4F3 /* libReactNativeNavigation.a */; };
+		53E1211722294DFD00A11621 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53E1211422294DF300A11621 /* libRNGestureHandler.a */; };
 		53EA48A52225719F007BF208 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53EA487622257195007BF208 /* libART.a */; };
 		5EA785E47A4B4EFFA0984F5E /* GothamProRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1A1E3791B554454CBEB65BBC /* GothamProRegular.otf */; };
 		740BAFC37F0A4E1FA68D5711 /* GothamProMediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = FE21C660711F410887D2BF20 /* GothamProMediumItalic.otf */; };
@@ -349,6 +350,13 @@
 			remoteGlobalIDString = 7B49FEBB1E95090800DEB3EA;
 			remoteInfo = ReactNativeNavigationTests;
 		};
+		53E1211322294DF300A11621 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 53E120E322294DF300A11621 /* RNGestureHandler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNGestureHandler;
+		};
 		53EA487522257195007BF208 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 53EA487022257195007BF208 /* ART.xcodeproj */;
@@ -448,6 +456,7 @@
 		531FF30E221D9BDC00FFD7D7 /* BVLinearGradient.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BVLinearGradient.xcodeproj; path = "../node_modules/react-native-linear-gradient/BVLinearGradient.xcodeproj"; sourceTree = "<group>"; };
 		5353AB692223CE48009014E1 /* FastImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FastImage.xcodeproj; path = "../node_modules/react-native-fast-image/ios/FastImage.xcodeproj"; sourceTree = "<group>"; };
 		5392812D21FA0118001DC4F3 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/lib/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
+		53E120E322294DF300A11621 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
 		53EA487022257195007BF208 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		682AC2BB5F164BF2AB53B051 /* GothamProBlack.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProBlack.otf; path = ../src/assets/fonts/GothamProBlack.otf; sourceTree = "<group>"; };
@@ -477,6 +486,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53E1211722294DFD00A11621 /* libRNGestureHandler.a in Frameworks */,
 				53EA48A52225719F007BF208 /* libART.a in Frameworks */,
 				5353AB9B2223CE51009014E1 /* libFastImage.a in Frameworks */,
 				53028B922223C5F000351332 /* libRNTextInputMask.a in Frameworks */,
@@ -693,6 +703,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		53E120E422294DF300A11621 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				53E1211422294DF300A11621 /* libRNGestureHandler.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		53EA487122257195007BF208 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -723,6 +741,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				53E120E322294DF300A11621 /* RNGestureHandler.xcodeproj */,
 				53EA487022257195007BF208 /* ART.xcodeproj */,
 				5353AB692223CE48009014E1 /* FastImage.xcodeproj */,
 				53028B872223C5A700351332 /* RNTextInputMask.xcodeproj */,
@@ -996,6 +1015,10 @@
 				{
 					ProductGroup = 5392812E21FA0118001DC4F3 /* Products */;
 					ProjectRef = 5392812D21FA0118001DC4F3 /* ReactNativeNavigation.xcodeproj */;
+				},
+				{
+					ProductGroup = 53E120E422294DF300A11621 /* Products */;
+					ProjectRef = 53E120E322294DF300A11621 /* RNGestureHandler.xcodeproj */;
 				},
 				{
 					ProductGroup = 53028B882223C5A700351332 /* Products */;
@@ -1288,6 +1311,13 @@
 			fileType = wrapper.cfbundle;
 			path = ReactNativeNavigationTests.xctest;
 			remoteRef = 5392815921FA0119001DC4F3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		53E1211422294DF300A11621 /* libRNGestureHandler.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNGestureHandler.a;
+			remoteRef = 53E1211322294DF300A11621 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		53EA487622257195007BF208 /* libART.a */ = {

@@ -23,7 +23,7 @@ class NavBarButton extends Component {
     return (
       <TouchableOpacity
         style={[styles.buttonContainer, styles.backButton]}
-        onPress={() => Navigator.pop(this.props.screenId)}
+        onPress={this._onPress}
       >
         <Image
           source={
@@ -42,6 +42,7 @@ class NavBarButton extends Component {
     return (
       <TouchableOpacity
         style={[styles.buttonContainer, styles.shevronDownButton]}
+        onPress={this._onPress}
       >
         <Image
           source={images.NAVBAR_SHEVRON_DOWN_WHITE}
@@ -54,7 +55,10 @@ class NavBarButton extends Component {
 
   _renderSettings = () => {
     return (
-      <TouchableOpacity style={[styles.buttonContainer, styles.settingsButton]}>
+      <TouchableOpacity
+        style={[styles.buttonContainer, styles.settingsButton]}
+        onPress={this._onPress}
+      >
         <Image
           source={images.NAVBAR_SETTINGS_WHITE}
           resizeMode="contain"
@@ -66,7 +70,10 @@ class NavBarButton extends Component {
 
   _renderUserAvatar = () => {
     return (
-      <TouchableOpacity style={[styles.buttonContainer, styles.avatarButton]}>
+      <TouchableOpacity
+        style={[styles.buttonContainer, styles.avatarButton]}
+        onPress={this._onPress}
+      >
         <Image
           source={images.NAVBAR_AVATAR_EMPTY}
           resizeMode="contain"
@@ -74,6 +81,25 @@ class NavBarButton extends Component {
         />
       </TouchableOpacity>
     )
+  }
+
+  _onPress = () => {
+    if (this.props.onPress) {
+      this.props.onPress()
+    } else {
+      switch (this.props.type) {
+        case NAV_BAR_BUTTON_ARROW_BACK_WHITE:
+        case NAV_BAR_BUTTON_ARROW_BACK_BLACK:
+          Navigator.pop(this.props.screenId)
+          break
+        case NAV_BAR_BUTTON_SHEVRON_DOWN_WHITE:
+        case NAV_BAR_BUTTON_SETTINGS_WHITE:
+        case NAV_BAR_BUTTON_USER_AVATAR:
+        case NAV_BAR_BUTTON_ANDROID_OFFSET:
+        default:
+          break
+      }
+    }
   }
 
   _renderAndroidOffset = () => {
@@ -152,6 +178,7 @@ const styles = StyleSheet.create({
 NavBarButton.propTypes = {
   type: PropTypes.string,
   screenId: PropTypes.string,
+  onPress: PropTypes.func,
   androidRightOffset: PropTypes.bool,
 }
 
