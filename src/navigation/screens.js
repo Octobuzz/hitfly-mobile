@@ -1,72 +1,72 @@
-import { appName } from '../constants'
+import { APP_NAME } from '../constants/names'
 
 export const NAV_BAR_BUTTON = {
-  screen: `${appName}.NavBarButton`,
+  screen: `${APP_NAME}.NavBarButton`,
 }
 
 export const NAV_BAR_TITLE = {
-  screen: `${appName}.NavBarTitle`,
+  screen: `${APP_NAME}.NavBarTitle`,
 }
 
 export const SPLASH = {
-  screen: `${appName}.SplashScreen`,
+  screen: `${APP_NAME}.SplashScreen`,
 }
 
 export const PLAYER = {
-  screen: `${appName}.PlayerScreen`,
+  screen: `${APP_NAME}.PlayerScreen`,
 }
 
 export const AUTH = {
   title: 'Вход',
-  screen: `${appName}.AuthScreen`,
+  screen: `${APP_NAME}.AuthScreen`,
 }
 
 export const AUTH_CREATE_ACCOUNT = {
   title: 'Создать аккаунт',
-  screen: `${appName}.AuthCreateAccountScreen`,
+  screen: `${APP_NAME}.AuthCreateAccountScreen`,
 }
 
 export const AUTH_CREATE_ACCOUNT_PARAMS = {
   title: 'Создать аккаунт',
-  screen: `${appName}.AuthCreateAccountParamsScreen`,
+  screen: `${APP_NAME}.AuthCreateAccountParamsScreen`,
 }
 
 export const AUTH_CREATE_ACCOUNT_CATEGORIES = {
   title: 'Выбор жанра',
-  screen: `${appName}.AuthCreateAccountCategoriesScreen`,
+  screen: `${APP_NAME}.AuthCreateAccountCategoriesScreen`,
 }
 
 export const AUTH_FORGOT_PASSWORD = {
   title: 'Восстановление пароля',
-  screen: `${appName}.AuthForgotPasswordScreen`,
+  screen: `${APP_NAME}.AuthForgotPasswordScreen`,
 }
 
 export const AUTH_RECOVERY_PASSWORD = {
   title: 'Восстановление пароля',
-  screen: `${appName}.AuthRecoveryPasswordScreen`,
+  screen: `${APP_NAME}.AuthRecoveryPasswordScreen`,
 }
 
 export const TAB_HOME = {
   title: 'Главное',
-  screen: `${appName}.TabHomeScreen`,
+  screen: `${APP_NAME}.TabHomeScreen`,
 }
 
 export const TAB_SELECTIONS = {
   title: 'Подборки',
-  screen: `${appName}.TabSelectionsScreen`,
+  screen: `${APP_NAME}.TabSelectionsScreen`,
 }
 
 export const TAB_RADIO = {
   title: 'Радиостанция',
-  screen: `${appName}.TabRadioScreen`,
+  screen: `${APP_NAME}.TabRadioScreen`,
 }
 
 export const TAB_BLOG = {
   title: 'Блог',
-  screen: `${appName}.TabBlogScreen`,
+  screen: `${APP_NAME}.TabBlogScreen`,
 }
 
 export const TAB_SEARCH = {
   title: 'Поиск',
-  screen: `${appName}.TabSearchScreen`,
+  screen: `${APP_NAME}.TabSearchScreen`,
 }

@@ -1,8 +1,8 @@
 import R from 'ramda'
-import { appName } from '../constants'
+import { APP_NAME } from '../constants/names'
 
 export const getModuleActionName = R.curry(
-  (moduleName, actionName) => `${appName}/${moduleName}/${actionName}`,
+  (moduleName, actionName) => `${APP_NAME}/${moduleName}/${actionName}`,
 )
 
 export const generateUID = (count = 10) => {
@@ -56,4 +56,10 @@ export const secondsToStringTime = (sec, separator = '.') => {
   return !hours
     ? `${minutes}${separator}${seconds}`
     : `${hours}${separator}${minutes}${separator}${seconds}`
+}
+
+export const getNumberMultiple_05 = num => {
+  const whole = Math.trunc(num)
+  const fract = Math.trunc((num % 1) * 10) >= 5 ? 0.5 : 0
+  return whole + fract
 }

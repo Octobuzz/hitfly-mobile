@@ -8,12 +8,16 @@ import {
   Platform,
   ViewPropTypes,
 } from 'react-native'
-import { colors, style, sizes } from '../constants'
-import { secondsToStringTime } from '../utils/helpers'
+import { colors, style, sizes } from '../../constants'
+import { secondsToStringTime } from '../../utils/helpers'
 
-class FullPlayerTimePin extends Component {
+class FullTimePin extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      currentTime: '0.00',
+      totalTime: '0.00',
+    }
     this.topAnimation = new Animated.Value(
       sizes.FULL_PLAYER_TIMELINE_TOP_HEIGHT -
         sizes.FULL_PLAYER_TIME_PIN_HEIGHT -
@@ -24,10 +28,19 @@ class FullPlayerTimePin extends Component {
     this.pinBgOpacityAnimation = new Animated.Value(1)
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.isRewinded !== this.props.isRewinded) {
-      this._rewindAnimate(this.props.isRewinded)
-    }
+  setTime = (currentTime, totalTime) => {
+    this.setState({
+      currentTime: secondsToStringTime(currentTime),
+      totalTime: secondsToStringTime(totalTime),
+    })
+  }
+
+  animateToRewindOn = () => {
+    this._rewindAnimate(true)
+  }
+
+  animateToRewindOff = () => {
+    this._rewindAnimate(false)
   }
 
   _rewindAnimate = (isRewinded = false) => {
@@ -77,10 +90,10 @@ class FullPlayerTimePin extends Component {
   }
 
   render() {
-    const { styleWrapper, currentTime, totalTime } = this.props
+    const { currentTime, totalTime } = this.state
     const wrapperStyle = [
       styles.wrapper,
-      styleWrapper,
+      this.props.styleWrapper,
       {
         top: this.topAnimation,
         height: this.heightAnimation,
@@ -114,14 +127,12 @@ class FullPlayerTimePin extends Component {
       <Animated.View style={wrapperStyle}>
         <View style={[styles.textContainer, styles.textContainerCurrent]}>
           <Animated.View style={pinBackgroundStyle} />
-          <Animated.Text style={textStyle}>
-            {secondsToStringTime(currentTime)}
-          </Animated.Text>
+          <Animated.Text style={textStyle}>{currentTime}</Animated.Text>
         </View>
         <View style={[styles.textContainer, styles.textContainerTotal]}>
           <Animated.View style={pinBackgroundStyle} />
           <Animated.Text style={[textStyle, styles.textTotal]}>
-            {secondsToStringTime(totalTime)}
+            {totalTime}
           </Animated.Text>
         </View>
         <View style={styles.separator} />
@@ -130,19 +141,13 @@ class FullPlayerTimePin extends Component {
   }
 }
 
-FullPlayerTimePin.propTypes = {
+FullTimePin.propTypes = {
   styleWrapper: ViewPropTypes.style,
-  currentTime: PropTypes.number,
-  totalTime: PropTypes.number,
-  isRewinded: PropTypes.bool,
   bottomTabsHeight: PropTypes.number,
 }
 
-FullPlayerTimePin.defaultProps = {
-  currentTime: 0,
-  totalTime: 0,
-  isRewinded: false,
-  bottomTabsHeight: 50,
+FullTimePin.defaultProps = {
+  bottomTabsHeight: 0,
 }
 
 const styles = StyleSheet.create({
@@ -198,4 +203,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default FullPlayerTimePin
+export default FullTimePin

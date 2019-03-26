@@ -1,49 +1,42 @@
-import R from 'ramda'
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, Image, Animated, Platform } from 'react-native'
-import { colors, sizes } from '../constants'
+import { colors, sizes } from '../../constants'
 
 const IMAGE_WIDTH = sizes.WINDOW_WIDTH * 1.2
 
 class FullPlayerArtwork extends Component {
   constructor(props) {
     super(props)
-    const { totalTime, currentTime, isBlured } = props
-    this.leftAnimation = new Animated.Value(
-      this._getLeftPosition(totalTime, currentTime),
-    )
-    this.blurAnimation = new Animated.Value(isBlured ? 1 : 0)
+    this.leftAnimation = new Animated.Value(0)
+    this.blurAnimation = new Animated.Value(0)
   }
 
-  shouldComponentUpdate(nextProps) {
-    if (
-      nextProps.currentTime !== this.props.currentTime ||
-      nextProps.totalTime !== this.props.totalTime
-    ) {
-      this._positionAnimate(nextProps.totalTime, nextProps.currentTime)
-    }
-    if (nextProps.isBlured !== this.props.isBlured) {
-      this._playedAnimate(nextProps.isBlured)
-    }
-    if (!R.equals(nextProps.source, this.props.source)) {
-      return true
-    }
-    return false
+  init = (currentTime, totalTime, isBlured = false) => {
+    this.animateToTime(currentTime, totalTime)
+    this._animateBlur(isBlured)
   }
 
-  _getLeftPosition = (totalTime, currentTime) => {
+  _getLeftPosition = (currentTime, totalTime) => {
     return -Math.trunc(((currentTime * IMAGE_WIDTH) / totalTime) * 10) / 10
   }
 
-  _positionAnimate = (totalTime, currentTime) => {
+  animateToTime = (currentTime, totalTime) => {
     Animated.timing(this.leftAnimation, {
-      toValue: this._getLeftPosition(totalTime, currentTime),
+      toValue: this._getLeftPosition(currentTime, totalTime),
       duration: 0,
     }).start()
   }
 
-  _playedAnimate = (isBlured = false) => {
+  animateToBlur = () => {
+    this._animateBlur(true)
+  }
+
+  animateToFocus = () => {
+    this._animateBlur(false)
+  }
+
+  _animateBlur = (isBlured = false) => {
     Animated.timing(this.blurAnimation).stop()
     Animated.timing(this.blurAnimation, {
       toValue: isBlured ? 1 : 0,
@@ -95,17 +88,12 @@ class FullPlayerArtwork extends Component {
 }
 
 FullPlayerArtwork.propTypes = {
-  currentTime: PropTypes.number,
-  totalTime: PropTypes.number,
   isBlured: PropTypes.bool,
   source: PropTypes.number,
 }
 
 FullPlayerArtwork.defaultProps = {
-  currentTime: 0,
-  totalTime: 0,
   isBlured: false,
-  bottomTabsHeight: 50,
 }
 
 const styles = StyleSheet.create({

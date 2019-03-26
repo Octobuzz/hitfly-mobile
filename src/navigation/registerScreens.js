@@ -1,7 +1,6 @@
 import React from 'react'
 import { Navigation } from 'react-native-navigation'
 import { Provider } from 'react-redux'
-import { gestureHandlerRootHOC } from 'react-native-gesture-handler'
 
 import NavBarButton from '../screens/NavBarButton'
 import NavBarTitle from '../screens/NavBarTitle'
@@ -48,7 +47,7 @@ export default function() {
     WrappedComponent(Splash),
   )
   Navigation.registerComponent(screens.PLAYER.screen, () =>
-    WrappedComponent(gestureHandlerRootHOC(Player)),
+    WrappedComponent(Player),
   )
   Navigation.registerComponent(screens.AUTH.screen, () =>
     WrappedComponent(Auth),

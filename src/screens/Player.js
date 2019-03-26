@@ -9,34 +9,34 @@ import {
   Animated,
   Easing,
   ViewPropTypes,
+  Platform,
+  PanResponder,
 } from 'react-native'
-import RNLinearGradient from 'react-native-linear-gradient'
-import {
-  LongPressGestureHandler,
-  PanGestureHandler,
-  TapGestureHandler,
-  State,
-} from 'react-native-gesture-handler'
+import { ifIphoneX, getStatusBarHeight } from 'react-native-iphone-x-helper'
 import NavBarButton, {
   NAV_BAR_BUTTON_SHEVRON_DOWN_WHITE,
   NAV_BAR_BUTTON_USER_AVATAR,
 } from './NavBarButton'
-import FullPlayerArtwork from '../components/FullPlayerArtwork'
-import FullPlayerTimeLine from '../components/FullPlayerTimeLine'
-import FullPlayerTimePin from '../components/FullPlayerTimePin'
-import { colors, sizes, style, images } from '../constants'
+import {
+  MinPlayer,
+  FullPlayerArtwork,
+  FullPlayerTimeLine,
+  FullPlayerTimePin,
+} from '../components/Player'
+import { colors, sizes, style, images, names } from '../constants'
+import { getNumberMultiple_05 } from '../utils/helpers'
 import { Navigator } from '../navigation'
+
+const MOVE_DETECT_BOUND = Platform.OS === 'ios' ? 2 : 4
 
 class Player extends Component {
   constructor() {
     super()
     this.state = {
-      bottomTabsHeight: 0,
+      bottomTabsHeight: 50,
       isPlayed: false,
-      isRewinded: false,
-      timelinePosition: sizes.WINDOW_WIDTH * 0.3,
-      fullPlayerCurrentTime: 12.6,
-      fullPlayerTotalTime: 107.189,
+      musicTitle: 'Killer Queen',
+      musicDescription: 'Queen',
       timelineLevels: [
         1,
         0.24,
@@ -149,18 +149,47 @@ class Player extends Component {
         0.83,
       ],
     }
-    this.panState = {
-      changesCount: 0,
-      fullPlayerInitialTime: 0,
-    }
+
+    this.totalTime = 107.189
+    this.currentTime = 12.6
+    this.rewindTime = 0
+    this.isRewinded = false
+    this.isPlayed = false
+    this.isFullScreen = false
+
     this.screenHeight = new Animated.Value(0)
     this.screenBottom = new Animated.Value(0)
-    this.minPlayerTop = new Animated.Value(-sizes.MIN_PLAYER_HEIGHT)
     this.minPlayerOpacity = new Animated.Value(1)
     this.minTimelineTranslateX = new Animated.Value(0)
     this.minTimelineTranslateX_value = 0
 
-    this.timelinePanRef = React.createRef()
+    this.minPlayerRef = React.createRef()
+    this.fullPlayerArtworkRef = React.createRef()
+    this.fullPlayerTimeLineRef = React.createRef()
+    this.fullPlayerTimePinRef = React.createRef()
+
+    this.gestureState = {
+      x0: 0,
+      y0: 0,
+      boundedX0: 0,
+      boundY0: 0,
+      prevDx: 0,
+      prevDy: 0,
+      playerInitialGestureTime: 0,
+      firstMoveDetected: false,
+      initialMoveAxis: '',
+      lastMoveDirection: '',
+    }
+
+    this._fullPlayerTimelineResponder = PanResponder.create({
+      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
+      onMoveShouldSetPanResponder: (evt, gestureState) => true,
+      onPanResponderTerminationRequest: (evt, gestureState) => true,
+      onPanResponderGrant: this._onPanResponderStart,
+      onPanResponderMove: this._onPanResponderMove,
+      onPanResponderRelease: this._onPanResponderEnd,
+      onPanResponderTerminate: this._onPanResponderEnd,
+    })
   }
 
   componentDidMount() {
@@ -179,80 +208,216 @@ class Player extends Component {
           // console.log('error: ', e)
         })
     }, 500)
+
+    this.minPlayerRef.current.init(this.currentTime, this.totalTime)
+    this.fullPlayerArtworkRef.current.init(
+      this.currentTime,
+      this.totalTime,
+      !this.isPlayed || this.isRewinded,
+    )
+    this.fullPlayerTimeLineRef.current.init(
+      this.currentTime,
+      this.totalTime,
+      this.state.timelineLevels,
+      this.isPlayed,
+    )
+    this.fullPlayerTimePinRef.current.setTime(this.currentTime, this.totalTime)
   }
 
-  _onTimeLinePressEvent = ({ nativeEvent: { x } }) => {
-    const roundX = Math.round(x)
-    if (this.minTimelineTranslateX_value !== roundX) {
-      this.minTimelineTranslateX_value = roundX
-      Animated.timing(this.minTimelineTranslateX, {
-        toValue: roundX,
-        duration: 0,
-        useNativeDriver: true,
-      }).start()
+  _onPanResponderStart = (event, gestureState) => {
+    const { x0, y0 } = gestureState
+    this.gestureState = {
+      x0: getNumberMultiple_05(x0),
+      y0: getNumberMultiple_05(y0),
+      prevDx: 0,
+      prevDy: 0,
+      firstMoveDetected: false,
+      initialMoveAxis: '',
+      lastMoveDirection: '',
     }
+    // console.log(
+    //   'жест начался: \n',
+    //   `x0: ${getNumberMultiple_05(x0)} `,
+    //   `y0: ${getNumberMultiple_05(y0)} `,
+    // )
   }
 
-  _onTimeLinePressStateChange = ({ nativeEvent: { oldState, x } }) => {
-    if (!oldState) {
-      // console.log('timeline [StartPress]')
-    } else {
-      // console.log('timeline [EndPress] ', x)
-    }
-  }
+  _onPanResponderMove = (event, gestureState) => {
+    const { dx, dy, moveX, moveY } = gestureState
+    const roundDx = getNumberMultiple_05(dx)
+    const roundDy = getNumberMultiple_05(dy)
+    const roundMoveX = getNumberMultiple_05(moveX)
+    const roundMoveY = getNumberMultiple_05(moveY)
 
-  _onPanPressEvent = ({ nativeEvent: { translationX } }) => {
-    // console.log('nativeEvent: ', nativeEvent)
-    // console.log('translationX: ', translationX)
-    let fullPlayerCurrentTime =
-      this.panState.fullPlayerInitialTime - translationX
-    if (fullPlayerCurrentTime >= this.state.fullPlayerTotalTime) {
-      fullPlayerCurrentTime = this.state.fullPlayerTotalTime
-    } else if (fullPlayerCurrentTime <= 0) {
-      fullPlayerCurrentTime = 0
-    }
-    this.setState({
-      fullPlayerCurrentTime,
-    })
-  }
-
-  _onPanStateChange = ({ nativeEvent }) => {
-    if (nativeEvent.state === State.BEGAN) {
-      // console.log('timeline [BEGAN Press]')
-      this.panState = {
-        ...this.panState,
-        fullPlayerInitialTime: this.state.fullPlayerCurrentTime,
-      }
-    } else if (nativeEvent.state === State.ACTIVE) {
-      // console.log('timeline [ACTIVE]')
-      this.setState({
-        isRewinded: true,
-      })
-    } else if (
-      nativeEvent.state === State.END ||
-      nativeEvent.state === State.CANCELLED
+    // console.log(
+    //   `перемещение? roundDx: ${roundDx} roundDy: ${roundDy} dx: ${dx} dy: ${dy} `,
+    //   gestureState,
+    // )
+    // console.log(`перемещение?`)
+    if (
+      !this.gestureState.firstMoveDetected &&
+      (Math.abs(roundDx) >= MOVE_DETECT_BOUND ||
+        Math.abs(roundDy) >= MOVE_DETECT_BOUND)
     ) {
-      // console.log('timeline [END Press] ')
-      this.setState({
-        isRewinded: false,
-      })
-    } else if (nativeEvent.state === State.FAILED) {
-      // console.log('timeline [FAILED]')
-    } else if (nativeEvent.state === State.UNDETERMINED) {
-      // console.log('timeline [UNDETERMINED]')
+      if (Math.abs(roundDx) >= Math.abs(roundDy)) {
+        this.gestureState = {
+          ...this.gestureState,
+          boundedX0: roundMoveX,
+          boundY0: roundMoveY,
+          firstMoveDetected: true,
+          initialMoveAxis: names.MOVES.HORIZONTAL,
+          playerInitialGestureTime: this.currentTime,
+          prevDx: roundDx,
+          lastMoveDirection:
+            roundDx > this.gestureState.prevDx
+              ? names.MOVES.RIGHT
+              : names.MOVES.LEFT,
+        }
+        this._onFullPlayerRewindStart()
+        // console.log(
+        //   `Обнаружено горизонтальное перемещение: ${
+        //     this.gestureState.lastMoveDirection
+        //   } dx: ${roundDx}`,
+        // )
+      } else {
+        this.gestureState = {
+          ...this.gestureState,
+          boundedX0: roundMoveX,
+          boundY0: roundMoveY,
+          firstMoveDetected: true,
+          initialMoveAxis: names.MOVES.VERTICAL,
+          prevDy: roundDy,
+          lastMoveDirection:
+            roundDy > this.gestureState.prevDy
+              ? names.MOVES.BOTTOM
+              : names.MOVES.TOP,
+        }
+        // console.log(
+        //   `Обнаружено вертикальное перемещение: ${
+        //     this.gestureState.lastMoveDirection
+        //   } dy: ${roundDy}`,
+        // )
+      }
+    } else if (this.gestureState.firstMoveDetected) {
+      if (
+        this.gestureState.initialMoveAxis === names.MOVES.HORIZONTAL &&
+        this.gestureState.prevDx !== roundDx
+      ) {
+        this.gestureState = {
+          ...this.gestureState,
+          prevDx: roundDx,
+          lastMoveDirection:
+            roundDx > this.gestureState.prevDx
+              ? names.MOVES.RIGHT
+              : names.MOVES.LEFT,
+        }
+        this._onFullPlayerRewind(roundMoveX - this.gestureState.boundedX0)
+        // console.log(
+        //   `перемещение: ${this.gestureState.lastMoveDirection} dx: ${roundDx}`,
+        // )
+      } else if (
+        this.gestureState.initialMoveAxis === names.MOVES.VERTICAL &&
+        this.gestureState.prevDy !== roundDy
+      ) {
+        this.gestureState = {
+          ...this.gestureState,
+          prevDy: roundDy,
+          lastMoveDirection:
+            roundDy > this.gestureState.prevDy
+              ? names.MOVES.BOTTOM
+              : names.MOVES.TOP,
+        }
+        // console.log(
+        //   `перемещение: ${this.gestureState.lastMoveDirection} dy: ${roundDy}`,
+        // )
+      }
     }
   }
 
-  _onTapStateChange = ({ nativeEvent }) => {
-    if (nativeEvent.state === State.END) {
-      this._onPressPlay()
+  _onPanResponderEnd = (event, gestureState) => {
+    // const { dx, dy } = gestureState
+    // const roundDx = getNumberMultiple_05(dx)
+    // const roundDy = getNumberMultiple_05(dy)
+    // console.log(
+    //   `жест завершен: ${
+    //     this.gestureState.firstMoveDetected ? 'MOVED' : 'CLICKED'
+    //   }  dx: ${roundDx} dy: ${roundDy}`,
+    // )
+    if (!this.gestureState.firstMoveDetected) {
+      this._onPressPlayPause()
+    } else {
+      this._onFullPlayerRewindEnd()
+    }
+    this.gestureState = {
+      x0: 0,
+      y0: 0,
+      boundedX0: 0,
+      boundY0: 0,
+      prevDx: 0,
+      prevDy: 0,
+      playerInitialGestureTime: 0,
+      firstMoveDetected: false,
+      initialMoveAxis: '',
+      lastMoveDirection: '',
     }
   }
 
-  _onPressPlay = () => {
-    this.setState({
-      isPlayed: !this.state.isPlayed,
-    })
+  _onFullPlayerRewindStart = () => {
+    this.isRewinded = true
+    this.fullPlayerTimePinRef.current.animateToRewindOn()
+    if (this.isPlayed) {
+      this.fullPlayerArtworkRef.current.animateToBlur()
+    }
+  }
+
+  _onFullPlayerRewind = dx => {
+    let playerCurrentTime = this.gestureState.playerInitialGestureTime - dx
+    if (playerCurrentTime >= this.totalTime) {
+      playerCurrentTime = this.totalTime
+    } else if (playerCurrentTime <= 0) {
+      playerCurrentTime = 0
+    }
+    this.rewindTime = playerCurrentTime
+    this.fullPlayerTimePinRef.current.setTime(this.rewindTime, this.totalTime)
+    this.fullPlayerTimeLineRef.current.animateToTime(
+      this.rewindTime,
+      this.totalTime,
+    )
+    this.fullPlayerArtworkRef.current.animateToTime(
+      this.rewindTime,
+      this.totalTime,
+    )
+  }
+
+  _onFullPlayerRewindEnd = () => {
+    this.isRewinded = false
+    this.currentTime = this.rewindTime
+    this.fullPlayerTimePinRef.current.animateToRewindOff()
+    this.minPlayerRef.current.animateToTime(this.rewindTime, this.totalTime)
+    if (this.isPlayed) {
+      this.fullPlayerArtworkRef.current.animateToFocus()
+    }
+  }
+
+  _onMinPlayerRewindStart = time => {
+    this.isRewinded = true
+  }
+
+  _onMinPlayerRewindEnd = time => {
+    this.playerCurrentTime = time
+    this.fullPlayerArtworkRef.current.animateToTime(time, this.totalTime)
+    this.fullPlayerTimeLineRef.current.animateToTime(time, this.totalTime)
+    this.fullPlayerTimePinRef.current.setTime(time, this.totalTime)
+    this.isRewinded = false
+  }
+
+  _onPressPlayPause = () => {
+    this.isPlayed = !this.isPlayed
+    this.fullPlayerTimeLineRef.current.animatePlayPause(this.isPlayed)
+    this.fullPlayerArtworkRef.current[
+      this.isPlayed ? 'animateToFocus' : 'animateToBlur'
+    ]()
+    this.minPlayerRef.current.playPause(this.isPlayed)
   }
 
   _initBottomPlayerAnimate = () => {
@@ -312,7 +477,7 @@ class Player extends Component {
   }
 
   render() {
-    const { bottomTabsHeight, isPlayed, isRewinded } = this.state
+    const { bottomTabsHeight } = this.state
     const screenContainer = [
       styles.wrapper,
       {
@@ -335,16 +500,6 @@ class Player extends Component {
         }),
       },
     ]
-    const minPlayertimelineGray = [
-      styles.minPlayertimelineGray,
-      {
-        transform: [
-          {
-            translateX: this.minTimelineTranslateX,
-          },
-        ],
-      },
-    ]
     const fullPlayerBottomBarStyle = [
       styles.fullPlayerBottomBar,
       {
@@ -356,9 +511,9 @@ class Player extends Component {
       <Animated.View style={screenContainer}>
         <FullPlayerArtwork
           source={images.TEMP_ARTWORK_MAX}
-          currentTime={this.state.fullPlayerCurrentTime}
-          totalTime={this.state.fullPlayerTotalTime}
-          isBlured={!isPlayed || isRewinded}
+          currentTime={this.playerCurrentTime}
+          totalTime={this.playerTotalTime}
+          ref={this.fullPlayerArtworkRef}
         />
         <View style={styles.fullPlayerContainer}>
           <View style={styles.navbar}>
@@ -370,45 +525,29 @@ class Player extends Component {
           </View>
 
           <View style={styles.fullPlayerMusicText}>
-            <Text style={styles.fullPlayerTitle}>Killer Queen</Text>
-            <Text style={styles.fullPlayerArtist}>Queen</Text>
+            <Text style={styles.fullPlayerTitle}>{this.state.musicTitle}</Text>
+            <Text style={styles.fullPlayerArtist}>
+              {this.state.musicDescription}
+            </Text>
           </View>
 
-          <PanGestureHandler
-            onGestureEvent={this._onPanPressEvent}
-            onHandlerStateChange={this._onPanStateChange}
-            maxPointers={1}
+          <View
+            style={styles.fullPlayerCenterSpace}
+            {...this._fullPlayerTimelineResponder.panHandlers}
+          />
+          <View
+            style={styles.fullPlayerTimelineContainer}
+            {...this._fullPlayerTimelineResponder.panHandlers}
           >
-            <TapGestureHandler
-              waitFor={[this.timelinePanRef]}
-              onHandlerStateChange={this._onTapStateChange}
-            >
-              <View style={styles.fullPlayerCenterSpace} />
-            </TapGestureHandler>
-          </PanGestureHandler>
-          <PanGestureHandler
-            onGestureEvent={this._onPanPressEvent}
-            onHandlerStateChange={this._onPanStateChange}
-            maxPointers={1}
-            ref={this.timelinePanRef}
-          >
-            <TapGestureHandler onHandlerStateChange={this._onTapStateChange}>
-              <View style={styles.fullPlayerTimelineContainer}>
-                <FullPlayerTimeLine
-                  levels={this.state.timelineLevels}
-                  currentTime={this.state.fullPlayerCurrentTime}
-                  totalTime={this.state.fullPlayerTotalTime}
-                  isPlayed={isPlayed}
-                />
-                <FullPlayerTimePin
-                  currentTime={this.state.fullPlayerCurrentTime}
-                  totalTime={this.state.fullPlayerTotalTime}
-                  isRewinded={isRewinded}
-                  bottomTabsHeight={bottomTabsHeight}
-                />
-              </View>
-            </TapGestureHandler>
-          </PanGestureHandler>
+            <FullPlayerTimeLine
+              levels={this.state.timelineLevels}
+              ref={this.fullPlayerTimeLineRef}
+            />
+            <FullPlayerTimePin
+              bottomTabsHeight={bottomTabsHeight}
+              ref={this.fullPlayerTimePinRef}
+            />
+          </View>
           <View style={fullPlayerBottomBarStyle}>
             <TouchableOpacity style={styles.fullPlayerBarButton}>
               <Image source={images.CONTROL_PLUS_WHITE} resizeMode="contain" />
@@ -442,60 +581,16 @@ class Player extends Component {
         </View>
 
         <Animated.View style={minPlayerContainer}>
-          <LongPressGestureHandler
-            onGestureEvent={this._onTimeLinePressEvent}
-            onHandlerStateChange={this._onTimeLinePressStateChange}
-            minDurationMs={0}
-          >
-            <RNLinearGradient
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-              colors={[colors.BRAND_BLUE, colors.BRAND_PINK]}
-              style={styles.minPlyerTimeline}
-            >
-              <Animated.View style={minPlayertimelineGray}>
-                <View style={styles.minPlayertimelineCursor} />
-              </Animated.View>
-            </RNLinearGradient>
-          </LongPressGestureHandler>
-          <View style={styles.minPlayerRow}>
-            <TouchableOpacity
-              style={styles.minPlayerItemInfoRow}
-              onPress={this._showFullScreenPlayer}
-            >
-              <View style={styles.minPlayerArtworkContainer}>
-                <View style={styles.minPlayerArtworkShadow}>
-                  <Image
-                    source={images.TEMP_ARTWORK_MIN}
-                    style={styles.minPlayerArtworkImage}
-                    resizeMode="contain"
-                  />
-                </View>
-              </View>
-              <View style={styles.minPlayerItemInfo}>
-                <Text style={styles.minPlayerItemTitle} numberOfLines={1}>
-                  Мальчики
-                </Text>
-                <Text style={styles.minPlayerItemDescription} numberOfLines={1}>
-                  АлоэВера – Алимоно – 2018
-                </Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.minPlayerPlayButton}
-              onPress={this._onPressPlay}
-              activeOpacity={0.6}
-            >
-              <Image
-                source={
-                  isPlayed
-                    ? images.CONTROL_BOTTOM_PLAYER_PAUSE
-                    : images.CONTROL_BOTTOM_PLAYER_PLAY
-                }
-                resizeMode="contain"
-              />
-            </TouchableOpacity>
-          </View>
+          <MinPlayer
+            onPressPlay={this._onPressPlayPause}
+            onPressShowFullPlayer={this._showFullScreenPlayer}
+            musicTitle={this.state.musicTitle}
+            musicDescription={this.state.musicDescription}
+            onRewindStart={this._onMinPlayerRewindStart}
+            onRewindEnd={this._onMinPlayerRewindEnd}
+            isPlayed={this.state.isPlayed}
+            ref={this.minPlayerRef}
+          />
         </Animated.View>
       </Animated.View>
     )
@@ -513,16 +608,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 16,
-    paddingTop: 24,
+    ...Platform.select({
+      ios: {
+        ...ifIphoneX(
+          {
+            paddingTop: getStatusBarHeight() + 24,
+          },
+          {
+            paddingTop: 24,
+          },
+        ),
+      },
+      android: {
+        marginTop: 24,
+      },
+    }),
   },
 
-  fullPlayerBgImage: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    width: sizes.WINDOW_WIDTH * 3,
-    height: sizes.WINDOW_HEIGHT,
-  },
   fullPlayerContainer: {
     backgroundColor: colors.BLACK_30,
     position: 'absolute',
@@ -549,6 +651,7 @@ const styles = StyleSheet.create({
   },
   fullPlayerCenterSpace: {
     flex: 1,
+    backgroundColor: colors.FUCKING_ANDROID,
   },
   fullPlayerTimelineContainer: {
     width: '100%',
@@ -556,6 +659,7 @@ const styles = StyleSheet.create({
       sizes.FULL_PLAYER_TIMELINE_TOP_HEIGHT +
       sizes.FULL_PLAYER_TIMELINE_BOTTOM_HEIGHT +
       16,
+    backgroundColor: colors.FUCKING_ANDROID,
   },
   fullPlayerBottomBar: {
     width: '100%',
@@ -586,7 +690,6 @@ const styles = StyleSheet.create({
     paddingLeft: 4,
     paddingTop: 2,
   },
-
   minPlayerContainer: {
     overflow: 'hidden',
     position: 'absolute',
@@ -595,78 +698,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.WHITE,
     // borderBottomWidth: 1,
     // borderBottomColor: colors.BOTTOM_TABBAR_BORDER,
-  },
-  minPlyerTimeline: {
-    flexDirection: 'row',
-    height: sizes.MIN_PLAYER_TIMELINE_HEIGHT,
-    backgroundColor: colors.PLAYER_TIMELINE_GRAY,
-  },
-  minPlayertimelineGray: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    width: '100%',
-    transform: [
-      {
-        translateX: 0,
-      },
-    ],
-    backgroundColor: colors.PLAYER_TIMELINE_GRAY,
-    height: sizes.MIN_PLAYER_TIMELINE_HEIGHT,
-  },
-  minPlayertimelineCursor: {
-    backgroundColor: colors.BLACK,
-    position: 'absolute',
-    top: 0,
-    left: -2,
-    width: 4,
-    height: sizes.MIN_PLAYER_TIMELINE_HEIGHT,
-  },
-  minPlayerRow: {
-    flexDirection: 'row',
-  },
-  minPlayerItemInfoRow: {
-    flex: 1,
-    flexDirection: 'row',
-  },
-  minPlayerArtworkContainer: {
-    width: sizes.MIN_PLAYER_HEIGHT - sizes.MIN_PLAYER_TIMELINE_HEIGHT,
-    height: sizes.MIN_PLAYER_HEIGHT - sizes.MIN_PLAYER_TIMELINE_HEIGHT,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  minPlayerArtworkShadow: {
-    width: 24,
-    height: 24,
-    shadowColor: colors.BLACK,
-    shadowOpacity: 0.4,
-    shadowOffset: { width: 0, height: 0 },
-    shadowRadius: 10,
-  },
-  minPlayerArtworkImage: {
-    width: 24,
-    height: 24,
-    borderRadius: 4,
-  },
-  minPlayerItemInfo: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  minPlayerItemTitle: {
-    ...style.text.bold,
-    fontSize: 12,
-    lineHeight: 14,
-  },
-  minPlayerItemDescription: {
-    ...style.text.regular,
-    fontSize: 8,
-    lineHeight: 10,
-  },
-  minPlayerPlayButton: {
-    width: sizes.MIN_PLAYER_HEIGHT - sizes.MIN_PLAYER_TIMELINE_HEIGHT,
-    height: sizes.MIN_PLAYER_HEIGHT - sizes.MIN_PLAYER_TIMELINE_HEIGHT,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 })
 

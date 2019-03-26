@@ -1,51 +1,123 @@
 import R from 'ramda'
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { StyleSheet, View, Animated, Easing, ViewPropTypes } from 'react-native'
 import RNLinearGradient from 'react-native-linear-gradient'
-import { colors, sizes } from '../constants'
-import { getSectionGradientColor } from '../utils/helpers'
+import { colors, sizes } from '../../constants'
+import { getSectionGradientColor } from '../../utils/helpers'
 
 class FullPlayerTimeLine extends Component {
   constructor(props) {
     super(props)
-    const { totalTime, currentTime, levels, isPlayed } = props
+    this.state = {
+      displayLevels: [],
+    }
+    this.totalTime = 0
     this.topColumnsHeightAnimations = []
     this.bottomColumnsHeightAnimations = []
     this.columnsFlexAnimations = []
     this.columnsFlexAnimationsValues = []
     this.timelineControlLeftAnimation = new Animated.Value(0)
     this.pausedTimelineLeftAnimation = new Animated.Value(0)
-    this.pausedTimelineOpacityAnimation = new Animated.Value(!isPlayed)
+    this.pausedTimelineOpacityAnimation = new Animated.Value(1)
+  }
 
+  init = (currentTime, totalTime, levels, isPlayed = false) => {
     const displayLevels = this._getDisplayLevelsAndUpdateAnimations(
       levels,
       totalTime,
       currentTime,
       isPlayed,
     )
-
-    this.state = {
-      displayLevels,
-    }
+    this.setState({ displayLevels })
   }
 
-  shouldComponentUpdate(nextProps) {
-    if (nextProps.isPlayed && !this.props.isPlayed) {
-      this._animatePlayPause(true)
-    } else if (!nextProps.isPlayed && this.props.isPlayed) {
-      this._animatePlayPause(false)
-    }
-    if (nextProps.currentTime !== this.props.currentTime) {
-      this._animateToTime(nextProps.currentTime)
-    }
-    if (
-      !R.equals(nextProps.levels, this.props.levels) ||
-      !R.equals(nextProps.totalTime, this.props.totalTime)
-    ) {
-      return true
-    }
-    return false
+  animateToTime = (currentTime, totalTime) => {
+    const time = Math.trunc(currentTime * 10) / 10
+    const { displayLevels } = this.state
+    let leftOffset = 0
+    let animations = []
+    displayLevels.forEach((item, index, arr) => {
+      const { positionInPart, columnFlex } = this._getCurrentAnimatePosition(
+        time,
+        totalTime,
+        index,
+        arr.length,
+      )
+      leftOffset = leftOffset - positionInPart
+      if (columnFlex !== this.columnsFlexAnimationsValues[index]) {
+        this.columnsFlexAnimationsValues[index] = columnFlex
+        animations.push(
+          Animated.timing(this.columnsFlexAnimations[index], {
+            toValue: columnFlex,
+            duration: 0,
+          }),
+        )
+      }
+    })
+    leftOffset = Math.trunc(leftOffset * 10) / 10
+    animations.push(
+      Animated.timing(this.timelineControlLeftAnimation, {
+        toValue: sizes.WINDOW_WIDTH / 2 + leftOffset,
+        duration: 0,
+      }),
+    )
+    animations.push(
+      Animated.timing(this.pausedTimelineLeftAnimation, {
+        toValue: -leftOffset,
+        duration: 0,
+      }),
+    )
+    Animated.parallel(animations).start()
+  }
+
+  animatePlayPause = (animateToPlay = false) => {
+    const { displayLevels } = this.state
+    let animations = []
+    this._stopPlayPauseAnimations()
+    this.topColumnsHeightAnimations.forEach((item, index) => {
+      animations.push(
+        Animated.timing(item, {
+          toValue: animateToPlay
+            ? sizes.FULL_PLAYER_TIMELINE_TOP_HEIGHT *
+              (displayLevels[index] || 0)
+            : 0,
+          duration: 200,
+          easing: Easing.bezier(0.5, 0, 0.5, 1),
+        }),
+      )
+    })
+    this.bottomColumnsHeightAnimations.forEach((item, index) => {
+      animations.push(
+        Animated.timing(item, {
+          toValue: animateToPlay
+            ? sizes.FULL_PLAYER_TIMELINE_BOTTOM_HEIGHT *
+              (displayLevels[index] || 0)
+            : 0,
+          duration: 200,
+          easing: Easing.bezier(0.5, 0, 0.5, 1),
+        }),
+      )
+    })
+    animations.push(
+      Animated.timing(this.pausedTimelineOpacityAnimation, {
+        toValue: animateToPlay ? 0 : 1,
+        duration: 200,
+        easing: Easing.bezier(0.5, 0, 0.5, 1),
+      }),
+    )
+    Animated.parallel(animations).start()
+  }
+
+  _stopPlayPauseAnimations = () => {
+    let animations = []
+    this.topColumnsHeightAnimations.forEach(item => {
+      animations.push(Animated.timing(item))
+    })
+    this.bottomColumnsHeightAnimations.forEach(item => {
+      animations.push(Animated.timing(item))
+    })
+    animations.push(Animated.timing(this.pausedTimelineOpacityAnimation))
+    Animated.parallel(animations).stop()
   }
 
   _getDisplayLevelsAndUpdateAnimations = (
@@ -101,96 +173,6 @@ class FullPlayerTimeLine extends Component {
         ? 1
         : 1 - Math.trunc((positionInPart / 2) * 10) / 10
     return { positionInPart, columnFlex }
-  }
-
-  _animateToTime = time => {
-    time = Math.trunc(time * 10) / 10
-    const { totalTime } = this.props
-    const { displayLevels } = this.state
-    let leftOffset = 0
-    let animations = []
-    displayLevels.forEach((item, index, arr) => {
-      const { positionInPart, columnFlex } = this._getCurrentAnimatePosition(
-        time,
-        totalTime,
-        index,
-        arr.length,
-      )
-      leftOffset = leftOffset - positionInPart
-      if (columnFlex !== this.columnsFlexAnimationsValues[index]) {
-        this.columnsFlexAnimationsValues[index] = columnFlex
-        animations.push(
-          Animated.timing(this.columnsFlexAnimations[index], {
-            toValue: columnFlex,
-            duration: 0,
-          }),
-        )
-      }
-    })
-    leftOffset = Math.trunc(leftOffset * 10) / 10
-    animations.push(
-      Animated.timing(this.timelineControlLeftAnimation, {
-        toValue: sizes.WINDOW_WIDTH / 2 + leftOffset,
-        duration: 0,
-      }),
-    )
-    animations.push(
-      Animated.timing(this.pausedTimelineLeftAnimation, {
-        toValue: -leftOffset,
-        duration: 0,
-      }),
-    )
-    Animated.parallel(animations).start()
-  }
-
-  _animatePlayPause = (animateToPlay = false) => {
-    const { displayLevels } = this.state
-    let animations = []
-    this._stopPlayPauseAnimations()
-    this.topColumnsHeightAnimations.forEach((item, index) => {
-      animations.push(
-        Animated.timing(item, {
-          toValue: animateToPlay
-            ? sizes.FULL_PLAYER_TIMELINE_TOP_HEIGHT *
-              (displayLevels[index] || 0)
-            : 0,
-          duration: 200,
-          easing: Easing.bezier(0.5, 0, 0.5, 1),
-        }),
-      )
-    })
-    this.bottomColumnsHeightAnimations.forEach((item, index) => {
-      animations.push(
-        Animated.timing(item, {
-          toValue: animateToPlay
-            ? sizes.FULL_PLAYER_TIMELINE_BOTTOM_HEIGHT *
-              (displayLevels[index] || 0)
-            : 0,
-          duration: 200,
-          easing: Easing.bezier(0.5, 0, 0.5, 1),
-        }),
-      )
-    })
-    animations.push(
-      Animated.timing(this.pausedTimelineOpacityAnimation, {
-        toValue: animateToPlay ? 0 : 1,
-        duration: 200,
-        easing: Easing.bezier(0.5, 0, 0.5, 1),
-      }),
-    )
-    Animated.parallel(animations).start()
-  }
-
-  _stopPlayPauseAnimations = () => {
-    let animations = []
-    this.topColumnsHeightAnimations.forEach(item => {
-      animations.push(Animated.timing(item))
-    })
-    this.bottomColumnsHeightAnimations.forEach(item => {
-      animations.push(Animated.timing(item))
-    })
-    animations.push(Animated.timing(this.pausedTimelineOpacityAnimation))
-    Animated.parallel(animations).stop()
   }
 
   render() {
@@ -291,17 +273,9 @@ class FullPlayerTimeLine extends Component {
 
 FullPlayerTimeLine.propTypes = {
   styleWrapper: ViewPropTypes.style,
-  levels: PropTypes.arrayOf(PropTypes.number),
-  currentTime: PropTypes.number,
-  totalTime: PropTypes.number,
-  isPlayed: PropTypes.bool,
 }
 
-FullPlayerTimeLine.defaultProps = {
-  size: 20,
-  color: colors.BRAND_BLUE,
-  isPlayed: false,
-}
+FullPlayerTimeLine.defaultProps = {}
 
 const styles = StyleSheet.create({
   wrapper: {
