@@ -346,7 +346,9 @@ class Player extends Component {
     if (!this.gestureState.firstMoveDetected) {
       this._onPressPlayPause()
     } else {
-      this._onFullPlayerRewindEnd()
+      if (this.gestureState.initialMoveAxis === names.MOVES.HORIZONTAL) {
+        this._onFullPlayerRewindEnd()
+      }
     }
     this.gestureState = {
       x0: 0,
@@ -372,9 +374,12 @@ class Player extends Component {
 
   _onFullPlayerRewind = dx => {
     let playerCurrentTime = this.gestureState.playerInitialGestureTime - dx
+    let rewindOffset = 0
     if (playerCurrentTime >= this.totalTime) {
+      rewindOffset = playerCurrentTime - this.totalTime
       playerCurrentTime = this.totalTime
     } else if (playerCurrentTime <= 0) {
+      rewindOffset = playerCurrentTime
       playerCurrentTime = 0
     }
     this.rewindTime = playerCurrentTime
@@ -382,6 +387,7 @@ class Player extends Component {
     this.fullPlayerTimeLineRef.current.animateToTime(
       this.rewindTime,
       this.totalTime,
+      rewindOffset,
     )
     this.fullPlayerArtworkRef.current.animateToTime(
       this.rewindTime,
@@ -392,8 +398,15 @@ class Player extends Component {
   _onFullPlayerRewindEnd = () => {
     this.isRewinded = false
     this.currentTime = this.rewindTime
+    this.rewindTime = 0
     this.fullPlayerTimePinRef.current.animateToRewindOff()
-    this.minPlayerRef.current.animateToTime(this.rewindTime, this.totalTime)
+    this.fullPlayerTimeLineRef.current.animateToTime(
+      this.currentTime,
+      this.totalTime,
+      0,
+      true,
+    )
+    this.minPlayerRef.current.animateToTime(this.currentTime, this.totalTime)
     if (this.isPlayed) {
       this.fullPlayerArtworkRef.current.animateToFocus()
     }

@@ -31,7 +31,14 @@ class FullPlayerTimeLine extends Component {
     this.setState({ displayLevels })
   }
 
-  animateToTime = (currentTime, totalTime) => {
+  animateToTime = (
+    currentTime,
+    totalTime,
+    rewindOffset = 0,
+    easing = false,
+  ) => {
+    rewindOffset =
+      Math.trunc(Math.tanh(rewindOffset) * Math.abs(rewindOffset) * 3) / 10
     const time = Math.trunc(currentTime * 10) / 10
     const { displayLevels } = this.state
     let leftOffset = 0
@@ -57,8 +64,9 @@ class FullPlayerTimeLine extends Component {
     leftOffset = Math.trunc(leftOffset * 10) / 10
     animations.push(
       Animated.timing(this.timelineControlLeftAnimation, {
-        toValue: sizes.WINDOW_WIDTH / 2 + leftOffset,
-        duration: 0,
+        toValue: sizes.WINDOW_WIDTH / 2 + leftOffset - rewindOffset,
+        duration: easing ? 200 : 0,
+        easing: easing ? Easing.bezier(0.5, 0, 0.5, 1) : Easing.linear,
       }),
     )
     animations.push(
