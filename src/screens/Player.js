@@ -157,9 +157,7 @@ class Player extends Component {
     this.isPlayed = false
     this.isFullScreen = false
 
-    this.screenHeight = new Animated.Value(0)
-    this.screenBottom = new Animated.Value(0)
-    this.minPlayerOpacity = new Animated.Value(1)
+    this.screenHeightAnimation = new Animated.Value(0)
     this.minTimelineTranslateX = new Animated.Value(0)
     this.minTimelineTranslateX_value = 0
 
@@ -172,12 +170,13 @@ class Player extends Component {
       x0: 0,
       y0: 0,
       boundedX0: 0,
-      boundY0: 0,
+      boundedY0: 0,
       prevDx: 0,
       prevDy: 0,
       playerInitialGestureTime: 0,
       firstMoveDetected: false,
       initialMoveAxis: '',
+      initialMoveDirection: '',
       lastMoveDirection: '',
     }
 
@@ -201,7 +200,7 @@ class Player extends Component {
             {
               bottomTabsHeight,
             },
-            () => this._initBottomPlayerAnimate(),
+            () => this._showMinPlayer(),
           )
         })
         .catch(e => {
@@ -233,6 +232,7 @@ class Player extends Component {
       prevDy: 0,
       firstMoveDetected: false,
       initialMoveAxis: '',
+      initialMoveDirection: '',
       lastMoveDirection: '',
     }
     // console.log(
@@ -263,9 +263,11 @@ class Player extends Component {
         this.gestureState = {
           ...this.gestureState,
           boundedX0: roundMoveX,
-          boundY0: roundMoveY,
+          boundedY0: roundMoveY,
           firstMoveDetected: true,
           initialMoveAxis: names.MOVES.HORIZONTAL,
+          initialMoveDirection:
+            roundDx > 0 ? names.MOVES.RIGHT : names.MOVES.LEFT,
           playerInitialGestureTime: this.currentTime,
           prevDx: roundDx,
           lastMoveDirection:
@@ -283,14 +285,15 @@ class Player extends Component {
         this.gestureState = {
           ...this.gestureState,
           boundedX0: roundMoveX,
-          boundY0: roundMoveY,
+          boundedY0: roundMoveY,
           firstMoveDetected: true,
           initialMoveAxis: names.MOVES.VERTICAL,
+          initialMoveDirection: roundDy > 0 ? names.MOVES.DOWN : names.MOVES.UP,
           prevDy: roundDy,
           lastMoveDirection:
             roundDy > this.gestureState.prevDy
-              ? names.MOVES.BOTTOM
-              : names.MOVES.TOP,
+              ? names.MOVES.DOWN
+              : names.MOVES.UP,
         }
         // console.log(
         //   `Обнаружено вертикальное перемещение: ${
@@ -324,8 +327,11 @@ class Player extends Component {
           prevDy: roundDy,
           lastMoveDirection:
             roundDy > this.gestureState.prevDy
-              ? names.MOVES.BOTTOM
-              : names.MOVES.TOP,
+              ? names.MOVES.DOWN
+              : names.MOVES.UP,
+        }
+        if (this.gestureState.initialMoveDirection === names.MOVES.DOWN) {
+          this._onVerticalScreenMove(roundMoveY - this.gestureState.boundedY0)
         }
         // console.log(
         //   `перемещение: ${this.gestureState.lastMoveDirection} dy: ${roundDy}`,
@@ -335,9 +341,10 @@ class Player extends Component {
   }
 
   _onPanResponderEnd = (event, gestureState) => {
-    // const { dx, dy } = gestureState
+    const { moveY } = gestureState
     // const roundDx = getNumberMultiple_05(dx)
     // const roundDy = getNumberMultiple_05(dy)
+    const roundMoveY = getNumberMultiple_05(moveY)
     // console.log(
     //   `жест завершен: ${
     //     this.gestureState.firstMoveDetected ? 'MOVED' : 'CLICKED'
@@ -348,18 +355,24 @@ class Player extends Component {
     } else {
       if (this.gestureState.initialMoveAxis === names.MOVES.HORIZONTAL) {
         this._onFullPlayerRewindEnd()
+      } else if (this.gestureState.initialMoveDirection === names.MOVES.DOWN) {
+        this._onVerticalScreenMoveEnd(
+          this.gestureState.lastMoveDirection,
+          roundMoveY - this.gestureState.boundedY0,
+        )
       }
     }
     this.gestureState = {
       x0: 0,
       y0: 0,
       boundedX0: 0,
-      boundY0: 0,
+      boundedY0: 0,
       prevDx: 0,
       prevDy: 0,
       playerInitialGestureTime: 0,
       firstMoveDetected: false,
       initialMoveAxis: '',
+      initialMoveDirection: '',
       lastMoveDirection: '',
     }
   }
@@ -433,60 +446,49 @@ class Player extends Component {
     this.minPlayerRef.current.playPause(this.isPlayed)
   }
 
-  _initBottomPlayerAnimate = () => {
-    Animated.sequence([
-      Animated.timing(this.screenBottom, {
-        toValue: this.state.bottomTabsHeight,
-        duration: 0,
-      }),
-      Animated.timing(this.screenHeight, {
-        toValue: sizes.MIN_PLAYER_HEIGHT,
-        delay: 1000,
-        duration: 400,
-        easing: Easing.bezier(0.5, 0, 0.5, 1),
-      }),
-    ]).start()
+  _getVerticalMovePosition = dy => {
+    if (sizes.WINDOW_HEIGHT - dy >= sizes.WINDOW_HEIGHT) {
+      return sizes.WINDOW_HEIGHT
+    } else if (sizes.WINDOW_HEIGHT - dy <= sizes.MIN_PLAYER_HEIGHT) {
+      return sizes.MIN_PLAYER_HEIGHT
+    } else {
+      return sizes.WINDOW_HEIGHT - dy
+    }
+  }
+
+  _onVerticalScreenMove = dy => {
+    this._animateScreenHeight(this._getVerticalMovePosition(dy), 0)
+  }
+
+  _onVerticalScreenMoveEnd = (lastMoveDirection, dy) => {
+    const movePosition = this._getVerticalMovePosition(dy)
+    if (lastMoveDirection === names.MOVES.UP) {
+      const duration =
+        (400 * (sizes.WINDOW_HEIGHT - movePosition)) /
+        (sizes.WINDOW_HEIGHT - sizes.MIN_PLAYER_HEIGHT)
+      this._animateScreenHeight(sizes.WINDOW_HEIGHT, duration)
+    } else {
+      const duration =
+        (400 * (movePosition - sizes.MIN_PLAYER_HEIGHT)) /
+        (sizes.WINDOW_HEIGHT - sizes.MIN_PLAYER_HEIGHT)
+      this._animateScreenHeight(sizes.MIN_PLAYER_HEIGHT, duration)
+    }
+  }
+
+  _animateScreenHeight = (toValue, duration = 400) => {
+    Animated.timing(this.screenHeightAnimation, {
+      toValue,
+      duration,
+      easing: duration ? Easing.bezier(0.5, 0, 0.5, 1) : Easing.linear,
+    }).start()
+  }
+
+  _showMinPlayer = () => {
+    this._animateScreenHeight(sizes.MIN_PLAYER_HEIGHT)
   }
 
   _showFullScreenPlayer = () => {
-    Animated.parallel([
-      Animated.timing(this.screenBottom, {
-        toValue: 0,
-        delay: 100,
-        duration: 100,
-        easing: Easing.bezier(0.5, 0, 0.5, 1),
-      }),
-      Animated.timing(this.minPlayerOpacity, {
-        toValue: 0,
-        duration: 100,
-      }),
-      Animated.timing(this.screenHeight, {
-        toValue: sizes.WINDOW_HEIGHT,
-        duration: 400,
-        easing: Easing.bezier(0.5, 0, 0.5, 1),
-      }),
-    ]).start()
-  }
-
-  _hideFullScreenPlayer = () => {
-    Animated.parallel([
-      Animated.timing(this.screenBottom, {
-        toValue: this.state.bottomTabsHeight,
-        duration: 100,
-        delay: 200,
-        easing: Easing.bezier(0.5, 0, 0.5, 1),
-      }),
-      Animated.timing(this.screenHeight, {
-        toValue: sizes.MIN_PLAYER_HEIGHT,
-        duration: 400,
-        easing: Easing.bezier(0.5, 0, 0.5, 1),
-      }),
-      Animated.timing(this.minPlayerOpacity, {
-        toValue: 1,
-        delay: 300,
-        duration: 100,
-      }),
-    ]).start()
+    this._animateScreenHeight(sizes.WINDOW_HEIGHT)
   }
 
   render() {
@@ -494,9 +496,17 @@ class Player extends Component {
     const screenContainer = [
       styles.wrapper,
       {
-        height: this.screenHeight,
-        bottom: this.screenBottom,
-        backgroundColor: this.screenHeight.interpolate({
+        height: this.screenHeightAnimation,
+        bottom: this.screenHeightAnimation.interpolate({
+          inputRange: [
+            0,
+            sizes.MIN_PLAYER_HEIGHT,
+            (sizes.MIN_PLAYER_HEIGHT + bottomTabsHeight) * 1.4,
+            sizes.WINDOW_HEIGHT,
+          ],
+          outputRange: [bottomTabsHeight, bottomTabsHeight, 0, 0],
+        }),
+        backgroundColor: this.screenHeightAnimation.interpolate({
           inputRange: [0, sizes.MIN_PLAYER_HEIGHT, sizes.WINDOW_HEIGHT],
           outputRange: [colors.TRANSPARENT, colors.WHITE, colors.BLACK],
         }),
@@ -506,10 +516,60 @@ class Player extends Component {
     const minPlayerContainer = [
       styles.minPlayerContainer,
       {
-        opacity: this.minPlayerOpacity,
-        height: this.minPlayerOpacity.interpolate({
-          inputRange: [0, 0.01, 1],
-          outputRange: [0, sizes.MIN_PLAYER_HEIGHT, sizes.MIN_PLAYER_HEIGHT],
+        opacity: this.screenHeightAnimation.interpolate({
+          inputRange: [
+            0,
+            sizes.MIN_PLAYER_HEIGHT,
+            (sizes.MIN_PLAYER_HEIGHT + bottomTabsHeight) * 1.4,
+            sizes.WINDOW_HEIGHT,
+          ],
+          outputRange: [1, 1, 0, 0],
+        }),
+        height: this.screenHeightAnimation.interpolate({
+          inputRange: [
+            0,
+            sizes.MIN_PLAYER_HEIGHT,
+            (sizes.MIN_PLAYER_HEIGHT + bottomTabsHeight) * 1.4,
+            (sizes.MIN_PLAYER_HEIGHT + bottomTabsHeight) * 1.4 + 1,
+            sizes.WINDOW_HEIGHT,
+          ],
+          outputRange: [
+            sizes.MIN_PLAYER_HEIGHT,
+            sizes.MIN_PLAYER_HEIGHT,
+            sizes.MIN_PLAYER_HEIGHT,
+            0,
+            0,
+          ],
+        }),
+      },
+    ]
+    const minPlayerBottomWhiteSpace = [
+      styles.minPlayerBottomWhiteSpace,
+      {
+        opacity: this.screenHeightAnimation.interpolate({
+          inputRange: [
+            0,
+            sizes.MIN_PLAYER_HEIGHT,
+            (sizes.MIN_PLAYER_HEIGHT + bottomTabsHeight) * 1.4,
+            sizes.WINDOW_HEIGHT,
+          ],
+          outputRange: [1, 1, 0, 0],
+        }),
+        height: this.screenHeightAnimation.interpolate({
+          inputRange: [
+            0,
+            sizes.MIN_PLAYER_HEIGHT,
+            (sizes.MIN_PLAYER_HEIGHT + bottomTabsHeight) * 1.4,
+            (sizes.MIN_PLAYER_HEIGHT + bottomTabsHeight) * 1.4 + 1,
+            sizes.WINDOW_HEIGHT,
+          ],
+          outputRange: [
+            sizes.WINDOW_HEIGHT,
+            sizes.WINDOW_HEIGHT,
+            sizes.WINDOW_HEIGHT,
+            0,
+            0,
+          ],
         }),
       },
     ]
@@ -532,12 +592,19 @@ class Player extends Component {
           <View style={styles.navbar}>
             <NavBarButton
               type={NAV_BAR_BUTTON_SHEVRON_DOWN_WHITE}
-              onPress={this._hideFullScreenPlayer}
+              onPress={this._showMinPlayer}
+            />
+            <View
+              style={styles.navbarCenterSpace}
+              {...this._fullPlayerTimelineResponder.panHandlers}
             />
             <NavBarButton type={NAV_BAR_BUTTON_USER_AVATAR} />
           </View>
 
-          <View style={styles.fullPlayerMusicText}>
+          <View
+            style={styles.fullPlayerMusicText}
+            {...this._fullPlayerTimelineResponder.panHandlers}
+          >
             <Text style={styles.fullPlayerTitle}>{this.state.musicTitle}</Text>
             <Text style={styles.fullPlayerArtist}>
               {this.state.musicDescription}
@@ -593,6 +660,7 @@ class Player extends Component {
           </View>
         </View>
 
+        <Animated.View style={minPlayerBottomWhiteSpace} />
         <Animated.View style={minPlayerContainer}>
           <MinPlayer
             onPressPlay={this._onPressPlayPause}
@@ -620,7 +688,7 @@ const styles = StyleSheet.create({
   navbar: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 16,
+    paddingHorizontal: 16,
     ...Platform.select({
       ios: {
         ...ifIphoneX(
@@ -633,22 +701,42 @@ const styles = StyleSheet.create({
         ),
       },
       android: {
-        marginTop: 24,
+        paddingTop: 16,
       },
     }),
   },
-
+  navbarCenterSpace: {
+    flex: 1,
+    backgroundColor: colors.FUCKING_ANDROID,
+    ...Platform.select({
+      ios: {
+        ...ifIphoneX(
+          {
+            marginTop: -(getStatusBarHeight() + 24),
+          },
+          {
+            marginTop: -24,
+          },
+        ),
+      },
+      android: {
+        marginTop: -16,
+      },
+    }),
+  },
   fullPlayerContainer: {
     backgroundColor: colors.BLACK_30,
     position: 'absolute',
     left: 0,
     top: 0,
-    right: 0,
-    bottom: 0,
+    width: sizes.WINDOW_WIDTH,
+    height: sizes.WINDOW_HEIGHT,
     justifyContent: 'space-between',
   },
   fullPlayerMusicText: {
     padding: 16,
+    paddingTop: 32,
+    backgroundColor: colors.FUCKING_ANDROID,
   },
   fullPlayerTitle: {
     ...style.text.bold,
@@ -711,6 +799,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.WHITE,
     // borderBottomWidth: 1,
     // borderBottomColor: colors.BOTTOM_TABBAR_BORDER,
+  },
+  minPlayerBottomWhiteSpace: {
+    position: 'absolute',
+    width: '100%',
+    top: sizes.MIN_PLAYER_HEIGHT,
+    backgroundColor: colors.WHITE,
   },
 })
 

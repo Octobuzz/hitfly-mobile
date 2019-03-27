@@ -1,7 +1,10 @@
-import { Dimensions, PixelRatio } from 'react-native'
+import { Dimensions, PixelRatio, Platform, StatusBar } from 'react-native'
 
 export const WINDOW_WIDTH = Dimensions.get('window').width
-export const WINDOW_HEIGHT = Dimensions.get('window').height
+export const WINDOW_HEIGHT =
+  Platform.OS === 'ios'
+    ? Dimensions.get('window').height
+    : Dimensions.get('window').height - StatusBar.currentHeight
 export const PIXEL_RATIO = PixelRatio.get()
 // export const PIXEL_RATIO = 3
 

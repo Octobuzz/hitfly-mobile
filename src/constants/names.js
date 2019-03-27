@@ -2,9 +2,9 @@ export const APP_NAME = 'digicomob'
 
 export const MOVES = {
   LEFT: 'LEFT',
-  TOP: 'TOP',
+  UP: 'UP',
   RIGHT: 'RIGHT',
-  BOTTOM: 'BOTTOM',
+  DOWN: 'DOWN',
   HORIZONTAL: 'HORIZONTAL',
   VERTICAL: 'VERTICAL',
 }
