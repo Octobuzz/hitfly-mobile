@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ViewPropTypes,
 } from 'react-native'
+import RNFastImage from 'react-native-fast-image'
 import { colors, style } from '../constants'
 import { hasValue } from '../utils/helpers'
 
@@ -52,7 +53,15 @@ const GenreItem = ({ title, description, image, size, style, onPress }) => {
     >
       {hasValue(image) && (
         <View style={imageWrapperStyle}>
-          <Image style={imageStyle} source={image} resizeMode="cover" />
+          {typeof image === 'string' ? (
+            <RNFastImage
+              style={imageStyle}
+              source={{ uri: image }}
+              resizeMode="cover"
+            />
+          ) : (
+            <Image style={imageStyle} source={image} resizeMode="cover" />
+          )}
         </View>
       )}
       {(hasValue(title) || hasValue(description)) && (
@@ -76,7 +85,11 @@ const GenreItem = ({ title, description, image, size, style, onPress }) => {
 GenreItem.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
-  image: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+  image: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.object,
+  ]),
   size: PropTypes.number.isRequired,
   style: ViewPropTypes.style,
   onPress: PropTypes.func,

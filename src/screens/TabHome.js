@@ -3,16 +3,18 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { StyleSheet } from 'react-native'
-import { Navigator } from '../navigation'
+import { Navigator, screens } from '../navigation'
 import { profileSelectors, requestLogOut } from '../redux/profile'
+import { tempMusicSelectors } from '../redux/tempMusic'
 import Button from '../components/Button'
 import Announcement from '../components/Announcement'
 import Wrapper from '../containers/Wrapper'
 import Title from '../components/Title'
 import Carousel from '../components/Carousel'
-import { images, colors } from '../constants'
 import FaceItem from '../components/FaceItem'
 import GenreItem from '../components/GenreItem'
+import { images, colors } from '../constants'
+import { renameKeys } from '../utils/helpers'
 
 const TEMPDATA = [
   {
@@ -90,9 +92,28 @@ class TabHome extends Component {
     this.props.requestLogOut()
   }
 
+  _onPressAlbum = item => {
+    if (item[0] && item[0].hasOwnProperty('id')) {
+      Navigator.pushWhiteTransparent(this, screens.PLAYLIST, {
+        title: `${item[0].title} - ${item[0].description}`,
+        albumId: item[0].id,
+      })
+    }
+  }
+
   render() {
+    const albums = R.map(
+      renameKeys({ album: 'title', artist: 'description', artwork: 'image' }),
+      this.props.albums,
+    )
+
     return (
-      <Wrapper isFetching={this.props.isFetching} scroll style={styles.wrapper}>
+      <Wrapper
+        isFetching={this.props.isFetching}
+        scroll
+        playerOffset
+        style={styles.wrapper}
+      >
         <Button
           label="Выйти"
           styleWrapper={styles.roundedButtonWrapper}
@@ -114,7 +135,8 @@ class TabHome extends Component {
             />
           }
           RenderComponent={GenreItem}
-          data={TEMPDATA2}
+          data={albums}
+          onPress={this._onPressAlbum}
           style={styles.marginTop}
         />
         <Carousel
@@ -194,11 +216,13 @@ TabHome.propTypes = {
   requestLogOut: PropTypes.func,
   userName: PropTypes.string,
   isFetching: PropTypes.bool,
+  albums: PropTypes.array,
 }
 
 const mapStateToProps = R.applySpec({
   userName: profileSelectors.getUserName,
   isFetching: profileSelectors.getIsFetching,
+  albums: tempMusicSelectors.getAlbums,
 })
 
 const mapDispatchToProps = {

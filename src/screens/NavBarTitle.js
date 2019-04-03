@@ -16,7 +16,11 @@ class NavTitle extends Component {
             screenId={this.props.screenId}
           />
         ))}
-        <Text style={styles.title} ellipsizeMode="tail" numberOfLines={1}>
+        <Text
+          style={[styles.title, { color: this.props.color }]}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+        >
           {this.props.title}
         </Text>
       </View>
@@ -33,7 +37,6 @@ const styles = StyleSheet.create({
   },
   title: {
     ...style.text.navBarTitle,
-    color: colors.BLACK_LABEL,
   },
 })
 
@@ -45,12 +48,14 @@ NavTitle.propTypes = {
     }),
   ),
   screenId: PropTypes.string,
+  color: PropTypes.string,
 }
 
 NavTitle.defaultProps = {
   title: '',
   androidLeftButtons: [],
   screenId: '',
+  color: colors.BLACK_LABEL,
 }
 
 export default NavTitle

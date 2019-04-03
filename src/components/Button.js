@@ -12,6 +12,7 @@ import RNLinearGradient from 'react-native-linear-gradient'
 import { colors, sizes, style } from '../constants/'
 
 const BUTTON_DEFAULT = 'BUTTON_DEFAULT'
+const BUTTON_HEADER = 'BUTTON_HEADER'
 const BUTTON_BORDERED = 'BUTTON_BORDERED'
 const BUTTON_ICON = 'BUTTON_ICON'
 const BUTTON_LINK = 'BUTTON_LINK'
@@ -65,7 +66,7 @@ const Button = props => {
         style={touchableStyle}
         onPress={onPress}
         disabled={disabled}
-        activeOpacity={0.6}
+        activeOpacity={0.8}
       >
         {type === BUTTON_LINK || type === BUTTON_ICON ? (
           ButtonContent
@@ -86,6 +87,7 @@ const Button = props => {
 
 Button.types = {
   BUTTON_DEFAULT,
+  BUTTON_HEADER,
   BUTTON_BORDERED,
   BUTTON_ICON,
   BUTTON_LINK,
@@ -166,6 +168,23 @@ const styles = {
     linearGradient: {
       ...base_styles.linearGradient,
       borderRadius: sizes.BUTTON_HEIGHT / 2,
+    },
+  }),
+  [BUTTON_HEADER]: StyleSheet.create({
+    ...base_styles,
+    wrapper: {
+      ...base_styles.wrapper,
+      width: '100%',
+      alignItems: 'flex-end',
+    },
+    touchable: {
+      ...base_styles.touchable,
+      maxWidth: sizes.WINDOW_WIDTH * 0.85,
+      borderTopLeftRadius: sizes.BUTTON_HEIGHT / 2,
+    },
+    linearGradient: {
+      ...base_styles.linearGradient,
+      borderTopLeftRadius: sizes.BUTTON_HEIGHT / 2,
     },
   }),
   [BUTTON_BORDERED]: StyleSheet.create({

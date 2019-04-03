@@ -6,6 +6,7 @@ import NavBarButton from '../screens/NavBarButton'
 import NavBarTitle from '../screens/NavBarTitle'
 import Splash from '../screens/Splash'
 import Player from '../screens/Player'
+import Playlist from '../screens/Playlist'
 import Auth from '../screens/Auth'
 import AuthCreateAccount from '../screens/AuthCreateAccount'
 import AuthCreateAccountParams from '../screens/AuthCreateAccountParams'
@@ -45,6 +46,9 @@ export default function() {
   )
   Navigation.registerComponent(screens.SPLASH.screen, () =>
     WrappedComponent(Splash),
+  )
+  Navigation.registerComponent(screens.PLAYLIST.screen, () =>
+    WrappedComponent(Playlist),
   )
   Navigation.registerComponent(screens.PLAYER.screen, () =>
     WrappedComponent(Player),

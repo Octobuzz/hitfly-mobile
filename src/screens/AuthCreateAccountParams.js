@@ -30,7 +30,7 @@ class AuthCreateAccountParams extends Component {
 
   render() {
     return (
-      <Wrapper scroll>
+      <Wrapper scrollKeyboard>
         <InputText
           placeholder="Возраст"
           mask={InputText.masks.MASK_NUMBERS_2}

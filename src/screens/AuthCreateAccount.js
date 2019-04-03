@@ -33,7 +33,7 @@ class AuthCreateAccount extends Component {
 
   render() {
     return (
-      <Wrapper scroll>
+      <Wrapper scrollKeyboard>
         <View style={styles.authControls}>
           <View style={styles.socialRow}>
             <Button

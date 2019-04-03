@@ -11,9 +11,11 @@ import {
 import { createLogger } from 'redux-logger'
 
 import profileReducer, { profileSagas } from './profile'
+import tempMusicReducer from './tempMusic'
 
 const rootReducer = combineReducers({
   profile: profileReducer,
+  tempMusic: tempMusicReducer,
 })
 
 function* rootSaga() {
@@ -32,6 +34,8 @@ const persistConfig = {
   stateReconciler: seamlessImmutableReconciler,
   transforms: [seamlessImmutableTransformCreator(transformerConfig)],
 }
+
+// purgeStoredState(persistConfig)
 
 export const configureStore = () => {
   const sagaMiddleware = createSagaMiddleware()

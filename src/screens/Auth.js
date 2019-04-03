@@ -49,7 +49,7 @@ class Auth extends Component {
 
   render() {
     return (
-      <Wrapper scroll isFetching={this.props.isFetching}>
+      <Wrapper scrollKeyboard isFetching={this.props.isFetching}>
         <View style={styles.authControls}>
           <View style={styles.socialRow}>
             <Button

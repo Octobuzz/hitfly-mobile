@@ -30,7 +30,7 @@ class AuthForgotPassword extends Component {
 
   render() {
     return (
-      <Wrapper scroll>
+      <Wrapper scrollKeyboard>
         <Text style={styles.description}>
           Введите ваш e–mail и мы отправим вам письмо с инструкцией по
           восстановлению пароля

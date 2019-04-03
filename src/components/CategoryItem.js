@@ -60,6 +60,7 @@ const CategoryItem = props => {
     <TouchableOpacity
       style={wrapperStyle}
       onPress={onPress}
+      disabled={!onPress}
       activeOpacity={0.8}
     >
       <RNLinearGradient

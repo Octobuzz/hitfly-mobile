@@ -16,6 +16,23 @@ export const generateUID = (count = 10) => {
 
 export const hasValue = value => value !== undefined && value !== ''
 
+export const renameKeys = R.curry((keysMap, obj) =>
+  R.reduce(
+    (acc, key) => R.assoc(keysMap[key] || key, obj[key], acc),
+    {},
+    R.keys(obj),
+  ),
+)
+
+export const getNameForCount = (number, titles) => {
+  const cases = [2, 0, 1, 1, 1, 2]
+  return titles[
+    number % 100 > 4 && number % 100 < 20
+      ? 2
+      : cases[number % 10 < 5 ? number % 10 : 5]
+  ]
+}
+
 export const hexToRgb = hex => {
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
   hex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b)
@@ -48,14 +65,36 @@ export const getSectionGradientColor = (
   return `rgb(${red}, ${green}, ${blue})`
 }
 
-export const secondsToStringTime = (sec, separator = '.') => {
+export const secondsToStringTime = (sec, separator = '.', mode = '') => {
   const hours = Math.floor((sec / (60 * 60)) % 60)
   const minutes = Math.floor((sec / 60) % 60)
   const seconds =
     Math.floor(sec % 60) > 9 ? Math.floor(sec % 60) : `0${Math.floor(sec % 60)}`
-  return !hours
-    ? `${minutes}${separator}${seconds}`
-    : `${hours}${separator}${minutes}${separator}${seconds}`
+  if (mode === 'playlistInfo') {
+    return !hours
+      ? `${minutes} ${getNameForCount(minutes, [
+          'минута',
+          'минуты',
+          'минут',
+        ])} ${seconds} ${getNameForCount(seconds, [
+          'секунда',
+          'секунды',
+          'секунд',
+        ])}`
+      : `${hours} ${getNameForCount(hours, [
+          'час',
+          'часа',
+          'часов',
+        ])} ${minutes} ${getNameForCount(minutes, [
+          'минута',
+          'минуты',
+          'минут',
+        ])}`
+  } else {
+    return !hours
+      ? `${minutes}${separator}${seconds}`
+      : `${hours}${separator}${minutes}${separator}${seconds}`
+  }
 }
 
 export const getNumberMultiple_05 = num => {

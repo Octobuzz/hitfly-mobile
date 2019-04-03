@@ -36,6 +36,10 @@ class Carousel extends PureComponent {
 
   _renderListItem = ({ item, index }) => {
     const { horizontal, hmargin, RenderComponent } = this.props
+    const onPress =
+      !this.props.disabled && this.props.onPress
+        ? () => this.props.onPress(item)
+        : null
     return (
       <View
         onLayout={!horizontal && this._onLayout}
@@ -49,6 +53,7 @@ class Carousel extends PureComponent {
         {item.map((props, index) => (
           <RenderComponent
             {...props}
+            onPress={onPress}
             key={index}
             size={this.state.size}
             styleWrapper={[

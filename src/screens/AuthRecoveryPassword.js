@@ -32,7 +32,7 @@ class AuthRecoveryPassword extends Component {
 
   render() {
     return (
-      <Wrapper scroll>
+      <Wrapper scrollKeyboard>
         <Text style={styles.description}>Введите новый пароль</Text>
         <InputText
           placeholder="Новый пароль"

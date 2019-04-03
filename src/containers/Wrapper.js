@@ -1,30 +1,50 @@
+import R from 'ramda'
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { StyleSheet, View, ViewPropTypes } from 'react-native'
+import { StyleSheet, View, ScrollView, ViewPropTypes } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Loader from '../components/Loader'
-import { colors } from '../constants'
+import { colors, sizes } from '../constants'
 
 class Wrapper extends Component {
   render() {
-    const { children, style, scroll, isFetching } = this.props
+    const {
+      children,
+      style,
+      scroll,
+      scrollKeyboard,
+      playerOffset,
+      isFetching,
+    } = this.props
 
-    if (scroll) {
+    if (scroll || scrollKeyboard) {
+      const ScrollContainer = scrollKeyboard
+        ? KeyboardAwareScrollView
+        : ScrollView
+      const scrollViewProps = R.omit(
+        ['children', 'style', 'scroll', 'scrollKeyboard', 'isFetching'],
+        this.props,
+      )
       return (
         <Fragment>
-          <KeyboardAwareScrollView
+          <ScrollContainer
             contentContainerStyle={[styles.wrapper, style]}
+            {...scrollViewProps}
           >
             {children}
-          </KeyboardAwareScrollView>
+          </ScrollContainer>
           {!!isFetching && <Loader styleWrapper={styles.loader} />}
+          {!!playerOffset && <View style={styles.playerOffset} />}
         </Fragment>
       )
     } else {
       return (
         <Fragment>
-          <View style={[styles.wrapper, style]}>{children}</View>
+          <View style={[styles.wrapper, styles.flexWrapper, style]}>
+            {children}
+          </View>
           {!!isFetching && <Loader styleWrapper={styles.loader} />}
+          {!!playerOffset && <View style={styles.playerOffset} />}
         </Fragment>
       )
     }
@@ -36,6 +56,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 16,
   },
+  flexWrapper: {
+    flex: 1,
+  },
   loader: {
     backgroundColor: colors.WHITE_60,
     position: 'absolute',
@@ -46,6 +69,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  playerOffset: {
+    height: sizes.MIN_PLAYER_HEIGHT,
+  },
 })
 
 Wrapper.propTypes = {
@@ -55,11 +81,15 @@ Wrapper.propTypes = {
   ]),
   style: ViewPropTypes.style,
   scroll: PropTypes.bool,
+  scrollKeyboard: PropTypes.bool,
+  playerOffset: PropTypes.bool,
   isFetching: PropTypes.bool,
 }
 
 Wrapper.defaultProps = {
   scroll: false,
+  scrollKeyboard: false,
+  playerOffset: false,
   isFetching: false,
 }
 

@@ -1,4 +1,4 @@
-// import R from 'ramda'
+import R from 'ramda'
 import { Navigation } from 'react-native-navigation'
 import { Platform } from 'react-native'
 
@@ -6,12 +6,12 @@ import * as screens from './screens'
 import { colors, images, style } from '../constants'
 import { helpers } from '../utils'
 import {
-  // NAV_BAR_BUTTON_ARROW_BACK_WHITE,
+  NAV_BAR_BUTTON_ARROW_BACK_WHITE,
   NAV_BAR_BUTTON_ARROW_BACK_BLACK,
   // NAV_BAR_BUTTON_SHEVRON_DOWN_WHITE,
   // NAV_BAR_BUTTON_SETTINGS_WHITE,
   NAV_BAR_BUTTON_USER_AVATAR,
-  // NAV_BAR_BUTTON_ANDROID_OFFSET,
+  NAV_BAR_BUTTON_ANDROID_OFFSET,
 } from '../screens/NavBarButton'
 
 const STATUS_BAR_STYLE = {
@@ -97,7 +97,6 @@ const topBarTitle = (title = '', props = {}) => {
         passProps: {
           ...props,
           title,
-          someProp: 'qq',
         },
       },
     },
@@ -325,10 +324,12 @@ const startTabBasedApp = () => {
   })
 }
 
+let playerOverlayID = 0
 export const showPlayerOverlay = () => {
+  playerOverlayID++
   Navigation.showOverlay({
     component: {
-      id: screens.PLAYER.screen,
+      id: `${screens.PLAYER.screen}_${playerOverlayID}`,
       name: screens.PLAYER.screen,
       options: {
         layout: {
@@ -343,7 +344,7 @@ export const showPlayerOverlay = () => {
 }
 
 export const dismissPlayerOverlay = () => {
-  Navigation.dismissOverlay(screens.PLAYER.screen)
+  Navigation.dismissOverlay(`${screens.PLAYER.screen}_${playerOverlayID}`)
 }
 
 const getComponentId = screen => {
@@ -360,49 +361,92 @@ const getComponentId = screen => {
 const push = (currentScreen, screen = {}, passProps = {}, navOptions = {}) => {
   const currentScreenId = getComponentId(currentScreen)
   const screenId = `${screen.screen}_${helpers.generateUID}`
+  const leftButtons =
+    !navOptions.topBar || !navOptions.topBar.leftButtons
+      ? [NAV_BAR_BUTTON_ARROW_BACK_BLACK]
+      : navOptions.topBar.leftButtons
+  const rightButtons =
+    !navOptions.topBar || !navOptions.topBar.rightButtons
+      ? []
+      : navOptions.topBar.rightButtons
   Navigation.push(currentScreenId, {
     component: {
       id: screenId,
       name: screen.screen,
       passProps,
-      options: {
-        topBar: {
-          ...TOP_BAR_STYLE,
-          ...Platform.select({
-            ios: {
-              ...topBarTitle(screen.title || ''),
-              leftButtons: [
-                navBarButton(NAV_BAR_BUTTON_ARROW_BACK_BLACK, { screenId }),
-              ],
-            },
-            // TODO: фикс для android https://github.com/wix/react-native-navigation/issues/4449
-            android: {
-              ...topBarTitle(screen.title || '', {
-                androidLeftButtons: [
-                  {
-                    type: NAV_BAR_BUTTON_ARROW_BACK_BLACK,
-                  },
+      options: R.mergeDeepRight(
+        {
+          topBar: {
+            ...TOP_BAR_STYLE,
+            ...Platform.select({
+              ios: {
+                ...topBarTitle(screen.title || passProps.title || '', {
+                  color: passProps.titleColor || colors.BLACK_LABEL,
+                }),
+                leftButtons: [
+                  ...leftButtons.map(item => navBarButton(item, { screenId })),
                 ],
-                screenId,
-              }),
-            },
-          }),
-          // rightButtons: R.filter(R.complement(R.isNil), [
-          //   Platform.OS === 'android' ? navBarButton(NAV_BAR_BUTTON_ANDROID_OFFSET) : null,
-          //   navBarButton(NAV_BAR_BUTTON_USER_AVATAR, {screenId}),
-          //   navBarButton(NAV_BAR_BUTTON_ARROW_BACK_BLACK, {screenId}),
-          // ]),
+              },
+              // FIXME: фикс для android https://github.com/wix/react-native-navigation/issues/4449
+              android: {
+                ...topBarTitle(screen.title || passProps.title || '', {
+                  androidLeftButtons: [
+                    ...leftButtons.map(item => ({ type: item })),
+                  ],
+                  color: passProps.titleColor || colors.BLACK_LABEL,
+                  screenId,
+                }),
+              },
+            }),
+            rightButtons: R.filter(R.complement(R.isNil), [
+              Platform.OS === 'android'
+                ? navBarButton(NAV_BAR_BUTTON_ANDROID_OFFSET)
+                : null,
+              ...rightButtons.map(item => navBarButton(item, { screenId })),
+            ]),
+          },
+          bottomTabs: {
+            ...BOTTOM_TABS_STYLE,
+          },
+          bottomTab: {
+            ...BOTTOM_TAB_STYLE,
+          },
         },
-        bottomTabs: {
-          ...BOTTOM_TABS_STYLE,
-        },
-        bottomTab: {
-          ...BOTTOM_TAB_STYLE,
-        },
-        ...navOptions,
-      },
+        R.dissocPath(
+          ['topBar', 'leftButtons'],
+          R.dissocPath(['topBar', 'rightButtons'], navOptions),
+        ),
+      ),
     },
   })
+}
+
+const pushWhiteTransparent = (
+  currentScreen,
+  screen = {},
+  passProps = {},
+  navOptions = {},
+) => {
+  push(
+    currentScreen,
+    screen,
+    {
+      titleColor: colors.WHITE,
+      ...passProps,
+    },
+    R.mergeDeepRight(
+      {
+        topBar: {
+          drawBehind: true,
+          background: {
+            color: colors.TRANSPARENT,
+          },
+          leftButtons: [NAV_BAR_BUTTON_ARROW_BACK_WHITE],
+        },
+      },
+      navOptions,
+    ),
+  )
 }
 
 const pop = screen => {
@@ -439,6 +483,7 @@ export default {
   showPlayerOverlay,
   dismissPlayerOverlay,
   push,
+  pushWhiteTransparent,
   pop,
   popToRoot,
   showModal,

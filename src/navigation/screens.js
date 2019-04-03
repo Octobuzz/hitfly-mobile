@@ -16,6 +16,10 @@ export const PLAYER = {
   screen: `${APP_NAME}.PlayerScreen`,
 }
 
+export const PLAYLIST = {
+  screen: `${APP_NAME}.PlaylistScreen`,
+}
+
 export const AUTH = {
   title: 'Вход',
   screen: `${APP_NAME}.AuthScreen`,
