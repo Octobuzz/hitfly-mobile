@@ -8,6 +8,7 @@ import {
   ViewPropTypes,
   Image,
 } from 'react-native'
+import RNFastImage from 'react-native-fast-image'
 import RNLinearGradient from 'react-native-linear-gradient'
 import { colors, style } from '../constants'
 import { hasValue } from '../utils/helpers'
@@ -19,7 +20,12 @@ const BG = (bgcolors, bgimage) => {
   let backgroundColor = colors.BRAND_BLUE
   let content = null
   if (bgimage) {
-    content = <Image source={bgimage} style={styles.bgImage} />
+    content =
+      typeof bgimage === 'string' ? (
+        <RNFastImage source={{ uri: bgimage }} style={styles.bgImage} />
+      ) : (
+        <Image source={bgimage} style={styles.bgimage} />
+      )
   }
   if (bgcolors && Array.isArray(bgcolors)) {
     if (bgcolors.length > 1)
@@ -50,9 +56,10 @@ const BG = (bgcolors, bgimage) => {
  * @param {array} props.bgcolors Массив цветов
  * @param {*} props.bgimage Картинка на подложку вложенную или {uri: 'link'}
  * @param {*} props.image Ссылка на картинку вложенную или {uri: 'link'}
+ * @param {*} props.imageSize TODO: размеры картинки
  */
 const Announcement = ({
-  style,
+  styleWrapper,
   onPress,
   disabled,
   title,
@@ -61,9 +68,13 @@ const Announcement = ({
   bgcolors,
   bgimage,
   image,
+  imageSize,
 }) => (
   <TouchableOpacity
-    style={[hasValue(image) ? styles.wrapper : styles.wrapper2, style && style]}
+    style={[
+      hasValue(image) ? styles.wrapper : styles.wrapper2,
+      styleWrapper && styleWrapper,
+    ]}
     onPress={onPress}
     disabled={disabled || !onPress}
     activeOpacity={0.6}
@@ -71,8 +82,26 @@ const Announcement = ({
     <View style={styles.content}>
       {BG(bgcolors, bgimage)}
       {hasValue(image) && (
-        <View style={styles.imageWrapper}>
-          <Image source={image} style={styles.image} resizeMode="contain" />
+        <View
+          style={[
+            styles.imageWrapper,
+            hasValue(imageSize) &&
+              imageSize.width &&
+              imageSize.height && {
+                width: imageSize.width,
+                height: imageSize.height,
+              },
+          ]}
+        >
+          {typeof image === 'string' ? (
+            <RNFastImage
+              source={{ uri: image }}
+              style={styles.image}
+              resizeMode="contain"
+            />
+          ) : (
+            <Image source={image} style={styles.image} resizeMode="contain" />
+          )}
         </View>
       )}
       <View style={styles.flexWrapper}>
@@ -93,22 +122,44 @@ const Announcement = ({
             </Text>
           )}
         </View>
-        {hasValue(image) && <View style={styles.right} />}
+        {hasValue(image) && (
+          <View
+            style={[
+              styles.right,
+              hasValue(imageSize) &&
+                imageSize.width && {
+                  width: imageSize.width,
+                },
+            ]}
+          />
+        )}
       </View>
     </View>
   </TouchableOpacity>
 )
 
 Announcement.propTypes = {
-  style: ViewPropTypes.style,
+  styleWrapper: ViewPropTypes.style,
   onPress: PropTypes.func,
   disabled: PropTypes.bool,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
   bottom: PropTypes.string,
   bgcolors: PropTypes.arrayOf(PropTypes.string).isRequired,
-  bgimage: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
-  image: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
+  bgimage: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.object,
+  ]),
+  image: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+    PropTypes.object,
+  ]),
+  imageSize: PropTypes.shape({
+    width: PropTypes.number,
+    height: PropTypes.number,
+  }),
 }
 
 Announcement.defaultProps = {
@@ -138,7 +189,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 0,
     height: HEIGHT_IMG,
-    width: HEIGHT_IMG,
+    maxWidth: HEIGHT_IMG,
   },
   image: {
     flex: 1,
@@ -149,7 +200,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   right: {
-    flex: 1,
+    // flex: 1,
   },
   textsWrapper: {
     flex: 2,

@@ -55,6 +55,8 @@ export const CONTROL_PLUS_BLACK = require('../assets/images/control/plus_black.p
 export const CONTROL_PLUS_WHITE = require('../assets/images/control/plus_white.png')
 export const CONTROL_SHUFFLE_BLACK = require('../assets/images/control/shuffle_black.png')
 export const CONTROL_SHUFFLE_WHITE = require('../assets/images/control/shuffle_white.png')
+export const CONTROL_SLIDER_ARROW_LEFT = require('../assets/images/control/slider_arrow_left.png')
+export const CONTROL_SLIDER_ARROW_RIGHT = require('../assets/images/control/slider_arrow_right.png')
 
 // temp categories
 export const TEMP_CATEGORY_1 = require('../assets/images/temp/categories/category_1.png')
@@ -68,6 +70,14 @@ export const TEMP_CATEGORY_8 = require('../assets/images/temp/categories/categor
 
 // temp main
 export const TEMP_EVENT = require('../assets/images/temp/main/event.png')
+export const TEMP_DANCE_GIRL = require('../assets/images/temp/main/dance_girl.png')
+export const TEMP_GUITAR_GIRL = require('../assets/images/temp/main/guitar_girl.png')
+export const TEMP_EXPERT_JULIA = require('../assets/images/temp/main/expert_julia.png')
+export const TEMP_EXPERT_MIHAILOV = require('../assets/images/temp/main/expert_mihailov.png')
+export const TEMP_EXPERT_SPLIN = require('../assets/images/temp/main/expert_splin.png')
+export const TEMP_MELOMAN_DJ = require('../assets/images/temp/main/meloman_dj.png')
+export const TEMP_MELOMAN_GUITAR_GIRL = require('../assets/images/temp/main/meloman_guitar_girl.png')
+
 // temp player
 export const TEMP_ARTWORK_MIN = require('../assets/images/temp/player/artwork_min.png')
 export const TEMP_ARTWORK_MAX = require('../assets/images/temp/player/artwork_max.png')

@@ -19,6 +19,7 @@ const MARGIN = 8
  * @param {number} props.row Количество строк
  * @param {number} props.hmargin Отступы справа и слева для горизонтальной прокрутки
  * @param {component} props.RenderComponent Компонент для рендера
+ * @param {object} props.RenderComponentStyle Стиль для компонента рендера
  */
 class Carousel extends PureComponent {
   constructor(props) {
@@ -35,7 +36,12 @@ class Carousel extends PureComponent {
   _keyExtractor = (item, index) => `item_${item.id || index}`
 
   _renderListItem = ({ item, index }) => {
-    const { horizontal, hmargin, RenderComponent } = this.props
+    const {
+      horizontal,
+      hmargin,
+      RenderComponent,
+      RenderComponentStyle,
+    } = this.props
     const onPress =
       !this.props.disabled && this.props.onPress
         ? () => this.props.onPress(item)
@@ -60,6 +66,8 @@ class Carousel extends PureComponent {
               { marginBottom: 0 },
               horizontal && index && { marginTop: MARGIN },
               !horizontal && index && { marginLeft: MARGIN },
+              props.styleWrapper && props.styleWrapper,
+              RenderComponentStyle && RenderComponentStyle,
             ]}
           />
         ))}
@@ -134,6 +142,7 @@ Carousel.propTypes = {
   row: PropTypes.number.isRequired,
   hmargin: PropTypes.number.isRequired,
   RenderComponent: PropTypes.func.isRequired,
+  RenderComponentStyle: ViewPropTypes.style,
 }
 
 Carousel.defaultProps = {

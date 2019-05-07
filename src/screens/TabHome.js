@@ -2,7 +2,7 @@ import R from 'ramda'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { StyleSheet } from 'react-native'
+import { StyleSheet /*, Text, View*/ } from 'react-native'
 import { Navigator, screens } from '../navigation'
 import { profileSelectors, requestLogOut } from '../redux/profile'
 import { tempMusicSelectors } from '../redux/tempMusic'
@@ -13,7 +13,8 @@ import Title from '../components/Title'
 import Carousel from '../components/Carousel'
 import FaceItem from '../components/FaceItem'
 import GenreItem from '../components/GenreItem'
-import { images, colors } from '../constants'
+// import CustomSwiper from '../components/CustomSwiper'
+import { images, colors, sizes, style } from '../constants'
 import { renameKeys } from '../utils/helpers'
 
 const TEMPDATA = [
@@ -49,30 +50,41 @@ const TEMPDATA = [
     label: 'R&B',
     image: images.TEMP_CATEGORY_8,
   },
-  {
-    label: 'R&B',
-    image: images.TEMP_CATEGORY_8,
-  },
 ]
 
-const TEMPDATA2 = [
+// const TEMP_MELOMAN = [
+//   {
+//     title: 'Юлианна Караулова',
+//     description: 'Певица',
+//     image: images.TEMP_EXPERT_JULIA,
+//   },
+//   {
+//     title: 'Стас Михайлов',
+//     description: 'Певец',
+//     image: images.TEMP_EXPERT_MIHAILOV,
+//   },
+//   {
+//     title: 'Сплин',
+//     description: 'Группа',
+//     image: images.TEMP_EXPERT_SPLIN,
+//   },
+// ]
+
+const TEMP_EXPERTS = [
   {
-    title: 'Рок',
-    description: 'Рок',
-    image: images.TEMP_CATEGORY_1,
+    title: 'Юлианна Караулова',
+    description: 'Певица',
+    image: images.TEMP_EXPERT_JULIA,
   },
   {
-    title: 'Джаз',
-    image: images.TEMP_CATEGORY_2,
+    title: 'Стас Михайлов',
+    description: 'Певец',
+    image: images.TEMP_EXPERT_MIHAILOV,
   },
   {
-    description: 'Альтернатива',
-    image: images.TEMP_CATEGORY_3,
-  },
-  {
-    title: 'Метал',
-    description: 'Метал',
-    image: images.TEMP_CATEGORY_4,
+    title: 'Сплин',
+    description: 'Группа',
+    image: images.TEMP_EXPERT_SPLIN,
   },
 ]
 
@@ -106,6 +118,8 @@ class TabHome extends Component {
       renameKeys({ album: 'title', artist: 'description', artwork: 'image' }),
       this.props.albums,
     )
+    // const swiperWidth = sizes.WINDOW_WIDTH - 32
+    // const swiperHeight = 400
 
     return (
       <Wrapper
@@ -122,7 +136,7 @@ class TabHome extends Component {
         <Announcement
           title="Битва музыкантов"
           bgcolors={[colors.BLUE]}
-          style={styles.item}
+          styleWrapper={styles.item}
           bgimage={images.TEMP_EVENT}
         />
         <Carousel
@@ -139,11 +153,57 @@ class TabHome extends Component {
           onPress={this._onPressAlbum}
           style={styles.marginTop}
         />
+        <Announcement
+          title="Топ 20"
+          description="Лучшие музыканты в одном месте"
+          bottom="3 часа 43 минуты"
+          bgcolors={['#FE6C6D', '#FFA469']}
+          styleWrapper={styles.item}
+          image={images.TEMP_DANCE_GIRL}
+          imageSize={{ width: 125, height: 204 }}
+        />
         <Carousel
           horizontal
           header={
             <Title
-              title="Горизонтальное"
+              title="Новые релизы"
+              style={[styles.paddingHorizontal, styles.marginBottom]}
+            />
+          }
+          RenderComponent={GenreItem}
+          data={albums}
+          onPress={this._onPressAlbum}
+          style={styles.marginTop}
+        />
+        <Announcement
+          title="Сейчас слушают"
+          description="Обновлен вчера"
+          bottom="127 песен"
+          bgcolors={['#E3C8BD', '#6B76A7']}
+          styleWrapper={styles.item}
+          image={images.TEMP_GUITAR_GIRL}
+          imageSize={{ width: 180, height: 184 }}
+        />
+        <Carousel
+          horizontal
+          header={
+            <Title
+              title="Супер меломан"
+              description="«Русская рулетка» треков"
+              hot
+              style={[styles.paddingHorizontal, styles.marginBottom]}
+            />
+          }
+          RenderComponent={GenreItem}
+          data={albums}
+          onPress={this._onPressAlbum}
+          style={styles.marginTop}
+        />
+        <Carousel
+          horizontal
+          header={
+            <Title
+              title="Жанры"
               style={[styles.paddingHorizontal, styles.marginBottom]}
             />
           }
@@ -151,7 +211,7 @@ class TabHome extends Component {
           data={TEMPDATA}
           style={styles.marginTop}
         />
-        <Carousel
+        {/* <Carousel
           header={<Title title="Вертикальное" style={styles.marginBottom} />}
           style={styles.item}
           data={TEMPDATA}
@@ -167,15 +227,15 @@ class TabHome extends Component {
           description="description"
           bottom="bottom"
           bgcolors={[colors.BRAND_BLUE, colors.BRAND_PINK]}
-          style={styles.item}
+          styleWrapper={styles.item}
           image={{ uri: 'http://img.lenagold.ru/g/gen/gens141.png' }}
         />
         <Announcement
           title="ЗаголовокЗаголовок"
           description="descriptiondescriptiondescription descriptiondescriptiondescription"
           bottom="bottombottombottombottombottom"
-          style={styles.item}
-        />
+          styleWrapper={styles.item}
+        /> */}
         <Carousel
           horizontal
           header={
@@ -185,9 +245,51 @@ class TabHome extends Component {
             />
           }
           RenderComponent={FaceItem}
-          data={TEMPDATA2}
+          data={TEMP_EXPERTS}
           style={styles.marginTop}
         />
+        {/* <Text style={styles.swiperTitle}>Последние отзывы</Text> */}
+        {/* <CustomSwiper
+          styleWrapper={{
+            backgroundColor: '#f0f',
+            width: swiperWidth,
+            height: swiperHeight,
+          }}
+          width={swiperWidth}
+          height={swiperHeight}
+          onTouchStart={this.props.handleSwiperTouchStart}
+          onTouchEnd={this.props.handleSwiperTouchEnd}
+          loop={false}
+        >
+          <View
+            style={{
+              backgroundColor: colors.GRAY_LABEL,
+              width: swiperWidth,
+              height: swiperHeight,
+            }}
+          />
+          <View
+            style={{
+              backgroundColor: colors.GRAY_LABEL,
+              width: swiperWidth,
+              height: swiperHeight,
+            }}
+          />
+          <View
+            style={{
+              backgroundColor: colors.GRAY_LABEL,
+              width: swiperWidth,
+              height: swiperHeight,
+            }}
+          />
+          <View
+            style={{
+              backgroundColor: colors.GRAY_LABEL,
+              width: swiperWidth,
+              height: swiperHeight,
+            }}
+          />
+        </CustomSwiper> */}
       </Wrapper>
     )
   }
@@ -209,6 +311,15 @@ const styles = StyleSheet.create({
   item: {
     paddingHorizontal: 16,
     marginTop: 24,
+  },
+  horizontalItem: {
+    width: sizes.WINDOW_WIDTH - 32,
+  },
+  swiperTitle: {
+    ...style.text.bold,
+    fontSize: 16,
+    lineHeight: 18,
+    padding: 16,
   },
 })
 
