@@ -15,7 +15,7 @@ import FaceItem from '../components/FaceItem'
 import GenreItem from '../components/GenreItem'
 // import CustomSwiper from '../components/CustomSwiper'
 import { images, colors, sizes, style } from '../constants'
-import { renameKeys } from '../utils/helpers'
+import { renameKeys, generateUID } from '../utils/helpers'
 
 const TEMPDATA = [
   {
@@ -89,13 +89,18 @@ const TEMP_EXPERTS = [
 ]
 
 class TabHome extends Component {
+  playerScreenId = generateUID()
+
   componentDidMount() {
-    Navigator.showPlayerOverlay()
+    Navigator.showOverlay(screens.PLAYER, this.playerScreenId)
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.userName && !this.props.userName) {
-      Navigator.dismissPlayerOverlay()
+      Navigator.dismissOverlay({
+        screen: screens.PLAYER,
+        screenId: this.playerScreenId,
+      })
       Navigator.startAuthScreen()
     }
   }

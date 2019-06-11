@@ -11,8 +11,9 @@ import {
   // NAV_BAR_BUTTON_SHEVRON_DOWN_WHITE,
   // NAV_BAR_BUTTON_SETTINGS_WHITE,
   NAV_BAR_BUTTON_USER_AVATAR,
+  NAV_BAR_BUTTON_NOTIFICATIONS_BLACK,
   NAV_BAR_BUTTON_ANDROID_OFFSET,
-} from '../screens/NavBarButton'
+} from '../components/NavBarButton'
 
 const STATUS_BAR_STYLE = {
   style: 'light', // | 'dark',
@@ -197,6 +198,7 @@ const startTabBasedApp = () => {
                         ...topBarTitle(screens.TAB_HOME.title),
                         rightButtons: [
                           navBarButton(NAV_BAR_BUTTON_USER_AVATAR),
+                          navBarButton(NAV_BAR_BUTTON_NOTIFICATIONS_BLACK),
                         ],
                       },
                     },
@@ -324,13 +326,11 @@ const startTabBasedApp = () => {
   })
 }
 
-let playerOverlayID = 0
-export const showPlayerOverlay = () => {
-  playerOverlayID++
+export const showOverlay = (screen = {}, screenId = '', passProps = {}) => {
   Navigation.showOverlay({
     component: {
-      id: `${screens.PLAYER.screen}_${playerOverlayID}`,
-      name: screens.PLAYER.screen,
+      id: `${screen.screen}_${screenId}`,
+      name: screen.screen,
       options: {
         layout: {
           backgroundColor: colors.TRANSPARENT,
@@ -339,12 +339,27 @@ export const showPlayerOverlay = () => {
           interceptTouchOutside: false,
         },
       },
+      passProps,
     },
   })
 }
 
-export const dismissPlayerOverlay = () => {
-  Navigation.dismissOverlay(`${screens.PLAYER.screen}_${playerOverlayID}`)
+export const dismissOverlay = ({
+  screen = {},
+  screenId = '',
+  componentId = '',
+}) => {
+  if (componentId) {
+    Navigation.dismissOverlay(componentId)
+  } else {
+    Navigation.dismissOverlay(`${screen.screen}_${screenId}`)
+  }
+}
+
+let playerOverlayID = 0
+export const showPlayerOverlay = () => {
+  playerOverlayID++
+  showOverlay(screens.PLAYER, playerOverlayID)
 }
 
 const getComponentId = screen => {
@@ -481,7 +496,8 @@ export default {
   startAuthScreen,
   startTabBasedApp,
   showPlayerOverlay,
-  dismissPlayerOverlay,
+  showOverlay,
+  dismissOverlay,
   push,
   pushWhiteTransparent,
   pop,

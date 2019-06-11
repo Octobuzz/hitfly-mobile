@@ -15,9 +15,10 @@ import { hasValue } from '../utils/helpers'
 const ITEM_HEIGHT = 56
 
 /**
- * Трек в плейлисте
+ * Трек
  * @param {object} props
- * @param {string} props.title Заголовок
+ * @param {bool} props.blackMode темный режим
+ * @param {string} props.label Заголовок
  * @param {string} props.description Описание
  * @param {string} props.time время трека
  * @param {*} props.image Ссылка на картинку, requireID или объект картинки
@@ -26,8 +27,9 @@ const ITEM_HEIGHT = 56
  * @param {func} props.controls Дополнительные кнопки
  */
 
-const PlaylistItem = ({
-  title,
+const TrackItem = ({
+  blackMode = false,
+  label,
   description,
   time,
   image,
@@ -56,17 +58,30 @@ const PlaylistItem = ({
           )}
         </View>
         <View style={styles.textWrapper}>
-          <Text numberOfLines={1} style={styles.title}>
-            {title}
+          <Text
+            numberOfLines={1}
+            style={[styles.label, blackMode && styles.labelWhite]}
+          >
+            {label}
           </Text>
-          <Text numberOfLines={1} style={styles.description}>
+          <Text
+            numberOfLines={1}
+            style={[styles.description, blackMode && styles.descriptionWhite]}
+          >
             {description}
           </Text>
         </View>
       </TouchableOpacity>
-      {hasValue(controls) && controls}
+      {hasValue(controls)
+        ? Array.isArray(controls)
+          ? controls.map(item => item)
+          : controls
+        : null}
       {hasValue(time) && (
-        <Text numberOfLines={1} style={styles.time}>
+        <Text
+          numberOfLines={1}
+          style={[styles.time, blackMode && styles.timeWhite]}
+        >
           {time}
         </Text>
       )}
@@ -74,8 +89,9 @@ const PlaylistItem = ({
   )
 }
 
-PlaylistItem.propTypes = {
-  title: PropTypes.string,
+TrackItem.propTypes = {
+  blackMode: PropTypes.bool,
+  label: PropTypes.string,
   description: PropTypes.string,
   time: PropTypes.string,
   image: PropTypes.oneOfType([
@@ -125,12 +141,15 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     justifyContent: 'center',
   },
-  title: {
+  label: {
     ...style.text.medium,
     color: colors.BLACK_LABEL,
     fontSize: 12,
     lineHeight: 14,
     paddingTop: 2,
+  },
+  labelWhite: {
+    color: colors.WHITE,
   },
   description: {
     ...style.text.regular,
@@ -138,6 +157,9 @@ const styles = StyleSheet.create({
     fontSize: 10,
     lineHeight: 12,
     paddingTop: 2,
+  },
+  descriptionWhite: {
+    color: colors.WHITE_60,
   },
   time: {
     ...style.text.regular,
@@ -148,6 +170,9 @@ const styles = StyleSheet.create({
     minWidth: 32,
     paddingLeft: 8,
   },
+  timeWhite: {
+    color: colors.WHITE_60,
+  },
 })
 
-export default PlaylistItem
+export default TrackItem

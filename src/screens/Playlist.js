@@ -16,7 +16,7 @@ import RNFastImage from 'react-native-fast-image'
 import { profileSelectors, requestLogOut } from '../redux/profile'
 import { tempMusicSelectors } from '../redux/tempMusic'
 import Button from '../components/Button'
-import PlaylistItem from '../components/PlaylistItem'
+import TrackItem from '../components/TrackItem'
 import Wrapper from '../containers/Wrapper'
 import { images, colors, style, sizes } from '../constants'
 import { getNameForCount, secondsToStringTime } from '../utils/helpers'
@@ -38,8 +38,8 @@ class Playlist extends Component {
     const { albums, albumId } = this.props
     const album = albums[albumId]
     return (
-      <PlaylistItem
-        title={item.title}
+      <TrackItem
+        label={item.title}
         description={album.artist}
         time={secondsToStringTime(item.time, ':')}
         image={album.artwork}

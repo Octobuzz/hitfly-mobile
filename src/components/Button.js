@@ -24,6 +24,8 @@ const Button = props => {
     type: _type,
     icon,
     onPress,
+    onLongPress,
+    onPressOut,
     styleWrapper,
     styleTouchable,
     styleContent,
@@ -65,6 +67,8 @@ const Button = props => {
       <TouchableOpacity
         style={touchableStyle}
         onPress={onPress}
+        onLongPress={onLongPress}
+        onPressOut={onPressOut}
         disabled={disabled}
         activeOpacity={0.8}
       >
@@ -100,6 +104,8 @@ Button.propTypes = {
   subLabel: PropTypes.string,
   type: PropTypes.string.isRequired,
   onPress: PropTypes.func,
+  onLongPress: PropTypes.func,
+  onPressOut: PropTypes.func,
   disabled: PropTypes.bool,
   styleTouchable: ViewPropTypes.style,
   styleWrapper: ViewPropTypes.style,

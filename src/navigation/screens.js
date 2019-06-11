@@ -16,6 +16,10 @@ export const PLAYER = {
   screen: `${APP_NAME}.PlayerScreen`,
 }
 
+export const PLAYER_TRACKS = {
+  screen: `${APP_NAME}.PlayerTracksScreen`,
+}
+
 export const PLAYLIST = {
   screen: `${APP_NAME}.PlaylistScreen`,
 }

@@ -19,6 +19,8 @@ export const NAVBAR_BACK_ARROW_WHITE = require('../assets/images/navigation/back
 export const NAVBAR_BACK_ARROW_BLACK = require('../assets/images/navigation/back_arrow_black.png')
 export const NAVBAR_SHEVRON_DOWN_WHITE = require('../assets/images/navigation/shevron_down_white.png')
 export const NAVBAR_SETTINGS_WHITE = require('../assets/images/navigation/settings_white.png')
+export const NAVBAR_NOTIFICATIONS_WHITE = require('../assets/images/navigation/notifications_white.png')
+export const NAVBAR_NOTIFICATIONS_BLACK = require('../assets/images/navigation/notifications_black.png')
 export const NAVBAR_AVATAR_EMPTY = require('../assets/images/navigation/avatar_empty.png')
 
 // social
@@ -49,6 +51,7 @@ export const CONTROL_BOTTOM_PLAYER_PLAY = require('../assets/images/control/bott
 export const CONTROL_BOTTOM_PLAYER_PAUSE = require('../assets/images/control/bottom_player_pause.png')
 export const CONTROL_DOTS_WHITE = require('../assets/images/control/dots_white.png')
 export const CONTROL_DOTS_BLACK = require('../assets/images/control/dots_black.png')
+export const CONTROL_LINES_WHITE = require('../assets/images/control/lines_white.png')
 export const CONTROL_PLAYLIST_BLACK = require('../assets/images/control/playlist_black.png')
 export const CONTROL_PLAYLIST_WHITE = require('../assets/images/control/playlist_white.png')
 export const CONTROL_PLUS_BLACK = require('../assets/images/control/plus_black.png')
