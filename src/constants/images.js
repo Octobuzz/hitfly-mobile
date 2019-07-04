@@ -47,6 +47,8 @@ export const CONTROL_PLAYER_PLAY = require('../assets/images/control/player_play
 export const CONTROL_PLAYER_PAUSE = require('../assets/images/control/player_pause.png')
 export const CONTROL_PLAYER_PREV = require('../assets/images/control/player_prev.png')
 export const CONTROL_PLAYER_NEXT = require('../assets/images/control/player_next.png')
+export const CONTROL_TRACK_PLAY = require('../assets/images/control/track_play.png')
+export const CONTROL_TRACK_PAUSE = require('../assets/images/control/track_pause.png')
 export const CONTROL_BOTTOM_PLAYER_PLAY = require('../assets/images/control/bottom_player_play.png')
 export const CONTROL_BOTTOM_PLAYER_PAUSE = require('../assets/images/control/bottom_player_pause.png')
 export const CONTROL_DOTS_WHITE = require('../assets/images/control/dots_white.png')
@@ -60,6 +62,10 @@ export const CONTROL_SHUFFLE_BLACK = require('../assets/images/control/shuffle_b
 export const CONTROL_SHUFFLE_WHITE = require('../assets/images/control/shuffle_white.png')
 export const CONTROL_SLIDER_ARROW_LEFT = require('../assets/images/control/slider_arrow_left.png')
 export const CONTROL_SLIDER_ARROW_RIGHT = require('../assets/images/control/slider_arrow_right.png')
+
+// music
+export const MUSIC_ARTWORK_EMPTY_ALBUM = require('../assets/images/music/artwork_empty_album.png')
+export const MUSIC_ARTWORK_EMPTY_TRACK = require('../assets/images/music/artwork_empty_track.png')
 
 // temp categories
 export const TEMP_CATEGORY_1 = require('../assets/images/temp/categories/category_1.png')

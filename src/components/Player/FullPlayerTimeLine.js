@@ -1,17 +1,28 @@
 import R from 'ramda'
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { StyleSheet, View, Animated, Easing, ViewPropTypes } from 'react-native'
 import RNLinearGradient from 'react-native-linear-gradient'
 import { colors, sizes } from '../../constants'
 import { getSectionGradientColor } from '../../utils/helpers'
 
 class FullPlayerTimeLine extends Component {
+  static propTypes = {
+    styleWrapper: ViewPropTypes.style,
+    totalTime: PropTypes.number,
+    levels: PropTypes.array,
+    isPlayed: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    isPlayed: false,
+  }
+
   constructor(props) {
     super(props)
-    this.state = {
-      displayLevels: [],
-    }
-    this.totalTime = 0
+    const { totalTime = 0, levels = [] } = props
+    this.currentTime = 0
+    this.isPlayed = false
     this.topColumnsHeightAnimations = []
     this.bottomColumnsHeightAnimations = []
     this.columnsFlexAnimations = []
@@ -19,16 +30,47 @@ class FullPlayerTimeLine extends Component {
     this.timelineControlLeftAnimation = new Animated.Value(0)
     this.pausedTimelineLeftAnimation = new Animated.Value(0)
     this.pausedTimelineOpacityAnimation = new Animated.Value(1)
+
+    this.displayLevels = this._getDisplayLevelsAndUpdateAnimations(
+      levels,
+      totalTime,
+      this.currentTime,
+      this.isPlayed,
+    )
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const { levels = [], totalTime = 0, isPlayed = false } = nextProps
+    const {
+      levels: prevLevels = [],
+      totalTime: prevTotalTime = 0,
+      isPlayed: prevIsPlayed = false,
+    } = this.props
+    if (R.equals(levels, prevLevels) && R.equals(totalTime, prevTotalTime)) {
+      if (isPlayed !== prevIsPlayed) {
+        this.animatePlayPause(isPlayed)
+      }
+      return false
+    } else {
+      this.isPlayed = isPlayed
+      this.displayLevels = this._getDisplayLevelsAndUpdateAnimations(
+        levels,
+        totalTime,
+        this.currentTime,
+        this.isPlayed,
+      )
+      return true
+    }
   }
 
   init = (currentTime, totalTime, levels, isPlayed = false) => {
-    const displayLevels = this._getDisplayLevelsAndUpdateAnimations(
-      levels,
-      totalTime,
-      currentTime,
-      isPlayed,
-    )
-    this.setState({ displayLevels })
+    // const displayLevels = this._getDisplayLevelsAndUpdateAnimations(
+    //   levels,
+    //   totalTime,
+    //   currentTime,
+    //   isPlayed,
+    // )
+    // this.setState({ displayLevels })
   }
 
   animateToTime = (
@@ -37,13 +79,13 @@ class FullPlayerTimeLine extends Component {
     rewindOffset = 0,
     easing = false,
   ) => {
+    this.currentTime = currentTime
     rewindOffset =
       Math.trunc(Math.tanh(rewindOffset) * Math.abs(rewindOffset) * 3) / 10
     const time = Math.trunc(currentTime * 10) / 10
-    const { displayLevels } = this.state
     let leftOffset = 0
     let animations = []
-    displayLevels.forEach((item, index, arr) => {
+    this.displayLevels.forEach((item, index, arr) => {
       const { positionInPart, columnFlex } = this._getCurrentAnimatePosition(
         time,
         totalTime,
@@ -79,7 +121,6 @@ class FullPlayerTimeLine extends Component {
   }
 
   animatePlayPause = (animateToPlay = false) => {
-    const { displayLevels } = this.state
     let animations = []
     this._stopPlayPauseAnimations()
     this.topColumnsHeightAnimations.forEach((item, index) => {
@@ -87,7 +128,7 @@ class FullPlayerTimeLine extends Component {
         Animated.timing(item, {
           toValue: animateToPlay
             ? sizes.FULL_PLAYER_TIMELINE_TOP_HEIGHT *
-              (displayLevels[index] || 0)
+              (this.displayLevels[index] || 0)
             : 0,
           duration: 200,
           easing: Easing.bezier(0.5, 0, 0.5, 1),
@@ -99,7 +140,7 @@ class FullPlayerTimeLine extends Component {
         Animated.timing(item, {
           toValue: animateToPlay
             ? sizes.FULL_PLAYER_TIMELINE_BOTTOM_HEIGHT *
-              (displayLevels[index] || 0)
+              (this.displayLevels[index] || 0)
             : 0,
           duration: 200,
           easing: Easing.bezier(0.5, 0, 0.5, 1),
@@ -113,7 +154,9 @@ class FullPlayerTimeLine extends Component {
         easing: Easing.bezier(0.5, 0, 0.5, 1),
       }),
     )
-    Animated.parallel(animations).start()
+    Animated.parallel(animations).start(() => {
+      this.isPlayed = animateToPlay
+    })
   }
 
   _stopPlayPauseAnimations = () => {
@@ -184,7 +227,6 @@ class FullPlayerTimeLine extends Component {
   }
 
   render() {
-    const { displayLevels } = this.state
     const pausedTimelineGrayStyle = [
       styles.pausedTimelineGray,
       {
@@ -206,13 +248,13 @@ class FullPlayerTimeLine extends Component {
           style={[
             styles.timelineControl,
             {
-              width: displayLevels.length * 3,
+              width: this.displayLevels.length * 3,
               left: this.timelineControlLeftAnimation,
             },
           ]}
         >
           <View style={styles.lightRow}>
-            {displayLevels.map((item, index) => (
+            {this.displayLevels.map((item, index) => (
               <Animated.View
                 key={index}
                 style={[
@@ -221,7 +263,7 @@ class FullPlayerTimeLine extends Component {
                     backgroundColor: getSectionGradientColor(
                       colors.BRAND_BLUE,
                       colors.BRAND_PINK,
-                      (index + 1) / displayLevels.length,
+                      (index + 1) / this.displayLevels.length,
                     ),
                     height: this.topColumnsHeightAnimations[index],
                   },
@@ -237,7 +279,7 @@ class FullPlayerTimeLine extends Component {
             ))}
           </View>
           <View style={styles.darkRow}>
-            {this.state.displayLevels.map((item, index) => (
+            {this.displayLevels.map((item, index) => (
               <Animated.View
                 key={index}
                 style={[
@@ -246,7 +288,7 @@ class FullPlayerTimeLine extends Component {
                     backgroundColor: getSectionGradientColor(
                       colors.BRAND_BLUE,
                       colors.BRAND_PINK,
-                      (index + 1) / displayLevels.length,
+                      (index + 1) / this.displayLevels.length,
                     ),
                     height: this.bottomColumnsHeightAnimations[index],
                   },
@@ -278,12 +320,6 @@ class FullPlayerTimeLine extends Component {
     )
   }
 }
-
-FullPlayerTimeLine.propTypes = {
-  styleWrapper: ViewPropTypes.style,
-}
-
-FullPlayerTimeLine.defaultProps = {}
 
 const styles = StyleSheet.create({
   wrapper: {

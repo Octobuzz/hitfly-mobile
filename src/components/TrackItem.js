@@ -9,7 +9,7 @@ import {
   ViewPropTypes,
 } from 'react-native'
 import RNFastImage from 'react-native-fast-image'
-import { colors, style } from '../constants'
+import { colors, style, images } from '../constants'
 import { hasValue } from '../utils/helpers'
 
 const ITEM_HEIGHT = 56
@@ -25,6 +25,8 @@ const ITEM_HEIGHT = 56
  * @param {number} props.time Продолжительность трека в секундах
  * @param {func} props.onPress Функция play/pause
  * @param {func} props.controls Дополнительные кнопки
+ * @param {bool} props.isPlayed трек играется
+ * @param {bool} props.isPaused трек на паузе
  */
 
 const TrackItem = ({
@@ -36,6 +38,8 @@ const TrackItem = ({
   style,
   onPress,
   controls,
+  isPlayed,
+  isPaused,
 }) => {
   const wrapperStyle = [styles.wrapper, style]
   return (
@@ -47,14 +51,24 @@ const TrackItem = ({
         style={styles.trackInfo}
       >
         <View style={styles.artworkWrapper}>
-          {typeof image === 'string' ? (
+          {typeof image === 'string' && !isPaused && !isPlayed ? (
             <RNFastImage
               style={styles.artwork}
               source={{ uri: image }}
               resizeMode="cover"
             />
           ) : (
-            <Image style={styles.artwork} source={image} resizeMode="cover" />
+            <Image
+              style={styles.artwork}
+              source={
+                isPlayed
+                  ? images.CONTROL_TRACK_PAUSE
+                  : isPaused
+                  ? images.CONTROL_TRACK_PLAY
+                  : image
+              }
+              resizeMode="cover"
+            />
           )}
         </View>
         <View style={styles.textWrapper}>
@@ -100,6 +114,8 @@ TrackItem.propTypes = {
     PropTypes.string,
   ]),
   onPress: PropTypes.func,
+  isPlayed: PropTypes.bool,
+  isPaused: PropTypes.bool,
   style: ViewPropTypes.style,
   controls: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -119,6 +135,7 @@ const styles = StyleSheet.create({
     height: ITEM_HEIGHT,
     flexDirection: 'row',
     paddingHorizontal: 16,
+    paddingRight: 8,
     alignContent: 'center',
     flexGrow: 1,
     width: 0,
@@ -140,6 +157,8 @@ const styles = StyleSheet.create({
   textWrapper: {
     paddingLeft: 16,
     justifyContent: 'center',
+    flexGrow: 1,
+    width: 0,
   },
   label: {
     ...style.text.medium,

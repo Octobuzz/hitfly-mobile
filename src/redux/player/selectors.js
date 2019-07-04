@@ -1,25 +1,26 @@
 import R from 'ramda'
+import { createSelector } from 'reselect'
 
 const getState = R.prop('player')
 
-const getCurrentPlaylist = R.pipe(
+const getPlayerState = R.pipe(
   getState,
-  R.prop('currentPlaylist'),
+  R.prop('playerState'),
 )
 
-const getTracks = R.pipe(
+const getCurrentAlbumId = R.pipe(
   getState,
-  R.prop('tracks'),
+  R.prop('currentAlbumId'),
 )
 
-const getCurrentTrack = R.pipe(
+const getQueue = R.pipe(
   getState,
-  R.prop('currentTrack'),
+  R.prop('queue'),
 )
 
-const getCurrentTime = R.pipe(
+const getCurrentTrackId = R.pipe(
   getState,
-  R.prop('currentTime'),
+  R.prop('currentTrackId'),
 )
 
 const getIsMixEnable = R.pipe(
@@ -27,10 +28,16 @@ const getIsMixEnable = R.pipe(
   R.prop('isMixEnable'),
 )
 
+const getCurrentTrackInfo = createSelector(
+  [getCurrentTrackId, getQueue],
+  (trackId, queue) => R.find(R.propEq('id', trackId), queue),
+)
+
 export default {
-  getCurrentPlaylist,
-  getTracks,
-  getCurrentTrack,
-  getCurrentTime,
+  getPlayerState,
+  getCurrentAlbumId,
+  getCurrentTrackId,
+  getCurrentTrackInfo,
+  getQueue,
   getIsMixEnable,
 }

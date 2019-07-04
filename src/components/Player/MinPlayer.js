@@ -10,16 +10,28 @@ import {
   PanResponder,
 } from 'react-native'
 import RNLinearGradient from 'react-native-linear-gradient'
+import RNFastImage from 'react-native-fast-image'
 import { colors, style, sizes, images } from '../../constants'
 import { getNumberMultiple_05 } from '../../utils/helpers'
 
-class CompactPlayer extends Component {
+class MinPlayer extends Component {
+  static propTypes = {
+    title: PropTypes.string,
+    description: PropTypes.string,
+    artwork: PropTypes.string,
+    onPressPlay: PropTypes.func,
+    onPressShowFullPlayer: PropTypes.func,
+    onRewindStart: PropTypes.func,
+    onRewindEnd: PropTypes.func,
+    isPlayed: PropTypes.bool,
+  }
+
+  static defaultProps = {
+    isPlayed: false,
+  }
+
   constructor(props) {
     super(props)
-    this.state = {
-      isPlayed: false,
-    }
-
     this.totalTime = 0
     this.minTimelineTranslateX_value = 0
     this.minTimelineTranslateX = new Animated.Value(0)
@@ -45,12 +57,6 @@ class CompactPlayer extends Component {
       ? (currentTime * sizes.WINDOW_WIDTH) / totalTime
       : 0
     this._animateTimeline(translateX)
-  }
-
-  playPause = (isPlayed = false) => {
-    this.setState({
-      isPlayed,
-    })
   }
 
   _onPanResponderStart = (event, gestureState) => {
@@ -95,12 +101,13 @@ class CompactPlayer extends Component {
 
   render() {
     const {
-      musicTitle,
-      musicDescription,
+      title,
+      description,
+      artwork,
       onPressShowFullPlayer,
       onPressPlay,
+      isPlayed,
     } = this.props
-    const { isPlayed } = this.state
 
     const minPlayertimelineGray = [
       styles.minPlayertimelineGray,
@@ -133,19 +140,27 @@ class CompactPlayer extends Component {
           >
             <View style={styles.minPlayerArtworkContainer}>
               <View style={styles.minPlayerArtworkShadow}>
-                <Image
-                  source={images.TEMP_ARTWORK_MIN}
-                  style={styles.minPlayerArtworkImage}
-                  resizeMode="contain"
-                />
+                {artwork ? (
+                  <RNFastImage
+                    source={{ uri: artwork }}
+                    style={styles.minPlayerArtworkImage}
+                    resizeMode="contain"
+                  />
+                ) : (
+                  <Image
+                    source={images.MUSIC_ARTWORK_EMPTY_TRACK}
+                    style={styles.minPlayerArtworkImage}
+                    resizeMode="contain"
+                  />
+                )}
               </View>
             </View>
             <View style={styles.minPlayerItemInfo}>
               <Text style={styles.minPlayerItemTitle} numberOfLines={1}>
-                {musicTitle}
+                {title}
               </Text>
               <Text style={styles.minPlayerItemDescription} numberOfLines={1}>
-                {musicDescription}
+                {description}
               </Text>
             </View>
           </TouchableOpacity>
@@ -167,20 +182,6 @@ class CompactPlayer extends Component {
       </View>
     )
   }
-}
-
-CompactPlayer.propTypes = {
-  musicTitle: PropTypes.string,
-  musicDescription: PropTypes.string,
-  onPressPlay: PropTypes.func,
-  onPressShowFullPlayer: PropTypes.func,
-  onRewindStart: PropTypes.func,
-  onRewindEnd: PropTypes.func,
-  isPlayed: PropTypes.bool,
-}
-
-CompactPlayer.defaultProps = {
-  isPlayed: false,
 }
 
 const styles = StyleSheet.create({
@@ -262,4 +263,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default CompactPlayer
+export default MinPlayer

@@ -1,11 +1,21 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, Image, Animated, Platform } from 'react-native'
-import { colors, sizes } from '../../constants'
+import RNFastImage from 'react-native-fast-image'
+import { colors, images, sizes } from '../../constants'
 
 const IMAGE_WIDTH = sizes.WINDOW_WIDTH * 1.2
 
 class FullPlayerArtwork extends Component {
+  static propTypes = {
+    isBlured: PropTypes.bool,
+    source: PropTypes.string,
+  }
+
+  static defaultProps = {
+    isBlured: false,
+  }
+
   constructor(props) {
     super(props)
     this.leftAnimation = new Animated.Value(0)
@@ -18,13 +28,20 @@ class FullPlayerArtwork extends Component {
   }
 
   _getLeftPosition = (currentTime, totalTime) => {
-    return -Math.trunc(((currentTime * IMAGE_WIDTH) / totalTime) * 10) / 10
+    return (
+      -Math.trunc(
+        ((currentTime * (IMAGE_WIDTH - sizes.WINDOW_WIDTH)) / totalTime) * 10,
+      ) / 10
+    )
   }
 
-  animateToTime = (currentTime, totalTime) => {
+  animateToTime = (currentTime, totalTime, duration = 0) => {
+    if (duration) {
+      Animated.timing(this.leftAnimation).stop()
+    }
     Animated.timing(this.leftAnimation, {
       toValue: this._getLeftPosition(currentTime, totalTime),
-      duration: 0,
+      duration,
     }).start()
   }
 
@@ -71,29 +88,41 @@ class FullPlayerArtwork extends Component {
     return (
       <Fragment>
         <Animated.View style={wrapperStyle}>
-          <Image style={styles.image} source={source} resizeMode="cover" />
-          <Animated.View style={blurContainerStyle}>
-            <Image
+          {source ? (
+            <RNFastImage
+              source={{ uri: source }}
               style={styles.image}
-              source={source}
               resizeMode="cover"
-              blurRadius={Platform.OS === 'ios' ? 10 : 2}
             />
+          ) : (
+            <Image
+              source={images.MUSIC_ARTWORK_EMPTY_TRACK}
+              style={styles.image}
+              resizeMode="cover"
+            />
+          )}
+          <Animated.View style={blurContainerStyle}>
+            {source ? (
+              <RNFastImage
+                source={{ uri: source }}
+                style={styles.image}
+                resizeMode="cover"
+                blurRadius={Platform.OS === 'ios' ? 10 : 2}
+              />
+            ) : (
+              <Image
+                source={images.MUSIC_ARTWORK_EMPTY_TRACK}
+                style={styles.image}
+                resizeMode="cover"
+                blurRadius={Platform.OS === 'ios' ? 10 : 2}
+              />
+            )}
           </Animated.View>
         </Animated.View>
         <Animated.View style={shadowStyle} />
       </Fragment>
     )
   }
-}
-
-FullPlayerArtwork.propTypes = {
-  isBlured: PropTypes.bool,
-  source: PropTypes.number,
-}
-
-FullPlayerArtwork.defaultProps = {
-  isBlured: false,
 }
 
 const styles = StyleSheet.create({

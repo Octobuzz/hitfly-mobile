@@ -1,16 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Animated, Easing, Platform, PanResponder } from 'react-native'
 import { sizes, names } from '../../constants'
 import { getNumberMultiple_05 } from '../../utils/helpers'
+import TrackPlayerServices from './TrackPlayerServices'
 
 const MOVE_DETECT_BOUND = Platform.OS === 'ios' ? 2 : 4
 
-class PlayerPanResponder extends Component {
-  constructor() {
-    super()
+class PlayerPanResponder extends TrackPlayerServices {
+  constructor(props) {
+    super(props)
 
-    this.totalTime = 320.189
-    this.currentTime = 12.6
+    this.totalTime = 0
+    this.currentTime = 0
     this.rewindTime = 0
     this.isRewinded = false
     this.isPlayed = false
@@ -266,12 +267,12 @@ class PlayerPanResponder extends Component {
   }
 
   _onPressPlayPause = () => {
-    this.isPlayed = !this.isPlayed
-    this.fullPlayerTimeLineRef.current.animatePlayPause(this.isPlayed)
-    this.fullPlayerArtworkRef.current[
-      this.isPlayed ? 'animateToFocus' : 'animateToBlur'
-    ]()
-    this.minPlayerRef.current.playPause(this.isPlayed)
+    // this.isPlayed = !this.isPlayed
+    // this.fullPlayerTimeLineRef.current.animatePlayPause(this.isPlayed)
+    // this.fullPlayerArtworkRef.current[
+    //   this.isPlayed ? 'animateToFocus' : 'animateToBlur'
+    // ]()
+    // this.minPlayerRef.current.playPause(this.isPlayed)
   }
 
   _getVerticalMovePosition = dy => {

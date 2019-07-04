@@ -1,5 +1,5 @@
 export * from './duck'
 export * from './sagas'
 export { default } from './duck'
-export { default as tempMusicSagas } from './sagas'
-export { default as tempMusicSelectors } from './selectors'
+export { default as playerSagas } from './sagas'
+export { default as playerSelectors } from './selectors'

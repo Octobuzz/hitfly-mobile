@@ -13,26 +13,36 @@ import {
 import TrackItem from '../components/TrackItem'
 import Button from '../components/Button'
 import VerticalGestureScreen from './VerticalGestureScreen'
-import { tempMusicSelectors } from '../redux/tempMusic'
-import { colors, sizes, images } from '../constants'
+import { playerSelectors, moveTrackInQueue } from '../redux/player'
+import { colors, sizes, names, images } from '../constants'
 
 const DRAGGABLE_AREA_WIDTH = 40
 const DRAGGABLE_AREA_RIGHT_OFFSET = 16
 
 class PlayerTracks extends VerticalGestureScreen {
   static propTypes = {
-    albums: PropTypes.array,
+    moveTrackInQueue: PropTypes.func.isRequired,
+    queue: PropTypes.array,
     onWillUnmount: PropTypes.func,
   }
 
   static defaultProps = {
-    albums: [],
+    queue: [],
   }
 
   constructor(props) {
     super(props)
     this.state = {
-      data: props.albums[0].tracks,
+      screenQueue: props.queue,
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { queue: prevQueue } = prevProps
+    const { queue } = this.props
+    // TODO: если плееру не удастся обновить очередь может вернутся такая же
+    if (!R.equals(queue, prevQueue)) {
+      this.setState({ screenQueue: queue })
     }
   }
 
@@ -42,23 +52,27 @@ class PlayerTracks extends VerticalGestureScreen {
     super.componentWillUnmount()
   }
 
-  _renderItem = item => {
-    const { albums } = this.props
-    const album = albums[0]
+  _renderItem = ({ id, title, artist, artwork, sortHandlers }) => {
+    const { playingTrackId, playerState } = this.props
+    const isPlayed =
+      playerState === names.PLAYER_STATES.PLAYING ||
+      playerState === names.PLAYER_STATES.BUFERING
     return (
       <TouchableOpacity
         style={styles.rowContainer}
         activeOpacity={0.8}
         delayLongPress={10}
-        {...item.sortHandlers}
+        {...sortHandlers}
       >
         <TrackItem
           onPress={() => {}}
+          isPlayed={id === playingTrackId && isPlayed}
+          isPaused={id === playingTrackId && !isPlayed}
           style={styles.trackWrapper}
           blackMode
-          label={item.title}
-          description={album.artist}
-          image={album.artwork}
+          label={title}
+          description={artist}
+          image={artwork}
           controls={
             <View style={styles.itemControls}>
               <Button
@@ -80,19 +94,24 @@ class PlayerTracks extends VerticalGestureScreen {
   }
 
   _onRowMoved = ({ from, to }) => {
-    const { data: prevData } = this.state
+    const { screenQueue: prevData } = this.state
     const data = [].concat(
       from > 0 ? prevData.slice(0, from) : [],
       from < prevData.length ? prevData.slice(from + 1) : [],
     )
     data.splice(to, 0, prevData[from])
-    this.setState({
-      data,
-    })
+    this.setState(
+      {
+        screenQueue: data,
+      },
+      () => {
+        this.props.moveTrackInQueue({ from, to })
+      },
+    )
   }
 
   render() {
-    const { data } = this.state
+    const { screenQueue } = this.state
     const screenContainer = [
       styles.wrapper,
       {
@@ -122,8 +141,8 @@ class PlayerTracks extends VerticalGestureScreen {
           />
 
           <SortableListView
-            style={styles.trackList}
-            data={data}
+            contentContainerStyle={styles.trackList}
+            data={screenQueue}
             onRowMoved={this._onRowMoved}
             sortRowStyle={styles.draggableRow}
             renderRow={this._renderItem}
@@ -186,10 +205,14 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = R.applySpec({
-  albums: tempMusicSelectors.getAlbums,
+  queue: playerSelectors.getQueue,
+  playingTrackId: playerSelectors.getCurrentTrackId,
+  playerState: playerSelectors.getPlayerState,
 })
 
-const mapDispatchToProps = null
+const mapDispatchToProps = {
+  moveTrackInQueue,
+}
 
 export default connect(
   mapStateToProps,

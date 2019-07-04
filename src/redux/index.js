@@ -11,15 +11,17 @@ import {
 import { createLogger } from 'redux-logger'
 
 import profileReducer, { profileSagas } from './profile'
+import playerReducer, { playerSagas } from './player'
 import tempMusicReducer from './tempMusic'
 
 const rootReducer = combineReducers({
   profile: profileReducer,
+  player: playerReducer,
   tempMusic: tempMusicReducer,
 })
 
 function* rootSaga() {
-  yield all([call(profileSagas)])
+  yield all([call(profileSagas), call(playerSagas)])
 }
 
 const transformerConfig = {

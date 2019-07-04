@@ -13,12 +13,12 @@ import {
   Platform,
 } from 'react-native'
 import RNFastImage from 'react-native-fast-image'
-import { profileSelectors, requestLogOut } from '../redux/profile'
+import { playerSelectors, playWithNewTracks } from '../redux/player'
 import { tempMusicSelectors } from '../redux/tempMusic'
 import Button from '../components/Button'
 import TrackItem from '../components/TrackItem'
 import Wrapper from '../containers/Wrapper'
-import { images, colors, style, sizes } from '../constants'
+import { images, colors, style, sizes, names } from '../constants'
 import { getNameForCount, secondsToStringTime } from '../utils/helpers'
 
 const HEADER_MIN_HEIGHT = sizes.NAVBAR_HEIGHT + sizes.BUTTON_HEIGHT
@@ -26,6 +26,14 @@ const HEADER_SCROLL_DISTANCE =
   sizes.PARALLAX_HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT
 
 class Playlist extends Component {
+  static propTypes = {
+    playWithNewTracks: PropTypes.func,
+    playingAlbumId: PropTypes.number,
+    playingTrackId: PropTypes.string,
+    playerState: PropTypes.string,
+    albumId: PropTypes.number,
+  }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -34,15 +42,40 @@ class Playlist extends Component {
     this.scrollY = new Animated.Value(0)
   }
 
-  _renderItem = ({ item, index }) => {
+  _onPressTrack = (trackId = '') => {
     const { albums, albumId } = this.props
+    const album = albums[albumId]
+    this.props.playWithNewTracks({
+      albumId,
+      tracks: album.tracks.map(
+        ({ id, source, title, artist, artwork, levels, time }) => ({
+          id,
+          url: source,
+          title,
+          artist,
+          artwork,
+          levels,
+          totalTime: time,
+        }),
+      ),
+      skipId: trackId,
+    })
+  }
+
+  _renderItem = ({ item, index }) => {
+    const { albums, albumId, playingTrackId, playerState } = this.props
+    const isPlayed =
+      playerState === names.PLAYER_STATES.PLAYING ||
+      playerState === names.PLAYER_STATES.BUFERING
     const album = albums[albumId]
     return (
       <TrackItem
+        isPlayed={item.id === playingTrackId && isPlayed}
+        isPaused={item.id === playingTrackId && !isPlayed}
         label={item.title}
         description={album.artist}
         time={secondsToStringTime(item.time, ':')}
-        image={album.artwork}
+        image={item.artwork}
         controls={
           <Button
             type={Button.types.BUTTON_ICON}
@@ -52,6 +85,7 @@ class Playlist extends Component {
             onPress={() => {}}
           />
         }
+        onPress={() => this._onPressTrack(item.id)}
       />
     )
   }
@@ -132,8 +166,11 @@ class Playlist extends Component {
         }),
       },
     ]
-    const { albums, albumId } = this.props
+    const { albums, albumId, playingAlbumId, playerState } = this.props
     const album = albums[albumId]
+    const isPlayed =
+      playerState === names.PLAYER_STATES.PLAYING ||
+      playerState === names.PLAYER_STATES.BUFERING
 
     return (
       <Wrapper
@@ -165,7 +202,14 @@ class Playlist extends Component {
               style={styles.headerPlayTouch}
               activeOpacity={0.8}
             >
-              <Image source={images.CONTROL_PLAYER_PLAY} resizeMode="contain" />
+              <Image
+                source={
+                  isPlayed && albumId === playingAlbumId
+                    ? images.CONTROL_PLAYER_PAUSE
+                    : images.CONTROL_PLAYER_PLAY
+                }
+                resizeMode="contain"
+              />
             </TouchableOpacity>
           </Animated.View>
           <Button
@@ -274,21 +318,15 @@ const styles = StyleSheet.create({
   },
 })
 
-Playlist.propTypes = {
-  requestLogOut: PropTypes.func,
-  userName: PropTypes.string,
-  isFetching: PropTypes.bool,
-  albumId: PropTypes.number,
-}
-
 const mapStateToProps = R.applySpec({
-  userName: profileSelectors.getUserName,
-  isFetching: profileSelectors.getIsFetching,
+  playingAlbumId: playerSelectors.getCurrentAlbumId,
+  playingTrackId: playerSelectors.getCurrentTrackId,
+  playerState: playerSelectors.getPlayerState,
   albums: tempMusicSelectors.getAlbums,
 })
 
 const mapDispatchToProps = {
-  requestLogOut,
+  playWithNewTracks,
 }
 
 export default connect(

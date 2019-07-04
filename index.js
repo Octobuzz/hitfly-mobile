@@ -1,7 +1,10 @@
-import {Navigation} from 'react-native-navigation';
-import {Navigator} from './src/navigation';
+import { Navigation } from 'react-native-navigation'
+import { Navigator } from './src/navigation'
 import registerScreens from './src/navigation/registerScreens'
 
-registerScreens();
+registerScreens()
 
-Navigation.events().registerAppLaunchedListener(() => Navigator.startSplashScreen());
+Navigation.events().registerAppLaunchedListener(() =>
+  Navigator.startSplashScreen(),
+)
+

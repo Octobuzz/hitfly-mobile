@@ -12,6 +12,15 @@ import { colors, style, sizes } from '../../constants'
 import { secondsToStringTime } from '../../utils/helpers'
 
 class FullTimePin extends Component {
+  static propTypes = {
+    styleWrapper: ViewPropTypes.style,
+    bottomTabsHeight: PropTypes.number,
+  }
+
+  static defaultProps = {
+    bottomTabsHeight: 0,
+  }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -139,15 +148,6 @@ class FullTimePin extends Component {
       </Animated.View>
     )
   }
-}
-
-FullTimePin.propTypes = {
-  styleWrapper: ViewPropTypes.style,
-  bottomTabsHeight: PropTypes.number,
-}
-
-FullTimePin.defaultProps = {
-  bottomTabsHeight: 0,
 }
 
 const styles = StyleSheet.create({

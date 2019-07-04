@@ -1,3 +1,4 @@
+import R from 'ramda'
 import React from 'react'
 import {
   StyleSheet,
@@ -8,6 +9,15 @@ import {
   Animated,
   BackHandler,
 } from 'react-native'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import TrackPlayer from 'react-native-track-player'
+import {
+  playerSelectors,
+  trackPlayerStateChanged,
+  trackPlayerTrackChanged,
+  initPlayerQueue,
+} from '../../redux/player'
 import PlayerPanResponder from './PlayerPanResponder'
 import {
   NAV_BAR_BUTTON_SHEVRON_DOWN_WHITE,
@@ -20,356 +30,36 @@ import {
   FullPlayerArtwork,
   FullPlayerTimeLine,
   FullPlayerTimePin,
+  TPProgress,
 } from '../../components/Player'
-import { colors, sizes, style, images } from '../../constants'
+import { colors, sizes, style, images, names } from '../../constants'
 import { generateUID } from '../../utils/helpers'
 import { Navigator, screens } from '../../navigation'
 
 class Player extends PlayerPanResponder {
-  constructor() {
-    super()
+  static propTypes = {
+    trackPlayerStateChanged: PropTypes.func.isRequired,
+    playingAlbumId: PropTypes.number,
+    playingTrackId: PropTypes.string,
+    playingQueue: PropTypes.array,
+    playerState: PropTypes.string,
+  }
+
+  constructor(props) {
+    super(props)
     this.state = {
       bottomTabsHeight: 50,
       isPlayed: false,
-      musicTitle: 'Killer Queen',
-      musicDescription: 'Queen',
-      timelineLevels: [
-        1,
-        0.24,
-        0.27,
-        0.25,
-        0.9,
-        0.15,
-        0.3,
-        0.12,
-        0.28,
-        0.4,
-        0.5,
-        0.2,
-        0.21,
-        0.77,
-        0.22,
-        0.2,
-        0.14,
-        0.23,
-        0.6,
-        0.78,
-        0.79,
-        0.8,
-        0.16,
-        0.17,
-        0.18,
-        0.3,
-        0.32,
-        0.36,
-        0.37,
-        0.76,
-        0.55,
-        0.56,
-        0.57,
-        0.58,
-        0.47,
-        0.48,
-        0.55,
-        0.56,
-        0.57,
-        0.58,
-        0.47,
-        0.48,
-        0.49,
-        0.53,
-        0.19,
-        0.49,
-        0.53,
-        0.19,
-        0.31,
-        0.35,
-        0.92,
-        0.7,
-        0.68,
-        0.29,
-        0.85,
-        0.36,
-        0.37,
-        0.49,
-        0.53,
-        0.19,
-        0.31,
-        0.11,
-        0.3,
-        0.59,
-        0.61,
-        0.62,
-        0.41,
-        0.42,
-        0.75,
-        0.64,
-        0.72,
-        0.44,
-        0.45,
-        0.46,
-        0.49,
-        0.53,
-        0.19,
-        0.31,
-        0.65,
-        0.66,
-        0.53,
-        0.19,
-        0.31,
-        0.11,
-        0.3,
-        0.59,
-        0.61,
-        0.62,
-        0.41,
-        0.42,
-        0.75,
-        0.64,
-        0.72,
-        0.44,
-        0.93,
-        0.87,
-        0.34,
-        0.54,
-        0.86,
-        0.63,
-        0.33,
-        0.51,
-        0.63,
-        0.52,
-        0.9,
-        0.91,
-        0.6,
-        0.82,
-        0.83,
-        1,
-        0.24,
-        0.27,
-        0.25,
-        0.9,
-        0.15,
-        0.3,
-        0.12,
-        0.28,
-        0.4,
-        0.5,
-        0.2,
-        0.21,
-        0.77,
-        0.22,
-        0.2,
-        0.14,
-        0.23,
-        0.6,
-        0.78,
-        0.79,
-        0.8,
-        0.16,
-        0.17,
-        0.18,
-        0.3,
-        0.32,
-        0.36,
-        0.37,
-        0.76,
-        0.55,
-        0.56,
-        0.57,
-        0.58,
-        0.47,
-        0.48,
-        0.55,
-        0.56,
-        0.57,
-        0.58,
-        0.47,
-        0.48,
-        0.49,
-        0.53,
-        0.19,
-        0.49,
-        0.53,
-        0.19,
-        0.31,
-        0.35,
-        0.92,
-        0.7,
-        0.68,
-        0.29,
-        0.85,
-        0.36,
-        0.37,
-        0.49,
-        0.53,
-        0.19,
-        0.31,
-        0.11,
-        0.3,
-        0.59,
-        0.61,
-        0.62,
-        0.41,
-        0.42,
-        0.75,
-        0.64,
-        0.72,
-        0.44,
-        0.45,
-        0.46,
-        0.49,
-        0.53,
-        0.19,
-        0.31,
-        0.65,
-        0.66,
-        0.53,
-        0.19,
-        0.31,
-        0.11,
-        0.3,
-        0.59,
-        0.61,
-        0.62,
-        0.41,
-        0.42,
-        0.75,
-        0.64,
-        0.72,
-        0.44,
-        0.93,
-        0.87,
-        0.34,
-        0.54,
-        0.86,
-        0.63,
-        0.33,
-        0.51,
-        0.63,
-        0.52,
-        0.9,
-        0.91,
-        0.6,
-        0.82,
-        0.83,
-        1,
-        0.24,
-        0.27,
-        0.25,
-        0.9,
-        0.15,
-        0.3,
-        0.12,
-        0.28,
-        0.4,
-        0.5,
-        0.2,
-        0.21,
-        0.77,
-        0.22,
-        0.2,
-        0.14,
-        0.23,
-        0.6,
-        0.78,
-        0.79,
-        0.8,
-        0.16,
-        0.17,
-        0.18,
-        0.3,
-        0.32,
-        0.36,
-        0.37,
-        0.76,
-        0.55,
-        0.56,
-        0.57,
-        0.58,
-        0.47,
-        0.48,
-        0.55,
-        0.56,
-        0.57,
-        0.58,
-        0.47,
-        0.48,
-        0.49,
-        0.53,
-        0.19,
-        0.49,
-        0.53,
-        0.19,
-        0.31,
-        0.35,
-        0.92,
-        0.7,
-        0.68,
-        0.29,
-        0.85,
-        0.36,
-        0.37,
-        0.49,
-        0.53,
-        0.19,
-        0.31,
-        0.11,
-        0.3,
-        0.59,
-        0.61,
-        0.62,
-        0.41,
-        0.42,
-        0.75,
-        0.64,
-        0.72,
-        0.44,
-        0.45,
-        0.46,
-        0.49,
-        0.53,
-        0.19,
-        0.31,
-        0.65,
-        0.66,
-        0.53,
-        0.19,
-        0.31,
-        0.11,
-        0.3,
-        0.59,
-        0.61,
-        0.62,
-        0.41,
-        0.42,
-        0.75,
-        0.64,
-        0.72,
-        0.44,
-        0.93,
-        0.87,
-        0.34,
-        0.54,
-        0.86,
-        0.63,
-        0.33,
-        0.51,
-        0.63,
-        0.52,
-        0.9,
-        0.91,
-        0.6,
-        0.82,
-        0.83,
-      ],
     }
   }
 
   componentDidMount() {
+    super.componentDidMount()
     this.backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       this._onAndroidBackPress,
     )
+    this.props.initPlayerQueue()
     // FIXME: https://github.com/wix/react-native-navigation/issues/4737
     setTimeout(() => {
       Navigator.constants()
@@ -392,17 +82,40 @@ class Player extends PlayerPanResponder {
       this.totalTime,
       !this.isPlayed || this.isRewinded,
     )
-    this.fullPlayerTimeLineRef.current.init(
-      this.currentTime,
-      this.totalTime,
-      this.state.timelineLevels,
-      this.isPlayed,
-    )
+    // this.fullPlayerTimeLineRef.current.init(
+    //   this.currentTime,
+    //   this.totalTime,
+    //   this.state.timelineLevels,
+    //   this.isPlayed,
+    // )
     this.fullPlayerTimePinRef.current.setTime(this.currentTime, this.totalTime)
   }
 
   componentWillUnmount() {
     this.backHandler.remove()
+    super.componentWillUnmount()
+  }
+
+  onTP_playbackState = ({ state }) => {
+    this.props.trackPlayerStateChanged(state)
+  }
+
+  onTP_playbackTrackChanged = ({ nextTrack, track }) => {
+    this.props.trackPlayerTrackChanged(track || nextTrack)
+  }
+
+  _animateSeek = (time, totalTime) => {
+    this.minPlayerRef.current.animateToTime(time, totalTime)
+    this.fullPlayerArtworkRef.current.animateToTime(time, totalTime, 1200)
+    this.fullPlayerTimeLineRef.current.animateToTime(time, totalTime)
+    this.fullPlayerTimePinRef.current.setTime(time, totalTime)
+  }
+
+  _onTPProgressUpdate = ({ position, bufferedPosition, duration }) => {
+    this.totalTime = duration
+    if (!this.isRewinded) {
+      this._animateSeek(position, duration)
+    }
   }
 
   _onAndroidBackPress = () => {
@@ -427,7 +140,32 @@ class Player extends PlayerPanResponder {
     }
   }
 
+  _onPressPlayPause = () => {
+    const { playerState } = this.props
+    if (
+      playerState === names.PLAYER_STATES.PLAYING ||
+      playerState === names.PLAYER_STATES.BUFERING
+    ) {
+      TrackPlayer.pause()
+    } else {
+      TrackPlayer.play()
+    }
+  }
+
   render() {
+    const {
+      playerState,
+      playingTrackInfo: {
+        artwork: currentArtwork = '',
+        title: currentTitle,
+        artist: currentArtist = '',
+        levels: currentLevels = [],
+        totalTime: currentTotalTime = 0,
+      } = {},
+    } = this.props
+    const isPlayed =
+      playerState === names.PLAYER_STATES.PLAYING ||
+      playerState === names.PLAYER_STATES.BUFERING
     const { bottomTabsHeight } = this.state
     const screenContainer = [
       styles.wrapper,
@@ -518,9 +256,9 @@ class Player extends PlayerPanResponder {
     return (
       <Animated.View style={screenContainer}>
         <FullPlayerArtwork
-          source={images.TEMP_ARTWORK_MAX}
-          currentTime={this.playerCurrentTime}
-          totalTime={this.playerTotalTime}
+          source={currentArtwork}
+          // currentTime={this.playerCurrentTime}
+          // totalTime={this.playerTotalTime}
           ref={this.fullPlayerArtworkRef}
         />
         <View style={styles.fullPlayerContainer}>
@@ -545,10 +283,8 @@ class Player extends PlayerPanResponder {
             style={styles.fullPlayerMusicText}
             {...this._panResponder.panHandlers}
           >
-            <Text style={styles.fullPlayerTitle}>{this.state.musicTitle}</Text>
-            <Text style={styles.fullPlayerArtist}>
-              {this.state.musicDescription}
-            </Text>
+            <Text style={styles.fullPlayerTitle}>{currentTitle}</Text>
+            <Text style={styles.fullPlayerArtist}>{currentArtist}</Text>
           </View>
           <View
             style={styles.fullPlayerCenterSpace}
@@ -559,7 +295,9 @@ class Player extends PlayerPanResponder {
             {...this._panResponder.panHandlers}
           >
             <FullPlayerTimeLine
-              levels={this.state.timelineLevels}
+              totalTime={currentTotalTime}
+              levels={currentLevels}
+              isPlayed={isPlayed}
               ref={this.fullPlayerTimeLineRef}
             />
             <FullPlayerTimePin
@@ -601,20 +339,21 @@ class Player extends PlayerPanResponder {
             </TouchableOpacity>
           </View>
         </View>
-
         <Animated.View style={minPlayerBottomWhiteSpace} />
         <Animated.View style={minPlayerContainer}>
           <MinPlayer
             onPressPlay={this._onPressPlayPause}
             onPressShowFullPlayer={this._onPressShowFullPlayer}
-            musicTitle={this.state.musicTitle}
-            musicDescription={this.state.musicDescription}
+            title={currentTitle}
+            description={currentArtist}
+            artwork={currentArtwork}
             onRewindStart={this._onMinPlayerRewindStart}
             onRewindEnd={this._onMinPlayerRewindEnd}
-            isPlayed={this.state.isPlayed}
+            isPlayed={isPlayed}
             ref={this.minPlayerRef}
           />
         </Animated.View>
+        <TPProgress onProgressUpdate={this._onTPProgressUpdate} />
       </Animated.View>
     )
   }
@@ -711,4 +450,21 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Player
+const mapStateToProps = R.applySpec({
+  playingAlbumId: playerSelectors.getCurrentAlbumId,
+  playingTrackId: playerSelectors.getCurrentTrackId,
+  playingTrackInfo: playerSelectors.getCurrentTrackInfo,
+  playingQueue: playerSelectors.getQueue,
+  playerState: playerSelectors.getPlayerState,
+})
+
+const mapDispatchToProps = {
+  trackPlayerStateChanged,
+  trackPlayerTrackChanged,
+  initPlayerQueue,
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Player)
