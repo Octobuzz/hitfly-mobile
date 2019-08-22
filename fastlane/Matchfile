@@ -1,0 +1,12 @@
+git_url("http://bitbucket.zebrains.team/scm/rnd/ios-sertificates.git")
+
+storage_mode("git")
+
+type("appstore") # The default type, can be: appstore, adhoc, enterprise or development
+
+username("ios-dev@zebrains.team") 
+
+# For all available options run `fastlane match --help`
+# Remove the # in the beginning of the line to enable the other options
+
+# The docs are available on https://docs.fastlane.tools/actions/match
