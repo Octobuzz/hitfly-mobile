@@ -63,7 +63,7 @@ class Carousel extends PureComponent {
             key={index}
             size={this.state.size}
             styleWrapper={[
-              { marginBottom: 0 },
+              { marginBottom: 0 }, // eslint-disable-line react-native/no-inline-styles
               horizontal && index && { marginTop: MARGIN },
               !horizontal && index && { marginLeft: MARGIN },
               props.styleWrapper && props.styleWrapper,
@@ -77,7 +77,9 @@ class Carousel extends PureComponent {
 
   _onLayout = event => {
     let { width } = event.nativeEvent.layout
-    if (this.state.width !== width) this._setWidth(width)
+    if (this.state.width !== width) {
+      this._setWidth(width)
+    }
   }
 
   _setWidth = width => {
@@ -124,7 +126,9 @@ class Carousel extends PureComponent {
           {Content}
         </View>
       )
-    } else return Content
+    } else {
+      return Content
+    }
   }
 }
 

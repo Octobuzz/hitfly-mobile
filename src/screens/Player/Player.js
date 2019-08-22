@@ -20,12 +20,6 @@ import {
 } from '../../redux/player'
 import PlayerPanResponder from './PlayerPanResponder'
 import {
-  NAV_BAR_BUTTON_SHEVRON_DOWN_WHITE,
-  NAV_BAR_BUTTON_NOTIFICATIONS_WHITE,
-  NAV_BAR_BUTTON_USER_AVATAR,
-} from '../../components/NavBarButton'
-import NavBar from '../../components/NavBar'
-import {
   MinPlayer,
   FullPlayerArtwork,
   FullPlayerTimeLine,
@@ -262,23 +256,6 @@ class Player extends PlayerPanResponder {
           ref={this.fullPlayerArtworkRef}
         />
         <View style={styles.fullPlayerContainer}>
-          <NavBar
-            leftButtons={[
-              {
-                type: NAV_BAR_BUTTON_SHEVRON_DOWN_WHITE,
-                onPress: this._onPressShowMinPlayer,
-              },
-            ]}
-            rightButtons={[
-              {
-                type: NAV_BAR_BUTTON_NOTIFICATIONS_WHITE,
-              },
-              {
-                type: NAV_BAR_BUTTON_USER_AVATAR,
-              },
-            ]}
-            centerSpaceProps={this._panResponder.panHandlers}
-          />
           <View
             style={styles.fullPlayerMusicText}
             {...this._panResponder.panHandlers}
@@ -319,7 +296,7 @@ class Player extends PlayerPanResponder {
               <Image
                 source={images.CONTROL_HEART_GRADIENT}
                 resizeMode="contain"
-                style={{ width: 16, height: 15 }}
+                style={{ width: 16, height: 15 }} // eslint-disable-line react-native/no-inline-styles
               />
               <Text style={styles.fullPlayerBarLikesText} numberOfLines={1}>
                 23 000

@@ -6,7 +6,7 @@ import {
   STATE_BUFFERING,
   STATE_READY,
 } from 'react-native-track-player'
-export const APP_NAME = 'digicomob'
+export const APP_NAME = 'Hitfly'
 
 export const MOVES = {
   LEFT: 'LEFT',

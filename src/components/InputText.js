@@ -10,8 +10,7 @@ import {
   Platform,
   TouchableOpacity,
 } from 'react-native'
-// eslint-disable-next-line
-import TextInputMask from 'react-native-text-input-mask'
+import { TextInputMask } from 'react-native-masked-text'
 import { colors, sizes, images, style } from '../constants'
 
 const MASK_PHONE = '+7 ([999]) [999]-[99]-[99]'

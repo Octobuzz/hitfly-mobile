@@ -1,5 +1,5 @@
 {
-  "plugins": ["react", "react-native"],
+  "plugins": ["react", "react-native", "import", "prettier"],
   "root": true,
   "extends": "@react-native-community",
   "rules": {
@@ -7,13 +7,16 @@
     "no-unexpected-multiline": "warn",
     "no-debugger": "error",
     "eqeqeq": "error",
-    "no-console": ["error", { "allow": ["tron"] }],
+    "no-console": "error",
     "prefer-template": "error",
     "import/no-unresolved": "error",
     "import/named": "error",
     "import/namespace": "error",
     "import/no-duplicates": "error",
     "react/jsx-boolean-value": "warn",
-    "react/jsx-curly-brace-presence": ["warn", "never"]
+    "react/jsx-curly-brace-presence": ["warn", "never"],
+    "react/no-did-update-set-state": "off",
+    "semi": "off",
+    "no-shadow": "off"
   }
 }

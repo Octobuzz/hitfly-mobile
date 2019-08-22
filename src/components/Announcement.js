@@ -28,7 +28,7 @@ const BG = (bgcolors, bgimage) => {
       )
   }
   if (bgcolors && Array.isArray(bgcolors)) {
-    if (bgcolors.length > 1)
+    if (bgcolors.length > 1) {
       return (
         <RNLinearGradient
           start={{ x: 0, y: 0 }}
@@ -39,7 +39,9 @@ const BG = (bgcolors, bgimage) => {
           {content}
         </RNLinearGradient>
       )
-    else if (bgcolors.length > 0) backgroundColor = bgcolors[0]
+    } else if (bgcolors.length > 0) {
+      backgroundColor = bgcolors[0]
+    }
   }
   return <View style={[styles.background, { backgroundColor }]}>{content}</View>
 }

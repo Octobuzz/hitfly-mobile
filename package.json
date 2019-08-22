@@ -4,20 +4,18 @@
   "private": true,
   "scripts": {
     "postinstall": "npx jetify",
-    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start": "react-native start",
+    "ios": "react-native run-ios",
+    "android": "react-native run-android",
     "test": "jest",
     "clean": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force",
-    "clean:android": "cd android/ && ./gradlew clean && cd .. && react-native run-android",
     "newclear": "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build && rm -rf node_modules/ && npm cache clean --force && npm i",
-    "android:build": "cd android && ./gradlew assembleRelease",
-    "android:install": "cd android && ./gradlew assembleRelease && ./gradlew installRelease",
-    "android:devices": "$ANDROID_HOME/platform-tools/adb devices",
-    "android:logcat": "$ANDROID_HOME/platform-tools/adb logcat *:S ReactNative:V ReactNativeJS:V",
-    "eslint": "node node_modules/eslint/bin/eslint.js src"
+    "lint": "npx eslint src"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.6.1",
     "date-fns": "^2.0.0",
+    "formik": "^1.5.8",
     "normalizr": "^3.3.0",
     "ramda": "^0.26.1",
     "react": "16.9.0",
@@ -27,6 +25,7 @@
     "react-native-keyboard-aware-scroll-view": "^0.9.1",
     "react-native-linear-gradient": "^2.5.3",
     "react-native-loader": "^1.2.1",
+    "react-native-masked-text": "^1.13.0",
     "react-native-slider": "^0.11.0",
     "react-native-sortable-listview": "^0.2.8",
     "react-native-splash-screen": "^3.2.0",
@@ -38,7 +37,8 @@
     "redux-actions": "^2.6.4",
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.1",
-    "reselect": "^4.0.0"
+    "reselect": "^4.0.0",
+    "yup": "^0.27.0"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
@@ -49,6 +49,7 @@
     "eslint-plugin-flowtype": "^4.2.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-react-native": "^3.6.0",
     "husky": "^3.0.4",
@@ -61,11 +62,6 @@
   },
   "jest": {
     "preset": "react-native"
-  },
-  "rnpm": {
-    "assets": [
-      "./src/assets/fonts/"
-    ]
   },
   "husky": {
     "hooks": {

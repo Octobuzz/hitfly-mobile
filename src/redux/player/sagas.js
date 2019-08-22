@@ -24,8 +24,12 @@ function* updateQueueAndPlay({
     yield call(TrackPlayer.reset)
     if (tracks.length) {
       yield call(TrackPlayer.add, tracks)
-      if (skipId) yield call(TrackPlayer.skip, skipId)
-      if (startPlaying) yield call(TrackPlayer.play)
+      if (skipId) {
+        yield call(TrackPlayer.skip, skipId)
+      }
+      if (startPlaying) {
+        yield call(TrackPlayer.play)
+      }
     }
     yield put(
       updatedPlayerQueue({

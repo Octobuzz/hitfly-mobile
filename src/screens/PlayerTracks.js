@@ -4,12 +4,6 @@ import PropTypes from 'prop-types'
 import { StyleSheet, View, TouchableOpacity, Animated } from 'react-native'
 import { connect } from 'react-redux'
 import SortableListView from 'react-native-sortable-listview'
-import NavBar from '../components/NavBar'
-import {
-  NAV_BAR_BUTTON_SHEVRON_DOWN_WHITE,
-  NAV_BAR_BUTTON_NOTIFICATIONS_WHITE,
-  NAV_BAR_BUTTON_USER_AVATAR,
-} from '../components/NavBarButton'
 import TrackItem from '../components/TrackItem'
 import Button from '../components/Button'
 import VerticalGestureScreen from './VerticalGestureScreen'
@@ -122,24 +116,6 @@ class PlayerTracks extends VerticalGestureScreen {
     return (
       <Animated.View style={screenContainer}>
         <View style={styles.content}>
-          <NavBar
-            leftButtons={[
-              {
-                type: NAV_BAR_BUTTON_SHEVRON_DOWN_WHITE,
-                onPress: this._hideScreen,
-              },
-            ]}
-            rightButtons={[
-              {
-                type: NAV_BAR_BUTTON_NOTIFICATIONS_WHITE,
-              },
-              {
-                type: NAV_BAR_BUTTON_USER_AVATAR,
-              },
-            ]}
-            centerSpaceProps={this._panResponder.panHandlers}
-          />
-
           <SortableListView
             contentContainerStyle={styles.trackList}
             data={screenQueue}
