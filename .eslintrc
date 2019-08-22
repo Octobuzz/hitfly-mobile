@@ -1,15 +1,7 @@
 {
-  "parser": "babel-eslint",
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "modules": true,
-      "experimentalObjectRestSpread": true
-    }
-  },
   "plugins": ["react", "react-native"],
-  "extends": ["react-app"],
+  "root": true,
+  "extends": "@react-native-community",
   "rules": {
     "no-unused-vars": "warn",
     "no-unexpected-multiline": "warn",
@@ -23,8 +15,5 @@
     "import/no-duplicates": "error",
     "react/jsx-boolean-value": "warn",
     "react/jsx-curly-brace-presence": ["warn", "never"]
-  },
-  "env": {
-    "react-native/react-native": true
   }
 }

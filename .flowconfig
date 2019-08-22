@@ -16,25 +16,21 @@ node_modules/react-native/Libraries/react-native/React.js
 ; Ignore polyfills
 node_modules/react-native/Libraries/polyfills/.*
 
-
- ; Ignore metro	; These should not be required directly
-.*/node_modules/metro/.*	; require from fbjs/lib instead: require('fbjs/lib/warning')
+; These should not be required directly
+; require from fbjs/lib instead: require('fbjs/lib/warning')
 node_modules/warning/.*
 
- ; Flow doesn't support platforms
+; Flow doesn't support platforms
 .*/Libraries/Utilities/HMRLoadingView.js
 
- [untyped]
+[untyped]
 .*/node_modules/@react-native-community/cli/.*/.*
-
 
 [include]
 
 [libs]
 node_modules/react-native/Libraries/react-native/react-native-interface.js
 node_modules/react-native/flow/
-node_modules/react-native/flow-github/
-./react-native.types.js
 
 [options]
 emoji=true
@@ -78,11 +74,14 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(<VERSION>\\)? *\\(site=[a-z,_]*
 suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
 
 [lints]
+sketchy-null-number=warn
 sketchy-null-mixed=warn
 sketchy-number=warn
+untyped-type-import=warn
 nonstrict-import=warn
 deprecated-type=warn
 unsafe-getters-setters=warn
+inexact-spread=warn
 unnecessary-invariant=warn
 signature-verification-failure=warn
 deprecated-utility=error
@@ -97,4 +96,4 @@ untyped-import
 untyped-type-import
 
 [version]
-^0.103.0
+^0.100.0
