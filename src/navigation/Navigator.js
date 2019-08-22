@@ -1,4 +1,5 @@
 import R from 'ramda'
+// eslint-disable-next-line
 import { Navigation } from 'react-native-navigation'
 import { Platform } from 'react-native'
 

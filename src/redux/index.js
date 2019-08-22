@@ -3,11 +3,12 @@ import { AsyncStorage } from 'react-native'
 import { all, call } from 'redux-saga/effects'
 import { combineReducers, applyMiddleware, createStore } from 'redux'
 import createSagaMiddleware from 'redux-saga'
+// eslint-disable-next-line
 import { persistStore, persistReducer } from 'redux-persist'
 import {
   seamlessImmutableReconciler,
   seamlessImmutableTransformCreator,
-} from 'redux-persist-seamless-immutable'
+} from 'redux-persist-seamless-immutable' // eslint-disable-line
 import { createLogger } from 'redux-logger'
 
 import profileReducer, { profileSagas } from './profile'

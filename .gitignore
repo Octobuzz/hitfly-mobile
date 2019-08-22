@@ -30,7 +30,7 @@ project.xcworkspace
 # Cocoapods
 #
 Pods/
-Podfile.lock
+
 
 # Android/IntelliJ
 #

@@ -1,4 +1,5 @@
 import React from 'react'
+// eslint-disable-next-line
 import { Navigation } from 'react-native-navigation'
 import { Provider } from 'react-redux'
 

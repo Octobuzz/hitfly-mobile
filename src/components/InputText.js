@@ -10,6 +10,7 @@ import {
   Platform,
   TouchableOpacity,
 } from 'react-native'
+// eslint-disable-next-line
 import TextInputMask from 'react-native-text-input-mask'
 import { colors, sizes, images, style } from '../constants'
 
