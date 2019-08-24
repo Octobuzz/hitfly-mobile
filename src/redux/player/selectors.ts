@@ -1,7 +1,8 @@
 import R from 'ramda'
 import { createSelector } from 'reselect'
+import { Player } from './duck'
 
-const getState = R.prop('player')
+const getState: (state: any) => Player = R.prop('player')
 
 const getPlayerState = R.pipe(
   getState,

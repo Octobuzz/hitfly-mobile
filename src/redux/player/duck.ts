@@ -1,6 +1,9 @@
-import { names } from '../../constants'
-import { createAction, handleActions } from 'redux-actions'
+import R from 'ramda'
+import { createAction, createReducer } from 'deox'
+import { State } from 'react-native-track-player'
 import { getModuleActionName } from '../../utils/helpers'
+import { names } from '../../constants'
+import { statePayloadArr } from '../utils'
 
 /* #region Action Types */
 
@@ -25,10 +28,23 @@ export const ERROR = getActionName('ERROR')
 /* #region Action Creators */
 
 export const initPlayerQueue = createAction(INIT_PLAYER_QUEUE)
-export const updatedPlayerQueue = createAction(UPDATED_PLAYER_QUEUE)
+export const updatedPlayerQueue = createAction(
+  UPDATED_PLAYER_QUEUE,
+  resolve => (payload: {
+    queue: any[]
+    currentTrackId: string
+    currentAlbumId: string
+  }) => resolve(payload),
+)
 export const playWithNewTracks = createAction(PLAY_WITH_NEW_TRACKS)
-export const trackPlayerStateChanged = createAction(TRACK_PLAYER_STATE_CHANGED)
-export const trackPlayerTrackChanged = createAction(TRACK_PLAYER_TRACK_CHANGED)
+export const trackPlayerStateChanged = createAction(
+  TRACK_PLAYER_STATE_CHANGED,
+  resolve => (playerState: State) => resolve(playerState),
+)
+export const trackPlayerTrackChanged = createAction(
+  TRACK_PLAYER_TRACK_CHANGED,
+  resolve => (currentTrackId: string) => resolve(currentTrackId),
+)
 export const moveTrackInQueue = createAction(MOVE_TRACK_IN_QUEUE)
 export const playingStarted = createAction(PLAYING_STARTED)
 export const playingStopped = createAction(PLAYING_STOPPED)
@@ -38,34 +54,36 @@ export const error = createAction(ERROR)
 
 /* #region reducers */
 
-const player = handleActions(
-  {
-    [TRACK_PLAYER_STATE_CHANGED]: (state, { payload }) => ({
-      ...state,
-      playerState: payload,
-    }),
-    [TRACK_PLAYER_TRACK_CHANGED]: (state, { payload }) => ({
-      ...state,
-      currentTrackId: payload,
-    }),
-    [UPDATED_PLAYER_QUEUE]: (
-      state,
-      { payload: { queue, currentAlbumId, currentTrackId } },
-    ) => ({
-      ...state,
-      queue,
-      currentTrackId,
-      currentAlbumId,
-    }),
-  },
-  {
-    playerState: names.PLAYER_STATES.NONE,
-    currentAlbumId: '',
-    currentTrackId: '',
-    queue: [],
-    isMixEnable: false,
-  },
-)
+export type Player = {
+  playerState: State
+  currentAlbumId: string
+  currentTrackId: string
+  queue: any[]
+  isMixEnable: boolean
+}
+
+const playerDefaultState: Player = {
+  playerState: names.PLAYER_STATES.NONE,
+  currentAlbumId: '',
+  currentTrackId: '',
+  queue: [],
+  isMixEnable: false,
+}
+
+const player = createReducer(playerDefaultState, handleAction => [
+  handleAction(
+    trackPlayerStateChanged,
+    R.useWith(R.flip(R.assoc('playerState')), statePayloadArr),
+  ),
+  handleAction(
+    trackPlayerTrackChanged,
+    R.useWith(R.flip(R.assoc('currentTrackId')), statePayloadArr),
+  ),
+  handleAction(
+    updatedPlayerQueue,
+    R.useWith(R.mergeDeepRight, statePayloadArr),
+  ),
+])
 
 /* #endregion */
 

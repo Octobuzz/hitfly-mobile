@@ -1,6 +1,8 @@
 import R from 'ramda'
+import { ProfileState } from './duck'
 
-const getState = R.prop('profile')
+// FIXME: добавить весь стейт вместо any?
+const getState: (state: any) => ProfileState = R.prop('profile')
 
 const getIsFetching = R.pipe(
   getState,

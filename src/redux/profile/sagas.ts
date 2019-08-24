@@ -1,4 +1,4 @@
-import { takeLatest, all, put, delay } from 'redux-saga/effects'
+import { takeLatest, all, put } from 'redux-saga/effects'
 import {
   REQUEST_LOGIN,
   REQUEST_LOGOUT,
@@ -6,13 +6,11 @@ import {
   logOutSuccess,
 } from './duck'
 
-function* requestLogInSaga({ payload: userName }) {
-  yield delay(2000)
-  yield put(logInSuccess({ userName }))
+function* requestLogInSaga() {
+  yield put(logInSuccess({ userName: 'Nikolay' }))
 }
 
 function* requestLogOutSaga() {
-  yield delay(2000)
   yield put(logOutSuccess())
 }
 

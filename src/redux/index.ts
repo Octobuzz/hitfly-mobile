@@ -1,17 +1,14 @@
-import R from 'ramda'
 import { all, call } from 'redux-saga/effects'
-import { combineReducers, applyMiddleware, createStore } from 'redux'
+import { combineReducers, applyMiddleware, createStore, compose } from 'redux'
+import Reactotron from 'reactotron-react-native'
 import createSagaMiddleware from 'redux-saga'
-import { createLogger } from 'redux-logger'
 
 import profileReducer, { profileSagas } from './profile'
 import playerReducer, { playerSagas } from './player'
-import tempMusicReducer from './tempMusic'
 
 const rootReducer = combineReducers({
   profile: profileReducer,
   player: playerReducer,
-  tempMusic: tempMusicReducer,
 })
 
 function* rootSaga() {
@@ -19,14 +16,17 @@ function* rootSaga() {
 }
 
 export const configureStore = () => {
-  const sagaMiddleware = createSagaMiddleware()
+  const sagaMonitor = __DEV__ ? (Reactotron as any).createSagaMonitor() : null
+  const sagaMiddleware = createSagaMiddleware({ sagaMonitor })
 
-  const middlewares = R.filter(R.complement(R.isNil), [
-    sagaMiddleware,
-    __DEV__ ? createLogger({ collapsed: true }) : null,
-  ])
+  const enhancers = [applyMiddleware(sagaMiddleware)]
 
-  const store = createStore(rootReducer, applyMiddleware(...middlewares))
+  if (__DEV__) {
+    // eslint-disable-next-line no-console
+    enhancers.push((Reactotron as any).createEnhancer())
+  }
+
+  const store = createStore(rootReducer, compose(...enhancers))
 
   sagaMiddleware.run(rootSaga)
 

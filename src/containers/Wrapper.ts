@@ -1,6 +1,5 @@
 import R from 'ramda'
 import React, { Component, Fragment } from 'react'
-import PropTypes from 'prop-types'
 import { StyleSheet, View, ScrollView, ViewPropTypes } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Loader from '../components/Loader'
@@ -73,18 +72,6 @@ const styles = StyleSheet.create({
     height: sizes.MIN_PLAYER_HEIGHT,
   },
 })
-
-Wrapper.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
-  style: ViewPropTypes.style,
-  scroll: PropTypes.bool,
-  scrollKeyboard: PropTypes.bool,
-  playerOffset: PropTypes.bool,
-  isFetching: PropTypes.bool,
-}
 
 Wrapper.defaultProps = {
   scroll: false,

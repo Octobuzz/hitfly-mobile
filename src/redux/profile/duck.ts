@@ -1,5 +1,6 @@
 import R from 'ramda'
-import { createAction, handleActions } from 'redux-actions'
+import { combineReducers } from 'redux'
+import { createAction, createReducer } from 'deox'
 import { getModuleActionName } from '../../utils/helpers'
 
 /* #region Action Types */
@@ -17,7 +18,10 @@ export const LOGOUT_SUCCESS = getActionName('LOGOUT_SUCCESS')
 /* #region Action Creators */
 
 export const requestLogIn = createAction(REQUEST_LOGIN)
-export const logInSuccess = createAction(LOGIN_SUCCESS)
+export const logInSuccess = createAction(
+  LOGIN_SUCCESS,
+  resolve => (profile: Profile) => resolve(profile),
+)
 
 export const requestLogOut = createAction(REQUEST_LOGOUT)
 export const logOutSuccess = createAction(LOGOUT_SUCCESS)
@@ -26,22 +30,30 @@ export const logOutSuccess = createAction(LOGOUT_SUCCESS)
 
 /* #region reducers */
 
-const profile = handleActions(
-  {
-    [REQUEST_LOGIN]: state => ({ ...state, isFetching: true }),
-    [LOGIN_SUCCESS]: R.useWith(
-      (state, userName) => ({ userName, isFetching: false }),
-      [R.identity, R.path(['payload', 'userName'])],
-    ),
-    [REQUEST_LOGOUT]: state => ({ ...state, isFetching: true }),
-    [LOGOUT_SUCCESS]: state => ({ isFetching: false, userName: null }),
-  },
-  {
-    userName: null,
-    isFetching: false,
-  },
-)
+export type Profile = {
+  userName: string
+}
+
+export type ProfileState = Profile & {
+  isFetching: boolean
+}
+
+const profileDefaultState: Profile = {
+  userName: '',
+}
+const profile = createReducer(profileDefaultState, handleAction => [
+  handleAction(logOutSuccess, R.always(profileDefaultState)),
+  handleAction(
+    logInSuccess,
+    R.useWith(R.mergeDeepRight, [R.identity, R.prop('payload')]),
+  ),
+])
+
+const isFetching = createReducer(false, handleAction => [
+  handleAction([requestLogIn, requestLogOut], R.T),
+  handleAction([logInSuccess, logOutSuccess], R.F),
+])
 
 /* #endregion */
 
-export default profile
+export default combineReducers({ profile, isFetching })

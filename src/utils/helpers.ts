@@ -17,7 +17,7 @@ export const generateUID = (count = 10) => {
 }
 
 // FIXME: удалить
-export const hasValue = value => value !== undefined && value !== ''
+export const hasValue = (value: any) => value !== undefined && value !== ''
 
 export const renameKeys = R.curry((keysMap, obj) =>
   R.reduce(
@@ -27,32 +27,34 @@ export const renameKeys = R.curry((keysMap, obj) =>
   ),
 )
 
-export const getNameForCount = (number, titles) => {
+// FIXME: переписать, ничего не понятно
+export const getNameForCount = R.curry((titles: string[], count: number) => {
   const cases = [2, 0, 1, 1, 1, 2]
   return titles[
-    number % 100 > 4 && number % 100 < 20
+    count % 100 > 4 && count % 100 < 20
       ? 2
-      : cases[number % 10 < 5 ? number % 10 : 5]
+      : cases[count % 10 < 5 ? count % 10 : 5]
   ]
-}
+})
 
-export const hexToRgb = hex => {
+export const hexToRgb = (hex: string): { r: number; g: number; b: number } => {
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i
   hex = hex.replace(shorthandRegex, (m, r, g, b) => r + r + g + g + b + b)
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-  return result
-    ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      }
-    : null
+  if (!result) {
+    throw Error(`Could not convert ${hex} to RGB`)
+  }
+  return {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16),
+  }
 }
 
 export const getSectionGradientColor = (
-  firstColor,
-  secondColor,
-  section /*0..1*/,
+  firstColor: string,
+  secondColor: string,
+  section: number /*0..1*/,
 ) => {
   const firstRGBColor = hexToRgb(firstColor)
   const secondRGBColor = hexToRgb(secondColor)
@@ -68,39 +70,38 @@ export const getSectionGradientColor = (
   return `rgb(${red}, ${green}, ${blue})`
 }
 
-export const secondsToStringTime = (sec, separator = '.', mode = '') => {
+const getNameForSeconds = getNameForCount(['секунда', 'секунды', 'секунд'])
+const getNameForMinutes = getNameForCount(['минута', 'минуты', 'минут'])
+const getNameForHours = getNameForCount(['час', 'часа', 'часов'])
+export const secondsToStringTime = (
+  sec: number,
+  separator = '.',
+  mode = '',
+): string => {
   const hours = Math.floor((sec / (60 * 60)) % 60)
   const minutes = Math.floor((sec / 60) % 60)
-  const seconds =
-    Math.floor(sec % 60) > 9 ? Math.floor(sec % 60) : `0${Math.floor(sec % 60)}`
+  const seconds = Math.floor(sec % 60)
   if (mode === 'playlistInfo') {
-    return !hours
-      ? `${minutes} ${getNameForCount(minutes, [
-          'минута',
-          'минуты',
-          'минут',
-        ])} ${seconds} ${getNameForCount(seconds, [
-          'секунда',
-          'секунды',
-          'секунд',
-        ])}`
-      : `${hours} ${getNameForCount(hours, [
-          'час',
-          'часа',
-          'часов',
-        ])} ${minutes} ${getNameForCount(minutes, [
-          'минута',
-          'минуты',
-          'минут',
-        ])}`
+    const minutesName = getNameForMinutes(minutes)
+    if (hours) {
+      const hoursName = getNameForHours(hours)
+      return `${hours} ${hoursName} ${minutes} ${minutesName}`
+    } else {
+      const secondsName = getNameForSeconds(seconds)
+      return `${minutes} ${minutesName} ${seconds} ${secondsName}`
+    }
   } else {
-    return !hours
-      ? `${minutes}${separator}${seconds}`
-      : `${hours}${separator}${minutes}${separator}${seconds}`
+    const stringSeconds = seconds > 9 ? `0${seconds}` : seconds
+    const stringMinutes = minutes > 9 ? `0${minutes}` : minutes
+    const result = hours
+      ? [hours, stringMinutes, stringSeconds]
+      : [stringMinutes, stringSeconds]
+
+    return result.join(separator)
   }
 }
 
-export const getNumberMultiple_05 = num => {
+export const getNumberMultiple_05 = (num: number): number => {
   const whole = Math.trunc(num)
   const fract = Math.trunc((num % 1) * 10) >= 5 ? 0.5 : 0
   return whole + fract
