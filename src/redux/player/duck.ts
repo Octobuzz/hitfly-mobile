@@ -54,7 +54,7 @@ export const error = createAction(ERROR)
 
 /* #region reducers */
 
-export type Player = {
+export interface Player {
   playerState: State
   currentAlbumId: string
   currentTrackId: string

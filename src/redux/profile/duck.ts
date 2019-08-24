@@ -20,7 +20,7 @@ export const LOGOUT_SUCCESS = getActionName('LOGOUT_SUCCESS')
 export const requestLogIn = createAction(REQUEST_LOGIN)
 export const logInSuccess = createAction(
   LOGIN_SUCCESS,
-  resolve => (profile: Profile) => resolve(profile),
+  resolve => (payload: Profile) => resolve(payload),
 )
 
 export const requestLogOut = createAction(REQUEST_LOGOUT)
@@ -30,11 +30,11 @@ export const logOutSuccess = createAction(LOGOUT_SUCCESS)
 
 /* #region reducers */
 
-export type Profile = {
+export interface Profile {
   userName: string
 }
 
-export type ProfileState = Profile & {
+export interface ProfileState extends Profile {
   isFetching: boolean
 }
 

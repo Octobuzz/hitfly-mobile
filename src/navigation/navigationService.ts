@@ -1,20 +1,19 @@
-import { NavigationActions, StackActions } from 'react-navigation'
+import {
+  NavigationActions,
+  StackActions,
+  NavigationContainerComponent,
+  NavigationNavigateActionPayload,
+} from 'react-navigation'
 
-let navigator
+let navigator: NavigationContainerComponent
 
-function setTopLevelNavigator(navigatorRef) {
+function setTopLevelNavigator(navigatorRef: NavigationContainerComponent) {
   navigator = navigatorRef
 }
 
-function navigate(routeName, params, action) {
+function navigate(options: NavigationNavigateActionPayload) {
   if (navigator) {
-    navigator.dispatch(
-      NavigationActions.navigate({
-        routeName,
-        params,
-        action,
-      }),
-    )
+    navigator.dispatch(NavigationActions.navigate(options))
   }
 }
 
@@ -22,17 +21,7 @@ function goBack() {
   navigator.dispatch(NavigationActions.back())
 }
 
-function reset(index, ...routes) {
-  navigator.dispatch(
-    StackActions.reset({
-      index,
-      actions: routes.map(value => NavigationActions.navigate(value)),
-    }),
-  )
-}
-
 export default {
-  reset,
   goBack,
   navigate,
   setTopLevelNavigator,

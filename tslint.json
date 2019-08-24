@@ -12,6 +12,8 @@
     "object-literal-sort-keys": false,
     "quotemark": [true, "single", "jsx-double"],
     "no-var-requires": false,
-    "no-console": [true, "log", "error"]
+    "no-console": [true, "log", "error"],
+    "ordered-imports": false,
+    "member-access": [true, "no-public"]
   }
 }
