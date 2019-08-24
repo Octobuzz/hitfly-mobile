@@ -2,8 +2,8 @@ import * as styledComponents from 'styled-components/native'
 
 export interface ITheme {
   colors: {
-    main: string
-    secondary: string
+    brandBlue: string
+    brandPink: string
   }
 }
 

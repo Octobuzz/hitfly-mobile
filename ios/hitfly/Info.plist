@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>ru</string>
 	<key>CFBundleDisplayName</key>
-	<string>DIGICO</string>
+	<string>Hitfly</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -38,21 +38,9 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>GothaProBla.otf</string>
-		<string>GothaProBlaIta.otf</string>
-		<string>GothaProBol.otf</string>
-		<string>GothaProBolIta.otf</string>
-		<string>GothaProIta.otf</string>
-		<string>GothaProLig.otf</string>
-		<string>GothaProLigIta.otf</string>
-		<string>GothaProMed.otf</string>
-		<string>GothaProMedIta.otf</string>
-		<string>GothaProNarBol.otf</string>
-		<string>GothaProNarMed.otf</string>
-		<string>GothaProReg.otf</string>
 		<string>GothamProBlack.otf</string>
 		<string>GothamProBlackItalic.otf</string>
 		<string>GothamProBold.otf</string>

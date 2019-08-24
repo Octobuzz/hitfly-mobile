@@ -1,7 +1,10 @@
-import { ITheme } from '@/styled-components'
+import { ITheme } from './styled-components'
 
-const myTheme: ITheme = {
+const theme: ITheme = {
   colors: {
-    main: '#fff',
+    brandBlue: '#4297FE',
+    brandPink: '#D066BF',
   },
 }
+
+export default theme

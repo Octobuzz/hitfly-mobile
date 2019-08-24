@@ -1,11 +1,7 @@
-import R from 'ramda'
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { StyleSheet, Text } from 'react-native'
-import { Navigator } from '../navigation'
 import Button from '../components/Button'
 import InputText from '../components/InputText'
-import Wrapper from '../containers/Wrapper'
 import { colors, sizes, style } from '../constants'
 
 class AuthRecoveryPassword extends Component {
@@ -32,7 +28,7 @@ class AuthRecoveryPassword extends Component {
 
   render() {
     return (
-      <Wrapper scrollKeyboard>
+      <>
         <Text style={styles.description}>Введите новый пароль</Text>
         <InputText
           placeholder="Новый пароль"
@@ -56,14 +52,14 @@ class AuthRecoveryPassword extends Component {
           styleWrapper={styles.roundedButtonWrapper}
           onPress={this._onPressDone}
         />
-      </Wrapper>
+      </>
     )
   }
 }
 
 const styles = StyleSheet.create({
   description: {
-    ...style.text.regular,
+    ...style.style.text.regular,
     fontSize: 16,
     lineHeight: 20,
     color: colors.GRAY_LABEL,
@@ -79,11 +75,4 @@ const styles = StyleSheet.create({
   },
 })
 
-const mapStateToProps = R.applySpec({})
-
-const mapDispatchToProps = {}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AuthRecoveryPassword)
+export default AuthRecoveryPassword

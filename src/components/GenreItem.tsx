@@ -97,14 +97,14 @@ const styles = StyleSheet.create({
     paddingTop: 6,
   },
   title: {
-    ...style.text.medium,
+    ...style.style.text.medium,
     color: colors.BLACK_LABEL,
     fontSize: 14,
     lineHeight: 16,
     paddingTop: 2,
   },
   description: {
-    ...style.text.regular,
+    ...style.style.text.regular,
     color: colors.BLACK_LABEL,
     fontSize: 12,
     lineHeight: 14,

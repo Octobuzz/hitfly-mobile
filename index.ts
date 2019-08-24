@@ -4,7 +4,7 @@
  */
 
 import { AppRegistry } from 'react-native'
-import App from './src/navigation'
+import App from './src/App'
 import { names } from './src/constants'
 if (__DEV__) {
   import('./reactotron.config')

@@ -1,12 +1,5 @@
 import React from 'react'
-import {
-  StyleSheet,
-  View,
-  Image,
-  Text,
-  TouchableOpacity,
-  ViewPropTypes,
-} from 'react-native'
+import { StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
 import RNLinearGradient from 'react-native-linear-gradient'
 import { colors, style, images } from '../constants'
 
@@ -122,7 +115,7 @@ const styles = StyleSheet.create({
     height: 16,
   },
   text: {
-    ...style.text.bold,
+    ...style.style.text.bold,
     color: colors.WHITE,
     fontSize: 12,
     lineHeight: 16,

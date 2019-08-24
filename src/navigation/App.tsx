@@ -3,9 +3,9 @@ import { StatusBar, Platform } from 'react-native'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import NavigationService from './navigationService'
 import routeNames from './routeNames'
-import styled from '@/styled-components'
-import { style } from '@/constants'
-import { storage } from '@/utils'
+import styled from '../styled-components'
+import { style } from '../constants'
+import { storage } from '../utils'
 
 const SwitchRoutes = {
   [routeNames.APP.AUTH]: () => null,

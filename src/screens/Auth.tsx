@@ -2,12 +2,9 @@ import R from 'ramda'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, View, Text } from 'react-native'
-import { Navigator, screens } from '../navigation'
 import { profileSelectors, requestLogIn } from '../redux/profile'
 import Button from '../components/Button'
 import InputText from '../components/InputText'
-import TextWithLines from '../components/TextWithLines'
-import Wrapper from '../containers/Wrapper'
 import { images, colors, sizes, style } from '../constants'
 
 class Auth extends Component {
@@ -48,7 +45,7 @@ class Auth extends Component {
 
   render() {
     return (
-      <Wrapper scrollKeyboard isFetching={this.props.isFetching}>
+      <>
         <View style={styles.authControls}>
           <View style={styles.socialRow}>
             <Button
@@ -123,7 +120,7 @@ class Auth extends Component {
           <Text style={styles.licenseLink}> Условия использования</Text> и
           <Text style={styles.licenseLink}> Политику конфиденциальности</Text>
         </Text>
-      </Wrapper>
+      </>
     )
   }
 }
@@ -154,7 +151,7 @@ const styles = StyleSheet.create({
     marginVertical: sizes.CORRECT_PIXEL_RATIO_SIZE(12),
   },
   license: {
-    ...style.text.regular,
+    ...style.style.text.regular,
     fontSize: 12,
     color: colors.EXTRA_GRAY_LABEL,
     textAlign: 'center',

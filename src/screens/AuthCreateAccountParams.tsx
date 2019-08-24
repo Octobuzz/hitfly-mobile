@@ -1,11 +1,7 @@
-import R from 'ramda'
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { StyleSheet } from 'react-native'
-import { Navigator, screens } from '../navigation'
 import Button from '../components/Button'
 import InputText from '../components/InputText'
-import Wrapper from '../containers/Wrapper'
 import { colors, sizes, style } from '../constants'
 
 class AuthCreateAccountParams extends Component {
@@ -30,7 +26,7 @@ class AuthCreateAccountParams extends Component {
 
   render() {
     return (
-      <Wrapper scrollKeyboard>
+      <>
         <InputText
           placeholder="Возраст"
           mask={InputText.masks.MASK_NUMBERS_2}
@@ -53,7 +49,7 @@ class AuthCreateAccountParams extends Component {
           styleWrapper={styles.roundedButtonWrapper}
           onPress={this._onPressNext}
         />
-      </Wrapper>
+      </>
     )
   }
 }
@@ -77,11 +73,4 @@ const styles = StyleSheet.create({
   },
 })
 
-const mapStateToProps = R.applySpec({})
-
-const mapDispatchToProps = {}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(AuthCreateAccountParams)
+export default AuthCreateAccountParams

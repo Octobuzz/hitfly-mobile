@@ -22,6 +22,7 @@
 		AB324347476C834ABBFCBEAE /* libPods-hitfly.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F3C26854AAD32AABC19F6D /* libPods-hitfly.a */; };
 		B26BDD67315E445F98D5139B /* GothamProNarrowBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FAE9437663214483A68274CA /* GothamProNarrowBold.otf */; };
 		C95C9B2B91A842AE877E7104 /* GothamProBlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1D338DF957904366B005F28D /* GothamProBlackItalic.otf */; };
+		D16F0C562311A600000B3EA0 /* Hitfly.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16F0C552311A600000B3EA0 /* Hitfly.swift */; };
 		D526ABF781D9442DA4D93A4E /* GothamProBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9C3C143B0AB54A7E89EADB17 /* GothamProBold.otf */; };
 		EDF41F5AD5B84798B525534A /* GothamProMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8A5B44F665DC4AB0A96C5F29 /* GothamProMedium.otf */; };
 /* End PBXBuildFile section */
@@ -29,12 +30,12 @@
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* hitfly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hitfly.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = digicomob/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = digicomob/AppDelegate.m; sourceTree = "<group>"; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = hitfly/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = hitfly/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = digicomob/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = digicomob/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = digicomob/main.m; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = hitfly/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = hitfly/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = hitfly/main.m; sourceTree = "<group>"; };
 		178D5E7A7DAF4C6AB0AC8205 /* GothamProBoldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProBoldItalic.otf; path = ../src/assets/fonts/GothamProBoldItalic.otf; sourceTree = "<group>"; };
 		1A1E3791B554454CBEB65BBC /* GothamProRegular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProRegular.otf; path = ../src/assets/fonts/GothamProRegular.otf; sourceTree = "<group>"; };
 		1D338DF957904366B005F28D /* GothamProBlackItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProBlackItalic.otf; path = ../src/assets/fonts/GothamProBlackItalic.otf; sourceTree = "<group>"; };
@@ -48,6 +49,8 @@
 		8A5B44F665DC4AB0A96C5F29 /* GothamProMedium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProMedium.otf; path = ../src/assets/fonts/GothamProMedium.otf; sourceTree = "<group>"; };
 		9C3C143B0AB54A7E89EADB17 /* GothamProBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProBold.otf; path = ../src/assets/fonts/GothamProBold.otf; sourceTree = "<group>"; };
 		CA34B6DF03394DE3AE557173 /* GothamProLightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProLightItalic.otf; path = ../src/assets/fonts/GothamProLightItalic.otf; sourceTree = "<group>"; };
+		D16F0C552311A600000B3EA0 /* Hitfly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hitfly.swift; sourceTree = "<group>"; };
+		D16F0C572311A74A000B3EA0 /* Hitfly-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hitfly-Bridging-Header.h"; sourceTree = "<group>"; };
 		F2D3CD239E4E49148A8959F8 /* GothamProLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProLight.otf; path = ../src/assets/fonts/GothamProLight.otf; sourceTree = "<group>"; };
 		FAE9437663214483A68274CA /* GothamProNarrowBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProNarrowBold.otf; path = ../src/assets/fonts/GothamProNarrowBold.otf; sourceTree = "<group>"; };
 		FE21C660711F410887D2BF20 /* GothamProMediumItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProMediumItalic.otf; path = ../src/assets/fonts/GothamProMediumItalic.otf; sourceTree = "<group>"; };
@@ -69,6 +72,8 @@
 			isa = PBXGroup;
 			children = (
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
+				D16F0C552311A600000B3EA0 /* Hitfly.swift */,
+				D16F0C572311A74A000B3EA0 /* Hitfly-Bridging-Header.h */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -159,6 +164,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				5B36D0ECA5A2B88172AFC173 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -248,6 +254,54 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		5B36D0ECA5A2B88172AFC173 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-hitfly/Pods-hitfly-resources.sh",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hitfly/Pods-hitfly-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		AAB8C7B74EFC77FBEE19AD37 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -278,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				D16F0C562311A600000B3EA0 /* Hitfly.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,7 +346,7 @@
 				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
-			path = digicomob;
+			path = hitfly;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -308,7 +363,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 68GTLQ6C42;
-				INFOPLIST_FILE = digicomob/Info.plist;
+				INFOPLIST_FILE = hitfly/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -318,7 +373,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = team.zebrains.hitfly;
 				PRODUCT_NAME = hitfly;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development team.zebrains.hitfly";
-				SWIFT_OBJC_BRIDGING_HEADER = "digicomob-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hitfly-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -335,7 +390,7 @@
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 68GTLQ6C42;
-				INFOPLIST_FILE = digicomob/Info.plist;
+				INFOPLIST_FILE = hitfly/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -345,7 +400,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = team.zebrains.hitfly;
 				PRODUCT_NAME = hitfly;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development team.zebrains.hitfly";
-				SWIFT_OBJC_BRIDGING_HEADER = "digicomob-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Hitfly-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

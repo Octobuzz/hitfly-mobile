@@ -2,20 +2,15 @@ import R from 'ramda'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, View, Text } from 'react-native'
-import { Navigator, screens } from '../navigation'
 import Button from '../components/Button'
 import InputText from '../components/InputText'
 import TextWithLines from '../components/TextWithLines'
-import Wrapper from '../containers/Wrapper'
 import { images, colors, sizes, style } from '../constants'
 
 class AuthCreateAccount extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      email: 'some@email.com',
-      password: '12345',
-    }
+  state = {
+    email: 'some@email.com',
+    password: '12345',
   }
 
   _onPressCreateAccount = () => {
@@ -33,7 +28,7 @@ class AuthCreateAccount extends Component {
 
   render() {
     return (
-      <Wrapper scrollKeyboard>
+      <>
         <View style={styles.authControls}>
           <View style={styles.socialRow}>
             <Button
@@ -97,7 +92,7 @@ class AuthCreateAccount extends Component {
           <Text style={styles.licenseLink}> Условия использования</Text> и
           <Text style={styles.licenseLink}> Политику конфиденциальности</Text>
         </Text>
-      </Wrapper>
+      </>
     )
   }
 }
