@@ -17,6 +17,7 @@ export const MOVES = {
   VERTICAL: 'VERTICAL',
 }
 
+// FIXME: remove
 export const PLAYER_STATES = {
   NONE: STATE_NONE,
   PLAYING: STATE_PLAYING,

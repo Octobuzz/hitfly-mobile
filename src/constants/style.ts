@@ -1,6 +1,8 @@
 import { Platform } from 'react-native'
 import * as colors from './colors'
 
+export const HIT_SLOP = { left: 10, top: 10, right: 10, bottom: 10 }
+
 const baseFont = {
   color: colors.BLACK_LABEL,
   backgroundColor: 'transparent',
@@ -74,7 +76,7 @@ const fonts = {
   },
 }
 
-export default {
+export const style = {
   text: {
     ...fonts,
     navBarTitle: {

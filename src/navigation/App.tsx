@@ -3,6 +3,9 @@ import { StatusBar, Platform } from 'react-native'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import NavigationService from './navigationService'
 import routeNames from './routeNames'
+import styled from '@/styled-components'
+import { style } from '@/constants'
+import { storage } from '@/utils'
 
 const SwitchRoutes = {
   [routeNames.APP.AUTH]: () => null,
@@ -15,6 +18,25 @@ const AppContainer = createAppContainer(
   }),
 )
 
+const DevTools = styled.View`
+  flex-direction: row;
+  position: absolute;
+  top: 40;
+  right: 20;
+  z-index: 10;
+`
+
+const DebugButton = styled.TouchableOpacity.attrs(() => ({
+  onPress: storage.clearStorage,
+  hitSlop: style.HIT_SLOP,
+}))`
+  width: 10;
+  height: 10;
+  margin: 0 10;
+  border-radius: 5;
+  background-color: rgba(0, 0, 0, 0.5);
+`
+
 class AppNavigator extends React.Component {
   constructor(props: any) {
     super(props)
@@ -26,7 +48,16 @@ class AppNavigator extends React.Component {
   }
 
   render() {
-    return <AppContainer ref={NavigationService.setTopLevelNavigator} />
+    return (
+      <>
+        {__DEV__ && (
+          <DevTools>
+            <DebugButton />
+          </DevTools>
+        )}
+        <AppContainer ref={NavigationService.setTopLevelNavigator} />
+      </>
+    )
   }
 }
 
