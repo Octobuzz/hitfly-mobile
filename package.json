@@ -78,9 +78,9 @@
     }
   },
   "lint-staged": {
-    "src/**/*.js": [
+    "src/**/*.ts": [
       "prettier --write",
-      "tslint --project tsconfig.json",
+      "tslint --fix --project tsconfig.json",
       "git add"
     ]
   }

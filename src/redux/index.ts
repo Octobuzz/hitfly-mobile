@@ -1,10 +1,10 @@
-import { all, call } from 'redux-saga/effects'
-import { combineReducers, applyMiddleware, createStore, compose } from 'redux'
-import Reactotron from 'reactotron-react-native'
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
 import createSagaMiddleware from 'redux-saga'
+import { all, call } from 'redux-saga/effects'
+import './reactotron.config'
 
-import profileReducer, { profileSagas } from './profile'
 import playerReducer, { playerSagas } from './player'
+import profileReducer, { profileSagas } from './profile'
 
 const rootReducer = combineReducers({
   profile: profileReducer,
@@ -15,15 +15,20 @@ function* rootSaga() {
   yield all([call(profileSagas), call(playerSagas)])
 }
 
+declare global {
+  interface Console {
+    tron: any
+  }
+}
+
 export const configureStore = () => {
-  const sagaMonitor = __DEV__ ? (Reactotron as any).createSagaMonitor() : null
+  const sagaMonitor = __DEV__ ? console.tron.createSagaMonitor() : null
   const sagaMiddleware = createSagaMiddleware({ sagaMonitor })
 
   const enhancers = [applyMiddleware(sagaMiddleware)]
 
   if (__DEV__) {
-    // eslint-disable-next-line no-console
-    enhancers.push((Reactotron as any).createEnhancer())
+    enhancers.push(console.tron.createEnhancer())
   }
 
   const store = createStore(rootReducer, compose(...enhancers))

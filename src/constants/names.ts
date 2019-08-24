@@ -1,12 +1,12 @@
 import {
-  STATE_NONE,
-  STATE_PLAYING,
-  STATE_PAUSED,
-  STATE_STOPPED,
   STATE_BUFFERING,
+  STATE_NONE,
+  STATE_PAUSED,
+  STATE_PLAYING,
   STATE_READY,
+  STATE_STOPPED,
 } from 'react-native-track-player'
-export const APP_NAME = 'Hitfly'
+export const APP_NAME = 'hitfly'
 
 export const MOVES = {
   LEFT: 'LEFT',

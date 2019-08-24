@@ -6,8 +6,5 @@
 import { AppRegistry } from 'react-native'
 import App from './src/App'
 import { names } from './src/constants'
-if (__DEV__) {
-  import('./reactotron.config')
-}
 
 AppRegistry.registerComponent(names.APP_NAME, () => App)
