@@ -7,14 +7,12 @@ import theme from './theme'
 
 const store = configureStore()
 
-// const App = () => (
-//   <Provider store={store}>
-//     <ThemeProvider theme={theme}>
-//       <AppNavigator />
-//     </ThemeProvider>
-//   </Provider>
-// )
-
-const App = () => null
+const App = () => (
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <AppNavigator />
+    </ThemeProvider>
+  </Provider>
+)
 
 export default App

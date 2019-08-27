@@ -1,7 +1,3 @@
-// brand
-export const SPLASH_GRADIENT = require('../assets/images/brand/splash_gradient.png')
-export const LOGO_WHITE = require('../assets/images/brand/logo_white.png')
-
 // tabs
 export const TAB_HOME = require('../assets/images/navigation/tab_home.png')
 export const TAB_HOME_SELECTED = require('../assets/images/navigation/tab_home_selected.png')
@@ -14,9 +10,6 @@ export const TAB_BLOG_SELECTED = require('../assets/images/navigation/tab_blog_s
 export const TAB_SEARCH = require('../assets/images/navigation/tab_search.png')
 export const TAB_SEARCH_SELECTED = require('../assets/images/navigation/tab_search_selected.png')
 
-// navbar
-export const NAVBAR_BACK_ARROW_WHITE = require('../assets/images/navigation/back_arrow_white.png')
-export const NAVBAR_BACK_ARROW_BLACK = require('../assets/images/navigation/back_arrow_black.png')
 export const NAVBAR_SHEVRON_DOWN_WHITE = require('../assets/images/navigation/shevron_down_white.png')
 export const NAVBAR_SETTINGS_WHITE = require('../assets/images/navigation/settings_white.png')
 export const NAVBAR_NOTIFICATIONS_WHITE = require('../assets/images/navigation/notifications_white.png')

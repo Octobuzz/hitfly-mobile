@@ -18,10 +18,12 @@ if (__DEV__) {
         except: ['EFFECT_TRIGGERED', 'EFFECT_RESOLVED', 'EFFECT_REJECTED'],
       }),
     )
-    .use(sagaPlugin())
+    .use(sagaPlugin({}))
     .connect()
 
-  Reactotron.clear()
+  if (Reactotron.clear) {
+    Reactotron.clear()
+  }
 
   // tslint:disable-next-line
   console.tron = Reactotron

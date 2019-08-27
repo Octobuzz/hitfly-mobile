@@ -1,6 +1,7 @@
 const APP = {
   AUTH: 'auth',
   MAIN: 'main',
+  STORYBOOK: 'storybook',
 }
 
 export default {
