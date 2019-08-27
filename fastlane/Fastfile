@@ -1,0 +1,115 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+update_fastlane
+
+default_platform(:ios)
+
+APP_NAME = "hitfly"
+
+platform :ios do
+  desc 'Fetch certificates and provisioning profiles'
+  lane :certificates do
+    match(type: 'development', readonly: true)
+    match(type: 'appstore', readonly: true)
+  end
+
+  IOS_PROJECT = "./ios/#{APP_NAME}.xcodeproj"
+  IOS_WORKSPACE = "./ios/#{APP_NAME}.xcworkspace"
+
+  desc 'Build the iOS application.'
+  private_lane :build do
+    certificates
+    increment_build_number(xcodeproj: IOS_PROJECT, build_number: latest_testflight_build_number + 1)
+    # if using workspace (e.g Pods) else use gym(project: IOS_PROJECT)
+    gym(workspace: IOS_WORKSPACE, clean: true, silent: true)
+  end
+
+  desc 'Ship to Testflight.'
+  lane :beta do
+    begin
+      notification(subtitle: 'iOS', message: "#{APP_NAME} Start Building")
+
+      build
+      notification(subtitle: 'iOS', message: "#{APP_NAME} Finished Building")
+
+      commit_version_bump(xcodeproj: IOS_PROJECT, message: 'Change build version iOS')
+      push_to_git_remote
+      notification(subtitle: 'iOS', message: "#{APP_NAME} Commited and Pushed to VCS")
+
+      IOS_IPA = "#{APP_NAME}.ipa"
+      pilot(ipa: IOS_IPA)
+      notification(subtitle: 'iOS', message: "#{APP_NAME} Uploaded to TestFlight")
+
+      clean_build_artifacts
+      notification(subtitle: 'iOS', message: "#{APP_NAME} Cleaned build artifacts")
+
+      notification(subtitle: 'iOS', message: "Lane :beta finished")
+    rescue => error
+      notification(subtitle: 'iOS', message: "Lane :beta failed")
+      raise error
+    end
+  end
+end
+
+CRASHLYTIC_TOKEN = "80fdf973d6613b671271708f88e5f8f6f5103d06"
+CRASHLYTIC_SECRET = "8de2af9ec8ea6b0aa0681c4dbaa07859a357e4cd275286a19b22334745869ddc"
+
+platform :android do
+ 
+  ANDROID_PROJECT = './android/'
+  desc "Submit a new Beta Build to Crashlytics Beta"
+  lane :beta do
+    begin
+      notification(subtitle: 'Android', message: "#{APP_NAME} Start Building")
+      increment_version_code(
+        gradle_file_path: "#{ANDROID_PROJECT}app/build.gradle",
+        app_folder_name:"#{ANDROID_PROJECT}app"
+      )
+      gradle(task: "clean assembleRelease", project_dir: ANDROID_PROJECT)
+      notification(subtitle: 'Android', message: "#{APP_NAME} Finished Building")
+      
+      GRADLE_FILE = "#{ANDROID_PROJECT}app/build.gradle"
+      git_commit(path: GRADLE_FILE, message: "Change build version Android")
+      push_to_git_remote
+      notification(subtitle: 'Android', message: "#{APP_NAME} Commited and Pushed to VCS")
+
+      crashlytics(
+        api_token: CRASHLYTIC_TOKEN,
+        build_secret: CRASHLYTIC_SECRET
+      )
+      notification(subtitle: 'Android', message: "#{APP_NAME} Uploaded to Crashlytics")
+
+      APK_LOCATION = "#{lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]}"
+      APK_DESTINATION = "~/Desktop/#{APP_NAME}.apk"   
+      VERSION_CODE = android_get_version_code(gradle_file: GRADLE_FILE)
+      VERSION_NAME = android_get_version_name(gradle_file: GRADLE_FILE)
+      VERSION_NAME = VERSION_NAME.sub(/\./, "_")
+      APK_DESTINATION = "~/Desktop/#{APP_NAME}_v-#{VERSION_NAME}b-#{VERSION_CODE}.apk"      
+      sh("cp #{APK_LOCATION} #{APK_DESTINATION}")
+      notification(subtitle: 'Android', message: "#{APP_NAME} Copied to #{APK_DESTINATION}")
+
+      notification(subtitle: 'Android', message: "Lane :beta finished")
+    rescue => error
+      notification(subtitle: 'Android', message: "Lane :beta failed")
+      raise error
+    end
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :deploy do
+    gradle(task: "clean assembleRelease")
+    upload_to_play_store
+  end
+end
+

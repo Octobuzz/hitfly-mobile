@@ -27,10 +27,9 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 
-# Cocoapods
-#
-Pods/
-Podfile.lock
+# CocoaPods
+/ios/Pods/
+
 
 # Android/IntelliJ
 #

@@ -11,7 +11,7 @@
         android:id="@+id/imageView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/splash"
+        android:src="@mipmap/splash"
         android:scaleType="centerCrop"
         />
 </LinearLayout>
