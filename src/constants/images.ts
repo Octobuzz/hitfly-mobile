@@ -1,5 +1,5 @@
 // welcome
-export const WELCOME_LOGO = require('../assets/images/welcome/selcome_logo.png')
+export const WELCOME_LOGO = require('../assets/images/welcome/welcome_logo.png')
 
 // tabs
 export const TAB_RADIO = require('../assets/images/navigation/tab_radio.png')

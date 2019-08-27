@@ -1,10 +1,15 @@
 import * as styledComponents from 'styled-components/native'
 
+export interface ThemeColors {
+  brandBlue: string
+  brandPink: string
+  white: string
+  textMain: string
+  textAlt: string
+}
+
 export interface ITheme {
-  colors: {
-    brandBlue: string
-    brandPink: string
-  }
+  colors: ThemeColors
 }
 
 const {

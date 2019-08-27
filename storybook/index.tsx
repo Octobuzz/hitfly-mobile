@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native'
 
 // import stories
 configure(() => {
-  require('./stories.js')
+  require('./stories.tsx')
 }, module)
 
 // Refer to https://github.com/storybooks/storybook/tree/master/app/react-native#start-command-parameters

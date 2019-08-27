@@ -1,8 +1,8 @@
-import React from 'react'
-import styled from '../styled-components'
+import styled, { ThemeColors } from 'src/styled-components'
 
 interface ITextBase {
   weightType?: 'bold' | 'light' | 'regular'
+  color?: string
 }
 
 enum FontFamilies {
@@ -15,4 +15,7 @@ const TextBase = styled.Text<ITextBase>`
   font-family: ${({ weightType }) =>
     weightType ? FontFamilies[weightType] : FontFamilies.regular};
   font-size: 16px;
+  color: ${({ color, theme }) => color || theme.colors.textMain};
 `
+
+export default TextBase
