@@ -20,10 +20,11 @@ const Text = styled(TextBase)`
 
 interface Props {
   children?: string
+  style?: any
 }
 
-const TextWithLines = ({ children }: Props) => (
-  <Wrapper>
+const TextWithLines = ({ children, style }: Props) => (
+  <Wrapper style={style}>
     <Line />
     <Text>{children}</Text>
     <Line />

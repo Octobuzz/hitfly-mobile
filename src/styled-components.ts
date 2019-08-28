@@ -6,11 +6,20 @@ export interface ThemeColors {
   white: string
   textMain: string
   textAlt: string
+  textGray: string
   inputBorder: string
+}
+
+export interface ThemeFonts {
+  black: string
+  bold: string
+  medium: string
+  regular: string
 }
 
 export interface ITheme {
   colors: ThemeColors
+  fonts: ThemeFonts
 }
 
 const {

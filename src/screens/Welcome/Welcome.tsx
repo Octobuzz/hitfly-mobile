@@ -3,6 +3,7 @@ import { NavigationScreenProps } from 'react-navigation'
 import { View, Stretcher, Button } from 'src/components'
 import { images } from 'src/constants'
 import styled from 'src/styled-components'
+import { ROUTES } from 'src/navigation'
 import Features, { Feature } from './Features'
 
 const Container = styled.SafeAreaView`
@@ -43,7 +44,7 @@ class Welcome extends React.Component<NavigationScreenProps>
 
   private navigateToNext = () => {
     const { navigation } = this.props
-    navigation.navigate('')
+    navigation.navigate(ROUTES.AUTH.LOGIN)
   }
 
   render() {
