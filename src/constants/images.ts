@@ -1,5 +1,9 @@
 // welcome
 export const WELCOME_LOGO = require('../assets/images/welcome/welcome_logo.png')
+export const COINS_GRADIENT = require('../assets/images/welcome/coins_gradient.png')
+export const GROWTH_GRADIENT = require('../assets/images/welcome/growth_gradient.png')
+export const HEADPHONES_GRADIENT = require('../assets/images/welcome/headphones_gradient.png')
+export const INSIGNIA_GRADIENT = require('../assets/images/welcome/insignia_gradient.png')
 
 // tabs
 export const TAB_RADIO = require('../assets/images/navigation/tab_radio.png')
