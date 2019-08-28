@@ -1,5 +1,4 @@
 import React from 'react'
-import TextBase from 'src/components/TextBase'
 import { images } from 'src/constants'
 import styled from 'src/styled-components'
 
