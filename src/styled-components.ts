@@ -6,6 +6,7 @@ export interface ThemeColors {
   white: string
   textMain: string
   textAlt: string
+  inputBorder: string
 }
 
 export interface ITheme {

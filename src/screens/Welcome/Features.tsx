@@ -8,6 +8,9 @@ const IconWrapper = styled.View`
   margin-right: 14px;
   align-items: center;
   justify-content: center;
+  border-radius: 20px;
+  border-width: 1px;
+  border-color: ${({ theme }) => theme.colors.inputBorder};
 `
 
 const Icon = styled.Image``
@@ -21,6 +24,7 @@ const Text = styled(TextBase)`
 const Row = styled.View`
   flex-direction: row;
   align-items: center;
+  margin-bottom: 16px;
 `
 
 const FeaturesWrapper = styled.View`
