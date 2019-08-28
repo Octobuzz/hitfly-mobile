@@ -1,4 +1,5 @@
 export * from './views'
+export * from './fields'
 export * from './buttons'
 
 export { default as TextBase } from './TextBase'

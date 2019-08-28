@@ -9,6 +9,7 @@ import {
   SocialButton,
   TextWithLines,
 } from 'src/components'
+import LoginForm from './LoginForm'
 import styled from 'src/styled-components'
 
 const Container = styled.SafeAreaView`
@@ -38,6 +39,7 @@ const BottomText = styled(TextBase)`
   color: ${({ theme }) => theme.colors.textGray};
   font-size: 12px;
   text-align: center;
+  line-height: 20px;
 `
 
 const BottomLinkText = styled(BottomText)`
@@ -66,8 +68,8 @@ class Login extends React.Component<Props> {
           <BottomText>
             Регистрируясь через эл.почту, Facebook, VK, Instagram или
             Одноклассники вы принимаете
-            <BottomLinkText> Условия использования</BottomLinkText>
           </BottomText>
+          <BottomLinkText> Условия использования</BottomLinkText>
         </View>
       </Container>
     )

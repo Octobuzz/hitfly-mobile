@@ -1,6 +1,13 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react-native'
-import { Button, Link, SocialButton, TextWithLines } from 'src/components'
+import {
+  Link,
+  Input,
+  Button,
+  SocialButton,
+  TextWithLines,
+} from 'src/components'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 import styled from 'src/styled-components'
 
 storiesOf('Button', module)
@@ -24,4 +31,22 @@ storiesOf('SocialButton', module).add('Default', () => (
 
 storiesOf('TextWithLines', module).add('Default', () => (
   <TextWithLines>Text with lines</TextWithLines>
+))
+
+const formikBag: any = {
+  field: {
+    name: 'name',
+    value: '',
+    onChange: () => () => {},
+    onBlur: () => () => {},
+  },
+  form: {},
+}
+
+storiesOf('Input', module).add('Default', () => (
+  <Input
+    label="label"
+    RightIcon={<Icon name="mail-outline" size={16} />}
+    {...formikBag}
+  />
 ))
