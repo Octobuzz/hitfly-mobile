@@ -1,0 +1,33 @@
+import React from 'react'
+import styled from 'src/styled-components'
+import TextBase from 'src/components/TextBase'
+
+const Wrapper = styled.View`
+  flex-direction: row;
+  align-items: center;
+`
+
+const Line = styled.View`
+  height: 1px;
+  flex: 1;
+  background-color: ${({ theme }) => theme.colors.inputBorder};
+`
+
+const Text = styled(TextBase)`
+  color: ${({ theme }) => theme.colors.textAlt};
+  margin-horizontal: 6px;
+`
+
+interface Props {
+  children?: string
+}
+
+const TextWithLines = ({ children }: Props) => (
+  <Wrapper>
+    <Line />
+    <Text>{children}</Text>
+    <Line />
+  </Wrapper>
+)
+
+export default TextWithLines

@@ -1,6 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react-native'
-import { Button, Link, SocialButton } from 'src/components'
+import { Button, Link, SocialButton, TextWithLines } from 'src/components'
 import styled from 'src/styled-components'
 
 storiesOf('Button', module)
@@ -20,4 +20,8 @@ storiesOf('SocialButton', module).add('Default', () => (
     <SocialButton type="fb" />
     <SocialButton type="ok" />
   </CenterContainer>
+))
+
+storiesOf('TextWithLines', module).add('Default', () => (
+  <TextWithLines>Text with lines</TextWithLines>
 ))
