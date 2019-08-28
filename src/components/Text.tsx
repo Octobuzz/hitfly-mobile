@@ -1,19 +1,12 @@
-import styled, { ThemeColors } from 'src/styled-components'
+import styled from 'src/styled-components'
 
 interface ITextBase {
-  weightType?: 'bold' | 'light' | 'regular'
   color?: string
 }
 
-enum FontFamilies {
-  light = 'GothamPro-Light',
-  regular = 'GothamPro-Regular',
-  bold = 'GothamPro-Bold',
-}
-
 const TextBase = styled.Text<ITextBase>`
-  font-family: ${({ weightType }) =>
-    weightType ? FontFamilies[weightType] : FontFamilies.regular};
+  font-family: 'GothamPro';
+  font-weight: 400;
   font-size: 16px;
   color: ${({ color, theme }) => color || theme.colors.textMain};
 `
