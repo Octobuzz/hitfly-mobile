@@ -7,24 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00D191E6965040E7AACB248B /* GothamProLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = F2D3CD239E4E49148A8959F8 /* GothamProLight.otf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		5EA785E47A4B4EFFA0984F5E /* GothamProRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1A1E3791B554454CBEB65BBC /* GothamProRegular.otf */; };
-		740BAFC37F0A4E1FA68D5711 /* GothamProMediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = FE21C660711F410887D2BF20 /* GothamProMediumItalic.otf */; };
-		7C6713F130714869A8C4CCFD /* GothamProLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CA34B6DF03394DE3AE557173 /* GothamProLightItalic.otf */; };
-		8032AAF1CFBD4AEC845F280E /* GothamProBlack.otf in Resources */ = {isa = PBXBuildFile; fileRef = 682AC2BB5F164BF2AB53B051 /* GothamProBlack.otf */; };
-		96A1D94D0D9042239C817BE4 /* GothamProItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6B3E1D60B29A4E14BFB568DA /* GothamProItalic.otf */; };
-		A5EACB7C890E4318914070BF /* GothamProBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 178D5E7A7DAF4C6AB0AC8205 /* GothamProBoldItalic.otf */; };
-		AA2CA619AEC1467A95AE2594 /* GothamProNarrowMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 29178B071E4144518DE2586A /* GothamProNarrowMedium.otf */; };
 		AB324347476C834ABBFCBEAE /* libPods-hitfly.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F3C26854AAD32AABC19F6D /* libPods-hitfly.a */; };
-		B26BDD67315E445F98D5139B /* GothamProNarrowBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FAE9437663214483A68274CA /* GothamProNarrowBold.otf */; };
-		C95C9B2B91A842AE877E7104 /* GothamProBlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1D338DF957904366B005F28D /* GothamProBlackItalic.otf */; };
 		D16F0C562311A600000B3EA0 /* Hitfly.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16F0C552311A600000B3EA0 /* Hitfly.swift */; };
-		D526ABF781D9442DA4D93A4E /* GothamProBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9C3C143B0AB54A7E89EADB17 /* GothamProBold.otf */; };
-		EDF41F5AD5B84798B525534A /* GothamProMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8A5B44F665DC4AB0A96C5F29 /* GothamProMedium.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,24 +24,12 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = hitfly/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = hitfly/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = hitfly/main.m; sourceTree = "<group>"; };
-		178D5E7A7DAF4C6AB0AC8205 /* GothamProBoldItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProBoldItalic.otf; path = ../src/assets/fonts/GothamProBoldItalic.otf; sourceTree = "<group>"; };
-		1A1E3791B554454CBEB65BBC /* GothamProRegular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProRegular.otf; path = ../src/assets/fonts/GothamProRegular.otf; sourceTree = "<group>"; };
-		1D338DF957904366B005F28D /* GothamProBlackItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProBlackItalic.otf; path = ../src/assets/fonts/GothamProBlackItalic.otf; sourceTree = "<group>"; };
-		29178B071E4144518DE2586A /* GothamProNarrowMedium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProNarrowMedium.otf; path = ../src/assets/fonts/GothamProNarrowMedium.otf; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3046D5B8FE8335EE807866D9 /* Pods-hitfly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hitfly.debug.xcconfig"; path = "Target Support Files/Pods-hitfly/Pods-hitfly.debug.xcconfig"; sourceTree = "<group>"; };
-		682AC2BB5F164BF2AB53B051 /* GothamProBlack.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProBlack.otf; path = ../src/assets/fonts/GothamProBlack.otf; sourceTree = "<group>"; };
-		6B3E1D60B29A4E14BFB568DA /* GothamProItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProItalic.otf; path = ../src/assets/fonts/GothamProItalic.otf; sourceTree = "<group>"; };
 		74F3C26854AAD32AABC19F6D /* libPods-hitfly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-hitfly.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A4C059CD4A4C41C8119D5CD /* Pods-hitfly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hitfly.release.xcconfig"; path = "Target Support Files/Pods-hitfly/Pods-hitfly.release.xcconfig"; sourceTree = "<group>"; };
-		8A5B44F665DC4AB0A96C5F29 /* GothamProMedium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProMedium.otf; path = ../src/assets/fonts/GothamProMedium.otf; sourceTree = "<group>"; };
-		9C3C143B0AB54A7E89EADB17 /* GothamProBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProBold.otf; path = ../src/assets/fonts/GothamProBold.otf; sourceTree = "<group>"; };
-		CA34B6DF03394DE3AE557173 /* GothamProLightItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProLightItalic.otf; path = ../src/assets/fonts/GothamProLightItalic.otf; sourceTree = "<group>"; };
 		D16F0C552311A600000B3EA0 /* Hitfly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hitfly.swift; sourceTree = "<group>"; };
 		D16F0C572311A74A000B3EA0 /* Hitfly-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hitfly-Bridging-Header.h"; sourceTree = "<group>"; };
-		F2D3CD239E4E49148A8959F8 /* GothamProLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProLight.otf; path = ../src/assets/fonts/GothamProLight.otf; sourceTree = "<group>"; };
-		FAE9437663214483A68274CA /* GothamProNarrowBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProNarrowBold.otf; path = ../src/assets/fonts/GothamProNarrowBold.otf; sourceTree = "<group>"; };
-		FE21C660711F410887D2BF20 /* GothamProMediumItalic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamProMediumItalic.otf; path = ../src/assets/fonts/GothamProMediumItalic.otf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,18 +103,6 @@
 		99ECBC836C0B44538D93B3CE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				682AC2BB5F164BF2AB53B051 /* GothamProBlack.otf */,
-				1D338DF957904366B005F28D /* GothamProBlackItalic.otf */,
-				9C3C143B0AB54A7E89EADB17 /* GothamProBold.otf */,
-				178D5E7A7DAF4C6AB0AC8205 /* GothamProBoldItalic.otf */,
-				6B3E1D60B29A4E14BFB568DA /* GothamProItalic.otf */,
-				F2D3CD239E4E49148A8959F8 /* GothamProLight.otf */,
-				CA34B6DF03394DE3AE557173 /* GothamProLightItalic.otf */,
-				8A5B44F665DC4AB0A96C5F29 /* GothamProMedium.otf */,
-				FE21C660711F410887D2BF20 /* GothamProMediumItalic.otf */,
-				FAE9437663214483A68274CA /* GothamProNarrowBold.otf */,
-				29178B071E4144518DE2586A /* GothamProNarrowMedium.otf */,
-				1A1E3791B554454CBEB65BBC /* GothamProRegular.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -222,18 +186,6 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				8032AAF1CFBD4AEC845F280E /* GothamProBlack.otf in Resources */,
-				C95C9B2B91A842AE877E7104 /* GothamProBlackItalic.otf in Resources */,
-				D526ABF781D9442DA4D93A4E /* GothamProBold.otf in Resources */,
-				A5EACB7C890E4318914070BF /* GothamProBoldItalic.otf in Resources */,
-				96A1D94D0D9042239C817BE4 /* GothamProItalic.otf in Resources */,
-				00D191E6965040E7AACB248B /* GothamProLight.otf in Resources */,
-				7C6713F130714869A8C4CCFD /* GothamProLightItalic.otf in Resources */,
-				EDF41F5AD5B84798B525534A /* GothamProMedium.otf in Resources */,
-				740BAFC37F0A4E1FA68D5711 /* GothamProMediumItalic.otf in Resources */,
-				B26BDD67315E445F98D5139B /* GothamProNarrowBold.otf in Resources */,
-				AA2CA619AEC1467A95AE2594 /* GothamProNarrowMedium.otf in Resources */,
-				5EA785E47A4B4EFFA0984F5E /* GothamProRegular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,7 +204,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		5B36D0ECA5A2B88172AFC173 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

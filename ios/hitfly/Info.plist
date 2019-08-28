@@ -38,21 +38,13 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>GothamProBlack.otf</string>
-		<string>GothamProBlackItalic.otf</string>
-		<string>GothamProBold.otf</string>
-		<string>GothamProBoldItalic.otf</string>
-		<string>GothamProItalic.otf</string>
-		<string>GothamProLight.otf</string>
-		<string>GothamProLightItalic.otf</string>
-		<string>GothamProMedium.otf</string>
-		<string>GothamProMediumItalic.otf</string>
-		<string>GothamProNarrowBold.otf</string>
-		<string>GothamProNarrowMedium.otf</string>
-		<string>GothamProRegular.otf</string>
+		<string>GothamPro-Black.otf</string>
+		<string>GothamPro-Bold.otf</string>
+		<string>GothamPro-Medium.otf</string>
+		<string>GothamPro-Regular.otf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

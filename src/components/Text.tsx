@@ -6,9 +6,9 @@ interface ITextBase {
 }
 
 enum FontFamilies {
-  light = 'GothamProLight',
-  regular = 'GothamProRegular',
-  bold = 'GothamProBold',
+  light = 'GothamPro-Light',
+  regular = 'GothamPro-Regular',
+  bold = 'GothamPro-Bold',
 }
 
 const TextBase = styled.Text<ITextBase>`
