@@ -1,15 +1,15 @@
 import styled from 'src/styled-components'
 
 enum FontFamilies {
-  light = 'GothamPro-Light',
-  regular = 'GothamPro-Regular',
+  regular = 'GothamPro',
   bold = 'GothamPro-Bold',
   black = 'GothamPro-Black',
+  medium = 'GothamPro-Medium',
 }
 
 interface ITextBase {
   color?: string
-  fontType?: 'light' | 'regular' | 'bold' | 'black'
+  fontType?: 'medium' | 'regular' | 'bold' | 'black'
 }
 
 const TextBase = styled.Text<ITextBase>`
