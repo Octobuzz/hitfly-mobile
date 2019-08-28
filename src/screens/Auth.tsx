@@ -3,8 +3,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { StyleSheet, View, Text } from 'react-native'
 import { profileSelectors, requestLogIn } from '../redux/profile'
-import Button from '../components/Button'
-import InputText from '../components/InputText'
 import { images, colors, sizes, style } from '../constants'
 
 class Auth extends Component {

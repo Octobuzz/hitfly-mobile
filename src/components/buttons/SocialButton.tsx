@@ -7,9 +7,9 @@ const Wrapper = styled.TouchableOpacity``
 const Icon = styled.Image``
 
 interface Props {
-  type: 'vk' | 'fb' | 'ok' | 'gg'
+  type: 'vk' | 'fb' | 'ok' | 'inst' | 'gg'
   style?: any
-  onPress?: () => any
+  onPress?: () => void
 }
 
 class SocialButton extends React.Component<Props> {
@@ -24,6 +24,8 @@ class SocialButton extends React.Component<Props> {
         return images.SOCIAL_ODNOKLASSNIKI
       case 'gg':
         return images.SOCIAL_GOOGLE
+      case 'inst':
+        return images.SOCIAL_INSTAGRAM
     }
   }
 

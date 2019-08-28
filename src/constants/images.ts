@@ -19,6 +19,7 @@ export const NAVBAR_AVATAR_EMPTY = require('../assets/images/navigation/avatar_e
 export const SOCIAL_FACEBOOK = require('../assets/images/social/facebook.png')
 export const SOCIAL_VKONTAKTE = require('../assets/images/social/vkontakte.png')
 export const SOCIAL_GOOGLE = require('../assets/images/social/google.png')
+export const SOCIAL_INSTAGRAM = require('../assets/images/social/instagram.png')
 export const SOCIAL_ODNOKLASSNIKI = require('../assets/images/social/odnoklassniki.png')
 
 // form

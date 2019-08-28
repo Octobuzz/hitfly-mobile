@@ -1,5 +1,5 @@
 export interface ButtonBase {
   title: string
-  onPress?: () => any
+  onPress?: () => void
   style?: any
 }
