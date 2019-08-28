@@ -1,6 +1,7 @@
 import React from 'react'
+import { TouchableOpacity } from 'react-native'
 import styled from 'src/styled-components'
-import TextBase from 'src/components/Text'
+import TextBase from 'src/components/TextBase'
 import LinearGradient from 'react-native-linear-gradient'
 
 const Wrapper = styled.TouchableOpacity<ColorType>`
@@ -27,19 +28,25 @@ const Gradient = styled(LinearGradient).attrs(({ theme }) => ({
 `
 
 interface ColorType {
-  type: 'outline' | 'gradient'
+  type?: 'outline' | 'gradient'
 }
 
 interface Props extends ColorType {
   title: string
+  onPress?: () => any
 }
 
 class Button extends React.Component<Props> {
+  static defaultProps = {
+    type: 'gradient',
+    onPress: () => {},
+  }
+
   render() {
-    const { title, type } = this.props
+    const { title, type, onPress } = this.props
     return (
       <Gradient>
-        <Wrapper type={type}>
+        <Wrapper onPress={onPress} type={type}>
           <Text type={type}>{title}</Text>
         </Wrapper>
       </Gradient>

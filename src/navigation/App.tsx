@@ -2,6 +2,7 @@ import React from 'react'
 import { StatusBar, Platform } from 'react-native'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import NavigationService from './navigationService'
+import AuthNavigator from './Auth'
 import Storybook from '../../storybook'
 import routeNames from './routeNames'
 import styled from 'src/styled-components'
@@ -9,7 +10,7 @@ import { style } from 'src/constants'
 import { storage } from 'src/utils'
 
 const SwitchRoutes = {
-  [routeNames.APP.AUTH]: () => null,
+  [routeNames.APP.AUTH]: AuthNavigator,
   [routeNames.APP.MAIN]: () => null,
   [routeNames.APP.STORYBOOK]: Storybook,
 }

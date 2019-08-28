@@ -1,2 +1,4 @@
+export * from './views'
 export * from './buttons'
-export { default as Text } from './Text'
+
+export { default as TextBase } from './TextBase'
