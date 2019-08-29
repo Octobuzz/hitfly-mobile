@@ -3,7 +3,7 @@ import * as Yup from 'yup'
 import { Field, Formik, FormikProps } from 'formik'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons'
-import { Link, Input, Button } from 'src/components'
+import { Input, Button, FormWrapper } from 'src/components'
 import { strings } from 'src/constants'
 import styled from 'src/styled-components'
 
@@ -27,33 +27,38 @@ class RegisterForm extends React.Component<Props> {
       .required(strings.validation.required)
       .email(strings.validation.wrongEmail),
     password: Yup.string().required(strings.validation.required),
-    passwordRepeat: Yup.string().required(strings.validation.required),
+    passwordRepeat: Yup.string().oneOf(
+      [Yup.ref('password'), null],
+      strings.validation.passwordsDontMatch,
+    ),
   })
 
   private renderFields = ({ handleSubmit }: FormikProps<Values>): ReactNode => {
     return (
       <>
-        <Field
-          name="email"
-          label="E-mail"
-          component={IndentedInput}
-          keyboardType="email-address"
-          RightIcon={<MaterialIcon size={20} name="mail-outline" />}
-        />
-        <Field
-          name="password"
-          label="Пароль"
-          secureTextEntry
-          component={IndentedInput}
-          RightIcon={<SimpleLineIcon size={20} name="key" />}
-        />
-        <Field
-          name="passwordRepeat"
-          label="Повторите пароль"
-          secureTextEntry
-          component={IndentedInput}
-          RightIcon={<SimpleLineIcon size={20} name="key" />}
-        />
+        <FormWrapper>
+          <Field
+            name="email"
+            label="E-mail"
+            component={IndentedInput}
+            keyboardType="email-address"
+            RightIcon={<MaterialIcon size={20} name="mail-outline" />}
+          />
+          <Field
+            name="password"
+            label="Пароль"
+            secureTextEntry
+            component={IndentedInput}
+            RightIcon={<SimpleLineIcon size={20} name="key" />}
+          />
+          <Field
+            name="passwordRepeat"
+            label="Повторите пароль"
+            secureTextEntry
+            component={IndentedInput}
+            RightIcon={<SimpleLineIcon size={20} name="key" />}
+          />
+        </FormWrapper>
         <Button title="Зарегистрироваться" onPress={handleSubmit} />
       </>
     )
