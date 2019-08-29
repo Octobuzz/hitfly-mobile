@@ -4,6 +4,7 @@ import {
   Link,
   Input,
   Button,
+  DatePicker,
   SocialButton,
   TextWithLines,
 } from 'src/components'
@@ -40,13 +41,26 @@ const formikBag: any = {
     onChange: () => () => {},
     onBlur: () => () => {},
   },
-  form: {},
+  form: {
+    setFieldTouched: () => {},
+    setFieldValue: () => {},
+    errors: {},
+    touched: {},
+  },
 }
 
-storiesOf('Input', module).add('Default', () => (
-  <Input
-    label="label"
-    RightIcon={<Icon name="mail-outline" size={16} />}
-    {...formikBag}
-  />
-))
+storiesOf('Inputs', module)
+  .add('Input', () => (
+    <Input
+      label="label"
+      RightIcon={<Icon name="mail-outline" size={16} />}
+      {...formikBag}
+    />
+  ))
+  .add('DatePicker', () => (
+    <DatePicker
+      label="label"
+      RightIcon={<Icon name="mail-outline" size={16} />}
+      {...formikBag}
+    />
+  ))

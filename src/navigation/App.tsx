@@ -41,9 +41,12 @@ const DebugButton = styled.TouchableOpacity.attrs(() => ({
   background-color: rgba(0, 0, 0, 0.5);
 `
 
+const persistenceKey = 'react-navigation-presistence'
 const StorybookButton = styled(DebugButton).attrs(() => ({
-  onPress: () =>
-    NavigationService.navigate({ routeName: routeNames.APP.STORYBOOK }),
+  onPress: () => {
+    AsyncStorage.removeItem(persistenceKey)
+    NavigationService.navigate({ routeName: routeNames.APP.STORYBOOK })
+  },
 }))`
   background-color: rgba(150, 10, 50, 0.5);
 `
@@ -71,12 +74,11 @@ class AppNavigator extends React.Component {
         }
       : undefined
   }
-  private persistenceKey = 'react-navigation-presistence'
   private persistNavigationState = async (navState: any): Promise<void> =>
-    AsyncStorage.setItem(this.persistenceKey, JSON.stringify(navState))
+    AsyncStorage.setItem(persistenceKey, JSON.stringify(navState))
 
   private loadNavigationState = async (): Promise<any> => {
-    const jsonString = await AsyncStorage.getItem(this.persistenceKey)
+    const jsonString = await AsyncStorage.getItem(persistenceKey)
     if (jsonString) {
       return JSON.parse(jsonString)
     }

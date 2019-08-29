@@ -8,6 +8,7 @@ import theme from './theme'
 
 // либы до сих пор используют это
 YellowBox.ignoreWarnings([
+  'Warning: componentWillMount is deprecated',
   'Warning: componentWillUpdate is deprecated',
   'Warning: componentWillReceiveProps is deprecated',
 ])

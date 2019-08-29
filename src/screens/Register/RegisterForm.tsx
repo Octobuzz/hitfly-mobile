@@ -3,7 +3,7 @@ import * as Yup from 'yup'
 import { Field, Formik, FormikProps } from 'formik'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons'
-import { Input, Button, FormWrapper } from 'src/components'
+import { Input, DatePicker, Button, FormWrapper } from 'src/components'
 import { strings } from 'src/constants'
 import styled from 'src/styled-components'
 
@@ -11,10 +11,15 @@ const IndentedInput = styled(Input).attrs(() => ({
   containerStyle: { marginBottom: 16 },
 }))``
 
+const IndentedDatepicker = styled(DatePicker).attrs(() => ({
+  containerStyle: { marginBottom: 16 },
+}))``
+
 interface Values {
   email: string
   password: string
   passwordRepeat: string
+  birthday: string
 }
 
 interface Props {
@@ -31,6 +36,7 @@ class RegisterForm extends React.Component<Props> {
       [Yup.ref('password'), null],
       strings.validation.passwordsDontMatch,
     ),
+    birthday: Yup.string().required(strings.validation.required),
   })
 
   private renderFields = ({ handleSubmit }: FormikProps<Values>): ReactNode => {
@@ -58,6 +64,12 @@ class RegisterForm extends React.Component<Props> {
             component={IndentedInput}
             RightIcon={<SimpleLineIcon size={20} name="key" />}
           />
+          <Field
+            name="birthday"
+            label="Дата рождения"
+            component={IndentedDatepicker}
+            RightIcon={<MaterialIcon size={20} name="perm-contact-calendar" />}
+          />
         </FormWrapper>
         <Button title="Зарегистрироваться" onPress={handleSubmit} />
       </>
@@ -73,6 +85,7 @@ class RegisterForm extends React.Component<Props> {
           email: '',
           password: '',
           passwordRepeat: '',
+          birthday: '',
         }}
         validationSchema={this.validationSchema}
         render={this.renderFields}

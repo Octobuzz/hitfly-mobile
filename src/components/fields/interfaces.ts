@@ -1,9 +1,9 @@
-import { FieldProps } from 'formik'
-
-export interface InputBase extends FieldProps {
+export interface InputBase {
+  onPress?: () => void
   defaultValue?: string
   editable?: boolean
   RightIcon: JSX.Element
   label: string
+  error?: string
   style?: any
 }
