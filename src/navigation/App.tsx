@@ -1,6 +1,7 @@
 import React from 'react'
 import { StatusBar, Platform } from 'react-native'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
+import AsyncStorage from '@react-native-community/async-storage'
 import NavigationService from './navigationService'
 import AuthNavigator from './Auth'
 import Storybook from '../../storybook'
@@ -57,6 +58,30 @@ class AppNavigator extends React.Component {
     }
   }
 
+  // восстановление экранов в дев режиме
+  // https://reactnavigation.org/docs/en/state-persistence.html
+  private getPersistenceFunctions = (): {
+    persistNavigationState: (state: any) => Promise<void>
+    loadNavigationState: () => Promise<any>
+  } | void => {
+    return __DEV__
+      ? {
+          persistNavigationState: this.persistNavigationState,
+          loadNavigationState: this.loadNavigationState,
+        }
+      : undefined
+  }
+  private persistenceKey = 'react-navigation-presistence'
+  private persistNavigationState = async (navState: any): Promise<void> =>
+    AsyncStorage.setItem(this.persistenceKey, JSON.stringify(navState))
+
+  private loadNavigationState = async (): Promise<any> => {
+    const jsonString = await AsyncStorage.getItem(this.persistenceKey)
+    if (jsonString) {
+      return JSON.parse(jsonString)
+    }
+  }
+
   render() {
     return (
       <>
@@ -66,7 +91,10 @@ class AppNavigator extends React.Component {
             <StorybookButton />
           </DevTools>
         )}
-        <AppContainer ref={NavigationService.setTopLevelNavigator} />
+        <AppContainer
+          {...this.getPersistenceFunctions()}
+          ref={NavigationService.setTopLevelNavigator}
+        />
       </>
     )
   }

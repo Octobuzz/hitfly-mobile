@@ -7,10 +7,6 @@ import { Link, Input, Button } from 'src/components'
 import { strings } from 'src/constants'
 import styled from 'src/styled-components'
 
-const IndentedLink = styled(Link)`
-  margin-bottom: 32px;
-`
-
 const IndentedInput = styled(Input).attrs(() => ({
   containerStyle: { marginBottom: 16 },
 }))``
@@ -18,23 +14,20 @@ const IndentedInput = styled(Input).attrs(() => ({
 interface Values {
   email: string
   password: string
+  passwordRepeat: string
 }
 
 interface Props {
-  initialValues: Values
   onSubmit: (from: Values) => void
 }
 
-class LoginForm extends React.Component<Props> {
-  static defaultProps = {
-    initialValues: {},
-  }
-
+class RegisterForm extends React.Component<Props> {
   private validationSchema = Yup.object().shape({
     email: Yup.string()
       .required(strings.validation.required)
       .email(strings.validation.wrongEmail),
     password: Yup.string().required(strings.validation.required),
+    passwordRepeat: Yup.string().required(strings.validation.required),
   })
 
   private renderFields = ({ handleSubmit }: FormikProps<Values>): ReactNode => {
@@ -54,23 +47,33 @@ class LoginForm extends React.Component<Props> {
           component={IndentedInput}
           RightIcon={<SimpleLineIcon size={20} name="key" />}
         />
-        <IndentedLink title="Забыли пароль?" />
-        <Button title="Войти" onPress={handleSubmit} />
+        <Field
+          name="passwordRepeat"
+          label="Повторите пароль"
+          secureTextEntry
+          component={IndentedInput}
+          RightIcon={<SimpleLineIcon size={20} name="key" />}
+        />
+        <Button title="Зарегистрироваться" onPress={handleSubmit} />
       </>
     )
   }
 
   render() {
-    const { initialValues, onSubmit } = this.props
+    const { onSubmit } = this.props
     return (
       <Formik
         onSubmit={onSubmit}
+        initialValues={{
+          email: '',
+          password: '',
+          passwordRepeat: '',
+        }}
         validationSchema={this.validationSchema}
-        initialValues={initialValues}
         render={this.renderFields}
       />
     )
   }
 }
 
-export default LoginForm
+export default RegisterForm

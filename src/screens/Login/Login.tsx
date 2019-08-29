@@ -10,6 +10,7 @@ import {
   TextWithLines,
 } from 'src/components'
 import LoginForm from './LoginForm'
+import { ROUTES } from 'src/navigation'
 import styled from 'src/styled-components'
 
 const Container = styled.SafeAreaView`
@@ -51,6 +52,11 @@ interface Props extends NavigationScreenProps {}
 class Login extends React.Component<Props> {
   private handleSubmit = () => {}
 
+  private navigateToRegistration = (): void => {
+    const { navigation } = this.props
+    navigation.navigate(ROUTES.AUTH.REGISTER)
+  }
+
   render() {
     return (
       <Container>
@@ -63,7 +69,11 @@ class Login extends React.Component<Props> {
           </SocialRow>
           <IndentedTextWithLines>или войдите через почту</IndentedTextWithLines>
           <LoginForm onSubmit={this.handleSubmit} />
-          <IndentedButton title="Зарегистрироваться" type="outline" />
+          <IndentedButton
+            onPress={this.navigateToRegistration}
+            title="Зарегистрироваться"
+            type="outline"
+          />
           <Stretcher />
           <IndentedLink title="Пропустить" />
           <BottomText>

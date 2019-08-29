@@ -1,5 +1,5 @@
 import { createStackNavigator } from 'react-navigation'
-import { WelcomeScreen, LoginScreen } from 'src/screens'
+import { WelcomeScreen, LoginScreen, RegisterScreen } from 'src/screens'
 import routeNames from './routeNames'
 import theme from 'src/theme'
 
@@ -12,6 +12,10 @@ const AuthNavigator = createStackNavigator(
     [routeNames.AUTH.LOGIN]: {
       screen: LoginScreen,
       navigationOptions: { title: 'Вход' },
+    },
+    [routeNames.AUTH.REGISTER]: {
+      screen: RegisterScreen,
+      navigationOptions: { title: 'Создать аккаунт' },
     },
   },
   {
