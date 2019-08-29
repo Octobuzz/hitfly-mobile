@@ -3,7 +3,15 @@ import * as Yup from 'yup'
 import { Field, Formik, FormikProps } from 'formik'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons'
-import { Input, DatePicker, Button, FormWrapper } from 'src/components'
+import {
+  Input,
+  Button,
+  TextBase,
+  CheckBox,
+  DatePicker,
+  FormWrapper,
+} from 'src/components'
+import { NavigationService } from 'src/navigation'
 import { strings } from 'src/constants'
 import styled from 'src/styled-components'
 
@@ -15,6 +23,19 @@ const IndentedDatepicker = styled(DatePicker).attrs(() => ({
   containerStyle: { marginBottom: 16 },
 }))``
 
+const StyledCheckBox = styled(CheckBox)`
+  align-self: center;
+`
+
+const CheckBoxText = styled(TextBase)`
+  font-size: 12px;
+  color: ${({ theme }) => theme.colors.textAlt};
+`
+
+const BrandText = styled(CheckBoxText)`
+  color: ${({ theme }) => theme.colors.brandPink};
+`
+
 interface Values {
   email: string
   password: string
@@ -23,7 +44,7 @@ interface Values {
 }
 
 interface Props {
-  onSubmit: (from: Values) => void
+  onSubmit: (form: Values) => void
 }
 
 class RegisterForm extends React.Component<Props> {
@@ -37,6 +58,7 @@ class RegisterForm extends React.Component<Props> {
       strings.validation.passwordsDontMatch,
     ),
     birthday: Yup.string().required(strings.validation.required),
+    policy: Yup.boolean().required(strings.validation.required),
   })
 
   private renderFields = ({ handleSubmit }: FormikProps<Values>): ReactNode => {
@@ -70,10 +92,24 @@ class RegisterForm extends React.Component<Props> {
             component={IndentedDatepicker}
             RightIcon={<MaterialIcon size={20} name="perm-contact-calendar" />}
           />
+
+          <Field name="policy" component={StyledCheckBox}>
+            <CheckBoxText>
+              Согласен с{' '}
+              <BrandText onPress={this.navigateToDocument}>
+                условиями использования
+              </BrandText>
+            </CheckBoxText>
+          </Field>
         </FormWrapper>
         <Button title="Зарегистрироваться" onPress={handleSubmit} />
       </>
     )
+  }
+
+  // TODO: сделать когда бэк готов или хардкод?
+  private navigateToDocument = (): void => {
+    NavigationService.navigate({ routeName: '' })
   }
 
   render() {
