@@ -5,6 +5,7 @@ import {
   Input,
   Button,
   DatePicker,
+  CheckBoxUI,
   SocialButton,
   TextWithLines,
 } from 'src/components'
@@ -49,6 +50,24 @@ const formikBag: any = {
   },
 }
 
+const Text = styled.Text``
+class CheckBoxUIStory extends React.Component<{}, { isChecked: boolean }> {
+  state = {
+    isChecked: false,
+  }
+  private toggleCheck = () => {
+    this.setState({ isChecked: !this.state.isChecked })
+  }
+  render() {
+    const { isChecked } = this.state
+    return (
+      <CheckBoxUI onPress={this.toggleCheck} isChecked={isChecked}>
+        <Text>CheckBoxUI</Text>
+      </CheckBoxUI>
+    )
+  }
+}
+
 storiesOf('Inputs', module)
   .add('Input', () => (
     <Input
@@ -64,3 +83,5 @@ storiesOf('Inputs', module)
       {...formikBag}
     />
   ))
+
+  .add('CheckBoxUI', () => <CheckBoxUIStory />)

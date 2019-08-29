@@ -1,3 +1,7 @@
+// checkbox
+export const CHECKBOX_INACTIVE = require('../assets/images/checkbox/checkbox_inactive.png')
+export const CHECKBOX_ACTIVE = require('../assets/images/checkbox/checkbox_active.png')
+
 // welcome
 export const WELCOME_LOGO = require('../assets/images/welcome/welcome_logo.png')
 export const COINS_GRADIENT = require('../assets/images/welcome/coins_gradient.png')
@@ -21,14 +25,6 @@ export const SOCIAL_VKONTAKTE = require('../assets/images/social/vkontakte.png')
 export const SOCIAL_GOOGLE = require('../assets/images/social/google.png')
 export const SOCIAL_INSTAGRAM = require('../assets/images/social/instagram.png')
 export const SOCIAL_ODNOKLASSNIKI = require('../assets/images/social/odnoklassniki.png')
-
-// form
-export const FORM_CALENDAR = require('../assets/images/form/calendar.png')
-export const FORM_CROSS = require('../assets/images/form/cross.png')
-export const FORM_EMAIL = require('../assets/images/form/email.png')
-export const FORM_PASSWORD = require('../assets/images/form/password.png')
-export const FORM_SEARCH = require('../assets/images/form/search.png')
-export const FORM_SHEVRON_DOWN = require('../assets/images/form/shevron_down.png')
 
 // control
 export const CONTROL_HEART_GRADIENT = require('../assets/images/control/heart_gradient.png')
