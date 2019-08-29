@@ -1,4 +1,5 @@
 import React from 'react'
+import { TextInputProps } from 'react-native'
 import Label from './Label'
 import { InputBase } from './interfaces'
 import styled from 'src/styled-components'
@@ -18,19 +19,23 @@ const Inner = styled.View`
 
 const TextInput = styled.TextInput.attrs(({ theme }) => ({
   placeholderTextColor: theme.colors.textGray,
+  selectionColor: theme.colors.textMain,
 }))`
   color: ${({ theme }) => theme.colors.textMain};
   font-family: ${({ theme }) => theme.fonts.regular};
   font-size: 12px;
+  margin-top: 7px;
 `
 
-class Input extends React.Component<InputBase> {
+class Input extends React.Component<InputBase & TextInputProps> {
   render() {
     const {
       label,
       style,
       RightIcon,
       field: { name, value, onChange, onBlur },
+      form,
+      ...rest
     } = this.props
     return (
       <Wrapper style={style}>
@@ -41,6 +46,7 @@ class Input extends React.Component<InputBase> {
             onBlur={onBlur(name)}
             value={value}
             defaultValue={value}
+            {...rest}
           />
         </Inner>
         {RightIcon}

@@ -17,13 +17,8 @@ const Logo = styled.Image.attrs(() => ({
   align-self: center;
 `
 
-interface Featured {
-  features: Feature[]
-}
-
-class Welcome extends React.Component<NavigationScreenProps>
-  implements Featured {
-  features = [
+class Welcome extends React.Component<NavigationScreenProps> {
+  features: Feature[] = [
     {
       icon: images.HEADPHONES_GRADIENT,
       title: 'Открывайте новых исполнителей',

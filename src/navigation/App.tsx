@@ -6,7 +6,7 @@ import AuthNavigator from './Auth'
 import Storybook from '../../storybook'
 import routeNames from './routeNames'
 import styled from 'src/styled-components'
-import { style } from 'src/constants'
+import { styles } from 'src/constants'
 import { storage } from 'src/utils'
 
 const SwitchRoutes = {
@@ -31,7 +31,7 @@ const DevTools = styled.View`
 
 const DebugButton = styled.TouchableOpacity.attrs(() => ({
   onPress: storage.clearStorage,
-  hitSlop: style.HIT_SLOP,
+  hitSlop: styles.HIT_SLOP,
 }))`
   width: 10;
   height: 10;

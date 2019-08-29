@@ -16,6 +16,7 @@
     "ordered-imports": false,
     "member-access": [true, "no-public"],
     "member-ordering": false,
-    "no-empty": false
+    "no-empty": false,
+    "jsx-boolean-value": false
   }
 }

@@ -32,7 +32,7 @@ const IndentedLink = styled(Link)`
 `
 
 const IndentedButton = styled(Button)`
-  margin-bottom: 24px;
+  margin-top: 24px;
 `
 
 const BottomText = styled(TextBase)`
@@ -49,6 +49,8 @@ const BottomLinkText = styled(BottomText)`
 interface Props extends NavigationScreenProps {}
 
 class Login extends React.Component<Props> {
+  private handleSubmit = () => {}
+
   render() {
     return (
       <Container>
@@ -60,9 +62,8 @@ class Login extends React.Component<Props> {
             <SocialButton type="ok" />
           </SocialRow>
           <IndentedTextWithLines>или войдите через почту</IndentedTextWithLines>
-          <IndentedLink title="Забыли пароль?" />
-          <IndentedButton title="Войти" />
-          <Button title="Зарегистрироваться" type="outline" />
+          <LoginForm onSubmit={this.handleSubmit} />
+          <IndentedButton title="Зарегистрироваться" type="outline" />
           <Stretcher />
           <IndentedLink title="Пропустить" />
           <BottomText>
