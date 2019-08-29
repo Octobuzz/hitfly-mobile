@@ -11,9 +11,9 @@ const IndentedLink = styled(Link)`
   margin-bottom: 32px;
 `
 
-const IndentedInput = styled(Input)`
-  margin-bottom: 16px;
-`
+const IndentedInput = styled(Input).attrs(() => ({
+  containerStyle: { marginBottom: 16 },
+}))``
 
 interface Values {
   email: string
