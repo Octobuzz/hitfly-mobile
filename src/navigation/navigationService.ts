@@ -1,6 +1,5 @@
 import {
   NavigationActions,
-  StackActions,
   NavigationContainerComponent,
   NavigationNavigateActionPayload,
 } from 'react-navigation'
