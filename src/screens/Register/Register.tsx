@@ -36,7 +36,9 @@ class Register extends React.Component {
             <SocialButton type="inst" />
             <SocialButton type="ok" />
           </SocialRow>
-          <IndentedTextWithLines>или войдите через почту</IndentedTextWithLines>
+          <IndentedTextWithLines>
+            или зарегистрируйтесь через почту
+          </IndentedTextWithLines>
           <RegisterForm onSubmit={this.handleSubmit} />
         </View>
       </Container>
