@@ -1,4 +1,4 @@
-import { StyleProp, View } from 'react-native'
+import { StyleProp, ViewStyle } from 'react-native'
 
 export interface InputBase {
   onPress?: () => void
@@ -8,9 +8,10 @@ export interface InputBase {
   label: string
   error?: string
   style?: any
+  containerStyle?: StyleProp<ViewStyle>
 }
 
 export interface CheckBoxProps {
   error?: string
-  style?: StyleProp<View>
+  style?: StyleProp<ViewStyle>
 }

@@ -4,6 +4,7 @@ import {
   Link,
   Input,
   Button,
+  Dropdown,
   DatePicker,
   CheckBoxUI,
   SocialButton,
@@ -83,5 +84,11 @@ storiesOf('Inputs', module)
       {...formikBag}
     />
   ))
-
   .add('CheckBoxUI', () => <CheckBoxUIStory />)
+  .add('Dropdown', () => (
+    <Dropdown
+      label="label"
+      options={[{ value: 'm', title: 'Male' }, { value: 'f', title: 'Female' }]}
+      {...formikBag}
+    />
+  ))

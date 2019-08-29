@@ -21,6 +21,7 @@
     "ramda": "^0.26.1",
     "react": "16.9.0",
     "react-native": "0.60.5",
+    "react-native-collapsible": "^1.5.1",
     "react-native-fast-image": "^7.0.2",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-iphone-x-helper": "^1.2.0",

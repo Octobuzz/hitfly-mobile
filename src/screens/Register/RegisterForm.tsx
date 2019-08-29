@@ -6,6 +6,7 @@ import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons'
 import {
   Input,
   Button,
+  Dropdown,
   TextBase,
   CheckBox,
   DatePicker,
@@ -15,13 +16,15 @@ import { NavigationService } from 'src/navigation'
 import { strings } from 'src/constants'
 import styled from 'src/styled-components'
 
-const IndentedInput = styled(Input).attrs(() => ({
+const indentAttrs = () => ({
   containerStyle: { marginBottom: 16 },
-}))``
+})
 
-const IndentedDatepicker = styled(DatePicker).attrs(() => ({
-  containerStyle: { marginBottom: 16 },
-}))``
+const IndentedInput = styled(Input).attrs(indentAttrs)``
+
+const IndentedDatepicker = styled(DatePicker).attrs(indentAttrs)``
+
+const IndentedDropdown = styled(Dropdown).attrs(indentAttrs)``
 
 const StyledCheckBox = styled(CheckBox)`
   align-self: center;
@@ -41,6 +44,7 @@ interface Values {
   password: string
   passwordRepeat: string
   birthday: string
+  gender: 'M' | 'F'
 }
 
 interface Props {
@@ -58,6 +62,9 @@ class RegisterForm extends React.Component<Props> {
       strings.validation.passwordsDontMatch,
     ),
     birthday: Yup.string().required(strings.validation.required),
+    gender: Yup.string()
+      .required(strings.validation.required)
+      .matches(/(M|F)/, strings.validation.wrongSelection),
     policy: Yup.boolean().required(strings.validation.required),
   })
 
@@ -92,6 +99,15 @@ class RegisterForm extends React.Component<Props> {
             component={IndentedDatepicker}
             RightIcon={<MaterialIcon size={20} name="perm-contact-calendar" />}
           />
+          <Field
+            name="gender"
+            label="Пол"
+            options={[
+              { value: 'M', title: 'Мужчина' },
+              { value: 'F', title: 'Женщина' },
+            ]}
+            component={IndentedDropdown}
+          />
 
           <Field name="policy" component={StyledCheckBox}>
             <CheckBoxText>
@@ -122,6 +138,7 @@ class RegisterForm extends React.Component<Props> {
           password: '',
           passwordRepeat: '',
           birthday: '',
+          gender: 'M',
         }}
         validationSchema={this.validationSchema}
         render={this.renderFields}
