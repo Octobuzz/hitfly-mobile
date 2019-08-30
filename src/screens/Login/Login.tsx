@@ -6,22 +6,15 @@ import {
   Button,
   TextBase,
   Stretcher,
-  SocialButton,
   TextWithLines,
 } from 'src/components'
+import { SocialAuth } from 'src/containers'
 import LoginForm from './LoginForm'
 import { ROUTES } from 'src/navigation'
 import styled from 'src/styled-components'
 
 const Container = styled.SafeAreaView`
   flex: 1;
-`
-
-const SocialRow = styled.View`
-  flex-direction: row;
-  justify-content: space-around;
-  padding-horizontal: 10px;
-  margin-bottom: 32px;
 `
 
 const IndentedTextWithLines = styled(TextWithLines)`
@@ -47,9 +40,7 @@ const BottomLinkText = styled(BottomText)`
   color: ${({ theme }) => theme.colors.brandPink};
 `
 
-interface Props extends NavigationScreenProps {}
-
-class Login extends React.Component<Props> {
+class Login extends React.Component<NavigationScreenProps> {
   private handleSubmit = () => {}
 
   private navigateToRegistration = (): void => {
@@ -61,12 +52,7 @@ class Login extends React.Component<Props> {
     return (
       <Container>
         <View>
-          <SocialRow>
-            <SocialButton type="fb" />
-            <SocialButton type="vk" />
-            <SocialButton type="inst" />
-            <SocialButton type="ok" />
-          </SocialRow>
+          <SocialAuth />
           <IndentedTextWithLines>или войдите через почту</IndentedTextWithLines>
           <LoginForm onSubmit={this.handleSubmit} />
           <IndentedButton

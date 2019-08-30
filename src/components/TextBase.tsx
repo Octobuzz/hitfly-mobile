@@ -9,6 +9,7 @@ const TextBase = styled.Text<ITextBase>`
   font-family: ${({ fontType, theme: { fonts } }) =>
     fontType ? fonts[fontType] : fonts.regular};
   font-size: 16px;
+  line-height: 20px;
   color: ${({ color, theme }) => color || theme.colors.textMain};
 `
 

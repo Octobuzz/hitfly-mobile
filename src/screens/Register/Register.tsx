@@ -1,7 +1,9 @@
 import React from 'react'
-import { View, SocialButton, TextWithLines } from 'src/components'
+import { NavigationScreenProps } from 'react-navigation'
+import { View, TextWithLines } from 'src/components'
 import { SocialAuth } from 'src/containers'
 import RegisterForm from './RegisterForm'
+import { ROUTES } from 'src/navigation'
 import styled from 'src/styled-components'
 
 const Container = styled.SafeAreaView`
@@ -12,8 +14,12 @@ const IndentedTextWithLines = styled(TextWithLines)`
   margin-bottom: 24px;
 `
 
-class Register extends React.Component {
-  private handleSubmit = () => {}
+class Register extends React.Component<NavigationScreenProps> {
+  private handleSubmit = () => {
+    const { navigation } = this.props
+    navigation.navigate(ROUTES.AUTH.SELECT_GENRE)
+  }
+
   render() {
     return (
       <Container>

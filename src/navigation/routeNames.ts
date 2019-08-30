@@ -10,6 +10,7 @@ export default {
     WELCOME: `${APP.AUTH}/welcome`,
     LOGIN: `${APP.AUTH}/login`,
     REGISTER: `${APP.AUTH}/register`,
+    SELECT_GENRE: `${APP.AUTH}/select_genre`,
   },
   MAIN: {
     HOME: `${APP.MAIN}/homde`,
