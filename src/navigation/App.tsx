@@ -1,6 +1,7 @@
 import React from 'react'
 import { StatusBar, Platform } from 'react-native'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
+import AsyncStorage from '@react-native-community/async-storage'
 import NavigationService from './navigationService'
 import AuthNavigator from './Auth'
 import Storybook from '../../storybook'
@@ -40,9 +41,12 @@ const DebugButton = styled.TouchableOpacity.attrs(() => ({
   background-color: rgba(0, 0, 0, 0.5);
 `
 
+const persistenceKey = 'react-navigation-presistence'
 const StorybookButton = styled(DebugButton).attrs(() => ({
-  onPress: () =>
-    NavigationService.navigate({ routeName: routeNames.APP.STORYBOOK }),
+  onPress: () => {
+    AsyncStorage.removeItem(persistenceKey)
+    NavigationService.navigate({ routeName: routeNames.APP.STORYBOOK })
+  },
 }))`
   background-color: rgba(150, 10, 50, 0.5);
 `
@@ -57,6 +61,29 @@ class AppNavigator extends React.Component {
     }
   }
 
+  // восстановление экранов в дев режиме
+  // https://reactnavigation.org/docs/en/state-persistence.html
+  private getPersistenceFunctions = (): {
+    persistNavigationState: (state: any) => Promise<void>
+    loadNavigationState: () => Promise<any>
+  } | void => {
+    return __DEV__
+      ? {
+          persistNavigationState: this.persistNavigationState,
+          loadNavigationState: this.loadNavigationState,
+        }
+      : undefined
+  }
+  private persistNavigationState = async (navState: any): Promise<void> =>
+    AsyncStorage.setItem(persistenceKey, JSON.stringify(navState))
+
+  private loadNavigationState = async (): Promise<any> => {
+    const jsonString = await AsyncStorage.getItem(persistenceKey)
+    if (jsonString) {
+      return JSON.parse(jsonString)
+    }
+  }
+
   render() {
     return (
       <>
@@ -66,7 +93,10 @@ class AppNavigator extends React.Component {
             <StorybookButton />
           </DevTools>
         )}
-        <AppContainer ref={NavigationService.setTopLevelNavigator} />
+        <AppContainer
+          {...this.getPersistenceFunctions()}
+          ref={NavigationService.setTopLevelNavigator}
+        />
       </>
     )
   }

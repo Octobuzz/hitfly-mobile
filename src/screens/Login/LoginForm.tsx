@@ -11,9 +11,9 @@ const IndentedLink = styled(Link)`
   margin-bottom: 32px;
 `
 
-const IndentedInput = styled(Input)`
-  margin-bottom: 16px;
-`
+const IndentedInput = styled(Input).attrs(() => ({
+  containerStyle: { marginBottom: 16 },
+}))``
 
 interface Values {
   email: string
@@ -44,6 +44,7 @@ class LoginForm extends React.Component<Props> {
           name="email"
           label="E-mail"
           component={IndentedInput}
+          keyboardType="email-address"
           RightIcon={<MaterialIcon size={20} name="mail-outline" />}
         />
         <Field

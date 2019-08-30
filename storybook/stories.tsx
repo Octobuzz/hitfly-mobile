@@ -4,6 +4,9 @@ import {
   Link,
   Input,
   Button,
+  Dropdown,
+  DatePicker,
+  CheckBoxUI,
   SocialButton,
   TextWithLines,
 } from 'src/components'
@@ -40,13 +43,52 @@ const formikBag: any = {
     onChange: () => () => {},
     onBlur: () => () => {},
   },
-  form: {},
+  form: {
+    setFieldTouched: () => {},
+    setFieldValue: () => {},
+    errors: {},
+    touched: {},
+  },
 }
 
-storiesOf('Input', module).add('Default', () => (
-  <Input
-    label="label"
-    RightIcon={<Icon name="mail-outline" size={16} />}
-    {...formikBag}
-  />
-))
+const Text = styled.Text``
+class CheckBoxUIStory extends React.Component<{}, { isChecked: boolean }> {
+  state = {
+    isChecked: false,
+  }
+  private toggleCheck = () => {
+    this.setState({ isChecked: !this.state.isChecked })
+  }
+  render() {
+    const { isChecked } = this.state
+    return (
+      <CheckBoxUI onPress={this.toggleCheck} isChecked={isChecked}>
+        <Text>CheckBoxUI</Text>
+      </CheckBoxUI>
+    )
+  }
+}
+
+storiesOf('Inputs', module)
+  .add('Input', () => (
+    <Input
+      label="label"
+      RightIcon={<Icon name="mail-outline" size={16} />}
+      {...formikBag}
+    />
+  ))
+  .add('DatePicker', () => (
+    <DatePicker
+      label="label"
+      RightIcon={<Icon name="mail-outline" size={16} />}
+      {...formikBag}
+    />
+  ))
+  .add('CheckBoxUI', () => <CheckBoxUIStory />)
+  .add('Dropdown', () => (
+    <Dropdown
+      label="label"
+      options={[{ value: 'm', title: 'Male' }, { value: 'f', title: 'Female' }]}
+      {...formikBag}
+    />
+  ))
