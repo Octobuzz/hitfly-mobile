@@ -13,10 +13,13 @@
     "lint": "npx tslint --project tsconfig.json"
   },
   "dependencies": {
+    "@apollo/react-hooks": "^3.0.1",
     "@react-native-community/async-storage": "^1.6.1",
+    "apollo-boost": "^0.4.4",
     "date-fns": "^2.0.0",
     "deox": "^2.1.0",
     "formik": "^1.5.8",
+    "graphql": "^14.5.4",
     "normalizr": "^3.3.0",
     "ramda": "^0.26.1",
     "react": "16.9.0",
