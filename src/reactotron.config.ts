@@ -1,7 +1,11 @@
 import { NativeModules } from 'react-native'
 import Reactotron from 'reactotron-react-native'
-import { reactotronRedux } from 'reactotron-redux'
-import sagaPlugin from 'reactotron-redux-saga'
+
+declare global {
+  interface Console {
+    tron: any
+  }
+}
 
 if (__DEV__) {
   const scriptURL = NativeModules.SourceCode.scriptURL
@@ -13,12 +17,6 @@ if (__DEV__) {
         ignoreUrls: /symbolicate/,
       },
     })
-    .use(
-      reactotronRedux({
-        except: ['EFFECT_TRIGGERED', 'EFFECT_RESOLVED', 'EFFECT_REJECTED'],
-      }),
-    )
-    .use(sagaPlugin({}))
     .connect()
 
   if (Reactotron.clear) {
