@@ -5,6 +5,7 @@ import {
   Input,
   Button,
   Dropdown,
+  GenreItem,
   DatePicker,
   CheckBoxUI,
   SocialButton,
@@ -92,3 +93,19 @@ storiesOf('Inputs', module)
       {...formikBag}
     />
   ))
+
+const GenreItemStory = () => {
+  const [isSelected, setSelected] = React.useState(false)
+  return (
+    <GenreItem
+      item={{
+        imageUrl:
+          'https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-260nw-407021107.jpg',
+      }}
+      onPress={() => setSelected(!isSelected)}
+      isSelected={isSelected}
+    />
+  )
+}
+
+storiesOf('GenreItem', module).add('Default', () => <GenreItemStory />)

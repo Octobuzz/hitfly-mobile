@@ -17,6 +17,8 @@
     "member-access": [true, "no-public"],
     "member-ordering": false,
     "no-empty": false,
-    "jsx-boolean-value": false
+    "jsx-boolean-value": false,
+    "one-variable-per-declaration": false,
+    "max-classes-per-file": false
   }
 }
