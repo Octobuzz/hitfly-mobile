@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-  View,
-  TextBase,
-  Stretcher,
-  SocialButton,
-  TextWithLines,
-} from 'src/components'
+import { View, SocialButton, TextWithLines } from 'src/components'
 import RegisterForm from './RegisterForm'
 import styled from 'src/styled-components'
 

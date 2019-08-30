@@ -23,16 +23,11 @@ interface Props extends Checkable, CheckBoxProps {
   onPress?: () => void
 }
 
-class CheckBoxUI extends React.Component<Props> {
-  render() {
-    const { isChecked, children, onPress, style } = this.props
-    return (
-      <Wrapper style={style} onPress={onPress}>
-        <Icon isChecked={isChecked} />
-        {children}
-      </Wrapper>
-    )
-  }
-}
+const CheckBoxUI = ({ isChecked, children, onPress, style }: Props) => (
+  <Wrapper style={style} onPress={onPress}>
+    <Icon isChecked={isChecked} />
+    {children}
+  </Wrapper>
+)
 
 export default CheckBoxUI
