@@ -9,8 +9,8 @@ import {
   Link,
   Loader,
   Button,
-  TextBase,
   GenreItem,
+  HelperText,
   IGenreItem,
 } from 'src/components'
 import { ROUTES } from 'src/navigation'
@@ -19,12 +19,6 @@ import styled from 'src/styled-components'
 
 const Container = styled.SafeAreaView`
   flex: 1;
-`
-
-const HelperText = styled(TextBase)`
-  color: ${({ theme }) => theme.colors.textAlt};
-  text-align: center;
-  margin-bottom: 40px;
 `
 
 const IndentedButton = styled(Button)`

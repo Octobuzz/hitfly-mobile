@@ -23,6 +23,7 @@ interface Values {
 interface Props {
   initialValues: Values
   onSubmit: (from: Values) => void
+  onPressFogrotPassword?: () => void
 }
 
 class LoginForm extends React.Component<Props> {
@@ -37,7 +38,11 @@ class LoginForm extends React.Component<Props> {
     password: Yup.string().required(strings.validation.required),
   })
 
-  private renderFields = ({ handleSubmit }: FormikProps<Values>): ReactNode => {
+  private renderFields = ({
+    isValid,
+    handleSubmit,
+  }: FormikProps<Values>): ReactNode => {
+    const { onPressFogrotPassword } = this.props
     return (
       <>
         <Field
@@ -54,8 +59,8 @@ class LoginForm extends React.Component<Props> {
           component={IndentedInput}
           RightIcon={<SimpleLineIcon size={20} name="key" />}
         />
-        <IndentedLink title="Забыли пароль?" />
-        <Button title="Войти" onPress={handleSubmit} />
+        <IndentedLink onPress={onPressFogrotPassword} title="Забыли пароль?" />
+        <Button isDisabled={!isValid} title="Войти" onPress={handleSubmit} />
       </>
     )
   }

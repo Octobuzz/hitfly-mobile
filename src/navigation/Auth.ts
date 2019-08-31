@@ -3,7 +3,10 @@ import {
   LoginScreen,
   WelcomeScreen,
   RegisterScreen,
+  SocialAuthScreen,
   SelectGenreScreen,
+  RecoveryInfoScreen,
+  ForgotPasswordScreen,
 } from 'src/screens'
 import routeNames from './routeNames'
 import theme from 'src/theme'
@@ -26,9 +29,14 @@ const AuthNavigator = createStackNavigator(
       screen: SelectGenreScreen,
       navigationOptions: { title: 'Выбор жанра' },
     },
-    [routeNames.AUTH.SOCIAL_AUTH]: {
-      screen: SelectGenreScreen,
-      // navigationOptions: { title: 'Выбор жанра' },
+    [routeNames.AUTH.SOCIAL_AUTH]: SocialAuthScreen,
+    [routeNames.AUTH.FORGOT_PASSWORD]: {
+      screen: ForgotPasswordScreen,
+      navigationOptions: { title: 'Восстановление пароля' },
+    },
+    [routeNames.AUTH.RECOVERY_INFO]: {
+      screen: RecoveryInfoScreen,
+      navigationOptions: { title: 'Проверьте электронную почту' },
     },
   },
   {

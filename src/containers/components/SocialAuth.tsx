@@ -1,16 +1,19 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useCallback } from 'react'
+import { ViewStyle, StyleProp } from 'react-native'
 import { NavigationScreenProps, withNavigation } from 'react-navigation'
 import { useQuery } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
 import {
   Loader,
   SocialButton,
+  TextWithLines,
   SocialButtonData,
-  SocialButtonType,
 } from 'src/components'
-import styled from 'src/styled-components'
 import { ROUTES } from 'src/navigation'
 import { serverTransformers } from 'src/utils'
+import styled from 'src/styled-components'
+
+const Wrapper = styled.View``
 
 const SocialRow = styled.View`
   flex-direction: row;
@@ -34,6 +37,11 @@ interface SocialConnectData {
   SocialConnectQuery?: SocialConnect[]
 }
 
+interface Props extends NavigationScreenProps {
+  bottomText: string
+  style?: StyleProp<ViewStyle>
+}
+
 const GET_SOCIAL_LINKS = gql`
   {
     SocialConnectQuery {
@@ -43,7 +51,7 @@ const GET_SOCIAL_LINKS = gql`
   }
 `
 
-const SocialAuth: React.FC<NavigationScreenProps> = ({ navigation }) => {
+const SocialAuth: React.FC<Props> = ({ navigation, bottomText, style }) => {
   const { data, loading } = useQuery<SocialConnectData>(GET_SOCIAL_LINKS)
 
   const navigateToSocialAuth = useCallback(({ url }: SocialButtonData) => {
@@ -60,20 +68,23 @@ const SocialAuth: React.FC<NavigationScreenProps> = ({ navigation }) => {
 
   if (data && data.SocialConnectQuery) {
     return (
-      <SocialRow>
-        {data.SocialConnectQuery.map(serverData => {
-          const buttonData = serverTransformers.serverSocialDataAdapter(
-            serverData,
-          )
-          return (
-            <SocialButton
-              onPress={navigateToSocialAuth}
-              key={buttonData.type}
-              data={buttonData}
-            />
-          )
-        })}
-      </SocialRow>
+      <Wrapper style={style}>
+        <SocialRow>
+          {data.SocialConnectQuery.map(serverData => {
+            const buttonData = serverTransformers.serverSocialDataAdapter(
+              serverData,
+            )
+            return (
+              <SocialButton
+                onPress={navigateToSocialAuth}
+                key={buttonData.type}
+                data={buttonData}
+              />
+            )
+          })}
+        </SocialRow>
+        <TextWithLines>{bottomText}</TextWithLines>
+      </Wrapper>
     )
   }
 

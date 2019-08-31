@@ -13,4 +13,10 @@ const TextBase = styled.Text<ITextBase>`
   color: ${({ color, theme }) => color || theme.colors.textMain};
 `
 
+export const HelperText = styled(TextBase)`
+  color: ${({ theme }) => theme.colors.textAlt};
+  text-align: center;
+  margin-bottom: 40px;
+`
+
 export default TextBase

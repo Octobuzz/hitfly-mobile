@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavigationScreenProps } from 'react-navigation'
-import { View, TextWithLines } from 'src/components'
+import { View } from 'src/components'
 import { SocialAuth } from 'src/containers'
 import RegisterForm from './RegisterForm'
 import { ROUTES } from 'src/navigation'
@@ -10,7 +10,7 @@ const Container = styled.SafeAreaView`
   flex: 1;
 `
 
-const IndentedTextWithLines = styled(TextWithLines)`
+const IndentedSocialAuth = styled(SocialAuth)`
   margin-bottom: 24px;
 `
 
@@ -24,10 +24,7 @@ class Register extends React.Component<NavigationScreenProps> {
     return (
       <Container>
         <View>
-          <SocialAuth />
-          <IndentedTextWithLines>
-            или зарегистрируйтесь через почту
-          </IndentedTextWithLines>
+          <IndentedSocialAuth bottomText="или зарегистрируйтесь через почту" />
           <RegisterForm onSubmit={this.handleSubmit} />
         </View>
       </Container>
