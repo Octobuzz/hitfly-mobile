@@ -68,7 +68,10 @@ class RegisterForm extends React.Component<Props> {
     policy: Yup.boolean().required(strings.validation.required),
   })
 
-  private renderFields = ({ handleSubmit }: FormikProps<Values>): ReactNode => {
+  private renderFields = ({
+    handleSubmit,
+    isValid,
+  }: FormikProps<Values>): ReactNode => {
     return (
       <>
         <FormWrapper>
@@ -118,7 +121,11 @@ class RegisterForm extends React.Component<Props> {
             </CheckBoxText>
           </Field>
         </FormWrapper>
-        <Button title="Зарегистрироваться" onPress={handleSubmit} />
+        <Button
+          isDisabled={!isValid}
+          title="Зарегистрироваться"
+          onPress={handleSubmit}
+        />
       </>
     )
   }

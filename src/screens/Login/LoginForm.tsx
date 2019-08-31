@@ -38,7 +38,10 @@ class LoginForm extends React.Component<Props> {
     password: Yup.string().required(strings.validation.required),
   })
 
-  private renderFields = ({ handleSubmit }: FormikProps<Values>): ReactNode => {
+  private renderFields = ({
+    isValid,
+    handleSubmit,
+  }: FormikProps<Values>): ReactNode => {
     const { onPressFogrotPassword } = this.props
     return (
       <>
@@ -57,7 +60,7 @@ class LoginForm extends React.Component<Props> {
           RightIcon={<SimpleLineIcon size={20} name="key" />}
         />
         <IndentedLink onPress={onPressFogrotPassword} title="Забыли пароль?" />
-        <Button title="Войти" onPress={handleSubmit} />
+        <Button isDisabled={!isValid} title="Войти" onPress={handleSubmit} />
       </>
     )
   }
