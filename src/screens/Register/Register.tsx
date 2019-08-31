@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavigationScreenProps } from 'react-navigation'
-import { View, TextWithLines } from 'src/components'
+import { View } from 'src/components'
 import { SocialAuth } from 'src/containers'
 import RegisterForm from './RegisterForm'
 import { ROUTES } from 'src/navigation'
