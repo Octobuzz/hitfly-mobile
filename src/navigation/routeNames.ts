@@ -12,6 +12,7 @@ export default {
     REGISTER: `${APP.AUTH}/register`,
     SELECT_GENRE: `${APP.AUTH}/select_genre`,
     SOCIAL_AUTH: `${APP.AUTH}/social_auth`,
+    FORGOT_PASSWORD: `${APP.AUTH}/forgot_password`,
   },
   MAIN: {
     HOME: `${APP.MAIN}/homde`,

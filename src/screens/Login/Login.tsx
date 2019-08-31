@@ -48,13 +48,21 @@ class Login extends React.Component<NavigationScreenProps> {
     navigation.navigate(ROUTES.AUTH.REGISTER)
   }
 
+  private navigateToPasswordRecovery = (): void => {
+    const { navigation } = this.props
+    navigation.navigate(ROUTES.AUTH.FORGOT_PASSWORD)
+  }
+
   render() {
     return (
       <Container>
         <View>
           <SocialAuth />
           <IndentedTextWithLines>или войдите через почту</IndentedTextWithLines>
-          <LoginForm onSubmit={this.handleSubmit} />
+          <LoginForm
+            onPressFogrotPassword={this.navigateToPasswordRecovery}
+            onSubmit={this.handleSubmit}
+          />
           <IndentedButton
             onPress={this.navigateToRegistration}
             title="Зарегистрироваться"

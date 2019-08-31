@@ -2,6 +2,7 @@ export * from './views'
 export * from './fields'
 export * from './buttons'
 export * from './GenreItem'
+export * from './TextBase'
 
 export { default as Loader } from './Loader'
 export { default as TextBase } from './TextBase'
