@@ -1,22 +1,16 @@
-// @flow
 import R from 'ramda'
 import AsyncStorage from '@react-native-community/async-storage'
 
-const setItem = (key: string, item: string) =>
+export const setItem = (key: string, item: string) =>
   AsyncStorage.setItem(key, JSON.stringify(item))
 
-const getItem = (key: string, defaultItem?: any) =>
+type DefaultItem = string | number | object | void
+
+export const getItem = (key: string, defaultItem?: DefaultItem): DefaultItem =>
   AsyncStorage.getItem(key)
     .then(JSON.parse)
     .catch(R.always(defaultItem))
 
-const clearStorage = () => AsyncStorage.clear()
+export const clearStorage = () => AsyncStorage.clear()
 
-const removeItem = (key: string) => AsyncStorage.removeItem(key)
-
-export default {
-  setItem,
-  getItem,
-  removeItem,
-  clearStorage,
-}
+export const removeItem = (key: string) => AsyncStorage.removeItem(key)

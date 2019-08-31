@@ -1,3 +1,7 @@
+// genres
+export const GENRE_INACTIVE = require('../assets/images/genres/genre_inactive.png')
+export const GENRE_ACTIVE = require('../assets/images/genres/genre_active.png')
+
 // checkbox
 export const CHECKBOX_INACTIVE = require('../assets/images/checkbox/checkbox_inactive.png')
 export const CHECKBOX_ACTIVE = require('../assets/images/checkbox/checkbox_active.png')

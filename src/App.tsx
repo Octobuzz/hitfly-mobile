@@ -1,9 +1,10 @@
 import React from 'react'
+import './reactotron.config'
 import { YellowBox } from 'react-native'
-import { Provider } from 'react-redux'
 import { ThemeProvider } from 'styled-components'
+import ApolloClient from 'apollo-boost'
+import { ApolloProvider } from '@apollo/react-hooks'
 import AppNavigator from './navigation'
-import { configureStore } from './redux'
 import theme from './theme'
 
 // либы до сих пор используют это
@@ -13,14 +14,16 @@ YellowBox.ignoreWarnings([
   'Warning: componentWillReceiveProps is deprecated',
 ])
 
-const store = configureStore()
+const client = new ApolloClient({
+  uri: 'http://digico.itech-test.ru/graphql',
+})
 
 const App = () => (
-  <Provider store={store}>
+  <ApolloProvider client={client}>
     <ThemeProvider theme={theme}>
       <AppNavigator />
     </ThemeProvider>
-  </Provider>
+  </ApolloProvider>
 )
 
 export default App

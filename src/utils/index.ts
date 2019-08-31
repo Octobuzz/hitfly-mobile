@@ -1,4 +1,5 @@
 import * as helpers from './helpers'
-import { default as storage } from './storage'
+import * as storage from './storage'
+import * as serverTransformers from './serverTransformers'
 
-export { helpers, storage }
+export { helpers, storage, serverTransformers }

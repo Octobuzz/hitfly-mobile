@@ -1,41 +1,30 @@
 import React from 'react'
-import {
-  View,
-  TextBase,
-  Stretcher,
-  SocialButton,
-  TextWithLines,
-} from 'src/components'
+import { NavigationScreenProps } from 'react-navigation'
+import { View, TextWithLines } from 'src/components'
+import { SocialAuth } from 'src/containers'
 import RegisterForm from './RegisterForm'
+import { ROUTES } from 'src/navigation'
 import styled from 'src/styled-components'
 
 const Container = styled.SafeAreaView`
   flex: 1;
 `
 
-const SocialRow = styled.View`
-  flex-direction: row;
-  justify-content: space-around;
-  padding-horizontal: 10px;
-  margin-bottom: 32px;
-`
-
 const IndentedTextWithLines = styled(TextWithLines)`
   margin-bottom: 24px;
 `
 
-class Register extends React.Component {
-  private handleSubmit = () => {}
+class Register extends React.Component<NavigationScreenProps> {
+  private handleSubmit = () => {
+    const { navigation } = this.props
+    navigation.navigate(ROUTES.AUTH.SELECT_GENRE)
+  }
+
   render() {
     return (
       <Container>
         <View>
-          <SocialRow>
-            <SocialButton type="fb" />
-            <SocialButton type="vk" />
-            <SocialButton type="inst" />
-            <SocialButton type="ok" />
-          </SocialRow>
+          <SocialAuth />
           <IndentedTextWithLines>
             или зарегистрируйтесь через почту
           </IndentedTextWithLines>
