@@ -1,9 +1,12 @@
 import React from 'react'
 import { ViewStyle, StyleProp } from 'react-native'
 import { images } from 'src/constants'
+import { disabledStyle } from './Button'
 import styled from 'src/styled-components'
 
-const Wrapper = styled.TouchableOpacity``
+const Wrapper = styled.TouchableOpacity`
+  ${disabledStyle}
+`
 
 const Icon = styled.Image``
 
@@ -43,12 +46,9 @@ class SocialButton extends React.Component<Props> {
   }
 
   private handlePress = (): void => {
-    const {
-      data: { type },
-      onPress,
-    } = this.props
+    const { data, onPress } = this.props
     if (onPress) {
-      onPress(type)
+      onPress(data)
     }
   }
 

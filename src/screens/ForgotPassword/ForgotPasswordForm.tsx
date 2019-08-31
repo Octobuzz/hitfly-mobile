@@ -5,13 +5,13 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { Input, Button, Stretcher } from 'src/components'
 import { strings } from 'src/constants'
 
-interface Values {
+export interface ForgotPasswordValues {
   email: string
 }
 
 interface Props {
-  initialValues: Values
-  onSubmit: (from: Values) => void
+  initialValues: ForgotPasswordValues
+  onSubmit: (from: ForgotPasswordValues) => void
 }
 
 class ForgotPasswordForm extends React.Component<Props> {
@@ -25,7 +25,10 @@ class ForgotPasswordForm extends React.Component<Props> {
       .email(strings.validation.wrongEmail),
   })
 
-  private renderFields = ({ handleSubmit }: FormikProps<Values>): ReactNode => (
+  private renderFields = ({
+    handleSubmit,
+    isValid,
+  }: FormikProps<ForgotPasswordValues>): ReactNode => (
     <>
       <Field
         name="email"
@@ -35,7 +38,11 @@ class ForgotPasswordForm extends React.Component<Props> {
         RightIcon={<MaterialIcon size={20} name="mail-outline" />}
       />
       <Stretcher />
-      <Button onPress={handleSubmit} title="Сбросить пароль" />
+      <Button
+        isDisabled={!isValid}
+        onPress={handleSubmit}
+        title="Сбросить пароль"
+      />
     </>
   )
 

@@ -5,6 +5,7 @@ import {
   RegisterScreen,
   SocialAuthScreen,
   SelectGenreScreen,
+  RecoveryInfoScreen,
   ForgotPasswordScreen,
 } from 'src/screens'
 import routeNames from './routeNames'
@@ -32,6 +33,10 @@ const AuthNavigator = createStackNavigator(
     [routeNames.AUTH.FORGOT_PASSWORD]: {
       screen: ForgotPasswordScreen,
       navigationOptions: { title: 'Восстановление пароля' },
+    },
+    [routeNames.AUTH.RECOVERY_INFO]: {
+      screen: RecoveryInfoScreen,
+      navigationOptions: { title: 'Проверьте электронную почту' },
     },
   },
   {
