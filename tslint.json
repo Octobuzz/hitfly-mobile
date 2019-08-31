@@ -3,9 +3,9 @@
     "tslint:recommended",
     "tslint-eslint-rules",
     "tslint-react",
-    "tslint-config-prettier"
+    "tslint-config-prettier",
+    "tslint-react-hooks"
   ],
-  "jsRules": {},
   "rules": {
     "interface-name": false,
     "jsx-no-lambda": false,

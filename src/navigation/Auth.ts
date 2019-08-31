@@ -26,6 +26,10 @@ const AuthNavigator = createStackNavigator(
       screen: SelectGenreScreen,
       navigationOptions: { title: 'Выбор жанра' },
     },
+    [routeNames.AUTH.SOCIAL_AUTH]: {
+      screen: SelectGenreScreen,
+      // navigationOptions: { title: 'Выбор жанра' },
+    },
   },
   {
     initialRouteName: routeNames.AUTH.WELCOME,
