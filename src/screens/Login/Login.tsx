@@ -17,16 +17,16 @@ const Container = styled.SafeAreaView`
   flex: 1;
 `
 
-const IndentedTextWithLines = styled(TextWithLines)`
-  margin-bottom: 24px;
-`
-
 const IndentedLink = styled(Link)`
   margin-bottom: 32px;
 `
 
 const IndentedButton = styled(Button)`
   margin-top: 24px;
+`
+
+const IndentedSocialAuth = styled(SocialAuth)`
+  margin-bottom: 24px;
 `
 
 const BottomText = styled(TextBase)`
@@ -57,8 +57,7 @@ class Login extends React.Component<NavigationScreenProps> {
     return (
       <Container>
         <View>
-          <SocialAuth />
-          <IndentedTextWithLines>или войдите через почту</IndentedTextWithLines>
+          <IndentedSocialAuth bottomText="или войдите через почту" />
           <LoginForm
             onPressFogrotPassword={this.navigateToPasswordRecovery}
             onSubmit={this.handleSubmit}
