@@ -12,7 +12,6 @@
     "object-literal-sort-keys": false,
     "quotemark": [true, "single", "jsx-double"],
     "no-var-requires": false,
-    "no-unused-variable": [true, { "ignore-pattern": "^_" }],
     "no-console": [true, "log", "error"],
     "ordered-imports": false,
     "member-access": [true, "no-public"],

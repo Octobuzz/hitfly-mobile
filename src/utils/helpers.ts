@@ -100,9 +100,3 @@ export const secondsToStringTime = (
     return result.join(separator)
   }
 }
-
-export const getNumberMultiple_05 = (num: number): number => {
-  const whole = Math.trunc(num)
-  const fract = Math.trunc((num % 1) * 10) >= 5 ? 0.5 : 0
-  return whole + fract
-}
