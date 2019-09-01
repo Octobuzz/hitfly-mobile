@@ -37,6 +37,7 @@ const TitleText = styled(TextBase)`
 
 interface Selectable {
   isSelected?: boolean
+  isSelectable?: boolean
 }
 
 export interface IGenreItem {
@@ -54,7 +55,12 @@ interface Sized {
   size: number
 }
 
-const GenreItem: React.FC<Props> & Sized = ({ item, isSelected, onPress }) => {
+const GenreItem: React.FC<Props> & Sized = ({
+  item,
+  onPress,
+  isSelected,
+  isSelectable,
+}) => {
   const { imageUrl, title } = item
   const handlePress = React.useCallback(() => {
     onPress(item)
@@ -63,7 +69,7 @@ const GenreItem: React.FC<Props> & Sized = ({ item, isSelected, onPress }) => {
   return (
     <Wrapper onPress={handlePress}>
       <GenreImage source={{ uri: imageUrl }} />
-      <CornerImage isSelected={isSelected} />
+      {isSelectable && <CornerImage isSelected={isSelected} />}
       <TitleText>{title}</TitleText>
     </Wrapper>
   )

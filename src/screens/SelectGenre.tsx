@@ -14,7 +14,6 @@ import {
   IGenreItem,
 } from 'src/components'
 import { ROUTES } from 'src/navigation'
-import { Genre } from 'src/graphqlModels'
 import styled from 'src/styled-components'
 
 const Container = styled.SafeAreaView`
@@ -37,6 +36,12 @@ const Scroll = styled(FlatList as new () => FlatList<Genre>).attrs(() => ({
   flex: 1;
   margin-bottom: 40px;
 `
+
+interface Genre {
+  id: number
+  name: string
+  image: string
+}
 
 interface GenreData {
   genre: Genre[]
@@ -76,6 +81,7 @@ class SelectGenre extends React.Component<NavigationScreenProps, State> {
     const isSelected = selectedGenres[id]
     return (
       <GenreItem
+        isSelectable
         item={{ imageUrl: image, title: name, id }}
         isSelected={isSelected}
         onPress={this.toggleGenre}
@@ -94,10 +100,7 @@ class SelectGenre extends React.Component<NavigationScreenProps, State> {
     this.setState({ selectedGenres: newGenres })
   }
 
-  private keyExtractor = R.pipe(
-    R.prop('id'),
-    R.toString,
-  )
+  private keyExtractor = ({ id }: Genre) => id.toString()
 
   private getItemLayout = (
     _: any,

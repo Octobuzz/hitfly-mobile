@@ -1,13 +1,6 @@
 import React from 'react'
 import { NavigationScreenProps } from 'react-navigation'
-import {
-  View,
-  Link,
-  Button,
-  TextBase,
-  Stretcher,
-  TextWithLines,
-} from 'src/components'
+import { View, Link, Button, TextBase, Stretcher } from 'src/components'
 import { SocialAuth } from 'src/containers'
 import LoginForm from './LoginForm'
 import { ROUTES } from 'src/navigation'
