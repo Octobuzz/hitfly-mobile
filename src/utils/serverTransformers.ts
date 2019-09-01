@@ -1,5 +1,7 @@
-import { SocialButtonData, SocialButtonType } from 'src/components'
+import { SocialButtonData, SocialButtonType, IGenreItem } from 'src/components'
 import { SocialConnect, SocialType } from 'src/containers'
+import { Genre } from 'src/screens/Home/Home'
+import { renameKeys } from './helpers'
 
 export const serverSocialDataAdapter = ({
   link,
@@ -18,4 +20,13 @@ export const serverSocialDataAdapter = ({
   }
 
   return data
+}
+
+const genresMapper = {
+  name: 'title',
+  image: 'imageUrl',
+}
+export const serverGenreAdapter = (genre: Genre): IGenreItem => {
+  const item = renameKeys(genresMapper, genre) as IGenreItem
+  return item
 }

@@ -9,23 +9,22 @@ const Wrapper = styled.View``
 
 const DIVIDER_SIZE = 8
 
-const Divider = styled.View`
-  width: ${DIVIDER_SIZE}px;
-`
-
 const ScrollWrapper = styled.View`
   height: ${GenreItem.size * 2 + DIVIDER_SIZE}px;
 `
 
 const Scroll = styled(FlatList as new () => FlatList<GenrePair>).attrs(() => ({
   horizontal: true,
-}))`
-  margin-bottom: 40px;
-`
+  initialNumToRender: 5,
+  contentInset: { left: 12, right: 12 },
+  contentOffset: { x: -12, y: 0 },
+  showsHorizontalScrollIndicator: false,
+}))``
 
 const Column = styled.View`
   flex: 1;
-  justify-content: space-around;
+  padding-horizontal: ${DIVIDER_SIZE / 2}px;
+  justify-content: space-between;
 `
 
 type GenrePair = [IGenreItem, IGenreItem?]
@@ -59,6 +58,17 @@ class GenresSection extends React.Component<Props> {
     )
   }
 
+  private getItemLayout = (
+    _: any,
+    index: number,
+  ): { length: number; offset: number; index: number } => {
+    const length = GenreItem.size + DIVIDER_SIZE
+    return {
+      length,
+      offset: length * index,
+      index,
+    }
+  }
   render() {
     const { isLoading } = this.props
     const pairedGenres = this.getPairedGenres()
@@ -69,7 +79,7 @@ class GenresSection extends React.Component<Props> {
           {isLoading && <Loader isFilled />}
           {pairedGenres && (
             <Scroll
-              ItemSeparatorComponent={Divider}
+              getItemLayout={this.getItemLayout}
               renderItem={this.renderGenre}
               keyExtractor={this.keyExtractor}
               data={pairedGenres}

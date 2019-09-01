@@ -3,7 +3,9 @@ import { TextBase } from 'src/components'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import styled from 'src/styled-components'
 
-const Wrapper = styled.TouchableOpacity``
+const Wrapper = styled.TouchableOpacity`
+  padding: 0 16px 16px;
+`
 
 const Inner = styled.View`
   align-items: center;

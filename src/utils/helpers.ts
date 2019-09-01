@@ -1,8 +1,11 @@
 import R from 'ramda'
-import { APP_NAME } from '../constants/names'
 
-export const getModuleActionName = R.curry(
-  (moduleName, actionName) => `${APP_NAME}/${moduleName}/${actionName}`,
+export const renameKeys = R.curry((keysMap, obj) =>
+  R.reduce(
+    (acc, key) => R.assoc(keysMap[key] || key, obj[key], acc),
+    {},
+    R.keys(obj),
+  ),
 )
 
 // FIXME: удалить
@@ -18,14 +21,6 @@ export const generateUID = (count = 10) => {
 
 // FIXME: удалить
 export const hasValue = (value: any) => value !== undefined && value !== ''
-
-export const renameKeys = R.curry((keysMap, obj) =>
-  R.reduce(
-    (acc, key) => R.assoc(keysMap[key] || key, obj[key], acc),
-    {},
-    R.keys(obj),
-  ),
-)
 
 // FIXME: переписать, ничего не понятно
 export const getNameForCount = R.curry((titles: string[], count: number) => {
