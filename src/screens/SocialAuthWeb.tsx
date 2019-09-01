@@ -2,7 +2,7 @@ import React from 'react'
 import { NavigationScreenProps } from 'react-navigation'
 import { WebView } from 'react-native-webview'
 
-class SocialAuth extends React.Component<NavigationScreenProps> {
+class SocialAuthWeb extends React.Component<NavigationScreenProps> {
   render() {
     const { navigation } = this.props
     const url = navigation.getParam('url')
@@ -10,4 +10,4 @@ class SocialAuth extends React.Component<NavigationScreenProps> {
   }
 }
 
-export default SocialAuth
+export default SocialAuthWeb
