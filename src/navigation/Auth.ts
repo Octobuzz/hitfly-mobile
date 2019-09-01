@@ -9,7 +9,7 @@ import {
   ForgotPasswordScreen,
 } from 'src/screens'
 import routeNames from './routeNames'
-import theme from 'src/theme'
+import { stackConfig } from './configs'
 
 const AuthNavigator = createStackNavigator(
   {
@@ -41,18 +41,7 @@ const AuthNavigator = createStackNavigator(
   },
   {
     initialRouteName: routeNames.AUTH.WELCOME,
-    defaultNavigationOptions: {
-      headerBackTitle: null,
-      headerStyle: {
-        borderBottomWidth: 0,
-      },
-      headerTintColor: theme.colors.textMain,
-      headerTitleStyle: {
-        fontFamily: theme.fonts.bold,
-        fontWeight: undefined, // убрать дефолтный вес от react-navigation
-        fontSize: 18,
-      },
-    },
+    ...stackConfig,
   },
 )
 

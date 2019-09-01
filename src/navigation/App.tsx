@@ -4,6 +4,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import AsyncStorage from '@react-native-community/async-storage'
 import NavigationService from './navigationService'
 import AuthNavigator from './Auth'
+import MainNavigator from './Main'
 import Storybook from '../../storybook'
 import routeNames from './routeNames'
 import styled from 'src/styled-components'
@@ -12,7 +13,7 @@ import { storage } from 'src/utils'
 
 const SwitchRoutes = {
   [routeNames.APP.AUTH]: AuthNavigator,
-  [routeNames.APP.MAIN]: () => null,
+  [routeNames.APP.MAIN]: MainNavigator,
   [routeNames.APP.STORYBOOK]: Storybook,
 }
 
