@@ -62,10 +62,6 @@ const SocialAuth: React.FC<Props> = ({ navigation, bottomText, style }) => {
     return <Loader />
   }
 
-  if (!data) {
-    return null
-  }
-
   if (data && data.SocialConnectQuery) {
     return (
       <Wrapper style={style}>
