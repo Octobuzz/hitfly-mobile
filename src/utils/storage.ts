@@ -6,10 +6,19 @@ export const setItem = (key: string, item: string) =>
 
 type DefaultItem = string | number | object | void
 
-export const getItem = (key: string, defaultItem?: DefaultItem): DefaultItem =>
-  AsyncStorage.getItem(key)
-    .then(JSON.parse)
-    .catch(R.always(defaultItem))
+export const getItem = async (
+  key: string,
+  defaultItem?: DefaultItem,
+): Promise<DefaultItem> => {
+  try {
+    const item = await AsyncStorage.getItem(key)
+    if (item) {
+      return JSON.parse(item)
+    }
+  } catch {
+    return defaultItem
+  }
+}
 
 export const clearStorage = () => AsyncStorage.clear()
 
