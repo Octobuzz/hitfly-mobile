@@ -23,3 +23,5 @@ export const getItem = async (
 export const clearStorage = () => AsyncStorage.clear()
 
 export const removeItem = (key: string) => AsyncStorage.removeItem(key)
+
+export default AsyncStorage

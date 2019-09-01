@@ -2,10 +2,13 @@ import React from 'react'
 import './reactotron.config'
 import { YellowBox } from 'react-native'
 import { ThemeProvider } from 'styled-components'
-import ApolloClient from 'apollo-boost'
+import ApolloClient, { InMemoryCache } from 'apollo-boost'
+import { persistCache } from 'apollo-cache-persist'
 import { ApolloProvider } from '@apollo/react-hooks'
 import AppNavigator from './navigation'
+import { storageInstance } from './utils'
 import theme from './theme'
+import { names } from './constants'
 
 // либы до сих пор используют это
 YellowBox.ignoreWarnings([
@@ -14,16 +17,47 @@ YellowBox.ignoreWarnings([
   'Warning: componentWillReceiveProps is deprecated',
 ])
 
-const client = new ApolloClient({
-  uri: 'http://digico.itech-test.ru/graphql',
-})
+async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
+  const cache = new InMemoryCache({})
 
-const App = () => (
-  <ApolloProvider client={client}>
-    <ThemeProvider theme={theme}>
-      <AppNavigator />
-    </ThemeProvider>
-  </ApolloProvider>
-)
+  await persistCache({
+    cache,
+    // @ts-ignore
+    storage: storageInstance,
+  })
+
+  const client = new ApolloClient<InMemoryCache>({
+    cache,
+    uri: names.BASE_URL,
+  })
+
+  return client
+}
+
+class App extends React.Component<{}, { isReady: boolean }> {
+  client?: ApolloClient<InMemoryCache>
+  state = {
+    isReady: false,
+  }
+
+  async componentDidMount() {
+    this.client = await createApolloClient()
+    this.setState({ isReady: true })
+  }
+
+  render() {
+    const { isReady } = this.state
+    return (
+      isReady &&
+      this.client && (
+        <ApolloProvider client={this.client}>
+          <ThemeProvider theme={theme}>
+            <AppNavigator />
+          </ThemeProvider>
+        </ApolloProvider>
+      )
+    )
+  }
+}
 
 export default App
