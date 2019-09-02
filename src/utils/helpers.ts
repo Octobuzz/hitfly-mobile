@@ -8,6 +8,9 @@ export const renameKeys = R.curry((keysMap, obj) =>
   ),
 )
 
+export const delay = (ms: number): Promise<void> =>
+  new Promise(res => setTimeout(res, ms))
+
 // FIXME: удалить
 export const generateUID = (count = 10) => {
   let text = ''

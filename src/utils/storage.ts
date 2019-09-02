@@ -1,9 +1,11 @@
 import AsyncStorage from '@react-native-community/async-storage'
 
-export const setItem = (key: string, item: string) =>
-  AsyncStorage.setItem(key, JSON.stringify(item))
+type Item = string | number | object
 
-type DefaultItem = string | number | object | void
+type DefaultItem = Item | Item[] | void
+
+export const setItem = (key: string, item: Item | Item[]) =>
+  AsyncStorage.setItem(key, JSON.stringify(item))
 
 export const getItem = async (
   key: string,

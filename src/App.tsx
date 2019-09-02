@@ -6,9 +6,9 @@ import ApolloClient, { InMemoryCache } from 'apollo-boost'
 import { persistCache } from 'apollo-cache-persist'
 import { ApolloProvider } from '@apollo/react-hooks'
 import AppNavigator from './navigation'
-import { storageInstance } from './utils'
+import { storageInstance, storage } from './utils'
 import theme from './theme'
-import { names } from './constants'
+import { names, storageKeys } from './constants'
 
 // либы до сих пор используют это
 YellowBox.ignoreWarnings([
@@ -26,8 +26,13 @@ async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
     storage: storageInstance,
   })
 
+  const token = await storage.getItem(storageKeys.AUTH_TOKEN)
+
   const client = new ApolloClient<InMemoryCache>({
     cache,
+    headers: {
+      'X-TOKEN-AUTH': token,
+    },
     uri: names.BASE_URL,
   })
 

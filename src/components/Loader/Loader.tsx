@@ -5,6 +5,15 @@ import animation from './playaudio.json'
 
 const Wrapper = styled.View<Props>`
   ${({ isFilled }) => isFilled && 'flex: 1;'}
+  ${({ isAbsolute }) =>
+    isAbsolute &&
+    `
+    position: absolute;
+    left: 0;
+    top: 0;
+    right:0;
+    bottom:0;
+  `}
   align-items: center;
   justify-content: center;
 `
