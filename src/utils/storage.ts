@@ -1,4 +1,3 @@
-import R from 'ramda'
 import AsyncStorage from '@react-native-community/async-storage'
 
 export const setItem = (key: string, item: string) =>

@@ -9,16 +9,13 @@ import {
   Link,
   Loader,
   Button,
+  SafeView,
   GenreItem,
   HelperText,
   IGenreItem,
 } from 'src/components'
 import { ROUTES } from 'src/navigation'
 import styled from 'src/styled-components'
-
-const Container = styled.SafeAreaView`
-  flex: 1;
-`
 
 const IndentedButton = styled(Button)`
   margin-bottom: 24px;
@@ -113,7 +110,7 @@ class SelectGenre extends React.Component<NavigationScreenProps, State> {
 
   render() {
     return (
-      <Container>
+      <SafeView>
         <View>
           <HelperText>
             Отметьте жанры, которые Вам нравятся. Это поможет получать более
@@ -140,7 +137,7 @@ class SelectGenre extends React.Component<NavigationScreenProps, State> {
           <IndentedButton title="Готово" />
           <Link onPress={this.navigateToMain} title="Пропустить" />
         </View>
-      </Container>
+      </SafeView>
     )
   }
 }

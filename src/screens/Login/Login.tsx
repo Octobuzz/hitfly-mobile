@@ -1,14 +1,17 @@
 import React from 'react'
 import { NavigationScreenProps } from 'react-navigation'
-import { View, Link, Button, TextBase, Stretcher } from 'src/components'
+import {
+  View,
+  Link,
+  Button,
+  TextBase,
+  SafeView,
+  Stretcher,
+} from 'src/components'
 import { SocialAuth } from 'src/containers'
 import LoginForm from './LoginForm'
 import { ROUTES } from 'src/navigation'
 import styled from 'src/styled-components'
-
-const Container = styled.SafeAreaView`
-  flex: 1;
-`
 
 const IndentedLink = styled(Link)`
   margin-bottom: 32px;
@@ -53,7 +56,7 @@ class Login extends React.Component<NavigationScreenProps> {
 
   render() {
     return (
-      <Container>
+      <SafeView>
         <View>
           <IndentedSocialAuth bottomText="или войдите через почту" />
           <LoginForm
@@ -73,7 +76,7 @@ class Login extends React.Component<NavigationScreenProps> {
           </BottomText>
           <BottomLinkText> Условия использования</BottomLinkText>
         </View>
-      </Container>
+      </SafeView>
     )
   }
 }
