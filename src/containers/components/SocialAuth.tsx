@@ -15,7 +15,7 @@ import styled from 'src/styled-components'
 
 const Wrapper = styled.View``
 
-const SocialRow = styled.View`
+const Row = styled.View`
   flex-direction: row;
   justify-content: space-around;
   padding-horizontal: 10px;
@@ -65,7 +65,7 @@ const SocialAuth: React.FC<Props> = ({ navigation, bottomText, style }) => {
   if (data && data.SocialConnectQuery) {
     return (
       <Wrapper style={style}>
-        <SocialRow>
+        <Row>
           {data.SocialConnectQuery.map(serverData => {
             const buttonData = serverTransformers.serverSocialDataAdapter(
               serverData,
@@ -78,7 +78,7 @@ const SocialAuth: React.FC<Props> = ({ navigation, bottomText, style }) => {
               />
             )
           })}
-        </SocialRow>
+        </Row>
         <TextWithLines>{bottomText}</TextWithLines>
       </Wrapper>
     )

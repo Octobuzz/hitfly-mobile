@@ -4,6 +4,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import AsyncStorage from '@react-native-community/async-storage'
 import NavigationService from './navigationService'
 import AuthNavigator from './Auth'
+import MainNavigator from './Main'
 import Storybook from '../../storybook'
 import routeNames from './routeNames'
 import styled from 'src/styled-components'
@@ -12,7 +13,7 @@ import { storage } from 'src/utils'
 
 const SwitchRoutes = {
   [routeNames.APP.AUTH]: AuthNavigator,
-  [routeNames.APP.MAIN]: () => null,
+  [routeNames.APP.MAIN]: MainNavigator,
   [routeNames.APP.STORYBOOK]: Storybook,
 }
 
@@ -44,7 +45,7 @@ const DebugButton = styled.TouchableOpacity.attrs(() => ({
 const persistenceKey = 'react-navigation-presistence'
 const StorybookButton = styled(DebugButton).attrs(() => ({
   onPress: () => {
-    AsyncStorage.removeItem(persistenceKey)
+    storage.removeItem(persistenceKey)
     NavigationService.navigate({ routeName: routeNames.APP.STORYBOOK })
   },
 }))`
@@ -75,14 +76,10 @@ class AppNavigator extends React.Component {
       : undefined
   }
   private persistNavigationState = async (navState: any): Promise<void> =>
-    AsyncStorage.setItem(persistenceKey, JSON.stringify(navState))
+    storage.setItem(persistenceKey, navState)
 
-  private loadNavigationState = async (): Promise<any> => {
-    const jsonString = await AsyncStorage.getItem(persistenceKey)
-    if (jsonString) {
-      return JSON.parse(jsonString)
-    }
-  }
+  private loadNavigationState = (): Promise<any> =>
+    storage.getItem(persistenceKey)
 
   render() {
     return (

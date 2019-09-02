@@ -1,13 +1,6 @@
 import React from 'react'
 import { NavigationScreenProps } from 'react-navigation'
-import {
-  View,
-  Link,
-  Button,
-  TextBase,
-  Stretcher,
-  TextWithLines,
-} from 'src/components'
+import { View, Link, Button, TextBase, Stretcher } from 'src/components'
 import { SocialAuth } from 'src/containers'
 import LoginForm from './LoginForm'
 import { ROUTES } from 'src/navigation'
@@ -53,6 +46,11 @@ class Login extends React.Component<NavigationScreenProps> {
     navigation.navigate(ROUTES.AUTH.FORGOT_PASSWORD)
   }
 
+  private navigateToMain = (): void => {
+    const { navigation } = this.props
+    navigation.navigate(ROUTES.MAIN.HOME)
+  }
+
   render() {
     return (
       <Container>
@@ -68,7 +66,7 @@ class Login extends React.Component<NavigationScreenProps> {
             type="outline"
           />
           <Stretcher />
-          <IndentedLink title="Пропустить" />
+          <IndentedLink onPress={this.navigateToMain} title="Пропустить" />
           <BottomText>
             Регистрируясь через эл.почту, Facebook, VK, Instagram или
             Одноклассники вы принимаете
