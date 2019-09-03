@@ -3,11 +3,12 @@ import * as Yup from 'yup'
 import { withNavigation } from 'react-navigation'
 import { withFormik } from 'formik'
 import { withMutation } from '@apollo/react-hoc'
-import { strings } from 'src/constants'
+import { strings, storageKeys } from 'src/constants'
 import RegisterForm from './RegisterForm'
-import gql from 'graphql-tag'
 import { ROUTES } from 'src/navigation'
 import { transformFormErrors } from 'src/utils/helpers'
+import { storage } from 'src/utils'
+import gql from 'graphql-tag'
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -52,8 +53,16 @@ export default R.compose(
     handleSubmit: async (payload, { props, setErrors, setSubmitting }) => {
       const { mutate, navigation } = props
       try {
-        await mutate({ variables: payload })
-        navigation.navigate(ROUTES.AUTH.SELECT_GENRE)
+        const result = await mutate({ variables: payload })
+        if (result && result.data) {
+          // TODO: проверить когда бэк заработает
+          //   console.tron.log(result)
+          // @ts-ignore
+          await storage.setItem(storageKeys.AUTH_TOKEN, result.data.token)
+          // TODO: это костыль, удалить когда бэк станет лучше
+          await storage.setItem(storageKeys.GRAPHQL_ENDPOINT, 'user')
+          navigation.navigate(ROUTES.AUTH.SELECT_GENRE)
+        }
       } catch (error) {
         const formErrors = transformFormErrors(error)
         setErrors(formErrors)
@@ -63,6 +72,9 @@ export default R.compose(
     },
     mapPropsToValues: R.always({
       gender: 'M',
+      email: 'm@m.ru',
+      password: 'qwer1245tfWe#',
+      passwordRepeat: 'qwer1245tfWe#',
     }),
   }),
   // @ts-ignore
