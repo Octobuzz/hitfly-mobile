@@ -44,7 +44,7 @@ interface Props extends NavigationScreenProps {
 
 const GET_SOCIAL_LINKS = gql`
   {
-    SocialConnectQuery {
+    SocialConnectQuery(filters: { mobile: true }) {
       social_type
       link
     }
