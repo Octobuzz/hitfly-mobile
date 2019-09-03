@@ -3,7 +3,7 @@ import React from 'react'
 import { FlatList } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { Query } from '@apollo/react-components'
-import { gql } from 'apollo-boost'
+import gql from 'graphql-tag'
 import {
   View,
   Link,

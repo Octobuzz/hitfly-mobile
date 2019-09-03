@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavigationScreenProps } from 'react-navigation'
 import { Query } from '@apollo/react-components'
-import { gql } from 'apollo-boost'
+import gql from 'graphql-tag'
 import GenresSection from './GenresSection'
 import { IGenreItem, SafeView } from 'src/components'
 import { serverTransformers } from 'src/utils'
