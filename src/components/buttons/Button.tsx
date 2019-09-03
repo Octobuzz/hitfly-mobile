@@ -3,6 +3,7 @@ import TextBase from 'src/components/TextBase'
 import LinearGradient from 'react-native-linear-gradient'
 import styled, { css } from 'src/styled-components'
 import { ButtonBase } from './interfaces'
+import Loader from '../Loader'
 
 export const disabledStyle = css`
   ${({ disabled }: { disabled?: boolean }) => disabled && `opacity: 0.4;`}
@@ -38,18 +39,21 @@ interface IndentedHorizontal {
   withMargin?: boolean
 }
 
-interface Props extends ColorType, ButtonBase, IndentedHorizontal {}
+interface Props extends ColorType, ButtonBase, IndentedHorizontal {
+  isLoading?: boolean
+}
 
 const Button: React.FC<Props> = ({
   type,
   title,
   style,
   onPress,
+  isLoading,
   isDisabled,
 }) => (
   <Wrapper disabled={isDisabled} onPress={onPress} type={type} style={style}>
     <Gradient>
-      <Text type={type}>{title}</Text>
+      {isLoading ? <Loader size={61.7} /> : <Text type={type}>{title}</Text>}
     </Gradient>
   </Wrapper>
 )

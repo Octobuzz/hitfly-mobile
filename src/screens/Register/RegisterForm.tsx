@@ -1,6 +1,5 @@
-import React, { ReactNode } from 'react'
-import * as Yup from 'yup'
-import { Field, Formik, FormikProps } from 'formik'
+import React from 'react'
+import { Field, FormikProps } from 'formik'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons'
 import {
@@ -13,7 +12,7 @@ import {
   FormWrapper,
 } from 'src/components'
 import { NavigationService } from 'src/navigation'
-import { strings } from 'src/constants'
+
 import styled from 'src/styled-components'
 
 const indentAttrs = () => ({
@@ -39,39 +38,23 @@ const BrandText = styled(CheckBoxText)`
   color: ${({ theme }) => theme.colors.brandPink};
 `
 
-interface Values {
+export interface RegisterFormValues {
   email: string
   password: string
-  passwordRepeat: string
   birthday: string
   gender: 'M' | 'F'
 }
 
-interface Props {
-  onSubmit: (form: Values) => void
-}
+interface Props extends FormikProps<RegisterFormValues> {}
 
 class RegisterForm extends React.Component<Props> {
-  private validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .required(strings.validation.required)
-      .email(strings.validation.wrongEmail),
-    password: Yup.string().required(strings.validation.required),
-    passwordRepeat: Yup.string().oneOf(
-      [Yup.ref('password'), null],
-      strings.validation.passwordsDontMatch,
-    ),
-    birthday: Yup.string().required(strings.validation.required),
-    gender: Yup.string()
-      .required(strings.validation.required)
-      .matches(/(M|F)/, strings.validation.wrongSelection),
-    policy: Yup.boolean().required(strings.validation.required),
-  })
+  // TODO: сделать когда бэк готов или хардкод?
+  private navigateToDocument = (): void => {
+    NavigationService.navigate({ routeName: '' })
+  }
 
-  private renderFields = ({
-    handleSubmit,
-    isValid,
-  }: FormikProps<Values>): ReactNode => {
+  render() {
+    const { isValid, handleSubmit, isSubmitting } = this.props
     return (
       <>
         <FormWrapper>
@@ -122,34 +105,12 @@ class RegisterForm extends React.Component<Props> {
           </Field>
         </FormWrapper>
         <Button
-          isDisabled={!isValid}
+          isDisabled={!isValid || isSubmitting}
+          isLoading={isSubmitting}
           title="Зарегистрироваться"
           onPress={handleSubmit}
         />
       </>
-    )
-  }
-
-  // TODO: сделать когда бэк готов или хардкод?
-  private navigateToDocument = (): void => {
-    NavigationService.navigate({ routeName: '' })
-  }
-
-  render() {
-    const { onSubmit } = this.props
-    return (
-      <Formik
-        onSubmit={onSubmit}
-        initialValues={{
-          email: '',
-          password: '',
-          passwordRepeat: '',
-          birthday: '',
-          gender: 'M',
-        }}
-        validationSchema={this.validationSchema}
-        render={this.renderFields}
-      />
     )
   }
 }

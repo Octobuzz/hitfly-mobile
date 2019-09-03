@@ -2,26 +2,24 @@ import React from 'react'
 import { NavigationScreenProps } from 'react-navigation'
 import { View, SafeView } from 'src/components'
 import { SocialAuth } from 'src/containers'
-import RegisterForm from './RegisterForm'
-import { ROUTES } from 'src/navigation'
+import RegisterForm from './RegisterFormContainer'
 import styled from 'src/styled-components'
 
 const IndentedSocialAuth = styled(SocialAuth)`
   margin-bottom: 24px;
 `
 
-class Register extends React.Component<NavigationScreenProps> {
-  private handleSubmit = () => {
-    const { navigation } = this.props
-    navigation.navigate(ROUTES.AUTH.SELECT_GENRE)
-  }
+// interface User {
+//   token: string
+// }
 
+class Register extends React.Component<NavigationScreenProps> {
   render() {
     return (
       <SafeView>
         <View>
           <IndentedSocialAuth bottomText="или зарегистрируйтесь через почту" />
-          <RegisterForm onSubmit={this.handleSubmit} />
+          <RegisterForm />
         </View>
       </SafeView>
     )

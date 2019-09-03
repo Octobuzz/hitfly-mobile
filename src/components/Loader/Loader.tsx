@@ -18,14 +18,26 @@ const Wrapper = styled.View<Props>`
   justify-content: center;
 `
 
-interface Props {
+const StyledLottie = styled(LottieView).attrs(() => ({
+  source: animation,
+  autoPlay: true,
+  loop: true,
+}))<Sized>`
+  ${({ size }) => size && `height: ${size}px;`}
+`
+
+interface Sized {
+  size?: number
+}
+
+interface Props extends Sized {
   isAbsolute?: boolean
   isFilled?: boolean
 }
 
-const Loader: React.FC<Props> = props => (
+const Loader: React.FC<Props> = ({ size, ...props }) => (
   <Wrapper {...props}>
-    <LottieView source={animation} autoPlay loop />
+    <StyledLottie size={size} />
   </Wrapper>
 )
 
