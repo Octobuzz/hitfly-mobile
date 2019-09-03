@@ -1,33 +1,13 @@
 import R from 'ramda'
 import * as Yup from 'yup'
-import { withNavigation, NavigationInjectedProps } from 'react-navigation'
-import { withFormik, FormikBag } from 'formik'
-import { withMutation, MutateProps } from '@apollo/react-hoc'
+import { withNavigation } from 'react-navigation'
+import { withFormik } from 'formik'
+import { withMutation } from '@apollo/react-hoc'
 import { strings } from 'src/constants'
-import RegisterForm, { RegisterFormValues } from './RegisterForm'
+import RegisterForm from './RegisterForm'
 import gql from 'graphql-tag'
 import { ROUTES } from 'src/navigation'
 import { transformFormErrors } from 'src/utils/helpers'
-
-const handleSubmit = async (
-  payload: RegisterFormValues,
-  {
-    props,
-    setErrors,
-    setSubmitting,
-  }: FormikBag<MutateProps & NavigationInjectedProps, RegisterFormValues>,
-) => {
-  const { mutate, navigation } = props
-  try {
-    await mutate({ variables: payload })
-    navigation.navigate(ROUTES.AUTH.SELECT_GENRE)
-  } catch (error) {
-    const formErrors = transformFormErrors(error)
-    setErrors(formErrors)
-  } finally {
-    setSubmitting(false)
-  }
-}
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
@@ -64,22 +44,26 @@ const REGISTER = gql`
   }
 `
 
-export default R.pipe(
+export default R.compose(
   withNavigation,
   withMutation(REGISTER),
   withFormik({
     validationSchema,
-    handleSubmit,
-    // @ts-ignore
-    mapPropsToValues: (_: any) => ({
+    handleSubmit: async (payload, { props, setErrors, setSubmitting }) => {
+      const { mutate, navigation } = props
+      try {
+        await mutate({ variables: payload })
+        navigation.navigate(ROUTES.AUTH.SELECT_GENRE)
+      } catch (error) {
+        const formErrors = transformFormErrors(error)
+        setErrors(formErrors)
+      } finally {
+        setSubmitting(false)
+      }
+    },
+    mapPropsToValues: R.always({
       gender: 'M',
-      // FIXME: 'ниже тестовые - удалить'
-      email: 'm@m.ru',
-      password: '12345',
-      passwordRepeat: '12345',
-      birthday: '03.09.2000',
     }),
   }),
-  // тут странная х.афпя происходит
   // @ts-ignore
 )(RegisterForm)

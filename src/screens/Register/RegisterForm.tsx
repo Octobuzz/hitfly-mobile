@@ -11,8 +11,6 @@ import {
   DatePicker,
   FormWrapper,
 } from 'src/components'
-import { NavigationService } from 'src/navigation'
-
 import styled from 'src/styled-components'
 
 const indentAttrs = () => ({
@@ -47,72 +45,63 @@ export interface RegisterFormValues {
 
 interface Props extends FormikProps<RegisterFormValues> {}
 
-class RegisterForm extends React.Component<Props> {
-  // TODO: сделать когда бэк готов или хардкод?
-  private navigateToDocument = (): void => {
-    NavigationService.navigate({ routeName: '' })
-  }
+const RegisterForm: React.FC<Props> = ({
+  isValid,
+  handleSubmit,
+  isSubmitting,
+}) => (
+  <>
+    <FormWrapper>
+      <Field
+        name="email"
+        label="E-mail"
+        component={IndentedInput}
+        keyboardType="email-address"
+        RightIcon={<MaterialIcon size={20} name="mail-outline" />}
+      />
+      <Field
+        name="password"
+        label="Пароль"
+        secureTextEntry
+        component={IndentedInput}
+        RightIcon={<SimpleLineIcon size={20} name="key" />}
+      />
+      <Field
+        name="passwordRepeat"
+        label="Повторите пароль"
+        secureTextEntry
+        component={IndentedInput}
+        RightIcon={<SimpleLineIcon size={20} name="key" />}
+      />
+      <Field
+        name="birthday"
+        label="Дата рождения"
+        component={IndentedDatepicker}
+        RightIcon={<MaterialIcon size={20} name="perm-contact-calendar" />}
+      />
+      <Field
+        name="gender"
+        label="Пол"
+        options={[
+          { value: 'M', title: 'Мужчина' },
+          { value: 'F', title: 'Женщина' },
+        ]}
+        component={IndentedDropdown}
+      />
 
-  render() {
-    const { isValid, handleSubmit, isSubmitting } = this.props
-    return (
-      <>
-        <FormWrapper>
-          <Field
-            name="email"
-            label="E-mail"
-            component={IndentedInput}
-            keyboardType="email-address"
-            RightIcon={<MaterialIcon size={20} name="mail-outline" />}
-          />
-          <Field
-            name="password"
-            label="Пароль"
-            secureTextEntry
-            component={IndentedInput}
-            RightIcon={<SimpleLineIcon size={20} name="key" />}
-          />
-          <Field
-            name="passwordRepeat"
-            label="Повторите пароль"
-            secureTextEntry
-            component={IndentedInput}
-            RightIcon={<SimpleLineIcon size={20} name="key" />}
-          />
-          <Field
-            name="birthday"
-            label="Дата рождения"
-            component={IndentedDatepicker}
-            RightIcon={<MaterialIcon size={20} name="perm-contact-calendar" />}
-          />
-          <Field
-            name="gender"
-            label="Пол"
-            options={[
-              { value: 'M', title: 'Мужчина' },
-              { value: 'F', title: 'Женщина' },
-            ]}
-            component={IndentedDropdown}
-          />
-
-          <Field name="policy" component={StyledCheckBox}>
-            <CheckBoxText>
-              Согласен с{' '}
-              <BrandText onPress={this.navigateToDocument}>
-                условиями использования
-              </BrandText>
-            </CheckBoxText>
-          </Field>
-        </FormWrapper>
-        <Button
-          isDisabled={!isValid || isSubmitting}
-          isLoading={isSubmitting}
-          title="Зарегистрироваться"
-          onPress={handleSubmit}
-        />
-      </>
-    )
-  }
-}
+      <Field name="policy" component={StyledCheckBox}>
+        <CheckBoxText>
+          Согласен с <BrandText>условиями использования</BrandText>
+        </CheckBoxText>
+      </Field>
+    </FormWrapper>
+    <Button
+      isDisabled={!isValid || isSubmitting}
+      isLoading={isSubmitting}
+      title="Зарегистрироваться"
+      onPress={handleSubmit}
+    />
+  </>
+)
 
 export default RegisterForm
