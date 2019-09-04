@@ -1,4 +1,4 @@
-import R from 'ramda'
+import L from 'lodash'
 import React from 'react'
 import { FlatList } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
@@ -12,9 +12,9 @@ import {
   SafeView,
   GenreItem,
   HelperText,
-  IGenreItem,
 } from 'src/components'
 import { ROUTES } from 'src/navigation'
+import { Genre } from 'src/apollo'
 import styled from 'src/styled-components'
 
 const IndentedButton = styled(Button)`
@@ -33,12 +33,6 @@ const Scroll = styled(FlatList as new () => FlatList<Genre>).attrs(() => ({
   flex: 1;
   margin-bottom: 40px;
 `
-
-interface Genre {
-  id: number
-  name: string
-  image: string
-}
 
 interface GenreData {
   genre: Genre[]
@@ -69,30 +63,26 @@ class SelectGenre extends React.Component<NavigationScreenProps, State> {
     navigation.navigate(ROUTES.APP.MAIN)
   }
 
-  private renderGenre = ({
-    item: { image, name, id },
-  }: {
-    item: Genre
-  }): JSX.Element => {
+  private renderGenre = ({ item }: { item: Genre }): JSX.Element => {
     const { selectedGenres } = this.state
-    const isSelected = selectedGenres[id]
+    const isSelected = selectedGenres[item.id]
     return (
       <GenreItem
         isSelectable
-        item={{ imageUrl: image, title: name, id }}
+        item={item}
         isSelected={isSelected}
         onPress={this.toggleGenre}
       />
     )
   }
 
-  private toggleGenre = (genre: IGenreItem): void => {
+  private toggleGenre = (genre: Genre): void => {
     const { selectedGenres } = this.state
     let newGenres
     if (selectedGenres[genre.id]) {
-      newGenres = R.assoc(`${genre.id}`, false, selectedGenres)
+      newGenres = L.set(selectedGenres, genre.id, false)
     } else {
-      newGenres = R.assoc(`${genre.id}`, true, selectedGenres)
+      newGenres = L.set(selectedGenres, genre.id, true)
     }
     this.setState({ selectedGenres: newGenres })
   }

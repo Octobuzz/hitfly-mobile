@@ -1,29 +1,23 @@
-import R from 'ramda'
+import L from 'lodash'
 import React from 'react'
 import { NavigationScreenProps } from 'react-navigation'
 import { Query } from '@apollo/react-components'
 import gql from 'graphql-tag'
 import GenresSection from './GenresSection'
 import Top50Section from './Top50Section'
-import { IGenreItem, SafeView } from 'src/components'
-import { serverTransformers } from 'src/utils'
-
-export interface Genre {
-  id: number
-  name: string
-  image: string
-}
+import { SafeView } from 'src/components'
+import { Genre } from 'src/apollo'
 
 interface GenreData {
-  genre?: Genre[]
+  genres?: Genre[]
 }
 
 const GET_GENRES = gql`
   {
-    genre {
+    genres: genres {
       id
-      name
-      image
+      title: name
+      imageUrl: image
     }
   }
 `
@@ -39,7 +33,7 @@ const GET_TOP50 = gql`
 `
 
 class Home extends React.Component<NavigationScreenProps> {
-  private handlePressGenreItem = (item: IGenreItem) => {}
+  private handlePressGenreItem = (item: Genre) => {}
 
   private handlePressTop50 = () => {}
 
@@ -48,7 +42,7 @@ class Home extends React.Component<NavigationScreenProps> {
       <SafeView>
         <Query<GenreData> query={GET_TOP50}>
           {({ loading, data }) => {
-            const playlist = R.path(['GetTopFifty', 'data'], data)
+            const playlist = L.get(data, ['GetTopFifty', 'data'])
             // if (!loading && !playlist) {
             //   return null
             // }
@@ -64,18 +58,13 @@ class Home extends React.Component<NavigationScreenProps> {
         </Query>
         <Query<GenreData> query={GET_GENRES}>
           {({ loading, data }) => {
-            if (!loading && !data) {
+            const genres = L.get(data, 'genres')
+            if (!loading && !genres) {
               return null
-            }
-            let adaptedGenres
-            if (data && data.genre) {
-              adaptedGenres = data.genre.map(
-                serverTransformers.serverGenreAdapter,
-              )
             }
             return (
               <GenresSection
-                genres={adaptedGenres}
+                genres={genres}
                 isLoading={loading}
                 onPressItem={this.handlePressGenreItem}
               />

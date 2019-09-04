@@ -1,4 +1,4 @@
-import R from 'ramda'
+import L from 'lodash'
 import * as Yup from 'yup'
 import { withNavigation } from 'react-navigation'
 import { withFormik } from 'formik'
@@ -21,12 +21,13 @@ const RESET = gql`
   }
 `
 
-export default R.compose(
+export default L.flowRight(
   withNavigation,
   withMutation(RESET),
   withFormik({
     validationSchema,
     handleSubmit: async ({ email }, { props, setErrors, setSubmitting }) => {
+      // @ts-ignore
       const { mutate, navigation } = props
       try {
         await mutate({ variables: { email } })
@@ -39,5 +40,4 @@ export default R.compose(
       }
     },
   }),
-  // @ts-ignore
 )(ForgotPasswordForm)
