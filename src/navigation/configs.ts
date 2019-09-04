@@ -5,6 +5,7 @@ export const stackConfig = {
     headerBackTitle: null,
     headerStyle: {
       borderBottomWidth: 0,
+      elevation: 0,
     },
     headerTintColor: theme.colors.textMain,
     headerTitleStyle: {

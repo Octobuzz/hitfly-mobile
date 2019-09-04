@@ -1,15 +1,10 @@
 import React from 'react'
 import { NavigationScreenProps } from 'react-navigation'
 import { Query } from '@apollo/react-components'
-import { gql } from 'apollo-boost'
+import gql from 'graphql-tag'
 import GenresSection from './GenresSection'
-import { IGenreItem } from 'src/components'
-import styled from 'src/styled-components'
+import { IGenreItem, SafeView } from 'src/components'
 import { serverTransformers } from 'src/utils'
-
-const Container = styled.SafeAreaView`
-  flex: 1;
-`
 
 export interface Genre {
   id: number
@@ -36,7 +31,7 @@ class Home extends React.Component<NavigationScreenProps> {
 
   render() {
     return (
-      <Container>
+      <SafeView>
         <Query<GenreData> query={GET_GENRES}>
           {({ loading, data }) => {
             let adaptedGenres
@@ -54,7 +49,7 @@ class Home extends React.Component<NavigationScreenProps> {
             )
           }}
         </Query>
-      </Container>
+      </SafeView>
     )
   }
 }

@@ -1,25 +1,24 @@
 import React from 'react'
 import { StatusBar, Platform } from 'react-native'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
-import AsyncStorage from '@react-native-community/async-storage'
 import NavigationService from './navigationService'
 import AuthNavigator from './Auth'
 import MainNavigator from './Main'
 import Storybook from '../../storybook'
-import routeNames from './routeNames'
+import ROUTES from './routeNames'
 import styled from 'src/styled-components'
-import { styles } from 'src/constants'
+import { styles, storageKeys } from 'src/constants'
 import { storage } from 'src/utils'
 
 const SwitchRoutes = {
-  [routeNames.APP.AUTH]: AuthNavigator,
-  [routeNames.APP.MAIN]: MainNavigator,
-  [routeNames.APP.STORYBOOK]: Storybook,
+  [ROUTES.APP.AUTH]: AuthNavigator,
+  [ROUTES.APP.MAIN]: MainNavigator,
+  [ROUTES.APP.STORYBOOK]: Storybook,
 }
 
 const AppContainer = createAppContainer(
   createSwitchNavigator(SwitchRoutes, {
-    initialRouteName: routeNames.APP.AUTH,
+    initialRouteName: ROUTES.APP.AUTH,
   }),
 )
 
@@ -46,7 +45,7 @@ const persistenceKey = 'react-navigation-presistence'
 const StorybookButton = styled(DebugButton).attrs(() => ({
   onPress: () => {
     storage.removeItem(persistenceKey)
-    NavigationService.navigate({ routeName: routeNames.APP.STORYBOOK })
+    NavigationService.navigate({ routeName: ROUTES.APP.STORYBOOK })
   },
 }))`
   background-color: rgba(150, 10, 50, 0.5);
@@ -60,6 +59,18 @@ class AppNavigator extends React.Component {
     } else {
       StatusBar.setBarStyle('light-content')
     }
+  }
+
+  componentDidMount() {
+    this.handleInitialNavigation()
+  }
+
+  private handleInitialNavigation = async () => {
+    const token = await storage.getItem(storageKeys.AUTH_TOKEN)
+    if (token) {
+      NavigationService.navigate({ routeName: ROUTES.MAIN.HOME })
+    }
+    // TODO: тут надо убрать сплешскрин вне зависимости от условия
   }
 
   // восстановление экранов в дев режиме

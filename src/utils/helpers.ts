@@ -8,19 +8,39 @@ export const renameKeys = R.curry((keysMap, obj) =>
   ),
 )
 
-// FIXME: удалить
-export const generateUID = (count = 10) => {
-  let text = ''
-  const possible =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-  for (let i = 0; i < count; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length))
-  }
-  return text
-}
+export const delay = (ms: number): Promise<void> =>
+  new Promise(res => setTimeout(res, ms))
 
-// FIXME: удалить
-export const hasValue = (value: any) => value !== undefined && value !== ''
+interface Validation {
+  [fieldName: string]: string[]
+}
+interface FormErrorsInput {
+  graphQLErrors: [
+    {
+      validation: Validation
+    },
+  ]
+}
+interface FormErrorsOutput {
+  [fieldName: string]: string
+}
+export const transformFormErrors = (
+  error: FormErrorsInput,
+): FormErrorsOutput => {
+  const validation = R.path<Validation>(
+    ['graphQLErrors', 0, 'validation'],
+    error,
+  )
+  if (!validation) {
+    return {}
+  }
+
+  // не подхватывает map для объектов
+  // @ts-ignore
+  const result = R.map(R.join('\n'), validation)
+
+  return result
+}
 
 // FIXME: переписать, ничего не понятно
 export const getNameForCount = R.curry((titles: string[], count: number) => {

@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { ViewStyle, StyleProp } from 'react-native'
 import { NavigationScreenProps, withNavigation } from 'react-navigation'
 import { useQuery } from '@apollo/react-hooks'
-import { gql } from 'apollo-boost'
+import gql from 'graphql-tag'
 import {
   Loader,
   SocialButton,
@@ -44,7 +44,7 @@ interface Props extends NavigationScreenProps {
 
 const GET_SOCIAL_LINKS = gql`
   {
-    SocialConnectQuery {
+    SocialConnectQuery(filters: { mobile: true }) {
       social_type
       link
     }

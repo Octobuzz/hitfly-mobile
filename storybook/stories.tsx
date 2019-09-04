@@ -17,6 +17,9 @@ import styled from 'src/styled-components'
 storiesOf('Button', module)
   .add('Gradient', () => <Button title="Gradient" type="gradient" />)
   .add('Outline', () => <Button title="Outline" type="outline" />)
+  .add('Gradient with Loader', () => (
+    <Button isLoading title="Outline" type="outline" />
+  ))
 storiesOf('Link', module).add('Default', () => <Link title="Link" />)
 
 const CenterContainer = styled.View`
@@ -26,10 +29,10 @@ const CenterContainer = styled.View`
 `
 storiesOf('SocialButton', module).add('Default', () => (
   <CenterContainer>
-    <SocialButton type="vk" />
-    <SocialButton type="gg" />
-    <SocialButton type="fb" />
-    <SocialButton type="ok" />
+    <SocialButton data={{ type: 'vk', url: '' }} />
+    <SocialButton data={{ type: 'gg', url: '' }} />
+    <SocialButton data={{ type: 'fb', url: '' }} />
+    <SocialButton data={{ type: 'ok', url: '' }} />
   </CenterContainer>
 ))
 
@@ -100,8 +103,8 @@ const GenreItemStory = () => {
     <GenreItem
       item={{
         id: 1,
-        name: 'name',
-        image:
+        title: 'name',
+        imageUrl:
           'https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-260nw-407021107.jpg',
       }}
       onPress={() => setSelected(!isSelected)}
