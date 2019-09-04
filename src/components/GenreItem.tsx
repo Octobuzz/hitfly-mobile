@@ -3,6 +3,7 @@ import FastImage from 'react-native-fast-image'
 import { images } from 'src/constants'
 import styled from 'src/styled-components'
 import TextBase from 'src/components/TextBase'
+import { Genre } from 'src/apollo'
 
 const ITEM_SIZE = 109
 
@@ -40,15 +41,9 @@ interface Selectable {
   isSelectable?: boolean
 }
 
-export interface IGenreItem {
-  id: number
-  imageUrl: string
-  title: string
-}
-
 interface Props extends Selectable {
-  item: IGenreItem
-  onPress: (item: IGenreItem) => void
+  item: Genre
+  onPress: (item: Genre) => void
 }
 
 interface Sized {

@@ -1,4 +1,4 @@
-import R from 'ramda'
+import L from 'lodash'
 import * as Yup from 'yup'
 import { withNavigation } from 'react-navigation'
 import { withFormik } from 'formik'
@@ -25,18 +25,19 @@ const LOGIN = gql`
   }
 `
 
-export default R.compose(
+export default L.flowRight(
   withNavigation,
   withMutation(LOGIN),
   withFormik({
     validationSchema,
     handleSubmit: async (payload, { props, setErrors, setSubmitting }) => {
+      // @ts-ignore
       const { mutate, navigation } = props
       try {
         // TODO: это костыль, удалить когда бэк станет лучше
         await storage.setItem(storageKeys.GRAPHQL_ENDPOINT, 'auth')
         const result = await mutate({ variables: payload })
-        const token = R.path(['data', 'login', 'token'], result)
+        const token = L.get(result, 'data.login.token')
         if (token) {
           await storage.setItem(storageKeys.AUTH_TOKEN, token as string)
           // TODO: это костыль, удалить когда бэк станет лучше
@@ -57,10 +58,9 @@ export default R.compose(
     },
     // FIXME: удалить в проде (чтобы вручную не вводить каждый раз)
     isInitialValid: true,
-    mapPropsToValues: R.always({
+    mapPropsToValues: L.constant({
       email: 'awhiffofzephyr@yandex.ru',
       password: 'MyHitfly1!',
     }),
   }),
-  // @ts-ignore
 )(LoginForm)

@@ -1,11 +1,10 @@
-import R from 'ramda'
+import L from 'lodash'
 import React from 'react'
 import { FlatList } from 'react-native'
-import { View, Loader, GenreItem, IGenreItem } from 'src/components'
+import { Loader, GenreItem } from 'src/components'
+import { SectionHeader, SectionWrapper } from './components'
+import { Genre } from 'src/apollo'
 import styled from 'src/styled-components'
-import SectionHeader from './SectionHeader'
-
-const Wrapper = styled.View``
 
 const DIVIDER_SIZE = 8
 
@@ -27,12 +26,12 @@ const Column = styled.View`
   justify-content: space-between;
 `
 
-type GenrePair = [IGenreItem, IGenreItem?]
+type GenrePair = [Genre, Genre?]
 
 interface Props {
   isLoading?: boolean
-  genres?: IGenreItem[]
-  onPressItem: (item: IGenreItem) => void
+  genres?: Genre[]
+  onPressItem: (item: Genre) => void
 }
 
 class GenresSection extends React.Component<Props> {
@@ -40,7 +39,7 @@ class GenresSection extends React.Component<Props> {
   private getPairedGenres = (): GenrePair[] | void => {
     const { genres } = this.props
     if (genres) {
-      const pairedGenres = R.splitEvery(2, genres) as GenrePair[]
+      const pairedGenres = L.chunk(genres, 2) as GenrePair[]
       return pairedGenres
     }
   }
@@ -73,10 +72,10 @@ class GenresSection extends React.Component<Props> {
     const { isLoading } = this.props
     const pairedGenres = this.getPairedGenres()
     return (
-      <Wrapper>
+      <SectionWrapper>
         <SectionHeader title="Жанры" />
         <ScrollWrapper>
-          {isLoading && <Loader isFilled />}
+          {isLoading && <Loader isAbsolute />}
           {pairedGenres && (
             <Scroll
               getItemLayout={this.getItemLayout}
@@ -86,7 +85,7 @@ class GenresSection extends React.Component<Props> {
             />
           )}
         </ScrollWrapper>
-      </Wrapper>
+      </SectionWrapper>
     )
   }
 }

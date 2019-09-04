@@ -1,6 +1,7 @@
 import React from 'react'
 import { ViewStyle, StyleProp } from 'react-native'
 import { images } from 'src/constants'
+import { SocialConnect } from 'src/apollo'
 import { disabledStyle } from './Button'
 import styled from 'src/styled-components'
 
@@ -10,35 +11,25 @@ const Wrapper = styled.TouchableOpacity`
 
 const Icon = styled.Image``
 
-export type SocialButtonType = 'vk' | 'fb' | 'ok' | 'inst' | 'gg'
-
-export interface SocialButtonData {
-  type: SocialButtonType
-  url: string
-  isActive?: boolean
-}
-
 interface Props {
-  data: SocialButtonData // TODO: назвать по-другому?
+  buttonData: SocialConnect
   style?: StyleProp<ViewStyle>
-  onPress?: (buttonData: SocialButtonData) => void
+  onPress?: (buttonData: SocialConnect) => void
 }
 
 class SocialButton extends React.Component<Props> {
   private getIconSource = (): number => {
     const {
-      data: { type },
+      buttonData: { type },
     } = this.props
     switch (type) {
-      case 'vk':
+      case 'vkontakte':
         return images.SOCIAL_VKONTAKTE
-      case 'fb':
+      case 'facebook':
         return images.SOCIAL_FACEBOOK
-      case 'ok':
+      case 'odnoklassniki':
         return images.SOCIAL_ODNOKLASSNIKI
-      case 'gg':
-        return images.SOCIAL_GOOGLE
-      case 'inst':
+      case 'instagram':
         return images.SOCIAL_INSTAGRAM
       default:
         return images.SOCIAL_FACEBOOK // TODO: ошибку или заглушку
@@ -46,9 +37,9 @@ class SocialButton extends React.Component<Props> {
   }
 
   private handlePress = (): void => {
-    const { data, onPress } = this.props
+    const { buttonData, onPress } = this.props
     if (onPress) {
-      onPress(data)
+      onPress(buttonData)
     }
   }
 

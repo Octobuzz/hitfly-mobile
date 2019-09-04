@@ -1,54 +1,88 @@
+import L from 'lodash'
 import React from 'react'
 import { NavigationScreenProps } from 'react-navigation'
 import { Query } from '@apollo/react-components'
 import gql from 'graphql-tag'
 import GenresSection from './GenresSection'
-import { IGenreItem, SafeView } from 'src/components'
-import { serverTransformers } from 'src/utils'
+import Top50Section from './Top50Section'
+import { SafeView } from 'src/components'
+import { Genre, Playlist, Pagination } from 'src/apollo'
+import styled from 'src/styled-components'
 
-export interface Genre {
-  id: number
-  name: string
-  image: string
-}
+const Container = styled.ScrollView.attrs(() => ({
+  showsVerticalScrollIndicator: false,
+}))`
+  flex: 1;
+`
 
 interface GenreData {
-  genre?: Genre[]
+  genres?: Genre[]
+}
+
+interface Top50Data {
+  top50?: Pagination<Playlist>
 }
 
 const GET_GENRES = gql`
   {
-    genre {
+    genres: genre {
       id
-      name
-      image
+      title: name
+      imageUrl: image
+    }
+  }
+`
+
+const GET_TOP50 = gql`
+  query {
+    top50: GetTopFifty(limit: 50, page: 0) {
+      items: data {
+        length
+      }
     }
   }
 `
 
 class Home extends React.Component<NavigationScreenProps> {
-  private handlePressGenreItem = (item: IGenreItem) => {}
+  private handlePressGenreItem = (item: Genre) => {}
+
+  private handlePressTop50 = (playlist: Playlist) => {}
 
   render() {
     return (
       <SafeView>
-        <Query<GenreData> query={GET_GENRES}>
-          {({ loading, data }) => {
-            let adaptedGenres
-            if (data && data.genre) {
-              adaptedGenres = data.genre.map(
-                serverTransformers.serverGenreAdapter,
+        <Container>
+          <Query<Top50Data> query={GET_TOP50}>
+            {({ loading, data }) => {
+              const playlist = L.get(data, 'top50.items')
+              if (!loading && !playlist) {
+                return null
+              }
+              return (
+                <Top50Section
+                  playlist={playlist}
+                  isLoading={loading}
+                  onPress={this.handlePressTop50}
+                />
               )
-            }
-            return (
-              <GenresSection
-                genres={adaptedGenres}
-                isLoading={loading}
-                onPressItem={this.handlePressGenreItem}
-              />
-            )
-          }}
-        </Query>
+            }}
+          </Query>
+          <Query<GenreData> query={GET_GENRES}>
+            {({ loading, data }) => {
+              const genres = L.get(data, 'genres')
+              if (!loading && !genres) {
+                return null
+              }
+              return (
+                <GenresSection
+                  genres={genres}
+                  isLoading={loading}
+                  onPressItem={this.handlePressGenreItem}
+                />
+              )
+            }}
+          </Query>
+        </Container>
       </SafeView>
     )
   }
