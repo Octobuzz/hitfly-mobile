@@ -19,7 +19,7 @@ const validationSchema = Yup.object().shape({
 
 const LOGIN = gql`
   mutation Login($email: String!, $password: String!) {
-    login: loginMutation(email: $email, password: $password, remember: true) {
+    login: loginMutation(email: $email, password: $password) {
       token: accessToken
     }
   }
