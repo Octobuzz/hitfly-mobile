@@ -1,15 +1,15 @@
 import React from 'react'
-import { Loader } from 'src/components'
+import { Loader, TextBase } from 'src/components'
 import { images } from 'src/constants'
 import { Playlist } from 'src/apollo'
-import SectionHeader from './SectionHeader'
+import { PlaylistHeader, SectionWrapper } from './components'
 import styled from 'src/styled-components'
-
-const Wrapper = styled.View``
 
 const Inner = styled.TouchableOpacity`
   height: 160px;
   margin-horizontal: 16px;
+  padding: 16px;
+  justify-content: space-between;
 `
 
 const BackgroundImage = styled.Image.attrs(() => ({
@@ -20,6 +20,11 @@ const BackgroundImage = styled.Image.attrs(() => ({
   top: 0;
   right: 0;
   bottom: 0;
+`
+
+const BottomText = styled(TextBase)`
+  color: ${({ theme }) => theme.colors.textWhite};
+  font-size: 12px;
 `
 
 interface Props {
@@ -36,17 +41,22 @@ const Top50Section: React.FC<Props> = ({ isLoading, onPress, playlist }) => {
   }, [onPress, playlist])
 
   return (
-    <Wrapper>
-      <SectionHeader
-        onPress={handlePress}
-        title="Топ 50"
-        subtitle="Рейтинг лучших музыкантов"
-      />
+    <SectionWrapper>
       <Inner onPress={handlePress}>
         <BackgroundImage />
-        {isLoading && <Loader isFilled />}
+        {isLoading ? (
+          <Loader isAbsolute />
+        ) : (
+          <>
+            <PlaylistHeader
+              title="Топ 50"
+              subtitle="Рейтинг лучших музыкантов"
+            />
+            <BottomText>test</BottomText>
+          </>
+        )}
       </Inner>
-    </Wrapper>
+    </SectionWrapper>
   )
 }
 

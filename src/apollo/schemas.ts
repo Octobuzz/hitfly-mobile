@@ -44,3 +44,14 @@ export interface Track {
 }
 
 export type Playlist = Track[]
+
+export interface Pagination<T> {
+  items: T[] // data
+  total: number
+  limit: number // per_page
+  page: number // current_page
+  from: number
+  to: number
+  pagesCount: number // last_page
+  hasMorePages: boolean // has_more_pages
+}

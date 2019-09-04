@@ -2,11 +2,9 @@ import L from 'lodash'
 import React from 'react'
 import { FlatList } from 'react-native'
 import { Loader, GenreItem } from 'src/components'
-import SectionHeader from './SectionHeader'
+import { SectionHeader, SectionWrapper } from './components'
 import { Genre } from 'src/apollo'
 import styled from 'src/styled-components'
-
-const Wrapper = styled.View``
 
 const DIVIDER_SIZE = 8
 
@@ -74,10 +72,10 @@ class GenresSection extends React.Component<Props> {
     const { isLoading } = this.props
     const pairedGenres = this.getPairedGenres()
     return (
-      <Wrapper>
+      <SectionWrapper>
         <SectionHeader title="Жанры" />
         <ScrollWrapper>
-          {isLoading && <Loader isFilled />}
+          {isLoading && <Loader isAbsolute />}
           {pairedGenres && (
             <Scroll
               getItemLayout={this.getItemLayout}
@@ -87,7 +85,7 @@ class GenresSection extends React.Component<Props> {
             />
           )}
         </ScrollWrapper>
-      </Wrapper>
+      </SectionWrapper>
     )
   }
 }

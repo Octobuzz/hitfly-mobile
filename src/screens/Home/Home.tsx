@@ -6,16 +6,21 @@ import gql from 'graphql-tag'
 import GenresSection from './GenresSection'
 import Top50Section from './Top50Section'
 import { SafeView } from 'src/components'
-import { Genre, Playlist } from 'src/apollo'
+import { Genre, Playlist, Pagination } from 'src/apollo'
+import styled from 'src/styled-components'
+
+const Container = styled.ScrollView.attrs(() => ({
+  showsVerticalScrollIndicator: false,
+}))`
+  flex: 1;
+`
 
 interface GenreData {
   genres?: Genre[]
 }
 
 interface Top50Data {
-  top50?: {
-    playlist: Playlist
-  }
+  top50?: Pagination<Playlist>
 }
 
 const GET_GENRES = gql`
@@ -31,7 +36,7 @@ const GET_GENRES = gql`
 const GET_TOP50 = gql`
   query {
     top50: GetTopFifty(limit: 50, page: 0) {
-      tracks: data {
+      items: data {
         length
       }
     }
@@ -41,41 +46,43 @@ const GET_TOP50 = gql`
 class Home extends React.Component<NavigationScreenProps> {
   private handlePressGenreItem = (item: Genre) => {}
 
-  private handlePressTop50 = () => {}
+  private handlePressTop50 = (playlist: Playlist) => {}
 
   render() {
     return (
       <SafeView>
-        <Query<Top50Data> query={GET_TOP50}>
-          {({ loading, data }) => {
-            const playlist: Playlist | undefined = L.get(data, 'top50.tracks')
-            // if (!loading && !playlist) {
-            //   return null
-            // }
-            return (
-              <Top50Section
-                playlist={playlist}
-                isLoading={loading}
-                onPress={this.handlePressTop50}
-              />
-            )
-          }}
-        </Query>
-        <Query<GenreData> query={GET_GENRES}>
-          {({ loading, data }) => {
-            const genres = L.get(data, 'genres')
-            if (!loading && !genres) {
-              return null
-            }
-            return (
-              <GenresSection
-                genres={genres}
-                isLoading={loading}
-                onPressItem={this.handlePressGenreItem}
-              />
-            )
-          }}
-        </Query>
+        <Container>
+          <Query<Top50Data> query={GET_TOP50}>
+            {({ loading, data }) => {
+              const playlist: Playlist | undefined = L.get(data, 'top50.tracks')
+              if (!loading && !playlist) {
+                return null
+              }
+              return (
+                <Top50Section
+                  playlist={playlist}
+                  isLoading={loading}
+                  onPress={this.handlePressTop50}
+                />
+              )
+            }}
+          </Query>
+          <Query<GenreData> query={GET_GENRES}>
+            {({ loading, data }) => {
+              const genres = L.get(data, 'genres')
+              if (!loading && !genres) {
+                return null
+              }
+              return (
+                <GenresSection
+                  genres={genres}
+                  isLoading={loading}
+                  onPressItem={this.handlePressGenreItem}
+                />
+              )
+            }}
+          </Query>
+        </Container>
       </SafeView>
     )
   }

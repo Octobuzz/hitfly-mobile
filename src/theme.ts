@@ -9,6 +9,7 @@ const theme: ITheme = {
     textMain: '#313131',
     textAlt: '#606060',
     textGray: '#a6a6a6',
+    textWhite: '#ffffff',
     inputBorder: '#E4E4E4',
   },
 
