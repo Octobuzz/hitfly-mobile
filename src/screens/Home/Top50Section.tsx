@@ -1,7 +1,8 @@
 import React from 'react'
 import { Loader } from 'src/components'
-import SectionHeader from './SectionHeader'
 import { images } from 'src/constants'
+import { Playlist } from 'src/apollo'
+import SectionHeader from './SectionHeader'
 import styled from 'src/styled-components'
 
 const Wrapper = styled.View``
@@ -21,30 +22,32 @@ const BackgroundImage = styled.Image.attrs(() => ({
   bottom: 0;
 `
 
-// TODO: добавить тип
-interface Playlist {
-  some: any
-}
-
 interface Props {
   isLoading?: boolean
-  playlist: Playlist
+  playlist?: Playlist
   onPress: (playlist: Playlist) => void
 }
 
-class Top50Section extends React.Component<Props> {
-  render() {
-    const { isLoading } = this.props
-    return (
-      <Wrapper>
-        <SectionHeader title="Топ 50" subtitle="Рейтинг лучших музыкантов" />
-        <Inner>
-          <BackgroundImage />
-          {isLoading && <Loader isFilled />}
-        </Inner>
-      </Wrapper>
-    )
-  }
+const Top50Section: React.FC<Props> = ({ isLoading, onPress, playlist }) => {
+  const handlePress = React.useCallback(() => {
+    if (playlist) {
+      onPress(playlist)
+    }
+  }, [onPress, playlist])
+
+  return (
+    <Wrapper>
+      <SectionHeader
+        onPress={handlePress}
+        title="Топ 50"
+        subtitle="Рейтинг лучших музыкантов"
+      />
+      <Inner onPress={handlePress}>
+        <BackgroundImage />
+        {isLoading && <Loader isFilled />}
+      </Inner>
+    </Wrapper>
+  )
 }
 
 export default Top50Section

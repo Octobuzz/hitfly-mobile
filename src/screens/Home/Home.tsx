@@ -6,15 +6,21 @@ import gql from 'graphql-tag'
 import GenresSection from './GenresSection'
 import Top50Section from './Top50Section'
 import { SafeView } from 'src/components'
-import { Genre } from 'src/apollo'
+import { Genre, Playlist } from 'src/apollo'
 
 interface GenreData {
   genres?: Genre[]
 }
 
+interface Top50Data {
+  top50?: {
+    playlist: Playlist
+  }
+}
+
 const GET_GENRES = gql`
   {
-    genres: genres {
+    genres: genre {
       id
       title: name
       imageUrl: image
@@ -24,9 +30,9 @@ const GET_GENRES = gql`
 
 const GET_TOP50 = gql`
   query {
-    GetTopFifty(limit: 50, page: 0) {
-      data {
-        trackLength: length
+    top50: GetTopFifty(limit: 50, page: 0) {
+      tracks: data {
+        length
       }
     }
   }
@@ -40,15 +46,14 @@ class Home extends React.Component<NavigationScreenProps> {
   render() {
     return (
       <SafeView>
-        <Query<GenreData> query={GET_TOP50}>
+        <Query<Top50Data> query={GET_TOP50}>
           {({ loading, data }) => {
-            const playlist = L.get(data, ['GetTopFifty', 'data'])
+            const playlist: Playlist | undefined = L.get(data, 'top50.tracks')
             // if (!loading && !playlist) {
             //   return null
             // }
             return (
               <Top50Section
-                // @ts-ignore
                 playlist={playlist}
                 isLoading={loading}
                 onPress={this.handlePressTop50}

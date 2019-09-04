@@ -42,3 +42,5 @@ export interface Track {
   isMine: boolean // my
   commentedByMe: boolean
 }
+
+export type Playlist = Track[]
