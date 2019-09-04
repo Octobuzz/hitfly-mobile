@@ -6,3 +6,15 @@ export interface Genre {
   countTracks: number
   countListenedByUser?: number
 }
+
+export type SocialType =
+  | 'facebook'
+  | 'vkontakte'
+  | 'instagram'
+  | 'odnoklassniki'
+
+export interface SocialConnect {
+  url: string
+  type: SocialType
+  isLinked: boolean
+}
