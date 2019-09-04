@@ -29,3 +29,63 @@ export const transformFormErrors = (
 
   return result
 }
+
+export const getNameForCount = L.curry(
+  (
+    {
+      nominative,
+      genitive,
+      genitiveMultiple,
+    }: { nominative: string; genitive: string; genitiveMultiple: string },
+    count: number,
+  ) => {
+    if (count > 10 && count < 20) {
+      return genitiveMultiple
+    }
+
+    const mod10 = count % 10
+    return mod10 === 1
+      ? nominative
+      : [2, 3, 4].includes(mod10)
+      ? genitive
+      : genitiveMultiple
+  },
+)
+
+const getNameForHours = getNameForCount({
+  nominative: 'час',
+  genitive: 'часа',
+  genitiveMultiple: 'часов',
+})
+const getNameForMinutes = getNameForCount({
+  nominative: 'минута',
+  genitive: 'минуты',
+  genitiveMultiple: 'минут',
+})
+const getNameForSeconds = getNameForCount({
+  nominative: 'секунда',
+  genitive: 'секунды',
+  genitiveMultiple: 'секунд',
+})
+
+export const formatTimeDurationForPlaylist = (
+  initialSeconds: number,
+  withSeconds?: boolean,
+): string => {
+  const result: string[] = []
+  const hours = Math.trunc(initialSeconds / 3600)
+
+  if (hours > 0) {
+    result.push(`${hours} ${getNameForHours(hours)}`)
+  }
+  const minutes = Math.trunc((initialSeconds % 3600) / 60)
+  if (minutes > 0) {
+    result.push(`${minutes} ${getNameForMinutes(minutes)}`)
+  }
+  const seconds = initialSeconds % 60
+  if (withSeconds && seconds > 0) {
+    result.push(`${seconds} ${getNameForSeconds(seconds)}`)
+  }
+
+  return result.join(' ')
+}

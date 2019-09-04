@@ -1,8 +1,10 @@
+import L from 'lodash'
 import React from 'react'
 import { Loader, TextBase } from 'src/components'
 import { images } from 'src/constants'
 import { Playlist } from 'src/apollo'
 import { PlaylistHeader, SectionWrapper } from './components'
+import { helpers } from 'src/utils'
 import styled from 'src/styled-components'
 
 const Inner = styled.TouchableOpacity`
@@ -29,7 +31,7 @@ const BottomText = styled(TextBase)`
 
 interface Props {
   isLoading?: boolean
-  playlist?: Playlist
+  playlist: Playlist
   onPress: (playlist: Playlist) => void
 }
 
@@ -39,6 +41,12 @@ const Top50Section: React.FC<Props> = ({ isLoading, onPress, playlist }) => {
       onPress(playlist)
     }
   }, [onPress, playlist])
+
+  const bottomText = React.useMemo(() => {
+    const fullLength: number = L.sumBy(playlist, 'length')
+    const formattedTime = helpers.formatTimeDurationForPlaylist(fullLength)
+    return formattedTime
+  }, [playlist])
 
   return (
     <SectionWrapper>
@@ -52,7 +60,7 @@ const Top50Section: React.FC<Props> = ({ isLoading, onPress, playlist }) => {
               title="Топ 50"
               subtitle="Рейтинг лучших музыкантов"
             />
-            <BottomText>test</BottomText>
+            <BottomText>{bottomText}</BottomText>
           </>
         )}
       </Inner>

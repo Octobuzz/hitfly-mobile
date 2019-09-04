@@ -54,7 +54,7 @@ class Home extends React.Component<NavigationScreenProps> {
         <Container>
           <Query<Top50Data> query={GET_TOP50}>
             {({ loading, data }) => {
-              const playlist: Playlist | undefined = L.get(data, 'top50.tracks')
+              const playlist = L.get(data, 'top50.items')
               if (!loading && !playlist) {
                 return null
               }
