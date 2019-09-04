@@ -1,15 +1,9 @@
 import React from 'react'
 import { NavigationScreenProps } from 'react-navigation'
 import { View, HelperText, SafeView } from 'src/components'
-import ForgotPasswordForm, { ForgotPasswordValues } from './ForgotPasswordForm'
-import { ROUTES } from 'src/navigation'
+import ForgotPasswordForm from './ForgotPasswordFormContainer'
 
 class ForgotPassword extends React.Component<NavigationScreenProps> {
-  private handleSubmit = ({ email }: ForgotPasswordValues): void => {
-    const { navigation } = this.props
-    navigation.navigate(ROUTES.AUTH.RECOVERY_INFO, { email })
-  }
-
   render() {
     return (
       <SafeView>
@@ -18,7 +12,7 @@ class ForgotPassword extends React.Component<NavigationScreenProps> {
             Введите ваш e–mail и мы отправим вам письмо с инструкцией по
             восстановлению пароля
           </HelperText>
-          <ForgotPasswordForm onSubmit={this.handleSubmit} />
+          <ForgotPasswordForm />
         </View>
       </SafeView>
     )
