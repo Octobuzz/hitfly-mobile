@@ -9,7 +9,7 @@ import {
   Stretcher,
 } from 'src/components'
 import { SocialAuth } from 'src/containers'
-import LoginForm from './LoginForm'
+import LoginForm from './LoginFormContainer'
 import { ROUTES } from 'src/navigation'
 import styled from 'src/styled-components'
 
@@ -37,8 +37,6 @@ const BottomLinkText = styled(BottomText)`
 `
 
 class Login extends React.Component<NavigationScreenProps> {
-  private handleSubmit = () => {}
-
   private navigateToRegistration = (): void => {
     const { navigation } = this.props
     navigation.navigate(ROUTES.AUTH.REGISTER)
@@ -59,10 +57,7 @@ class Login extends React.Component<NavigationScreenProps> {
       <SafeView>
         <View>
           <IndentedSocialAuth bottomText="или войдите через почту" />
-          <LoginForm
-            onPressFogrotPassword={this.navigateToPasswordRecovery}
-            onSubmit={this.handleSubmit}
-          />
+          <LoginForm onPressFogrotPassword={this.navigateToPasswordRecovery} />
           <IndentedButton
             onPress={this.navigateToRegistration}
             title="Зарегистрироваться"
