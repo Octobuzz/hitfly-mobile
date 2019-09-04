@@ -14,8 +14,12 @@ const validationSchema = Yup.object().shape({
   email: Yup.string()
     .required(strings.validation.required)
     .email(strings.validation.wrongEmail),
-  // TODO: добавить валидацию на формат пароля
-  password: Yup.string().required(strings.validation.required),
+  password: Yup.string()
+    .required(strings.validation.required)
+    .matches(
+      /(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])/,
+      strings.validation.passwordFormat,
+    ),
   passwordRepeat: Yup.string().oneOf(
     [Yup.ref('password'), null],
     strings.validation.passwordsDontMatch,
@@ -54,11 +58,9 @@ export default R.compose(
       const { mutate, navigation } = props
       try {
         const result = await mutate({ variables: payload })
-        if (result && result.data) {
-          // TODO: проверить когда бэк заработает
-          //   console.tron.log(result)
-          // @ts-ignore
-          await storage.setItem(storageKeys.AUTH_TOKEN, result.data.token)
+        const token = R.path(['data', 'register', 'token'], result)
+        if (token) {
+          await storage.setItem(storageKeys.AUTH_TOKEN, token as string)
           // TODO: это костыль, удалить когда бэк станет лучше
           await storage.setItem(storageKeys.GRAPHQL_ENDPOINT, 'user')
           navigation.navigate(ROUTES.AUTH.SELECT_GENRE)
@@ -73,8 +75,8 @@ export default R.compose(
     mapPropsToValues: R.always({
       gender: 'M',
       email: 'm@m.ru',
-      password: 'qwer1245tfWe#',
-      passwordRepeat: 'qwer1245tfWe#',
+      password: '',
+      passwordRepeat: '',
     }),
   }),
   // @ts-ignore
