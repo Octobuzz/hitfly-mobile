@@ -1,7 +1,7 @@
 import R from 'ramda'
 import React from 'react'
 import { FlatList } from 'react-native'
-import { View, Loader, GenreItem, IGenreItem } from 'src/components'
+import { Loader, GenreItem, IGenreItem } from 'src/components'
 import styled from 'src/styled-components'
 import SectionHeader from './SectionHeader'
 

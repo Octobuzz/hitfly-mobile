@@ -1,3 +1,6 @@
+// home sections
+export const TOP50_BACKGROUND = require('../assets/images/home_sections/top50_background.png')
+
 // genres
 export const GENRE_INACTIVE = require('../assets/images/genres/genre_inactive.png')
 export const GENRE_ACTIVE = require('../assets/images/genres/genre_active.png')
