@@ -3,10 +3,6 @@ import theme from 'src/theme'
 export const stackConfig = {
   defaultNavigationOptions: {
     headerBackTitle: null,
-    headerStyle: {
-      borderBottomWidth: 0,
-      elevation: 0,
-    },
     headerTintColor: theme.colors.textMain,
     headerTitleStyle: {
       fontFamily: theme.fonts.bold,
