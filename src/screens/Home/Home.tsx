@@ -3,15 +3,17 @@ import React from 'react'
 import { NavigationScreenProps } from 'react-navigation'
 import { Query } from '@apollo/react-components'
 import gql from 'graphql-tag'
+import RecommendedSection from './RecommendedSection'
 import GenresSection from './GenresSection'
 import Top50Section from './Top50Section'
 import { SafeView } from 'src/components'
-import { Genre, Playlist, Pagination } from 'src/apollo'
+import { Genre, Playlist, Pagination, Collection } from 'src/apollo'
 import styled from 'src/styled-components'
 
 const Container = styled.ScrollView.attrs(() => ({
   showsVerticalScrollIndicator: false,
 }))`
+  padding-top: 24px;
   flex: 1;
 `
 
@@ -21,6 +23,10 @@ interface GenreData {
 
 interface Top50Data {
   top50?: Pagination<Playlist>
+}
+
+interface RecommendedData {
+  collections?: Pagination<Collection>
 }
 
 const GET_GENRES = gql`
@@ -43,15 +49,49 @@ const GET_TOP50 = gql`
   }
 `
 
+const GET_RECOMMENDED = gql`
+  query {
+    collections(limit: 10, page: 1, filters: { collection: true }) {
+      items: data {
+        id
+        images: image(sizes: [size_290x290]) {
+          imageUrl: url
+        }
+        title
+        tracksCountInPlaylist: tracksCount
+      }
+    }
+  }
+`
+
 class Home extends React.Component<NavigationScreenProps> {
   private handlePressGenreItem = (item: Genre) => {}
 
   private handlePressTop50 = (playlist: Playlist) => {}
 
+  private handlePressRecommendedHeader = () => {}
+  private handlePressRecommendedCollection = (collection: Collection) => {}
+
   render() {
     return (
       <SafeView>
         <Container>
+          <Query<RecommendedData> query={GET_RECOMMENDED}>
+            {({ loading, data }) => {
+              const collections = L.get(data, 'collections.items')
+              if (!loading && !collections) {
+                return null
+              }
+              return (
+                <RecommendedSection
+                  collections={collections}
+                  isLoading={loading}
+                  onPressHeader={this.handlePressRecommendedHeader}
+                  onPressCollection={this.handlePressRecommendedCollection}
+                />
+              )
+            }}
+          </Query>
           <Query<Top50Data> query={GET_TOP50}>
             {({ loading, data }) => {
               const playlist = L.get(data, 'top50.items')

@@ -34,7 +34,7 @@ export interface Track {
   fileUrl: string // filename
   isFavourite: boolean // userFavourite
   favouritesCount: number
-  userPlayLists: any // не знаю что это  TODO: добавить Collection[]
+  userPlayLists: Collection[] // не знаю что это
   musicWave: number[]
   cover: any // TODO: добавить ImageSizesType[]
   comments: any // TODO: добавить CommentTrack[]
@@ -45,6 +45,11 @@ export interface Track {
 
 export type Playlist = Track[]
 
+export interface Image {
+  sizeName: string // size
+  imageUrl: string // url
+}
+
 export interface Pagination<T> {
   items: T[] // data
   total: number
@@ -54,4 +59,20 @@ export interface Pagination<T> {
   to: number
   pagesCount: number // last_page
   hasMorePages: boolean // has_more_pages
+}
+
+export interface Collection {
+  id: number
+  title: string
+  isCreatedByAdmin: boolean // is_admin
+  images: Image[] // image
+  tracks: Playlist
+  user: any // TODO: добавить User
+  isFavourite: boolean // userFavourite
+  favouritesCount: number
+  isSet: boolean
+  isMine: boolean // my
+  tracksTime: number
+  tracksCountInCollection: number // countTracks
+  tracksCountInPlaylist: number // tracksCount
 }
