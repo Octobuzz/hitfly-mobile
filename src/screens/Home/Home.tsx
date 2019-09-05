@@ -54,8 +54,8 @@ const GET_RECOMMENDED = gql`
     collections(limit: 10, page: 1, filters: { collection: true }) {
       items: data {
         id
-        image(sizes: [size_290x290]) {
-          url
+        images: image(sizes: [size_290x290]) {
+          imageUrl: url
         }
         title
         tracksCountInPlaylist: tracksCount

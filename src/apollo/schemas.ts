@@ -45,6 +45,11 @@ export interface Track {
 
 export type Playlist = Track[]
 
+export interface Image {
+  sizeName: string // size
+  imageUrl: string // url
+}
+
 export interface Pagination<T> {
   items: T[] // data
   total: number
@@ -60,6 +65,7 @@ export interface Collection {
   id: number
   title: string
   isCreatedByAdmin: boolean // is_admin
+  images: Image[] // image
   tracks: Playlist
   user: any // TODO: добавить User
   isFavourite: boolean // userFavourite

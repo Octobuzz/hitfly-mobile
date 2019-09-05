@@ -1,9 +1,8 @@
-import L from 'lodash'
 import React from 'react'
 import { FlatList } from 'react-native'
+import FastImage from 'react-native-fast-image'
 import { Loader, TextBase } from 'src/components'
-import { images } from 'src/constants'
-import { Playlist, Collection } from 'src/apollo'
+import { Collection } from 'src/apollo'
 import { SectionHeader, SectionWrapper } from './components'
 import { helpers } from 'src/utils'
 import styled from 'src/styled-components'
@@ -16,17 +15,24 @@ const ItemWrapper = styled.TouchableOpacity`
   height: ${ITEM_HEIGHT}px;
   width: ${ITEM_WIDTH}px;
   padding: 16px;
+  align-items: flex-end;
   justify-content: space-between;
+  border-radius: 4px;
+  overflow: hidden;
 `
 
-const BackgroundImage = styled.Image.attrs(() => ({
-  source: images.TOP50_BACKGROUND,
-}))`
+const BackgroundImage = styled(FastImage)`
   position: absolute;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
+`
+
+const TopText = styled(TextBase)`
+  font-family: ${({ theme }) => theme.fonts.bold};
+  color: ${({ theme }) => theme.colors.textWhite};
+  font-size: 12px;
 `
 
 const BottomText = styled(TextBase)`
@@ -49,17 +55,20 @@ const RecommendedItem: React.FC<RecommendedItemProps> = ({
   collection,
   onPress,
 }) => {
-  const bottomText = getNameForTrack(collection.tracksCountInPlaylist)
-
   const handlePress = React.useCallback(() => {
     if (collection) {
       onPress(collection)
     }
   }, [onPress, collection])
 
+  const { tracksCountInPlaylist, title, images } = collection
+  const bottomText = `${tracksCountInPlaylist} ${getNameForTrack(
+    tracksCountInPlaylist,
+  )}`
   return (
     <ItemWrapper onPress={handlePress}>
-      <BackgroundImage />
+      <BackgroundImage source={{ uri: images[0].imageUrl }} />
+      <TopText>{title}</TopText>
       <BottomText>{bottomText}</BottomText>
     </ItemWrapper>
   )
