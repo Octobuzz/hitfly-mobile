@@ -36,12 +36,13 @@ interface Props {
 
 class GenresSection extends React.Component<Props> {
   // TODO: мемоизация
-  private getPairedGenres = (): GenrePair[] | void => {
+  private getPairedGenres = (): GenrePair[] | null => {
     const { genres } = this.props
     if (genres) {
       const pairedGenres = L.chunk(genres, 2) as GenrePair[]
       return pairedGenres
     }
+    return null
   }
 
   private keyExtractor = (item: GenrePair): string => item[0].id.toString()
@@ -76,14 +77,12 @@ class GenresSection extends React.Component<Props> {
         <SectionHeader title="Жанры" />
         <ScrollWrapper>
           {isLoading && <Loader isAbsolute />}
-          {pairedGenres && (
-            <Scroll
-              getItemLayout={this.getItemLayout}
-              renderItem={this.renderGenre}
-              keyExtractor={this.keyExtractor}
-              data={pairedGenres}
-            />
-          )}
+          <Scroll
+            getItemLayout={this.getItemLayout}
+            renderItem={this.renderGenre}
+            keyExtractor={this.keyExtractor}
+            data={pairedGenres}
+          />
         </ScrollWrapper>
       </SectionWrapper>
     )
