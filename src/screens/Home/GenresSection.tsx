@@ -15,10 +15,10 @@ const ScrollWrapper = styled.View`
 const Scroll = styled(FlatList as new () => FlatList<GenrePair>).attrs(() => ({
   horizontal: true,
   initialNumToRender: 5,
-  contentInset: { left: 12, right: 12 },
-  contentOffset: { x: -12, y: 0 },
   showsHorizontalScrollIndicator: false,
-}))``
+}))`
+  padding-horizontal: 12px;
+`
 
 const Column = styled.View`
   flex: 1;

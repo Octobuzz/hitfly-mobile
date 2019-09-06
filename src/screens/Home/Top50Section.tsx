@@ -9,9 +9,10 @@ import styled from 'src/styled-components'
 
 const Inner = styled.TouchableOpacity`
   height: 160px;
-  margin-horizontal: 16px;
   padding: 16px;
   justify-content: space-between;
+  overflow: hidden;
+  border-radius: 4px;
 `
 
 const BackgroundImage = styled.Image.attrs(() => ({
@@ -49,7 +50,7 @@ const Top50Section: React.FC<Props> = ({ isLoading, onPress, playlist }) => {
   }, [playlist])
 
   return (
-    <SectionWrapper>
+    <SectionWrapper withPadding>
       <Inner onPress={handlePress}>
         <BackgroundImage />
         {isLoading ? (

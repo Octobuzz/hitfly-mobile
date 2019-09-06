@@ -1,10 +1,10 @@
 import React from 'react'
 import { NavigationScreenProps } from 'react-navigation'
-import { View, Stretcher, Button, SafeView } from 'src/components'
+import { ScrollView, Stretcher, Button, SafeView } from 'src/components'
 import { images } from 'src/constants'
-import styled from 'src/styled-components'
 import { ROUTES } from 'src/navigation'
 import Features, { Feature } from './Features'
+import styled from 'src/styled-components'
 
 const Logo = styled.Image.attrs(() => ({
   source: images.WELCOME_LOGO,
@@ -41,7 +41,7 @@ class Welcome extends React.Component<NavigationScreenProps> {
   render() {
     return (
       <SafeView>
-        <View>
+        <ScrollView>
           <Logo />
           <Features features={this.features} />
           <Stretcher />
@@ -50,7 +50,7 @@ class Welcome extends React.Component<NavigationScreenProps> {
             type="outline"
             title="Начать слушать музыку"
           />
-        </View>
+        </ScrollView>
       </SafeView>
     )
   }
