@@ -21,13 +21,29 @@ export interface SocialConnect {
   isLinked: boolean // connected
 }
 
+export interface MusicGroup {
+  id: number
+  title: string // name
+  cover: Image[] // avatarGroup
+  careerStartYear: string
+  genres: Genre[]
+  createdBy: any // creatorGroup // TODO: добавить User
+  description: string
+  location: any // TODO: добавить CityType
+  followersCount: number
+  activeMembers: any // TODO: добавить User[]
+  socialLinks: any // TODO: добавить SocialLinks[]
+  isMeCreator: boolean // isCreator
+  isWatching: boolean // iWatch
+}
+
 export interface Track {
   id: number
   title: string // trackName
   genres: Genre[]
   album: any // TODO: добавить Album
   uploadedBy: any // user TODO: добавить User
-  group: any // musucGroup TODO: добавить MusicGroup
+  group?: MusicGroup // musucGroup
   singer: string
   date: string // trackDate
   songText: string
@@ -36,7 +52,7 @@ export interface Track {
   favouritesCount: number
   userPlayLists: Collection[] // не знаю что это
   musicWave: number[]
-  cover: any // TODO: добавить ImageSizesType[]
+  cover: Image[]
   comments: any // TODO: добавить CommentTrack[]
   length?: number
   isMine: boolean // my

@@ -30,7 +30,6 @@ target 'hitfly' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
   # Pods for hitfly
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
   use_native_modules!
 
 
