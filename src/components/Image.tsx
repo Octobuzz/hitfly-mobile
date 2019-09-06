@@ -3,6 +3,7 @@ import FastImage, { FastImageProperties } from 'react-native-fast-image'
 // @ts-ignore https://github.com/react-native-community/react-native-svg/issues/1089
 import { SvgXml } from 'react-native-svg'
 
+// В картинках есть теги <style> - их надо удлаить ибо ошибка
 const fetchText = async (uri: string): Promise<string> => {
   try {
     const response = await fetch(uri)
@@ -14,7 +15,6 @@ const fetchText = async (uri: string): Promise<string> => {
 
 const removeStylesFromSvg = (svg: string): string => {
   const tmp = svg.replace(/<style>.*<\/style>/gi, '')
-  console.tron.log(tmp)
   return tmp
 }
 
