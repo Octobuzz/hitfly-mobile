@@ -6,7 +6,7 @@ import gql from 'graphql-tag'
 import RecommendedSection from './RecommendedSection'
 import GenresSection from './GenresSection'
 import Top50Section from './Top50Section'
-import NewSection from './NewSection'
+import TracksSection from './TracksSection'
 import { SafeView } from 'src/components'
 import { Genre, Playlist, Pagination, Collection, Track } from 'src/apollo'
 import styled from 'src/styled-components'
@@ -136,7 +136,8 @@ class Home extends React.Component<NavigationScreenProps> {
                 return null
               }
               return (
-                <NewSection
+                <TracksSection
+                  title="Новое"
                   playlist={playlist}
                   isLoading={loading}
                   onPressTrack={this.handlePressNewTrack}

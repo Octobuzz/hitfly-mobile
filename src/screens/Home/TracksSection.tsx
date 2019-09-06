@@ -68,13 +68,15 @@ const Scroll = styled(FlatList as new () => FlatList<Track>).attrs(() => ({
 }))``
 
 interface Props {
+  title: string
+  subtitle?: string
   isLoading?: boolean
   playlist: Playlist
   onPressTrack: (track: Track) => void
   onPressHeader: () => void
 }
 
-class NewSection extends React.Component<Props> {
+class TracksSection extends React.Component<Props> {
   private keyExtractor = (item: Track): string => item.id.toString()
 
   private renderPlaylist = ({ item }: { item: Track }): JSX.Element => {
@@ -99,10 +101,14 @@ class NewSection extends React.Component<Props> {
   }
 
   render() {
-    const { isLoading, playlist, onPressHeader } = this.props
+    const { isLoading, playlist, onPressHeader, title, subtitle } = this.props
     return (
       <SectionWrapper>
-        <SectionHeader onPress={onPressHeader} title="Новое" />
+        <SectionHeader
+          onPress={onPressHeader}
+          title={title}
+          subtitle={subtitle}
+        />
         <ScrollWrapper>
           {isLoading && <Loader isAbsolute />}
           <Scroll
@@ -117,4 +123,4 @@ class NewSection extends React.Component<Props> {
   }
 }
 
-export default NewSection
+export default TracksSection
