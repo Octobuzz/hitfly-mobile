@@ -45,12 +45,26 @@ const GET_TOP50 = gql`
   }
 `
 
-interface RecommendedData {
+interface CollectionsData {
   collections?: Pagination<Collection>
 }
 const GET_RECOMMENDED = gql`
   query {
     collections(limit: 10, page: 1, filters: { collection: true }) {
+      items: data {
+        id
+        images: image(sizes: [size_290x290]) {
+          imageUrl: url
+        }
+        title
+        tracksCountInPlaylist: tracksCount
+      }
+    }
+  }
+`
+const GET_MUSIC_FAN = gql`
+  query {
+    collections(limit: 10, page: 1, filters: { superMusicFan: true }) {
       items: data {
         id
         images: image(sizes: [size_290x290]) {
@@ -128,7 +142,7 @@ class Home extends React.Component<NavigationScreenProps> {
     return (
       <SafeView>
         <Container>
-          <Query<RecommendedData> query={GET_RECOMMENDED}>
+          <Query<CollectionsData> query={GET_RECOMMENDED}>
             {({ loading, data }) => {
               const collections = L.get(data, 'collections.items')
               if (!loading && !collections) {
@@ -178,6 +192,24 @@ class Home extends React.Component<NavigationScreenProps> {
                   playlist={playlist}
                   isLoading={loading}
                   onPressTrack={this.handlePressNewTrack}
+                />
+              )
+            }}
+          </Query>
+          <Query<CollectionsData> query={GET_MUSIC_FAN}>
+            {({ loading, data }) => {
+              const collections = L.get(data, 'collections.items')
+              if (!loading && !collections) {
+                return null
+              }
+              return (
+                <CollectionSection
+                  title="Супер меломан 🔥"
+                  subtitle="«Русская рулетка» треков"
+                  isLoading={loading}
+                  collections={collections}
+                  onPressHeader={this.handlePressRecommendedHeader}
+                  onPressCollection={this.handlePressRecommendedCollection}
                 />
               )
             }}
