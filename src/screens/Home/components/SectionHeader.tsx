@@ -31,7 +31,7 @@ interface Props {
 }
 
 const SectionHeader: React.FC<Props> = ({ title, subtitle, onPress }) => (
-  <Wrapper onPress={onPress} disabled={!!onPress}>
+  <Wrapper onPress={onPress} disabled={!onPress}>
     <Inner>
       <TitleText>{title}</TitleText>
       <Icon name="arrow-forward" size={20} />
