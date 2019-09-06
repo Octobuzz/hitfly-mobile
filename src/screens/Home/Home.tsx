@@ -5,10 +5,11 @@ import { Query } from '@apollo/react-components'
 import gql from 'graphql-tag'
 import RecommendedSection from './RecommendedSection'
 import GenresSection from './GenresSection'
-import Top50Section from './Top50Section'
+import PlaylistSection from './PlaylistSection'
 import TracksSection from './TracksSection'
 import { SafeView } from 'src/components'
 import { Genre, Playlist, Pagination, Collection, Track } from 'src/apollo'
+import { images } from 'src/constants'
 import styled from 'src/styled-components'
 
 const Container = styled.ScrollView.attrs(() => ({
@@ -31,12 +32,12 @@ const GET_GENRES = gql`
   }
 `
 
-interface Top50Data {
-  top50?: Pagination<Playlist>
+interface PlaylistData {
+  playlist?: Pagination<Playlist>
 }
 const GET_TOP50 = gql`
   query {
-    top50: GetTopFifty(limit: 50, page: 0) {
+    playlist: GetTopFifty(limit: 50, page: 0) {
       items: data {
         length
       }
@@ -101,16 +102,27 @@ const GET_TOP_WEEK_TRACKS = gql`
   }
 `
 
+const GET_LISTENED_NOW = gql`
+  query {
+    playlist: GetTopFifty(limit: 0, page: 0) {
+      total
+    }
+  }
+`
+
 class Home extends React.Component<NavigationScreenProps> {
   private handlePressGenreItem = (item: Genre) => {}
 
-  private handlePressTop50 = (playlist: Playlist) => {}
+  private handlePressTop50 = () => {}
+
+  private handlePressListenedNow = () => {}
 
   private handlePressRecommendedHeader = () => {}
   private handlePressRecommendedCollection = (collection: Collection) => {}
 
-  private handlePressNewSectionHeader = () => {}
   private handlePressNewTrack = (track: Track) => {}
+
+  private handlePressTopWeekTrack = (track: Track) => {}
 
   render() {
     return (
@@ -132,21 +144,26 @@ class Home extends React.Component<NavigationScreenProps> {
               )
             }}
           </Query>
-          <Query<Top50Data> query={GET_TOP50}>
+          <Query<PlaylistData> query={GET_TOP50}>
             {({ loading, data }) => {
-              const playlist = L.get(data, 'top50.items')
+              const playlist = L.get(data, 'playlist.items')
               if (!loading && !playlist) {
                 return null
               }
               return (
-                <Top50Section
+                <PlaylistSection
+                  imageSource={images.TOP50_BACKGROUND}
+                  title="Топ 50"
+                  subtitle="Рейтинг лучших музыкантов"
                   playlist={playlist}
                   isLoading={loading}
+                  bottomTextType="tracksLength"
                   onPress={this.handlePressTop50}
                 />
               )
             }}
           </Query>
+
           <Query<TracksData> query={GET_NEW_TRACKS}>
             {({ loading, data }) => {
               const playlist = L.get(data, 'tracks.items')
@@ -159,7 +176,6 @@ class Home extends React.Component<NavigationScreenProps> {
                   playlist={playlist}
                   isLoading={loading}
                   onPressTrack={this.handlePressNewTrack}
-                  onPressHeader={this.handlePressNewSectionHeader}
                 />
               )
             }}
@@ -179,6 +195,22 @@ class Home extends React.Component<NavigationScreenProps> {
               )
             }}
           </Query>
+          <Query<PlaylistData> query={GET_LISTENED_NOW}>
+            {({ loading, data }) => {
+              const total = L.get(data, 'playlist.total')
+              return (
+                <PlaylistSection
+                  imageSource={images.LISTENED_NOW}
+                  title="Сейчас слушают"
+                  subtitle="Обновлен вчера" // TODO: это вычислять по дате?
+                  isLoading={loading}
+                  bottomTextType="tracksCount"
+                  tracksCount={total}
+                  onPress={this.handlePressListenedNow}
+                />
+              )
+            }}
+          </Query>
           <Query<TracksData> query={GET_TOP_WEEK_TRACKS}>
             {({ loading, data }) => {
               const playlist = L.get(data, 'tracks.items')
@@ -191,8 +223,7 @@ class Home extends React.Component<NavigationScreenProps> {
                   subtitle="Треки, которые неожиданно поднялись в чарте"
                   playlist={playlist}
                   isLoading={loading}
-                  onPressTrack={this.handlePressNewTrack}
-                  onPressHeader={this.handlePressNewSectionHeader}
+                  onPressTrack={this.handlePressTopWeekTrack}
                 />
               )
             }}
