@@ -89,3 +89,14 @@ export const formatTimeDurationForPlaylist = (
 
   return result.join(' ')
 }
+
+const getNameForTrack = getNameForCount({
+  nominative: 'песня',
+  genitive: 'песни',
+  genitiveMultiple: 'песен',
+})
+
+export const formatTracksCount = (count: number): string => {
+  const name = getNameForTrack(count)
+  return `${count} ${name}`
+}

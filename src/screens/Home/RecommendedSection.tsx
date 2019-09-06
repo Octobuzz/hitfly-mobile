@@ -40,12 +40,6 @@ const BottomText = styled(TextBase)`
   font-size: 12px;
 `
 
-const getNameForTrack = helpers.getNameForCount({
-  nominative: 'песня',
-  genitive: 'песни',
-  genitiveMultiple: 'песен',
-})
-
 interface RecommendedItemProps {
   collection: Collection
   onPress: (collection: Collection) => void
@@ -62,9 +56,7 @@ const RecommendedItem: React.FC<RecommendedItemProps> = ({
   }, [onPress, collection])
 
   const { tracksCountInPlaylist, title, images } = collection
-  const bottomText = `${tracksCountInPlaylist} ${getNameForTrack(
-    tracksCountInPlaylist,
-  )}`
+  const bottomText = helpers.formatTracksCount(tracksCountInPlaylist)
   return (
     <ItemWrapper onPress={handlePress}>
       <BackgroundImage source={{ uri: images[0].imageUrl }} />

@@ -73,7 +73,6 @@ interface Props {
   isLoading?: boolean
   playlist: Playlist
   onPressTrack: (track: Track) => void
-  onPressHeader: () => void
 }
 
 class TracksSection extends React.Component<Props> {
@@ -101,14 +100,10 @@ class TracksSection extends React.Component<Props> {
   }
 
   render() {
-    const { isLoading, playlist, onPressHeader, title, subtitle } = this.props
+    const { isLoading, playlist, title, subtitle } = this.props
     return (
       <SectionWrapper>
-        <SectionHeader
-          onPress={onPressHeader}
-          title={title}
-          subtitle={subtitle}
-        />
+        <SectionHeader title={title} subtitle={subtitle} />
         <ScrollWrapper>
           {isLoading && <Loader isAbsolute />}
           <Scroll

@@ -1,7 +1,7 @@
 import L from 'lodash'
 import React from 'react'
+import { ImageSourcePropType } from 'react-native'
 import { Loader, TextBase } from 'src/components'
-import { images } from 'src/constants'
 import { Playlist } from 'src/apollo'
 import { PlaylistHeader, SectionWrapper } from './components'
 import { helpers } from 'src/utils'
@@ -15,9 +15,7 @@ const Inner = styled.TouchableOpacity`
   border-radius: 4px;
 `
 
-const BackgroundImage = styled.Image.attrs(() => ({
-  source: images.TOP50_BACKGROUND,
-}))`
+const BackgroundImage = styled.Image`
   position: absolute;
   left: 0;
   top: 0;
@@ -30,13 +28,29 @@ const BottomText = styled(TextBase)`
   font-size: 12px;
 `
 
+type BottomTextType = 'tracksCount' | 'tracksLength'
+
 interface Props {
-  isLoading?: boolean
+  title: string
+  subtitle?: string
   playlist: Playlist
+  isLoading?: boolean
+  tracksCount?: number
+  bottomTextType?: BottomTextType
+  imageSource: ImageSourcePropType
   onPress: (playlist: Playlist) => void
 }
 
-const Top50Section: React.FC<Props> = ({ isLoading, onPress, playlist }) => {
+const PlaylistSection: React.FC<Props> = ({
+  title,
+  onPress,
+  playlist,
+  subtitle,
+  isLoading,
+  tracksCount,
+  imageSource,
+  bottomTextType,
+}) => {
   const handlePress = React.useCallback(() => {
     if (playlist) {
       onPress(playlist)
@@ -44,24 +58,29 @@ const Top50Section: React.FC<Props> = ({ isLoading, onPress, playlist }) => {
   }, [onPress, playlist])
 
   const bottomText = React.useMemo(() => {
-    const fullLength: number = L.sumBy(playlist, 'length')
-    const formattedTime = helpers.formatTimeDurationForPlaylist(fullLength)
-    return formattedTime
-  }, [playlist])
+    switch (bottomTextType) {
+      case 'tracksCount': {
+        const text = helpers.formatTracksCount(tracksCount || 0)
+        return text
+      }
+      case 'tracksLength': {
+        const fullLength: number = L.sumBy(playlist, 'length')
+        const formattedTime = helpers.formatTimeDurationForPlaylist(fullLength)
+        return formattedTime
+      }
+    }
+  }, [playlist, bottomTextType, tracksCount])
 
   return (
     <SectionWrapper withPadding>
       <Inner onPress={handlePress}>
-        <BackgroundImage />
+        <BackgroundImage source={imageSource} />
         {isLoading ? (
           <Loader isAbsolute />
         ) : (
           <>
-            <PlaylistHeader
-              title="Топ 50"
-              subtitle="Рейтинг лучших музыкантов"
-            />
-            <BottomText>{bottomText}</BottomText>
+            <PlaylistHeader title={title} subtitle={subtitle} />
+            {bottomText && <BottomText>{bottomText}</BottomText>}
           </>
         )}
       </Inner>
@@ -69,4 +88,4 @@ const Top50Section: React.FC<Props> = ({ isLoading, onPress, playlist }) => {
   )
 }
 
-export default Top50Section
+export default PlaylistSection
