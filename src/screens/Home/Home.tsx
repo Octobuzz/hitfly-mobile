@@ -62,12 +62,30 @@ const GET_RECOMMENDED = gql`
   }
 `
 
-interface NewTracksData {
+interface TracksData {
   tracks?: Pagination<Track>
 }
 const GET_NEW_TRACKS = gql`
   query {
     tracks(limit: 10, page: 0) {
+      items: data {
+        id
+        title: trackName
+        cover(sizes: [size_290x290]) {
+          imageUrl: url
+        }
+        group: musicGroup {
+          title: name
+        }
+        singer
+      }
+    }
+  }
+`
+
+const GET_TOP_WEEK_TRACKS = gql`
+  query {
+    tracks: TopWeeklyQuery(limit: 10, page: 0) {
       items: data {
         id
         title: trackName
@@ -129,7 +147,7 @@ class Home extends React.Component<NavigationScreenProps> {
               )
             }}
           </Query>
-          <Query<NewTracksData> query={GET_NEW_TRACKS}>
+          <Query<TracksData> query={GET_NEW_TRACKS}>
             {({ loading, data }) => {
               const playlist = L.get(data, 'tracks.items')
               if (!loading && !playlist) {
@@ -157,6 +175,24 @@ class Home extends React.Component<NavigationScreenProps> {
                   genres={genres}
                   isLoading={loading}
                   onPressItem={this.handlePressGenreItem}
+                />
+              )
+            }}
+          </Query>
+          <Query<TracksData> query={GET_TOP_WEEK_TRACKS}>
+            {({ loading, data }) => {
+              const playlist = L.get(data, 'tracks.items')
+              if (!loading && !playlist) {
+                return null
+              }
+              return (
+                <TracksSection
+                  title="Открытие недели"
+                  subtitle="Треки, которые неожиданно поднялись в чарте"
+                  playlist={playlist}
+                  isLoading={loading}
+                  onPressTrack={this.handlePressNewTrack}
+                  onPressHeader={this.handlePressNewSectionHeader}
                 />
               )
             }}

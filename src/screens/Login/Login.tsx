@@ -1,12 +1,12 @@
 import React from 'react'
 import { NavigationScreenProps } from 'react-navigation'
 import {
-  View,
   Link,
   Button,
   TextBase,
   SafeView,
   Stretcher,
+  ScrollView,
 } from 'src/components'
 import { SocialAuth } from 'src/containers'
 import LoginForm from './LoginFormContainer'
@@ -18,7 +18,7 @@ const IndentedLink = styled(Link)`
 `
 
 const IndentedButton = styled(Button)`
-  margin-top: 24px;
+  margin-vertical: 24px;
 `
 
 const IndentedSocialAuth = styled(SocialAuth)`
@@ -55,7 +55,7 @@ class Login extends React.Component<NavigationScreenProps> {
   render() {
     return (
       <SafeView>
-        <View>
+        <ScrollView>
           <IndentedSocialAuth bottomText="или войдите через почту" />
           <LoginForm onPressFogrotPassword={this.navigateToPasswordRecovery} />
           <IndentedButton
@@ -70,7 +70,7 @@ class Login extends React.Component<NavigationScreenProps> {
             Одноклассники вы принимаете
           </BottomText>
           <BottomLinkText> Условия использования</BottomLinkText>
-        </View>
+        </ScrollView>
       </SafeView>
     )
   }
