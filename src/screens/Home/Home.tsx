@@ -105,9 +105,6 @@ const GET_TOP_WEEK_TRACKS = gql`
 const GET_LISTENED_NOW = gql`
   query {
     playlist: GetTopFifty(limit: 0, page: 0) {
-      items: data {
-        length
-      }
       total
     }
   }
@@ -116,9 +113,9 @@ const GET_LISTENED_NOW = gql`
 class Home extends React.Component<NavigationScreenProps> {
   private handlePressGenreItem = (item: Genre) => {}
 
-  private handlePressTop50 = (playlist: Playlist) => {}
+  private handlePressTop50 = () => {}
 
-  private handlePressListenedNow = (playlist: Playlist) => {}
+  private handlePressListenedNow = () => {}
 
   private handlePressRecommendedHeader = () => {}
   private handlePressRecommendedCollection = (collection: Collection) => {}
@@ -200,17 +197,12 @@ class Home extends React.Component<NavigationScreenProps> {
           </Query>
           <Query<PlaylistData> query={GET_LISTENED_NOW}>
             {({ loading, data }) => {
-              const playlist = L.get(data, 'playlist.items')
-              if (!loading && !playlist) {
-                return null
-              }
               const total = L.get(data, 'playlist.total')
               return (
                 <PlaylistSection
                   imageSource={images.LISTENED_NOW}
                   title="Сейчас слушают"
                   subtitle="Обновлен вчера" // TODO: это вычислять по дате?
-                  playlist={playlist}
                   isLoading={loading}
                   bottomTextType="tracksCount"
                   tracksCount={total}

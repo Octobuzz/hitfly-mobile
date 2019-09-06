@@ -33,12 +33,12 @@ type BottomTextType = 'tracksCount' | 'tracksLength'
 interface Props {
   title: string
   subtitle?: string
-  playlist: Playlist
+  playlist?: Playlist
   isLoading?: boolean
   tracksCount?: number
   bottomTextType?: BottomTextType
   imageSource: ImageSourcePropType
-  onPress: (playlist: Playlist) => void
+  onPress: () => void
 }
 
 const PlaylistSection: React.FC<Props> = ({
@@ -51,12 +51,6 @@ const PlaylistSection: React.FC<Props> = ({
   imageSource,
   bottomTextType,
 }) => {
-  const handlePress = React.useCallback(() => {
-    if (playlist) {
-      onPress(playlist)
-    }
-  }, [onPress, playlist])
-
   const bottomText = React.useMemo(() => {
     switch (bottomTextType) {
       case 'tracksCount': {
@@ -73,7 +67,7 @@ const PlaylistSection: React.FC<Props> = ({
 
   return (
     <SectionWrapper withPadding>
-      <Inner onPress={handlePress}>
+      <Inner onPress={onPress}>
         <BackgroundImage source={imageSource} />
         {isLoading ? (
           <Loader isAbsolute />
