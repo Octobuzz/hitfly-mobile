@@ -40,12 +40,12 @@ const BottomText = styled(TextBase)`
   font-size: 12px;
 `
 
-interface RecommendedItemProps {
+interface CollectionItemProps {
   collection: Collection
   onPress: (collection: Collection) => void
 }
 
-const RecommendedItem: React.FC<RecommendedItemProps> = ({
+const CollectionItem: React.FC<CollectionItemProps> = ({
   collection,
   onPress,
 }) => {
@@ -84,20 +84,22 @@ const Scroll = styled(FlatList as new () => FlatList<Collection>).attrs(() => ({
 `
 
 interface Props {
+  title: string
+  subtitle?: string
   isLoading?: boolean
   collections: Collection[]
   onPressCollection: (collection: Collection) => void
   onPressHeader: () => void
 }
 
-class RecommendedSection extends React.Component<Props> {
+class ColleactionSection extends React.Component<Props> {
   private keyExtractor = (item: Collection): string => item.id.toString()
 
   private renderCollection = ({ item }: { item: Collection }): JSX.Element => {
     const { onPressCollection } = this.props
     return (
       <Column>
-        <RecommendedItem onPress={onPressCollection} collection={item} />
+        <CollectionItem onPress={onPressCollection} collection={item} />
       </Column>
     )
   }
@@ -115,13 +117,19 @@ class RecommendedSection extends React.Component<Props> {
   }
 
   render() {
-    const { isLoading, collections, onPressHeader } = this.props
+    const {
+      title,
+      subtitle,
+      isLoading,
+      collections,
+      onPressHeader,
+    } = this.props
     return (
       <SectionWrapper>
         <SectionHeader
           onPress={onPressHeader}
-          title="Рекомендованное"
-          subtitle="Плейлисты, собранные специально для тебя"
+          title={title}
+          subtitle={subtitle}
         />
         <ScrollWrapper>
           {isLoading && <Loader isAbsolute />}
@@ -137,4 +145,4 @@ class RecommendedSection extends React.Component<Props> {
   }
 }
 
-export default RecommendedSection
+export default ColleactionSection

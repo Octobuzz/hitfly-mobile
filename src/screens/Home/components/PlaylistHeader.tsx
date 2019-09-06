@@ -13,6 +13,7 @@ const Inner = styled.View`
 const TitleText = styled(TextBase)`
   font-size: 20px;
   margin-right: 8px;
+  line-height: 24px;
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.textWhite};
 `
