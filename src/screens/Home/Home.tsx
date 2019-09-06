@@ -3,7 +3,7 @@ import React from 'react'
 import { NavigationScreenProps } from 'react-navigation'
 import { Query } from '@apollo/react-components'
 import gql from 'graphql-tag'
-import RecommendedSection from './RecommendedSection'
+import CollectionSection from './CollectionSection'
 import GenresSection from './GenresSection'
 import PlaylistSection from './PlaylistSection'
 import TracksSection from './TracksSection'
@@ -135,9 +135,11 @@ class Home extends React.Component<NavigationScreenProps> {
                 return null
               }
               return (
-                <RecommendedSection
-                  collections={collections}
+                <CollectionSection
+                  title="Рекомендованное"
+                  subtitle="Плейлисты, собранные специально для тебя"
                   isLoading={loading}
+                  collections={collections}
                   onPressHeader={this.handlePressRecommendedHeader}
                   onPressCollection={this.handlePressRecommendedCollection}
                 />
