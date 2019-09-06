@@ -2,14 +2,26 @@ import L from 'lodash'
 import React from 'react'
 import { NavigationScreenProps } from 'react-navigation'
 import { Query } from '@apollo/react-components'
-import gql from 'graphql-tag'
 import CollectionSection from './CollectionSection'
-import GenresSection from './GenresSection'
 import PlaylistSection from './PlaylistSection'
 import TracksSection from './TracksSection'
+import GenresSection from './GenresSection'
 import { SafeView } from 'src/components'
-import { Genre, Playlist, Pagination, Collection, Track } from 'src/apollo'
+import { Genre, Collection, Track } from 'src/apollo'
 import { images } from 'src/constants'
+import {
+  CollectionsData,
+  PlaylistData,
+  TracksData,
+  GenreData,
+  GET_TOP50,
+  GET_GENRES,
+  GET_MUSIC_FAN,
+  GET_NEW_TRACKS,
+  GET_RECOMMENDED,
+  GET_LISTENED_NOW,
+  GET_TOP_WEEK_TRACKS,
+} from './graphql'
 import styled from 'src/styled-components'
 
 const Container = styled.ScrollView.attrs(() => ({
@@ -17,111 +29,6 @@ const Container = styled.ScrollView.attrs(() => ({
 }))`
   padding-top: 24px;
   flex: 1;
-`
-
-interface GenreData {
-  genres?: Genre[]
-}
-const GET_GENRES = gql`
-  {
-    genres: genre {
-      id
-      title: name
-      imageUrl: image
-    }
-  }
-`
-
-interface PlaylistData {
-  playlist?: Pagination<Playlist>
-}
-const GET_TOP50 = gql`
-  query {
-    playlist: GetTopFifty(limit: 50, page: 0) {
-      items: data {
-        length
-      }
-    }
-  }
-`
-
-interface CollectionsData {
-  collections?: Pagination<Collection>
-}
-const GET_RECOMMENDED = gql`
-  query {
-    collections(limit: 10, page: 1, filters: { collection: true }) {
-      items: data {
-        id
-        images: image(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        title
-        tracksCountInPlaylist: tracksCount
-      }
-    }
-  }
-`
-const GET_MUSIC_FAN = gql`
-  query {
-    collections(limit: 10, page: 1, filters: { superMusicFan: true }) {
-      items: data {
-        id
-        images: image(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        title
-        tracksCountInPlaylist: tracksCount
-      }
-    }
-  }
-`
-
-interface TracksData {
-  tracks?: Pagination<Track>
-}
-const GET_NEW_TRACKS = gql`
-  query {
-    tracks(limit: 10, page: 0) {
-      items: data {
-        id
-        title: trackName
-        cover(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        group: musicGroup {
-          title: name
-        }
-        singer
-      }
-    }
-  }
-`
-
-const GET_TOP_WEEK_TRACKS = gql`
-  query {
-    tracks: TopWeeklyQuery(limit: 10, page: 0) {
-      items: data {
-        id
-        title: trackName
-        cover(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        group: musicGroup {
-          title: name
-        }
-        singer
-      }
-    }
-  }
-`
-
-const GET_LISTENED_NOW = gql`
-  query {
-    playlist: GetTopFifty(limit: 0, page: 0) {
-      total
-    }
-  }
 `
 
 class Home extends React.Component<NavigationScreenProps> {
