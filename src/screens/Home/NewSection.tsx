@@ -1,24 +1,25 @@
 import React from 'react'
 import { FlatList } from 'react-native'
-import { Loader, TextBase, Image } from 'src/components'
 import { Track, Playlist } from 'src/apollo'
+import { Loader, TextBase, Image } from 'src/components'
 import { SectionHeader, SectionWrapper } from './components'
 import styled from 'src/styled-components'
 
-const ITEM_WIDTH = 202
-const ITEM_HEIGHT = 164
+const ITEM_WIDTH = 164
+const ITEM_HEIGHT = 212
 const DIVIDER_SIZE = 8
 
 const ItemWrapper = styled.TouchableOpacity``
 
 const BackgroundImage = styled(Image)`
   width: ${ITEM_WIDTH}px;
-  margin-bottom: 10px;
+  height: 160px;
   border-radius: 4px;
 `
 
 const TopText = styled(TextBase)`
   font-family: ${({ theme }) => theme.fonts.medium};
+  margin-top: 10px;
   font-size: 14px;
 `
 
@@ -42,11 +43,7 @@ const TrackItem: React.FC<TrackItemProps> = ({ track, onPress }) => {
   const subtitle = group ? group.title : singer
   return (
     <ItemWrapper onPress={handlePress}>
-      <SvgFromXml
-        width="100%"
-        height="100%"
-        source={{ uri: cover[0].imageUrl }}
-      />
+      <BackgroundImage source={{ uri: cover[0].imageUrl }} />
       <TopText>{title}</TopText>
       <BottomText>{subtitle}</BottomText>
     </ItemWrapper>
