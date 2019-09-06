@@ -62,10 +62,10 @@ const ScrollWrapper = styled.View`
 const Scroll = styled(FlatList as new () => FlatList<Track>).attrs(() => ({
   horizontal: true,
   initialNumToRender: 3,
-  contentInset: { left: 12, right: 12 },
-  contentOffset: { x: -12, y: 0 },
   showsHorizontalScrollIndicator: false,
-}))``
+}))`
+  padding-horizontal: 12px;
+`
 
 interface Props {
   title: string
