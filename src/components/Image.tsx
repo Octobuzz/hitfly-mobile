@@ -1,9 +1,8 @@
 import React from 'react'
 import FastImage, { FastImageProperties } from 'react-native-fast-image'
-// @ts-ignore https://github.com/react-native-community/react-native-svg/issues/1089
 import { SvgXml } from 'react-native-svg'
 
-// В картинках есть теги <style> - их надо удлаить ибо ошибка
+// В картинках есть теги <style> - их надо удалить ибо ошибка
 const fetchText = async (uri: string): Promise<string> => {
   try {
     const response = await fetch(uri)
