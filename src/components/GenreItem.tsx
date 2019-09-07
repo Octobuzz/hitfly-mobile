@@ -43,7 +43,7 @@ interface Selectable {
 
 interface Props extends Selectable {
   item: Genre
-  onPress: (item: Genre) => void
+  onPress?: (item: Genre) => void
 }
 
 interface Sized {
@@ -58,7 +58,9 @@ const GenreItem: React.FC<Props> & Sized = ({
 }) => {
   const { imageUrl, title } = item
   const handlePress = React.useCallback(() => {
-    onPress(item)
+    if (onPress) {
+      onPress(item)
+    }
   }, [onPress, item])
 
   return (

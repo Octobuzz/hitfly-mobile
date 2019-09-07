@@ -34,7 +34,6 @@ const Image: React.FC<FastImageProperties> = ({
         .then(setXml)
     }
   }, [source])
-
   return xml ? (
     <SvgXml style={style} xml={xml} />
   ) : (
