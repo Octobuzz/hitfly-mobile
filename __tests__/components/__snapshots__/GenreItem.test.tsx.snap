@@ -1,27 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<View
-  accessible={true}
-  clickable={true}
-  isTVSelectable={true}
-  onClick={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+<TouchableOpacity
+  activeOpacity={0.2}
+  onPress={[Function]}
   style={
-    Object {
-      "alignItems": "center",
-      "borderRadius": 4,
-      "height": 109,
-      "justifyContent": "center",
-      "opacity": 1,
-      "overflow": "hidden",
-      "width": 109,
-    }
+    Array [
+      Object {
+        "alignItems": "center",
+        "borderRadius": 4,
+        "height": 109,
+        "justifyContent": "center",
+        "overflow": "hidden",
+        "width": 109,
+      },
+    ]
   }
 >
   <View
@@ -73,5 +66,5 @@ exports[`renders correctly 1`] = `
   >
     title
   </Text>
-</View>
+</TouchableOpacity>
 `;

@@ -1,6 +1,27 @@
 import React from 'react'
-import FastImage, { FastImageProperties } from 'react-native-fast-image'
+import FastImage, {
+  FastImageSource,
+  FastImageProperties,
+} from 'react-native-fast-image'
 import { SvgXml } from 'react-native-svg'
+
+interface SvgImageProps {
+  uri: string
+  style: any
+}
+
+export const SvgImage: React.FC<SvgImageProps> = ({
+  uri,
+  style = { width: '100%', height: '100%' },
+}) => {
+  const [xml, setXml] = React.useState()
+  React.useEffect(() => {
+    fetchText(uri)
+      .then(removeStylesFromSvg)
+      .then(setXml)
+  }, [uri])
+  return <SvgXml style={style} xml={xml} />
+}
 
 // В картинках есть теги <style> - их надо удалить ибо ошибка
 const fetchText = async (uri: string): Promise<string> => {
@@ -17,27 +38,21 @@ const removeStylesFromSvg = (svg: string): string => {
   return tmp
 }
 
-const Image: React.FC<FastImageProperties> = ({
+export const Image: React.FC<FastImageProperties> = ({
+  style,
   source,
-  style = { width: '100%', height: '100%' },
   ...rest
 }) => {
-  const [xml, setXml] = React.useState()
-  React.useEffect(() => {
-    if (
-      typeof source !== 'number' &&
-      source.uri &&
-      source.uri.endsWith('.svg')
-    ) {
-      fetchText(source.uri)
-        .then(removeStylesFromSvg)
-        .then(setXml)
-    }
-  }, [source])
-  return xml ? (
-    <SvgXml style={style} xml={xml} />
+  const svgUri = getSvgUri(source)
+  return svgUri ? (
+    <SvgImage style={style} uri={svgUri} />
   ) : (
     <FastImage source={source} style={style} {...rest} />
   )
 }
-export default Image
+
+const getSvgUri = (source: FastImageSource | number): string | undefined => {
+  if (typeof source !== 'number' && source.uri && source.uri.endsWith('.svg')) {
+    return source.uri
+  }
+}

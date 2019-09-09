@@ -69,3 +69,7 @@ fastlane/screenshots
 
 # Bundle artifact
 *.jsbundle
+
+# jest
+cache/
+coverage/
