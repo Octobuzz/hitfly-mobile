@@ -9,7 +9,9 @@ const ITEM_WIDTH = 164
 const ITEM_HEIGHT = 212
 const DIVIDER_SIZE = 8
 
-const ItemWrapper = styled.TouchableOpacity``
+const ItemWrapper = styled.TouchableOpacity`
+  width: ${ITEM_WIDTH}px;
+`
 
 const BackgroundImage = styled(Image)`
   width: ${ITEM_WIDTH}px;
@@ -17,13 +19,17 @@ const BackgroundImage = styled(Image)`
   border-radius: 4px;
 `
 
-const TopText = styled(TextBase)`
+const TopText = styled(TextBase).attrs(() => ({
+  numberOfLines: 1,
+}))`
   font-family: ${({ theme }) => theme.fonts.medium};
   margin-top: 10px;
   font-size: 14px;
 `
 
-const BottomText = styled(TextBase)`
+const BottomText = styled(TextBase).attrs(() => ({
+  numberOfLines: 1,
+}))`
   color: ${({ theme }) => theme.colors.textAlt};
   font-size: 12px;
 `

@@ -10,10 +10,7 @@ interface SvgImageProps {
   style: any
 }
 
-export const SvgImage: React.FC<SvgImageProps> = ({
-  uri,
-  style = { width: '100%', height: '100%' },
-}) => {
+export const SvgImage: React.FC<SvgImageProps> = ({ uri, style }) => {
   const [xml, setXml] = React.useState()
   React.useEffect(() => {
     fetchText(uri)
