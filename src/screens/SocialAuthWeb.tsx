@@ -4,7 +4,6 @@ import { WebView } from 'react-native-webview'
 import { WebViewNativeEvent } from 'react-native-webview/lib/WebViewTypes'
 import { SafeView, Loader } from 'src/components'
 import { storageKeys } from 'src/constants'
-import { delay } from 'src/utils/helpers'
 import { storage } from 'src/utils'
 import { ROUTES } from 'src/navigation'
 import urlParser from 'url'
@@ -23,7 +22,6 @@ class SocialAuthWeb extends React.Component<NavigationScreenProps> {
       await storage.setItem(storageKeys.AUTH_TOKEN, query.token as string)
       // TODO: это костыль, удалить когда бэк станет лучше
       await storage.setItem(storageKeys.GRAPHQL_ENDPOINT, 'user')
-      await delay(1000)
       navigation.navigate(ROUTES.MAIN.HOME)
     }
   }

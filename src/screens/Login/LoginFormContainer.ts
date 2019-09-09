@@ -56,11 +56,5 @@ export default L.flowRight(
         setSubmitting(false)
       }
     },
-    // FIXME: удалить в проде (чтобы вручную не вводить каждый раз)
-    isInitialValid: true,
-    mapPropsToValues: L.constant({
-      email: 'awhiffofzephyr@yandex.ru',
-      password: 'MyHitfly1!',
-    }),
   }),
 )(LoginForm)

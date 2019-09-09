@@ -9,10 +9,6 @@ const IndentedSocialAuth = styled(SocialAuth)`
   margin-bottom: 24px;
 `
 
-// interface User {
-//   token: string
-// }
-
 class Register extends React.Component<NavigationScreenProps> {
   render() {
     return (

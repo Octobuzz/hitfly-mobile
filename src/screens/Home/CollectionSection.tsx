@@ -21,7 +21,9 @@ const ItemWrapper = styled.TouchableOpacity`
   overflow: hidden;
 `
 
-const BackgroundImage = styled(FastImage)`
+const BackgroundImage = styled(FastImage).attrs(() => ({
+  resizeMode: 'cover',
+}))`
   position: absolute;
   left: 0;
   top: 0;

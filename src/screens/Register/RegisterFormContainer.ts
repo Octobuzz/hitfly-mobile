@@ -75,10 +75,6 @@ export default L.flowRight(
     },
     mapPropsToValues: L.constant({
       gender: 'M',
-      // FIXME: удалить в проде
-      email: 'm@m.ru',
-      password: '',
-      passwordRepeat: '',
     }),
   }),
 )(RegisterForm)
