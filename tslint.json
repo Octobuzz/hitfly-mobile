@@ -6,6 +6,9 @@
     "tslint-config-prettier",
     "tslint-react-hooks"
   ],
+  "linterOptions": {
+    "exclude": ["cache/**", "coverage/**", "jest/setup.js"]
+  },
   "rules": {
     "interface-name": false,
     "jsx-no-lambda": false,
@@ -19,6 +22,7 @@
     "no-empty": false,
     "jsx-boolean-value": false,
     "one-variable-per-declaration": false,
-    "max-classes-per-file": false
+    "max-classes-per-file": false,
+    "no-empty-interface": false
   }
 }

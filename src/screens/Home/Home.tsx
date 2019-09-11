@@ -23,6 +23,7 @@ import {
   GET_TOP_WEEK_TRACKS,
 } from './graphql'
 import styled from 'src/styled-components'
+import { ROUTES } from 'src/navigation'
 
 const Container = styled.ScrollView.attrs(() => ({
   showsVerticalScrollIndicator: false,
@@ -38,8 +39,24 @@ class Home extends React.Component<NavigationScreenProps> {
 
   private handlePressListenedNow = () => {}
 
-  private handlePressRecommendedHeader = () => {}
+  private handlePressRecommendedHeader = () => {
+    const { navigation } = this.props
+    navigation.navigate(ROUTES.MAIN.COLLECTION_DETAILS, {
+      title: 'Рекомендуем',
+      query: GET_RECOMMENDED,
+      onPressItem: this.handlePressRecommendedCollection,
+    })
+  }
   private handlePressRecommendedCollection = (collection: Collection) => {}
+  private handlePressMusicFanHeader = () => {
+    const { navigation } = this.props
+    navigation.navigate(ROUTES.MAIN.COLLECTION_DETAILS, {
+      title: 'Супер меломан',
+      query: GET_MUSIC_FAN,
+      onPressItem: this.handlePressMusicFanCollection,
+    })
+  }
+  private handlePressMusicFanCollection = (collection: Collection) => {}
 
   private handlePressNewTrack = (track: Track) => {}
 
@@ -52,7 +69,7 @@ class Home extends React.Component<NavigationScreenProps> {
           <Query<CollectionsData> query={GET_RECOMMENDED}>
             {({ loading, data }) => {
               const collections = L.get(data, 'collections.items')
-              if (!loading && !collections) {
+              if (!loading && L.isEmpty(collections)) {
                 return null
               }
               return (
@@ -70,7 +87,7 @@ class Home extends React.Component<NavigationScreenProps> {
           <Query<PlaylistData> query={GET_TOP50}>
             {({ loading, data }) => {
               const playlist = L.get(data, 'playlist.items')
-              if (!loading && !playlist) {
+              if (!loading && L.isEmpty(playlist)) {
                 return null
               }
               return (
@@ -90,7 +107,7 @@ class Home extends React.Component<NavigationScreenProps> {
           <Query<TracksData> query={GET_NEW_TRACKS}>
             {({ loading, data }) => {
               const playlist = L.get(data, 'tracks.items')
-              if (!loading && !playlist) {
+              if (!loading && L.isEmpty(playlist)) {
                 return null
               }
               return (
@@ -106,7 +123,7 @@ class Home extends React.Component<NavigationScreenProps> {
           <Query<CollectionsData> query={GET_MUSIC_FAN}>
             {({ loading, data }) => {
               const collections = L.get(data, 'collections.items')
-              if (!loading && !collections) {
+              if (!loading && L.isEmpty(collections)) {
                 return null
               }
               return (
@@ -115,8 +132,8 @@ class Home extends React.Component<NavigationScreenProps> {
                   subtitle="«Русская рулетка» треков"
                   isLoading={loading}
                   collections={collections}
-                  onPressHeader={this.handlePressRecommendedHeader}
-                  onPressCollection={this.handlePressRecommendedCollection}
+                  onPressHeader={this.handlePressMusicFanHeader}
+                  onPressCollection={this.handlePressMusicFanCollection}
                 />
               )
             }}
@@ -124,7 +141,7 @@ class Home extends React.Component<NavigationScreenProps> {
           <Query<GenreData> query={GET_GENRES}>
             {({ loading, data }) => {
               const genres = L.get(data, 'genres')
-              if (!loading && !genres) {
+              if (!loading && L.isEmpty(genres)) {
                 return null
               }
               return (
@@ -155,7 +172,7 @@ class Home extends React.Component<NavigationScreenProps> {
           <Query<TracksData> query={GET_TOP_WEEK_TRACKS}>
             {({ loading, data }) => {
               const playlist = L.get(data, 'tracks.items')
-              if (!loading && !playlist) {
+              if (!loading && L.isEmpty(playlist)) {
                 return null
               }
               return (
