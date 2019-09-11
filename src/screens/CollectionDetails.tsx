@@ -5,7 +5,7 @@ import { NavigationScreenProps } from 'react-navigation'
 import { getBottomSpace } from 'react-native-iphone-x-helper'
 import { Query } from '@apollo/react-components'
 import { DocumentNode } from 'graphql'
-import { Collection } from 'src/apollo'
+import { Collection, PaginationVariables } from 'src/apollo'
 import { H1, Loader, CollectionItem } from 'src/components'
 import styled from 'src/styled-components'
 import { CollectionsData } from './Home/graphql'
@@ -34,6 +34,7 @@ interface Props extends NavigationScreenProps {}
 class CollectionDetails extends React.Component<Props> {
   private query?: DocumentNode
   private onPressItem: (collection: Collection) => void
+  private limit = 10
 
   constructor(props: Props) {
     super(props)
@@ -47,18 +48,41 @@ class CollectionDetails extends React.Component<Props> {
 
   private keyExtractor = (item: Collection): string => item.id.toString()
 
+  private mergePages = (
+    page1: CollectionsData,
+    page2: CollectionsData,
+  ): CollectionsData => {
+    return {
+      ...page1,
+      collections: {
+        ...page1.collections,
+        // @ts-ignore пока так
+        items: [...page1.collections.items, ...page2.collections.items],
+      },
+    } as CollectionsData
+  }
+
   render() {
     if (!this.query) {
       return null
     }
 
     return (
-      <Query<CollectionsData> query={this.query}>
-        {({ loading, data }) => {
+      <Query<CollectionsData, PaginationVariables>
+        query={this.query}
+        variables={{ page: 1, limit: this.limit }}
+      >
+        {({ loading, data, fetchMore }) => {
           const collections = L.get(data, 'collections.items')
-          if (!loading && !collections) {
+
+          if (!loading && L.isEmpty(collections)) {
             return null
           }
+          const hasMorePages: boolean = L.get(
+            data,
+            'collections.hasMorePages',
+            false,
+          )
           return (
             <Scroll
               data={collections}
@@ -66,6 +90,22 @@ class CollectionDetails extends React.Component<Props> {
               renderItem={this.renderItem}
               ListHeaderComponent={Header}
               ListFooterComponent={loading ? Loader : null}
+              onEndReached={() => {
+                if (hasMorePages) {
+                  // + 1, потому что для бэка 1 и 0 - одно и то же
+                  // поэтому page должна быть больше 1
+                  const page = Math.trunc(collections.length / this.limit) + 1
+                  fetchMore({
+                    variables: { page },
+                    updateQuery: (prev, { fetchMoreResult }) => {
+                      if (fetchMoreResult) {
+                        return this.mergePages(prev, fetchMoreResult)
+                      }
+                      return prev
+                    },
+                  })
+                }
+              }}
             />
           )
         }}
