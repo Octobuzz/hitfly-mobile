@@ -1,6 +1,7 @@
 import React from 'react'
 import { StatusBar, Platform } from 'react-native'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
+import SplashScreen from 'react-native-splash-screen'
 import NavigationService from './navigationService'
 import AuthNavigator from './Auth'
 import MainNavigator from './Main'
@@ -70,7 +71,7 @@ class AppNavigator extends React.Component {
     if (token) {
       NavigationService.navigate({ routeName: ROUTES.MAIN.HOME })
     }
-    // TODO: тут надо убрать сплешскрин вне зависимости от условия
+    SplashScreen.hide()
   }
 
   // восстановление экранов в дев режиме
