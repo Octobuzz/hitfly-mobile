@@ -1,72 +1,18 @@
 import React from 'react'
-import { FlatList } from 'react-native'
-import FastImage from 'react-native-fast-image'
-import { Loader, TextBase } from 'src/components'
+import { FlatList, ListRenderItem } from 'react-native'
+import { Loader, CollectionItem } from 'src/components'
 import { Collection } from 'src/apollo'
 import { SectionHeader, SectionWrapper } from './components'
-import { helpers } from 'src/utils'
 import styled from 'src/styled-components'
 
 const ITEM_WIDTH = 214
 const ITEM_HEIGHT = 160
 const DIVIDER_SIZE = 8
 
-const ItemWrapper = styled.TouchableOpacity`
-  height: ${ITEM_HEIGHT}px;
-  width: ${ITEM_WIDTH}px;
-  padding: 16px;
-  align-items: flex-end;
-  justify-content: space-between;
-  border-radius: 4px;
-  overflow: hidden;
-`
-
-const BackgroundImage = styled(FastImage).attrs(() => ({
-  resizeMode: 'cover',
-}))`
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-`
-
-const TopText = styled(TextBase)`
-  font-family: ${({ theme }) => theme.fonts.bold};
-  color: ${({ theme }) => theme.colors.textWhite};
-  font-size: 12px;
-`
-
-const BottomText = styled(TextBase)`
-  color: ${({ theme }) => theme.colors.textWhite};
-  font-size: 12px;
-`
-
-interface CollectionItemProps {
-  collection: Collection
-  onPress: (collection: Collection) => void
-}
-
-const CollectionItem: React.FC<CollectionItemProps> = ({
-  collection,
-  onPress,
-}) => {
-  const handlePress = React.useCallback(() => {
-    if (collection) {
-      onPress(collection)
-    }
-  }, [onPress, collection])
-
-  const { tracksCountInPlaylist, title, images } = collection
-  const bottomText = helpers.formatTracksCount(tracksCountInPlaylist)
-  return (
-    <ItemWrapper onPress={handlePress}>
-      <BackgroundImage source={{ uri: images[0].imageUrl }} />
-      <TopText>{title}</TopText>
-      <BottomText>{bottomText}</BottomText>
-    </ItemWrapper>
-  )
-}
+const SizedCollectionItem = styled(CollectionItem).attrs(() => ({
+  width: ITEM_WIDTH,
+  height: ITEM_HEIGHT,
+}))``
 
 const Column = styled.View`
   flex: 1;
@@ -97,11 +43,11 @@ interface Props {
 class ColleactionSection extends React.Component<Props> {
   private keyExtractor = (item: Collection): string => item.id.toString()
 
-  private renderCollection = ({ item }: { item: Collection }): JSX.Element => {
+  private renderCollection: ListRenderItem<Collection> = ({ item }) => {
     const { onPressCollection } = this.props
     return (
       <Column>
-        <CollectionItem onPress={onPressCollection} collection={item} />
+        <SizedCollectionItem onPress={onPressCollection} collection={item} />
       </Column>
     )
   }

@@ -77,6 +77,11 @@ export interface Pagination<T> {
   hasMorePages: boolean // has_more_pages
 }
 
+export interface PaginationVariables {
+  page?: number
+  limit?: number
+}
+
 export interface Collection {
   id: number
   title: string

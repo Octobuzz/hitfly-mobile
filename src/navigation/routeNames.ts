@@ -16,6 +16,7 @@ export default {
     RECOVERY_INFO: `${APP.AUTH}/recovery_info`,
   },
   MAIN: {
-    HOME: `${APP.MAIN}/homde`,
+    HOME: `${APP.MAIN}/home`,
+    COLLECTION_DETAILS: `${APP.MAIN}/collection_details`,
   },
 }
