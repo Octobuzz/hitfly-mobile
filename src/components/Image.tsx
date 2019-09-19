@@ -11,7 +11,7 @@ interface SvgImageProps {
 }
 
 export const SvgImage: React.FC<SvgImageProps> = ({ uri, style }) => {
-  const [xml, setXml] = React.useState()
+  const [xml, setXml] = React.useState<string | null>(null)
   React.useEffect(() => {
     fetchText(uri)
       .then(removeStylesFromSvg)

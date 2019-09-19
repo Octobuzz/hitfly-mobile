@@ -23,7 +23,7 @@ PODS:
     - libwebp/demux
   - libwebp/webp (1.0.3)
   - lottie-ios (3.0.3)
-  - lottie-react-native (3.1.0):
+  - lottie-react-native (3.1.1):
     - lottie-ios (~> 3.0.3)
     - React
   - React (0.60.5):
@@ -75,7 +75,7 @@ PODS:
     - React
   - react-native-track-player (1.1.8):
     - React
-  - react-native-webview (7.0.1):
+  - react-native-webview (7.0.6):
     - React
   - React-RCTActionSheet (0.60.5):
     - React-Core (= 0.60.5)
@@ -110,7 +110,7 @@ PODS:
     - React
   - RNReanimated (1.2.0):
     - React
-  - RNSVG (9.9.3):
+  - RNSVG (9.9.4):
     - React
   - RNVectorIcons (6.6.0):
     - React
@@ -240,7 +240,7 @@ SPEC CHECKSUMS:
   glog: 1f3da668190260b06b429bb211bfbee5cd790c28
   libwebp: 057912d6d0abfb6357d8bb05c0ea470301f5d61e
   lottie-ios: 6037add6441183d4ffd100d2ac78724aa8d919d4
-  lottie-react-native: 86aeee2caa9250e4c8027ac75711a59c6679e532
+  lottie-react-native: d8caf2aa9ab8bb76312e44997c1c91804a23d44d
   React: 53c53c4d99097af47cf60594b8706b4e3321e722
   React-Core: ba421f6b4f4cbe2fb17c0b6fc675f87622e78a64
   React-cxxreact: 8384287780c4999351ad9b6e7a149d9ed10a2395
@@ -250,7 +250,7 @@ SPEC CHECKSUMS:
   React-jsinspector: e08662d1bf5b129a3d556eb9ea343a3f40353ae4
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
   react-native-track-player: 6e4e91a246efe7121cdef5a43258659a062499db
-  react-native-webview: d67116b15dfff5316cbfcfd1a8b008178811d0f2
+  react-native-webview: ecdff49f18304c8c9b6a8512c133ee7aab9cbd95
   React-RCTActionSheet: b0f1ea83f4bf75fb966eae9bfc47b78c8d3efd90
   React-RCTAnimation: 359ba1b5690b1e87cc173558a78e82d35919333e
   React-RCTBlob: 5e2b55f76e9a1c7ae52b826923502ddc3238df24
@@ -265,7 +265,7 @@ SPEC CHECKSUMS:
   RNFastImage: 9b0c22643872bb7494c8d87bbbb66cc4c0d9e7a2
   RNGestureHandler: 4cb47a93019c1a201df2644413a0a1569a51c8aa
   RNReanimated: 1b52415c4302f198cb581282a0166690bad62c43
-  RNSVG: 2a15d0d14d171ba610db927190604d1ab223f413
+  RNSVG: 435cda60cd9e1ea6188eb0e21c12fc0f85def8e8
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   SDWebImage: fb387001955223213dde14bc08c8b73f371f8d8f
   SDWebImageWebPCoder: 7568737603c50f6237850afedd7e9e28e5917e6b
