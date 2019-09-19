@@ -31,8 +31,10 @@ const Scroll = styled(FlatList as new () => FlatList<Track>).attrs(() => ({
   initialNumToRender: 10,
 }))``
 
+type CoverType = FastImageSource | number
+
 interface Props {
-  cover: FastImageSource | number
+  cover: CoverType
   tracks: Track[]
   favouriteCount: number
 }
@@ -98,12 +100,22 @@ class Playlist extends React.Component<Props, State> {
     }
   }
 
+  private getCover = (): CoverType => {
+    const { cover } = this.props
+    const { activeTrack } = this.state
+    if (activeTrack) {
+      return { uri: activeTrack.cover[0].imageUrl }
+    }
+    return cover
+  }
+
   render() {
-    const { cover, tracks, favouriteCount } = this.props
+    const { tracks, favouriteCount } = this.props
+    const activeCover = this.getCover()
     return (
       <>
         <CoverWrapper>
-          <Cover source={cover} />
+          <Cover source={activeCover} />
           <PositionedShuffleButton />
         </CoverWrapper>
         <PlaylistInfoPanel favouriteCount={favouriteCount} playlist={tracks} />

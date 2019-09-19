@@ -16,7 +16,7 @@ import {
 import { PlaylistScreen } from 'src/screens'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import styled from 'src/styled-components'
-import { Track } from 'src/apollo'
+import { Track, Genre } from 'src/apollo'
 
 storiesOf('Button', module)
   .add('Gradient', () => <Button title="Gradient" type="gradient" />)
@@ -36,10 +36,12 @@ const CenterContainer = styled.View`
 `
 storiesOf('SocialButton', module).add('Default', () => (
   <CenterContainer>
-    <SocialButton data={{ type: 'vk', url: '' }} />
-    <SocialButton data={{ type: 'gg', url: '' }} />
-    <SocialButton data={{ type: 'fb', url: '' }} />
-    <SocialButton data={{ type: 'ok', url: '' }} />
+    <SocialButton buttonData={{ type: 'vkontakte', url: '', isLinked: true }} />
+    <SocialButton buttonData={{ type: 'instagram', url: '', isLinked: true }} />
+    <SocialButton buttonData={{ type: 'facebook', url: '', isLinked: true }} />
+    <SocialButton
+      buttonData={{ type: 'odnoklassniki', url: '', isLinked: true }}
+    />
   </CenterContainer>
 ))
 
@@ -108,12 +110,14 @@ const GenreItemStory = () => {
   const [isSelected, setSelected] = React.useState(false)
   return (
     <GenreItem
-      item={{
-        id: 1,
-        title: 'name',
-        imageUrl:
-          'https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-260nw-407021107.jpg',
-      }}
+      item={
+        {
+          id: 1,
+          title: 'name',
+          imageUrl:
+            'https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-260nw-407021107.jpg',
+        } as Genre
+      }
       onPress={() => setSelected(!isSelected)}
       isSelected={isSelected}
     />
