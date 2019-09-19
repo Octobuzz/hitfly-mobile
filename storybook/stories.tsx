@@ -2,6 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react-native'
 import {
   Link,
+  More,
   Input,
   Button,
   Dropdown,
@@ -21,6 +22,9 @@ storiesOf('Button', module)
   .add('Gradient with Loader', () => (
     <Button isLoading title="Outline" type="outline" />
   ))
+storiesOf('More', module).add('Default', () => (
+  <More style={{ backgroundColor: 'green' }} />
+))
 storiesOf('Link', module).add('Default', () => <Link title="Link" />)
 
 const CenterContainer = styled.View`
@@ -122,7 +126,7 @@ storiesOf('PlaylistScreen', module).add('Default', () => (
       uri:
         'https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_960_720.jpg',
     }}
-    tracks={[]}
+    tracks={[{ length: 1360, id: 1 }]}
     favouriteCount={100}
   />
 ))

@@ -1,6 +1,7 @@
 import React from 'react'
 import FastImage, { FastImageSource } from 'react-native-fast-image'
 import ShuffleButton from './ShuffleButton'
+import PlaylistInfoPanel from './PlaylistInfoPanel'
 import { Track } from 'src/apollo'
 import styled from 'src/styled-components'
 
@@ -32,12 +33,15 @@ interface Props {
 
 class Playlist extends React.Component<Props> {
   render() {
-    const { cover } = this.props
+    const { cover, tracks, favouriteCount } = this.props
     return (
-      <CoverWrapper>
-        <Cover source={cover} />
-        <PositionedShuffleButton />
-      </CoverWrapper>
+      <>
+        <CoverWrapper>
+          <Cover source={cover} />
+          <PositionedShuffleButton />
+        </CoverWrapper>
+        <PlaylistInfoPanel favouriteCount={favouriteCount} playlist={tracks} />
+      </>
     )
   }
 }
