@@ -10,7 +10,7 @@ import styled from 'src/styled-components'
 const Wrapper = styled.View`
   flex-direction: row;
   align-items: center;
-  padding: 30px 16px;
+  padding: 16px 30px 0px;
 `
 
 const Text = styled(TextBase)`
@@ -47,6 +47,9 @@ const PlaylistInfoPanel: React.FC<Props> = ({
       return count
     }
     const fullLength: number = L.sumBy(playlist, 'length')
+    if (!fullLength) {
+      return count
+    }
     const formattedTime = helpers.formatTimeDurationForPlaylist(fullLength)
     return `${count}, ${formattedTime}`
   }, [playlist])

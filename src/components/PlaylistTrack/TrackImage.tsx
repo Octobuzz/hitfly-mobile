@@ -30,9 +30,11 @@ const ControlOverlay: React.FC = () => {
   )
 }
 
+const SIZE = 32
+
 const Wrapper = styled.View`
-  width: 32px;
-  height: 32px;
+  width: ${SIZE}px;
+  height: ${SIZE}px;
   border-radius: 4px;
   overflow: hidden;
 `
@@ -46,7 +48,15 @@ interface Props extends Playable {
   style?: ViewStyle
 }
 
-const TrackImage: React.FC<Props> = ({ isPlaying, imageUrl, style }) => {
+interface Sized {
+  size: number
+}
+
+const TrackImage: React.FC<Props> & Sized = ({
+  isPlaying,
+  imageUrl,
+  style,
+}) => {
   return (
     <Wrapper style={style}>
       <StyledImage source={{ uri: imageUrl }} />
@@ -54,5 +64,7 @@ const TrackImage: React.FC<Props> = ({ isPlaying, imageUrl, style }) => {
     </Wrapper>
   )
 }
+
+TrackImage.size = SIZE
 
 export default TrackImage

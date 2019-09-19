@@ -122,7 +122,7 @@ const GenreItemStory = () => {
 
 storiesOf('GenreItem', module).add('Default', () => <GenreItemStory />)
 
-const track: Track = {
+const track = {
   id: 1,
   cover: [
     {
@@ -134,10 +134,18 @@ const track: Track = {
   group: {
     title: 'Some group title',
   },
-}
+} as Track
 storiesOf('PlaylistTrack', module)
   .add('Paused', () => <PlaylistTrack track={track} index={1} />)
   .add('Playing', () => <PlaylistTrack isPlaying track={track} index={1} />)
+
+const getMockPlaylist = (): Track[] => {
+  const result = []
+  for (let id = 0; id < 101; id++) {
+    result.push({ ...track, id })
+  }
+  return result
+}
 
 storiesOf('PlaylistScreen', module).add('Default', () => (
   <PlaylistScreen
@@ -145,7 +153,7 @@ storiesOf('PlaylistScreen', module).add('Default', () => (
       uri:
         'https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_960_720.jpg',
     }}
-    tracks={[{ length: 1360, id: 1 }]}
+    tracks={getMockPlaylist()}
     favouriteCount={100}
   />
 ))
