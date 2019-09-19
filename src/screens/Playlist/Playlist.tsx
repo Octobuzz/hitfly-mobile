@@ -1,8 +1,9 @@
 import React from 'react'
 import FastImage, { FastImageSource } from 'react-native-fast-image'
+import { Track } from 'src/apollo'
+import { PlaylistTrack } from 'src/components'
 import ShuffleButton from './ShuffleButton'
 import PlaylistInfoPanel from './PlaylistInfoPanel'
-import { Track } from 'src/apollo'
 import styled from 'src/styled-components'
 
 const CoverWrapper = styled.View`

@@ -10,11 +10,13 @@ import {
   DatePicker,
   CheckBoxUI,
   SocialButton,
+  PlaylistTrack,
   TextWithLines,
 } from 'src/components'
 import { PlaylistScreen } from 'src/screens'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import styled from 'src/styled-components'
+import { Track } from 'src/apollo'
 
 storiesOf('Button', module)
   .add('Gradient', () => <Button title="Gradient" type="gradient" />)
@@ -119,6 +121,23 @@ const GenreItemStory = () => {
 }
 
 storiesOf('GenreItem', module).add('Default', () => <GenreItemStory />)
+
+const track: Track = {
+  id: 1,
+  cover: [
+    {
+      imageUrl:
+        'https://images.unsplash.com/photo-1541233349642-6e425fe6190e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+    },
+  ],
+  title: 'Some track title',
+  group: {
+    title: 'Some group title',
+  },
+}
+storiesOf('PlaylistTrack', module)
+  .add('Paused', () => <PlaylistTrack track={track} index={1} />)
+  .add('Playing', () => <PlaylistTrack isPlaying track={track} index={1} />)
 
 storiesOf('PlaylistScreen', module).add('Default', () => (
   <PlaylistScreen

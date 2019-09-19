@@ -36,7 +36,8 @@ export default L.flowRight(
       try {
         // TODO: это костыль, удалить когда бэк станет лучше
         await storage.setItem(storageKeys.GRAPHQL_ENDPOINT, 'auth')
-        const result = await mutate({ variables: payload })
+        const variables = L.omit(payload, ['navigation', 'result'])
+        const result = await mutate({ variables })
         const token = L.get(result, 'data.login.token')
         if (token) {
           await storage.setItem(storageKeys.AUTH_TOKEN, token as string)
