@@ -17,7 +17,7 @@ const validationSchema = Yup.object().shape({
   password: Yup.string()
     .required(strings.validation.required)
     .matches(
-      /(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])/,
+      /(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/,
       strings.validation.passwordFormat,
     ),
   passwordRepeat: Yup.string().oneOf(
