@@ -3,8 +3,8 @@ import { Track } from 'src/apollo'
 import { TextBase, More } from 'src/components'
 import { Playable } from './interfaces'
 import TrackImage from './TrackImage'
-import styled from 'src/styled-components'
 import { helpers } from 'src/utils'
+import styled from 'src/styled-components'
 
 const Wrapper = styled.TouchableOpacity<Playable>`
   flex-direction: row;
