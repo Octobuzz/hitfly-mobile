@@ -3,11 +3,7 @@ import { FlatList, ListRenderItem } from 'react-native'
 import FastImage, { FastImageSource } from 'react-native-fast-image'
 import SlidingUpPanel from 'rn-sliding-up-panel'
 import { Track } from 'src/apollo'
-import {
-  SlidingPanel,
-  PlaylistTrack,
-  SimplePlaylistTrack,
-} from 'src/components'
+import { SlidingPanel, PlaylistTrack } from 'src/components'
 import TrackMenu from './TrackMenu'
 import ControlButton from './ControlButton'
 import ShuffleButton from './ShuffleButton'
@@ -156,6 +152,11 @@ class Playlist extends React.Component<Props, State> {
   private setPanelRef = (ref: SlidingUpPanel): void => {
     this.panel = ref
   }
+  private hidePanel = (): void => {
+    if (this.panel) {
+      this.panel.hide()
+    }
+  }
 
   render() {
     const { tracks, favouriteCount } = this.props
@@ -181,7 +182,7 @@ class Playlist extends React.Component<Props, State> {
           renderItem={this.renderTrack}
         />
         <SlidingPanel forwardRef={this.setPanelRef}>
-          <TrackMenu track={detailedTrack} />
+          <TrackMenu onPressCancel={this.hidePanel} track={detailedTrack} />
         </SlidingPanel>
       </>
     )

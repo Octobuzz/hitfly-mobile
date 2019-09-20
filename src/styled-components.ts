@@ -12,6 +12,7 @@ export interface ThemeColors {
   textWhite: string
   inputBorder: string
   transparent70: string
+  transparentWhite50: string
 }
 
 export interface ThemeFonts {

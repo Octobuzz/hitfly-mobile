@@ -17,11 +17,11 @@ const Body = styled.View`
 const TopNotch = styled.View`
   width: 40px;
   height: 3px;
-  border-radius: 1px;
-  background-color: ${({ theme }) => theme.colors.white};
   margin-top: 16px;
-  margin-bottom: 42px;
+  margin-bottom: 16px;
+  border-radius: 1px;
   align-self: center;
+  background-color: ${({ theme }) => theme.colors.white};
 `
 
 interface Props extends SlidingUpPanelProps {
@@ -42,7 +42,7 @@ class SlidingPanel extends React.Component<Props, State> {
     this.setState({ contentHeight })
   }
 
-  private getDragableRange = (): { top: number; bottom: number } => {
+  private getDraggableRange = (): { top: number; bottom: number } => {
     const { contentHeight } = this.state
     let top = contentHeight
     const bottomSpace = getBottomSpace()
@@ -58,9 +58,11 @@ class SlidingPanel extends React.Component<Props, State> {
   render() {
     const { children, forwardRef } = this.props
     const { contentHeight } = this.state
+    const draggableRange = this.getDraggableRange()
     return (
       <StyledPanel
-        draggableRange={this.getDragableRange()}
+        snappingPoints={[draggableRange.top]}
+        draggableRange={draggableRange}
         height={contentHeight || undefined}
         ref={forwardRef}
       >

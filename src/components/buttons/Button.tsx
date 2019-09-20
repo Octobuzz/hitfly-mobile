@@ -9,7 +9,7 @@ export const disabledStyle = css`
   ${({ disabled }: { disabled?: boolean }) => disabled && `opacity: 0.4;`}
 `
 
-const Wrapper = styled.TouchableOpacity<ColorType & IndentedHorizontal>`
+const Wrapper = styled.TouchableOpacity<IndentedHorizontal>`
   ${disabledStyle}
   ${({ withMargin = true }) => withMargin && `margin-horizontal: 20px;`}
 `
@@ -18,10 +18,30 @@ const Text = styled(TextBase)<ColorType>`
   text-align: center;
   padding: 20px 29px;
   border-radius: 28px;
-  color: ${({ theme, type = 'gradient' }) =>
-    type === 'gradient' ? theme.colors.white : theme.colors.textMain};
-  ${({ theme, type }) =>
-    type === 'outline' && `background-color: ${theme.colors.white}`};
+  color: ${({ theme, type = 'gradient' }) => {
+    switch (type) {
+      case 'outline-black':
+      case 'gradient': {
+        return theme.colors.white
+      }
+      case 'outline': {
+        return theme.colors.textMain
+      }
+      default: {
+        return theme.colors.textMain
+      }
+    }
+  }};
+  ${({ theme, type }) => {
+    switch (type) {
+      case 'outline': {
+        return `background-color: ${theme.colors.white}`
+      }
+      case 'outline-black': {
+        return `background-color: ${theme.colors.black}`
+      }
+    }
+  }};
 `
 
 const Gradient = styled(LinearGradient).attrs(({ theme }) => ({
@@ -32,7 +52,7 @@ const Gradient = styled(LinearGradient).attrs(({ theme }) => ({
 `
 
 interface ColorType {
-  type?: 'outline' | 'gradient'
+  type?: 'outline' | 'outline-black' | 'gradient'
 }
 
 interface IndentedHorizontal {
@@ -51,7 +71,7 @@ const Button: React.FC<Props> = ({
   isLoading,
   isDisabled,
 }) => (
-  <Wrapper disabled={isDisabled} onPress={onPress} type={type} style={style}>
+  <Wrapper disabled={isDisabled} onPress={onPress} style={style}>
     <Gradient>
       {isLoading ? <Loader size={61.7} /> : <Text type={type}>{title}</Text>}
     </Gradient>
