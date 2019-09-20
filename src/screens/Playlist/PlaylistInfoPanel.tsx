@@ -2,7 +2,7 @@ import L from 'lodash'
 import React from 'react'
 import { ViewStyle } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import { More, TextBase, Stretcher } from 'src/components'
+import { TextBase, Stretcher } from 'src/components'
 import { Playlist } from 'src/apollo'
 import { helpers } from 'src/utils'
 import styled from 'src/styled-components'
@@ -16,10 +16,6 @@ const Wrapper = styled.View`
 const Text = styled(TextBase)`
   font-size: 12px;
   color: ${({ theme }) => theme.colors.textAlt};
-`
-
-const IndentedMoreButton = styled(More)`
-  margin-left: 16px;
 `
 
 const HeartIcon = styled(Icon).attrs(({ theme }) => ({
@@ -62,7 +58,6 @@ const PlaylistInfoPanel: React.FC<Props> = ({
       <Text>
         <HeartIcon /> {favouriteCount}
       </Text>
-      <IndentedMoreButton />
     </Wrapper>
   )
 }
