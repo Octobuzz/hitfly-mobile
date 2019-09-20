@@ -10,6 +10,7 @@ import {
   DatePicker,
   CheckBoxUI,
   SocialButton,
+  SlidingPanel,
   PlaylistTrack,
   TextWithLines,
 } from 'src/components'
@@ -17,6 +18,26 @@ import { PlaylistScreen } from 'src/screens'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import styled from 'src/styled-components'
 import { Track, Genre } from 'src/apollo'
+
+const SlidingPanelStory: React.FC = () => {
+  const panel = React.useRef(null)
+
+  const openPanel = () => {
+    // @ts-ignore
+    panel.current.show()
+  }
+
+  return (
+    <>
+      <Button onPress={openPanel} title="Open panel" />
+      <SlidingPanel forwardRef={panel}>
+        <Button title="Gradient" type="gradient" />
+      </SlidingPanel>
+    </>
+  )
+}
+
+storiesOf('SlidingPanel', module).add('Default', () => <SlidingPanelStory />)
 
 storiesOf('Button', module)
   .add('Gradient', () => <Button title="Gradient" type="gradient" />)
