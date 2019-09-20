@@ -1,4 +1,4 @@
-import React, { ReactElement, Ref } from 'react'
+import React, { Ref } from 'react'
 import { LayoutChangeEvent } from 'react-native'
 import { getBottomSpace } from 'react-native-iphone-x-helper'
 import SlidingUpPanel, { SlidingUpPanelProps } from 'rn-sliding-up-panel'
@@ -26,7 +26,6 @@ const TopNotch = styled.View`
 
 interface Props extends SlidingUpPanelProps {
   forwardRef?: Ref<SlidingUpPanel>
-  children?: ReactElement
 }
 
 interface State {

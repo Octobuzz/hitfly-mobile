@@ -1,7 +1,8 @@
 import React from 'react'
 import { Track } from 'src/apollo'
-import { TextBase, More } from 'src/components'
 import { Playable } from './interfaces'
+import More from 'src/components/buttons/More'
+import TextBase from 'src/components/TextBase'
 import TrackImage from './TrackImage'
 import { helpers } from 'src/utils'
 import styled from 'src/styled-components'
@@ -45,8 +46,9 @@ const TimeText = styled(GrayText)`
   margin-left: 16px;
 `
 
-interface Props extends Playable {
+interface PlaylistTrackProps extends Playable {
   onPress?: (track: Track) => void
+  onPressMore?: (track: Track) => void
   track: Track
   index: number
 }
@@ -55,11 +57,12 @@ interface Sized {
   size: number
 }
 
-const PlaylistTrack: React.FC<Props> & Sized = ({
+export const PlaylistTrack: React.FC<PlaylistTrackProps> & Sized = ({
   index,
   track,
   onPress,
   isPlaying,
+  onPressMore,
 }) => {
   const { cover, title, group, singer, length } = track
   const trackLength = React.useMemo(() => {
@@ -75,6 +78,12 @@ const PlaylistTrack: React.FC<Props> & Sized = ({
     }
   }, [onPress, track])
 
+  const handlePressMore = React.useCallback(() => {
+    if (onPressMore) {
+      onPressMore(track)
+    }
+  }, [onPressMore, track])
+
   return (
     <Wrapper isPlaying={isPlaying} onPress={handlePressTrack}>
       <TrackNumberText>{index}</TrackNumberText>
@@ -83,7 +92,7 @@ const PlaylistTrack: React.FC<Props> & Sized = ({
         <BlackText numberOfLines={1}>{title}</BlackText>
         <GrayText numberOfLines={1}>{group ? group.title : singer}</GrayText>
       </CenterBlock>
-      <More />
+      <More onPress={handlePressMore} />
       <TimeText>{trackLength}</TimeText>
     </Wrapper>
   )

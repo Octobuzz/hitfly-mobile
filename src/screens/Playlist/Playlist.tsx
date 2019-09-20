@@ -1,8 +1,14 @@
 import React from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
 import FastImage, { FastImageSource } from 'react-native-fast-image'
+import SlidingUpPanel from 'rn-sliding-up-panel'
 import { Track } from 'src/apollo'
-import { PlaylistTrack } from 'src/components'
+import {
+  SlidingPanel,
+  PlaylistTrack,
+  SimplePlaylistTrack,
+} from 'src/components'
+import TrackMenu from './TrackMenu'
 import ControlButton from './ControlButton'
 import ShuffleButton from './ShuffleButton'
 import PlaylistInfoPanel from './PlaylistInfoPanel'
@@ -48,13 +54,20 @@ interface Props {
 
 interface State {
   activeTrack: Track | null
+  detailedTrack?: Track
 }
 
 // TODO: на didMount нужно устанить текущий трек, если он есть в этом плейлисте
 // и играет сейчас
 class Playlist extends React.Component<Props, State> {
-  state: State = {
-    activeTrack: null,
+  constructor(props: Props) {
+    super(props)
+    // нужно для вычисления правильной высоты SlidingPanel
+    const detailedTrack = props.tracks[0] || null
+    this.state = {
+      activeTrack: null,
+      detailedTrack,
+    }
   }
 
   private toggleTrack = (track: Track) => {
@@ -86,6 +99,7 @@ class Playlist extends React.Component<Props, State> {
         index={index}
         isPlaying={isPlaying}
         onPress={this.toggleTrack}
+        onPressMore={this.handlePressMore}
         track={item}
       />
     )
@@ -97,6 +111,14 @@ class Playlist extends React.Component<Props, State> {
       return false
     }
     return activeTrack.id === track.id
+  }
+
+  private handlePressMore = (track: Track): void => {
+    this.setState({ detailedTrack: track }, () => {
+      if (this.panel) {
+        this.panel.show()
+      }
+    })
   }
 
   private getItemLayout = (
@@ -130,9 +152,14 @@ class Playlist extends React.Component<Props, State> {
     }
   }
 
+  private panel?: SlidingUpPanel
+  private setPanelRef = (ref: SlidingUpPanel): void => {
+    this.panel = ref
+  }
+
   render() {
     const { tracks, favouriteCount } = this.props
-    const { activeTrack } = this.state
+    const { activeTrack, detailedTrack } = this.state
     const activeCover = this.getCover()
     return (
       <>
@@ -153,6 +180,9 @@ class Playlist extends React.Component<Props, State> {
           keyExtractor={this.keyExtractor}
           renderItem={this.renderTrack}
         />
+        <SlidingPanel forwardRef={this.setPanelRef}>
+          <TrackMenu track={detailedTrack} />
+        </SlidingPanel>
       </>
     )
   }

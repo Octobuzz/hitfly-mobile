@@ -1,9 +1,9 @@
 import React from 'react'
 import FastImage from 'react-native-fast-image'
-import { images } from 'src/constants'
-import styled from 'src/styled-components'
 import TextBase from 'src/components/TextBase'
 import { Genre } from 'src/apollo'
+import { images } from 'src/constants'
+import styled from 'src/styled-components'
 
 const ITEM_SIZE = 109
 

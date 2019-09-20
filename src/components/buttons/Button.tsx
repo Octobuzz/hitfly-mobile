@@ -1,9 +1,9 @@
 import React from 'react'
-import TextBase from 'src/components/TextBase'
 import LinearGradient from 'react-native-linear-gradient'
-import styled, { css } from 'src/styled-components'
+import TextBase from 'src/components/TextBase'
+import Loader from 'src/components/Loader'
 import { ButtonBase } from './interfaces'
-import Loader from '../Loader'
+import styled, { css } from 'src/styled-components'
 
 export const disabledStyle = css`
   ${({ disabled }: { disabled?: boolean }) => disabled && `opacity: 0.4;`}
