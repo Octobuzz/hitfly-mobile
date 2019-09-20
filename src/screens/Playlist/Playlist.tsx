@@ -3,13 +3,14 @@ import { FlatList, ListRenderItem } from 'react-native'
 import FastImage, { FastImageSource } from 'react-native-fast-image'
 import { Track } from 'src/apollo'
 import { PlaylistTrack } from 'src/components'
+import ControlButton from './ControlButton'
 import ShuffleButton from './ShuffleButton'
 import PlaylistInfoPanel from './PlaylistInfoPanel'
 import styled from 'src/styled-components'
 
 const CoverWrapper = styled.View`
   height: 45%;
-  justify-content: flex-end;
+  justify-content: center;
   background-color: ${({ theme }) => theme.colors.white};
 `
 
@@ -23,8 +24,14 @@ const Cover = styled(FastImage)`
 `
 
 const PositionedShuffleButton = styled(ShuffleButton)`
-  align-self: flex-end;
+  position: absolute;
+  bottom: 0;
+  right: 0;
   width: 80%;
+`
+
+const PositionedControlButton = styled(ControlButton)`
+  align-self: center;
 `
 
 const Scroll = styled(FlatList as new () => FlatList<Track>).attrs(() => ({
@@ -57,13 +64,17 @@ class Playlist extends React.Component<Props, State> {
         // TODO: поменять трек в глобальном плеере
         this.setState({ activeTrack: track })
       } else {
-        // TODO: пауза в глобальном плеере
-        this.setState({ activeTrack: null })
+        this.pauseTrack()
       }
     } else {
       // TODO: новый трек в глобальном плеере
       this.setState({ activeTrack: track })
     }
+  }
+
+  private pauseTrack = (): void => {
+    // TODO: пауза в глобальном плеере
+    this.setState({ activeTrack: null })
   }
 
   private keyExtractor = (item: Track): string => item.id.toString()
@@ -109,13 +120,30 @@ class Playlist extends React.Component<Props, State> {
     return cover
   }
 
+  private pauseOrPlayFirstTrack = (): void => {
+    const { tracks } = this.props
+    const { activeTrack } = this.state
+    if (activeTrack) {
+      this.pauseTrack()
+    } else {
+      this.setState({ activeTrack: tracks[0] })
+    }
+  }
+
   render() {
     const { tracks, favouriteCount } = this.props
+    const { activeTrack } = this.state
     const activeCover = this.getCover()
     return (
       <>
         <CoverWrapper>
           <Cover source={activeCover} />
+          {tracks.length && (
+            <PositionedControlButton
+              onPress={this.pauseOrPlayFirstTrack}
+              isPlaying={!!activeTrack}
+            />
+          )}
           <PositionedShuffleButton />
         </CoverWrapper>
         <PlaylistInfoPanel favouriteCount={favouriteCount} playlist={tracks} />
