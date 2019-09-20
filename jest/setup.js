@@ -1,4 +1,13 @@
 import 'jest-styled-components'
+import mockAsyncStorage from '@react-native-community/async-storage/jest/async-storage-mock'
+
+jest.mock('react-native-vector-icons/Foundation', () => 'Icon')
+jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon')
+jest.mock('react-native-vector-icons/Feather', () => 'Icon')
+jest.mock('react-native-vector-icons/MaterialIcons', () => 'Icon')
+jest.mock('react-native-vector-icons/SimpleLineIcons', () => 'Icon')
+
+jest.mock('@react-native-community/async-storage', () => mockAsyncStorage)
 
 jest.mock('react-native-track-player', () => {
   return {

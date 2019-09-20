@@ -2,6 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react-native'
 import {
   Link,
+  More,
   Input,
   Button,
   Dropdown,
@@ -9,10 +10,13 @@ import {
   DatePicker,
   CheckBoxUI,
   SocialButton,
+  PlaylistTrack,
   TextWithLines,
 } from 'src/components'
+import { PlaylistScreen } from 'src/screens'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import styled from 'src/styled-components'
+import { Track, Genre } from 'src/apollo'
 
 storiesOf('Button', module)
   .add('Gradient', () => <Button title="Gradient" type="gradient" />)
@@ -20,6 +24,9 @@ storiesOf('Button', module)
   .add('Gradient with Loader', () => (
     <Button isLoading title="Outline" type="outline" />
   ))
+storiesOf('More', module).add('Default', () => (
+  <More style={{ backgroundColor: 'green' }} />
+))
 storiesOf('Link', module).add('Default', () => <Link title="Link" />)
 
 const CenterContainer = styled.View`
@@ -29,10 +36,12 @@ const CenterContainer = styled.View`
 `
 storiesOf('SocialButton', module).add('Default', () => (
   <CenterContainer>
-    <SocialButton data={{ type: 'vk', url: '' }} />
-    <SocialButton data={{ type: 'gg', url: '' }} />
-    <SocialButton data={{ type: 'fb', url: '' }} />
-    <SocialButton data={{ type: 'ok', url: '' }} />
+    <SocialButton buttonData={{ type: 'vkontakte', url: '', isLinked: true }} />
+    <SocialButton buttonData={{ type: 'instagram', url: '', isLinked: true }} />
+    <SocialButton buttonData={{ type: 'facebook', url: '', isLinked: true }} />
+    <SocialButton
+      buttonData={{ type: 'odnoklassniki', url: '', isLinked: true }}
+    />
   </CenterContainer>
 ))
 
@@ -101,12 +110,14 @@ const GenreItemStory = () => {
   const [isSelected, setSelected] = React.useState(false)
   return (
     <GenreItem
-      item={{
-        id: 1,
-        title: 'name',
-        imageUrl:
-          'https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-260nw-407021107.jpg',
-      }}
+      item={
+        {
+          id: 1,
+          title: 'name',
+          imageUrl:
+            'https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-260nw-407021107.jpg',
+        } as Genre
+      }
       onPress={() => setSelected(!isSelected)}
       isSelected={isSelected}
     />
@@ -114,3 +125,39 @@ const GenreItemStory = () => {
 }
 
 storiesOf('GenreItem', module).add('Default', () => <GenreItemStory />)
+
+const track = {
+  id: 1,
+  cover: [
+    {
+      imageUrl:
+        'https://images.unsplash.com/photo-1541233349642-6e425fe6190e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+    },
+  ],
+  title: 'Some track title',
+  group: {
+    title: 'Some group title',
+  },
+} as Track
+storiesOf('PlaylistTrack', module)
+  .add('Paused', () => <PlaylistTrack track={track} index={1} />)
+  .add('Playing', () => <PlaylistTrack isPlaying track={track} index={1} />)
+
+const getMockPlaylist = (): Track[] => {
+  const result = []
+  for (let id = 0; id < 101; id++) {
+    result.push({ ...track, id })
+  }
+  return result
+}
+
+storiesOf('PlaylistScreen', module).add('Default', () => (
+  <PlaylistScreen
+    cover={{
+      uri:
+        'https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_960_720.jpg',
+    }}
+    tracks={getMockPlaylist()}
+    favouriteCount={100}
+  />
+))

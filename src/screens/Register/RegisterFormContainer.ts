@@ -17,7 +17,7 @@ const validationSchema = Yup.object().shape({
   password: Yup.string()
     .required(strings.validation.required)
     .matches(
-      /(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])/,
+      /(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/,
       strings.validation.passwordFormat,
     ),
   passwordRepeat: Yup.string().oneOf(
@@ -58,7 +58,8 @@ export default L.flowRight(
       // @ts-ignore
       const { mutate, navigation } = props
       try {
-        const result = await mutate({ variables: payload })
+        const variables = L.omit(payload, ['navigation', 'result'])
+        const result = await mutate({ variables })
         const token = L.get(result, 'data.register.token')
         if (token) {
           await storage.setItem(storageKeys.AUTH_TOKEN, token as string)

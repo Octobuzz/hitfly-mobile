@@ -11,7 +11,7 @@ interface SvgImageProps {
 }
 
 export const SvgImage: React.FC<SvgImageProps> = ({ uri, style }) => {
-  const [xml, setXml] = React.useState()
+  const [xml, setXml] = React.useState<string | null>(null)
   React.useEffect(() => {
     fetchText(uri)
       .then(removeStylesFromSvg)
@@ -35,11 +35,9 @@ const removeStylesFromSvg = (svg: string): string => {
   return tmp
 }
 
-export const Image: React.FC<FastImageProperties> = ({
-  style,
-  source,
-  ...rest
-}) => {
+export interface ImageProps extends FastImageProperties {}
+
+export const Image: React.FC<ImageProps> = ({ style, source, ...rest }) => {
   const svgUri = getSvgUri(source)
   return svgUri ? (
     <SvgImage style={style} uri={svgUri} />
