@@ -14,6 +14,16 @@ const Body = styled.View`
   background-color: ${({ theme }) => theme.colors.black};
 `
 
+const TopNotch = styled.View`
+  width: 40px;
+  height: 3px;
+  border-radius: 1px;
+  background-color: ${({ theme }) => theme.colors.white};
+  margin-top: 16px;
+  margin-bottom: 42px;
+  align-self: center;
+`
+
 interface Props extends SlidingUpPanelProps {
   forwardRef?: Ref<SlidingUpPanel>
   children?: ReactElement
@@ -55,7 +65,10 @@ class SlidingPanel extends React.Component<Props, State> {
         height={contentHeight || undefined}
         ref={forwardRef}
       >
-        <Body onLayout={this.setContentHeight}>{children}</Body>
+        <Body onLayout={this.setContentHeight}>
+          <TopNotch />
+          {children}
+        </Body>
       </StyledPanel>
     )
   }
