@@ -46,7 +46,7 @@ const TimeText = styled(GrayText)`
   margin-left: 16px;
 `
 
-interface PlaylistTrackProps extends Playable {
+interface Props extends Playable {
   onPress?: (track: Track) => void
   onPressMore?: (track: Track) => void
   track: Track
@@ -57,7 +57,7 @@ interface Sized {
   size: number
 }
 
-export const PlaylistTrack: React.FC<PlaylistTrackProps> & Sized = ({
+const PlaylistTrack: React.FC<Props> & Sized = ({
   index,
   track,
   onPress,
