@@ -1,6 +1,6 @@
 import React from 'react'
-import styled from 'src/styled-components'
 import TextBase from 'src/components/TextBase'
+import styled from 'src/styled-components'
 
 const Wrapper = styled.View`
   flex-direction: row;

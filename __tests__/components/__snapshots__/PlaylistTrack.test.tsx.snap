@@ -35,6 +35,8 @@ exports[`PlaylistTrack renders correctly in paused state 1`] = `
             "fontSize": 12,
             "lineHeight": 20,
             "marginRight": 12,
+            "textAlign": "center",
+            "width": 24,
           },
         ]
       }
@@ -101,13 +103,14 @@ exports[`PlaylistTrack renders correctly in paused state 1`] = `
       }
     >
       <Text
+        numberOfLines={1}
         style={
           Array [
             Object {
               "color": "#313131",
               "fontFamily": "GothamPro-Bold",
               "fontSize": 12,
-              "lineHeight": 20,
+              "lineHeight": 14,
             },
           ]
         }
@@ -115,13 +118,14 @@ exports[`PlaylistTrack renders correctly in paused state 1`] = `
         Some track title
       </Text>
       <Text
+        numberOfLines={1}
         style={
           Array [
             Object {
               "color": "#606060",
               "fontFamily": "GothamPro",
               "fontSize": 10,
-              "lineHeight": 20,
+              "lineHeight": 12,
             },
           ]
         }
@@ -164,7 +168,7 @@ exports[`PlaylistTrack renders correctly in paused state 1`] = `
             "color": "#606060",
             "fontFamily": "GothamPro",
             "fontSize": 10,
-            "lineHeight": 20,
+            "lineHeight": 12,
             "marginLeft": 16,
           },
         ]
@@ -212,6 +216,8 @@ exports[`PlaylistTrack renders correctly in played state 1`] = `
             "fontSize": 12,
             "lineHeight": 20,
             "marginRight": 12,
+            "textAlign": "center",
+            "width": 24,
           },
         ]
       }
@@ -305,13 +311,14 @@ exports[`PlaylistTrack renders correctly in played state 1`] = `
       }
     >
       <Text
+        numberOfLines={1}
         style={
           Array [
             Object {
               "color": "#313131",
               "fontFamily": "GothamPro-Bold",
               "fontSize": 12,
-              "lineHeight": 20,
+              "lineHeight": 14,
             },
           ]
         }
@@ -319,13 +326,14 @@ exports[`PlaylistTrack renders correctly in played state 1`] = `
         Some track title
       </Text>
       <Text
+        numberOfLines={1}
         style={
           Array [
             Object {
               "color": "#606060",
               "fontFamily": "GothamPro",
               "fontSize": 10,
-              "lineHeight": 20,
+              "lineHeight": 12,
             },
           ]
         }
@@ -368,7 +376,7 @@ exports[`PlaylistTrack renders correctly in played state 1`] = `
             "color": "#606060",
             "fontFamily": "GothamPro",
             "fontSize": 10,
-            "lineHeight": 20,
+            "lineHeight": 12,
             "marginLeft": 16,
           },
         ]

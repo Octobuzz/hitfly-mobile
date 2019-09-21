@@ -5,12 +5,14 @@ export interface ThemeColors {
   brandPink: string
   white: string
   gray: string
+  black: string
   textMain: string
   textAlt: string
   textGray: string
   textWhite: string
   inputBorder: string
   transparent70: string
+  transparentWhite50: string
 }
 
 export interface ThemeFonts {

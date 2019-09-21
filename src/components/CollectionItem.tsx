@@ -2,8 +2,8 @@ import React from 'react'
 import TextBase from './TextBase'
 import { Image } from './Image'
 import { helpers } from 'src/utils'
-import styled from 'src/styled-components'
 import { Collection } from 'src/apollo'
+import styled from 'src/styled-components'
 
 const ItemWrapper = styled.TouchableOpacity<Sized>`
   height: ${({ height }) => height || 160}px;
