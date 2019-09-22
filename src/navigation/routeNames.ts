@@ -23,5 +23,6 @@ export default {
     LISTENED_NOW_PLAYLIST: `${APP.MAIN}/listened_now_playlist`,
     NEW_PLAYLIST: `${APP.MAIN}/new_playlist`,
     TOP_WEEK_PLAYLIST: `${APP.MAIN}/top_week_playlist`,
+    GENRE_PLAYLIST: `${APP.MAIN}/genre_playlist`,
   },
 }

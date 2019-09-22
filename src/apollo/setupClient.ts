@@ -5,6 +5,7 @@ import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 import { storageInstance, storage } from 'src/utils'
 import { names, storageKeys } from 'src/constants'
+import resolvers from './resolvers'
 
 async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
   const httpLink = createHttpLink({
@@ -29,10 +30,12 @@ async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
     return context
   })
 
-  const mainCache = new InMemoryCache({})
+  const cache = new InMemoryCache({
+    freezeResults: true,
+  })
 
   await persistCache({
-    cache: mainCache,
+    cache,
     debug: __DEV__,
     // @ts-ignore
     storage: storageInstance,
@@ -40,15 +43,9 @@ async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
 
   const client = new ApolloClient<InMemoryCache>({
     // @ts-ignore
-    cache: mainCache,
+    cache,
     link: authLink.concat(httpLink),
-    resolvers: {
-      Mutation: {
-        selectCollection: (_, { id }, { cache }: { cache: InMemoryCache }) => {
-          cache.writeData({ data: { currentCollectionId: id } })
-        },
-      },
-    },
+    resolvers,
   })
 
   return client

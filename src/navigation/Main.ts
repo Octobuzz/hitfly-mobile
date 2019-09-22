@@ -2,6 +2,7 @@ import { createStackNavigator } from 'react-navigation-stack'
 import { HomeScreen, CollectionDetailsScreen } from 'src/screens'
 import {
   NewPlaylistScreen,
+  GenrePlaylistScreen,
   Top50PlaylistScreen,
   TopWeekPlaylistScreen,
   CollectionPlaylistScreen,
@@ -61,6 +62,16 @@ const MainNavigator = createStackNavigator(
       navigationOptions: {
         title: 'Открытие недели',
         ...playlistConfig,
+      },
+    },
+    [routeNames.MAIN.GENRE_PLAYLIST]: {
+      screen: GenrePlaylistScreen,
+      navigationOptions: ({ navigation }) => {
+        const title = navigation.getParam('title')
+        return {
+          title,
+          ...playlistConfig,
+        }
       },
     },
   },

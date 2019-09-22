@@ -82,7 +82,7 @@ export const formatTimeDurationForPlaylist = (
   if (minutes > 0) {
     result.push(`${minutes} ${getNameForMinutes(minutes)}`)
   }
-  const seconds = initialSeconds % 60
+  const seconds = Math.trunc(initialSeconds % 60)
   if (withSeconds && seconds > 0) {
     result.push(`${seconds} ${getNameForSeconds(seconds)}`)
   }

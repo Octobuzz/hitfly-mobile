@@ -39,13 +39,25 @@ const SELECT_COLLECTION = gql`
     selectCollection(id: $id) @client
   }
 `
+const SELECT_GENRE = gql`
+  mutation SelectGenre($id: string) {
+    selectGenre(id: $id) @client
+  }
+`
 
 interface Props extends NavigationScreenProps {
   client: ApolloClient<any>
 }
 
 class Home extends React.Component<Props> {
-  private handlePressGenreItem = (item: Genre) => {}
+  private handlePressGenreItem = async (item: Genre) => {
+    const { client, navigation } = this.props
+    await client.mutate({
+      mutation: SELECT_GENRE,
+      variables: { id: item.id },
+    })
+    navigation.navigate(ROUTES.MAIN.GENRE_PLAYLIST, { title: item.title })
+  }
 
   private handlePressTop50 = () => {
     const { navigation } = this.props
