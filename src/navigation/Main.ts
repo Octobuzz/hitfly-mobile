@@ -3,6 +3,7 @@ import { HomeScreen, CollectionDetailsScreen } from 'src/screens'
 import {
   NewPlaylistScreen,
   Top50PlaylistScreen,
+  TopWeekPlaylistScreen,
   CollectionPlaylistScreen,
   ListenedNowPlaylistScreen,
 } from 'src/containers'
@@ -52,6 +53,13 @@ const MainNavigator = createStackNavigator(
       screen: NewPlaylistScreen,
       navigationOptions: {
         title: 'Новое',
+        ...playlistConfig,
+      },
+    },
+    [routeNames.MAIN.TOP_WEEK_PLAYLIST]: {
+      screen: TopWeekPlaylistScreen,
+      navigationOptions: {
+        title: 'Открытие недели',
         ...playlistConfig,
       },
     },

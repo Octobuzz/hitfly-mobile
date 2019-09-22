@@ -88,14 +88,27 @@ class Home extends React.Component<Props> {
     })
   }
 
+  // TODO: дубль, пока не решится следующий TODO
+  private handlePressNewHeader = () => {
+    const { navigation } = this.props
+    navigation.navigate(ROUTES.MAIN.NEW_PLAYLIST)
+  }
   // TODO: тут сразу трек в play?
   private handlePressNewTrack = (track: Track) => {
     const { navigation } = this.props
     navigation.navigate(ROUTES.MAIN.NEW_PLAYLIST)
   }
 
+  // TODO: дубль, пока не решится следующий TODO
+  private handlePressTopWeekHeader = () => {
+    const { navigation } = this.props
+    navigation.navigate(ROUTES.MAIN.TOP_WEEK_PLAYLIST)
+  }
   // TODO: тут сразу трек в play?
-  private handlePressTopWeekTrack = (track: Track) => {}
+  private handlePressTopWeekTrack = (track: Track) => {
+    const { navigation } = this.props
+    navigation.navigate(ROUTES.MAIN.TOP_WEEK_PLAYLIST)
+  }
 
   private selectCollection = (id: number): Promise<any> => {
     const { client } = this.props
@@ -158,6 +171,7 @@ class Home extends React.Component<Props> {
                   title="Новое"
                   playlist={playlist}
                   isLoading={loading}
+                  onPressHeader={this.handlePressNewHeader}
                   onPressTrack={this.handlePressNewTrack}
                 />
               )
@@ -224,6 +238,7 @@ class Home extends React.Component<Props> {
                   subtitle="Треки, которые неожиданно поднялись в чарте"
                   playlist={playlist}
                   isLoading={loading}
+                  onPressHeader={this.handlePressTopWeekHeader}
                   onPressTrack={this.handlePressTopWeekTrack}
                 />
               )
