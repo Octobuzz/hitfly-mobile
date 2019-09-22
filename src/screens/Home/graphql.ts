@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { Genre, Playlist, Pagination, Collection, Track } from 'src/apollo'
+import { Genre, Pagination, Collection, Track } from 'src/apollo'
 
 export interface GenreData {
   genres?: Genre[]

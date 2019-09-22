@@ -1,6 +1,7 @@
 import { createStackNavigator } from 'react-navigation-stack'
 import { HomeScreen, CollectionDetailsScreen } from 'src/screens'
 import {
+  NewPlaylistScreen,
   Top50PlaylistScreen,
   CollectionPlaylistScreen,
   ListenedNowPlaylistScreen,
@@ -44,6 +45,13 @@ const MainNavigator = createStackNavigator(
       screen: ListenedNowPlaylistScreen,
       navigationOptions: {
         title: 'Слушают сейчас',
+        ...playlistConfig,
+      },
+    },
+    [routeNames.MAIN.NEW_PLAYLIST]: {
+      screen: NewPlaylistScreen,
+      navigationOptions: {
+        title: 'Новое',
         ...playlistConfig,
       },
     },

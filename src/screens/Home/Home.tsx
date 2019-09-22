@@ -88,8 +88,13 @@ class Home extends React.Component<Props> {
     })
   }
 
-  private handlePressNewTrack = (track: Track) => {}
+  // TODO: тут сразу трек в play?
+  private handlePressNewTrack = (track: Track) => {
+    const { navigation } = this.props
+    navigation.navigate(ROUTES.MAIN.NEW_PLAYLIST)
+  }
 
+  // TODO: тут сразу трек в play?
   private handlePressTopWeekTrack = (track: Track) => {}
 
   private selectCollection = (id: number): Promise<any> => {

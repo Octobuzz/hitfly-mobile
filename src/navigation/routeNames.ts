@@ -21,5 +21,6 @@ export default {
     COLLECTION_PLAYLIST: `${APP.MAIN}/collection_playlist`,
     TOP_50_PLAYLIST: `${APP.MAIN}/top_50_playlist`,
     LISTENED_NOW_PLAYLIST: `${APP.MAIN}/listened_now_playlist`,
+    NEW_PLAYLIST: `${APP.MAIN}/new_playlist`,
   },
 }
