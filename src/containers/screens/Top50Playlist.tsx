@@ -1,10 +1,6 @@
-import L from 'lodash'
 import React from 'react'
 import gql from 'graphql-tag'
-import { Query } from '@apollo/react-components'
-import { PlaylistScreen } from 'src/screens'
-import { Pagination, Playlist, Track } from 'src/apollo'
-import { Loader } from 'src/components'
+import NonCollectionPlaylist from './NonCollectionPlaylist'
 import { images } from 'src/constants'
 
 const GET_TOP50_TRACKS = gql`
@@ -28,41 +24,12 @@ const GET_TOP50_TRACKS = gql`
   }
 `
 
-interface Data {
-  playlist?: Pagination<Track>
-}
-
-class Top50Playlist extends React.Component {
-  private getFavouritesCount = (playlist: Playlist): number => {
-    const count = L.sumBy<Track>(playlist, 'favouritesCount')
-    return count
-  }
-
-  render() {
-    return (
-      <Query<Data> query={GET_TOP50_TRACKS}>
-        {({ data, loading }) => {
-          if (loading) {
-            return <Loader isAbsolute />
-          }
-
-          if (!data || !data.playlist) {
-            return null
-          }
-          const { items } = data.playlist
-          const favouritesCount = this.getFavouritesCount(items)
-          return (
-            <PlaylistScreen
-              cover={images.TOP50_PLAYLIST}
-              tracks={items}
-              favouritesCount={favouritesCount}
-              {...this.props}
-            />
-          )
-        }}
-      </Query>
-    )
-  }
-}
+const Top50Playlist: React.FC = props => (
+  <NonCollectionPlaylist
+    query={GET_TOP50_TRACKS}
+    cover={images.TOP50_PLAYLIST}
+    {...props}
+  />
+)
 
 export default Top50Playlist

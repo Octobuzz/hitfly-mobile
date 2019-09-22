@@ -15,8 +15,9 @@ export const GET_GENRES = gql`
 `
 
 export interface PlaylistData {
-  playlist?: Pagination<Playlist>
+  playlist?: Pagination<Track>
 }
+
 export const GET_TOP50 = gql`
   query {
     playlist: GetTopFifty(limit: 50, page: 0) {
@@ -35,46 +36,9 @@ export const GET_LISTENED_NOW = gql`
   }
 `
 
-export interface CollectionsData {
-  collections?: Pagination<Collection>
-}
-export const GET_RECOMMENDED = gql`
-  query Collections($limit: Int = 10, $page: Int = 1) {
-    collections(limit: $limit, page: $page, filters: { collection: true }) {
-      items: data {
-        id
-        images: image(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        title
-        tracksCountInPlaylist: tracksCount
-      }
-      hasMorePages: has_more_pages
-    }
-  }
-`
-export const GET_MUSIC_FAN = gql`
-  query {
-    collections(limit: 10, page: 1, filters: { superMusicFan: true }) {
-      items: data {
-        id
-        images: image(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        title
-        tracksCountInPlaylist: tracksCount
-      }
-      hasMorePages: has_more_pages
-    }
-  }
-`
-
-export interface TracksData {
-  tracks?: Pagination<Track>
-}
 export const GET_NEW_TRACKS = gql`
   query {
-    tracks(limit: 10, page: 0) {
+    playlist: tracks(limit: 10, page: 0) {
       items: data {
         id
         title: trackName
@@ -92,7 +56,7 @@ export const GET_NEW_TRACKS = gql`
 
 export const GET_TOP_WEEK_TRACKS = gql`
   query {
-    tracks: TopWeeklyQuery(limit: 10, page: 0) {
+    playlist: TopWeeklyQuery(limit: 10, page: 0) {
       items: data {
         id
         title: trackName
@@ -104,6 +68,42 @@ export const GET_TOP_WEEK_TRACKS = gql`
         }
         singer
       }
+    }
+  }
+`
+
+export interface CollectionsData {
+  collections?: Pagination<Collection>
+}
+
+export const GET_RECOMMENDED = gql`
+  query Collections($limit: Int = 10, $page: Int = 1) {
+    collections(limit: $limit, page: $page, filters: { collection: true }) {
+      items: data {
+        id
+        images: image(sizes: [size_290x290]) {
+          imageUrl: url
+        }
+        title
+        tracksCountInPlaylist: tracksCount
+      }
+      hasMorePages: has_more_pages
+    }
+  }
+`
+
+export const GET_MUSIC_FAN = gql`
+  query {
+    collections(limit: 10, page: 1, filters: { superMusicFan: true }) {
+      items: data {
+        id
+        images: image(sizes: [size_290x290]) {
+          imageUrl: url
+        }
+        title
+        tracksCountInPlaylist: tracksCount
+      }
+      hasMorePages: has_more_pages
     }
   }
 `

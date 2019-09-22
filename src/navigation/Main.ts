@@ -1,8 +1,8 @@
 import { createStackNavigator } from 'react-navigation-stack'
 import { HomeScreen, CollectionDetailsScreen } from 'src/screens'
 import {
-  PlaylistScreen,
   Top50PlaylistScreen,
+  CollectionPlaylistScreen,
   ListenedNowPlaylistScreen,
 } from 'src/containers'
 import { stackConfig, playlistConfig } from './configs'
@@ -24,7 +24,7 @@ const MainNavigator = createStackNavigator(
       },
     },
     [routeNames.MAIN.COLLECTION_PLAYLIST]: {
-      screen: PlaylistScreen,
+      screen: CollectionPlaylistScreen,
       navigationOptions: ({ navigation }) => {
         const title = navigation.getParam('title')
         return {

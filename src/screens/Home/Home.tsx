@@ -14,7 +14,6 @@ import { images } from 'src/constants'
 import {
   CollectionsData,
   PlaylistData,
-  TracksData,
   GenreData,
   GET_TOP50,
   GET_GENRES,
@@ -143,9 +142,9 @@ class Home extends React.Component<Props> {
             }}
           </Query>
 
-          <Query<TracksData> query={GET_NEW_TRACKS}>
+          <Query<PlaylistData> query={GET_NEW_TRACKS}>
             {({ loading, data }) => {
-              const playlist = L.get(data, 'tracks.items')
+              const playlist = L.get(data, 'playlist.items')
               if (!loading && L.isEmpty(playlist)) {
                 return null
               }
@@ -208,9 +207,9 @@ class Home extends React.Component<Props> {
               )
             }}
           </Query>
-          <Query<TracksData> query={GET_TOP_WEEK_TRACKS}>
+          <Query<PlaylistData> query={GET_TOP_WEEK_TRACKS}>
             {({ loading, data }) => {
-              const playlist = L.get(data, 'tracks.items')
+              const playlist = L.get(data, 'playlist.items')
               if (!loading && L.isEmpty(playlist)) {
                 return null
               }

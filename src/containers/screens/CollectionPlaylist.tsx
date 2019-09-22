@@ -36,7 +36,7 @@ interface Data {
   collection?: Collection
 }
 
-class Playlist extends React.Component {
+class CollectionPlaylist extends React.Component {
   render() {
     return (
       <Query<Data> query={GET_CURRENT_COLLECTION}>
@@ -64,4 +64,4 @@ class Playlist extends React.Component {
   }
 }
 
-export default Playlist
+export default CollectionPlaylist
