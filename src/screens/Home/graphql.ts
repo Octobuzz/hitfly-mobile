@@ -29,7 +29,7 @@ export const GET_TOP50 = gql`
 
 export const GET_LISTENED_NOW = gql`
   query {
-    playlist: GetTopFifty(limit: 10, page: 0) {
+    playlist: GetListenedNow(limit: 0, page: 0) {
       total
     }
   }

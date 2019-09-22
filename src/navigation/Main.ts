@@ -1,6 +1,10 @@
 import { createStackNavigator } from 'react-navigation-stack'
 import { HomeScreen, CollectionDetailsScreen } from 'src/screens'
-import { PlaylistScreen, Top50PlaylistScreen } from 'src/containers'
+import {
+  PlaylistScreen,
+  Top50PlaylistScreen,
+  ListenedNowPlaylistScreen,
+} from 'src/containers'
 import { stackConfig, playlistConfig } from './configs'
 import routeNames from './routeNames'
 
@@ -33,6 +37,13 @@ const MainNavigator = createStackNavigator(
       screen: Top50PlaylistScreen,
       navigationOptions: {
         title: 'Топ 50',
+        ...playlistConfig,
+      },
+    },
+    [routeNames.MAIN.LISTENED_NOW_PLAYLIST]: {
+      screen: ListenedNowPlaylistScreen,
+      navigationOptions: {
+        title: 'Слушают сейчас',
         ...playlistConfig,
       },
     },

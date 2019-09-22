@@ -53,13 +53,16 @@ class Home extends React.Component<Props> {
     navigation.navigate(ROUTES.MAIN.TOP_50_PLAYLIST)
   }
 
-  private handlePressListenedNow = () => {}
+  private handlePressListenedNow = () => {
+    const { navigation } = this.props
+    navigation.navigate(ROUTES.MAIN.LISTENED_NOW_PLAYLIST)
+  }
 
   private handlePressRecommendedHeader = () => {
     const { navigation } = this.props
     navigation.navigate(ROUTES.MAIN.COLLECTION_DETAILS, {
       title: 'Рекомендуем',
-      query: GET_RECOMMENDED,
+      query: GET_RECOMMENDED, // TODO: сделать по-другому, не через навигацию
       onPressItem: this.handlePressRecommendedCollection,
     })
   }
@@ -74,7 +77,7 @@ class Home extends React.Component<Props> {
     const { navigation } = this.props
     navigation.navigate(ROUTES.MAIN.COLLECTION_DETAILS, {
       title: 'Супер меломан',
-      query: GET_MUSIC_FAN,
+      query: GET_MUSIC_FAN, // TODO: сделать по-другому, не через навигацию
       onPressItem: this.handlePressMusicFanCollection,
     })
   }
