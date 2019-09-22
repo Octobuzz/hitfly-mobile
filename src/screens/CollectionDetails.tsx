@@ -5,10 +5,9 @@ import { NavigationScreenProps } from 'react-navigation'
 import { getBottomSpace } from 'react-native-iphone-x-helper'
 import { Query } from '@apollo/react-components'
 import { DocumentNode } from 'graphql'
-import { Collection, PaginationVariables } from 'src/apollo'
+import { Collection, PaginationVariables, Pagination } from 'src/apollo'
 import { H1, Loader, CollectionItem } from 'src/components'
 import styled from 'src/styled-components'
-import { CollectionsData } from './Home/graphql'
 
 const Scroll = styled(FlatList as new () => FlatList<Collection>).attrs(() => ({
   numColumns: 2,
@@ -29,16 +28,20 @@ const IndentedH1 = styled(H1)`
 
 const Header = <IndentedH1>Плейлисты</IndentedH1>
 
-interface Props extends NavigationScreenProps {}
+interface CollectionsData {
+  collections?: Pagination<Collection>
+}
+
+interface Props extends NavigationScreenProps {
+  query: DocumentNode
+}
 
 class CollectionDetails extends React.Component<Props> {
-  private query?: DocumentNode
   private onPressItem: (collection: Collection) => void
   private limit = 10
 
   constructor(props: Props) {
     super(props)
-    this.query = props.navigation.getParam('query')
     this.onPressItem = props.navigation.getParam('onPressItem', () => {})
   }
 
@@ -63,13 +66,10 @@ class CollectionDetails extends React.Component<Props> {
   }
 
   render() {
-    if (!this.query) {
-      return null
-    }
-
+    const { query } = this.props
     return (
       <Query<CollectionsData, PaginationVariables>
-        query={this.query}
+        query={query}
         variables={{ page: 1, limit: this.limit }}
       >
         {({ loading, data, fetchMore }) => {

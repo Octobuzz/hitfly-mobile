@@ -3,8 +3,9 @@ import { InMemoryCache, IdGetter } from 'apollo-cache-inmemory'
 import { Resolvers } from 'apollo-client'
 import gql from 'graphql-tag'
 import { Genre } from './schemas'
+import { CollectionsType } from './commontTypes'
 
-interface ContextArsg {
+interface ContextArgs {
   cache: InMemoryCache
   getCacheKey: IdGetter
 }
@@ -18,19 +19,57 @@ const GET_GENRES = gql`
   }
 `
 
+const GET_RECOMMENDED = gql`
+  query Collections($limit: Int = 10, $page: Int = 1) {
+    collections(limit: $limit, page: $page, filters: { collection: true }) {
+      items: data {
+        id
+        images: image(sizes: [size_290x290]) {
+          imageUrl: url
+        }
+        title
+        tracksCountInPlaylist: tracksCount
+      }
+      hasMorePages: has_more_pages
+    }
+  }
+`
+
+// TODO: использовать фрагменты?
+const GET_MUSIC_FAN = gql`
+  query Collections($limit: Int = 10, $page: Int = 1) {
+    collections(limit: $limit, page: $page, filters: { superMusicFan: true }) {
+      items: data {
+        id
+        images: image(sizes: [size_290x290]) {
+          imageUrl: url
+        }
+        title
+        tracksCountInPlaylist: tracksCount
+      }
+      hasMorePages: has_more_pages
+    }
+  }
+`
+
 export default {
   Mutation: {
-    selectCollection: (_, { id }, { cache }: ContextArsg) => {
+    setCollectionsForDetails: (_, { type }, { cache }: ContextArgs) => {
+      // TODO: доавить тип/схему?
+      cache.writeData({ data: { collectionDetailsType: type } })
+      return null
+    },
+    selectCollection: (_, { id }, { cache }: ContextArgs) => {
       cache.writeData({ data: { currentCollectionId: id } })
       return null
     },
-    selectGenre: (_, { id }, { cache }: ContextArsg) => {
+    selectGenre: (_, { id }, { cache }: ContextArgs) => {
       cache.writeData({ data: { currentGenreId: id } })
       return null
     },
   },
   Query: {
-    genreById: (_, { genreId }, { cache }: ContextArsg) => {
+    genreById: (_, { genreId }, { cache }: ContextArgs) => {
       const resultGenres = cache.readQuery<{ genres?: Genre[] }>({
         query: GET_GENRES,
       })
@@ -39,6 +78,17 @@ export default {
         return genres.find(({ id }) => id === genreId)
       }
       return null
+    },
+    collectionsByType: (
+      _,
+      { type, ...variables }: { type: CollectionsType },
+      { cache }: ContextArgs,
+    ) => {
+      // TODO: добавить проверку?
+      const query = type === 'recommended' ? GET_RECOMMENDED : GET_MUSIC_FAN
+      const result = cache.readQuery({ query, variables })
+      const collections = L.get(result, 'collections', null)
+      return collections
     },
   },
 } as Resolvers

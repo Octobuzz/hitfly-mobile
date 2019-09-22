@@ -9,7 +9,7 @@ import PlaylistSection from './PlaylistSection'
 import TracksSection from './TracksSection'
 import GenresSection from './GenresSection'
 import { SafeView } from 'src/components'
-import { Genre, Collection, Track } from 'src/apollo'
+import { Genre, Collection, Track, CollectionsType } from 'src/apollo'
 import { images } from 'src/constants'
 import {
   CollectionsData,
@@ -35,13 +35,18 @@ const Container = styled.ScrollView.attrs(() => ({
 `
 
 const SELECT_COLLECTION = gql`
-  mutation SelectCollection($id: string) {
+  mutation SelectCollection($id: Int!) {
     selectCollection(id: $id) @client
   }
 `
 const SELECT_GENRE = gql`
-  mutation SelectGenre($id: string) {
+  mutation SelectGenre($id: Int!) {
     selectGenre(id: $id) @client
+  }
+`
+const SELECT_COLLECTIONS_TYPE = gql`
+  mutation SetCollectionsForDetails($type: String!) {
+    setCollectionsForDetails(type: $type) @client
   }
 `
 
@@ -50,7 +55,7 @@ interface Props extends NavigationScreenProps {
 }
 
 class Home extends React.Component<Props> {
-  private handlePressGenreItem = async (item: Genre) => {
+  private handlePressGenreItem = async (item: Genre): Promise<void> => {
     const { client, navigation } = this.props
     await client.mutate({
       mutation: SELECT_GENRE,
@@ -59,40 +64,44 @@ class Home extends React.Component<Props> {
     navigation.navigate(ROUTES.MAIN.GENRE_PLAYLIST, { title: item.title })
   }
 
-  private handlePressTop50 = () => {
+  private handlePressTop50 = (): void => {
     const { navigation } = this.props
     navigation.navigate(ROUTES.MAIN.TOP_50_PLAYLIST)
   }
 
-  private handlePressListenedNow = () => {
+  private handlePressListenedNow = (): void => {
     const { navigation } = this.props
     navigation.navigate(ROUTES.MAIN.LISTENED_NOW_PLAYLIST)
   }
 
-  private handlePressRecommendedHeader = () => {
+  private handlePressRecommendedHeader = async (): Promise<void> => {
     const { navigation } = this.props
+    await this.selectCollectionsType('recommended')
     navigation.navigate(ROUTES.MAIN.COLLECTION_DETAILS, {
       title: 'Рекомендуем',
-      query: GET_RECOMMENDED, // TODO: сделать по-другому, не через навигацию
       onPressItem: this.handlePressRecommendedCollection,
     })
   }
-  private handlePressRecommendedCollection = async (collection: Collection) => {
+  private handlePressRecommendedCollection = async (
+    collection: Collection,
+  ): Promise<void> => {
     const { navigation } = this.props
     await this.selectCollection(collection.id)
     navigation.navigate(ROUTES.MAIN.COLLECTION_PLAYLIST, {
       title: 'Рекомендуем',
     })
   }
-  private handlePressMusicFanHeader = () => {
+  private handlePressMusicFanHeader = async (): Promise<void> => {
     const { navigation } = this.props
+    await this.selectCollectionsType('musicFan')
     navigation.navigate(ROUTES.MAIN.COLLECTION_DETAILS, {
       title: 'Супер меломан',
-      query: GET_MUSIC_FAN, // TODO: сделать по-другому, не через навигацию
       onPressItem: this.handlePressMusicFanCollection,
     })
   }
-  private handlePressMusicFanCollection = async (collection: Collection) => {
+  private handlePressMusicFanCollection = async (
+    collection: Collection,
+  ): Promise<void> => {
     const { navigation } = this.props
     await this.selectCollection(collection.id)
     navigation.navigate(ROUTES.MAIN.COLLECTION_PLAYLIST, {
@@ -101,23 +110,23 @@ class Home extends React.Component<Props> {
   }
 
   // TODO: дубль, пока не решится следующий TODO
-  private handlePressNewHeader = () => {
+  private handlePressNewHeader = (): void => {
     const { navigation } = this.props
     navigation.navigate(ROUTES.MAIN.NEW_PLAYLIST)
   }
   // TODO: тут сразу трек в play?
-  private handlePressNewTrack = (track: Track) => {
+  private handlePressNewTrack = (track: Track): void => {
     const { navigation } = this.props
     navigation.navigate(ROUTES.MAIN.NEW_PLAYLIST)
   }
 
   // TODO: дубль, пока не решится следующий TODO
-  private handlePressTopWeekHeader = () => {
+  private handlePressTopWeekHeader = (): void => {
     const { navigation } = this.props
     navigation.navigate(ROUTES.MAIN.TOP_WEEK_PLAYLIST)
   }
   // TODO: тут сразу трек в play?
-  private handlePressTopWeekTrack = (track: Track) => {
+  private handlePressTopWeekTrack = (track: Track): void => {
     const { navigation } = this.props
     navigation.navigate(ROUTES.MAIN.TOP_WEEK_PLAYLIST)
   }
@@ -127,6 +136,14 @@ class Home extends React.Component<Props> {
     return client.mutate({
       mutation: SELECT_COLLECTION,
       variables: { id },
+    })
+  }
+
+  private selectCollectionsType = (type: CollectionsType): Promise<any> => {
+    const { client } = this.props
+    return client.mutate({
+      mutation: SELECT_COLLECTIONS_TYPE,
+      variables: { type },
     })
   }
 

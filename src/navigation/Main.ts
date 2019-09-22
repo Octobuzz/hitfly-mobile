@@ -1,10 +1,11 @@
 import { createStackNavigator } from 'react-navigation-stack'
-import { HomeScreen, CollectionDetailsScreen } from 'src/screens'
+import { HomeScreen } from 'src/screens'
 import {
   NewPlaylistScreen,
   GenrePlaylistScreen,
   Top50PlaylistScreen,
   TopWeekPlaylistScreen,
+  CollectionDetailsScreen,
   CollectionPlaylistScreen,
   ListenedNowPlaylistScreen,
 } from 'src/containers'
