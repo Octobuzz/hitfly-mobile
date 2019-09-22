@@ -46,6 +46,7 @@ async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
     cache,
     link: authLink.concat(httpLink),
     resolvers,
+    assumeImmutableResults: true,
   })
 
   return client
