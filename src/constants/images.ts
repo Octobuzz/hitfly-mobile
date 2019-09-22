@@ -1,5 +1,6 @@
 // home sections
 export const TOP50_BACKGROUND = require('../assets/images/home_sections/top50_background.png')
+export const TOP50_PLAYLIST = require('../assets/images/home_sections/top50_playlist.png')
 export const LISTENED_NOW = require('../assets/images/home_sections/listened_now.png')
 
 // genres

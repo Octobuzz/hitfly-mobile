@@ -29,10 +29,10 @@ async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
     return context
   })
 
-  const cache = new InMemoryCache({})
+  const mainCache = new InMemoryCache({})
 
   await persistCache({
-    cache,
+    cache: mainCache,
     debug: __DEV__,
     // @ts-ignore
     storage: storageInstance,
@@ -40,8 +40,15 @@ async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
 
   const client = new ApolloClient<InMemoryCache>({
     // @ts-ignore
-    cache,
+    cache: mainCache,
     link: authLink.concat(httpLink),
+    resolvers: {
+      Mutation: {
+        selectCollection: (_, { id }, { cache }: { cache: InMemoryCache }) => {
+          cache.writeData({ data: { currentCollectionId: id } })
+        },
+      },
+    },
   })
 
   return client

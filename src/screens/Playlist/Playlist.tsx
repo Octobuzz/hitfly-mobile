@@ -45,7 +45,7 @@ type CoverType = FastImageSource | number
 interface Props {
   cover: CoverType
   tracks: Track[]
-  favouriteCount: number
+  favouritesCount: number
 }
 
 interface State {
@@ -159,14 +159,14 @@ class Playlist extends React.Component<Props, State> {
   }
 
   render() {
-    const { tracks, favouriteCount } = this.props
+    const { tracks, favouritesCount } = this.props
     const { activeTrack, detailedTrack } = this.state
     const activeCover = this.getCover()
     return (
       <>
         <CoverWrapper>
           <Cover source={activeCover} />
-          {tracks.length && (
+          {!!tracks.length && (
             <PositionedControlButton
               onPress={this.pauseOrPlayFirstTrack}
               isPlaying={!!activeTrack}
@@ -174,7 +174,10 @@ class Playlist extends React.Component<Props, State> {
           )}
           <PositionedShuffleButton />
         </CoverWrapper>
-        <PlaylistInfoPanel favouriteCount={favouriteCount} playlist={tracks} />
+        <PlaylistInfoPanel
+          favouritesCount={favouritesCount}
+          playlist={tracks}
+        />
         <Scroll
           data={tracks}
           getItemLayout={this.getItemLayout}

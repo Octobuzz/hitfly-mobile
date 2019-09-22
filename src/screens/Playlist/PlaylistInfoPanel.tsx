@@ -33,13 +33,13 @@ const HeartIcon = styled(Icon).attrs(({ theme }) => ({
 interface Props {
   style?: ViewStyle
   playlist: Playlist
-  favouriteCount: number
+  favouritesCount: number
 }
 
 const PlaylistInfoPanel: React.FC<Props> = ({
   style,
   playlist,
-  favouriteCount,
+  favouritesCount,
 }) => {
   const playlistInfo = React.useMemo(() => {
     const count = helpers.formatTracksCount(playlist.length)
@@ -58,7 +58,7 @@ const PlaylistInfoPanel: React.FC<Props> = ({
     <Wrapper style={style}>
       <FullText>{playlistInfo}</FullText>
       <Text>
-        <HeartIcon /> {favouriteCount}
+        <HeartIcon /> {favouritesCount}
       </Text>
     </Wrapper>
   )

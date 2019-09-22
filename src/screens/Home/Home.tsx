@@ -2,6 +2,8 @@ import L from 'lodash'
 import React from 'react'
 import { NavigationScreenProps } from 'react-navigation'
 import { Query } from '@apollo/react-components'
+import { withApollo } from '@apollo/react-hoc'
+import { ApolloClient } from 'apollo-client'
 import CollectionSection from './CollectionSection'
 import PlaylistSection from './PlaylistSection'
 import TracksSection from './TracksSection'
@@ -24,6 +26,7 @@ import {
 } from './graphql'
 import styled from 'src/styled-components'
 import { ROUTES } from 'src/navigation'
+import gql from 'graphql-tag'
 
 const Container = styled.ScrollView.attrs(() => ({
   showsVerticalScrollIndicator: false,
@@ -32,10 +35,23 @@ const Container = styled.ScrollView.attrs(() => ({
   flex: 1;
 `
 
-class Home extends React.Component<NavigationScreenProps> {
+const SELECT_COLLECTION = gql`
+  mutation SelectCollection($id: string) {
+    selectCollection(id: $id) @client
+  }
+`
+
+interface Props extends NavigationScreenProps {
+  client: ApolloClient<any>
+}
+
+class Home extends React.Component<Props> {
   private handlePressGenreItem = (item: Genre) => {}
 
-  private handlePressTop50 = () => {}
+  private handlePressTop50 = () => {
+    const { navigation } = this.props
+    navigation.navigate(ROUTES.MAIN.TOP_50_PLAYLIST)
+  }
 
   private handlePressListenedNow = () => {}
 
@@ -47,7 +63,13 @@ class Home extends React.Component<NavigationScreenProps> {
       onPressItem: this.handlePressRecommendedCollection,
     })
   }
-  private handlePressRecommendedCollection = (collection: Collection) => {}
+  private handlePressRecommendedCollection = async (collection: Collection) => {
+    const { navigation } = this.props
+    await this.selectCollection(collection.id)
+    navigation.navigate(ROUTES.MAIN.COLLECTION_PLAYLIST, {
+      title: 'Рекомендуем',
+    })
+  }
   private handlePressMusicFanHeader = () => {
     const { navigation } = this.props
     navigation.navigate(ROUTES.MAIN.COLLECTION_DETAILS, {
@@ -56,11 +78,25 @@ class Home extends React.Component<NavigationScreenProps> {
       onPressItem: this.handlePressMusicFanCollection,
     })
   }
-  private handlePressMusicFanCollection = (collection: Collection) => {}
+  private handlePressMusicFanCollection = async (collection: Collection) => {
+    const { navigation } = this.props
+    await this.selectCollection(collection.id)
+    navigation.navigate(ROUTES.MAIN.COLLECTION_PLAYLIST, {
+      title: 'Супер меломан',
+    })
+  }
 
   private handlePressNewTrack = (track: Track) => {}
 
   private handlePressTopWeekTrack = (track: Track) => {}
+
+  private selectCollection = (id: number): Promise<any> => {
+    const { client } = this.props
+    return client.mutate({
+      mutation: SELECT_COLLECTION,
+      variables: { id },
+    })
+  }
 
   render() {
     return (
@@ -192,4 +228,4 @@ class Home extends React.Component<NavigationScreenProps> {
   }
 }
 
-export default Home
+export default withApollo<Props>(Home)

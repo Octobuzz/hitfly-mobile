@@ -118,7 +118,7 @@ export const formatTimeDurationForTrack = (initialSeconds: number): string => {
   } else {
     result.push(minutes.toString())
   }
-  const seconds = initialSeconds % 60
+  const seconds = Math.trunc(initialSeconds % 60)
   const paddedSeconds = `${seconds < 10 ? '0' : ''}${seconds}`
   result.push(paddedSeconds)
 
