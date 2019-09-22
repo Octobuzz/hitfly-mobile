@@ -1,6 +1,7 @@
+import L from 'lodash'
 import React from 'react'
 import gql from 'graphql-tag'
-import { Query } from '@apollo/react-components'
+import { useQuery } from '@apollo/react-hooks'
 import { PlaylistScreen } from 'src/screens'
 import { Collection } from 'src/apollo'
 import { Loader } from 'src/components'
@@ -36,32 +37,26 @@ interface Data {
   collection?: Collection
 }
 
-class CollectionPlaylist extends React.Component {
-  render() {
-    return (
-      <Query<Data> query={GET_CURRENT_COLLECTION}>
-        {({ data, loading }) => {
-          if (loading) {
-            return <Loader isAbsolute />
-          }
-
-          if (!data || !data.collection) {
-            return null
-          }
-          const { images, favouritesCount, tracks } = data.collection
-
-          return (
-            <PlaylistScreen
-              cover={{ uri: images[0].imageUrl }}
-              tracks={tracks}
-              favouritesCount={favouritesCount || 0}
-              {...this.props}
-            />
-          )
-        }}
-      </Query>
-    )
+const CollectionPlaylist: React.FC = props => {
+  const { data, loading } = useQuery<Data>(GET_CURRENT_COLLECTION)
+  if (loading) {
+    return <Loader isAbsolute />
   }
+
+  const collection = L.get(data, 'collection')
+  if (!collection) {
+    return null
+  }
+
+  const { images, favouritesCount, tracks } = collection
+  return (
+    <PlaylistScreen
+      cover={{ uri: images[0].imageUrl }}
+      tracks={tracks}
+      favouritesCount={favouritesCount || 0}
+      {...props}
+    />
+  )
 }
 
 export default CollectionPlaylist
