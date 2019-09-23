@@ -43,7 +43,7 @@ export interface Track {
   genres: Genre[]
   album: any // TODO: добавить Album
   uploadedBy: any // user TODO: добавить User
-  group?: MusicGroup // musucGroup
+  group?: MusicGroup // musicGroup
   singer: string
   date: string // trackDate
   songText: string
@@ -90,7 +90,7 @@ export interface Collection {
   tracks: Playlist
   user: any // TODO: добавить User
   isFavourite: boolean // userFavourite
-  favouritesCount: number
+  favouritesCount: number | null
   isSet: boolean
   isMine: boolean // my
   tracksTime: number

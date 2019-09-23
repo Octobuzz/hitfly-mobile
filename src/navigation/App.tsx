@@ -18,6 +18,7 @@ const SwitchRoutes = {
 }
 
 const AppContainer = createAppContainer(
+  // @ts-ignore
   createSwitchNavigator(SwitchRoutes, {
     initialRouteName: ROUTES.APP.AUTH,
   }),
@@ -42,10 +43,8 @@ const DebugButton = styled.TouchableOpacity.attrs(() => ({
   background-color: rgba(0, 0, 0, 0.5);
 `
 
-const persistenceKey = 'react-navigation-presistence'
 const StorybookButton = styled(DebugButton).attrs(() => ({
   onPress: () => {
-    storage.removeItem(persistenceKey)
     NavigationService.navigate({ routeName: ROUTES.APP.STORYBOOK })
   },
 }))`
@@ -74,25 +73,6 @@ class AppNavigator extends React.Component {
     SplashScreen.hide()
   }
 
-  // восстановление экранов в дев режиме
-  // https://reactnavigation.org/docs/en/state-persistence.html
-  private getPersistenceFunctions = (): {
-    persistNavigationState: (state: any) => Promise<void>
-    loadNavigationState: () => Promise<any>
-  } | void => {
-    return __DEV__
-      ? {
-          persistNavigationState: this.persistNavigationState,
-          loadNavigationState: this.loadNavigationState,
-        }
-      : undefined
-  }
-  private persistNavigationState = async (navState: any): Promise<void> =>
-    storage.setItem(persistenceKey, navState)
-
-  private loadNavigationState = (): Promise<any> =>
-    storage.getItem(persistenceKey)
-
   render() {
     return (
       <>
@@ -102,10 +82,7 @@ class AppNavigator extends React.Component {
             <StorybookButton />
           </DevTools>
         )}
-        <AppContainer
-          {...this.getPersistenceFunctions()}
-          ref={NavigationService.setTopLevelNavigator}
-        />
+        <AppContainer ref={NavigationService.setTopLevelNavigator} />
       </>
     )
   }

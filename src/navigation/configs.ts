@@ -11,3 +11,8 @@ export const stackConfig = {
     },
   },
 }
+
+export const playlistConfig = {
+  headerTintColor: theme.colors.white,
+  headerTransparent: true,
+}

@@ -18,5 +18,11 @@ export default {
   MAIN: {
     HOME: `${APP.MAIN}/home`,
     COLLECTION_DETAILS: `${APP.MAIN}/collection_details`,
+    COLLECTION_PLAYLIST: `${APP.MAIN}/collection_playlist`,
+    TOP_50_PLAYLIST: `${APP.MAIN}/top_50_playlist`,
+    LISTENED_NOW_PLAYLIST: `${APP.MAIN}/listened_now_playlist`,
+    NEW_PLAYLIST: `${APP.MAIN}/new_playlist`,
+    TOP_WEEK_PLAYLIST: `${APP.MAIN}/top_week_playlist`,
+    GENRE_PLAYLIST: `${APP.MAIN}/genre_playlist`,
   },
 }

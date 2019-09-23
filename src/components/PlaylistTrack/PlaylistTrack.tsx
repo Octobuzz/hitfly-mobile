@@ -22,7 +22,6 @@ const TrackNumberText = styled(TextBase)`
   font-size: 12px;
   margin-right: 12px;
   width: 24px;
-  text-align: center;
 `
 
 const CenterBlock = styled.View`

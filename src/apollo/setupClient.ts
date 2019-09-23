@@ -5,6 +5,7 @@ import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 import { storageInstance, storage } from 'src/utils'
 import { names, storageKeys } from 'src/constants'
+import resolvers from './resolvers'
 
 async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
   const httpLink = createHttpLink({
@@ -29,7 +30,9 @@ async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
     return context
   })
 
-  const cache = new InMemoryCache({})
+  const cache = new InMemoryCache({
+    freezeResults: true,
+  })
 
   await persistCache({
     cache,
@@ -42,6 +45,8 @@ async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
     // @ts-ignore
     cache,
     link: authLink.concat(httpLink),
+    resolvers,
+    assumeImmutableResults: true,
   })
 
   return client

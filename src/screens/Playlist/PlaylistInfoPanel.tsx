@@ -2,7 +2,7 @@ import L from 'lodash'
 import React from 'react'
 import { ViewStyle } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import { TextBase, Stretcher } from 'src/components'
+import { TextBase } from 'src/components'
 import { Playlist } from 'src/apollo'
 import { helpers } from 'src/utils'
 import styled from 'src/styled-components'
@@ -10,12 +10,16 @@ import styled from 'src/styled-components'
 const Wrapper = styled.View`
   flex-direction: row;
   align-items: center;
-  padding: 16px 30px 0px;
+  padding: 16px 16px 0px;
 `
 
 const Text = styled(TextBase)`
   font-size: 12px;
   color: ${({ theme }) => theme.colors.textAlt};
+`
+
+const FullText = styled(Text)`
+  flex: 1;
 `
 
 const HeartIcon = styled(Icon).attrs(({ theme }) => ({
@@ -29,13 +33,13 @@ const HeartIcon = styled(Icon).attrs(({ theme }) => ({
 interface Props {
   style?: ViewStyle
   playlist: Playlist
-  favouriteCount: number
+  favouritesCount: number
 }
 
 const PlaylistInfoPanel: React.FC<Props> = ({
   style,
   playlist,
-  favouriteCount,
+  favouritesCount,
 }) => {
   const playlistInfo = React.useMemo(() => {
     const count = helpers.formatTracksCount(playlist.length)
@@ -46,17 +50,18 @@ const PlaylistInfoPanel: React.FC<Props> = ({
     if (!fullLength) {
       return count
     }
-    const formattedTime = helpers.formatTimeDurationForPlaylist(fullLength)
+    const formattedTime = helpers.formatTimeDurationForPlaylist(
+      fullLength,
+      true,
+    )
     return `${count}, ${formattedTime}`
   }, [playlist])
 
   return (
     <Wrapper style={style}>
-      <Stretcher>
-        <Text>{playlistInfo}</Text>
-      </Stretcher>
+      <FullText>{playlistInfo}</FullText>
       <Text>
-        <HeartIcon /> {favouriteCount}
+        <HeartIcon /> {favouritesCount}
       </Text>
     </Wrapper>
   )
