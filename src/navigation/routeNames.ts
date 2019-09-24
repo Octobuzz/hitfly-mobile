@@ -24,5 +24,7 @@ export default {
     NEW_PLAYLIST: `${APP.MAIN}/new_playlist`,
     TOP_WEEK_PLAYLIST: `${APP.MAIN}/top_week_playlist`,
     GENRE_PLAYLIST: `${APP.MAIN}/genre_playlist`,
+
+    PROFILE: `${APP.MAIN}/profile`,
   },
 }

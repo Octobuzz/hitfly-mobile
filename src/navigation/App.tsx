@@ -1,6 +1,7 @@
 import React from 'react'
 import { StatusBar, Platform } from 'react-native'
-import { createAppContainer, createSwitchNavigator } from 'react-navigation'
+import createAnimatedSwitchNavigator from 'react-navigation-animated-switch'
+import { createAppContainer } from 'react-navigation'
 import SplashScreen from 'react-native-splash-screen'
 import NavigationService from './navigationService'
 import AuthNavigator from './Auth'
@@ -19,7 +20,7 @@ const SwitchRoutes = {
 
 const AppContainer = createAppContainer(
   // @ts-ignore
-  createSwitchNavigator(SwitchRoutes, {
+  createAnimatedSwitchNavigator(SwitchRoutes, {
     initialRouteName: ROUTES.APP.AUTH,
   }),
 )

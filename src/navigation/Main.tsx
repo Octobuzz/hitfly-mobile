@@ -1,5 +1,5 @@
 import { createStackNavigator } from 'react-navigation-stack'
-import { HomeScreen } from 'src/screens'
+import { HomeScreen, ProfileScreen } from 'src/screens'
 import {
   NewPlaylistScreen,
   GenrePlaylistScreen,
@@ -9,8 +9,19 @@ import {
   CollectionPlaylistScreen,
   ListenedNowPlaylistScreen,
 } from 'src/containers'
-import { stackConfig, playlistConfig } from './configs'
+import { stackDefaultOptions, playlistConfig } from './configs'
 import routeNames from './routeNames'
+
+// FIXME: временно, пока не вынесу конпки из хедера
+import styled from 'src/styled-components'
+import React from 'react'
+import NavigationService from './navigationService'
+
+const PButton = styled.Button.attrs(() => ({
+  title: 'P',
+  onPress: () =>
+    NavigationService.navigate({ routeName: routeNames.MAIN.PROFILE }),
+}))``
 
 const MainNavigator = createStackNavigator(
   {
@@ -75,11 +86,22 @@ const MainNavigator = createStackNavigator(
         }
       },
     },
+    // Экраны профиля
+    [routeNames.MAIN.PROFILE]: {
+      screen: ProfileScreen,
+      navigationOptions: {
+        headerTransparent: true,
+        headerTintColor: 'white',
+      },
+    },
   },
   {
     initialRouteName: routeNames.MAIN.HOME,
     headerMode: 'screen',
-    ...stackConfig,
+    defaultNavigationOptions: {
+      ...stackDefaultOptions,
+      headerRight: <PButton />,
+    },
   },
 )
 
