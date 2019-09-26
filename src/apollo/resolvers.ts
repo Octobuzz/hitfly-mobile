@@ -3,7 +3,7 @@ import { InMemoryCache, IdGetter } from 'apollo-cache-inmemory'
 import { Resolvers } from 'apollo-client'
 import gql from 'graphql-tag'
 import { Genre } from './schemas'
-import { CollectionsType } from './commontTypes'
+import { CollectionsType, HeaderSettings } from './commonTypes'
 
 interface ContextArgs {
   cache: InMemoryCache
@@ -52,10 +52,18 @@ const GET_MUSIC_FAN = gql`
   }
 `
 
+const GET_HEADER_SETTINGS = gql`
+  query {
+    headerSettings {
+      mode
+      state
+    }
+  }
+`
+
 export default {
   Mutation: {
     setCollectionsForDetails: (_, { type }, { cache }: ContextArgs) => {
-      // TODO: доавить тип/схему?
       cache.writeData({ data: { collectionDetailsType: type } })
       return null
     },
@@ -65,6 +73,18 @@ export default {
     },
     selectGenre: (_, { id }, { cache }: ContextArgs) => {
       cache.writeData({ data: { currentGenreId: id } })
+      return null
+    },
+    setHeaderSettings: (
+      _,
+      { settings }: { settings: Partial<HeaderSettings> },
+      { cache }: ContextArgs,
+    ) => {
+      const result = cache.readQuery<{ headerSettings: HeaderSettings }>({
+        query: GET_HEADER_SETTINGS,
+      })
+      const newSettings = { ...L.get(result, 'headerSettings'), ...settings }
+      cache.writeData({ data: { headerSettings: newSettings } })
       return null
     },
   },

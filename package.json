@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "postinstall": "npx jetify",
-    "start": "react-native start",
+    "start": "REACT_DEBUGGER='rndebugger-open --open --port 8081' react-native start",
     "ios": "react-native run-ios",
     "android": "react-native run-android",
     "android:emulator": "$ANDROID_HOME/emulator/emulator @Nexus_5X_API_28",
@@ -63,6 +63,7 @@
     "react-native-webview": "^7.2.5",
     "react-navigation": "^4.0.9",
     "react-navigation-animated-switch": "^0.3.2",
+    "react-navigation-header-buttons": "^3.0.2",
     "react-navigation-stack": "^1.9.0",
     "rn-sliding-up-panel": "^2.3.3",
     "styled-components": "^4.4.0",

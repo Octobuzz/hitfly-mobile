@@ -1,5 +1,5 @@
 import React from 'react'
-import './reactotron.config'
+import './rn-debugger.config'
 import { YellowBox } from 'react-native'
 import { ThemeProvider } from 'styled-components'
 import { ApolloProvider } from '@apollo/react-hooks'
@@ -11,33 +11,29 @@ import theme from './theme'
 
 // либы до сих пор используют это
 YellowBox.ignoreWarnings([
-  'Warning: componentWillMount is deprecated',
-  'Warning: componentWillUpdate is deprecated',
-  'Warning: componentWillReceiveProps is deprecated',
+  'Warning: componentWillMount',
+  'Warning: componentWillUpdate',
+  'Warning: componentWillReceiveProps',
 ])
 
-class App extends React.Component<{}, { isReady: boolean }> {
+class App extends React.Component {
   client?: ApolloClient<InMemoryCache>
-  state = {
-    isReady: false,
-  }
 
   async componentDidMount() {
     this.client = await setupClient()
-    this.setState({ isReady: true })
+    this.forceUpdate()
   }
 
   render() {
-    const { isReady } = this.state
+    if (!this.client) {
+      return null
+    }
     return (
-      isReady &&
-      this.client && (
-        <ApolloProvider client={this.client}>
-          <ThemeProvider theme={theme}>
-            <AppNavigator />
-          </ThemeProvider>
-        </ApolloProvider>
-      )
+      <ApolloProvider client={this.client}>
+        <ThemeProvider theme={theme}>
+          <AppNavigator />
+        </ThemeProvider>
+      </ApolloProvider>
     )
   }
 }

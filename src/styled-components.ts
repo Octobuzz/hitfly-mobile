@@ -30,10 +30,11 @@ export interface ITheme {
 const {
   default: styled,
   css,
+  withTheme,
   ThemeProvider,
 } = styledComponents as styledComponents.ReactNativeThemedStyledComponentsModule<
   ITheme
 >
 
-export { css, ThemeProvider }
+export { css, ThemeProvider, withTheme }
 export default styled

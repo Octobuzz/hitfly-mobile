@@ -1,6 +1,10 @@
+import React from 'react'
 import { createStackNavigator } from 'react-navigation-stack'
 import { HomeScreen } from 'src/screens'
 import {
+  HeaderRightButtons,
+
+  // screens
   ProfileTabScreen,
   NewPlaylistScreen,
   GenrePlaylistScreen,
@@ -12,17 +16,6 @@ import {
 } from 'src/containers'
 import { stackDefaultOptions, playlistConfig } from './configs'
 import routeNames from './routeNames'
-
-// FIXME: временно, пока не вынесу конпки из хедера
-import styled from 'src/styled-components'
-import React from 'react'
-import NavigationService from './navigationService'
-
-const PButton = styled.Button.attrs(() => ({
-  title: 'P',
-  onPress: () =>
-    NavigationService.navigate({ routeName: routeNames.MAIN.PROFILE }),
-}))``
 
 const MainNavigator = createStackNavigator(
   {
@@ -101,7 +94,7 @@ const MainNavigator = createStackNavigator(
     headerMode: 'screen',
     defaultNavigationOptions: {
       ...stackDefaultOptions,
-      headerRight: <PButton />,
+      headerRight: <HeaderRightButtons />,
     },
   },
 )
