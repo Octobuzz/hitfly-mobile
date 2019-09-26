@@ -1,6 +1,7 @@
 import { createStackNavigator } from 'react-navigation-stack'
-import { HomeScreen, ProfileScreen } from 'src/screens'
+import { HomeScreen } from 'src/screens'
 import {
+  ProfileTabScreen,
   NewPlaylistScreen,
   GenrePlaylistScreen,
   Top50PlaylistScreen,
@@ -88,7 +89,7 @@ const MainNavigator = createStackNavigator(
     },
     // Экраны профиля
     [routeNames.MAIN.PROFILE]: {
-      screen: ProfileScreen,
+      screen: ProfileTabScreen,
       navigationOptions: {
         headerTransparent: true,
         headerTintColor: 'white',
