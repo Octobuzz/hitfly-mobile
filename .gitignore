@@ -54,6 +54,7 @@ yarn-error.log
 buck-out/
 \.buckd/
 *.keystore
+!debug.keystore
 
 # fastlane
 #
@@ -73,3 +74,4 @@ fastlane/screenshots
 # jest
 cache/
 coverage/
+
