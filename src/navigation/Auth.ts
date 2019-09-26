@@ -9,7 +9,7 @@ import {
   ForgotPasswordScreen,
 } from 'src/screens'
 import routeNames from './routeNames'
-import { stackConfig } from './configs'
+import { stackDefaultOptions } from './configs'
 
 const AuthNavigator = createStackNavigator(
   {
@@ -41,7 +41,7 @@ const AuthNavigator = createStackNavigator(
   },
   {
     initialRouteName: routeNames.AUTH.WELCOME,
-    ...stackConfig,
+    defaultNavigationOptions: stackDefaultOptions,
   },
 )
 
