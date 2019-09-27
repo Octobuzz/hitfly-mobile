@@ -118,9 +118,9 @@ export interface User {
   gender: Gender
   musicGroups: MusicGroup[]
   followersCount: number
-  location: City
+  location: City | null
   avatar: Image[]
-  favouriteGenres: Genre[]
+  favouriteGenres: Genre[] | null
   roles: Role[]
   careerStartDate: string // careerStart
   description: string
