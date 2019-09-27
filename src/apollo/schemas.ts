@@ -27,11 +27,11 @@ export interface MusicGroup {
   cover: Image[] // avatarGroup
   careerStartYear: string
   genres: Genre[]
-  createdBy: any // creatorGroup // TODO: добавить User
+  createdBy: User
   description: string
-  location: any // TODO: добавить CityType
+  location: City
   followersCount: number
-  activeMembers: any // TODO: добавить User[]
+  activeMembers: User[]
   socialLinks: any // TODO: добавить SocialLinks[]
   isMeCreator: boolean // isCreator
   isWatching: boolean // iWatch
@@ -42,7 +42,7 @@ export interface Track {
   title: string // trackName
   genres: Genre[]
   album: any // TODO: добавить Album
-  uploadedBy: any // user TODO: добавить User
+  uploadedBy: User
   group?: MusicGroup // musicGroup
   singer: string
   date: string // trackDate
@@ -88,7 +88,7 @@ export interface Collection {
   isCreatedByAdmin: boolean // is_admin
   images: Image[] // image
   tracks: Playlist
-  user: any // TODO: добавить User
+  user: User
   isFavourite: boolean // userFavourite
   favouritesCount: number | null
   isSet: boolean
@@ -96,4 +96,55 @@ export interface Collection {
   tracksTime: number
   tracksCountInCollection: number // countTracks
   tracksCountInPlaylist: number // tracksCount
+}
+
+export type Gender = 'M' | 'F'
+
+export interface City {
+  id: number
+  title: string
+  region: string // area_region
+}
+
+export interface Role {
+  title: string
+  slug: string
+}
+
+export interface User {
+  id: number
+  userName: string // username
+  registrationDate: string // dateRegister
+  gender: Gender
+  musicGroups: MusicGroup[]
+  followersCount: number
+  location: City
+  avatar: Image[]
+  favouriteGenres: Genre[]
+  roles: Role[]
+  careerStartDate: string // careerStart
+  description: string
+  playsInGenres: Genre[] // genresPlay
+  daysInBonusProgram: number // bpDaysInProgram
+  isSubscribed: boolean // iWatch
+  favouritesTracksCount: number // favouritesTrackCount
+  favouritesTracksTime: number // favouritesTrackTime
+  listenedCount: number // countListenedTracks
+}
+
+export enum BonusProgramLevel {
+  LEVEL_NOVICE = 'LEVEL_NOVICE',
+  LEVEL_AMATEUR = 'LEVEL_AMATEUR',
+  LEVEL_CONNOISSEUR_OF_THE_GENRE = 'LEVEL_CONNOISSEUR_OF_THE_GENRE',
+  LEVEL_SUPER_MUSIC_LOVER = 'LEVEL_SUPER_MUSIC_LOVER',
+}
+
+export interface Profile extends User {
+  email: string
+  accessToken: string
+  bonusProgramLevel: BonusProgramLevel // bpLevelBonusProgram
+  bonusProgramPoints: number // bpPoints
+  bonusProgramListenedGenres: Genre[] // bpListenedTracksByGenres
+  myTracksCount: number
+  myTracksTime: number
 }

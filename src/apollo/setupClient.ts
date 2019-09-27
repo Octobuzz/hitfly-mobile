@@ -1,11 +1,12 @@
 import { ApolloClient } from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
-import { persistCache } from 'apollo-cache-persist'
 import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
-import { storageInstance, storage } from 'src/utils'
+import { storage } from 'src/utils'
 import { names, storageKeys } from 'src/constants'
 import resolvers from './resolvers'
+import initCache from './cache'
+import gql from 'graphql-tag'
 
 async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
   const httpLink = createHttpLink({
@@ -30,22 +31,19 @@ async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
     return context
   })
 
-  const cache = new InMemoryCache({
-    freezeResults: true,
-  })
-
-  await persistCache({
-    cache,
-    debug: __DEV__,
-    // @ts-ignore
-    storage: storageInstance,
-  })
+  const cache = await initCache()
 
   const client = new ApolloClient<InMemoryCache>({
     // @ts-ignore
     cache,
     link: authLink.concat(httpLink),
     resolvers,
+    typeDefs: gql`
+      type HeaderSettings {
+        style: String!
+        state: String!
+      }
+    `,
     assumeImmutableResults: true,
   })
 

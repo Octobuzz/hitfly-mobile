@@ -1,3 +1,4 @@
+export { default as ProfileTabScreen } from './ProfileTab'
 export { default as NewPlaylistScreen } from './NewPlaylist'
 export { default as GenrePlaylistScreen } from './GenrePlaylist'
 export { default as Top50PlaylistScreen } from './Top50Playlist'

@@ -18,6 +18,7 @@ const Text = styled(TextBase)<ColorType>`
   text-align: center;
   padding: 20px 29px;
   border-radius: 28px;
+  overflow: hidden;
   color: ${({ theme, type = 'gradient' }) => {
     switch (type) {
       case 'outline-black':
