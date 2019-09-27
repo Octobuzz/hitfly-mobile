@@ -18,4 +18,9 @@ export const H1 = styled(TextBase)`
   font-size: 20px;
 `
 
+export const H2 = styled(TextBase)`
+  font-family: ${({ theme }) => theme.fonts.bold};
+  font-size: 16px;
+`
+
 export default TextBase

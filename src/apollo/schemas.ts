@@ -116,11 +116,11 @@ export interface User {
   userName: string // username
   registrationDate: string // dateRegister
   gender: Gender
-  musicGroups: MusicGroup[]
+  musicGroups: MusicGroup[] | null
   followersCount: number
-  location: City
+  location: City | null
   avatar: Image[]
-  favouriteGenres: Genre[]
+  favouriteGenres: Genre[] | null
   roles: Role[]
   careerStartDate: string // careerStart
   description: string

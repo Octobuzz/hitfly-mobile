@@ -8,6 +8,7 @@ import {
   SceneRendererProps,
 } from 'react-native-tab-view'
 import Header from './Header'
+import AboutMeScreen from './AboutMe'
 import { Profile } from 'src/apollo'
 import { helpers } from 'src/utils'
 import { TextBase } from 'src/components'
@@ -48,7 +49,7 @@ class ProfileTab extends React.Component<Props, State> {
   }
 
   private scene = SceneMap({
-    about: () => null,
+    about: AboutMeScreen,
   })
 
   private renderTabBar = (

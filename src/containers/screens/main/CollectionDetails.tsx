@@ -10,7 +10,7 @@ const GET_COLLECTIONS = gql`
   }
 `
 
-const CollectionDetails: React.FC = props => (
+const CollectionDetails: React.FC<any> = props => (
   <CollectionDetailsScreen query={GET_COLLECTIONS} {...props} />
 )
 
