@@ -116,7 +116,7 @@ export interface User {
   userName: string // username
   registrationDate: string // dateRegister
   gender: Gender
-  musicGroups: MusicGroup[]
+  musicGroups: MusicGroup[] | null
   followersCount: number
   location: City | null
   avatar: Image[]

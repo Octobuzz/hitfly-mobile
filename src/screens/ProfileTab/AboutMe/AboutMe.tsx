@@ -1,8 +1,10 @@
 import React from 'react'
-import { View, TextBase } from 'src/components'
+import { ScrollView, TextBase, H2 } from 'src/components'
 import Icon from 'react-native-vector-icons/Ionicons'
-import styled from 'src/styled-components'
+import MusicGroup from './MusicGroup'
 import { Profile } from 'src/apollo'
+import styled from 'src/styled-components'
+import { helpers } from 'src/utils'
 
 const Block = styled.View`
   padding-vertical: 24px;
@@ -17,9 +19,14 @@ const StyledIcon = styled(Icon).attrs(({ theme }) => ({
   margin-right: 8px;
 `
 
-const Row = styled.View`
+const Row = styled.View<Indentable>`
   flex-direction: row;
   align-items: center;
+  ${({ withMargin }) => withMargin && `margin-top: 24px;`}
+`
+
+const IndentedH2 = styled(H2)`
+  margin-bottom: 24px;
 `
 
 const NoInfoText = styled(TextBase)`
@@ -31,6 +38,10 @@ interface Props {
   profile: Profile
 }
 
+interface Indentable {
+  withMargin?: boolean
+}
+
 class AboutMe extends React.Component<Props> {
   private renderProfileInfo = (): React.ReactNode => {
     const {
@@ -40,7 +51,7 @@ class AboutMe extends React.Component<Props> {
 
     if (favouriteGenres) {
       content.push(
-        <Row>
+        <Row key="genres">
           <StyledIcon name="ios-musical-notes" />
           <TextBase>
             {favouriteGenres.map(({ title }) => title).join(', ')}
@@ -51,7 +62,7 @@ class AboutMe extends React.Component<Props> {
 
     if (location) {
       content.push(
-        <Row>
+        <Row withMargin={content.length > 0} key="location">
           <StyledIcon name="md-pin" />
           <TextBase>{location.title}</TextBase>
         </Row>,
@@ -60,7 +71,7 @@ class AboutMe extends React.Component<Props> {
 
     if (!content.length) {
       content.push(
-        <NoInfoText>
+        <NoInfoText key="noInfo">
           Заполните информацию о себе в разделе «Настройки»
         </NoInfoText>,
       )
@@ -69,8 +80,44 @@ class AboutMe extends React.Component<Props> {
     return <Block>{content}</Block>
   }
 
+  private renderProfileGroups = (): React.ReactNode => {
+    const {
+      profile: { musicGroups },
+    } = this.props
+    if (!musicGroups) {
+      return null
+    }
+
+    return (
+      <Block>
+        <IndentedH2>Мои группы</IndentedH2>
+        {musicGroups.map(({ id, title, followersCount, cover }) => (
+          <MusicGroup
+            key={id}
+            imageUrl={cover[0].imageUrl}
+            title={title}
+            subtitle={`${followersCount} ${this.getNameForFollowers(
+              followersCount,
+            )}`}
+          />
+        ))}
+      </Block>
+    )
+  }
+
+  private getNameForFollowers = helpers.getNameForCount({
+    nominative: 'поклонник',
+    genitive: 'поклонника',
+    genitiveMultiple: 'поклонников',
+  })
+
   render() {
-    return <View>{this.renderProfileInfo()}</View>
+    return (
+      <ScrollView>
+        {this.renderProfileInfo()}
+        {this.renderProfileGroups()}
+      </ScrollView>
+    )
   }
 }
 
