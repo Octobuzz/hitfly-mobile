@@ -1,4 +1,6 @@
 import L from 'lodash'
+import { Platform, StatusBar } from 'react-native'
+import { HeaderMode } from 'src/apollo'
 
 export const delay = (ms: number): Promise<void> =>
   new Promise(res => setTimeout(res, ms))
@@ -123,4 +125,13 @@ export const formatTimeDurationForTrack = (initialSeconds: number): string => {
   result.push(paddedSeconds)
 
   return result.join(':')
+}
+
+export const setStatusBarColor = (mode: HeaderMode): void => {
+  if (Platform.OS === 'ios') {
+    StatusBar.setBarStyle(
+      mode === 'dark' ? 'dark-content' : 'light-content',
+      true,
+    )
+  }
 }

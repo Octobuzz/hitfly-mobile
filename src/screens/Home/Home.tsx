@@ -1,8 +1,7 @@
 import L from 'lodash'
 import React from 'react'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { Query } from '@apollo/react-components'
-import { withApollo } from '@apollo/react-hoc'
 import { ApolloClient } from 'apollo-client'
 import CollectionSection from './CollectionSection'
 import PlaylistSection from './PlaylistSection'
@@ -50,7 +49,7 @@ const SELECT_COLLECTIONS_TYPE = gql`
   }
 `
 
-interface Props extends NavigationScreenProps {
+interface Props extends NavigationStackScreenProps {
   client: ApolloClient<any>
 }
 
@@ -279,4 +278,4 @@ class Home extends React.Component<Props> {
   }
 }
 
-export default withApollo<Props>(Home)
+export default Home

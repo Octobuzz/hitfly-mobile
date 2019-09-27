@@ -1,7 +1,7 @@
 import L from 'lodash'
 import React from 'react'
 import { withNavigation, NavigationInjectedProps } from 'react-navigation'
-import { graphql, MutateProps, DataProps } from '@apollo/react-hoc'
+import { graphql, DataProps } from '@apollo/react-hoc'
 import Icon from 'react-native-vector-icons/Ionicons'
 import {
   Item,
@@ -12,6 +12,7 @@ import gql from 'graphql-tag'
 import { ROUTES } from 'src/navigation'
 import { HeaderSettings } from 'src/apollo'
 import { withTheme, ITheme } from 'src/styled-components'
+import { storage } from 'src/utils'
 
 const IoniconsHeaderButton = (passMeFurther: any) => (
   <HeaderButton {...passMeFurther} IconComponent={Icon} />
@@ -19,7 +20,6 @@ const IoniconsHeaderButton = (passMeFurther: any) => (
 
 interface Props
   extends NavigationInjectedProps,
-    MutateProps<void, { settings: Partial<HeaderSettings> }>,
     DataProps<{
       headerSettings: HeaderSettings
     }> {
@@ -28,9 +28,21 @@ interface Props
 
 class HeaderRightButtons extends React.PureComponent<Props> {
   private navigateToProfile = (): void => {
-    const { navigation, mutate } = this.props
-    mutate({ variables: { settings: { state: 'profile' } } })
+    const { navigation } = this.props
     navigation.navigate(ROUTES.MAIN.PROFILE)
+  }
+
+  private navigateToSettings = (): void => {
+    const { navigation } = this.props
+    navigation.navigate(ROUTES.MAIN.SETTINGS)
+  }
+
+  private logout = async (): Promise<void> => {
+    const { navigation } = this.props
+    // FIXME: временно, пока не сделаю логаут в другом месте
+    // и через бэк
+    await storage.clearStorage()
+    navigation.navigate(ROUTES.AUTH.LOGIN)
   }
 
   private getColor = (): string => {
@@ -63,6 +75,7 @@ class HeaderRightButtons extends React.PureComponent<Props> {
         iconSize={this.iconSize}
         title="Настройки"
         iconName="md-cog"
+        onPress={this.navigateToSettings}
       />
     )
   }
@@ -76,6 +89,7 @@ class HeaderRightButtons extends React.PureComponent<Props> {
           iconSize={this.iconSize}
           title="Выход"
           iconName="md-log-out"
+          onPress={this.logout}
         />
         <Item
           color={color}
@@ -98,15 +112,8 @@ const GET_HEADER_SETTINGS = gql`
   }
 `
 
-const SET_HEADER_SETTINGS = gql`
-  mutation SetHeaderSettings($settings: HeaderSettings!) {
-    setHeaderSettings(setting: $settings) @client
-  }
-`
-
 export default L.flowRight(
   graphql(GET_HEADER_SETTINGS),
-  graphql(SET_HEADER_SETTINGS),
   withNavigation,
   withTheme,
 )(HeaderRightButtons)

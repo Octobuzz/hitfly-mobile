@@ -31,7 +31,7 @@ const GET_SOCIAL_LINKS = gql`
   }
 `
 
-interface Props extends NavigationScreenProps {
+interface Props extends NavigationStackScreenProps {
   bottomText: string
   style?: StyleProp<ViewStyle>
 }

@@ -8,6 +8,7 @@ import {
   SocialAuthWebScreen,
   ForgotPasswordScreen,
 } from 'src/screens'
+
 import routeNames from './routeNames'
 import { stackDefaultOptions } from './configs'
 

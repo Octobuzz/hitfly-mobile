@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { View, Link, HelperText, Stretcher, SafeView } from 'src/components'
 import { ROUTES } from 'src/navigation'
 import styled from 'src/styled-components'
@@ -8,7 +8,7 @@ const BoldHelperText = styled(HelperText)`
   font-family: ${({ theme }) => theme.fonts.bold};
 `
 
-class RecoveryInfo extends React.Component<NavigationScreenProps> {
+class RecoveryInfo extends React.Component<NavigationStackScreenProps> {
   private navigateToLogin = (): void => {
     const { navigation } = this.props
     navigation.navigate(ROUTES.AUTH.LOGIN)

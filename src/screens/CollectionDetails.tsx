@@ -1,7 +1,7 @@
 import L from 'lodash'
 import React from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { getBottomSpace } from 'react-native-iphone-x-helper'
 import { Query } from '@apollo/react-components'
 import { DocumentNode } from 'graphql'
@@ -32,7 +32,7 @@ interface CollectionsData {
   collections?: Pagination<Collection>
 }
 
-interface Props extends NavigationScreenProps {
+interface Props extends NavigationStackScreenProps {
   query: DocumentNode
 }
 

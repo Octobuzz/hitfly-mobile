@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { View, SafeView } from 'src/components'
 import { SocialAuth } from 'src/containers'
 import RegisterForm from './RegisterFormContainer'
@@ -9,7 +9,7 @@ const IndentedSocialAuth = styled(SocialAuth)`
   margin-bottom: 24px;
 `
 
-class Register extends React.Component<NavigationScreenProps> {
+class Register extends React.Component<NavigationStackScreenProps> {
   render() {
     return (
       <SafeView>

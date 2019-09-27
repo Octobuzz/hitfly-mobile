@@ -26,5 +26,6 @@ export default {
     GENRE_PLAYLIST: `${APP.MAIN}/genre_playlist`,
 
     PROFILE: `${APP.MAIN}/profile`,
+    SETTINGS: `${APP.MAIN}/settings`,
   },
 }

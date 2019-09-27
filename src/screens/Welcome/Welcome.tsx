@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { ScrollView, Stretcher, Button, SafeView } from 'src/components'
 import { images } from 'src/constants'
 import { ROUTES } from 'src/navigation'
@@ -13,7 +13,7 @@ const Logo = styled.Image.attrs(() => ({
   align-self: center;
 `
 
-class Welcome extends React.Component<NavigationScreenProps> {
+class Welcome extends React.Component<NavigationStackScreenProps> {
   features: Feature[] = [
     {
       icon: images.HEADPHONES_GRADIENT,

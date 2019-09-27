@@ -4,6 +4,7 @@ import { Resolvers } from 'apollo-client'
 import gql from 'graphql-tag'
 import { Genre } from './schemas'
 import { CollectionsType, HeaderSettings } from './commonTypes'
+import { helpers } from 'src/utils'
 
 interface ContextArgs {
   cache: InMemoryCache
@@ -83,7 +84,13 @@ export default {
       const result = cache.readQuery<{ headerSettings: HeaderSettings }>({
         query: GET_HEADER_SETTINGS,
       })
-      const newSettings = { ...L.get(result, 'headerSettings'), ...settings }
+      const newSettings = {
+        ...L.get(result, 'headerSettings'),
+        ...settings,
+      }
+      if (newSettings.mode) {
+        helpers.setStatusBarColor(newSettings.mode)
+      }
       cache.writeData({ data: { headerSettings: newSettings } })
       return null
     },
