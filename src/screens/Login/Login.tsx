@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationStackScreenProps } from 'react-navigation-stack'
 import {
   Link,
   Button,
@@ -36,7 +36,7 @@ const BottomLinkText = styled(BottomText)`
   color: ${({ theme }) => theme.colors.brandPink};
 `
 
-class Login extends React.Component<NavigationScreenProps> {
+class Login extends React.Component<NavigationStackScreenProps> {
   private navigateToRegistration = (): void => {
     const { navigation } = this.props
     navigation.navigate(ROUTES.AUTH.REGISTER)

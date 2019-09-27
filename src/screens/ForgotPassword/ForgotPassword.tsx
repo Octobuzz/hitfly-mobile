@@ -1,9 +1,9 @@
 import React from 'react'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { View, HelperText, SafeView } from 'src/components'
 import ForgotPasswordForm from './ForgotPasswordFormContainer'
 
-class ForgotPassword extends React.Component<NavigationScreenProps> {
+class ForgotPassword extends React.Component<NavigationStackScreenProps> {
   render() {
     return (
       <SafeView>

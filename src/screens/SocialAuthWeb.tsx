@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { WebView } from 'react-native-webview'
 import { WebViewNativeEvent } from 'react-native-webview/lib/WebViewTypes'
 import { SafeView, Loader } from 'src/components'
@@ -8,7 +8,7 @@ import { storage } from 'src/utils'
 import { ROUTES } from 'src/navigation'
 import urlParser from 'url'
 
-class SocialAuthWeb extends React.Component<NavigationScreenProps> {
+class SocialAuthWeb extends React.Component<NavigationStackScreenProps> {
   private renderLoader = (): JSX.Element => <Loader isAbsolute />
 
   private handleNavigationStateChange = async ({

@@ -1,7 +1,7 @@
 import L from 'lodash'
 import React from 'react'
 import { FlatList } from 'react-native'
-import { NavigationScreenProps } from 'react-navigation'
+import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { Query } from '@apollo/react-components'
 import gql from 'graphql-tag'
 import {
@@ -54,7 +54,7 @@ const GET_GENRES = gql`
   }
 `
 
-class SelectGenre extends React.Component<NavigationScreenProps, State> {
+class SelectGenre extends React.Component<NavigationStackScreenProps, State> {
   state: State = {
     selectedGenres: {},
   }

@@ -1,6 +1,6 @@
 import React from 'react'
-import { NavigationScreenProps } from 'react-navigation'
 import { CollectionDetailsScreen } from 'src/screens'
+import { withChangingHeaderSettings } from 'src/containers/HOCs'
 import gql from 'graphql-tag'
 
 const GET_COLLECTIONS = gql`
@@ -10,8 +10,10 @@ const GET_COLLECTIONS = gql`
   }
 `
 
-const CollectionDetails: React.FC<NavigationScreenProps> = props => (
+const CollectionDetails: React.FC = props => (
   <CollectionDetailsScreen query={GET_COLLECTIONS} {...props} />
 )
 
-export default CollectionDetails
+export default withChangingHeaderSettings({ state: 'main', mode: 'dark' })(
+  CollectionDetails,
+)

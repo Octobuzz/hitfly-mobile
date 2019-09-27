@@ -2,6 +2,7 @@ import L from 'lodash'
 import React from 'react'
 import { DocumentNode } from 'graphql'
 import { Query } from '@apollo/react-components'
+import { withChangingHeaderSettings } from 'src/containers/HOCs'
 import { PlaylistScreen } from 'src/screens'
 import { Pagination, Playlist, Track } from 'src/apollo'
 import { Loader } from 'src/components'
@@ -49,4 +50,6 @@ class NonCollectionPlaylist extends React.Component<Props> {
   }
 }
 
-export default NonCollectionPlaylist
+export default withChangingHeaderSettings({ state: 'main', mode: 'light' })(
+  NonCollectionPlaylist,
+)
