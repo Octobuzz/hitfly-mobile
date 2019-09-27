@@ -29,6 +29,18 @@ const IndentedH2 = styled(H2)`
   margin-bottom: 24px;
 `
 
+const YearText = styled(TextBase)`
+  font-size: 14px;
+  line-height: 14px;
+  margin-bottom: 10px;
+  font-family: ${({ theme }) => theme.fonts.medium};
+`
+
+const DescriptionText = styled(TextBase)`
+  font-size: 14px;
+  line-height: 20px;
+`
+
 const NoInfoText = styled(TextBase)`
   color: ${({ theme }) => theme.colors.textAlt};
   text-align: center;
@@ -49,7 +61,7 @@ class AboutMe extends React.Component<Props> {
     } = this.props
     const content: React.ReactNode[] = []
 
-    if (favouriteGenres) {
+    if (favouriteGenres && favouriteGenres.length) {
       content.push(
         <Row key="genres">
           <StyledIcon name="ios-musical-notes" />
@@ -84,7 +96,7 @@ class AboutMe extends React.Component<Props> {
     const {
       profile: { musicGroups },
     } = this.props
-    if (!musicGroups) {
+    if (!musicGroups || !musicGroups.length) {
       return null
     }
 
@@ -111,11 +123,44 @@ class AboutMe extends React.Component<Props> {
     genitiveMultiple: 'поклонников',
   })
 
+  private renderDescription = (): React.ReactNode => {
+    const {
+      profile: { description, careerStartDate },
+    } = this.props
+    const content: React.ReactNode[] = []
+
+    if (careerStartDate) {
+      content.push(
+        <YearText key="year">
+          Год начала карьеры{' '}
+          <DescriptionText>{careerStartDate}</DescriptionText>
+        </YearText>,
+      )
+    }
+
+    if (description) {
+      content.push(
+        <DescriptionText key="description">{description}</DescriptionText>,
+      )
+    }
+
+    if (!content.length) {
+      return null
+    }
+    return (
+      <Block>
+        <IndentedH2>Описание</IndentedH2>
+        {content}
+      </Block>
+    )
+  }
+
   render() {
     return (
       <ScrollView>
         {this.renderProfileInfo()}
         {this.renderProfileGroups()}
+        {this.renderDescription()}
       </ScrollView>
     )
   }

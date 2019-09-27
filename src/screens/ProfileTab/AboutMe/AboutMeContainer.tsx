@@ -17,6 +17,7 @@ const AboutMeContainer: React.FC<Props> = ({
   if (!profile) {
     return null
   }
+
   return <AboutMeScreen profile={profile} {...rest} />
 }
 
@@ -24,6 +25,23 @@ const GET_PROFILE_FOR_ABOUT = gql`
   query {
     profile: myProfile {
       id
+      favouriteGenres {
+        id
+        title: name
+      }
+      location {
+        title
+      }
+      careerStartDate: careerStart
+      description
+      musicGroups {
+        id
+        title: name
+        followersCount
+        cover: avatarGroup(sizes: [size_290x290]) {
+          imageUrl: url
+        }
+      }
     }
   }
 `
