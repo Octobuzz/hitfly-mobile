@@ -20,6 +20,7 @@ const TitleText = styled(TextBase)`
   font-size: 12px;
   line-height: 12px;
   margin-bottom: 4px;
+  font-family: ${({ theme }) => theme.fonts.medium};
 `
 
 const SubTitleText = styled(TextBase)`

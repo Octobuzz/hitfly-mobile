@@ -123,7 +123,7 @@ export interface User {
   favouriteGenres: Genre[] | null
   roles: Role[]
   careerStartDate: string // careerStart
-  description: string
+  description: string | null
   playsInGenres: Genre[] // genresPlay
   daysInBonusProgram: number // bpDaysInProgram
   isSubscribed: boolean // iWatch
