@@ -57,7 +57,7 @@ interface Props
   > {}
 
 class BonusProgram extends React.PureComponent<Props> {
-  private getNameForPoints = helpers.getNameForCount({
+  private getNameForBonuses = helpers.getNameForCount({
     nominative: 'бонус',
     genitive: 'бонуса',
     genitiveMultiple: 'бонусов',
@@ -100,7 +100,7 @@ class BonusProgram extends React.PureComponent<Props> {
           <Column>
             <ColumnImage source={images.RING} />
             <ColumnText>
-              {`${bonusProgramPoints} ${this.getNameForPoints(
+              {`${bonusProgramPoints} ${this.getNameForBonuses(
                 bonusProgramPoints,
               )}`}
             </ColumnText>
