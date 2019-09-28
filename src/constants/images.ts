@@ -1,3 +1,8 @@
+// profile
+export const RING = require('../assets/images/profile/ring.png')
+export const CALENDAR = require('../assets/images/profile/calendar.png')
+export const HEART_MUSIC = require('../assets/images/profile/heart_music.png')
+
 // home sections
 export const TOP50_BACKGROUND = require('../assets/images/home_sections/top50_background.png')
 export const TOP50_PLAYLIST = require('../assets/images/home_sections/top50_playlist.png')

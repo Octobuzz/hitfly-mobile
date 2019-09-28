@@ -1,6 +1,6 @@
 import L from 'lodash'
 import { Platform, StatusBar } from 'react-native'
-import { HeaderMode } from 'src/apollo'
+import { HeaderMode, BonusProgramLevel } from 'src/apollo'
 
 export const delay = (ms: number): Promise<void> =>
   new Promise(res => setTimeout(res, ms))
@@ -133,5 +133,71 @@ export const setStatusBarColor = (mode: HeaderMode): void => {
       mode === 'dark' ? 'dark-content' : 'light-content',
       true,
     )
+  }
+}
+
+interface BonusProgramTexts {
+  nominative: string
+  genitive: string
+  order: number
+}
+
+const bonusProgramMap = new Map<BonusProgramLevel, BonusProgramTexts>([
+  [
+    BonusProgramLevel.LEVEL_NOVICE,
+    {
+      nominative: '👶 Новичек',
+      genitive: '👶 Новичка',
+      order: 0,
+    },
+  ],
+  [
+    BonusProgramLevel.LEVEL_AMATEUR,
+    {
+      nominative: '🎤 Любитель',
+      genitive: '🎤 Любителя',
+      order: 1,
+    },
+  ],
+  [
+    BonusProgramLevel.LEVEL_CONNOISSEUR_OF_THE_GENRE,
+    {
+      nominative: 'LEVEL_CONNOISSEUR_OF_THE_GENRE',
+      genitive: 'LEVEL_CONNOISSEUR_OF_THE_GENRE',
+      order: 2,
+    },
+  ],
+  [
+    BonusProgramLevel.LEVEL_SUPER_MUSIC_LOVER,
+    {
+      nominative: 'LEVEL_SUPER_MUSIC_LOVER',
+      genitive: 'LEVEL_SUPER_MUSIC_LOVER',
+      order: 3,
+    },
+  ],
+])
+
+export const getBonusProgramLevelHumanReadable = (
+  level: BonusProgramLevel,
+  genitive?: boolean,
+): string => {
+  const bonusProgramTexts = bonusProgramMap.get(level) as BonusProgramTexts
+  return genitive ? bonusProgramTexts.genitive : bonusProgramTexts.nominative
+}
+
+export const getNextBonusProgramHumanReadable = (
+  level: BonusProgramLevel,
+  genitive?: boolean,
+): string | undefined => {
+  const currentProgram = bonusProgramMap.get(level) as BonusProgramTexts
+  let nextProgram: BonusProgramTexts | undefined
+  for (const bp of bonusProgramMap.values()) {
+    if (bp.order > currentProgram.order) {
+      nextProgram = bp
+      break
+    }
+  }
+  if (nextProgram) {
+    return genitive ? nextProgram.genitive : nextProgram.nominative
   }
 }

@@ -24,7 +24,6 @@ const AboutMeContainer: React.FC<Props> = ({
 const GET_PROFILE_FOR_ABOUT = gql`
   query {
     profile: myProfile {
-      id
       favouriteGenres {
         id
         title: name
@@ -34,6 +33,10 @@ const GET_PROFILE_FOR_ABOUT = gql`
       }
       careerStartDate: careerStart
       description
+      bonusProgramLevel: bpLevelBonusProgram
+      bonusProgramPoints: bpPoints
+      daysInBonusProgram: bpDaysInProgram
+      favouritesTracksCount: favouritesTrackCount
       musicGroups {
         id
         title: name
