@@ -61,8 +61,8 @@ class Playlist extends React.Component<Props, State> {
     // нужно для вычисления правильной высоты SlidingPanel
     const detailedTrack = props.tracks[0] || null
     this.state = {
-      activeTrack: null,
       detailedTrack,
+      activeTrack: null,
     }
   }
 
@@ -184,9 +184,11 @@ class Playlist extends React.Component<Props, State> {
           keyExtractor={this.keyExtractor}
           renderItem={this.renderTrack}
         />
-        <SlidingPanel forwardRef={this.setPanelRef}>
-          <TrackMenu onPressCancel={this.hidePanel} track={detailedTrack} />
-        </SlidingPanel>
+        {!!tracks.length && (
+          <SlidingPanel forwardRef={this.setPanelRef}>
+            <TrackMenu onPressCancel={this.hidePanel} track={detailedTrack} />
+          </SlidingPanel>
+        )}
       </>
     )
   }
