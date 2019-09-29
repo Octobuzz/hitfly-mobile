@@ -35,7 +35,9 @@ const removeStylesFromSvg = (svg: string): string => {
   return tmp
 }
 
-export interface ImageProps extends FastImageProperties {}
+export type SourceType = FastImageSource
+
+interface ImageProps extends FastImageProperties {}
 
 export const Image: React.FC<ImageProps> = ({ style, source, ...rest }) => {
   const svgUri = getSvgUri(source)

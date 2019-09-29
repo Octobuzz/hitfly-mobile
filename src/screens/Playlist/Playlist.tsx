@@ -1,9 +1,8 @@
 import React from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
-import FastImage, { FastImageSource } from 'react-native-fast-image'
 import SlidingUpPanel from 'rn-sliding-up-panel'
 import { Track } from 'src/apollo'
-import { SlidingPanel, PlaylistTrack } from 'src/components'
+import { SlidingPanel, PlaylistTrack, Image, SourceType } from 'src/components'
 import TrackMenu from './TrackMenu'
 import ControlButton from './ControlButton'
 import ShuffleButton from './ShuffleButton'
@@ -16,7 +15,7 @@ const CoverWrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.white};
 `
 
-const Cover = styled(FastImage)`
+const Cover = styled(Image)`
   border-bottom-left-radius: 28px;
   position: absolute;
   top: 0;
@@ -40,10 +39,8 @@ const Scroll = styled(FlatList as new () => FlatList<Track>).attrs(() => ({
   initialNumToRender: 10,
 }))``
 
-type CoverType = FastImageSource | number
-
 interface Props {
-  cover: CoverType
+  cover: SourceType
   tracks: Track[]
   favouritesCount: number
 }
@@ -129,7 +126,7 @@ class Playlist extends React.Component<Props, State> {
     }
   }
 
-  private getCover = (): CoverType => {
+  private getCover = (): SourceType => {
     const { cover } = this.props
     const { activeTrack } = this.state
     if (activeTrack) {
