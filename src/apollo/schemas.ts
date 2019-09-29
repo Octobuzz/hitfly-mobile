@@ -86,7 +86,7 @@ export interface Collection {
   id: number
   title: string
   isCreatedByAdmin: boolean // is_admin
-  images: Image[] // image
+  image: Image[]
   tracks: Playlist
   user: User
   isFavourite: boolean // userFavourite

@@ -1,4 +1,5 @@
 import React from 'react'
+import { ViewStyle } from 'react-native'
 import TextBase from './TextBase'
 import { Image } from './Image'
 import { helpers } from 'src/utils'
@@ -42,14 +43,17 @@ interface Sized {
 }
 
 interface CollectionItemProps extends Sized {
-  collection: Collection
   onPress: (collection: Collection) => void
+  collection: Collection
+  style?: ViewStyle
 }
 
 const CollectionItem: React.FC<CollectionItemProps> = ({
   collection,
   onPress,
-  ...rest
+  style,
+  width,
+  height,
 }) => {
   const handlePress = React.useCallback(() => {
     if (collection) {
@@ -57,11 +61,16 @@ const CollectionItem: React.FC<CollectionItemProps> = ({
     }
   }, [onPress, collection])
 
-  const { tracksCountInPlaylist, title, images } = collection
+  const { tracksCountInPlaylist, title, image } = collection
   const bottomText = helpers.formatTracksCount(tracksCountInPlaylist)
   return (
-    <ItemWrapper {...rest} onPress={handlePress}>
-      <BackgroundImage source={{ uri: images[0].imageUrl }} />
+    <ItemWrapper
+      style={style}
+      width={width}
+      height={height}
+      onPress={handlePress}
+    >
+      <BackgroundImage source={{ uri: image[0].imageUrl }} />
       <TopText>{title}</TopText>
       <BottomText>{bottomText}</BottomText>
     </ItemWrapper>
