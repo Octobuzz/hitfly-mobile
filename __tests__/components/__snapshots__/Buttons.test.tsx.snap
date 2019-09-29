@@ -495,3 +495,139 @@ exports[`Link renders correctly in disabled state 1`] = `
   </TouchableOpacity>
 </View>
 `;
+
+exports[`Social Button renders correctly as facebook 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    style={
+      Array [
+        Object {},
+      ]
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../src/assets/images/social/facebook.png",
+        }
+      }
+      style={
+        Array [
+          Object {},
+        ]
+      }
+    />
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`Social Button renders correctly as instagram 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    style={
+      Array [
+        Object {},
+      ]
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../src/assets/images/social/instagram.png",
+        }
+      }
+      style={
+        Array [
+          Object {},
+        ]
+      }
+    />
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`Social Button renders correctly as odnoklassniki 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    style={
+      Array [
+        Object {},
+      ]
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../src/assets/images/social/odnoklassniki.png",
+        }
+      }
+      style={
+        Array [
+          Object {},
+        ]
+      }
+    />
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`Social Button renders correctly as vkontakte 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    style={
+      Array [
+        Object {},
+      ]
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../src/assets/images/social/vkontakte.png",
+        }
+      }
+      style={
+        Array [
+          Object {},
+        ]
+      }
+    />
+  </TouchableOpacity>
+</View>
+`;
