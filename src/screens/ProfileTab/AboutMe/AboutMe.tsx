@@ -2,6 +2,7 @@ import React from 'react'
 import { ScrollView, TextBase, H2 } from 'src/components'
 import Icon from 'react-native-vector-icons/Ionicons'
 import MusicGroup from './MusicGroup'
+import BonusProgram from './BonusProgram'
 import { Profile } from 'src/apollo'
 import styled from 'src/styled-components'
 import { helpers } from 'src/utils'
@@ -155,11 +156,33 @@ class AboutMe extends React.Component<Props> {
     )
   }
 
+  renderBonuses = (): React.ReactNode => {
+    const {
+      profile: {
+        bonusProgramLevel,
+        bonusProgramPoints,
+        daysInBonusProgram,
+        favouritesTracksCount,
+      },
+    } = this.props
+    return (
+      <Block>
+        <BonusProgram
+          bonusProgramLevel={bonusProgramLevel}
+          bonusProgramPoints={bonusProgramPoints}
+          daysInBonusProgram={daysInBonusProgram}
+          favouritesTracksCount={favouritesTracksCount}
+        />
+      </Block>
+    )
+  }
+
   render() {
     return (
       <ScrollView>
         {this.renderProfileInfo()}
         {this.renderProfileGroups()}
+        {this.renderBonuses()}
         {this.renderDescription()}
       </ScrollView>
     )

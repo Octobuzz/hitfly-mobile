@@ -1,6 +1,6 @@
 import L from 'lodash'
 import { Platform, StatusBar } from 'react-native'
-import { HeaderMode } from 'src/apollo'
+import { HeaderMode, BonusProgramLevel } from 'src/apollo'
 
 export const delay = (ms: number): Promise<void> =>
   new Promise(res => setTimeout(res, ms))
@@ -133,5 +133,64 @@ export const setStatusBarColor = (mode: HeaderMode): void => {
       mode === 'dark' ? 'dark-content' : 'light-content',
       true,
     )
+  }
+}
+
+interface BonusProgramTexts {
+  title: string
+  order: number
+}
+
+const bonusProgramMap = new Map<BonusProgramLevel, BonusProgramTexts>([
+  [
+    BonusProgramLevel.LEVEL_NOVICE,
+    {
+      title: '👶 Новичек',
+      order: 0,
+    },
+  ],
+  [
+    BonusProgramLevel.LEVEL_AMATEUR,
+    {
+      title: '🎤 Любитель',
+      order: 1,
+    },
+  ],
+  [
+    BonusProgramLevel.LEVEL_CONNOISSEUR_OF_THE_GENRE,
+    {
+      title: '🎸 Знаток жанра',
+      order: 2,
+    },
+  ],
+  [
+    BonusProgramLevel.LEVEL_SUPER_MUSIC_LOVER,
+    {
+      title: '🎧 Супер меломан',
+      order: 3,
+    },
+  ],
+])
+
+export const getBonusProgramLevelHumanReadable = (
+  level: BonusProgramLevel,
+): string => {
+  const bonusProgramTexts = bonusProgramMap.get(level) as BonusProgramTexts
+  return bonusProgramTexts.title
+}
+
+export const getNextBonusProgramHumanReadable = (
+  level: BonusProgramLevel,
+): string | undefined => {
+  const currentProgram = bonusProgramMap.get(level) as BonusProgramTexts
+  let nextProgram: BonusProgramTexts | undefined
+  for (const bp of bonusProgramMap.values()) {
+    if (bp.order > currentProgram.order) {
+      nextProgram = bp
+      break
+    }
+  }
+  if (nextProgram) {
+    return nextProgram.title
   }
 }

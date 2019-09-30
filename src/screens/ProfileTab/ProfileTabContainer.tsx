@@ -28,7 +28,6 @@ const ProfileTab: React.FC<Props> = ({
 const GET_PROFILE = gql`
   query {
     profile: myProfile {
-      id
       userName: username
       followersCount
       avatar(sizes: [size_235x235]) {
