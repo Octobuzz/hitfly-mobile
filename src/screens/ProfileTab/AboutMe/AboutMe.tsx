@@ -179,7 +179,7 @@ class AboutMe extends React.Component<Props> {
 
   render() {
     return (
-      <ScrollView>
+      <ScrollView addBottomSafePadding>
         {this.renderProfileInfo()}
         {this.renderProfileGroups()}
         {this.renderBonuses()}

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Track, NullableTrack } from 'src/apollo'
-import { Image, SourceType } from 'src/components'
+import { Image, SourceType, View } from 'src/components'
 import { TracksList } from 'src/containers'
 import ControlButton from './ControlButton'
 import ShuffleButton from './ShuffleButton'
@@ -97,7 +97,7 @@ class Playlist extends React.Component<Props, State> {
     const { activeTrack } = this.state
     const activeCover = this.getCover()
     return (
-      <>
+      <View noPadding addBottomSafePadding>
         <CoverWrapper>
           <Cover source={activeCover} />
           {!!tracks.length && (
@@ -113,7 +113,7 @@ class Playlist extends React.Component<Props, State> {
           playlist={tracks}
         />
         <TracksList tracks={tracks} />
-      </>
+      </View>
     )
   }
 }
