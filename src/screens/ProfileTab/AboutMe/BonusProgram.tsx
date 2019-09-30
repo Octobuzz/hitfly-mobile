@@ -1,7 +1,8 @@
 import React from 'react'
+import { Linking } from 'react-native'
 import { helpers } from 'src/utils'
 import { Profile } from 'src/apollo'
-import { H2, Link, Button, TextBase } from 'src/components'
+import { H2, Link, TextBase } from 'src/components'
 import styled from 'src/styled-components'
 import { images } from 'src/constants'
 
@@ -43,10 +44,6 @@ const Divider = styled.View`
   background-color: ${({ theme }) => theme.colors.inputBorder};
 `
 
-const IndentedLink = styled(Link)`
-  margin-top: 16px;
-`
-
 interface Props
   extends Pick<
     Profile,
@@ -72,6 +69,11 @@ class BonusProgram extends React.PureComponent<Props> {
     genitive: 'любимые песни',
     genitiveMultiple: 'любимых песен',
   })
+
+  private openBonusProgramLink = (): void => {
+    Linking.openURL('https://myhitfly.ru/bonus-program')
+  }
+
   render() {
     const {
       bonusProgramLevel,
@@ -127,8 +129,10 @@ class BonusProgram extends React.PureComponent<Props> {
           </Column>
         </Row>
 
-        <Button type="outline" title="На что потратить бонусы?" />
-        <IndentedLink title="Подробнее о бонусной программе" />
+        <Link
+          onPress={this.openBonusProgramLink}
+          title="Подробнее о бонусной программе"
+        />
       </>
     )
   }
