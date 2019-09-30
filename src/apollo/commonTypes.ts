@@ -1,3 +1,5 @@
+import { Track } from './schemas'
+
 export type CollectionsType = 'recommended' | 'musicFan'
 
 export type HeaderMode = 'light' | 'dark'
@@ -8,3 +10,5 @@ export interface HeaderSettings {
   mode: HeaderMode
   state: NavigationState
 }
+
+export type NullableTrack = Track | null

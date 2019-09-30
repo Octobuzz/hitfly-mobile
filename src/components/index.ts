@@ -7,6 +7,7 @@ export * from './GenreItem'
 
 export { default as Loader } from './Loader'
 export { default as TextBase } from './TextBase'
+export { default as TrackMenu } from './TrackMenu'
 export { default as GenreItem } from './GenreItem'
 export { default as SlidingPanel } from './SlidingPanel'
 export { default as TextWithLines } from './TextWithLines'
