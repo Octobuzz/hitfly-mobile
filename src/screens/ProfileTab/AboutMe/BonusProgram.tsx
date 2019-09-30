@@ -57,10 +57,10 @@ interface Props
   > {}
 
 class BonusProgram extends React.PureComponent<Props> {
-  private getNameForBonuses = helpers.getNameForCount({
-    nominative: 'бонус',
-    genitive: 'бонуса',
-    genitiveMultiple: 'бонусов',
+  private getNameForPoints = helpers.getNameForCount({
+    nominative: 'балл',
+    genitive: 'балла',
+    genitiveMultiple: 'баллов',
   })
   private getNameForDays = helpers.getNameForCount({
     nominative: 'день',
@@ -81,8 +81,8 @@ class BonusProgram extends React.PureComponent<Props> {
     } = this.props
     const nextLevel = helpers.getNextBonusProgramHumanReadable(
       bonusProgramLevel,
-      true,
     )
+    const nextLevelBonuses = 20
     return (
       <>
         <TitleText>
@@ -90,9 +90,11 @@ class BonusProgram extends React.PureComponent<Props> {
         </TitleText>
         {nextLevel && (
           <SubtitleText>
-            до{' '}
-            {helpers.getNextBonusProgramHumanReadable(bonusProgramLevel, true)}{' '}
-            осталось: <SubtitleBoldText>100000 б</SubtitleBoldText>
+            до статуса <SubtitleBoldText>{nextLevel}</SubtitleBoldText>{' '}
+            осталось:{' '}
+            <SubtitleBoldText>{`${nextLevelBonuses} ${this.getNameForPoints(
+              nextLevelBonuses,
+            )}`}</SubtitleBoldText>
           </SubtitleText>
         )}
 
@@ -100,7 +102,7 @@ class BonusProgram extends React.PureComponent<Props> {
           <Column>
             <ColumnImage source={images.RING} />
             <ColumnText>
-              {`${bonusProgramPoints} ${this.getNameForBonuses(
+              {`${bonusProgramPoints} ${this.getNameForPoints(
                 bonusProgramPoints,
               )}`}
             </ColumnText>
@@ -111,7 +113,7 @@ class BonusProgram extends React.PureComponent<Props> {
             <ColumnText>
               {`${daysInBonusProgram} ${this.getNameForDays(
                 daysInBonusProgram,
-              )} в Digico`}
+              )} в Hitfly`}
             </ColumnText>
           </Column>
           <Divider />
