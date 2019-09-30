@@ -1,7 +1,8 @@
 import React from 'react'
+import { Linking } from 'react-native'
 import { helpers } from 'src/utils'
 import { Profile } from 'src/apollo'
-import { H2, Link, Button, TextBase } from 'src/components'
+import { H2, Link, TextBase } from 'src/components'
 import styled from 'src/styled-components'
 import { images } from 'src/constants'
 
@@ -43,10 +44,6 @@ const Divider = styled.View`
   background-color: ${({ theme }) => theme.colors.inputBorder};
 `
 
-const IndentedLink = styled(Link)`
-  margin-top: 16px;
-`
-
 interface Props
   extends Pick<
     Profile,
@@ -57,10 +54,10 @@ interface Props
   > {}
 
 class BonusProgram extends React.PureComponent<Props> {
-  private getNameForBonuses = helpers.getNameForCount({
-    nominative: 'бонус',
-    genitive: 'бонуса',
-    genitiveMultiple: 'бонусов',
+  private getNameForPoints = helpers.getNameForCount({
+    nominative: 'балл',
+    genitive: 'балла',
+    genitiveMultiple: 'баллов',
   })
   private getNameForDays = helpers.getNameForCount({
     nominative: 'день',
@@ -72,6 +69,11 @@ class BonusProgram extends React.PureComponent<Props> {
     genitive: 'любимые песни',
     genitiveMultiple: 'любимых песен',
   })
+
+  private openBonusProgramLink = (): void => {
+    Linking.openURL('https://myhitfly.ru/bonus-program')
+  }
+
   render() {
     const {
       bonusProgramLevel,
@@ -81,8 +83,8 @@ class BonusProgram extends React.PureComponent<Props> {
     } = this.props
     const nextLevel = helpers.getNextBonusProgramHumanReadable(
       bonusProgramLevel,
-      true,
     )
+    const nextLevelBonuses = 20
     return (
       <>
         <TitleText>
@@ -90,9 +92,11 @@ class BonusProgram extends React.PureComponent<Props> {
         </TitleText>
         {nextLevel && (
           <SubtitleText>
-            до{' '}
-            {helpers.getNextBonusProgramHumanReadable(bonusProgramLevel, true)}{' '}
-            осталось: <SubtitleBoldText>100000 б</SubtitleBoldText>
+            до статуса <SubtitleBoldText>{nextLevel}</SubtitleBoldText>{' '}
+            осталось:{' '}
+            <SubtitleBoldText>{`${nextLevelBonuses} ${this.getNameForPoints(
+              nextLevelBonuses,
+            )}`}</SubtitleBoldText>
           </SubtitleText>
         )}
 
@@ -100,7 +104,7 @@ class BonusProgram extends React.PureComponent<Props> {
           <Column>
             <ColumnImage source={images.RING} />
             <ColumnText>
-              {`${bonusProgramPoints} ${this.getNameForBonuses(
+              {`${bonusProgramPoints} ${this.getNameForPoints(
                 bonusProgramPoints,
               )}`}
             </ColumnText>
@@ -111,7 +115,7 @@ class BonusProgram extends React.PureComponent<Props> {
             <ColumnText>
               {`${daysInBonusProgram} ${this.getNameForDays(
                 daysInBonusProgram,
-              )} в Digico`}
+              )} в Hitfly`}
             </ColumnText>
           </Column>
           <Divider />
@@ -125,8 +129,10 @@ class BonusProgram extends React.PureComponent<Props> {
           </Column>
         </Row>
 
-        <Button type="outline" title="На что потратить бонусы?" />
-        <IndentedLink title="Подробнее о бонусной программе" />
+        <Link
+          onPress={this.openBonusProgramLink}
+          title="Подробнее о бонусной программе"
+        />
       </>
     )
   }
