@@ -9,11 +9,7 @@ interface Props {
   albums: Collection[]
 }
 
-interface State {
-  selectedTrack?: Track
-}
-
-class LikedMusic extends React.Component<Props, State> {
+class LikedMusic extends React.Component<Props> {
   private renderTracks = (): React.ReactNode => {
     const { tracks } = this.props
 

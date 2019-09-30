@@ -1,1 +1,1 @@
-export { default } from './LikedMusic'
+export { default } from './LikedMusicContainer'

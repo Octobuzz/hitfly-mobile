@@ -11,7 +11,7 @@ import { Genre } from 'src/apollo/schemas'
 const GET_GENRE_TRACKS = gql`
   query getCurrentGenreTracks($genreId: Int!) {
     currentGenreId @client @export(as: "genreId")
-    playlist: tracks(limit: 50, page: 0, filters: { genre: $genreId }) {
+    playlist: tracks(limit: 1000, page: 0, filters: { genre: $genreId }) {
       items: data {
         id
         title: trackName

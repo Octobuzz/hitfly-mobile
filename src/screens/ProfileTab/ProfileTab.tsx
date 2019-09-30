@@ -9,6 +9,7 @@ import {
 } from 'react-native-tab-view'
 import Header from './Header'
 import AboutMeScreen from './AboutMe'
+import LikedMusicScreen from './LikedMusic'
 import { Profile } from 'src/apollo'
 import { helpers } from 'src/utils'
 import { TextBase } from 'src/components'
@@ -45,11 +46,19 @@ interface Props extends NavigationStackScreenProps {
 class ProfileTab extends React.Component<Props, State> {
   state = {
     index: 0,
-    routes: [{ key: 'about', title: 'Обо мне' }],
+    routes: [
+      { key: 'about', title: 'Обо мне' },
+      { key: 'myMusic', title: 'Моя музыка' },
+      { key: 'likedMusic', title: 'Мне нравится' },
+      { key: 'feedback', title: 'Отзывы' },
+    ],
   }
 
   private scene = SceneMap({
     about: AboutMeScreen,
+    myMusic: () => null,
+    likedMusic: LikedMusicScreen,
+    feedback: () => null,
   })
 
   private renderTabBar = (

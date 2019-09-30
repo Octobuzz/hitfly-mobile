@@ -59,6 +59,13 @@ export interface Track {
   commentedByMe: boolean
 }
 
+export interface FavouriteTrack {
+  id: number
+  track: Track
+  userId: number
+  createdAt: string
+}
+
 export type Playlist = Track[]
 
 export interface Image {
