@@ -3,11 +3,11 @@ import React from 'react'
 import { Dimensions } from 'react-native'
 import { Track, Album } from 'src/apollo'
 import {
-  ScrollView,
   H1,
   TextBase,
-  TracksView,
   AlbumItem,
+  TracksView,
+  ScrollView,
   RefreshControl,
 } from 'src/components'
 import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/containers/HOCs'
@@ -49,6 +49,7 @@ interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   albumTitle: string
   refreshing: boolean
   onRefresh: () => void
+  onPressAlbum: (album: Album) => void
 }
 
 class LikedMusic extends React.Component<Props> {
@@ -105,7 +106,7 @@ class LikedMusic extends React.Component<Props> {
   }
 
   private renderAlbums = (): React.ReactNode => {
-    const { albums, albumTitle } = this.props
+    const { albums, albumTitle, onPressAlbum } = this.props
 
     if (!albums.length) {
       return null
@@ -120,7 +121,7 @@ class LikedMusic extends React.Component<Props> {
         <AlbumsWrapper>
           {albums.map(album => (
             <Col key={album.id.toString()}>
-              <AlbumItem item={album} />
+              <AlbumItem onPress={onPressAlbum} item={album} />
             </Col>
           ))}
         </AlbumsWrapper>

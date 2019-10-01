@@ -49,7 +49,12 @@ export const Image: React.FC<ImageProps> = ({ style, source, ...rest }) => {
 }
 
 const getSvgUri = (source: FastImageSource | number): string | undefined => {
-  if (typeof source !== 'number' && source.uri && source.uri.endsWith('.svg')) {
+  if (
+    source &&
+    typeof source !== 'number' &&
+    source.uri &&
+    source.uri.endsWith('.svg')
+  ) {
     return source.uri
   }
 }

@@ -23,7 +23,8 @@ const withChangingHeaderSettings = (nextSettings: Partial<HeaderSettings>) => (
   WrappedComponent: React.ComponentType<any>,
 ) => {
   class ChangingHeaderSettings extends React.Component<Props> {
-    componentDidMount() {
+    constructor(props: Props) {
+      super(props)
       this.setupFocusListeners()
     }
 
@@ -36,7 +37,7 @@ const withChangingHeaderSettings = (nextSettings: Partial<HeaderSettings>) => (
     private setupFocusListeners = (): void => {
       const { navigation, mutate } = this.props
       this.willFocusSubscription = navigation.addListener(
-        'didFocus',
+        'willFocus',
         async () => {
           await mutate({
             variables: { settings: nextSettings },

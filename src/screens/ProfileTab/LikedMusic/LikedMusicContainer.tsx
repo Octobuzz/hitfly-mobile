@@ -1,17 +1,20 @@
 import L from 'lodash'
-import React, { useMemo, useState, useCallback } from 'react'
+import React, { useMemo, useCallback } from 'react'
+import { withNavigation, NavigationInjectedProps } from 'react-navigation'
 import gql from 'graphql-tag'
 import { DataValue, graphql } from '@apollo/react-hoc'
 import { Pagination, FavouriteAlbum, FavouriteTrack } from 'src/apollo'
-import MusicAndAlbumsScreen from './MusicAndAlbums'
+import MusicAndAlbumsContainer from './MusicAndAlbumsContainer'
 import {
   withTrackToggle,
   ToggleTrackProps,
   DetailedTrackMenuProps,
 } from 'src/containers/HOCs'
-import { Loader } from 'src/components'
 
-interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
+interface Props
+  extends ToggleTrackProps,
+    DetailedTrackMenuProps,
+    NavigationInjectedProps {
   tracksData: DataValue<{ tracksPagination: Pagination<FavouriteTrack> }>
   albumsData: DataValue<{ albumsPagination: Pagination<FavouriteAlbum> }>
 }
@@ -29,8 +32,6 @@ const LikedMusicContainer: React.FC<Props> = ({
   },
   ...rest
 }) => {
-  const [isRefreshing, setRefreshing] = useState(false)
-
   const favouriteTracks: FavouriteTrack[] = L.get(tracksPagination, 'items', [])
   const normalTracks = useMemo(
     () => favouriteTracks.map(({ track }) => track),
@@ -44,33 +45,17 @@ const LikedMusicContainer: React.FC<Props> = ({
     [favouriteAlbums],
   )
 
-  if (!isRefreshing && (tracksLoading || albumsLoading)) {
-    return <Loader isAbsolute />
-  }
-
-  // if (isRefreshing && !tracksLoading && !albumsLoading) {
-  //   setRefreshing(false)
-  // }
-
-  const refreshData = async () => {
-    try {
-      setRefreshing(true)
-      await Promise.all([refretchTracks(), refretchAlbums()])
-    } catch {
-      // добавлять ли что-то?
-    } finally {
-      setRefreshing(false)
-    }
-  }
+  const refreshData = useCallback(
+    (): Promise<any> => Promise.all([refretchTracks(), refretchAlbums()]),
+    [],
+  )
 
   return (
-    <MusicAndAlbumsScreen
-      tracksTitle="Любимые песни"
-      albumTitle="Любимые альбомы"
+    <MusicAndAlbumsContainer
       albums={normalAlbums}
       tracks={normalTracks}
-      refreshing={isRefreshing}
-      onRefresh={refreshData}
+      isLoading={tracksLoading || albumsLoading}
+      refreshData={refreshData}
       {...rest}
     />
   )
@@ -125,4 +110,5 @@ export default L.flowRight(
   graphql<Props>(GET_LIKED_MUSIC, { name: 'tracksData' }),
   graphql<Props>(GET_LIKED_ALBUMS, { name: 'albumsData' }),
   withTrackToggle,
+  withNavigation,
 )(LikedMusicContainer)

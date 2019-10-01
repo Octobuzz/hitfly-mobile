@@ -76,6 +76,10 @@ export default {
       cache.writeData({ data: { currentGenreId: id } })
       return null
     },
+    selectAlbum: (_, { id }, { cache }: ContextArgs) => {
+      cache.writeData({ data: { currentAlbumId: id } })
+      return null
+    },
     setHeaderSettings: (
       _,
       { settings }: { settings: Partial<HeaderSettings> },
