@@ -8,7 +8,7 @@ import {
 } from 'react-native-tab-view'
 import Header from './Header'
 import AboutMeScreen from './AboutMe'
-import LikedMusicScreen from './LikedMusic'
+import { LikedMusicScreen } from './MusicAndAlbums'
 import { Profile } from 'src/apollo'
 import { helpers } from 'src/utils'
 import { TextBase } from 'src/components'
