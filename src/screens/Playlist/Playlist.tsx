@@ -1,7 +1,7 @@
 import React from 'react'
 import { Track, NullableTrack } from 'src/apollo'
 import { Image, SourceType, View, TracksFlatList } from 'src/components'
-import { ToggleTrackProps } from 'src/containers/HOCs'
+import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/containers/HOCs'
 import ControlButton from './ControlButton'
 import ShuffleButton from './ShuffleButton'
 import PlaylistInfoPanel from './PlaylistInfoPanel'
@@ -33,7 +33,7 @@ const PositionedControlButton = styled(ControlButton)`
   align-self: center;
 `
 
-interface Props extends ToggleTrackProps {
+interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   cover: SourceType
   tracks: Track[]
   favouritesCount: number
@@ -84,7 +84,13 @@ class Playlist extends React.Component<Props, State> {
   }
 
   render() {
-    const { tracks, favouritesCount, toggleTrack, activeTrack } = this.props
+    const {
+      tracks,
+      favouritesCount,
+      toggleTrack,
+      activeTrack,
+      showDetailedTrack,
+    } = this.props
     const { playingTrack } = this.state
     const activeCover = this.getCover()
     return (
@@ -106,6 +112,7 @@ class Playlist extends React.Component<Props, State> {
         <TracksFlatList
           toggleTrack={toggleTrack}
           activeTrack={activeTrack}
+          showDetailedTrack={showDetailedTrack}
           tracks={tracks}
         />
       </View>

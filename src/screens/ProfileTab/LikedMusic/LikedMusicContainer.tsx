@@ -4,10 +4,15 @@ import gql from 'graphql-tag'
 import { DataValue, graphql } from '@apollo/react-hoc'
 import { Pagination, FavouriteAlbum, FavouriteTrack } from 'src/apollo'
 import LikedMusicScreen from './LikedMusic'
-import { withTrackToggle, ToggleTrackProps } from 'src/containers/HOCs'
+import {
+  withTrackToggle,
+  ToggleTrackProps,
+  withDetailedTrackMenu,
+  DetailedTrackMenuProps,
+} from 'src/containers/HOCs'
 import { Loader } from 'src/components'
 
-interface Props extends ToggleTrackProps {
+interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   tracksData: DataValue<{ tracksPagination: Pagination<FavouriteTrack> }>
   albumsData: DataValue<{ albumsPagination: Pagination<FavouriteAlbum> }>
 }

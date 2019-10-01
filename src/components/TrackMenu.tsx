@@ -4,6 +4,8 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { Track } from 'src/apollo'
 import styled from 'src/styled-components'
 
+export const TRACK_MENU_HEIGHT = 300
+
 const TrackWrapper = styled.View`
   flex-direction: row;
   align-items: center;

@@ -2,12 +2,21 @@ import L from 'lodash'
 import React from 'react'
 import gql from 'graphql-tag'
 import { DataProps, graphql } from '@apollo/react-hoc'
-import { withChangingHeaderSettings } from 'src/containers/HOCs'
-import { PlaylistScreen } from 'src/screens'
+import {
+  withTrackToggle,
+  withDetailedTrackMenu,
+  withChangingHeaderSettings,
+  ToggleTrackProps,
+  DetailedTrackMenuProps,
+} from 'src/containers/HOCs'
+import PlaylistScreen from 'src/screens/Playlist/Playlist'
 import { Collection } from 'src/apollo'
 import { Loader } from 'src/components'
 
-interface Props extends DataProps<{ collection?: Collection }> {}
+interface Props
+  extends DataProps<{ collection?: Collection }>,
+    ToggleTrackProps,
+    DetailedTrackMenuProps {}
 
 const CollectionPlaylist: React.FC<Props> = ({
   data: { loading, collection },
@@ -21,10 +30,10 @@ const CollectionPlaylist: React.FC<Props> = ({
     return null
   }
 
-  const { images, favouritesCount, tracks } = collection
+  const { image, favouritesCount, tracks } = collection
   return (
     <PlaylistScreen
-      cover={{ uri: images[0].imageUrl }}
+      cover={{ uri: image[0].imageUrl }}
       tracks={tracks}
       favouritesCount={favouritesCount || 0}
       {...rest}
@@ -37,7 +46,7 @@ const GET_CURRENT_COLLECTION = gql`
     currentCollectionId @client @export(as: "collectionId")
     collection(id: $collectionId) {
       id
-      images: image(sizes: [size_290x290]) {
+      image(sizes: [size_290x290]) {
         imageUrl: url
       }
       title
@@ -62,4 +71,6 @@ const GET_CURRENT_COLLECTION = gql`
 export default L.flowRight(
   withChangingHeaderSettings({ state: 'main', mode: 'light' }),
   graphql<Props>(GET_CURRENT_COLLECTION),
+  withDetailedTrackMenu,
+  withTrackToggle,
 )(CollectionPlaylist)

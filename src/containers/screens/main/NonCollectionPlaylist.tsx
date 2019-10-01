@@ -1,55 +1,58 @@
 import L from 'lodash'
 import React from 'react'
 import { DocumentNode } from 'graphql'
-import { Query } from '@apollo/react-components'
-import { withChangingHeaderSettings } from 'src/containers/HOCs'
-import { PlaylistScreen } from 'src/screens'
-import { Pagination, Playlist, Track } from 'src/apollo'
+import { useQuery } from '@apollo/react-hooks'
+import {
+  withTrackToggle,
+  withDetailedTrackMenu,
+  withChangingHeaderSettings,
+  ToggleTrackProps,
+  DetailedTrackMenuProps,
+} from 'src/containers/HOCs'
+import PlaylistScreen from 'src/screens/Playlist'
+import { Pagination, Track } from 'src/apollo'
 import { Loader } from 'src/components'
 
 interface Data {
   playlist?: Pagination<Track>
 }
 
-interface Props {
+interface Props extends DetailedTrackMenuProps, ToggleTrackProps {
   query: DocumentNode
   cover: any // FIXME: вытащить проп из PlaylistScreen
 }
 
-class NonCollectionPlaylist extends React.Component<Props> {
-  private getFavouritesCount = (playlist: Playlist): number => {
-    const count = L.sumBy<Track>(playlist, 'favouritesCount')
+const NonCollectionPlaylist: React.FC<Props> = ({ query, cover, ...rest }) => {
+  const { data, loading } = useQuery<Data>(query)
+
+  const favouritesCount = React.useMemo((): number => {
+    if (!data || !data.playlist) {
+      return 0
+    }
+    const count = L.sumBy<Track>(data.playlist.items, 'favouritesCount')
     return count
+  }, [data])
+
+  if (loading) {
+    return <Loader isAbsolute />
   }
 
-  render() {
-    const { query, cover } = this.props
-    return (
-      <Query<Data> query={query}>
-        {({ data, loading }) => {
-          if (loading) {
-            return <Loader isAbsolute />
-          }
-
-          if (!data || !data.playlist) {
-            return null
-          }
-          const { items } = data.playlist
-          const favouritesCount = this.getFavouritesCount(items)
-          return (
-            <PlaylistScreen
-              cover={cover}
-              tracks={items}
-              favouritesCount={favouritesCount}
-              {...this.props}
-            />
-          )
-        }}
-      </Query>
-    )
+  if (!data || !data.playlist) {
+    return null
   }
+  const { items } = data.playlist
+  return (
+    <PlaylistScreen
+      cover={cover}
+      tracks={items}
+      favouritesCount={favouritesCount}
+      {...rest}
+    />
+  )
 }
 
-export default withChangingHeaderSettings({ state: 'main', mode: 'light' })(
-  NonCollectionPlaylist,
-)
+export default L.flowRight(
+  withChangingHeaderSettings({ state: 'main', mode: 'light' }),
+  withDetailedTrackMenu,
+  withTrackToggle,
+)(NonCollectionPlaylist)

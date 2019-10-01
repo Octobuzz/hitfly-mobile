@@ -2,7 +2,7 @@ import L from 'lodash'
 import React from 'react'
 import { Track, Album } from 'src/apollo'
 import { ScrollView, H1, TextBase, TracksView } from 'src/components'
-import { ToggleTrackProps } from 'src/containers/HOCs'
+import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/containers/HOCs'
 import { helpers } from 'src/utils'
 import styled from 'src/styled-components'
 
@@ -18,14 +18,14 @@ const InfoText = styled(TextBase)`
   font-size: 12px;
 `
 
-interface Props extends ToggleTrackProps {
+interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   tracks: Track[]
   albums: Album[]
 }
 
 class LikedMusic extends React.Component<Props> {
   private renderTracks = (): React.ReactNode => {
-    const { tracks, toggleTrack, activeTrack } = this.props
+    const { tracks, toggleTrack, activeTrack, showDetailedTrack } = this.props
 
     if (!tracks.length) {
       return null
@@ -41,6 +41,7 @@ class LikedMusic extends React.Component<Props> {
         </HeaderWrapper>
 
         <TracksView
+          showDetailedTrack={showDetailedTrack}
           toggleTrack={toggleTrack}
           activeTrack={activeTrack}
           tracks={tracks}

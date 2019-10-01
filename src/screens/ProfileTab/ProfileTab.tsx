@@ -14,6 +14,7 @@ import { Profile } from 'src/apollo'
 import { helpers } from 'src/utils'
 import { TextBase } from 'src/components'
 import styled from 'src/styled-components'
+import { DetailedTrackMenuProps } from 'src/containers/HOCs'
 
 const StyledTabBar = styled(TabBar).attrs(({ theme }) => ({
   scrollEnabled: true,
@@ -39,7 +40,7 @@ interface TabState {
 
 interface State extends NavigationState<TabState> {}
 
-interface Props extends NavigationStackScreenProps {
+interface Props extends NavigationStackScreenProps, DetailedTrackMenuProps {
   profile: Profile
 }
 
@@ -53,13 +54,6 @@ class ProfileTab extends React.Component<Props, State> {
       { key: 'feedback', title: 'Отзывы' },
     ],
   }
-
-  private scene = SceneMap({
-    about: AboutMeScreen,
-    myMusic: () => null,
-    likedMusic: LikedMusicScreen,
-    feedback: () => null,
-  })
 
   private renderTabBar = (
     props: SceneRendererProps & {
@@ -105,6 +99,24 @@ class ProfileTab extends React.Component<Props, State> {
     this.setState({ index })
   }
 
+  private renderScene = ({
+    route,
+  }: SceneRendererProps & { route: TabState }): React.ReactNode => {
+    const { showDetailedTrack } = this.props
+    switch (route.key) {
+      case 'about':
+        return <AboutMeScreen />
+      case 'myMusic':
+        return null
+      case 'likedMusic':
+        return <LikedMusicScreen showDetailedTrack={showDetailedTrack} />
+      case 'feedback':
+        return null
+      default:
+        return null
+    }
+  }
+
   render() {
     return (
       <TabView
@@ -113,7 +125,7 @@ class ProfileTab extends React.Component<Props, State> {
         onIndexChange={this.handleIndexChange}
         navigationState={this.state}
         renderTabBar={this.renderTabBar}
-        renderScene={this.scene}
+        renderScene={this.renderScene}
       />
     )
   }

@@ -56,15 +56,17 @@ class SlidingPanel extends React.Component<Props, State> {
   }
 
   render() {
-    const { children, forwardRef } = this.props
+    const { children, forwardRef, ...rest } = this.props
     const { contentHeight } = this.state
     const draggableRange = this.getDraggableRange()
     return (
+      // @ts-ignore
       <StyledPanel
         snappingPoints={[draggableRange.top]}
         draggableRange={draggableRange}
         height={contentHeight || undefined}
         ref={forwardRef}
+        {...rest}
       >
         <Body onLayout={this.setContentHeight}>
           <TopNotch />

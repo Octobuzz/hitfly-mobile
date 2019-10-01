@@ -1,30 +1,16 @@
 import React from 'react'
 import { View } from 'react-native'
-import SlidingUpPanel from 'rn-sliding-up-panel'
-import { Track, NullableTrack } from 'src/apollo'
-import { ToggleTrackProps } from 'src/containers/HOCs'
-import { TrackMenu, SlidingPanel, PlaylistTrack } from 'src/components'
+import { Track } from 'src/apollo'
+import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/containers/HOCs'
+import { PlaylistTrack } from 'src/components'
 
-interface Props extends ToggleTrackProps {
+interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   tracks: Track[]
 }
 
-interface State {
-  detailedTrack: NullableTrack
-}
-
-class TracksView extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props)
-    // нужно для вычисления правильной высоты SlidingPanel
-    const detailedTrack = props.tracks[0] || null
-    this.state = {
-      detailedTrack,
-    }
-  }
-
+class TracksView extends React.Component<Props> {
   private renderTrack = (item: Track, index: number): React.ReactNode => {
-    const { toggleTrack } = this.props
+    const { toggleTrack, showDetailedTrack } = this.props
     const isPlaying = this.isTrackPlaying(item)
     return (
       <PlaylistTrack
@@ -32,7 +18,7 @@ class TracksView extends React.Component<Props, State> {
         index={index}
         isPlaying={isPlaying}
         onPress={toggleTrack}
-        onPressMore={this.handlePressMore}
+        onPressMore={showDetailedTrack}
         track={item}
       />
     )
@@ -46,37 +32,9 @@ class TracksView extends React.Component<Props, State> {
     return activeTrack.id === track.id
   }
 
-  private handlePressMore = (track: Track): void => {
-    this.setState({ detailedTrack: track }, () => {
-      if (this.panel) {
-        this.panel.show()
-      }
-    })
-  }
-
-  private panel?: SlidingUpPanel
-  private setPanelRef = (ref: SlidingUpPanel): void => {
-    this.panel = ref
-  }
-  private hidePanel = (): void => {
-    if (this.panel) {
-      this.panel.hide()
-    }
-  }
-
   render() {
     const { tracks } = this.props
-    const { detailedTrack } = this.state
-    return (
-      <>
-        <View>{tracks.map(this.renderTrack)}</View>
-        {detailedTrack && (
-          <SlidingPanel forwardRef={this.setPanelRef}>
-            <TrackMenu onPressCancel={this.hidePanel} track={detailedTrack} />
-          </SlidingPanel>
-        )}
-      </>
-    )
+    return <View>{tracks.map(this.renderTrack)}</View>
   }
 }
 
