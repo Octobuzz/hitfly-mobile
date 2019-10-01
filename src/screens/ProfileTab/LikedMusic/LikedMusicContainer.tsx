@@ -7,7 +7,6 @@ import LikedMusicScreen from './LikedMusic'
 import {
   withTrackToggle,
   ToggleTrackProps,
-  withDetailedTrackMenu,
   DetailedTrackMenuProps,
 } from 'src/containers/HOCs'
 import { Loader } from 'src/components'

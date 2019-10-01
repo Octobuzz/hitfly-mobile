@@ -3,7 +3,6 @@ import { NavigationStackScreenProps } from 'react-navigation-stack'
 import {
   TabBar,
   TabView,
-  SceneMap,
   NavigationState,
   SceneRendererProps,
 } from 'react-native-tab-view'
@@ -13,8 +12,8 @@ import LikedMusicScreen from './LikedMusic'
 import { Profile } from 'src/apollo'
 import { helpers } from 'src/utils'
 import { TextBase } from 'src/components'
-import styled from 'src/styled-components'
 import { DetailedTrackMenuProps } from 'src/containers/HOCs'
+import styled from 'src/styled-components'
 
 const StyledTabBar = styled(TabBar).attrs(({ theme }) => ({
   scrollEnabled: true,
