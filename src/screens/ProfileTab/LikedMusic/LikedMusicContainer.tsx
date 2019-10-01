@@ -1,9 +1,9 @@
 import L from 'lodash'
-import React, { useMemo } from 'react'
+import React, { useMemo, useState, useCallback } from 'react'
 import gql from 'graphql-tag'
 import { DataValue, graphql } from '@apollo/react-hoc'
 import { Pagination, FavouriteAlbum, FavouriteTrack } from 'src/apollo'
-import LikedMusicScreen from './LikedMusic'
+import MusicAndAlbumsScreen from './MusicAndAlbums'
 import {
   withTrackToggle,
   ToggleTrackProps,
@@ -17,13 +17,20 @@ interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
 }
 
 const LikedMusicContainer: React.FC<Props> = ({
-  tracksData: { tracksPagination, loading: tracksLoading },
-  albumsData: { albumsPagination, loading: albumsLoading },
+  tracksData: {
+    tracksPagination,
+    loading: tracksLoading,
+    refetch: refretchTracks,
+  },
+  albumsData: {
+    albumsPagination,
+    loading: albumsLoading,
+    refetch: refretchAlbums,
+  },
   ...rest
 }) => {
-  if (tracksLoading || albumsLoading) {
-    return <Loader isAbsolute />
-  }
+  const [isRefreshing, setRefreshing] = useState(false)
+
   const favouriteTracks: FavouriteTrack[] = L.get(tracksPagination, 'items', [])
   const normalTracks = useMemo(
     () => favouriteTracks.map(({ track }) => track),
@@ -37,8 +44,35 @@ const LikedMusicContainer: React.FC<Props> = ({
     [favouriteAlbums],
   )
 
+  if (!isRefreshing && (tracksLoading || albumsLoading)) {
+    return <Loader isAbsolute />
+  }
+
+  // if (isRefreshing && !tracksLoading && !albumsLoading) {
+  //   setRefreshing(false)
+  // }
+
+  const refreshData = async () => {
+    try {
+      setRefreshing(true)
+      await Promise.all([refretchTracks(), refretchAlbums()])
+    } catch {
+      // добавлять ли что-то?
+    } finally {
+      setRefreshing(false)
+    }
+  }
+
   return (
-    <LikedMusicScreen albums={normalAlbums} tracks={normalTracks} {...rest} />
+    <MusicAndAlbumsScreen
+      tracksTitle="Любимые песни"
+      albumTitle="Любимые альбомы"
+      albums={normalAlbums}
+      tracks={normalTracks}
+      refreshing={isRefreshing}
+      onRefresh={refreshData}
+      {...rest}
+    />
   )
 }
 
