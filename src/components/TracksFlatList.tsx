@@ -2,16 +2,16 @@ import React from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
 import SlidingUpPanel from 'rn-sliding-up-panel'
 import { Track, NullableTrack } from 'src/apollo'
+import { ToggleTrackProps } from 'src/containers/HOCs'
 import { TrackMenu, SlidingPanel, PlaylistTrack } from 'src/components'
 import styled from 'src/styled-components'
 
-interface Props {
+interface Props extends ToggleTrackProps {
   tracks: Track[]
 }
 
 interface State {
   detailedTrack: NullableTrack
-  activeTrack: NullableTrack
 }
 
 const Scroll = styled(FlatList as new () => FlatList<Track>).attrs(() => ({
@@ -25,48 +25,19 @@ class TracksList extends React.Component<Props, State> {
     const detailedTrack = props.tracks[0] || null
     this.state = {
       detailedTrack,
-      activeTrack: null,
     }
-  }
-
-  componentDidMount() {
-    this.initActiveTrack()
-  }
-
-  private initActiveTrack = (): void => {
-    // TODO: когда будет готов плеер, сделать запрос на выбор текущего играемого трека
-    // и записать его в activeTrack
-    const activeTrack = null
-    this.setState({ activeTrack })
-  }
-
-  private toggleTrack = (track: Track) => {
-    const { activeTrack } = this.state
-    let newTrack: NullableTrack
-    if (activeTrack) {
-      if (activeTrack.id !== track.id) {
-        // TODO: поменять трек в глобальном плеере
-        newTrack = track
-      } else {
-        // TODO: пауза в глобальном плеере
-        newTrack = null
-      }
-    } else {
-      // TODO: новый трек в глобальном плеере
-      newTrack = track
-    }
-    this.setState({ activeTrack: newTrack })
   }
 
   private keyExtractor = (item: Track): string => item.id.toString()
 
   private renderTrack: ListRenderItem<Track> = ({ item, index }) => {
+    const { toggleTrack } = this.props
     const isPlaying = this.isTrackPlaying(item)
     return (
       <PlaylistTrack
         index={index}
         isPlaying={isPlaying}
-        onPress={this.toggleTrack}
+        onPress={toggleTrack}
         onPressMore={this.handlePressMore}
         track={item}
       />
@@ -74,7 +45,7 @@ class TracksList extends React.Component<Props, State> {
   }
 
   private isTrackPlaying = (track: Track): boolean => {
-    const { activeTrack } = this.state
+    const { activeTrack } = this.props
     if (!activeTrack) {
       return false
     }
@@ -115,18 +86,19 @@ class TracksList extends React.Component<Props, State> {
     const { tracks } = this.props
     const { detailedTrack } = this.state
     return (
-      <Scroll
-        data={tracks}
-        getItemLayout={this.getItemLayout}
-        keyExtractor={this.keyExtractor}
-        renderItem={this.renderTrack}
-      >
+      <>
+        <Scroll
+          data={tracks}
+          getItemLayout={this.getItemLayout}
+          keyExtractor={this.keyExtractor}
+          renderItem={this.renderTrack}
+        />
         {detailedTrack && (
           <SlidingPanel forwardRef={this.setPanelRef}>
             <TrackMenu onPressCancel={this.hidePanel} track={detailedTrack} />
           </SlidingPanel>
         )}
-      </Scroll>
+      </>
     )
   }
 }

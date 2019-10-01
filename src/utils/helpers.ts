@@ -72,21 +72,28 @@ const getNameForSeconds = getNameForCount({
 
 export const formatTimeDurationForPlaylist = (
   initialSeconds: number,
-  withSeconds?: boolean,
+  {
+    withSeconds,
+    useShortSyntax,
+  }: { withSeconds?: boolean; useShortSyntax?: boolean } = {},
 ): string => {
   const result: string[] = []
   const hours = Math.trunc(initialSeconds / 3600)
 
   if (hours > 0) {
-    result.push(`${hours} ${getNameForHours(hours)}`)
+    result.push(`${hours} ${useShortSyntax ? 'ч' : getNameForHours(hours)}`)
   }
   const minutes = Math.trunc((initialSeconds % 3600) / 60)
   if (minutes > 0) {
-    result.push(`${minutes} ${getNameForMinutes(minutes)}`)
+    result.push(
+      `${minutes} ${useShortSyntax ? 'м' : getNameForMinutes(minutes)}`,
+    )
   }
   const seconds = Math.trunc(initialSeconds % 60)
   if (withSeconds && seconds > 0) {
-    result.push(`${seconds} ${getNameForSeconds(seconds)}`)
+    result.push(
+      `${seconds} ${useShortSyntax ? 'с' : getNameForSeconds(seconds)}`,
+    )
   }
 
   return result.join(' ')

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Track, NullableTrack } from 'src/apollo'
-import { Image, SourceType, View } from 'src/components'
-import { TracksList } from 'src/containers'
+import { Image, SourceType, View, TracksFlatList } from 'src/components'
+import { ToggleTrackProps } from 'src/containers/HOCs'
 import ControlButton from './ControlButton'
 import ShuffleButton from './ShuffleButton'
 import PlaylistInfoPanel from './PlaylistInfoPanel'
@@ -33,68 +33,59 @@ const PositionedControlButton = styled(ControlButton)`
   align-self: center;
 `
 
-interface Props {
+interface Props extends ToggleTrackProps {
   cover: SourceType
   tracks: Track[]
   favouritesCount: number
-  playingTrack: NullableTrack
 }
 
 interface State {
-  activeTrack: Track | null
+  playingTrack: NullableTrack
 }
 
 class Playlist extends React.Component<Props, State> {
   state: State = {
-    activeTrack: null,
+    playingTrack: null,
   }
 
-  // играемый трек может менятся, поэтому надо каждый раз проверят
+  // играемый трек может меняться, поэтому надо каждый раз проверять
   // что бы правильно отображать паузу на текущем экране
   static getDerivedStateFromProps = ({
-    playingTrack,
+    activeTrack,
     tracks,
   }: Props): Partial<State> | null => {
-    if (playingTrack && tracks.includes(playingTrack)) {
+    if (activeTrack && tracks.includes(activeTrack)) {
       return {
-        activeTrack: playingTrack,
+        playingTrack: activeTrack,
       }
     }
 
     return null
   }
 
-  private pausePlayer = (): void => {
-    // TODO: пауза в глобальном плеере
-  }
-
-  private playTrack = (track: Track): void => {
-    // TODO: воспроизведение в глобальном плеере
-  }
-
   // выбор между обложкой трека или плейлиста
   private getCover = (): SourceType => {
     const { cover } = this.props
-    const { activeTrack } = this.state
-    if (activeTrack) {
-      return { uri: activeTrack.cover[0].imageUrl }
+    const { playingTrack } = this.state
+    if (playingTrack) {
+      return { uri: playingTrack.cover[0].imageUrl }
     }
     return cover
   }
 
   private pauseOrPlayFirstTrack = (): void => {
-    const { tracks } = this.props
-    const { activeTrack } = this.state
-    if (activeTrack) {
-      this.pausePlayer()
+    const { tracks, toggleTrack } = this.props
+    const { playingTrack } = this.state
+    if (playingTrack) {
+      toggleTrack(null)
     } else {
-      this.playTrack(tracks[0])
+      toggleTrack(tracks[0])
     }
   }
 
   render() {
-    const { tracks, favouritesCount } = this.props
-    const { activeTrack } = this.state
+    const { tracks, favouritesCount, toggleTrack, activeTrack } = this.props
+    const { playingTrack } = this.state
     const activeCover = this.getCover()
     return (
       <View noPadding addBottomSafePadding>
@@ -103,7 +94,7 @@ class Playlist extends React.Component<Props, State> {
           {!!tracks.length && (
             <PositionedControlButton
               onPress={this.pauseOrPlayFirstTrack}
-              isPlaying={!!activeTrack}
+              isPlaying={!!playingTrack}
             />
           )}
           <PositionedShuffleButton />
@@ -112,7 +103,11 @@ class Playlist extends React.Component<Props, State> {
           favouritesCount={favouritesCount}
           playlist={tracks}
         />
-        <TracksList tracks={tracks} />
+        <TracksFlatList
+          toggleTrack={toggleTrack}
+          activeTrack={activeTrack}
+          tracks={tracks}
+        />
       </View>
     )
   }

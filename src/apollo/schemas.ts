@@ -41,7 +41,7 @@ export interface Track {
   id: number
   title: string // trackName
   genres: Genre[]
-  album: any // TODO: добавить Album
+  album: Album
   uploadedBy: User
   group?: MusicGroup // musicGroup
   singer: string
@@ -59,11 +59,34 @@ export interface Track {
   commentedByMe: boolean
 }
 
-export interface FavouriteTrack {
+export interface Album {
   id: number
-  track: Track
+  title: string
+  genres: Genre[]
+  createdBy: User // user
+  author: string
+  year: string
+  cover: Image[]
+  group: MusicGroup // musicGroup
+  isFavourite: boolean // userFavourite
+  favouritesCount: number
+  isMine: boolean // my
+  tracksCount: number
+  tracksTime: number
+}
+
+export interface FavouriteBase {
+  id: number
   userId: number
   createdAt: string
+}
+
+export interface FavouriteTrack extends FavouriteBase {
+  track: Track
+}
+
+export interface FavouriteAlbum extends FavouriteBase {
+  album: Album
 }
 
 export type Playlist = Track[]
