@@ -53,10 +53,18 @@ export interface Track {
   userPlayLists: Collection[] // не знаю что это
   musicWave: number[]
   cover: Image[]
-  comments: any // TODO: добавить CommentTrack[]
+  comments: TrackComment[]
   length?: number
   isMine: boolean // my
   commentedByMe: boolean
+}
+
+export interface TrackComment {
+  id: number
+  comment: string
+  createdBy: User // user
+  createdAt: string
+  estimation: number
 }
 
 export interface Album {

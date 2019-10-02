@@ -43,9 +43,11 @@ const GrayText = styled(TextBase)`
 
 const TimeText = styled(GrayText)`
   margin-left: 16px;
+  width: 30px;
+  text-align: right;
 `
 
-interface Props extends Playable {
+export interface PlaylistTrackProps extends Playable {
   onPress?: (track: Track) => void
   onPressMore?: (track: Track) => void
   track: Track
@@ -56,7 +58,7 @@ interface Sized {
   size: number
 }
 
-const PlaylistTrack: React.FC<Props> & Sized = ({
+const PlaylistTrack: React.FC<PlaylistTrackProps> & Sized = ({
   index,
   track,
   onPress,
@@ -85,7 +87,7 @@ const PlaylistTrack: React.FC<Props> & Sized = ({
 
   return (
     <Wrapper isPlaying={isPlaying} onPress={handlePressTrack}>
-      <TrackNumberText>{index}</TrackNumberText>
+      <TrackNumberText>{index + 1}</TrackNumberText>
       <TrackImage isPlaying={isPlaying} imageUrl={cover[0].imageUrl} />
       <CenterBlock>
         <BlackText numberOfLines={1}>{title}</BlackText>
