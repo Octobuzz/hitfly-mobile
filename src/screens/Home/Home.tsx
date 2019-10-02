@@ -7,6 +7,7 @@ import CollectionSection from './CollectionSection'
 import PlaylistSection from './PlaylistSection'
 import TracksSection from './TracksSection'
 import GenresSection from './GenresSection'
+import StarsSection from './StarsSection'
 import { SafeView } from 'src/components'
 import { Genre, Collection, Track, CollectionsType } from 'src/apollo'
 import { images } from 'src/constants'
@@ -14,7 +15,9 @@ import {
   CollectionsData,
   PlaylistData,
   GenreData,
+  StarsData,
   GET_TOP50,
+  GET_STARS,
   GET_GENRES,
   GET_MUSIC_FAN,
   GET_NEW_TRACKS,
@@ -150,6 +153,34 @@ class Home extends React.Component<Props> {
     return (
       <SafeView>
         <Container>
+          <Query<StarsData> query={GET_STARS}>
+            {({ loading, data }) => {
+              const users = L.get(data, 'users.items')
+              if (!loading && L.isEmpty(users)) {
+                return null
+              }
+              return <StarsSection users={users} isLoading={loading} />
+            }}
+          </Query>
+
+          <Query<PlaylistData> query={GET_NEW_TRACKS}>
+            {({ loading, data }) => {
+              const playlist = L.get(data, 'playlist.items')
+              if (!loading && L.isEmpty(playlist)) {
+                return null
+              }
+              return (
+                <TracksSection
+                  title="Новое"
+                  playlist={playlist}
+                  isLoading={loading}
+                  onPressHeader={this.handlePressNewHeader}
+                  onPressTrack={this.handlePressNewTrack}
+                />
+              )
+            }}
+          </Query>
+
           <Query<CollectionsData> query={GET_RECOMMENDED}>
             {({ loading, data }) => {
               const collections = L.get(data, 'collections.items')
@@ -158,7 +189,7 @@ class Home extends React.Component<Props> {
               }
               return (
                 <CollectionSection
-                  title="Рекомендованное"
+                  title="Рекомендуем"
                   subtitle="Плейлисты, собранные специально для тебя"
                   isLoading={loading}
                   collections={collections}
@@ -188,37 +219,18 @@ class Home extends React.Component<Props> {
             }}
           </Query>
 
-          <Query<PlaylistData> query={GET_NEW_TRACKS}>
+          <Query<PlaylistData> query={GET_LISTENED_NOW}>
             {({ loading, data }) => {
-              const playlist = L.get(data, 'playlist.items')
-              if (!loading && L.isEmpty(playlist)) {
-                return null
-              }
+              const total = L.get(data, 'playlist.total')
               return (
-                <TracksSection
-                  title="Новое"
-                  playlist={playlist}
+                <PlaylistSection
+                  imageSource={images.LISTENED_NOW}
+                  title="Сейчас слушают"
+                  subtitle="Обновлен вчера" // TODO: это вычислять по дате?
                   isLoading={loading}
-                  onPressHeader={this.handlePressNewHeader}
-                  onPressTrack={this.handlePressNewTrack}
-                />
-              )
-            }}
-          </Query>
-          <Query<CollectionsData> query={GET_MUSIC_FAN}>
-            {({ loading, data }) => {
-              const collections = L.get(data, 'collections.items')
-              if (!loading && L.isEmpty(collections)) {
-                return null
-              }
-              return (
-                <CollectionSection
-                  title="Супер меломан 🔥"
-                  subtitle="«Русская рулетка» треков"
-                  isLoading={loading}
-                  collections={collections}
-                  onPressHeader={this.handlePressMusicFanHeader}
-                  onPressCollection={this.handlePressMusicFanCollection}
+                  bottomTextType="tracksCount"
+                  tracksCount={total}
+                  onPress={this.handlePressListenedNow}
                 />
               )
             }}
@@ -238,22 +250,26 @@ class Home extends React.Component<Props> {
               )
             }}
           </Query>
-          <Query<PlaylistData> query={GET_LISTENED_NOW}>
+
+          <Query<CollectionsData> query={GET_MUSIC_FAN}>
             {({ loading, data }) => {
-              const total = L.get(data, 'playlist.total')
+              const collections = L.get(data, 'collections.items')
+              if (!loading && L.isEmpty(collections)) {
+                return null
+              }
               return (
-                <PlaylistSection
-                  imageSource={images.LISTENED_NOW}
-                  title="Сейчас слушают"
-                  subtitle="Обновлен вчера" // TODO: это вычислять по дате?
+                <CollectionSection
+                  title="Супер меломан 🔥"
+                  subtitle="«Русская рулетка» треков"
                   isLoading={loading}
-                  bottomTextType="tracksCount"
-                  tracksCount={total}
-                  onPress={this.handlePressListenedNow}
+                  collections={collections}
+                  onPressHeader={this.handlePressMusicFanHeader}
+                  onPressCollection={this.handlePressMusicFanCollection}
                 />
               )
             }}
           </Query>
+
           <Query<PlaylistData> query={GET_TOP_WEEK_TRACKS}>
             {({ loading, data }) => {
               const playlist = L.get(data, 'playlist.items')

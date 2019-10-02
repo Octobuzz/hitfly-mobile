@@ -63,7 +63,7 @@ const GET_MY_TRACKS_WITH_FEEDBACK = gql`
             id
             userName: username
             avatar(sizes: [size_235x235]) {
-              url
+              imageUrl: url
             }
           }
         }
