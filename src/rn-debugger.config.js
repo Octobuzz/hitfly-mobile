@@ -1,3 +1,4 @@
+/* tslint:disable */
 global.XMLHttpRequest = global.originalXMLHttpRequest
   ? global.originalXMLHttpRequest
   : global.XMLHttpRequest

@@ -37,7 +37,7 @@ const withChangingHeaderSettings = (nextSettings: Partial<HeaderSettings>) => (
     private setupFocusListeners = (): void => {
       const { navigation, mutate } = this.props
       this.willFocusSubscription = navigation.addListener(
-        'willFocus',
+        'didFocus',
         async () => {
           await mutate({
             variables: { settings: nextSettings },
