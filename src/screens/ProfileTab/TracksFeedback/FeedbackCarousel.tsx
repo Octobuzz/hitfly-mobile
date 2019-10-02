@@ -1,5 +1,5 @@
 import React, { createRef } from 'react'
-import Animated from 'react-native-animatable'
+import * as Animated from 'react-native-animatable'
 import { TrackComment } from 'src/apollo'
 import Icon from 'react-native-vector-icons/AntDesign'
 import styled from 'src/styled-components'
@@ -17,6 +17,8 @@ const ArrowButtonsWrapper = styled.View`
   border-width: 1px;
   border-color: ${({ theme }) => theme.colors.inputBorder};
   align-self: center;
+  flex-direction: row;
+  margin-top: 16px;
 `
 
 const ArrowButtonsDivider = styled.View`
@@ -30,12 +32,15 @@ const ArrowButton = styled.TouchableOpacity.attrs(() => ({
   ${({ disabled }) => disabled && `opacity: 0.6;`}
   justify-content: center;
   align-items: center;
+  padding: 10px;
 `
 
 const StyledIcon = styled(Icon).attrs(({ theme }) => ({
   color: theme.colors.textMain,
   size: 24,
-}))``
+}))`
+  top: 1px;
+`
 
 interface Props {
   comments: TrackComment[]
@@ -62,13 +67,13 @@ class FeedbackCarousel extends React.Component<Props, State> {
     ) {
       await this.animatedView.current.fadeOut(300)
     }
-    this.setState({ currentPage: page }, async () => {
+    this.setState({ currentPage: page }, () => {
       if (
         this.animatedView &&
         this.animatedView.current &&
         this.animatedView.current.fadeIn
       ) {
-        await this.animatedView.current.fadeIn(300)
+        this.animatedView.current.fadeIn(300)
       }
     })
   }
@@ -88,9 +93,9 @@ class FeedbackCarousel extends React.Component<Props, State> {
     const { currentPage } = this.state
     return (
       <Wrapper>
-        <Animated.View ref={this.animatedView}>
-          <CommentText>{comments[currentPage]}</CommentText>
-        </Animated.View>
+        <CommentText useNativeDriver as={Animated.Text} ref={this.animatedView}>
+          {comments[currentPage].comment}
+        </CommentText>
         <ArrowButtonsWrapper>
           <ArrowButton disabled={currentPage === 0} onPress={this.previousPage}>
             <StyledIcon name="arrowleft" />

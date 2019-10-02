@@ -8,6 +8,11 @@ import styled from 'src/styled-components'
 
 const Scroll = styled(FlatList as new () => FlatList<Track>)`
   flex: 1;
+  padding: 16px;
+`
+
+const Divider = styled.View`
+  height: 16px;
 `
 
 interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
@@ -72,6 +77,7 @@ class TracksFeedback extends React.Component<Props, State> {
     const { isRefreshing } = this.state
     return (
       <Scroll
+        ItemSeparatorComponent={Divider}
         refreshControl={
           <RefreshControl
             refreshing={isRefreshing}
