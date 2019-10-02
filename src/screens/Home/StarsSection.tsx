@@ -31,13 +31,12 @@ const Scroll = styled.ScrollView.attrs(() => ({
 interface Props {
   users: User[]
   isLoading: boolean
-  onPressHeader?: () => void
 }
 
-const StarsSection: React.FC<Props> = ({ isLoading, users, onPressHeader }) => {
+const StarsSection: React.FC<Props> = ({ isLoading, users }) => {
   return (
     <SectionWrapper>
-      <SectionHeader onPress={onPressHeader} title="Звездные эксперты" />
+      <SectionHeader title="Звездные эксперты" />
       {isLoading && <Loader isAbsolute />}
       <Scroll showsHorizontalScrollIndicator={false}>
         {users.map(({ id, userName, avatar }) => (
