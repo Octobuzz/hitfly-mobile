@@ -1,0 +1,197 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CollectionItem renders correctly 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    style={
+      Array [
+        Object {
+          "alignItems": "flex-end",
+          "borderRadius": 4,
+          "height": 160,
+          "justifyContent": "space-between",
+          "overflow": "hidden",
+          "paddingBottom": 16,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+          "paddingTop": 16,
+          "width": 164,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          Array [
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+          ],
+        ]
+      }
+    >
+      <FastImageView
+        resizeMode="cover"
+        source={
+          Object {
+            "uri": "url",
+          }
+        }
+        style={
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+      />
+    </View>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#ffffff",
+            "fontFamily": "GothamPro-Bold",
+            "fontSize": 12,
+            "lineHeight": 20,
+          },
+        ]
+      }
+    >
+      title
+    </Text>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#ffffff",
+            "fontFamily": "GothamPro",
+            "fontSize": 12,
+            "lineHeight": 20,
+          },
+        ]
+      }
+    >
+      10 песен
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`CollectionItem renders correctly with sizes 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    height={100}
+    style={
+      Array [
+        Object {
+          "alignItems": "flex-end",
+          "borderRadius": 4,
+          "height": 100,
+          "justifyContent": "space-between",
+          "overflow": "hidden",
+          "paddingBottom": 16,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+          "paddingTop": 16,
+          "width": 100,
+        },
+      ]
+    }
+    width={100}
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          Array [
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+          ],
+        ]
+      }
+    >
+      <FastImageView
+        resizeMode="cover"
+        source={
+          Object {
+            "uri": "url",
+          }
+        }
+        style={
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+      />
+    </View>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#ffffff",
+            "fontFamily": "GothamPro-Bold",
+            "fontSize": 12,
+            "lineHeight": 20,
+          },
+        ]
+      }
+    >
+      title
+    </Text>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#ffffff",
+            "fontFamily": "GothamPro",
+            "fontSize": 12,
+            "lineHeight": 20,
+          },
+        ]
+      }
+    >
+      10 песен
+    </Text>
+  </TouchableOpacity>
+</View>
+`;

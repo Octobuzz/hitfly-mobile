@@ -1,70 +1,269 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
-<TouchableOpacity
-  activeOpacity={0.2}
-  onPress={[Function]}
+exports[`GenreItem renders correctly 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
   style={
-    Array [
-      Object {
-        "alignItems": "center",
-        "borderRadius": 4,
-        "height": 109,
-        "justifyContent": "center",
-        "overflow": "hidden",
-        "width": 109,
-      },
-    ]
+    Object {
+      "flex": 1,
+    }
   }
 >
-  <View
+  <TouchableOpacity
+    activeOpacity={0.2}
     style={
       Array [
         Object {
+          "alignItems": "center",
+          "borderRadius": 4,
+          "height": 109,
+          "justifyContent": "center",
           "overflow": "hidden",
+          "width": 109,
         },
-        Array [
-          Object {
-            "height": "100%",
-            "width": "100%",
-          },
-        ],
       ]
     }
   >
-    <FastImageView
-      resizeMode="cover"
+    <View
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          Array [
+            Object {
+              "height": "100%",
+              "width": "100%",
+            },
+          ],
+        ]
+      }
+    >
+      <FastImageView
+        resizeMode="cover"
+        source={
+          Object {
+            "uri": "url",
+          }
+        }
+        style={
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+      />
+    </View>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#ffffff",
+            "fontFamily": "GothamPro-Bold",
+            "fontSize": 16,
+            "lineHeight": 20,
+            "position": "absolute",
+            "textAlign": "center",
+          },
+        ]
+      }
+    >
+      title
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`GenreItem renders correctly in selected state 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderRadius": 4,
+          "height": 109,
+          "justifyContent": "center",
+          "overflow": "hidden",
+          "width": 109,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          Array [
+            Object {
+              "height": "100%",
+              "width": "100%",
+            },
+          ],
+        ]
+      }
+    >
+      <FastImageView
+        resizeMode="cover"
+        source={
+          Object {
+            "uri": "url",
+          }
+        }
+        style={
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+      />
+    </View>
+    <Image
+      isSelected={true}
       source={
         Object {
-          "uri": "url",
+          "testUri": "../../../src/assets/images/genres/genre_active.png",
         }
       }
       style={
-        Object {
-          "bottom": 0,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
+        Array [
+          Object {
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
       }
     />
-  </View>
-  <Text
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#ffffff",
+            "fontFamily": "GothamPro-Bold",
+            "fontSize": 16,
+            "lineHeight": 20,
+            "position": "absolute",
+            "textAlign": "center",
+          },
+        ]
+      }
+    >
+      title
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`GenreItem renders correctly in unselected state 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
     style={
       Array [
         Object {
-          "color": "#ffffff",
-          "fontFamily": "GothamPro-Bold",
-          "fontSize": 16,
-          "lineHeight": 20,
-          "position": "absolute",
-          "textAlign": "center",
+          "alignItems": "center",
+          "borderRadius": 4,
+          "height": 109,
+          "justifyContent": "center",
+          "overflow": "hidden",
+          "width": 109,
         },
       ]
     }
   >
-    title
-  </Text>
-</TouchableOpacity>
+    <View
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          Array [
+            Object {
+              "height": "100%",
+              "width": "100%",
+            },
+          ],
+        ]
+      }
+    >
+      <FastImageView
+        resizeMode="cover"
+        source={
+          Object {
+            "uri": "url",
+          }
+        }
+        style={
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+      />
+    </View>
+    <Image
+      isSelected={false}
+      source={
+        Object {
+          "testUri": "../../../src/assets/images/genres/genre_inactive.png",
+        }
+      }
+      style={
+        Array [
+          Object {
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+    />
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#ffffff",
+            "fontFamily": "GothamPro-Bold",
+            "fontSize": 16,
+            "lineHeight": 20,
+            "position": "absolute",
+            "textAlign": "center",
+          },
+        ]
+      }
+    >
+      title
+    </Text>
+  </TouchableOpacity>
+</View>
 `;

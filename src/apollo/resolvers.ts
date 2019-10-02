@@ -25,7 +25,7 @@ const GET_RECOMMENDED = gql`
     collections(limit: $limit, page: $page, filters: { collection: true }) {
       items: data {
         id
-        images: image(sizes: [size_290x290]) {
+        image: image(sizes: [size_290x290]) {
           imageUrl: url
         }
         title
@@ -42,7 +42,7 @@ const GET_MUSIC_FAN = gql`
     collections(limit: $limit, page: $page, filters: { superMusicFan: true }) {
       items: data {
         id
-        images: image(sizes: [size_290x290]) {
+        image: image(sizes: [size_290x290]) {
           imageUrl: url
         }
         title
@@ -74,6 +74,10 @@ export default {
     },
     selectGenre: (_, { id }, { cache }: ContextArgs) => {
       cache.writeData({ data: { currentGenreId: id } })
+      return null
+    },
+    selectAlbum: (_, { id }, { cache }: ContextArgs) => {
+      cache.writeData({ data: { currentAlbumId: id } })
       return null
     },
     setHeaderSettings: (

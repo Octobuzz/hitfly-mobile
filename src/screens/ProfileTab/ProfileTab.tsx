@@ -3,15 +3,16 @@ import { NavigationStackScreenProps } from 'react-navigation-stack'
 import {
   TabBar,
   TabView,
-  SceneMap,
   NavigationState,
   SceneRendererProps,
 } from 'react-native-tab-view'
 import Header from './Header'
 import AboutMeScreen from './AboutMe'
+import LikedMusicScreen from './LikedMusic'
 import { Profile } from 'src/apollo'
 import { helpers } from 'src/utils'
 import { TextBase } from 'src/components'
+import { DetailedTrackMenuProps } from 'src/containers/HOCs'
 import styled from 'src/styled-components'
 
 const StyledTabBar = styled(TabBar).attrs(({ theme }) => ({
@@ -38,19 +39,20 @@ interface TabState {
 
 interface State extends NavigationState<TabState> {}
 
-interface Props extends NavigationStackScreenProps {
+interface Props extends NavigationStackScreenProps, DetailedTrackMenuProps {
   profile: Profile
 }
 
 class ProfileTab extends React.Component<Props, State> {
   state = {
     index: 0,
-    routes: [{ key: 'about', title: 'Обо мне' }],
+    routes: [
+      { key: 'about', title: 'Обо мне' },
+      { key: 'myMusic', title: 'Моя музыка' },
+      { key: 'likedMusic', title: 'Мне нравится' },
+      { key: 'feedback', title: 'Отзывы' },
+    ],
   }
-
-  private scene = SceneMap({
-    about: AboutMeScreen,
-  })
 
   private renderTabBar = (
     props: SceneRendererProps & {
@@ -96,6 +98,24 @@ class ProfileTab extends React.Component<Props, State> {
     this.setState({ index })
   }
 
+  private renderScene = ({
+    route,
+  }: SceneRendererProps & { route: TabState }): React.ReactNode => {
+    const { showDetailedTrack } = this.props
+    switch (route.key) {
+      case 'about':
+        return <AboutMeScreen />
+      case 'myMusic':
+        return null
+      case 'likedMusic':
+        return <LikedMusicScreen showDetailedTrack={showDetailedTrack} />
+      case 'feedback':
+        return null
+      default:
+        return null
+    }
+  }
+
   render() {
     return (
       <TabView
@@ -104,7 +124,7 @@ class ProfileTab extends React.Component<Props, State> {
         onIndexChange={this.handleIndexChange}
         navigationState={this.state}
         renderTabBar={this.renderTabBar}
-        renderScene={this.scene}
+        renderScene={this.renderScene}
       />
     )
   }

@@ -4,8 +4,8 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import MusicGroup from './MusicGroup'
 import BonusProgram from './BonusProgram'
 import { Profile } from 'src/apollo'
-import styled from 'src/styled-components'
 import { helpers } from 'src/utils'
+import styled from 'src/styled-components'
 
 const Block = styled.View`
   padding-vertical: 24px;
@@ -179,7 +179,7 @@ class AboutMe extends React.Component<Props> {
 
   render() {
     return (
-      <ScrollView>
+      <ScrollView addBottomSafePadding>
         {this.renderProfileInfo()}
         {this.renderProfileGroups()}
         {this.renderBonuses()}

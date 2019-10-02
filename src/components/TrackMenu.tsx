@@ -4,6 +4,8 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { Track } from 'src/apollo'
 import styled from 'src/styled-components'
 
+export const TRACK_MENU_HEIGHT = 300
+
 const TrackWrapper = styled.View`
   flex-direction: row;
   align-items: center;
@@ -64,25 +66,23 @@ const MenuItemText = styled(TextBase)`
 
 interface Props {
   track?: Track
-  onPressNext?: () => void
   onPressLike?: () => void
+  onPressEdit?: () => void
   onPressCancel?: () => void
-  onPressAddToPlaylist?: () => void
 }
 
 const TrackMenu: React.FC<Props> = ({
   track,
-  onPressNext,
   onPressLike,
+  onPressEdit,
   onPressCancel,
-  onPressAddToPlaylist,
 }) => {
   if (!track) {
     return null
   }
   const { cover, group, singer, title } = track
   return (
-    <View noFill>
+    <View paddingBottom={32} noFill>
       <TrackWrapper>
         <StyledImage source={{ uri: cover[0].imageUrl }} />
         <CenterBlock>
@@ -91,17 +91,13 @@ const TrackMenu: React.FC<Props> = ({
         </CenterBlock>
       </TrackWrapper>
       <Divider />
-      <MenuItem onPress={onPressNext}>
-        <StyledIcon name="step-forward" />
-        <MenuItemText>Слушать далее</MenuItemText>
-      </MenuItem>
       <MenuItem onPress={onPressLike}>
         <StyledIcon name="heart-o" />
         <MenuItemText>Понравилось</MenuItemText>
       </MenuItem>
-      <MenuItem onPress={onPressAddToPlaylist}>
-        <StyledIcon name="plus" />
-        <MenuItemText>Добавить в список воспроизведения</MenuItemText>
+      <MenuItem onPress={onPressEdit}>
+        <StyledIcon name="edit" />
+        <MenuItemText>Редактировать</MenuItemText>
       </MenuItem>
       <Button onPress={onPressCancel} title="Отмена" type="outline-black" />
     </View>

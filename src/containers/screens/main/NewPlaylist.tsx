@@ -8,7 +8,7 @@ import { images } from 'src/constants'
 // либо добавить пагинацию в UI
 export const GET_NEW_TRACKS = gql`
   query {
-    playlist: tracks(limit: 50, page: 0) {
+    playlist: tracks(limit: 1000, page: 0) {
       items: data {
         id
         title: trackName

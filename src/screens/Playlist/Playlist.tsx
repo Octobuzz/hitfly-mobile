@@ -1,10 +1,7 @@
 import React from 'react'
-import { FlatList, ListRenderItem } from 'react-native'
-import FastImage, { FastImageSource } from 'react-native-fast-image'
-import SlidingUpPanel from 'rn-sliding-up-panel'
-import { Track } from 'src/apollo'
-import { SlidingPanel, PlaylistTrack } from 'src/components'
-import TrackMenu from './TrackMenu'
+import { Track, NullableTrack } from 'src/apollo'
+import { Image, SourceType, View, TracksFlatList } from 'src/components'
+import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/containers/HOCs'
 import ControlButton from './ControlButton'
 import ShuffleButton from './ShuffleButton'
 import PlaylistInfoPanel from './PlaylistInfoPanel'
@@ -16,7 +13,7 @@ const CoverWrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.white};
 `
 
-const Cover = styled(FastImage)`
+const Cover = styled(Image)`
   border-bottom-left-radius: 28px;
   position: absolute;
   top: 0;
@@ -36,140 +33,74 @@ const PositionedControlButton = styled(ControlButton)`
   align-self: center;
 `
 
-const Scroll = styled(FlatList as new () => FlatList<Track>).attrs(() => ({
-  initialNumToRender: 10,
-}))``
-
-type CoverType = FastImageSource | number
-
-interface Props {
-  cover: CoverType
+interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
+  cover: SourceType
   tracks: Track[]
   favouritesCount: number
 }
 
 interface State {
-  activeTrack: Track | null
-  detailedTrack?: Track
+  playingTrack: NullableTrack
 }
 
-// TODO: на didMount нужно устанить текущий трек, если он есть в этом плейлисте
-// и играет сейчас
 class Playlist extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props)
-    // нужно для вычисления правильной высоты SlidingPanel
-    const detailedTrack = props.tracks[0] || null
-    this.state = {
-      activeTrack: null,
-      detailedTrack,
-    }
+  state: State = {
+    playingTrack: null,
   }
 
-  private toggleTrack = (track: Track) => {
-    const { activeTrack } = this.state
-    if (activeTrack) {
-      if (activeTrack.id !== track.id) {
-        // TODO: поменять трек в глобальном плеере
-        this.setState({ activeTrack: track })
-      } else {
-        this.pauseTrack()
+  // играемый трек может меняться, поэтому надо каждый раз проверять
+  // что бы правильно отображать паузу на текущем экране
+  static getDerivedStateFromProps = ({
+    activeTrack,
+    tracks,
+  }: Props): Partial<State> | null => {
+    if (activeTrack && tracks.includes(activeTrack)) {
+      return {
+        playingTrack: activeTrack,
       }
-    } else {
-      // TODO: новый трек в глобальном плеере
-      this.setState({ activeTrack: track })
     }
+
+    return null
   }
 
-  private pauseTrack = (): void => {
-    // TODO: пауза в глобальном плеере
-    this.setState({ activeTrack: null })
-  }
-
-  private keyExtractor = (item: Track): string => item.id.toString()
-
-  private renderTrack: ListRenderItem<Track> = ({ item, index }) => {
-    const isPlaying = this.isTrackPlaying(item)
-    return (
-      <PlaylistTrack
-        index={index}
-        isPlaying={isPlaying}
-        onPress={this.toggleTrack}
-        onPressMore={this.handlePressMore}
-        track={item}
-      />
-    )
-  }
-
-  private isTrackPlaying = (track: Track): boolean => {
-    const { activeTrack } = this.state
-    if (!activeTrack) {
-      return false
-    }
-    return activeTrack.id === track.id
-  }
-
-  private handlePressMore = (track: Track): void => {
-    this.setState({ detailedTrack: track }, () => {
-      if (this.panel) {
-        this.panel.show()
-      }
-    })
-  }
-
-  private getItemLayout = (
-    _: any,
-    index: number,
-  ): { length: number; offset: number; index: number } => {
-    const length = PlaylistTrack.size
-    return {
-      length,
-      offset: length * index,
-      index,
-    }
-  }
-
-  private getCover = (): CoverType => {
+  // выбор между обложкой трека или плейлиста
+  private getCover = (): SourceType => {
     const { cover } = this.props
-    const { activeTrack } = this.state
-    if (activeTrack) {
-      return { uri: activeTrack.cover[0].imageUrl }
+    const { playingTrack } = this.state
+    if (playingTrack) {
+      return { uri: playingTrack.cover[0].imageUrl }
     }
     return cover
   }
 
   private pauseOrPlayFirstTrack = (): void => {
-    const { tracks } = this.props
-    const { activeTrack } = this.state
-    if (activeTrack) {
-      this.pauseTrack()
+    const { tracks, toggleTrack } = this.props
+    const { playingTrack } = this.state
+    if (playingTrack) {
+      toggleTrack(null)
     } else {
-      this.setState({ activeTrack: tracks[0] })
-    }
-  }
-
-  private panel?: SlidingUpPanel
-  private setPanelRef = (ref: SlidingUpPanel): void => {
-    this.panel = ref
-  }
-  private hidePanel = (): void => {
-    if (this.panel) {
-      this.panel.hide()
+      toggleTrack(tracks[0])
     }
   }
 
   render() {
-    const { tracks, favouritesCount } = this.props
-    const { activeTrack, detailedTrack } = this.state
+    const {
+      tracks,
+      favouritesCount,
+      toggleTrack,
+      activeTrack,
+      showDetailedTrack,
+    } = this.props
+    const { playingTrack } = this.state
     const activeCover = this.getCover()
     return (
-      <>
+      <View noPadding addBottomSafePadding>
         <CoverWrapper>
           <Cover source={activeCover} />
           {!!tracks.length && (
             <PositionedControlButton
               onPress={this.pauseOrPlayFirstTrack}
-              isPlaying={!!activeTrack}
+              isPlaying={!!playingTrack}
             />
           )}
           <PositionedShuffleButton />
@@ -178,16 +109,13 @@ class Playlist extends React.Component<Props, State> {
           favouritesCount={favouritesCount}
           playlist={tracks}
         />
-        <Scroll
-          data={tracks}
-          getItemLayout={this.getItemLayout}
-          keyExtractor={this.keyExtractor}
-          renderItem={this.renderTrack}
+        <TracksFlatList
+          toggleTrack={toggleTrack}
+          activeTrack={activeTrack}
+          showDetailedTrack={showDetailedTrack}
+          tracks={tracks}
         />
-        <SlidingPanel forwardRef={this.setPanelRef}>
-          <TrackMenu onPressCancel={this.hidePanel} track={detailedTrack} />
-        </SlidingPanel>
-      </>
+      </View>
     )
   }
 }

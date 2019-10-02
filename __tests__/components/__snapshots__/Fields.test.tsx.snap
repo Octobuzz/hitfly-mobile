@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CheckBoxUI renders correctly in checked state 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+        },
+      ]
+    }
+  >
+    <Image
+      isChecked={true}
+      source={
+        Object {
+          "testUri": "../../../src/assets/images/checkbox/checkbox_active.png",
+        }
+      }
+      style={
+        Array [
+          Object {
+            "marginRight": 16,
+          },
+        ]
+      }
+    />
+    test
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`CheckBoxUI renders correctly in unchecked state 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+        },
+      ]
+    }
+  >
+    <Image
+      isChecked={false}
+      source={
+        Object {
+          "testUri": "../../../src/assets/images/checkbox/checkbox_inactive.png",
+        }
+      }
+      style={
+        Array [
+          Object {
+            "marginRight": 16,
+          },
+        ]
+      }
+    />
+    test
+  </TouchableOpacity>
+</View>
+`;

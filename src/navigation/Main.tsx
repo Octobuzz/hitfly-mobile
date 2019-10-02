@@ -5,6 +5,7 @@ import {
   // screens
   HomeScreen,
   NewPlaylistScreen,
+  AlbumPlaylistScreen,
   GenrePlaylistScreen,
   Top50PlaylistScreen,
   TopWeekPlaylistScreen,
@@ -85,6 +86,16 @@ const MainNavigator = createStackNavigator(
       navigationOptions: {
         headerTransparent: true,
         headerTintColor: 'white',
+      },
+    },
+    [routeNames.MAIN.ALBUM_PLAYLIST]: {
+      screen: AlbumPlaylistScreen,
+      navigationOptions: ({ navigation }) => {
+        const title = navigation.getParam('title')
+        return {
+          title,
+          ...playlistConfig,
+        }
       },
     },
   },

@@ -27,6 +27,60 @@ exports[`Text Base renders correctly 1`] = `
 </View>
 `;
 
+exports[`Text H1 renders correctly 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#313131",
+          "fontFamily": "GothamPro-Bold",
+          "fontSize": 20,
+          "lineHeight": 20,
+        },
+      ]
+    }
+  >
+    test
+  </Text>
+</View>
+`;
+
+exports[`Text H2 renders correctly 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#313131",
+          "fontFamily": "GothamPro-Bold",
+          "fontSize": 16,
+          "lineHeight": 20,
+        },
+      ]
+    }
+  >
+    test
+  </Text>
+</View>
+`;
+
 exports[`Text Helper renders correctly 1`] = `
 <View
   collapsable={true}
