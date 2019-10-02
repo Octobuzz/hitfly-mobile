@@ -24,8 +24,8 @@ const MyMusicContainer: React.FC<Props> = ({
   albumsData: { albums, loading: albumsLoading, refetch: refretchAlbums },
   ...rest
 }) => {
-  const favouriteTracks: FavouriteTrack[] = L.get(tracks, 'items', [])
-  const favouriteAlbums: FavouriteAlbum[] = L.get(albums, 'items', [])
+  const myTracks: FavouriteTrack[] = L.get(tracks, 'items', [])
+  const myAlbums: FavouriteAlbum[] = L.get(albums, 'items', [])
 
   const refreshData = useCallback(
     (): Promise<any> => Promise.all([refretchTracks(), refretchAlbums()]),
@@ -34,8 +34,8 @@ const MyMusicContainer: React.FC<Props> = ({
 
   return (
     <MusicAndAlbumsContainer
-      albums={favouriteTracks}
-      tracks={favouriteAlbums}
+      albums={myAlbums}
+      tracks={myTracks}
       isLoading={tracksLoading || albumsLoading}
       refreshData={refreshData}
       {...rest}
