@@ -1,4 +1,3 @@
-import { StatusBar } from 'react-native'
 import { helpers } from 'src/utils'
 import { BonusProgramLevel } from 'src/apollo'
 
