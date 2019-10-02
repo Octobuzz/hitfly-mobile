@@ -1,5 +1,6 @@
 import L from 'lodash'
 import React from 'react'
+import { Linking } from 'react-native'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { Query } from '@apollo/react-components'
 import { ApolloClient } from 'apollo-client'
@@ -9,7 +10,7 @@ import TracksSection from './TracksSection'
 import GenresSection from './GenresSection'
 import StarsSection from './StarsSection'
 import { SafeView } from 'src/components'
-import { Genre, Collection, Track, CollectionsType } from 'src/apollo'
+import { Genre, Collection, Track, CollectionsType, User } from 'src/apollo'
 import { images } from 'src/constants'
 import {
   CollectionsData,
@@ -25,9 +26,10 @@ import {
   GET_LISTENED_NOW,
   GET_TOP_WEEK_TRACKS,
 } from './graphql'
-import styled from 'src/styled-components'
+import { DOMAIN_URL } from 'src/constants/names'
 import { ROUTES } from 'src/navigation'
 import gql from 'graphql-tag'
+import styled from 'src/styled-components'
 
 const Container = styled.ScrollView.attrs(() => ({
   showsVerticalScrollIndicator: false,
@@ -111,6 +113,10 @@ class Home extends React.Component<Props> {
     })
   }
 
+  private goToStarProfile = (user: User): void => {
+    Linking.openURL(`${DOMAIN_URL}user/${user.id}`)
+  }
+
   // TODO: дубль, пока не решится следующий TODO
   private handlePressNewHeader = (): void => {
     const { navigation } = this.props
@@ -159,7 +165,13 @@ class Home extends React.Component<Props> {
               if (!loading && L.isEmpty(users)) {
                 return null
               }
-              return <StarsSection users={users} isLoading={loading} />
+              return (
+                <StarsSection
+                  onPressStar={this.goToStarProfile}
+                  users={users}
+                  isLoading={loading}
+                />
+              )
             }}
           </Query>
 

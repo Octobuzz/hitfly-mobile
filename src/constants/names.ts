@@ -7,7 +7,8 @@ import {
   STATE_STOPPED,
 } from 'react-native-track-player'
 export const APP_NAME = 'hitfly'
-export const BASE_URL = 'http://digico.itech-test.ru/graphql'
+export const DOMAIN_URL = 'http://digico.itech-test.ru/'
+export const BASE_URL = `${DOMAIN_URL}graphql`
 
 export const MOVES = {
   LEFT: 'LEFT',
