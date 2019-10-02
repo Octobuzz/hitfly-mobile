@@ -7,6 +7,7 @@ import CollectionSection from './CollectionSection'
 import PlaylistSection from './PlaylistSection'
 import TracksSection from './TracksSection'
 import GenresSection from './GenresSection'
+import StarsSection from './StarsSection'
 import { SafeView } from 'src/components'
 import { Genre, Collection, Track, CollectionsType } from 'src/apollo'
 import { images } from 'src/constants'
@@ -14,7 +15,9 @@ import {
   CollectionsData,
   PlaylistData,
   GenreData,
+  StarsData,
   GET_TOP50,
+  GET_STARS,
   GET_GENRES,
   GET_MUSIC_FAN,
   GET_NEW_TRACKS,
@@ -150,6 +153,16 @@ class Home extends React.Component<Props> {
     return (
       <SafeView>
         <Container>
+          <Query<StarsData> query={GET_STARS}>
+            {({ loading, data }) => {
+              const users = L.get(data, 'users.items')
+              if (!loading && L.isEmpty(users)) {
+                return null
+              }
+              return <StarsSection users={users} isLoading={loading} />
+            }}
+          </Query>
+
           <Query<PlaylistData> query={GET_NEW_TRACKS}>
             {({ loading, data }) => {
               const playlist = L.get(data, 'playlist.items')
