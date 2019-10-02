@@ -5,6 +5,7 @@ export * from './buttons'
 export * from './TextBase'
 export * from './GenreItem'
 export * from './TrackMenu'
+export * from './PlaylistTrack'
 
 export { default as Loader } from './Loader'
 export { default as TextBase } from './TextBase'

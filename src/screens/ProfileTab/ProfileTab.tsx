@@ -8,6 +8,7 @@ import {
 } from 'react-native-tab-view'
 import Header from './Header'
 import AboutMeScreen from './AboutMe'
+import TracksFeedbackScreen from './TracksFeedback'
 import { MyMusicScreen, LikedMusicScreen } from './MusicAndAlbums'
 import { Profile } from 'src/apollo'
 import { helpers } from 'src/utils'
@@ -110,7 +111,7 @@ class ProfileTab extends React.Component<Props, State> {
       case 'likedMusic':
         return <LikedMusicScreen showDetailedTrack={showDetailedTrack} />
       case 'feedback':
-        return null
+        return <TracksFeedbackScreen showDetailedTrack={showDetailedTrack} />
       default:
         return null
     }
