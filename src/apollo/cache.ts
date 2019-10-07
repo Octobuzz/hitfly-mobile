@@ -30,9 +30,5 @@ export default async (): Promise<InMemoryCache> => {
     storage: storageInstance,
   })
 
-  // cache.writeData({
-  //   data: defaults,
-  // })
-
   return cache
 }
