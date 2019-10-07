@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { User } from 'src/apollo'
 import { SectionWrapper, SectionHeader } from './components'
 import { Loader, Image, TextBase } from 'src/components'
 import styled from 'src/styled-components'
 
-const StarWrapper = styled.View`
+const StarWrapper = styled.TouchableOpacity`
   align-items: center;
   width: 100px;
 `
@@ -22,6 +22,26 @@ const StarTitleText = styled(TextBase)`
   font-family: ${({ theme }) => theme.fonts.medium};
 `
 
+interface StarProps {
+  user: User
+  onPress: (user: User) => void
+}
+
+const Star: React.FC<StarProps> = ({ user, onPress }) => {
+  const handlePress = useCallback(() => {
+    onPress(user)
+  }, [user, onPress])
+
+  const { userName, avatar } = user
+
+  return (
+    <StarWrapper onPress={handlePress}>
+      <UserImage source={{ uri: avatar[0].imageUrl }} />
+      <StarTitleText>{userName}</StarTitleText>
+    </StarWrapper>
+  )
+}
+
 const Scroll = styled.ScrollView.attrs(() => ({
   horizontal: true,
 }))`
@@ -31,19 +51,17 @@ const Scroll = styled.ScrollView.attrs(() => ({
 interface Props {
   users: User[]
   isLoading: boolean
+  onPressStar: (user: User) => void
 }
 
-const StarsSection: React.FC<Props> = ({ isLoading, users }) => {
+const StarsSection: React.FC<Props> = ({ isLoading, users, onPressStar }) => {
   return (
     <SectionWrapper>
       <SectionHeader title="Звездные эксперты" />
       {isLoading && <Loader isAbsolute />}
       <Scroll showsHorizontalScrollIndicator={false}>
-        {users.map(({ id, userName, avatar }) => (
-          <StarWrapper key={id.toString()}>
-            <UserImage source={{ uri: avatar[0].imageUrl }} />
-            <StarTitleText>{userName}</StarTitleText>
-          </StarWrapper>
+        {users.map(user => (
+          <Star onPress={onPressStar} user={user} key={user.id.toString()} />
         ))}
       </Scroll>
     </SectionWrapper>
