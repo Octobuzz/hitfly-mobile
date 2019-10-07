@@ -13,6 +13,7 @@ import {
   SlidingPanelInstance,
 } from 'src/components'
 import styled from 'src/styled-components'
+import { ROUTES } from 'src/navigation'
 
 const LogoutText = styled(TextBase)`
   text-align: center;
@@ -27,20 +28,34 @@ const IndetedButton = styled(Button)`
 interface Props extends NavigationStackScreenProps, LogoutProps {}
 
 class Settings extends React.Component<Props> {
-  private items: NavigationItem[] = [
-    {
-      title: 'Редактировать профиль',
-    },
-    {
-      title: 'Список любимых жанров',
-    },
-    {
-      title: 'Настройка входа',
-    },
-    {
-      title: 'Удалить аккаунт',
-    },
-  ]
+  private items: NavigationItem[]
+
+  constructor(props: Props) {
+    super(props)
+    this.items = this.initItems()
+  }
+
+  private initItems = (): NavigationItem[] => {
+    const { navigation } = this.props
+    const items: NavigationItem[] = [
+      {
+        title: 'Редактировать профиль',
+      },
+      {
+        title: 'Список любимых жанров',
+      },
+      {
+        title: 'Настройка входа',
+      },
+      {
+        title: 'Удалить аккаунт',
+        onPress: () => {
+          navigation.navigate(ROUTES.MAIN.REMOVE_ACCOUNT)
+        },
+      },
+    ]
+    return items
+  }
 
   private logoutPanel = createRef<SlidingPanelInstance>()
 

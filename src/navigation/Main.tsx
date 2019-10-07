@@ -8,6 +8,7 @@ import {
   NewPlaylistScreen,
   AlbumPlaylistScreen,
   GenrePlaylistScreen,
+  RemoveAccountScreen,
   Top50PlaylistScreen,
   TopWeekPlaylistScreen,
   CollectionDetailsScreen,
@@ -103,6 +104,12 @@ const MainNavigator = createStackNavigator(
       screen: SettingsScreen,
       navigationOptions: {
         title: 'Настройки',
+      },
+    },
+    [routeNames.MAIN.REMOVE_ACCOUNT]: {
+      screen: RemoveAccountScreen,
+      navigationOptions: {
+        title: 'Удаление аккаунта',
       },
     },
   },

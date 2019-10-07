@@ -28,5 +28,6 @@ export default {
 
     PROFILE: `${APP.MAIN}/profile`,
     SETTINGS: `${APP.MAIN}/settings`,
+    REMOVE_ACCOUNT: `${APP.MAIN}/remove_account`,
   },
 }
