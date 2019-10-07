@@ -1,12 +1,27 @@
-import React from 'react'
+import React, { createRef } from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import {
   Link,
   View,
+  Button,
+  TextBase,
   Stretcher,
+  SlidingPanel,
   NavigationList,
   NavigationItem,
+  SlidingPanelInstance,
 } from 'src/components'
+import styled from 'src/styled-components'
+
+const LogoutText = styled(TextBase)`
+  text-align: center;
+  color: ${({ theme }) => theme.colors.white};
+`
+
+const IndetedButton = styled(Button)`
+  margin-top: 32px;
+  margin-bottom: 24px;
+`
 
 interface Props extends NavigationStackScreenProps {}
 
@@ -26,12 +41,33 @@ class Settings extends React.Component<Props> {
     },
   ]
 
+  private logoutPanel = createRef<SlidingPanelInstance>()
+
+  private showLogoutPanel = (): void => {
+    if (this.logoutPanel && this.logoutPanel.current) {
+      this.logoutPanel.current.show()
+    }
+  }
+
+  private hideLogoutPanel = (): void => {
+    if (this.logoutPanel && this.logoutPanel.current) {
+      this.logoutPanel.current.hide()
+    }
+  }
+
   render() {
     return (
       <View paddingTop={0} addBottomSafePadding>
         <NavigationList items={this.items} />
         <Stretcher />
-        <Link title="Выйти" />
+        <Link title="Выйти" onPress={this.showLogoutPanel} />
+        <SlidingPanel forwardRef={this.logoutPanel}>
+          <View paddingBottom={32} noFill>
+            <LogoutText>Вы уверены, что хотите выйти из аккаута?</LogoutText>
+            <IndetedButton title="Выйти" />
+            <Link type="dark" title="Отмена" onPress={this.hideLogoutPanel} />
+          </View>
+        </SlidingPanel>
       </View>
     )
   }

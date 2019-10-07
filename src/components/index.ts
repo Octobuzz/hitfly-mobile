@@ -5,6 +5,7 @@ export * from './buttons'
 export * from './TextBase'
 export * from './GenreItem'
 export * from './TrackMenu'
+export * from './SlidingPanel'
 export * from './PlaylistTrack'
 export * from './NavigationList'
 

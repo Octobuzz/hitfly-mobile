@@ -24,6 +24,8 @@ const TopNotch = styled.View`
   background-color: ${({ theme }) => theme.colors.white};
 `
 
+export type SlidingPanelInstance = SlidingUpPanel
+
 interface Props extends SlidingUpPanelProps {
   forwardRef?: Ref<SlidingUpPanel>
 }
@@ -44,14 +46,10 @@ class SlidingPanel extends React.Component<Props, State> {
 
   private getDraggableRange = (): { top: number; bottom: number } => {
     const { contentHeight } = this.state
-    let top = contentHeight
-    const bottomSpace = getBottomSpace()
-    if (top && top - bottomSpace > 0) {
-      top -= bottomSpace
-    }
+    const top = contentHeight
     return {
       top,
-      bottom: -bottomSpace,
+      bottom: 0,
     }
   }
 
