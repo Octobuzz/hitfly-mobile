@@ -13,7 +13,7 @@ import {
   CollectionPlaylistScreen,
   ListenedNowPlaylistScreen,
 } from 'src/containers'
-import { ProfileTabScreen } from 'src/screens'
+import { ProfileTabScreen, SettingsScreen } from 'src/screens'
 import { stackDefaultOptions, playlistConfig } from './configs'
 import routeNames from './routeNames'
 
@@ -96,6 +96,12 @@ const MainNavigator = createStackNavigator(
           title,
           ...playlistConfig,
         }
+      },
+    },
+    [routeNames.MAIN.SETTINGS]: {
+      screen: SettingsScreen,
+      navigationOptions: {
+        title: 'Настройки',
       },
     },
   },
