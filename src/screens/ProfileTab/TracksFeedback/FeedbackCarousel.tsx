@@ -1,9 +1,13 @@
 import React, { createRef } from 'react'
+import { ViewStyle } from 'react-native'
 import * as Animated from 'react-native-animatable'
-import { TrackComment } from 'src/apollo'
 import Icon from 'react-native-vector-icons/AntDesign'
+import { parseISO, formatRelative } from 'date-fns'
+import { ru } from 'date-fns/locale'
+import { TrackComment } from 'src/apollo'
+import { TextBase, Image } from 'src/components'
+import { styles } from 'src/constants'
 import styled from 'src/styled-components'
-import { TextBase } from 'src/components'
 
 const Wrapper = styled.View``
 
@@ -27,7 +31,7 @@ const ArrowButtonsDivider = styled.View`
 `
 
 const ArrowButton = styled.TouchableOpacity.attrs(() => ({
-  hitSlop: { top: 10, left: 10, right: 10, bottom: 10 },
+  hitSlop: styles.HIT_SLOP,
 }))`
   ${({ disabled }) => disabled && `opacity: 0.6;`}
   justify-content: center;
@@ -42,8 +46,33 @@ const StyledIcon = styled(Icon).attrs(({ theme }) => ({
   top: 1px;
 `
 
+const Avatar = styled(Image)`
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+`
+
+const UserNameText = styled(TextBase)`
+  font-size: 12px;
+  font-family: ${({ theme }) => theme.fonts.bold};
+  flex: 1;
+  padding-horizontal: 16px;
+`
+
+const DateText = styled(TextBase)`
+  font-size: 10px;
+  color: ${({ theme }) => theme.colors.textGray};
+`
+
+const Row = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 16px;
+`
+
 interface Props {
   comments: TrackComment[]
+  style?: ViewStyle
 }
 
 interface State {
@@ -88,14 +117,33 @@ class FeedbackCarousel extends React.Component<Props, State> {
     this.openPage(currentPage - 1)
   }
 
+  private formatCreatedAtDate = (createdAt: string): string => {
+    const parsed = parseISO(createdAt)
+    const newFormat = formatRelative(parsed, Date.now(), { locale: ru })
+    return newFormat
+  }
+
   render() {
-    const { comments } = this.props
+    const { comments, style } = this.props
     const { currentPage } = this.state
+    if (!comments.length) {
+      return null
+    }
+    const {
+      comment,
+      createdAt,
+      createdBy: { userName, avatar },
+    } = comments[currentPage]
     return (
-      <Wrapper>
-        <CommentText useNativeDriver as={Animated.Text} ref={this.animatedView}>
-          {comments[currentPage].comment}
-        </CommentText>
+      <Wrapper style={style}>
+        <Animated.View useNativeDriver ref={this.animatedView}>
+          <Row>
+            <Avatar source={{ uri: avatar[0].imageUrl }} />
+            <UserNameText>{userName}</UserNameText>
+            <DateText>{this.formatCreatedAtDate(createdAt)}</DateText>
+          </Row>
+          <CommentText>{comment}</CommentText>
+        </Animated.View>
         <ArrowButtonsWrapper>
           <ArrowButton disabled={currentPage === 0} onPress={this.previousPage}>
             <StyledIcon name="arrowleft" />

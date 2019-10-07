@@ -155,13 +155,14 @@ class Home extends React.Component<Props> {
     })
   }
 
+  // FIXME: переписать через apollo-hoc и добавить рефреш
   render() {
     return (
       <SafeView>
         <Container>
           <Query<StarsData> query={GET_STARS}>
             {({ loading, data }) => {
-              const users = L.get(data, 'users.items')
+              const users = L.get(data, 'users.items', [])
               if (!loading && L.isEmpty(users)) {
                 return null
               }
@@ -177,7 +178,7 @@ class Home extends React.Component<Props> {
 
           <Query<PlaylistData> query={GET_NEW_TRACKS}>
             {({ loading, data }) => {
-              const playlist = L.get(data, 'playlist.items')
+              const playlist = L.get(data, 'playlist.items', [])
               if (!loading && L.isEmpty(playlist)) {
                 return null
               }
@@ -195,7 +196,7 @@ class Home extends React.Component<Props> {
 
           <Query<CollectionsData> query={GET_RECOMMENDED}>
             {({ loading, data }) => {
-              const collections = L.get(data, 'collections.items')
+              const collections = L.get(data, 'collections.items', [])
               if (!loading && L.isEmpty(collections)) {
                 return null
               }
@@ -213,7 +214,7 @@ class Home extends React.Component<Props> {
           </Query>
           <Query<PlaylistData> query={GET_TOP50}>
             {({ loading, data }) => {
-              const playlist = L.get(data, 'playlist.items')
+              const playlist = L.get(data, 'playlist.items', [])
               if (!loading && L.isEmpty(playlist)) {
                 return null
               }
@@ -233,7 +234,7 @@ class Home extends React.Component<Props> {
 
           <Query<PlaylistData> query={GET_LISTENED_NOW}>
             {({ loading, data }) => {
-              const total = L.get(data, 'playlist.total')
+              const total = L.get(data, 'playlist.total', [])
               return (
                 <PlaylistSection
                   imageSource={images.LISTENED_NOW}
@@ -249,7 +250,7 @@ class Home extends React.Component<Props> {
           </Query>
           <Query<GenreData> query={GET_GENRES}>
             {({ loading, data }) => {
-              const genres = L.get(data, 'genres')
+              const genres = L.get(data, 'genres', [])
               if (!loading && L.isEmpty(genres)) {
                 return null
               }
@@ -265,7 +266,7 @@ class Home extends React.Component<Props> {
 
           <Query<CollectionsData> query={GET_MUSIC_FAN}>
             {({ loading, data }) => {
-              const collections = L.get(data, 'collections.items')
+              const collections = L.get(data, 'collections.items', [])
               if (!loading && L.isEmpty(collections)) {
                 return null
               }
@@ -284,7 +285,7 @@ class Home extends React.Component<Props> {
 
           <Query<PlaylistData> query={GET_TOP_WEEK_TRACKS}>
             {({ loading, data }) => {
-              const playlist = L.get(data, 'playlist.items')
+              const playlist = L.get(data, 'playlist.items', [])
               if (!loading && L.isEmpty(playlist)) {
                 return null
               }
