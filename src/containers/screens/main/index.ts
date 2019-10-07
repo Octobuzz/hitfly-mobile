@@ -1,4 +1,5 @@
 export { default as HomeScreen } from './Home'
+export { default as SettingsScreen } from './Settings'
 export { default as NewPlaylistScreen } from './NewPlaylist'
 export { default as AlbumPlaylistScreen } from './AlbumPlaylist'
 export { default as GenrePlaylistScreen } from './GenrePlaylist'

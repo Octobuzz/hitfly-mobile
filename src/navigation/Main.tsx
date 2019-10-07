@@ -4,6 +4,7 @@ import {
   HeaderRightButtons,
   // screens
   HomeScreen,
+  SettingsScreen,
   NewPlaylistScreen,
   AlbumPlaylistScreen,
   GenrePlaylistScreen,
@@ -13,7 +14,7 @@ import {
   CollectionPlaylistScreen,
   ListenedNowPlaylistScreen,
 } from 'src/containers'
-import { ProfileTabScreen, SettingsScreen } from 'src/screens'
+import { ProfileTabScreen } from 'src/screens'
 import { stackDefaultOptions, playlistConfig } from './configs'
 import routeNames from './routeNames'
 

@@ -1,5 +1,6 @@
 import React, { createRef } from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
+import { LogoutProps } from 'src/containers/HOCs'
 import {
   Link,
   View,
@@ -23,7 +24,7 @@ const IndetedButton = styled(Button)`
   margin-bottom: 24px;
 `
 
-interface Props extends NavigationStackScreenProps {}
+interface Props extends NavigationStackScreenProps, LogoutProps {}
 
 class Settings extends React.Component<Props> {
   private items: NavigationItem[] = [
@@ -56,6 +57,7 @@ class Settings extends React.Component<Props> {
   }
 
   render() {
+    const { logout } = this.props
     return (
       <View paddingTop={0} addBottomSafePadding>
         <NavigationList items={this.items} />
@@ -64,7 +66,7 @@ class Settings extends React.Component<Props> {
         <SlidingPanel forwardRef={this.logoutPanel}>
           <View paddingBottom={32} noFill>
             <LogoutText>Вы уверены, что хотите выйти из аккаута?</LogoutText>
-            <IndetedButton title="Выйти" />
+            <IndetedButton onPress={logout} title="Выйти" />
             <Link type="dark" title="Отмена" onPress={this.hideLogoutPanel} />
           </View>
         </SlidingPanel>
