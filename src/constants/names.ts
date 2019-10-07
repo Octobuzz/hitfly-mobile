@@ -9,6 +9,8 @@ import {
 export const APP_NAME = 'hitfly'
 export const BASE_URL = 'http://digico.itech-test.ru/graphql'
 
+export const SERVER_DATE_FORMAT = 'yyyy-MM-dd HH:mm:ss'
+
 export const MOVES = {
   LEFT: 'LEFT',
   UP: 'UP',
