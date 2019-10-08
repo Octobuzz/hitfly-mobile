@@ -5,6 +5,8 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 target 'hitfly' do
   # Comment the next line if you don't want to use dynamic frameworks
   # use_frameworks!
+
+  # Pods for hitfly
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -37,7 +39,11 @@ target 'hitfly' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
-  # Pods for hitfly
+  pod 'Fabric', '~> 1.10.2'
+  pod 'Crashlytics', '~> 3.14.0'
+
+  pod 'Firebase/Analytics'
+
   use_native_modules!
 
 

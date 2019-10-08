@@ -63,13 +63,12 @@ platform :ios do
   end
 end
 
-CRASHLYTIC_TOKEN = "80fdf973d6613b671271708f88e5f8f6f5103d06"
-CRASHLYTIC_SECRET = "8de2af9ec8ea6b0aa0681c4dbaa07859a357e4cd275286a19b22334745869ddc"
+FIREBASE_ANDROID_ID = "1:564025817349:android:d4dc71183d0087bc75df6c"
 
 platform :android do
  
   ANDROID_PROJECT = './android/'
-  desc "Submit a new Beta Build to Crashlytics Beta"
+  desc "Submit a new Beta Build to Firebase App Distribution"
   lane :beta do
     begin
       notification(subtitle: 'Android', message: "#{APP_NAME} Start Building")
@@ -79,15 +78,16 @@ platform :android do
       )
       gradle(task: "clean assembleRelease", project_dir: ANDROID_PROJECT)
       notification(subtitle: 'Android', message: "#{APP_NAME} Finished Building")
-      
-      crashlytics(
-        api_token: CRASHLYTIC_TOKEN,
-        build_secret: CRASHLYTIC_SECRET
-        )
-        notification(subtitle: 'Android', message: "#{APP_NAME} Uploaded to Crashlytics")
+
+      firebase_app_distribution(
+          app: FIREBASE_ANDROID_ID,
+          groups: "qa",
+          firebase_cli_path: "/usr/local/bin/firebase"
+      )
+      notification(subtitle: 'Android', message: "#{APP_NAME} Uploaded to Firebase App Distribution")
         
       GRADLE_FILE = "#{ANDROID_PROJECT}app/build.gradle"
-      APK_LOCATION = "#{lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]}"
+      APK_LOCATION = lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
       APK_DESTINATION = "~/Desktop/#{APP_NAME}.apk"   
       VERSION_CODE = android_get_version_code(gradle_file: GRADLE_FILE)
       VERSION_NAME = android_get_version_name(gradle_file: GRADLE_FILE)
