@@ -1,6 +1,7 @@
-import styled from 'src/styled-components'
+import L from 'lodash'
 import { getBottomSpace } from 'react-native-iphone-x-helper'
 import { IView } from './interfaces'
+import styled from 'src/styled-components'
 
 const View = styled.View<IView>`
   ${({ noFill }) => !noFill && 'flex: 1;'}
@@ -10,7 +11,9 @@ const View = styled.View<IView>`
     paddingTop,
     paddingVertical,
   }) =>
-    noVerticalPadding || noPadding ? 0 : paddingTop || paddingVertical || 16}px;
+    noVerticalPadding || noPadding
+      ? 0
+      : L.without([paddingTop, paddingVertical, 16], undefined)[0]}px;
   padding-bottom: ${({
     noPadding,
     noVerticalPadding,
@@ -21,7 +24,10 @@ const View = styled.View<IView>`
     let padding =
       noVerticalPadding || noPadding
         ? 0
-        : paddingBottom || paddingVertical || 16
+        : (L.without(
+            [paddingBottom, paddingVertical, 16],
+            undefined,
+          )[0] as number)
     if (addBottomSafePadding) {
       padding += getBottomSpace()
     }

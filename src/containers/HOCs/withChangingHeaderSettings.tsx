@@ -53,7 +53,7 @@ const withChangingHeaderSettings = (nextSettings: Partial<HeaderSettings>) => (
     }
 
     render() {
-      const { mutate, ...rest } = this.props
+      const { mutate, result, ...rest } = this.props
       return <WrappedComponent {...rest} />
     }
   }

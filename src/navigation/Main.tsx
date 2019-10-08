@@ -4,9 +4,11 @@ import {
   HeaderRightButtons,
   // screens
   HomeScreen,
+  SettingsScreen,
   NewPlaylistScreen,
   AlbumPlaylistScreen,
   GenrePlaylistScreen,
+  RemoveAccountScreen,
   Top50PlaylistScreen,
   TopWeekPlaylistScreen,
   CollectionDetailsScreen,
@@ -96,6 +98,18 @@ const MainNavigator = createStackNavigator(
           title,
           ...playlistConfig,
         }
+      },
+    },
+    [routeNames.MAIN.SETTINGS]: {
+      screen: SettingsScreen,
+      navigationOptions: {
+        title: 'Настройки',
+      },
+    },
+    [routeNames.MAIN.REMOVE_ACCOUNT]: {
+      screen: RemoveAccountScreen,
+      navigationOptions: {
+        title: 'Удаление аккаунта',
       },
     },
   },
