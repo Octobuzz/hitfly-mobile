@@ -43,16 +43,17 @@ platform :ios do
       build
       notification(subtitle: 'iOS', message: "#{APP_NAME} Finished Building")
 
-      commit_version_bump(xcodeproj: IOS_PROJECT, message: 'Change build version iOS')
-      push_to_git_remote
-      notification(subtitle: 'iOS', message: "#{APP_NAME} Commited and Pushed to VCS")
-
       IOS_IPA = "#{APP_NAME}.ipa"
       pilot(ipa: IOS_IPA)
       notification(subtitle: 'iOS', message: "#{APP_NAME} Uploaded to TestFlight")
 
       clean_build_artifacts
       notification(subtitle: 'iOS', message: "#{APP_NAME} Cleaned build artifacts")
+
+      git_pull
+      commit_version_bump(xcodeproj: IOS_PROJECT, message: 'Change build version iOS')
+      push_to_git_remote
+      notification(subtitle: 'iOS', message: "#{APP_NAME} Commited and Pushed to VCS")
 
       notification(subtitle: 'iOS', message: "Lane :beta finished")
     rescue => error
@@ -79,25 +80,26 @@ platform :android do
       gradle(task: "clean assembleRelease", project_dir: ANDROID_PROJECT)
       notification(subtitle: 'Android', message: "#{APP_NAME} Finished Building")
       
-      GRADLE_FILE = "#{ANDROID_PROJECT}app/build.gradle"
-      git_commit(path: GRADLE_FILE, message: "Change build version Android")
-      push_to_git_remote
-      notification(subtitle: 'Android', message: "#{APP_NAME} Commited and Pushed to VCS")
-
       crashlytics(
         api_token: CRASHLYTIC_TOKEN,
         build_secret: CRASHLYTIC_SECRET
-      )
-      notification(subtitle: 'Android', message: "#{APP_NAME} Uploaded to Crashlytics")
-
+        )
+        notification(subtitle: 'Android', message: "#{APP_NAME} Uploaded to Crashlytics")
+        
+      GRADLE_FILE = "#{ANDROID_PROJECT}app/build.gradle"
       APK_LOCATION = "#{lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]}"
       APK_DESTINATION = "~/Desktop/#{APP_NAME}.apk"   
       VERSION_CODE = android_get_version_code(gradle_file: GRADLE_FILE)
       VERSION_NAME = android_get_version_name(gradle_file: GRADLE_FILE)
-      VERSION_NAME = VERSION_NAME.sub(/\./, "_")
+      VERSION_NAME = VERSION_NAME.gsub(/\./, "_")
       APK_DESTINATION = "~/Desktop/#{APP_NAME}_v-#{VERSION_NAME}b-#{VERSION_CODE}.apk"      
       sh("cp #{APK_LOCATION} #{APK_DESTINATION}")
       notification(subtitle: 'Android', message: "#{APP_NAME} Copied to #{APK_DESTINATION}")
+
+      git_pull
+      git_commit(path: GRADLE_FILE, message: "Change build version Android")
+      push_to_git_remote
+      notification(subtitle: 'Android', message: "#{APP_NAME} Commited and Pushed to VCS")
 
       notification(subtitle: 'Android', message: "Lane :beta finished")
     rescue => error
