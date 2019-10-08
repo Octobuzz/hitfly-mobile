@@ -16,7 +16,10 @@
     "coverage": "jest --verbose --coverage && open ./coverage/lcov-report/index.html",
     "clean": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force",
     "newclear": "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build && rm -rf node_modules/ && npm cache clean --force && npm i",
-    "lint": "npx tslint --project tsconfig.json"
+    "lint": "npx tslint --project tsconfig.json",
+    "android:beta": "bundle exec fastlane android beta",
+    "ios:beta": "bundle exec fastlane ios beta",
+    "fastlane:beta": "yarn android:beta && yarn ios:beta"
   },
   "dependencies": {
     "@apollo/react-components": "^3.1.2",
