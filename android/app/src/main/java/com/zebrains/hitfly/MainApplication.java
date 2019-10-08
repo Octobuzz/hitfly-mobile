@@ -4,12 +4,14 @@ import android.app.Application;
 import android.content.Context;
 import androidx.multidex.MultiDexApplication;
 
+import com.crashlytics.android.Crashlytics;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
 
+import io.fabric.sdk.android.Fabric;
 import java.lang.reflect.InvocationTargetException;
 
 import java.util.List;
@@ -46,6 +48,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         SoLoader.init(this, /* native exopackage */ false);
         initializeFlipper(this); // Remove this line if you don't want Flipper enabled
     }
