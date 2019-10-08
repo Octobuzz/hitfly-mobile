@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "564025817349",
+    "firebase_url": "https://hitfly-864a4.firebaseio.com",
+    "project_id": "hitfly-864a4",
+    "storage_bucket": "hitfly-864a4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564025817349:android:d4dc71183d0087bc75df6c",
+        "android_client_info": {
+          "package_name": "com.zebrains.hitfly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564025817349-tinjmj4v49tjv6hnf1rnq4n4b9500jmm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzt-e4S4GwYH0wJWHRBy8TECS_YaSuv5M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564025817349-tinjmj4v49tjv6hnf1rnq4n4b9500jmm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
