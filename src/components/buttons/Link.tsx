@@ -8,14 +8,22 @@ const Wrapper = styled.TouchableOpacity`
   ${disabledStyle}
 `
 
-const Text = styled(TextBase)`
-  color: ${({ theme }) => theme.colors.brandPink};
+const Text = styled(TextBase)<ColorType>`
+  ${({ type }) => type === 'dark' && `opacity: 0.5;`}
+  color: ${({ theme, type = 'brand' }) =>
+    type === 'brand' ? theme.colors.brandPink : theme.colors.white};
   text-align: center;
 `
 
-const Link = ({ title, onPress, style, isDisabled }: ButtonBase) => (
+interface ColorType {
+  type?: 'brand' | 'dark'
+}
+
+interface Props extends ButtonBase, ColorType {}
+
+const Link: React.FC<Props> = ({ type, title, onPress, style, isDisabled }) => (
   <Wrapper disabled={isDisabled} style={style} onPress={onPress}>
-    <Text>{title}</Text>
+    <Text type={type}>{title}</Text>
   </Wrapper>
 )
 

@@ -12,7 +12,6 @@ import gql from 'graphql-tag'
 import { ROUTES } from 'src/navigation'
 import { HeaderSettings } from 'src/apollo'
 import { withTheme, ITheme } from 'src/styled-components'
-import { storage } from 'src/utils'
 
 const IoniconsHeaderButton = (passMeFurther: any) => (
   <HeaderButton {...passMeFurther} IconComponent={Icon} />
@@ -35,14 +34,6 @@ class HeaderRightButtons extends React.PureComponent<Props> {
   private navigateToSettings = (): void => {
     const { navigation } = this.props
     navigation.navigate(ROUTES.MAIN.SETTINGS)
-  }
-
-  private logout = async (): Promise<void> => {
-    const { navigation } = this.props
-    // FIXME: временно, пока не сделаю логаут в другом месте
-    // и через бэк
-    await storage.clearStorage()
-    navigation.navigate(ROUTES.AUTH.LOGIN)
   }
 
   private getColor = (): string => {
@@ -84,13 +75,6 @@ class HeaderRightButtons extends React.PureComponent<Props> {
     const color = this.getColor()
     return (
       <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-        <Item
-          color={color}
-          iconSize={this.iconSize}
-          title="Выход"
-          iconName="md-log-out"
-          onPress={this.logout}
-        />
         <Item
           color={color}
           iconSize={this.iconSize}

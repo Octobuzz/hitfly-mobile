@@ -16,18 +16,13 @@ const Body = styled(View)`
 
 interface Props extends PlaylistTrackProps {}
 
-class TrackWithFeedback extends React.Component<Props> {
-  render() {
-    const { track } = this.props
-    return (
-      <Wrapper>
-        <PlaylistTrack {...this.props} />
-        <Body>
-          <FeedbackCarousel comments={track.comments} />
-        </Body>
-      </Wrapper>
-    )
-  }
-}
+const TrackWithFeedback: React.FC<Props> = props => (
+  <Wrapper>
+    <PlaylistTrack {...props} />
+    <Body>
+      <FeedbackCarousel comments={props.track.comments} />
+    </Body>
+  </Wrapper>
+)
 
 export default TrackWithFeedback
