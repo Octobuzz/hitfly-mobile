@@ -37,7 +37,7 @@
 		7A4C059CD4A4C41C8119D5CD /* Pods-hitfly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hitfly.release.xcconfig"; path = "Target Support Files/Pods-hitfly/Pods-hitfly.release.xcconfig"; sourceTree = "<group>"; };
 		95D12CEBB9C54ADB89FFB636 /* GothamPro-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GothamPro-Medium.otf"; path = "../src/assets/fonts/GothamPro-Medium.otf"; sourceTree = "<group>"; };
 		BF6A5525BE0D42689FC35BFF /* GothamPro-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GothamPro-Bold.otf"; path = "../src/assets/fonts/GothamPro-Bold.otf"; sourceTree = "<group>"; };
-		D16F0C552311A600000B3EA0 /* Hitfly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hitfly.swift; sourceTree = "<group>"; };
+		D16F0C552311A600000B3EA0 /* Hitfly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hitfly.swift; sourceTree = SOURCE_ROOT; };
 		D16F0C572311A74A000B3EA0 /* Hitfly-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hitfly-Bridging-Header.h"; sourceTree = "<group>"; };
 		D1805589234CDD0400FFBDCB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "hitfly/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
