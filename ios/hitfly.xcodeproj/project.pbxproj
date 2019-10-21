@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
-		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
-		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2686DBF4235850F500099465 /* Hitfly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2686DBF3235850F500099465 /* Hitfly.swift */; };
+		2686DBF72358522100099465 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2686DBF52358522100099465 /* AppDelegate.m */; };
+		2686DBF82358522100099465 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2686DBF62358522100099465 /* main.m */; };
+		2686DBFB2358568400099465 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2686DBFA2358568400099465 /* GoogleService-Info.plist */; };
+		2686DBFD235858A500099465 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2686DBFC235858A500099465 /* LaunchScreen.xib */; };
+		2686DBFF235859C900099465 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2686DBFE235859C900099465 /* Images.xcassets */; };
 		80C7F13CAFE647EABCACB087 /* GothamPro.otf in Resources */ = {isa = PBXBuildFile; fileRef = 25E0F0E3ABE54681BCF640EB /* GothamPro.otf */; };
 		AB324347476C834ABBFCBEAE /* libPods-hitfly.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74F3C26854AAD32AABC19F6D /* libPods-hitfly.a */; };
 		C8FBA10767CA4CEB8FD1F5B8 /* GothamPro-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4313C1AD30F04EDEA92E7254 /* GothamPro-Black.otf */; };
-		D16F0C562311A600000B3EA0 /* Hitfly.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16F0C552311A600000B3EA0 /* Hitfly.swift */; };
-		D180558A234CDD0400FFBDCB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1805589234CDD0400FFBDCB /* GoogleService-Info.plist */; };
 		D2604694A62049AD8AD3C0D8 /* GothamPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = BF6A5525BE0D42689FC35BFF /* GothamPro-Bold.otf */; };
 		F6387BF932074D9587CADE19 /* GothamPro-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 95D12CEBB9C54ADB89FFB636 /* GothamPro-Medium.otf */; };
 /* End PBXBuildFile section */
@@ -23,13 +23,15 @@
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* hitfly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hitfly.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = hitfly/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = hitfly/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = hitfly/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = hitfly/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = hitfly/main.m; sourceTree = "<group>"; };
 		25E0F0E3ABE54681BCF640EB /* GothamPro.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = GothamPro.otf; path = ../src/assets/fonts/GothamPro.otf; sourceTree = "<group>"; };
+		2686DBF3235850F500099465 /* Hitfly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Hitfly.swift; path = ../../../../sdv/WebstormProjects/Hitfly.swift; sourceTree = "<group>"; };
+		2686DBF52358522100099465 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../../../../sdv/WebstormProjects/AppDelegate.m; sourceTree = "<group>"; };
+		2686DBF62358522100099465 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../../../../sdv/WebstormProjects/main.m; sourceTree = "<group>"; };
+		2686DBF92358535C00099465 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../../../../sdv/WebstormProjects/AppDelegate.h; sourceTree = "<group>"; };
+		2686DBFA2358568400099465 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../sdv/WebstormProjects/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2686DBFC235858A500099465 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = ../../../../sdv/WebstormProjects/LaunchScreen.xib; sourceTree = "<group>"; };
+		2686DBFE235859C900099465 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../../../../sdv/WebstormProjects/Images.xcassets; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3046D5B8FE8335EE807866D9 /* Pods-hitfly.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hitfly.debug.xcconfig"; path = "Target Support Files/Pods-hitfly/Pods-hitfly.debug.xcconfig"; sourceTree = "<group>"; };
 		4313C1AD30F04EDEA92E7254 /* GothamPro-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GothamPro-Black.otf"; path = "../src/assets/fonts/GothamPro-Black.otf"; sourceTree = "<group>"; };
@@ -37,9 +39,7 @@
 		7A4C059CD4A4C41C8119D5CD /* Pods-hitfly.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hitfly.release.xcconfig"; path = "Target Support Files/Pods-hitfly/Pods-hitfly.release.xcconfig"; sourceTree = "<group>"; };
 		95D12CEBB9C54ADB89FFB636 /* GothamPro-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GothamPro-Medium.otf"; path = "../src/assets/fonts/GothamPro-Medium.otf"; sourceTree = "<group>"; };
 		BF6A5525BE0D42689FC35BFF /* GothamPro-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "GothamPro-Bold.otf"; path = "../src/assets/fonts/GothamPro-Bold.otf"; sourceTree = "<group>"; };
-		D16F0C552311A600000B3EA0 /* Hitfly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hitfly.swift; sourceTree = "<group>"; };
 		D16F0C572311A74A000B3EA0 /* Hitfly-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hitfly-Bridging-Header.h"; sourceTree = "<group>"; };
-		D1805589234CDD0400FFBDCB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "hitfly/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,16 +57,16 @@
 		13B07FAE1A68108700A75B9A /* hitfly */ = {
 			isa = PBXGroup;
 			children = (
-				D1805589234CDD0400FFBDCB /* GoogleService-Info.plist */,
+				2686DBFE235859C900099465 /* Images.xcassets */,
+				2686DBFC235858A500099465 /* LaunchScreen.xib */,
+				2686DBFA2358568400099465 /* GoogleService-Info.plist */,
+				2686DBF92358535C00099465 /* AppDelegate.h */,
+				2686DBF52358522100099465 /* AppDelegate.m */,
+				2686DBF62358522100099465 /* main.m */,
+				2686DBF3235850F500099465 /* Hitfly.swift */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
-				D16F0C552311A600000B3EA0 /* Hitfly.swift */,
 				D16F0C572311A74A000B3EA0 /* Hitfly-Bridging-Header.h */,
-				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
-				13B07FB01A68108700A75B9A /* AppDelegate.m */,
-				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
-				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = hitfly;
 			path = "/Users/nikolaj/Projects/hitfly-mobile/ios";
@@ -200,13 +200,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				C8FBA10767CA4CEB8FD1F5B8 /* GothamPro-Black.otf in Resources */,
 				D2604694A62049AD8AD3C0D8 /* GothamPro-Bold.otf in Resources */,
+				2686DBFF235859C900099465 /* Images.xcassets in Resources */,
+				2686DBFD235858A500099465 /* LaunchScreen.xib in Resources */,
 				F6387BF932074D9587CADE19 /* GothamPro-Medium.otf in Resources */,
 				80C7F13CAFE647EABCACB087 /* GothamPro.otf in Resources */,
-				D180558A234CDD0400FFBDCB /* GoogleService-Info.plist in Resources */,
+				2686DBFB2358568400099465 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,25 +323,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
-				D16F0C562311A600000B3EA0 /* Hitfly.swift in Sources */,
-				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				2686DBF72358522100099465 /* AppDelegate.m in Sources */,
+				2686DBF82358522100099465 /* main.m in Sources */,
+				2686DBF4235850F500099465 /* Hitfly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				13B07FB21A68108700A75B9A /* Base */,
-			);
-			name = LaunchScreen.xib;
-			path = hitfly;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
