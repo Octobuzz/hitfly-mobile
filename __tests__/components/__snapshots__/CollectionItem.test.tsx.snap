@@ -69,10 +69,15 @@ exports[`CollectionItem renders correctly 1`] = `
       style={
         Array [
           Object {
+            "color": "#313131",
+            "fontFamily": "GothamPro",
+            "fontSize": 16,
+            "lineHeight": 20,
+          },
+          Object {
             "color": "#ffffff",
             "fontFamily": "GothamPro-Bold",
             "fontSize": 12,
-            "lineHeight": 20,
           },
         ]
       }
@@ -83,10 +88,14 @@ exports[`CollectionItem renders correctly 1`] = `
       style={
         Array [
           Object {
-            "color": "#ffffff",
+            "color": "#313131",
             "fontFamily": "GothamPro",
-            "fontSize": 12,
+            "fontSize": 16,
             "lineHeight": 20,
+          },
+          Object {
+            "color": "#ffffff",
+            "fontSize": 12,
           },
         ]
       }
@@ -168,10 +177,15 @@ exports[`CollectionItem renders correctly with sizes 1`] = `
       style={
         Array [
           Object {
+            "color": "#313131",
+            "fontFamily": "GothamPro",
+            "fontSize": 16,
+            "lineHeight": 20,
+          },
+          Object {
             "color": "#ffffff",
             "fontFamily": "GothamPro-Bold",
             "fontSize": 12,
-            "lineHeight": 20,
           },
         ]
       }
@@ -182,10 +196,14 @@ exports[`CollectionItem renders correctly with sizes 1`] = `
       style={
         Array [
           Object {
-            "color": "#ffffff",
+            "color": "#313131",
             "fontFamily": "GothamPro",
-            "fontSize": 12,
+            "fontSize": 16,
             "lineHeight": 20,
+          },
+          Object {
+            "color": "#ffffff",
+            "fontSize": 12,
           },
         ]
       }

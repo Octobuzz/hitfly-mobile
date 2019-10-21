@@ -30,19 +30,19 @@ const IndentedH2 = styled(H2)`
   margin-bottom: 24px;
 `
 
-const YearText = styled(TextBase)`
+const YearText = styled(props => <TextBase {...props} />)`
   font-size: 14px;
   line-height: 14px;
   margin-bottom: 10px;
   font-family: ${({ theme }) => theme.fonts.medium};
 `
 
-const DescriptionText = styled(TextBase)`
+const DescriptionText = styled(props => <TextBase {...props} />)`
   font-size: 14px;
   line-height: 20px;
 `
 
-const NoInfoText = styled(TextBase)`
+const NoInfoText = styled(props => <TextBase {...props} />)`
   color: ${({ theme }) => theme.colors.textAlt};
   text-align: center;
 `

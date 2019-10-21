@@ -13,7 +13,7 @@ const Wrapper = styled.View`
   padding: 16px 16px 0px;
 `
 
-const Text = styled(TextBase)`
+const Text = styled(props => <TextBase {...props} />)`
   font-size: 12px;
   color: ${({ theme }) => theme.colors.textAlt};
 `

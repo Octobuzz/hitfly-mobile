@@ -22,14 +22,14 @@ const CenterBlock = styled.View`
   margin-horizontal: 16px;
 `
 
-const TitleText = styled(TextBase)`
+const TitleText = styled(props => <TextBase {...props} />)`
   font-size: 12px;
   line-height: 14px;
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.white};
 `
 
-const SubtitleText = styled(TextBase)`
+const SubtitleText = styled(props => <TextBase {...props} />)`
   font-size: 10px;
   line-height: 12px;
   opacity: 0.6;
@@ -58,7 +58,7 @@ const StyledIcon = styled(Icon).attrs(({ theme }) => ({
   width: 32px;
 `
 
-const MenuItemText = styled(TextBase)`
+const MenuItemText = styled(props => <TextBase {...props} />)`
   font-size: 14px;
   line-height: 14px;
   color: ${({ theme }) => theme.colors.white};

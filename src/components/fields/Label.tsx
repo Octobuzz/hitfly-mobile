@@ -6,7 +6,7 @@ interface Props {
   children: string
 }
 
-const Text = styled(TextBase)`
+const Text = styled(props => <TextBase {...props} />)`
   color: ${({ theme }) => theme.colors.textGray};
   font-size: 10px;
 `

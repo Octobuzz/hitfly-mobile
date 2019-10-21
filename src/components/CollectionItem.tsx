@@ -26,13 +26,13 @@ const BackgroundImage = styled(Image).attrs(() => ({
   bottom: 0;
 `
 
-const TopText = styled(TextBase)`
+const TopText = styled(props => <TextBase {...props} />)`
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.textWhite};
   font-size: 12px;
 `
 
-const BottomText = styled(TextBase)`
+const BottomText = styled(props => <TextBase {...props} />)`
   color: ${({ theme }) => theme.colors.textWhite};
   font-size: 12px;
 `

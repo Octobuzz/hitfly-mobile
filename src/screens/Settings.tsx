@@ -15,7 +15,7 @@ import {
 import styled from 'src/styled-components'
 import { ROUTES } from 'src/navigation'
 
-const LogoutText = styled(TextBase)`
+const LogoutText = styled(props => <TextBase {...props} />)`
   text-align: center;
   color: ${({ theme }) => theme.colors.white};
 `

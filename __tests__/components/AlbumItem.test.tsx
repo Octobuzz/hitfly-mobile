@@ -6,17 +6,21 @@ import { ThemeProvider } from 'src/styled-components'
 import theme from 'src/theme'
 
 describe('AlbumItem', () => {
-  it('it renders correctly', () => {
-    const item = ({
-      cover: [],
-      title: 'title',
-      group: 'group',
-      author: 'author',
-    } as unknown) as Album
+  const item = {
+    title: 'title',
+    cover: [{ imageUrl: 'url' }],
+    author: 'author',
+  } as Album
 
+  const props = {
+    item,
+    onPress: jest.fn,
+  }
+
+  it('it renders correctly', () => {
     const { asJSON } = render(
       <ThemeProvider theme={theme}>
-        <AlbumItem item={item} />
+        <AlbumItem {...props} />
       </ThemeProvider>,
     )
 

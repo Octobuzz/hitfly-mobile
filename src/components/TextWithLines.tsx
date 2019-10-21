@@ -13,7 +13,7 @@ const Line = styled.View`
   background-color: ${({ theme }) => theme.colors.inputBorder};
 `
 
-const Text = styled(TextBase)`
+const Text = styled(props => <TextBase {...props} />)`
   color: ${({ theme }) => theme.colors.textAlt};
   margin-horizontal: 6px;
 `

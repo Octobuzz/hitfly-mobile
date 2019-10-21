@@ -42,9 +42,13 @@ exports[`Text H1 renders correctly 1`] = `
       Array [
         Object {
           "color": "#313131",
+          "fontFamily": "GothamPro",
+          "fontSize": 16,
+          "lineHeight": 20,
+        },
+        Object {
           "fontFamily": "GothamPro-Bold",
           "fontSize": 20,
-          "lineHeight": 20,
         },
       ]
     }
@@ -69,9 +73,13 @@ exports[`Text H2 renders correctly 1`] = `
       Array [
         Object {
           "color": "#313131",
-          "fontFamily": "GothamPro-Bold",
+          "fontFamily": "GothamPro",
           "fontSize": 16,
           "lineHeight": 20,
+        },
+        Object {
+          "fontFamily": "GothamPro-Bold",
+          "fontSize": 16,
         },
       ]
     }
@@ -95,10 +103,13 @@ exports[`Text Helper renders correctly 1`] = `
     style={
       Array [
         Object {
-          "color": "#606060",
+          "color": "#313131",
           "fontFamily": "GothamPro",
           "fontSize": 16,
           "lineHeight": 20,
+        },
+        Object {
+          "color": "#606060",
           "marginBottom": 40,
           "textAlign": "center",
         },

@@ -20,13 +20,13 @@ const Cover = styled(Image)`
   bottom: 0;
 `
 
-const TitleText = styled(TextBase)`
+const TitleText = styled(props => <TextBase {...props} />)`
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.white};
   font-size: 24px;
 `
 
-const SubTitleText = styled(TextBase)`
+const SubTitleText = styled(props => <TextBase {...props} />)`
   color: ${({ theme }) => theme.colors.white};
   font-size: 12px;
   line-height: 14px;

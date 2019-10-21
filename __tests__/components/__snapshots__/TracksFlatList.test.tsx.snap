@@ -1,0 +1,238 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TrackFlatList renders correctly 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ScrollView
+    data={
+      Array [
+        Object {
+          "cover": Array [
+            Object {},
+          ],
+          "id": 2,
+          "singer": "singer",
+          "songText": "song text",
+          "title": "title",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    horizontal={false}
+    initialNumToRender={10}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onEndReachedThreshold={2}
+    removeClippedSubviews={false}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
+    style={
+      Array [
+        Object {},
+      ]
+    }
+    updateCellsBatchingPeriod={50}
+    viewabilityConfigCallbackPairs={Array []}
+    windowSize={21}
+  >
+    <View
+      style={null}
+    >
+      <TouchableOpacity
+        activeOpacity={0.2}
+        isPlaying={false}
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#ffffff",
+              "flexDirection": "row",
+              "paddingBottom": 12,
+              "paddingLeft": 16,
+              "paddingRight": 16,
+              "paddingTop": 12,
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#313131",
+                "fontFamily": "GothamPro",
+                "fontSize": 16,
+                "lineHeight": 20,
+              },
+              Object {
+                "fontSize": 12,
+                "marginRight": 12,
+                "width": 24,
+              },
+            ]
+          }
+        >
+          1
+        </Text>
+        <View
+          style={
+            Array [
+              Object {
+                "borderRadius": 4,
+                "height": 32,
+                "overflow": "hidden",
+                "width": 32,
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "overflow": "hidden",
+                },
+                Array [
+                  Object {
+                    "flexBasis": 0,
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                  },
+                ],
+              ]
+            }
+          >
+            <FastImageView
+              resizeMode="cover"
+              source={
+                Object {
+                  "uri": undefined,
+                }
+              }
+              style={
+                Object {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                }
+              }
+            />
+          </View>
+        </View>
+        <View
+          style={
+            Array [
+              Object {
+                "flexBasis": 0,
+                "flexGrow": 1,
+                "flexShrink": 1,
+                "marginHorizontal": 16,
+              },
+            ]
+          }
+        >
+          <Text
+            numberOfLines={1}
+            style={
+              Array [
+                Object {
+                  "color": "#313131",
+                  "fontFamily": "GothamPro",
+                  "fontSize": 16,
+                  "lineHeight": 20,
+                },
+                Object {
+                  "fontFamily": "GothamPro-Bold",
+                  "fontSize": 12,
+                  "lineHeight": 14,
+                },
+              ]
+            }
+          >
+            title
+          </Text>
+          <Text
+            numberOfLines={1}
+            style={
+              Array [
+                Object {
+                  "color": "#313131",
+                  "fontFamily": "GothamPro",
+                  "fontSize": 16,
+                  "lineHeight": 20,
+                },
+                Object {
+                  "color": "#606060",
+                  "fontSize": 10,
+                  "lineHeight": 12,
+                },
+              ]
+            }
+          >
+            singer
+          </Text>
+        </View>
+        <TouchableOpacity
+          activeOpacity={0.2}
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "#ffffff",
+                "borderRadius": 16,
+                "height": 32,
+                "justifyContent": "center",
+                "width": 32,
+              },
+            ]
+          }
+        >
+          <Icon
+            color="#313131"
+            name="dots-horizontal"
+            size={20}
+            style={
+              Array [
+                Object {
+                  "top": 1,
+                },
+              ]
+            }
+          />
+        </TouchableOpacity>
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#313131",
+                "fontFamily": "GothamPro",
+                "fontSize": 16,
+                "lineHeight": 20,
+              },
+              Object {
+                "color": "#606060",
+                "fontSize": 10,
+                "lineHeight": 12,
+                "marginLeft": 16,
+                "textAlign": "right",
+                "width": 30,
+              },
+            ]
+          }
+        >
+          0:00
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </ScrollView>
+</View>
+`;

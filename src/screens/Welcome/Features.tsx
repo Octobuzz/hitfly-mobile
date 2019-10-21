@@ -15,7 +15,7 @@ const IconWrapper = styled.View`
 
 const Icon = styled.Image``
 
-const Text = styled(TextBase)`
+const Text = styled(props => <TextBase {...props} />)`
   font-size: 14px;
   flex: 1;
   color: ${({ theme }) => theme.colors.textAlt};

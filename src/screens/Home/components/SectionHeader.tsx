@@ -12,14 +12,14 @@ const Inner = styled.View`
   flex-direction: row;
 `
 
-const TitleText = styled(TextBase)`
+const TitleText = styled(props => <TextBase {...props} />)`
   font-family: ${({ theme }) => theme.fonts.bold};
   font-size: 20px;
   margin-right: 8px;
   line-height: 24px;
 `
 
-const SubtitleText = styled(TextBase)`
+const SubtitleText = styled(props => <TextBase {...props} />)`
   color: ${({ theme }) => theme.colors.textAlt};
   font-size: 12px;
   margin-top: 7px;

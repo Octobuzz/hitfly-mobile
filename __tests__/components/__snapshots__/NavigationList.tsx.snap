@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavigationList renders correctly 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {},
+      ]
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "borderBottomColor": "#E4E4E4",
+            "borderBottomWidth": 1,
+            "flexDirection": "row",
+            "paddingVertical": 28,
+          },
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#313131",
+              "fontFamily": "GothamPro",
+              "fontSize": 16,
+              "lineHeight": 20,
+            },
+            Object {
+              "flexBasis": 0,
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "paddingRight": 16,
+            },
+          ]
+        }
+      >
+        title
+      </Text>
+      <Icon
+        name="arrow-forward"
+        size={20}
+        style={
+          Array [
+            Object {
+              "color": "#313131",
+            },
+          ]
+        }
+      />
+    </TouchableOpacity>
+  </View>
+</View>
+`;
