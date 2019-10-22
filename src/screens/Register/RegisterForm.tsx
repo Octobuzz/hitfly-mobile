@@ -27,7 +27,7 @@ const StyledCheckBox = styled(CheckBox)`
   align-self: center;
 `
 
-const CheckBoxText = styled(props => <TextBase {...props} />)`
+const CheckBoxText = styled(TextBase)`
   font-size: 12px;
   color: ${({ theme }) => theme.colors.textAlt};
 `

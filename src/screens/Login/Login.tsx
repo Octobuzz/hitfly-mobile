@@ -25,7 +25,7 @@ const IndentedSocialAuth = styled(SocialAuth)`
   margin-bottom: 24px;
 `
 
-const BottomText = styled(props => <TextBase {...props} />)`
+const BottomText = styled(TextBase)`
   color: ${({ theme }) => theme.colors.textGray};
   font-size: 12px;
   text-align: center;

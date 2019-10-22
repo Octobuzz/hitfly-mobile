@@ -29,7 +29,7 @@ const GenreImage = styled(FastImage)`
   height: 100%;
 `
 
-const TitleText = styled(props => <TextBase {...props} />)`
+const TitleText = styled(TextBase)`
   position: absolute;
   text-align: center;
   font-family: ${({ theme }) => theme.fonts.bold};

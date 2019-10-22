@@ -16,14 +16,14 @@ const Cover = styled(Image)`
 
 const Block = styled.View``
 
-const TitleText = styled(props => <TextBase {...props} />)`
+const TitleText = styled(TextBase)`
   font-size: 12px;
   line-height: 12px;
   margin-bottom: 4px;
   font-family: ${({ theme }) => theme.fonts.medium};
 `
 
-const SubTitleText = styled(props => <TextBase {...props} />)`
+const SubTitleText = styled(TextBase)`
   font-size: 10px;
   line-height: 10px;
   color: ${({ theme }) => theme.colors.textGray};

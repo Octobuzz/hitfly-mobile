@@ -23,7 +23,7 @@ const BackgroundImage = styled.Image`
   bottom: 0;
 `
 
-const BottomText = styled(props => <TextBase {...props} />)`
+const BottomText = styled(TextBase)`
   color: ${({ theme }) => theme.colors.textWhite};
   font-size: 12px;
 `

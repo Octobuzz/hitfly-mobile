@@ -29,7 +29,7 @@ const StyledTabBar = styled(TabBar).attrs(({ theme }) => ({
   background-color: transparent;
 `
 
-const LabelText = styled(props => <TextBase {...props} />)`
+const LabelText = styled(TextBase)`
   color: ${({ theme }) => theme.colors.white};
 `
 

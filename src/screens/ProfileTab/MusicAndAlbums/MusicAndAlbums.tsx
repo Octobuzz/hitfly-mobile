@@ -22,7 +22,7 @@ const HeaderWrapper = styled.View`
   padding-horizontal: 16px;
 `
 
-const InfoText = styled(props => <TextBase {...props} />)`
+const InfoText = styled(TextBase)`
   color: ${({ theme }) => theme.colors.textGray};
   font-size: 12px;
 `

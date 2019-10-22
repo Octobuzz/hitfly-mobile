@@ -1,8 +1,9 @@
 import React from 'react'
-import { Image, TextBase, View, Button } from 'src/components'
+import { Image, View, Button } from 'src/components'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { Track } from 'src/apollo'
 import styled from 'src/styled-components'
+import TextBase from './TextBase'
 
 export const TRACK_MENU_HEIGHT = 300
 
@@ -22,14 +23,14 @@ const CenterBlock = styled.View`
   margin-horizontal: 16px;
 `
 
-const TitleText = styled(props => <TextBase {...props} />)`
+const TitleText = styled(TextBase)`
   font-size: 12px;
   line-height: 14px;
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.white};
 `
 
-const SubtitleText = styled(props => <TextBase {...props} />)`
+const SubtitleText = styled(TextBase)`
   font-size: 10px;
   line-height: 12px;
   opacity: 0.6;
@@ -58,7 +59,7 @@ const StyledIcon = styled(Icon).attrs(({ theme }) => ({
   width: 32px;
 `
 
-const MenuItemText = styled(props => <TextBase {...props} />)`
+const MenuItemText = styled(TextBase)`
   font-size: 14px;
   line-height: 14px;
   color: ${({ theme }) => theme.colors.white};

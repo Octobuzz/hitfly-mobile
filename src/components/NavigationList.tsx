@@ -13,7 +13,7 @@ const ItemWrapper = styled.TouchableOpacity`
   border-bottom-color: ${({ theme }) => theme.colors.inputBorder};
 `
 
-const ItemText = styled(props => <TextBase {...props} />)`
+const ItemText = styled(TextBase)`
   flex: 1;
   padding-right: 16px;
 `

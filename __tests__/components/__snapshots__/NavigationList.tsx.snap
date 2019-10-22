@@ -36,14 +36,12 @@ exports[`NavigationList renders correctly 1`] = `
           Array [
             Object {
               "color": "#313131",
-              "fontFamily": "GothamPro",
-              "fontSize": 16,
-              "lineHeight": 20,
-            },
-            Object {
               "flexBasis": 0,
               "flexGrow": 1,
               "flexShrink": 1,
+              "fontFamily": "GothamPro",
+              "fontSize": 16,
+              "lineHeight": 20,
               "paddingRight": 16,
             },
           ]

@@ -68,11 +68,8 @@ exports[`TrackFlatList renders correctly 1`] = `
               Object {
                 "color": "#313131",
                 "fontFamily": "GothamPro",
-                "fontSize": 16,
-                "lineHeight": 20,
-              },
-              Object {
                 "fontSize": 12,
+                "lineHeight": 20,
                 "marginRight": 12,
                 "width": 24,
               },
@@ -146,11 +143,6 @@ exports[`TrackFlatList renders correctly 1`] = `
               Array [
                 Object {
                   "color": "#313131",
-                  "fontFamily": "GothamPro",
-                  "fontSize": 16,
-                  "lineHeight": 20,
-                },
-                Object {
                   "fontFamily": "GothamPro-Bold",
                   "fontSize": 12,
                   "lineHeight": 14,
@@ -165,13 +157,8 @@ exports[`TrackFlatList renders correctly 1`] = `
             style={
               Array [
                 Object {
-                  "color": "#313131",
-                  "fontFamily": "GothamPro",
-                  "fontSize": 16,
-                  "lineHeight": 20,
-                },
-                Object {
                   "color": "#606060",
+                  "fontFamily": "GothamPro",
                   "fontSize": 10,
                   "lineHeight": 12,
                 },
@@ -213,13 +200,8 @@ exports[`TrackFlatList renders correctly 1`] = `
           style={
             Array [
               Object {
-                "color": "#313131",
-                "fontFamily": "GothamPro",
-                "fontSize": 16,
-                "lineHeight": 20,
-              },
-              Object {
                 "color": "#606060",
+                "fontFamily": "GothamPro",
                 "fontSize": 10,
                 "lineHeight": 12,
                 "marginLeft": 16,

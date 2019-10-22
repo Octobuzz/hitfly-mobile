@@ -10,7 +10,7 @@ const TitleText = styled(H2)`
   margin-bottom: 3px;
 `
 
-const SubtitleText = styled(props => <TextBase {...props} />)`
+const SubtitleText = styled(TextBase)`
   color: ${({ theme }) => theme.colors.textAlt};
   font-size: 12px;
 `
@@ -33,7 +33,7 @@ const Column = styled.View`
 
 const ColumnImage = styled.Image``
 
-const ColumnText = styled(props => <TextBase {...props} />)`
+const ColumnText = styled(TextBase)`
   font-size: 12px;
   margin-top: 14px;
   text-align: center;

@@ -14,7 +14,7 @@ const Gradient = styled(LinearGradient).attrs(({ theme }) => ({
   border-top-left-radius: 28px;
 `
 
-const Text = styled(props => <TextBase {...props} />)`
+const Text = styled(TextBase)`
   text-align: center;
   padding-vertical: 24px;
   color: ${({ theme }) => theme.colors.white};

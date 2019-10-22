@@ -11,7 +11,7 @@ import styled from 'src/styled-components'
 
 const Wrapper = styled.View``
 
-const CommentText = styled(props => <TextBase {...props} />)`
+const CommentText = styled(TextBase)`
   font-size: 14px;
   color: ${({ theme }) => theme.colors.textAlt};
 `
@@ -52,14 +52,14 @@ const Avatar = styled(Image)`
   border-radius: 12px;
 `
 
-const UserNameText = styled(props => <TextBase {...props} />)`
+const UserNameText = styled(TextBase)`
   font-size: 12px;
   font-family: ${({ theme }) => theme.fonts.bold};
   flex: 1;
   padding-horizontal: 16px;
 `
 
-const DateText = styled(props => <TextBase {...props} />)`
+const DateText = styled(TextBase)`
   font-size: 10px;
   color: ${({ theme }) => theme.colors.textGray};
 `

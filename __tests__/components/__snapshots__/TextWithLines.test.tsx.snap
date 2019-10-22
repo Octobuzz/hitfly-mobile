@@ -37,13 +37,10 @@ exports[`TextWithLines renders correctly 1`] = `
       style={
         Array [
           Object {
-            "color": "#313131",
+            "color": "#606060",
             "fontFamily": "GothamPro",
             "fontSize": 16,
             "lineHeight": 20,
-          },
-          Object {
-            "color": "#606060",
             "marginHorizontal": 6,
           },
         ]

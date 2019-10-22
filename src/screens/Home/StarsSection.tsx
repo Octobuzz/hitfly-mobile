@@ -16,7 +16,7 @@ const UserImage = styled(Image)`
   margin-bottom: 8px;
 `
 
-const StarTitleText = styled(props => <TextBase {...props} />)`
+const StarTitleText = styled(TextBase)`
   font-size: 14px;
   text-align: center;
   font-family: ${({ theme }) => theme.fonts.medium};

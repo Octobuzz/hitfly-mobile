@@ -95,12 +95,6 @@ exports[`TrackMenu renders correctly with handlers 1`] = `
           style={
             Array [
               Object {
-                "color": "#313131",
-                "fontFamily": "GothamPro",
-                "fontSize": 16,
-                "lineHeight": 20,
-              },
-              Object {
                 "color": "#ffffff",
                 "fontFamily": "GothamPro-Bold",
                 "fontSize": 12,
@@ -115,13 +109,8 @@ exports[`TrackMenu renders correctly with handlers 1`] = `
           style={
             Array [
               Object {
-                "color": "#313131",
-                "fontFamily": "GothamPro",
-                "fontSize": 16,
-                "lineHeight": 20,
-              },
-              Object {
                 "color": "#ffffff",
+                "fontFamily": "GothamPro",
                 "fontSize": 10,
                 "lineHeight": 12,
                 "opacity": 0.6,
@@ -185,13 +174,8 @@ exports[`TrackMenu renders correctly with handlers 1`] = `
         style={
           Array [
             Object {
-              "color": "#313131",
-              "fontFamily": "GothamPro",
-              "fontSize": 16,
-              "lineHeight": 20,
-            },
-            Object {
               "color": "#ffffff",
+              "fontFamily": "GothamPro",
               "fontSize": 14,
               "lineHeight": 14,
             },
@@ -243,13 +227,8 @@ exports[`TrackMenu renders correctly with handlers 1`] = `
         style={
           Array [
             Object {
-              "color": "#313131",
-              "fontFamily": "GothamPro",
-              "fontSize": 16,
-              "lineHeight": 20,
-            },
-            Object {
               "color": "#ffffff",
+              "fontFamily": "GothamPro",
               "fontSize": 14,
               "lineHeight": 14,
             },

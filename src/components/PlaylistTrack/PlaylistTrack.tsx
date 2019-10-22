@@ -18,7 +18,7 @@ const Wrapper = styled.TouchableOpacity<Playable>`
 `
 
 // width: 24 - для 3-х значных чисел нормально
-const TrackNumberText = styled(props => <TextBase {...props} />)`
+const TrackNumberText = styled(TextBase)`
   font-size: 12px;
   margin-right: 12px;
   width: 24px;
@@ -29,13 +29,13 @@ const CenterBlock = styled.View`
   margin-horizontal: 16px;
 `
 
-const BlackText = styled(props => <TextBase {...props} />)`
+const BlackText = styled(TextBase)`
   font-size: 12px;
   line-height: 14px;
   font-family: ${({ theme }) => theme.fonts.bold};
 `
 
-const GrayText = styled(props => <TextBase {...props} />)`
+const GrayText = styled(TextBase)`
   font-size: 10px;
   line-height: 12px;
   color: ${({ theme }) => theme.colors.textAlt};

@@ -3,7 +3,7 @@ import styled from 'src/styled-components'
 import TextBase from 'src/components/TextBase'
 import { Option } from './Dropdown'
 
-const Text = styled(props => <TextBase {...props} />)`
+const Text = styled(TextBase)`
   margin-bottom: 8px;
   font-size: 14px;
   color: ${({ theme }) => theme.colors.textAlt};
