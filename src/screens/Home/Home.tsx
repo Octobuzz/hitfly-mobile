@@ -1,6 +1,5 @@
 import L from 'lodash'
 import React from 'react'
-import { Linking } from 'react-native'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { Query } from '@apollo/react-components'
 import { ApolloClient } from 'apollo-client'
@@ -8,17 +7,15 @@ import CollectionSection from './CollectionSection'
 import PlaylistSection from './PlaylistSection'
 import TracksSection from './TracksSection'
 import GenresSection from './GenresSection'
-import StarsSection from './StarsSection'
-import { SafeView } from 'src/components'
-import { Genre, Collection, Track, CollectionsType, User } from 'src/apollo'
+import { StarsSection } from './containers'
+import { SafeView, RefreshControl } from 'src/components'
+import { Genre, Collection, Track, CollectionsType } from 'src/apollo'
 import { images } from 'src/constants'
 import {
   CollectionsData,
   PlaylistData,
   GenreData,
-  StarsData,
   GET_TOP50,
-  GET_STARS,
   GET_GENRES,
   GET_MUSIC_FAN,
   GET_NEW_TRACKS,
@@ -26,7 +23,6 @@ import {
   GET_LISTENED_NOW,
   GET_TOP_WEEK_TRACKS,
 } from './graphql'
-import { DOMAIN_URL } from 'src/constants/names'
 import { ROUTES } from 'src/navigation'
 import gql from 'graphql-tag'
 import styled from 'src/styled-components'
@@ -113,10 +109,6 @@ class Home extends React.Component<Props> {
     })
   }
 
-  private goToStarProfile = (user: User): void => {
-    Linking.openURL(`${DOMAIN_URL}user/${user.id}`)
-  }
-
   // TODO: дубль, пока не решится следующий TODO
   private handlePressNewHeader = (): void => {
     const { navigation } = this.props
@@ -155,26 +147,34 @@ class Home extends React.Component<Props> {
     })
   }
 
+  private refreshAllSections = (): void => {
+    L.each(this.sectionsRefs, ref => {
+      if (typeof ref.refreshData === 'function') {
+        ref.refreshData()
+      }
+    })
+  }
+
+  private sectionsRefs: { [id: string]: any } = {}
+  private setRef = (id: string) => (ref: any) => {
+    if (ref.getWrappedInstance) {
+      this.sectionsRefs[id] = ref.getWrappedInstance()
+    }
+  }
+
   // FIXME: переписать через apollo-hoc и добавить рефреш
   render() {
     return (
       <SafeView>
-        <Container>
-          <Query<StarsData> query={GET_STARS}>
-            {({ loading, data }) => {
-              const users = L.get(data, 'users.items', [])
-              if (!loading && L.isEmpty(users)) {
-                return null
-              }
-              return (
-                <StarsSection
-                  onPressStar={this.goToStarProfile}
-                  users={users}
-                  isLoading={loading}
-                />
-              )
-            }}
-          </Query>
+        <Container
+          refreshControl={
+            <RefreshControl
+              refreshing={false}
+              onRefresh={this.refreshAllSections}
+            />
+          }
+        >
+          <StarsSection ref={this.setRef('stars')} />
 
           <Query<PlaylistData> query={GET_NEW_TRACKS}>
             {({ loading, data }) => {

@@ -3,7 +3,6 @@ import { createStackNavigator } from 'react-navigation-stack'
 import {
   HeaderRightButtons,
   // screens
-  HomeScreen,
   SettingsScreen,
   NewPlaylistScreen,
   AlbumPlaylistScreen,
@@ -15,7 +14,7 @@ import {
   CollectionPlaylistScreen,
   ListenedNowPlaylistScreen,
 } from 'src/containers'
-import { ProfileTabScreen } from 'src/screens'
+import { ProfileTabScreen, HomeScreen } from 'src/screens'
 import { stackDefaultOptions, playlistConfig } from './configs'
 import routeNames from './routeNames'
 

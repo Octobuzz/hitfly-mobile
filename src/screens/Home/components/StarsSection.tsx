@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react'
 import { User } from 'src/apollo'
-import { SectionWrapper, SectionHeader } from './components'
+import SectionWrapper from './SectionWrapper'
+import SectionHeader from './SectionHeader'
 import { Loader, Image, TextBase } from 'src/components'
 import styled from 'src/styled-components'
 
@@ -55,10 +56,13 @@ interface Props {
 }
 
 const StarsSection: React.FC<Props> = ({ isLoading, users, onPressStar }) => {
+  if (!users.length) {
+    return null
+  }
   return (
     <SectionWrapper>
       <SectionHeader title="Звездные эксперты" />
-      {isLoading && <Loader isAbsolute />}
+      {isLoading && <Loader />}
       <Scroll showsHorizontalScrollIndicator={false}>
         {users.map(user => (
           <Star onPress={onPressStar} user={user} key={user.id.toString()} />
