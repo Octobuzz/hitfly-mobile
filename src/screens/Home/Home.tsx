@@ -4,24 +4,17 @@ import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { Query } from '@apollo/react-components'
 import { ApolloClient } from 'apollo-client'
 import PlaylistSection from './PlaylistSection'
-import GenresSection from './GenresSection'
 import {
   NewSection,
   StarsSection,
+  GenresSection,
   TopWeekSection,
   MusicFanSection,
   RecommendedSection,
 } from './containers'
 import { SafeView, RefreshControl } from 'src/components'
-import { Genre } from 'src/apollo'
 import { images } from 'src/constants'
-import {
-  PlaylistData,
-  GenreData,
-  GET_TOP50,
-  GET_GENRES,
-  GET_LISTENED_NOW,
-} from './graphql'
+import { PlaylistData, GET_TOP50, GET_LISTENED_NOW } from './graphql'
 import { ROUTES } from 'src/navigation'
 import styled from 'src/styled-components'
 
@@ -37,15 +30,6 @@ interface Props extends NavigationStackScreenProps {
 }
 
 class Home extends React.Component<Props> {
-  private handlePressGenreItem = async (item: Genre): Promise<void> => {
-    // const { client, navigation } = this.props
-    // await client.mutate({
-    //   mutation: SELECT_GENRE,
-    //   variables: { id: item.id },
-    // })
-    // navigation.navigate(ROUTES.MAIN.GENRE_PLAYLIST, { title: item.title })
-  }
-
   private handlePressTop50 = (): void => {
     const { navigation } = this.props
     navigation.navigate(ROUTES.MAIN.TOP_50_PLAYLIST)
@@ -121,21 +105,8 @@ class Home extends React.Component<Props> {
               )
             }}
           </Query>
-          <Query<GenreData> query={GET_GENRES}>
-            {({ loading, data }) => {
-              const genres = L.get(data, 'genres', [])
-              if (!loading && L.isEmpty(genres)) {
-                return null
-              }
-              return (
-                <GenresSection
-                  genres={genres}
-                  isLoading={loading}
-                  onPressItem={this.handlePressGenreItem}
-                />
-              )
-            }}
-          </Query>
+
+          <GenresSection getRefetcher={this.setRefetcher('genres')} />
 
           <MusicFanSection getRefetcher={this.setRefetcher('musicFun')} />
 
