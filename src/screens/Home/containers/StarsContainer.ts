@@ -15,7 +15,6 @@ export default L.flowRight(
   // @ts-ignore
   graphql<StarsData>(GET_STARS, {
     alias: 'withStars',
-    withRef: true,
     // @ts-ignore
     props: ({ data: { users, refetch, loading } }) => {
       const reqUsers = L.get(users, 'items', [])

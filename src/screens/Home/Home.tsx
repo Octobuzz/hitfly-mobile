@@ -5,11 +5,10 @@ import { Query } from '@apollo/react-components'
 import { ApolloClient } from 'apollo-client'
 import CollectionSection from './CollectionSection'
 import PlaylistSection from './PlaylistSection'
-import TracksSection from './TracksSection'
 import GenresSection from './GenresSection'
-import { StarsSection } from './containers'
+import { StarsSection, NewSection, TopWeekSection } from './containers'
 import { SafeView, RefreshControl } from 'src/components'
-import { Genre, Collection, Track, CollectionsType } from 'src/apollo'
+import { Genre, Collection, CollectionsType } from 'src/apollo'
 import { images } from 'src/constants'
 import {
   CollectionsData,
@@ -18,10 +17,8 @@ import {
   GET_TOP50,
   GET_GENRES,
   GET_MUSIC_FAN,
-  GET_NEW_TRACKS,
   GET_RECOMMENDED,
   GET_LISTENED_NOW,
-  GET_TOP_WEEK_TRACKS,
 } from './graphql'
 import { ROUTES } from 'src/navigation'
 import gql from 'graphql-tag'
@@ -109,28 +106,6 @@ class Home extends React.Component<Props> {
     })
   }
 
-  // TODO: дубль, пока не решится следующий TODO
-  private handlePressNewHeader = (): void => {
-    const { navigation } = this.props
-    navigation.navigate(ROUTES.MAIN.NEW_PLAYLIST)
-  }
-  // TODO: тут сразу трек в play?
-  private handlePressNewTrack = (track: Track): void => {
-    const { navigation } = this.props
-    navigation.navigate(ROUTES.MAIN.NEW_PLAYLIST)
-  }
-
-  // TODO: дубль, пока не решится следующий TODO
-  private handlePressTopWeekHeader = (): void => {
-    const { navigation } = this.props
-    navigation.navigate(ROUTES.MAIN.TOP_WEEK_PLAYLIST)
-  }
-  // TODO: тут сразу трек в play?
-  private handlePressTopWeekTrack = (track: Track): void => {
-    const { navigation } = this.props
-    navigation.navigate(ROUTES.MAIN.TOP_WEEK_PLAYLIST)
-  }
-
   private selectCollection = (id: number): Promise<any> => {
     const { client } = this.props
     return client.mutate({
@@ -148,17 +123,13 @@ class Home extends React.Component<Props> {
   }
 
   private refreshAllSections = (): void => {
-    L.each(this.sectionsRefs, ref => {
-      if (typeof ref.refreshData === 'function') {
-        ref.refreshData()
-      }
-    })
+    L.each(this.sectionsRefetchers, refetcher => refetcher())
   }
 
-  private sectionsRefs: { [id: string]: any } = {}
-  private setRef = (id: string) => (ref: any) => {
-    if (ref.getWrappedInstance) {
-      this.sectionsRefs[id] = ref.getWrappedInstance()
+  private sectionsRefetchers: { [id: string]: any } = {}
+  private setRefetcher = (id: string) => (refetcher: () => void) => {
+    if (refetcher) {
+      this.sectionsRefetchers[id] = refetcher
     }
   }
 
@@ -174,25 +145,9 @@ class Home extends React.Component<Props> {
             />
           }
         >
-          <StarsSection ref={this.setRef('stars')} />
+          <StarsSection getRefetcher={this.setRefetcher('stars')} />
 
-          <Query<PlaylistData> query={GET_NEW_TRACKS}>
-            {({ loading, data }) => {
-              const playlist = L.get(data, 'playlist.items', [])
-              if (!loading && L.isEmpty(playlist)) {
-                return null
-              }
-              return (
-                <TracksSection
-                  title="Новое"
-                  playlist={playlist}
-                  isLoading={loading}
-                  onPressHeader={this.handlePressNewHeader}
-                  onPressTrack={this.handlePressNewTrack}
-                />
-              )
-            }}
-          </Query>
+          <NewSection getRefetcher={this.setRefetcher('newTracks')} />
 
           <Query<CollectionsData> query={GET_RECOMMENDED}>
             {({ loading, data }) => {
@@ -282,25 +237,7 @@ class Home extends React.Component<Props> {
               )
             }}
           </Query>
-
-          <Query<PlaylistData> query={GET_TOP_WEEK_TRACKS}>
-            {({ loading, data }) => {
-              const playlist = L.get(data, 'playlist.items', [])
-              if (!loading && L.isEmpty(playlist)) {
-                return null
-              }
-              return (
-                <TracksSection
-                  title="Открытие недели"
-                  subtitle="Треки, которые неожиданно поднялись в чарте"
-                  playlist={playlist}
-                  isLoading={loading}
-                  onPressHeader={this.handlePressTopWeekHeader}
-                  onPressTrack={this.handlePressTopWeekTrack}
-                />
-              )
-            }}
-          </Query>
+          <TopWeekSection getRefetcher={this.setRefetcher('topWeekTracks')} />
         </Container>
       </SafeView>
     )

@@ -1,19 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 // для секций экрана Home
-const withGraphQLRefetch = (WrappedComponent: React.ComponentType<any>) =>
-  class GraphQLRefetch extends React.Component<{ refetch?: () => void }> {
-    refreshData = (): void => {
-      const { refetch } = this.props
-      if (refetch) {
-        refetch()
+const withGraphQLRefetch = (WrappedComponent: React.ComponentType<any>) => {
+  const GraphQLRefetch: React.FC<{
+    refetch?: () => void
+    getRefetcher?: (refetch: () => void) => void
+  }> = ({ refetch, getRefetcher, ...rest }) => {
+    useEffect(() => {
+      if (refetch && getRefetcher) {
+        getRefetcher(refetch)
       }
-    }
+    }, [refetch, getRefetcher])
 
-    render() {
-      const { refetch, ...rest } = this.props
-      return <WrappedComponent {...rest} />
-    }
+    return <WrappedComponent {...rest} />
   }
+
+  return GraphQLRefetch
+}
 
 export default withGraphQLRefetch

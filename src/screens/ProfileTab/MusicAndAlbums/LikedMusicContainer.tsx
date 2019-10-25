@@ -23,12 +23,12 @@ const LikedMusicContainer: React.FC<Props> = ({
   tracksData: {
     tracksPagination,
     loading: tracksLoading,
-    refetch: refretchTracks,
+    refetch: refetchTracks,
   },
   albumsData: {
     albumsPagination,
     loading: albumsLoading,
-    refetch: refretchAlbums,
+    refetch: refetchAlbums,
   },
   ...rest
 }) => {
@@ -46,7 +46,7 @@ const LikedMusicContainer: React.FC<Props> = ({
   )
 
   const refreshData = useCallback(
-    (): Promise<any> => Promise.all([refretchTracks(), refretchAlbums()]),
+    (): Promise<any> => Promise.all([refetchTracks(), refetchAlbums()]),
     [],
   )
 

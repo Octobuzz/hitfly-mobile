@@ -56,7 +56,7 @@ interface Props {
 }
 
 const StarsSection: React.FC<Props> = ({ isLoading, users, onPressStar }) => {
-  if (!users.length) {
+  if (!users.length && !isLoading) {
     return null
   }
   return (
