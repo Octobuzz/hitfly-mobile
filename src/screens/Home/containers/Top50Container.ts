@@ -1,16 +1,17 @@
 import L from 'lodash'
 import { withNavigation } from 'react-navigation'
 import { graphql } from '@apollo/react-hoc'
-import { TracksSection } from '../components'
-import { GET_NEW_TRACKS } from './graphql'
+import { PlaylistSection } from '../components'
+import { GET_TOP50 } from './graphql'
 import { withGraphQLRefetch } from 'src/containers/HOCs'
 import { ROUTES } from 'src/navigation'
+import { images } from 'src/constants'
 
 export default L.flowRight(
   withNavigation,
   // @ts-ignore
-  graphql(GET_NEW_TRACKS, {
-    alias: 'withNewTracks',
+  graphql(GET_TOP50, {
+    alias: 'withTop50',
     props: (
       {
         // @ts-ignore
@@ -21,23 +22,20 @@ export default L.flowRight(
       last,
     ) => {
       const reqPlaylist = L.get(playlist, 'items', [])
-      const onPressHeader = () => {
-        navigation.navigate(ROUTES.MAIN.NEW_PLAYLIST)
+      const onPress = () => {
+        navigation.navigate(ROUTES.MAIN.TOP_50_PLAYLIST)
       }
-      // TODO: когда будет плеер, сделать HOC и прокинуть нужную функцию сюда
-      const onPressTrack = () => {
-        navigation.navigate(ROUTES.MAIN.NEW_PLAYLIST)
-      }
-
       return {
         refetch,
-        title: 'Новое',
+        onPress,
+        title: 'Топ 50',
+        subtitle: 'Рейтинг лучших музыкантов',
+        imageSource: images.TOP50_BACKGROUND,
+        bottomTextType: 'tracksLength',
         playlist: reqPlaylist,
         isLoading: loading,
-        onPressTrack,
-        onPressHeader,
       }
     },
   }),
   withGraphQLRefetch,
-)(TracksSection)
+)(PlaylistSection)

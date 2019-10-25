@@ -2,7 +2,7 @@ import L from 'lodash'
 import { withNavigation } from 'react-navigation'
 import { graphql } from '@apollo/react-hoc'
 import { TracksSection } from '../components'
-import { GET_TOP_WEEK_TRACKS } from '../graphql'
+import { GET_TOP_WEEK_TRACKS } from './graphql'
 import { withGraphQLRefetch } from 'src/containers/HOCs'
 import { ROUTES } from 'src/navigation'
 

@@ -1,6 +1,8 @@
 export { default as NewSection } from './NewContainer'
 export { default as StarsSection } from './StarsContainer'
+export { default as Top50Section } from './Top50Container'
 export { default as GenresSection } from './GenresContainer'
 export { default as TopWeekSection } from './TopWeekContainer'
 export { default as MusicFanSection } from './MusicFanContainer'
+export { default as ListenedNowSection } from './ListenedNowContainer'
 export { default as RecommendedSection } from './RecommendedContainer'
