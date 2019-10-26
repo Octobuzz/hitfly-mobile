@@ -21,9 +21,9 @@ const SELECT_COLLECTIONS_TYPE = gql`
 `
 
 export interface SelectorsProps {
-  selectCollection: (collectionId: number) => Promise<void>
-  selectCollectionType: (type: string) => Promise<void>
-  selectGenre: (genreId: number) => Promise<void>
+  selectCollection: (collectionId: number) => Promise<any>
+  selectCollectionType: (type: string) => Promise<any>
+  selectGenre: (genreId: number) => Promise<any>
 }
 
 interface Props {
@@ -42,21 +42,16 @@ const withSelectors = (
     ...rest
   }) => {
     const selectCollection = useCallback(
-      async (collectionId: number) => {
-        await mutSelectCollection({ variables: { id: collectionId } })
-      },
+      (collectionId: number) =>
+        mutSelectCollection({ variables: { id: collectionId } }),
       [mutSelectCollection],
     )
     const selectGenre = useCallback(
-      async (genreId: number) => {
-        await mutSelectGenre({ variables: { id: genreId } })
-      },
+      (genreId: number) => mutSelectGenre({ variables: { id: genreId } }),
       [mutSelectGenre],
     )
     const selectCollectionType = useCallback(
-      async (type: string) => {
-        await mutSelectCollectionType({ variables: { type } })
-      },
+      (type: string) => mutSelectCollectionType({ variables: { type } }),
       [mutSelectCollectionType],
     )
 

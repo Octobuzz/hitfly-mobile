@@ -6,7 +6,7 @@ import { getBottomSpace } from 'react-native-iphone-x-helper'
 import { Query } from '@apollo/react-components'
 import { DocumentNode } from 'graphql'
 import { Collection, PaginationVariables, Pagination } from 'src/apollo'
-import { H1, Loader, CollectionItem } from 'src/components'
+import { H1, Loader, CollectionItem, RefreshControl } from 'src/components'
 import styled from 'src/styled-components'
 
 const Scroll = styled(FlatList as new () => FlatList<Collection>).attrs(() => ({
@@ -49,8 +49,6 @@ class CollectionDetails extends React.Component<Props> {
     return <CollectionItem collection={item} onPress={this.onPressItem} />
   }
 
-  private keyExtractor = (item: Collection): string => item.id.toString()
-
   private mergePages = (
     page1: CollectionsData,
     page2: CollectionsData,
@@ -72,7 +70,7 @@ class CollectionDetails extends React.Component<Props> {
         query={query}
         variables={{ page: 1, limit: this.limit }}
       >
-        {({ loading, data, fetchMore }) => {
+        {({ loading, data, fetchMore, refetch }) => {
           const collections = L.get(data, 'collections.items')
 
           if (!loading && L.isEmpty(collections)) {
@@ -86,7 +84,9 @@ class CollectionDetails extends React.Component<Props> {
           return (
             <Scroll
               data={collections}
-              keyExtractor={this.keyExtractor}
+              refreshControl={
+                <RefreshControl refreshing={false} onRefresh={refetch} />
+              }
               renderItem={this.renderItem}
               ListHeaderComponent={Header}
               ListFooterComponent={loading ? Loader : null}

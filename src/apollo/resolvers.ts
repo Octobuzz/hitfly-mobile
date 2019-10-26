@@ -3,7 +3,7 @@ import { InMemoryCache, IdGetter } from 'apollo-cache-inmemory'
 import { Resolvers } from 'apollo-client'
 import gql from 'graphql-tag'
 import { Genre } from './schemas'
-import { CollectionsType, HeaderSettings } from './commonTypes'
+import { HeaderSettings, CollectionsType } from './commonTypes'
 import { helpers } from 'src/utils'
 
 interface ContextArgs {
@@ -13,7 +13,7 @@ interface ContextArgs {
 
 const GET_GENRES = gql`
   query {
-    genres: genre {
+    genres: genre @client {
       id
       imageUrl: image
     }
@@ -22,7 +22,8 @@ const GET_GENRES = gql`
 
 const GET_RECOMMENDED = gql`
   query Collections($limit: Int = 10, $page: Int = 1) {
-    collections(limit: $limit, page: $page, filters: { collection: true }) {
+    collections(limit: $limit, page: $page, filters: { collection: true })
+      @client {
       items: data {
         id
         image: image(sizes: [size_290x290]) {
@@ -39,7 +40,8 @@ const GET_RECOMMENDED = gql`
 // TODO: использовать фрагменты?
 const GET_MUSIC_FAN = gql`
   query Collections($limit: Int = 10, $page: Int = 1) {
-    collections(limit: $limit, page: $page, filters: { superMusicFan: true }) {
+    collections(limit: $limit, page: $page, filters: { superMusicFan: true })
+      @client {
       items: data {
         id
         image: image(sizes: [size_290x290]) {
@@ -55,10 +57,16 @@ const GET_MUSIC_FAN = gql`
 
 const GET_HEADER_SETTINGS = gql`
   query {
-    headerSettings {
+    headerSettings @client {
       mode
       state
     }
+  }
+`
+
+const GET_SELECTED_COLLECTIONS_TYPE = gql`
+  query @client {
+    collectionDetailsType
   }
 `
 
