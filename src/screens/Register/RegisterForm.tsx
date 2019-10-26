@@ -9,7 +9,6 @@ import {
   TextBase,
   CheckBox,
   DatePicker,
-  FormWrapper,
 } from 'src/components'
 import styled from 'src/styled-components'
 
@@ -22,6 +21,10 @@ const IndentedInput = styled(Input).attrs(indentAttrs)``
 const IndentedDatepicker = styled(DatePicker).attrs(indentAttrs)``
 
 const IndentedDropdown = styled(Dropdown).attrs(indentAttrs)``
+
+const IndetedButton = styled(Button)`
+  margin-top: 16px;
+`
 
 const StyledCheckBox = styled(CheckBox)`
   align-self: center;
@@ -51,51 +54,50 @@ const RegisterForm: React.FC<Props> = ({
   isSubmitting,
 }) => (
   <>
-    <FormWrapper>
-      <Field
-        name="email"
-        label="E-mail"
-        component={IndentedInput}
-        keyboardType="email-address"
-        RightIcon={<MaterialIcon size={20} name="mail-outline" />}
-      />
-      <Field
-        name="password"
-        label="Пароль"
-        secureTextEntry
-        component={IndentedInput}
-        RightIcon={<SimpleLineIcon size={20} name="key" />}
-      />
-      <Field
-        name="passwordRepeat"
-        label="Повторите пароль"
-        secureTextEntry
-        component={IndentedInput}
-        RightIcon={<SimpleLineIcon size={20} name="key" />}
-      />
-      <Field
-        name="birthday"
-        label="Дата рождения"
-        component={IndentedDatepicker}
-        RightIcon={<MaterialIcon size={20} name="perm-contact-calendar" />}
-      />
-      <Field
-        name="gender"
-        label="Пол"
-        options={[
-          { value: 'M', title: 'Мужчина' },
-          { value: 'F', title: 'Женщина' },
-        ]}
-        component={IndentedDropdown}
-      />
+    <Field
+      name="email"
+      label="E-mail"
+      component={IndentedInput}
+      keyboardType="email-address"
+      RightIcon={<MaterialIcon size={20} name="mail-outline" />}
+    />
+    <Field
+      name="password"
+      label="Пароль"
+      secureTextEntry
+      component={IndentedInput}
+      RightIcon={<SimpleLineIcon size={20} name="key" />}
+    />
+    <Field
+      name="passwordRepeat"
+      label="Повторите пароль"
+      secureTextEntry
+      component={IndentedInput}
+      RightIcon={<SimpleLineIcon size={20} name="key" />}
+    />
+    <Field
+      name="birthday"
+      label="Дата рождения"
+      component={IndentedDatepicker}
+      RightIcon={<MaterialIcon size={20} name="perm-contact-calendar" />}
+    />
+    <Field
+      name="gender"
+      label="Пол"
+      options={[
+        { value: 'M', title: 'Мужчина' },
+        { value: 'F', title: 'Женщина' },
+      ]}
+      component={IndentedDropdown}
+    />
 
-      <Field name="policy" component={StyledCheckBox}>
-        <CheckBoxText>
-          Согласен с <BrandText>условиями использования</BrandText>
-        </CheckBoxText>
-      </Field>
-    </FormWrapper>
-    <Button
+    <Field name="policy" component={StyledCheckBox}>
+      <CheckBoxText>
+        Согласен с <BrandText>условиями использования</BrandText>
+      </CheckBoxText>
+    </Field>
+
+    <IndetedButton
       isDisabled={!isValid || isSubmitting}
       isLoading={isSubmitting}
       title="Зарегистрироваться"
