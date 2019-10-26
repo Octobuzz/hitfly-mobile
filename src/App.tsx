@@ -14,6 +14,7 @@ YellowBox.ignoreWarnings([
   'Warning: componentWillMount',
   'Warning: componentWillUpdate',
   'Warning: componentWillReceiveProps',
+  'cancelTouches',
 ])
 
 class App extends React.Component {
