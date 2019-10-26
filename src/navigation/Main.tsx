@@ -10,11 +10,14 @@ import {
   RemoveAccountScreen,
   Top50PlaylistScreen,
   TopWeekPlaylistScreen,
-  CollectionDetailsScreen,
   CollectionPlaylistScreen,
   ListenedNowPlaylistScreen,
 } from 'src/containers'
-import { ProfileTabScreen, HomeScreen } from 'src/screens'
+import {
+  HomeScreen,
+  ProfileTabScreen,
+  CollectionDetailsScreen,
+} from 'src/screens'
 import { stackDefaultOptions, playlistConfig } from './configs'
 import routeNames from './routeNames'
 

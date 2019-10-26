@@ -31,11 +31,11 @@ export default L.flowRight(
 
       return {
         refetch,
+        onPressTrack,
+        onPressHeader,
         title: 'Новое',
         playlist: reqPlaylist,
         isLoading: loading,
-        onPressTrack,
-        onPressHeader,
       }
     },
   }),

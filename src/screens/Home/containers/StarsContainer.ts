@@ -19,9 +19,9 @@ export default L.flowRight(
     props: ({ data: { users, refetch, loading } }) => {
       const reqUsers = L.get(users, 'items', [])
       return {
+        refetch,
         users: reqUsers,
         isLoading: loading,
-        refetch,
         onPressStar: goToStarProfile,
       }
     },

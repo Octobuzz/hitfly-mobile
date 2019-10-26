@@ -35,7 +35,6 @@ export default L.flowRight(
         await selectCollectionType('recommended')
         navigation.navigate(ROUTES.MAIN.COLLECTION_DETAILS, {
           title: 'Рекомендуем',
-          onPressItem: onPressCollection,
         })
       }
 

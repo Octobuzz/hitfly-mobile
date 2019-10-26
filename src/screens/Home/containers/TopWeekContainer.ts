@@ -31,12 +31,12 @@ export default L.flowRight(
 
       return {
         refetch,
-        title: 'Открытие недели',
-        subtitle: 'Треки, которые неожиданно поднялись в чарте',
-        playlist: reqPlaylist,
-        isLoading: loading,
         onPressTrack,
         onPressHeader,
+        isLoading: loading,
+        playlist: reqPlaylist,
+        title: 'Открытие недели',
+        subtitle: 'Треки, которые неожиданно поднялись в чарте',
       }
     },
   }),

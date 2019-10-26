@@ -35,7 +35,6 @@ export default L.flowRight(
         await selectCollectionType('musicFan')
         navigation.navigate(ROUTES.MAIN.COLLECTION_DETAILS, {
           title: 'Супер меломан',
-          onPressItem: onPressCollection,
         })
       }
 
