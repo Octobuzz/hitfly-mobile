@@ -33,8 +33,14 @@ const View = styled.View<IView>`
     }
     return padding
   }}px;
-  padding-horizontal:  ${({ noHorizontalPadding, noPadding }) =>
-    noHorizontalPadding || noPadding ? 0 : 16}px;
+  padding-horizontal:  ${({
+    noHorizontalPadding,
+    paddingHorizontal,
+    noPadding,
+  }) =>
+    noHorizontalPadding || noPadding
+      ? 0
+      : L.without([paddingHorizontal, 16], undefined)[0]}px;
 `
 
 export default View

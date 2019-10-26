@@ -27,9 +27,7 @@ const Row = styled.View`
   margin-bottom: 16px;
 `
 
-const FeaturesWrapper = styled.View`
-  padding-horizontal: 22px;
-`
+const FeaturesWrapper = styled.View``
 
 export interface Feature {
   icon: number

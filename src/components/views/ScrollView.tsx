@@ -9,6 +9,7 @@ const ScrollView = styled.ScrollView.attrs(
     paddingTop,
     paddingBottom,
     paddingVertical,
+    paddingHorizontal,
     noVerticalPadding,
     noHorizontalPadding,
     addBottomSafePadding,
@@ -33,7 +34,10 @@ const ScrollView = styled.ScrollView.attrs(
             ? 0
             : L.without([paddingTop, paddingVertical, 16], undefined)[0],
         paddingVertical: noVerticalPadding || noPadding ? 0 : 16,
-        paddingHorizontal: noHorizontalPadding || noPadding ? 0 : 16,
+        paddingHorizontal:
+          noHorizontalPadding || noPadding
+            ? 0
+            : L.without([paddingHorizontal, 16], undefined)[0],
       },
     }
   },
