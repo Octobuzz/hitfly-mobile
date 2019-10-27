@@ -1,17 +1,18 @@
 import React from 'react'
 import { TextInputProps } from 'react-native'
-import { TextField } from 'react-native-material-textfield'
+// @ts-ignore
+import { OutlinedTextField } from 'react-native-material-textfield'
 import { InputBase } from './interfaces'
 import styled from 'src/styled-components'
 
-const TextInput = styled(TextField).attrs(({ theme }) => ({
-  placeholderTextColor: theme.colors.textGray,
+const TextInput = styled(OutlinedTextField).attrs(({ theme }) => ({
   selectionColor: theme.colors.textMain,
   textColor: theme.colors.textMain,
+  tintColor: theme.colors.brandPink,
   labelTextStyle: {
     fontFamily: theme.fonts.regular,
   },
-  labelHeight: 20,
+  // labelHeight: 20,
 }))`
   color: ${({ theme }) => theme.colors.textMain};
   font-family: ${({ theme }) => theme.fonts.regular};
