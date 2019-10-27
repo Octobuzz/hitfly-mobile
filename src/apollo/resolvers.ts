@@ -123,11 +123,6 @@ export default {
       return client
         .query({ query, variables })
         .then(res => L.get(res, 'data.collections'))
-      // const result = await client.query({ query, variables })
-      // console.log('RESOLVERS', { result})
-
-      // const collections = L.get(result, 'data.collections')
-      // return collections
     },
   },
 } as Resolvers
