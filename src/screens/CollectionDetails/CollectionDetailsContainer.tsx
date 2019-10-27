@@ -57,7 +57,7 @@ const CollectionDetails: React.FC<Props> = ({
   const collections: Collection[] = L.get(data, 'collections.items', [])
   const hasMorePages: boolean = L.get(data, 'collections.hasMorePages')
 
-  const onEndReached = (): void => {
+  const onEndReached = useCallback((): void => {
     if (hasMorePages) {
       // + 1, потому что для бэка 1 и 0 - одно и то же
       // поэтому page должна быть больше 1
@@ -72,7 +72,7 @@ const CollectionDetails: React.FC<Props> = ({
         },
       })
     }
-  }
+  }, [hasMorePages])
 
   const title = navigation.getParam('title', '')
 
