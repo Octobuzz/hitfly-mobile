@@ -1,19 +1,20 @@
 import L from 'lodash'
 import { InMemoryCache, IdGetter } from 'apollo-cache-inmemory'
-import { Resolvers } from 'apollo-client'
+import ApolloClient, { Resolvers } from 'apollo-client'
 import gql from 'graphql-tag'
 import { Genre } from './schemas'
 import { HeaderSettings, CollectionsType } from './commonTypes'
 import { helpers } from 'src/utils'
 
 interface ContextArgs {
+  client: ApolloClient<InMemoryCache>
   cache: InMemoryCache
   getCacheKey: IdGetter
 }
 
 const GET_GENRES = gql`
   query {
-    genres: genre @client {
+    genres: genre {
       id
       imageUrl: image
     }
@@ -22,8 +23,7 @@ const GET_GENRES = gql`
 
 const GET_RECOMMENDED = gql`
   query Collections($limit: Int = 10, $page: Int = 1) {
-    collections(limit: $limit, page: $page, filters: { collection: true })
-      @client {
+    collections(limit: $limit, page: $page, filters: { collection: true }) {
       items: data {
         id
         image: image(sizes: [size_290x290]) {
@@ -40,8 +40,7 @@ const GET_RECOMMENDED = gql`
 // TODO: использовать фрагменты?
 const GET_MUSIC_FAN = gql`
   query Collections($limit: Int = 10, $page: Int = 1) {
-    collections(limit: $limit, page: $page, filters: { superMusicFan: true })
-      @client {
+    collections(limit: $limit, page: $page, filters: { superMusicFan: true }) {
       items: data {
         id
         image: image(sizes: [size_290x290]) {
@@ -61,12 +60,6 @@ const GET_HEADER_SETTINGS = gql`
       mode
       state
     }
-  }
-`
-
-const GET_SELECTED_COLLECTIONS_TYPE = gql`
-  query @client {
-    collectionDetailsType
   }
 `
 
@@ -121,13 +114,20 @@ export default {
     collectionsByType: (
       _,
       { type, ...variables }: { type: CollectionsType },
-      { cache }: ContextArgs,
+      { client }: ContextArgs,
     ) => {
-      // TODO: добавить проверку?
+      if (!type) {
+        return null
+      }
       const query = type === 'recommended' ? GET_RECOMMENDED : GET_MUSIC_FAN
-      const result = cache.readQuery({ query, variables })
-      const collections = L.get(result, 'collections', null)
-      return collections
+      return client
+        .query({ query, variables })
+        .then(res => L.get(res, 'data.collections'))
+      // const result = await client.query({ query, variables })
+      // console.log('RESOLVERS', { result})
+
+      // const collections = L.get(result, 'data.collections')
+      // return collections
     },
   },
 } as Resolvers
