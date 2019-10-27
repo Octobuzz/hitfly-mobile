@@ -1,6 +1,7 @@
 import L from 'lodash'
 import { getBottomSpace } from 'react-native-iphone-x-helper'
 import { IView } from './interfaces'
+import { styles } from 'src/constants'
 import styled from 'src/styled-components'
 
 const ScrollView = styled.ScrollView.attrs(
@@ -18,7 +19,7 @@ const ScrollView = styled.ScrollView.attrs(
       noVerticalPadding || noPadding
         ? 0
         : (L.without(
-            [paddingBottom, paddingVertical, 16],
+            [paddingBottom, paddingVertical, styles.VIEW_VERTICAL_INDENTATION],
             undefined,
           )[0] as number)
 
@@ -32,12 +33,19 @@ const ScrollView = styled.ScrollView.attrs(
         paddingTop:
           noVerticalPadding || noPadding
             ? 0
-            : L.without([paddingTop, paddingVertical, 16], undefined)[0],
-        paddingVertical: noVerticalPadding || noPadding ? 0 : 16,
+            : L.without(
+                [paddingTop, paddingVertical, styles.VIEW_VERTICAL_INDENTATION],
+                undefined,
+              )[0],
+        paddingVertical:
+          noVerticalPadding || noPadding ? 0 : styles.VIEW_VERTICAL_INDENTATION,
         paddingHorizontal:
           noHorizontalPadding || noPadding
             ? 0
-            : L.without([paddingHorizontal, 16], undefined)[0],
+            : L.without(
+                [paddingHorizontal, styles.VIEW_HORIZONTAL_INDENTATION],
+                undefined,
+              )[0],
       },
     }
   },

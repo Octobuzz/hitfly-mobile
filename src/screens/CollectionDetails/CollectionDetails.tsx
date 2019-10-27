@@ -2,6 +2,7 @@ import React, { useCallback } from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
 import { getBottomSpace } from 'react-native-iphone-x-helper'
 import { Collection } from 'src/apollo'
+import { styles } from 'src/constants'
 import { H1, Loader, CollectionItem, RefreshControl } from 'src/components'
 import styled from 'src/styled-components'
 
@@ -10,7 +11,7 @@ const Scroll = styled(FlatList as new () => FlatList<Collection>).attrs(() => ({
   initialNumToRender: 8,
   columnWrapperStyle: {
     justifyContent: 'space-between',
-    marginBottom: 8,
+    marginBottom: styles.VIEW_HORIZONTAL_INDENTATION,
   },
 }))`
   flex: 1;
