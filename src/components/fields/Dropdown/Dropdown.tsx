@@ -14,6 +14,8 @@ const StyledCollapsible = styled(Collapsible)`
   padding-horizontal: 8px;
 `
 
+const TouchableWrapper = styled.TouchableOpacity``
+
 export interface Option {
   title: string
   value: string
@@ -54,38 +56,8 @@ class Dropdown extends React.Component<Props, State> {
     setFieldValue(name, option.value)
   }
 
-  private showDropdown = (): void => {
-    this.setState({ isCollapsed: false })
-  }
-
-  private handleBlur = (): void => {
-    const {
-      field: { name },
-      form: { setFieldTouched },
-    } = this.props
-    this.setState({ isCollapsed: true })
-    setFieldTouched(name, true)
-  }
-
-  private handleChange = (text: string): void => {
-    const {
-      field: { name },
-      form: { setFieldValue },
-    } = this.props
-    const nearestOption = this.getClosestOption(text)
-    this.setState({ inputValue: text })
-    if (nearestOption) {
-      setFieldValue(name, nearestOption.value)
-    }
-  }
-
-  private getClosestOption = (text: string): Option | undefined => {
-    const { options } = this.props
-    const lowecaseText = text.toLowerCase()
-    const option = options.find(({ title }) =>
-      title.toLowerCase().includes(lowecaseText),
-    )
-    return option
+  private toggleDropdown = (): void => {
+    this.setState((state: State) => ({ isCollapsed: !state.isCollapsed }))
   }
 
   private renderItem = (option: Option): JSX.Element => (
@@ -109,15 +81,15 @@ class Dropdown extends React.Component<Props, State> {
     const RightIcon = this.getRightIcon()
     return (
       <Wrapper style={containerStyle}>
-        <TextInputUI
-          value={inputValue}
-          onChangeText={this.handleChange}
-          onBlur={this.handleBlur}
-          onFocus={this.showDropdown}
-          error={error}
-          RightIcon={RightIcon}
-          {...rest}
-        />
+        <TouchableWrapper onPress={this.toggleDropdown}>
+          <TextInputUI
+            editable={false}
+            value={inputValue}
+            error={error}
+            RightIcon={RightIcon}
+            {...rest}
+          />
+        </TouchableWrapper>
         <StyledCollapsible collapsed={isCollapsed}>
           {options.map(this.renderItem)}
         </StyledCollapsible>

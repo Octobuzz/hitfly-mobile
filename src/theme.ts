@@ -3,7 +3,7 @@ import { ITheme } from './styled-components'
 const theme: ITheme = {
   colors: {
     brandBlue: '#4297FE',
-    brandPink: '#D066BF',
+    brandPink: '#C461DD',
 
     transparent70: 'rgba(49, 49, 49, 0.7)',
     transparentWhite50: 'rgba(255, 255, 255, 0.5)',

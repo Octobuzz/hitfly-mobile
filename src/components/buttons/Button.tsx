@@ -11,7 +11,7 @@ export const disabledStyle = css`
 
 const Wrapper = styled.TouchableOpacity<IndentedHorizontal>`
   ${disabledStyle}
-  ${({ withMargin = true }) => withMargin && `margin-horizontal: 20px;`}
+  ${({ withoutMargin }) => !withoutMargin && `margin-horizontal: 20px;`}
 `
 
 const Text = styled(TextBase)<ColorType>`
@@ -57,7 +57,7 @@ interface ColorType {
 }
 
 interface IndentedHorizontal {
-  withMargin?: boolean
+  withoutMargin?: boolean
 }
 
 interface Props extends ColorType, ButtonBase, IndentedHorizontal {
@@ -71,8 +71,14 @@ const Button: React.FC<Props> = ({
   onPress,
   isLoading,
   isDisabled,
+  withoutMargin,
 }) => (
-  <Wrapper disabled={isDisabled} onPress={onPress} style={style}>
+  <Wrapper
+    disabled={isDisabled}
+    withoutMargin={withoutMargin}
+    onPress={onPress}
+    style={style}
+  >
     <Gradient>
       {isLoading ? <Loader size={61.7} /> : <Text type={type}>{title}</Text>}
     </Gradient>

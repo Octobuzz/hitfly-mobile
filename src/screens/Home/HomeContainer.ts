@@ -1,11 +1,11 @@
 import L from 'lodash'
 import {
-  withHidingSplashScreen,
   withChangingHeaderSettings,
+  withHidingSplashScreen,
 } from 'src/containers/HOCs'
-import Login from './Login'
+import HomeScreen from './Home'
 
 export default L.flowRight(
-  withChangingHeaderSettings({ state: 'auth', mode: 'dark' }),
+  withChangingHeaderSettings({ state: 'main', mode: 'dark' }),
   withHidingSplashScreen,
-)(Login)
+)(HomeScreen)

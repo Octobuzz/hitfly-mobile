@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
-import { View, SafeView } from 'src/components'
+import { FormWrapper, SafeView } from 'src/components'
 import { SocialAuth } from 'src/containers'
 import RegisterForm from './RegisterFormContainer'
 import styled from 'src/styled-components'
@@ -13,10 +13,10 @@ class Register extends React.Component<NavigationStackScreenProps> {
   render() {
     return (
       <SafeView>
-        <View>
+        <FormWrapper>
           <IndentedSocialAuth bottomText="или зарегистрируйтесь через почту" />
           <RegisterForm />
-        </View>
+        </FormWrapper>
       </SafeView>
     )
   }

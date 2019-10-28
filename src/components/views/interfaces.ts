@@ -6,5 +6,6 @@ export interface IView {
   paddingTop?: number
   paddingBottom?: number
   paddingVertical?: number
+  paddingHorizontal?: number
   addBottomSafePadding?: boolean
 }

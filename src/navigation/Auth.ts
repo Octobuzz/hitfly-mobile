@@ -1,7 +1,6 @@
 import { createStackNavigator } from 'react-navigation-stack'
 import {
   LoginScreen,
-  WelcomeScreen,
   RegisterScreen,
   SelectGenreScreen,
   RecoveryInfoScreen,
@@ -14,10 +13,6 @@ import { stackDefaultOptions } from './configs'
 
 const AuthNavigator = createStackNavigator(
   {
-    [routeNames.AUTH.WELCOME]: {
-      screen: WelcomeScreen,
-      navigationOptions: { header: null },
-    },
     [routeNames.AUTH.LOGIN]: {
       screen: LoginScreen,
       navigationOptions: { title: 'Вход' },
@@ -41,7 +36,7 @@ const AuthNavigator = createStackNavigator(
     },
   },
   {
-    initialRouteName: routeNames.AUTH.WELCOME,
+    initialRouteName: routeNames.AUTH.LOGIN,
     defaultNavigationOptions: stackDefaultOptions,
   },
 )

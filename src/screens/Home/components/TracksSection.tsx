@@ -2,7 +2,8 @@ import React from 'react'
 import { FlatList } from 'react-native'
 import { Track, Playlist } from 'src/apollo'
 import { Loader, TextBase, Image } from 'src/components'
-import { SectionHeader, SectionWrapper } from './components'
+import SectionWrapper from './SectionWrapper'
+import SectionHeader from './SectionHeader'
 import styled from 'src/styled-components'
 
 const ITEM_WIDTH = 164
@@ -108,6 +109,9 @@ class TracksSection extends React.Component<Props> {
 
   render() {
     const { isLoading, playlist, title, subtitle, onPressHeader } = this.props
+    if (!isLoading && !playlist.length) {
+      return null
+    }
     return (
       <SectionWrapper>
         <SectionHeader

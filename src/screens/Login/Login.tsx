@@ -1,13 +1,6 @@
 import React from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
-import {
-  Link,
-  Button,
-  TextBase,
-  SafeView,
-  Stretcher,
-  ScrollView,
-} from 'src/components'
+import { Link, Button, TextBase, SafeView, FormWrapper } from 'src/components'
 import { SocialAuth } from 'src/containers'
 import LoginForm from './LoginFormContainer'
 import { ROUTES } from 'src/navigation'
@@ -55,7 +48,7 @@ class Login extends React.Component<NavigationStackScreenProps> {
   render() {
     return (
       <SafeView>
-        <ScrollView>
+        <FormWrapper>
           <IndentedSocialAuth bottomText="или войдите через почту" />
           <LoginForm onPressFogrotPassword={this.navigateToPasswordRecovery} />
           <IndentedButton
@@ -63,14 +56,13 @@ class Login extends React.Component<NavigationStackScreenProps> {
             title="Зарегистрироваться"
             type="outline"
           />
-          <Stretcher />
           <IndentedLink onPress={this.navigateToMain} title="Пропустить" />
           <BottomText>
             Регистрируясь через эл.почту, Facebook, VK, Instagram или
             Одноклассники вы принимаете
           </BottomText>
           <BottomLinkText> Условия использования</BottomLinkText>
-        </ScrollView>
+        </FormWrapper>
       </SafeView>
     )
   }

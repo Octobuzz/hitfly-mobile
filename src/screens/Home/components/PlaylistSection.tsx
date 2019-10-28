@@ -3,7 +3,8 @@ import React from 'react'
 import { ImageSourcePropType } from 'react-native'
 import { Loader, TextBase } from 'src/components'
 import { Playlist } from 'src/apollo'
-import { PlaylistHeader, SectionWrapper } from './components'
+import SectionWrapper from './SectionWrapper'
+import PlaylistHeader from './PlaylistHeader'
 import { helpers } from 'src/utils'
 import styled from 'src/styled-components'
 
@@ -33,9 +34,9 @@ type BottomTextType = 'tracksCount' | 'tracksLength'
 interface Props {
   title: string
   subtitle?: string
-  playlist?: Playlist
+  playlist: Playlist
   isLoading?: boolean
-  tracksCount?: number
+  tracksCount: number
   bottomTextType?: BottomTextType
   imageSource: ImageSourcePropType
   onPress: () => void
@@ -51,6 +52,15 @@ const PlaylistSection: React.FC<Props> = ({
   imageSource,
   bottomTextType,
 }) => {
+  if (!isLoading) {
+    // разделил для читаемости
+    if (bottomTextType === 'tracksCount' && tracksCount === 0) {
+      return null
+    }
+    if (bottomTextType === 'tracksLength' && !playlist.length) {
+      return null
+    }
+  }
   const bottomText = React.useMemo(() => {
     switch (bottomTextType) {
       case 'tracksCount': {
@@ -74,7 +84,7 @@ const PlaylistSection: React.FC<Props> = ({
         ) : (
           <>
             <PlaylistHeader title={title} subtitle={subtitle} />
-            {bottomText && <BottomText>{bottomText}</BottomText>}
+            {!!bottomText && <BottomText>{bottomText}</BottomText>}
           </>
         )}
       </Inner>
