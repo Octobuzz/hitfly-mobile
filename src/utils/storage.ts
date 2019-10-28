@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage'
 
-type Item = string | number | object
+type Item = string | number | object | boolean
 
 type DefaultItem = Item | Item[] | void
 

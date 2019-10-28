@@ -2,7 +2,8 @@ import React from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
 import { Loader, CollectionItem } from 'src/components'
 import { Collection } from 'src/apollo'
-import { SectionHeader, SectionWrapper } from './components'
+import SectionWrapper from './SectionWrapper'
+import SectionHeader from './SectionHeader'
 import styled from 'src/styled-components'
 
 const ITEM_WIDTH = 214
@@ -72,6 +73,11 @@ class ColleactionSection extends React.Component<Props> {
       collections,
       onPressHeader,
     } = this.props
+
+    if (!isLoading && !collections.length) {
+      return null
+    }
+
     return (
       <SectionWrapper>
         <SectionHeader

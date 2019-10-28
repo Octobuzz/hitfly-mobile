@@ -4,13 +4,12 @@ import {
   KeyboardAwareScrollView,
   KeyboardAwareScrollViewProps,
 } from 'react-native-keyboard-aware-scroll-view'
-import styled from 'styled-components'
+import ScrollView from './ScrollView'
+import { IView } from './interfaces'
 
-const ScrollView = styled(KeyboardAwareScrollView)`
-  flex: 1;
-`
+interface Props extends KeyboardAwareScrollViewProps, IView {}
 
-class FormWrapper extends React.Component<KeyboardAwareScrollViewProps> {
+class FormWrapper extends React.Component<Props> {
   state = {
     scrollHeight: 0,
     contentHeight: 0,
@@ -41,7 +40,9 @@ class FormWrapper extends React.Component<KeyboardAwareScrollViewProps> {
   render() {
     const { scrollHeight, contentHeight, keyboardShown } = this.state
     return (
+      // @ts-ignore
       <ScrollView
+        as={KeyboardAwareScrollView}
         {...this.props}
         keyboardShouldPersistTaps="handled"
         scrollEnabled={keyboardShown || contentHeight > scrollHeight}

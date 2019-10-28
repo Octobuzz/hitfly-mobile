@@ -2,7 +2,8 @@ import L from 'lodash'
 import React from 'react'
 import { FlatList } from 'react-native'
 import { Loader, GenreItem } from 'src/components'
-import { SectionHeader, SectionWrapper } from './components'
+import SectionWrapper from './SectionWrapper'
+import SectionHeader from './SectionHeader'
 import { Genre } from 'src/apollo'
 import styled from 'src/styled-components'
 
@@ -30,19 +31,16 @@ type GenrePair = [Genre, Genre?]
 
 interface Props {
   isLoading?: boolean
-  genres?: Genre[]
+  genres: Genre[]
   onPressItem: (item: Genre) => void
 }
 
 class GenresSection extends React.Component<Props> {
   // TODO: мемоизация
-  private getPairedGenres = (): GenrePair[] | null => {
+  private getPairedGenres = (): GenrePair[] => {
     const { genres } = this.props
-    if (genres) {
-      const pairedGenres = L.chunk(genres, 2) as GenrePair[]
-      return pairedGenres
-    }
-    return null
+    const pairedGenres = L.chunk(genres, 2) as GenrePair[]
+    return pairedGenres
   }
 
   private keyExtractor = (item: GenrePair): string => item[0].id.toString()
@@ -71,7 +69,11 @@ class GenresSection extends React.Component<Props> {
   }
   render() {
     const { isLoading } = this.props
+
     const pairedGenres = this.getPairedGenres()
+    if (!isLoading && !pairedGenres.length) {
+      return null
+    }
     return (
       <SectionWrapper>
         <SectionHeader title="Жанры" />

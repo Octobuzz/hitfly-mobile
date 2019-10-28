@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useMemo, useCallback } from 'react'
 import { ViewStyle } from 'react-native'
 import TextBase from './TextBase'
 import { Image } from './Image'
 import { helpers } from 'src/utils'
 import { Collection } from 'src/apollo'
+import { styles } from 'src/constants'
 import styled from 'src/styled-components'
 
 const ItemWrapper = styled.TouchableOpacity<Sized>`
-  height: ${({ height }) => height || 160}px;
-  width: ${({ width }) => width || 164}px;
+  height: ${({ height }) => height || styles.COL2_WIDTH}px;
+  width: ${({ width }) => width || styles.COL2_WIDTH}px;
   padding: 16px;
   align-items: flex-end;
   justify-content: space-between;
@@ -55,14 +56,17 @@ const CollectionItem: React.FC<CollectionItemProps> = ({
   width,
   height,
 }) => {
-  const handlePress = React.useCallback(() => {
+  const handlePress = useCallback(() => {
     if (collection) {
       onPress(collection)
     }
   }, [onPress, collection])
 
   const { tracksCountInPlaylist, title, image } = collection
-  const bottomText = helpers.formatTracksCount(tracksCountInPlaylist)
+  const bottomText = useMemo(
+    () => helpers.formatTracksCount(tracksCountInPlaylist),
+    [tracksCountInPlaylist],
+  )
   return (
     <ItemWrapper
       style={style}

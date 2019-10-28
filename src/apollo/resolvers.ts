@@ -1,12 +1,13 @@
 import L from 'lodash'
 import { InMemoryCache, IdGetter } from 'apollo-cache-inmemory'
-import { Resolvers } from 'apollo-client'
+import ApolloClient, { Resolvers } from 'apollo-client'
 import gql from 'graphql-tag'
 import { Genre } from './schemas'
-import { CollectionsType, HeaderSettings } from './commonTypes'
+import { HeaderSettings, CollectionsType } from './commonTypes'
 import { helpers } from 'src/utils'
 
 interface ContextArgs {
+  client: ApolloClient<InMemoryCache>
   cache: InMemoryCache
   getCacheKey: IdGetter
 }
@@ -55,7 +56,7 @@ const GET_MUSIC_FAN = gql`
 
 const GET_HEADER_SETTINGS = gql`
   query {
-    headerSettings {
+    headerSettings @client {
       mode
       state
     }
@@ -113,13 +114,15 @@ export default {
     collectionsByType: (
       _,
       { type, ...variables }: { type: CollectionsType },
-      { cache }: ContextArgs,
+      { client }: ContextArgs,
     ) => {
-      // TODO: добавить проверку?
+      if (!type) {
+        return null
+      }
       const query = type === 'recommended' ? GET_RECOMMENDED : GET_MUSIC_FAN
-      const result = cache.readQuery({ query, variables })
-      const collections = L.get(result, 'collections', null)
-      return collections
+      return client
+        .query({ query, variables })
+        .then(res => L.get(res, 'data.collections'))
     },
   },
 } as Resolvers

@@ -20,15 +20,15 @@ interface Props
 }
 
 const MyMusicContainer: React.FC<Props> = ({
-  tracksData: { tracks, loading: tracksLoading, refetch: refretchTracks },
-  albumsData: { albums, loading: albumsLoading, refetch: refretchAlbums },
+  tracksData: { tracks, loading: tracksLoading, refetch: refetchTracks },
+  albumsData: { albums, loading: albumsLoading, refetch: refetchAlbums },
   ...rest
 }) => {
   const myTracks: FavouriteTrack[] = L.get(tracks, 'items', [])
   const myAlbums: FavouriteAlbum[] = L.get(albums, 'items', [])
 
   const refreshData = useCallback(
-    (): Promise<any> => Promise.all([refretchTracks(), refretchAlbums()]),
+    (): Promise<any> => Promise.all([refetchTracks(), refetchAlbums()]),
     [],
   )
 

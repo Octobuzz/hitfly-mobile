@@ -4,15 +4,21 @@ import createAnimatedSwitchNavigator from 'react-navigation-animated-switch'
 import { createAppContainer } from 'react-navigation'
 import SplashScreen from 'react-native-splash-screen'
 import NavigationService from './navigationService'
+import { WelcomeScreen } from 'src/screens'
 import AuthNavigator from './Auth'
 import MainNavigator from './Main'
 import Storybook from '../../storybook'
+
 import ROUTES from './routeNames'
 import styled from 'src/styled-components'
 import { styles, storageKeys } from 'src/constants'
 import { storage } from 'src/utils'
 
 const SwitchRoutes = {
+  [ROUTES.APP.WELCOME]: {
+    screen: WelcomeScreen,
+    navigationOptions: { header: null },
+  },
   [ROUTES.APP.AUTH]: AuthNavigator,
   [ROUTES.APP.MAIN]: MainNavigator,
   [ROUTES.APP.STORYBOOK]: Storybook,
@@ -67,11 +73,18 @@ class AppNavigator extends React.Component {
   }
 
   private handleInitialNavigation = async () => {
-    const token = await storage.getItem(storageKeys.AUTH_TOKEN)
+    const [token, isFirstTime] = await Promise.all([
+      storage.getItem(storageKeys.AUTH_TOKEN),
+      storage.getItem(storageKeys.IS_FIRST_TIME),
+    ])
+    if (isFirstTime) {
+      SplashScreen.hide()
+    } else {
+      NavigationService.navigate({ routeName: ROUTES.AUTH.LOGIN })
+    }
     if (token) {
       NavigationService.navigate({ routeName: ROUTES.MAIN.HOME })
     }
-    SplashScreen.hide()
   }
 
   render() {
