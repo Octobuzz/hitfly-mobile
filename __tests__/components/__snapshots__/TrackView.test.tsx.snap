@@ -210,3 +210,17 @@ exports[`TrackView renders correctly 1`] = `
   </View>
 </View>
 `;
+
+exports[`TrackView renders correctly with empty props 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View />
+</View>
+`;

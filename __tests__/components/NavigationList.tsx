@@ -7,13 +7,17 @@ describe('NavigationList', () => {
     items: [
       {
         title: 'title',
-        onPress: jest.fn(),
+        onPress: () => 'hello',
       },
     ],
   }
 
-  it('renders correctly', () => {
+  it('renders correctly with props', () => {
     const { asJSON } = render(<NavigationList {...props} />)
+    expect(asJSON()).toMatchSnapshot()
+  })
+  it('renders correctly with empty array as props', () => {
+    const { asJSON } = render(<NavigationList items={[]} />)
     expect(asJSON()).toMatchSnapshot()
   })
 })

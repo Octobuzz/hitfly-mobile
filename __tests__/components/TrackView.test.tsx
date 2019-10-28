@@ -19,8 +19,19 @@ describe('TrackView', () => {
     showDetailedTrack: jest.fn(),
   }
 
+  const emptyProps = {
+    tracks: [],
+    activeTrack: null,
+    toggleTrack: jest.fn(),
+    showDetailedTrack: jest.fn(),
+  }
+
   it('renders correctly', () => {
     const { asJSON } = render(<TracksView {...props} />)
+    expect(asJSON()).toMatchSnapshot()
+  })
+  it('renders correctly with empty props', () => {
+    const { asJSON } = render(<TracksView {...emptyProps} />)
     expect(asJSON()).toMatchSnapshot()
   })
 })

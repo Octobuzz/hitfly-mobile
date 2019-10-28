@@ -12,6 +12,18 @@ exports[`TrackMenu renders correctly 1`] = `
 />
 `;
 
+exports[`TrackMenu renders correctly 2`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+/>
+`;
+
 exports[`TrackMenu renders correctly with handlers 1`] = `
 <View
   collapsable={true}
@@ -143,6 +155,7 @@ exports[`TrackMenu renders correctly with handlers 1`] = `
           },
         ]
       }
+      testID="like"
     >
       <Text
         allowFontScaling={false}

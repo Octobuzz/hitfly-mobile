@@ -5,7 +5,7 @@ import styled from 'src/styled-components'
 
 const Wrapper = styled.View``
 
-const ItemWrapper = styled.TouchableOpacity`
+export const ItemWrapper = styled.TouchableOpacity`
   padding-vertical: 28px;
   flex-direction: row;
   align-items: center;
@@ -37,8 +37,8 @@ interface Props {
 const NavigationList: React.FC<Props> = ({ items }) => (
   <Wrapper>
     {items.map(({ title, onPress }) => (
-      <ItemWrapper onPress={onPress} key={title}>
-        <ItemText>{title}</ItemText>
+      <ItemWrapper onPress={onPress} key={title} testID="itemWrapper">
+        <ItemText testID="itemText">{title}</ItemText>
         <ArrowIcon />
       </ItemWrapper>
     ))}

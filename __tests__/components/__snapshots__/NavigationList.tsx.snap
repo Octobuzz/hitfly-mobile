@@ -1,6 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NavigationList renders correctly 1`] = `
+exports[`NavigationList renders correctly with empty array as props 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {},
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`NavigationList renders correctly with props 1`] = `
 <View
   collapsable={true}
   pointerEvents="box-none"
@@ -30,6 +50,7 @@ exports[`NavigationList renders correctly 1`] = `
           },
         ]
       }
+      testID="itemWrapper"
     >
       <Text
         style={
@@ -46,6 +67,7 @@ exports[`NavigationList renders correctly 1`] = `
             },
           ]
         }
+        testID="itemText"
       >
         title
       </Text>

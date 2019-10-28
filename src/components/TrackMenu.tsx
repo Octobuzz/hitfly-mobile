@@ -44,7 +44,7 @@ const Divider = styled.View`
   background-color: ${({ theme }) => theme.colors.transparentWhite50};
 `
 
-const MenuItem = styled.TouchableOpacity`
+export const MenuItem = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   margin-bottom: 34px;
@@ -92,7 +92,7 @@ const TrackMenu: React.FC<Props> = ({
         </CenterBlock>
       </TrackWrapper>
       <Divider />
-      <MenuItem onPress={onPressLike}>
+      <MenuItem onPress={onPressLike} testID="like">
         <StyledIcon name="heart-o" />
         <MenuItemText>Понравилось</MenuItemText>
       </MenuItem>
