@@ -1,5 +1,11 @@
 import React from 'react'
-import { ScrollView, TextBase, H2 } from 'src/components'
+import {
+  H2,
+  Loader,
+  TextBase,
+  ScrollView,
+  RefreshControl,
+} from 'src/components'
 import Icon from 'react-native-vector-icons/Ionicons'
 import MusicGroup from './MusicGroup'
 import BonusProgram from './BonusProgram'
@@ -49,6 +55,8 @@ const NoInfoText = styled(TextBase)`
 
 interface Props {
   profile: Profile
+  isLoading: boolean
+  onRefresh: () => void
 }
 
 interface Indentable {
@@ -178,8 +186,16 @@ class AboutMe extends React.Component<Props> {
   }
 
   render() {
-    return (
-      <ScrollView addBottomSafePadding>
+    const { onRefresh, isLoading } = this.props
+    return isLoading ? (
+      <Loader isAbsolute />
+    ) : (
+      <ScrollView
+        refreshControl={
+          <RefreshControl refreshing={false} onRefresh={onRefresh} />
+        }
+        addBottomSafePadding
+      >
         {this.renderProfileInfo()}
         {this.renderProfileGroups()}
         {this.renderBonuses()}
