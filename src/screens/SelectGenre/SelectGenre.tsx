@@ -1,9 +1,6 @@
 import L from 'lodash'
 import React from 'react'
 import { FlatList } from 'react-native'
-import { NavigationStackScreenProps } from 'react-navigation-stack'
-import { Query } from '@apollo/react-components'
-import gql from 'graphql-tag'
 import {
   View,
   Link,
@@ -12,9 +9,10 @@ import {
   SafeView,
   GenreItem,
   HelperText,
+  RefreshControl,
 } from 'src/components'
-import { ROUTES } from 'src/navigation'
 import { Genre } from 'src/apollo'
+import { styles } from 'src/constants'
 import styled from 'src/styled-components'
 
 const IndentedButton = styled(Button)`
@@ -26,41 +24,34 @@ const Scroll = styled(FlatList as new () => FlatList<Genre>).attrs(() => ({
   numColumns: 3,
   initialNumToRender: 12,
   columnWrapperStyle: {
-    justifyContent: 'space-around',
-    marginBottom: 8,
+    justifyContent: 'space-between',
+    marginBottom: styles.VIEW_HORIZONTAL_INDENTATION / 2,
+  },
+  contentContainerStyle: {
+    paddingHorizontal: styles.VIEW_HORIZONTAL_INDENTATION,
   },
 }))`
   flex: 1;
-  margin-bottom: 40px;
 `
 
-interface GenreData {
-  genre: Genre[]
+const SizedLoader = <Loader size={100} />
+
+interface Props {
+  isLoading: boolean
+  genres: Genre[]
+  onRefresh: () => void
+  onEndReached: () => void
+  onSkip: () => void
+  onSubmit: (genres: Record<number, boolean>) => void
 }
 
 interface State {
-  selectedGenres: {
-    [id: number]: boolean | undefined
-  }
+  selectedGenres: Record<number, boolean>
 }
 
-const GET_GENRES = gql`
-  {
-    genre {
-      id
-      name
-      image
-    }
-  }
-`
-
-class SelectGenre extends React.Component<NavigationStackScreenProps, State> {
+class SelectGenre extends React.Component<Props, State> {
   state: State = {
     selectedGenres: {},
-  }
-  private navigateToMain = (): void => {
-    const { navigation } = this.props
-    navigation.navigate(ROUTES.APP.MAIN)
   }
 
   private renderGenre = ({ item }: { item: Genre }): JSX.Element => {
@@ -87,45 +78,35 @@ class SelectGenre extends React.Component<NavigationStackScreenProps, State> {
     this.setState({ selectedGenres: newGenres })
   }
 
-  private keyExtractor = ({ id }: Genre) => id.toString()
-
-  private getItemLayout = (
-    _: any,
-    index: number,
-  ): { length: number; offset: number; index: number } => ({
-    length: GenreItem.size,
-    offset: GenreItem.size * index,
-    index,
-  })
+  private submit = () => {
+    const { onSubmit } = this.props
+    const { selectedGenres } = this.state
+    onSubmit(selectedGenres)
+  }
 
   render() {
+    const { onEndReached, isLoading, genres, onSkip, onRefresh } = this.props
     return (
       <SafeView>
-        <View>
+        <View noFill paddingVertical={0}>
           <HelperText>
             Отметьте жанры, которые Вам нравятся. Это поможет получать более
             точные и интересные рекомендации
           </HelperText>
-          <Query<GenreData> query={GET_GENRES}>
-            {({ data, loading }) => {
-              if (loading) {
-                return <Loader />
-              }
-              if (data) {
-                return (
-                  <Scroll
-                    data={data.genre}
-                    renderItem={this.renderGenre}
-                    keyExtractor={this.keyExtractor}
-                    getItemLayout={this.getItemLayout}
-                  />
-                )
-              }
-              return null
-            }}
-          </Query>
-          <IndentedButton title="Готово" />
-          <Link onPress={this.navigateToMain} title="Пропустить" />
+        </View>
+        <Scroll
+          refreshControl={
+            <RefreshControl refreshing={false} onRefresh={onRefresh} />
+          }
+          data={genres}
+          renderItem={this.renderGenre}
+          onEndReachedThreshold={0.7}
+          onEndReached={onEndReached}
+          ListFooterComponent={isLoading ? SizedLoader : null}
+        />
+        <View noFill paddingTop={42}>
+          <IndentedButton onPress={this.submit} title="Готово" />
+          <Link onPress={onSkip} title="Пропустить" />
         </View>
       </SafeView>
     )
