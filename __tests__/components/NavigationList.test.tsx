@@ -1,23 +1,27 @@
 import { render } from '../../jest/test-utils'
 import { NavigationList } from 'src/components'
 import React from 'react'
+import { fireEvent } from '@testing-library/react-native'
 
 describe('NavigationList', () => {
   const props = {
     items: [
       {
         title: 'title',
-        onPress: () => 'hello',
+        onPress: jest.fn(),
       },
     ],
   }
 
   it('renders correctly with props', () => {
-    const { asJSON } = render(<NavigationList {...props} />)
+    const { asJSON, getByRole } = render(<NavigationList {...props} />)
+
+    fireEvent.press(getByRole('summary'))
     expect(asJSON()).toMatchSnapshot()
   })
   it('renders correctly with empty array as props', () => {
     const { asJSON } = render(<NavigationList items={[]} />)
+
     expect(asJSON()).toMatchSnapshot()
   })
 })

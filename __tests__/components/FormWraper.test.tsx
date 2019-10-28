@@ -7,4 +7,12 @@ describe('FormWrapper', () => {
     const { asJSON } = render(<FormWrapper />)
     expect(asJSON()).toMatchSnapshot()
   })
+  it('renders correctly with scrollEnabled === false', () => {
+    const { asJSON } = render(<FormWrapper scrollEnabled={false} />)
+    expect(asJSON()).toMatchSnapshot()
+  })
+  it('renders correctly with scrollEnabled === true', () => {
+    const { asJSON } = render(<FormWrapper scrollEnabled={true} />)
+    expect(asJSON()).toMatchSnapshot()
+  })
 })

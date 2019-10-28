@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '@testing-library/react-native'
+import { fireEvent, render } from '@testing-library/react-native'
 import AlbumItem from 'src/components/AlbumItem'
 import { Album } from 'src/apollo'
 import { ThemeProvider } from 'src/styled-components'
@@ -18,12 +18,21 @@ describe('AlbumItem', () => {
   }
 
   it('it renders correctly', () => {
-    const { asJSON } = render(
+    const { asJSON, getByRole } = render(
       <ThemeProvider theme={theme}>
         <AlbumItem {...props} />
       </ThemeProvider>,
     )
 
+    fireEvent.press(getByRole('summary'))
     expect(asJSON()).toMatchSnapshot()
+  })
+  it('it renders correctly', () => {
+    const { getByRole } = render(
+      <ThemeProvider theme={theme}>
+        <AlbumItem {...props} />
+      </ThemeProvider>,
+    )
+    expect(getByRole('summary')).toMatchSnapshot()
   })
 })

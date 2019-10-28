@@ -92,11 +92,11 @@ const TrackMenu: React.FC<Props> = ({
         </CenterBlock>
       </TrackWrapper>
       <Divider />
-      <MenuItem onPress={onPressLike} testID="like">
+      <MenuItem onPress={onPressLike} accessibilityRole="summary">
         <StyledIcon name="heart-o" />
         <MenuItemText>Понравилось</MenuItemText>
       </MenuItem>
-      <MenuItem onPress={onPressEdit}>
+      <MenuItem onPress={onPressEdit} accessibilityRole="summary">
         <StyledIcon name="edit" />
         <MenuItemText testID="like">Редактировать</MenuItemText>
       </MenuItem>

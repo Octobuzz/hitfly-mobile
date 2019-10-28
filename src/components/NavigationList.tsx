@@ -37,8 +37,8 @@ interface Props {
 const NavigationList: React.FC<Props> = ({ items }) => (
   <Wrapper>
     {items.map(({ title, onPress }) => (
-      <ItemWrapper onPress={onPress} key={title} testID="itemWrapper">
-        <ItemText testID="itemText">{title}</ItemText>
+      <ItemWrapper onPress={onPress} key={title} accessibilityRole="summary">
+        <ItemText>{title}</ItemText>
         <ArrowIcon />
       </ItemWrapper>
     ))}

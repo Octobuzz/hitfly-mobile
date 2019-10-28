@@ -38,6 +38,7 @@ exports[`NavigationList renders correctly with props 1`] = `
     }
   >
     <TouchableOpacity
+      accessibilityRole="summary"
       activeOpacity={0.2}
       style={
         Array [
@@ -50,7 +51,6 @@ exports[`NavigationList renders correctly with props 1`] = `
           },
         ]
       }
-      testID="itemWrapper"
     >
       <Text
         style={
@@ -67,7 +67,6 @@ exports[`NavigationList renders correctly with props 1`] = `
             },
           ]
         }
-        testID="itemText"
       >
         title
       </Text>
