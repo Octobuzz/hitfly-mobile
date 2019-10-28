@@ -1,8 +1,7 @@
 import { render } from '../../jest/test-utils'
-import { MenuItem, TrackMenu } from 'src/components'
+import { TrackMenu } from 'src/components'
 import React from 'react'
 import { Track } from '../../src/apollo'
-import { fireEvent } from '@testing-library/react-native'
 
 describe('TrackMenu', () => {
   const track = {
@@ -29,15 +28,5 @@ describe('TrackMenu', () => {
   it('renders correctly with handlers', () => {
     const { asJSON } = render(<TrackMenu {...props} />)
     expect(asJSON()).toMatchSnapshot()
-  })
-  it('re', () => {
-    const mockFn = jest.fn()
-
-    const { getByTestId } = render(<MenuItem />)
-    const button = getByTestId('like')
-
-    fireEvent.press(button)
-
-    expect(mockFn).toHaveBeenCalled()
   })
 })

@@ -46,6 +46,7 @@ exports[`TrackMenu renders correctly with handlers 1`] = `
         },
       ]
     }
+    testID="like"
   >
     <View
       style={
@@ -247,6 +248,7 @@ exports[`TrackMenu renders correctly with handlers 1`] = `
             },
           ]
         }
+        testID="like"
       >
         Редактировать
       </Text>

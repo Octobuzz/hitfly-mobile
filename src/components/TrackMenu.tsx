@@ -83,7 +83,7 @@ const TrackMenu: React.FC<Props> = ({
   }
   const { cover, group, singer, title } = track
   return (
-    <View paddingBottom={32} noFill>
+    <View paddingBottom={32} noFill testID="like">
       <TrackWrapper>
         <StyledImage source={{ uri: cover[0].imageUrl }} />
         <CenterBlock>
@@ -98,7 +98,7 @@ const TrackMenu: React.FC<Props> = ({
       </MenuItem>
       <MenuItem onPress={onPressEdit}>
         <StyledIcon name="edit" />
-        <MenuItemText>Редактировать</MenuItemText>
+        <MenuItemText testID="like">Редактировать</MenuItemText>
       </MenuItem>
       <Button onPress={onPressCancel} title="Отмена" type="outline-black" />
     </View>
