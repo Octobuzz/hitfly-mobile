@@ -267,7 +267,7 @@ exports[`TrackMenu renders correctly with handlers 1`] = `
         colors={
           Array [
             4282554366,
-            4291847871,
+            4291060189,
           ]
         }
         endPoint={
