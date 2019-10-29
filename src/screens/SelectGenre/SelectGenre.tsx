@@ -7,9 +7,9 @@ import {
   Loader,
   Button,
   SafeView,
-  GenreItem,
   HelperText,
   RefreshControl,
+  SelectableGenreItem,
 } from 'src/components'
 import { Genre } from 'src/apollo'
 import { styles } from 'src/constants'
@@ -58,8 +58,7 @@ class SelectGenre extends React.Component<Props, State> {
     const { selectedGenres } = this.state
     const isSelected = selectedGenres[item.id]
     return (
-      <GenreItem
-        isSelectable
+      <SelectableGenreItem
         item={item}
         isSelected={isSelected}
         onPress={this.toggleGenre}

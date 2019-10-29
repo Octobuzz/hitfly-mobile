@@ -99,7 +99,7 @@ exports[`Text Helper renders correctly 1`] = `
           "fontFamily": "GothamPro",
           "fontSize": 16,
           "lineHeight": 20,
-          "marginBottom": 40,
+          "marginVertical": 40,
           "textAlign": "center",
         },
       ]

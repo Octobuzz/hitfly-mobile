@@ -16,14 +16,6 @@ const Wrapper = styled.TouchableOpacity`
   justify-content: center;
 `
 
-const CornerImage = styled.Image.attrs(({ isSelected }: Selectable) => ({
-  source: isSelected ? images.GENRE_ACTIVE : images.GENRE_INACTIVE,
-}))<Selectable>`
-  position: absolute;
-  top: 0;
-  right: 0;
-`
-
 const GenreImage = styled(FastImage)`
   width: 100%;
   height: 100%;
@@ -36,42 +28,64 @@ const TitleText = styled(TextBase)`
   color: ${({ theme }) => theme.colors.white};
 `
 
-interface Selectable {
-  isSelected?: boolean
-  isSelectable?: boolean
-}
-
-interface Props extends Selectable {
+interface GenreItemProps {
   item: Genre
-  onPress?: (item: Genre) => void
+  onPress: (item: Genre) => void
 }
 
 interface Sized {
   size: number
 }
 
-const GenreItem: React.FC<Props> & Sized = ({
+export const GenreItem: React.FC<GenreItemProps> & Sized = ({
   item,
   onPress,
-  isSelected,
-  isSelectable,
 }) => {
   const { imageUrl, title } = item
-  const handlePress = React.useCallback(() => {
-    if (onPress) {
-      onPress(item)
-    }
-  }, [onPress, item])
+  const handlePress = (): void => {
+    onPress(item)
+  }
 
   return (
     <Wrapper onPress={handlePress}>
       <GenreImage source={{ uri: imageUrl }} />
-      {isSelectable && <CornerImage isSelected={isSelected} />}
+      <TitleText>{title}</TitleText>
+    </Wrapper>
+  )
+}
+
+// TODO: возможно стоит вынести в общее место
+interface Selectable {
+  isSelected?: boolean
+}
+
+const CornerImage = styled.Image.attrs(({ isSelected }: Selectable) => ({
+  source: isSelected ? images.GENRE_ACTIVE : images.GENRE_INACTIVE,
+}))<Selectable>`
+  position: absolute;
+  top: 0;
+  right: 0;
+`
+
+interface SelectableGenreItemProps extends GenreItemProps, Selectable {}
+
+export const SelectableGenreItem: React.FC<SelectableGenreItemProps> = ({
+  item,
+  onPress,
+  isSelected,
+}) => {
+  const { imageUrl, title } = item
+  const handlePress = (): void => {
+    onPress(item)
+  }
+
+  return (
+    <Wrapper onPress={handlePress}>
+      <GenreImage source={{ uri: imageUrl }} />
+      <CornerImage isSelected={isSelected} />
       <TitleText>{title}</TitleText>
     </Wrapper>
   )
 }
 
 GenreItem.size = ITEM_SIZE
-
-export default GenreItem

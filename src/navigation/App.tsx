@@ -8,7 +8,6 @@ import { WelcomeScreen } from 'src/screens'
 import AuthNavigator from './Auth'
 import MainNavigator from './Main'
 import Storybook from '../../storybook'
-
 import ROUTES from './routeNames'
 import styled from 'src/styled-components'
 import { styles, storageKeys } from 'src/constants'
