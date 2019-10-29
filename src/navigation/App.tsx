@@ -27,7 +27,7 @@ const SwitchRoutes = {
 const AppContainer = createAppContainer(
   // @ts-ignore
   createAnimatedSwitchNavigator(SwitchRoutes, {
-    initialRouteName: ROUTES.APP.AUTH,
+    initialRouteName: ROUTES.APP.WELCOME,
   }),
 )
 
@@ -73,17 +73,17 @@ class AppNavigator extends React.Component {
   }
 
   private handleInitialNavigation = async () => {
-    const [token, isFirstTime] = await Promise.all([
+    const [token, skipWelcome] = await Promise.all([
       storage.getItem(storageKeys.AUTH_TOKEN),
-      storage.getItem(storageKeys.IS_FIRST_TIME),
+      storage.getItem(storageKeys.SKIP_WELCOME),
     ])
-    if (isFirstTime) {
-      SplashScreen.hide()
-    } else {
-      NavigationService.navigate({ routeName: ROUTES.AUTH.LOGIN })
-    }
     if (token) {
       NavigationService.navigate({ routeName: ROUTES.MAIN.HOME })
+    }
+    if (skipWelcome) {
+      NavigationService.navigate({ routeName: ROUTES.AUTH.LOGIN })
+    } else {
+      SplashScreen.hide()
     }
   }
 
