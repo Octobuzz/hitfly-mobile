@@ -22,6 +22,7 @@ const GET_GENRES = gql`
         id
         title: name
         imageUrl: image
+        hasSubGenres: haveSubGenres
       }
       hasMorePages: has_more_pages
     }

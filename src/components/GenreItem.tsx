@@ -12,6 +12,10 @@ const Wrapper = styled.TouchableOpacity`
   width: ${ITEM_SIZE}px;
   height: ${ITEM_SIZE}px;
   overflow: hidden;
+`
+
+const TitleTextWrapper = styled.View`
+  flex: 1;
   align-items: center;
   justify-content: center;
 `
@@ -19,6 +23,7 @@ const Wrapper = styled.TouchableOpacity`
 const GenreImage = styled(FastImage)`
   width: 100%;
   height: 100%;
+  position: absolute;
 `
 
 const TitleText = styled(TextBase)`
@@ -49,7 +54,9 @@ export const GenreItem: React.FC<GenreItemProps> & Sized = ({
   return (
     <Wrapper onPress={handlePress}>
       <GenreImage source={{ uri: imageUrl }} />
-      <TitleText>{title}</TitleText>
+      <TitleTextWrapper>
+        <TitleText>{title}</TitleText>
+      </TitleTextWrapper>
     </Wrapper>
   )
 }
@@ -67,6 +74,18 @@ const CornerImage = styled.Image.attrs(({ isSelected }: Selectable) => ({
   right: 0;
 `
 
+const SubGenresWrapper = styled.View`
+  background-color: ${({ theme }) => theme.colors.white};
+  padding-vertical: 12px;
+`
+
+const SubGenresText = styled(TextBase)`
+  color: ${({ theme }) => theme.colors.brandPink};
+  font-size: 14px;
+  line-height: 14px;
+  text-align: center;
+`
+
 interface SelectableGenreItemProps extends GenreItemProps, Selectable {}
 
 export const SelectableGenreItem: React.FC<SelectableGenreItemProps> = ({
@@ -74,7 +93,7 @@ export const SelectableGenreItem: React.FC<SelectableGenreItemProps> = ({
   onPress,
   isSelected,
 }) => {
-  const { imageUrl, title } = item
+  const { imageUrl, title, hasSubGenres } = item
   const handlePress = (): void => {
     onPress(item)
   }
@@ -83,7 +102,14 @@ export const SelectableGenreItem: React.FC<SelectableGenreItemProps> = ({
     <Wrapper onPress={handlePress}>
       <GenreImage source={{ uri: imageUrl }} />
       <CornerImage isSelected={isSelected} />
-      <TitleText>{title}</TitleText>
+      <TitleTextWrapper>
+        <TitleText>{title}</TitleText>
+      </TitleTextWrapper>
+      {hasSubGenres && (
+        <SubGenresWrapper>
+          <SubGenresText>+ Поджанры</SubGenresText>
+        </SubGenresWrapper>
+      )}
     </Wrapper>
   )
 }
