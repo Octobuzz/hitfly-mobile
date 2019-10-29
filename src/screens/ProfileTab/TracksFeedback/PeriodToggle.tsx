@@ -65,7 +65,7 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({
 }) => {
   const selectPeriod = useCallback(() => {
     onPress(period)
-  }, [period, title, onPress])
+  }, [period, onPress])
   return (
     <ButtonWrapper onPress={selectPeriod}>
       <Gradient isSelected={isSelected}>
@@ -110,9 +110,9 @@ interface Props {
   onPress: (period: FeedbackPeriod) => void
 }
 
-const PeriodToggle: React.FC<Props> = ({ currentPeriod, onPress }) => {
-  const renderButton = useCallback(
-    ({ period, title }: Period): JSX.Element => (
+const PeriodToggle: React.FC<Props> = ({ currentPeriod, onPress }) => (
+  <Wrapper>
+    {periods.map(({ period, title }) => (
       <ToggleButton
         onPress={onPress}
         isSelected={period === currentPeriod}
@@ -120,11 +120,8 @@ const PeriodToggle: React.FC<Props> = ({ currentPeriod, onPress }) => {
         title={title}
         period={period}
       />
-    ),
-    [currentPeriod, onPress],
-  )
-
-  return <Wrapper>{periods.map(renderButton)}</Wrapper>
-}
+    ))}
+  </Wrapper>
+)
 
 export default PeriodToggle
