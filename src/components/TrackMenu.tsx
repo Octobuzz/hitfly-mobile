@@ -1,8 +1,9 @@
 import React from 'react'
-import { Image, TextBase, View, Button } from 'src/components'
+import { Image, View, Button } from 'src/components'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { Track } from 'src/apollo'
 import styled from 'src/styled-components'
+import TextBase from './TextBase'
 
 export const TRACK_MENU_HEIGHT = 300
 
@@ -43,7 +44,7 @@ const Divider = styled.View`
   background-color: ${({ theme }) => theme.colors.transparentWhite50};
 `
 
-const MenuItem = styled.TouchableOpacity`
+export const MenuItem = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   margin-bottom: 34px;
@@ -82,7 +83,7 @@ const TrackMenu: React.FC<Props> = ({
   }
   const { cover, group, singer, title } = track
   return (
-    <View paddingBottom={32} noFill>
+    <View paddingBottom={32} noFill testID="like">
       <TrackWrapper>
         <StyledImage source={{ uri: cover[0].imageUrl }} />
         <CenterBlock>
@@ -91,13 +92,13 @@ const TrackMenu: React.FC<Props> = ({
         </CenterBlock>
       </TrackWrapper>
       <Divider />
-      <MenuItem onPress={onPressLike}>
+      <MenuItem onPress={onPressLike} accessibilityRole="summary">
         <StyledIcon name="heart-o" />
         <MenuItemText>Понравилось</MenuItemText>
       </MenuItem>
-      <MenuItem onPress={onPressEdit}>
+      <MenuItem onPress={onPressEdit} accessibilityRole="summary">
         <StyledIcon name="edit" />
-        <MenuItemText>Редактировать</MenuItemText>
+        <MenuItemText testID="like">Редактировать</MenuItemText>
       </MenuItem>
       <Button onPress={onPressCancel} title="Отмена" type="outline-black" />
     </View>

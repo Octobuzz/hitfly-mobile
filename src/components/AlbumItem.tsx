@@ -53,7 +53,7 @@ const AlbumItem: React.FC<Props> & Sized = ({ item, onPress }) => {
   }, [onPress, item])
 
   return (
-    <Wrapper onPress={handlePress}>
+    <Wrapper onPress={handlePress} accessibilityRole="summary">
       <AlbumImage source={{ uri: cover[0].imageUrl }} />
       <TitleText>{title}</TitleText>
       <SubTitleText>{group ? group.title : author}</SubTitleText>

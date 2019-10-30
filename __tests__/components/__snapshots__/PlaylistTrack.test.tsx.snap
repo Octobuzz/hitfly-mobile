@@ -40,7 +40,7 @@ exports[`PlaylistTrack renders correctly in paused state 1`] = `
         ]
       }
     >
-      1
+      2
     </Text>
     <View
       style={
@@ -169,6 +169,8 @@ exports[`PlaylistTrack renders correctly in paused state 1`] = `
             "fontSize": 10,
             "lineHeight": 12,
             "marginLeft": 16,
+            "textAlign": "right",
+            "width": 30,
           },
         ]
       }
@@ -220,7 +222,7 @@ exports[`PlaylistTrack renders correctly in played state 1`] = `
         ]
       }
     >
-      1
+      2
     </Text>
     <View
       style={
@@ -376,6 +378,8 @@ exports[`PlaylistTrack renders correctly in played state 1`] = `
             "fontSize": 10,
             "lineHeight": 12,
             "marginLeft": 16,
+            "textAlign": "right",
+            "width": 30,
           },
         ]
       }

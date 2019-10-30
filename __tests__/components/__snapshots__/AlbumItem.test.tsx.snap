@@ -1,0 +1,195 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AlbumItem it renders correctly 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <TouchableOpacity
+    accessibilityRole="summary"
+    activeOpacity={0.2}
+    style={
+      Array [
+        Object {},
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          Array [
+            Object {
+              "borderRadius": 4,
+              "height": 160,
+              "marginBottom": 14,
+              "width": "100%",
+            },
+          ],
+        ]
+      }
+    >
+      <FastImageView
+        resizeMode="cover"
+        source={
+          Object {
+            "uri": "url",
+          }
+        }
+        style={
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+      />
+    </View>
+    <Text
+      numberOfLines={1}
+      style={
+        Array [
+          Object {
+            "color": "#313131",
+            "fontFamily": "GothamPro-Medium",
+            "fontSize": 16,
+            "lineHeight": 16,
+            "marginBottom": 8,
+          },
+        ]
+      }
+    >
+      title
+    </Text>
+    <Text
+      numberOfLines={1}
+      style={
+        Array [
+          Object {
+            "color": "#606060",
+            "fontFamily": "GothamPro",
+            "fontSize": 12,
+            "lineHeight": 12,
+          },
+        ]
+      }
+    >
+      author
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`AlbumItem it renders correctly when AlbumItem has been pressed 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [],
+              "props": Object {
+                "onFastImageError": undefined,
+                "onFastImageLoad": undefined,
+                "onFastImageLoadEnd": undefined,
+                "onFastImageLoadStart": undefined,
+                "onFastImageProgress": undefined,
+                "resizeMode": "cover",
+                "source": Object {
+                  "uri": "url",
+                },
+                "style": Object {
+                  "bottom": 0,
+                  "left": 0,
+                  "position": "absolute",
+                  "right": 0,
+                  "top": 0,
+                },
+                "tintColor": undefined,
+              },
+              "type": "FastImageView",
+            },
+          ],
+          "props": Object {
+            "style": Array [
+              Object {
+                "overflow": "hidden",
+              },
+              Array [
+                Object {
+                  "borderRadius": 4,
+                  "height": 160,
+                  "marginBottom": 14,
+                  "width": "100%",
+                },
+              ],
+            ],
+          },
+          "type": "View",
+        },
+        Object {
+          "children": Array [
+            "title",
+          ],
+          "props": Object {
+            "numberOfLines": 1,
+            "style": Array [
+              Object {
+                "color": "#313131",
+                "fontFamily": "GothamPro-Medium",
+                "fontSize": 16,
+                "lineHeight": 16,
+                "marginBottom": 8,
+              },
+            ],
+          },
+          "type": "Text",
+        },
+        Object {
+          "children": Array [
+            "author",
+          ],
+          "props": Object {
+            "numberOfLines": 1,
+            "style": Array [
+              Object {
+                "color": "#606060",
+                "fontFamily": "GothamPro",
+                "fontSize": 12,
+                "lineHeight": 12,
+              },
+            ],
+          },
+          "type": "Text",
+        },
+      ],
+      "props": Object {
+        "accessibilityRole": "summary",
+        "activeOpacity": 0.2,
+        "style": Array [
+          Object {},
+        ],
+      },
+      "type": "TouchableOpacity",
+    },
+  ],
+  "props": Object {
+    "collapsable": true,
+    "pointerEvents": "box-none",
+    "style": Object {
+      "flex": 1,
+    },
+  },
+  "type": "View",
+}
+`;
