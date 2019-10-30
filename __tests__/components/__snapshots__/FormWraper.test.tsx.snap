@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormWrapper renders correctly 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ScrollView
+    automaticallyAdjustContentInsets={false}
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 16,
+        "paddingHorizontal": 16,
+        "paddingTop": 16,
+        "paddingVertical": 16,
+      }
+    }
+    contentInset={
+      Object {
+        "bottom": 0,
+      }
+    }
+    enableAutomaticScroll={true}
+    enableOnAndroid={false}
+    enableResetScrollToCoords={true}
+    extraHeight={75}
+    extraScrollHeight={0}
+    keyboardDismissMode="interactive"
+    keyboardOpeningTime={250}
+    keyboardShouldPersistTaps="handled"
+    keyboardSpace={0}
+    scrollEnabled={false}
+    scrollEventThrottle={1}
+    showsVerticalScrollIndicator={true}
+    style={
+      Array [
+        Object {
+          "flexBasis": 0,
+          "flexGrow": 1,
+          "flexShrink": 1,
+        },
+      ]
+    }
+    viewIsInsideTabBar={false}
+  />
+</View>
+`;
