@@ -15,9 +15,10 @@ describe('NavigationList', () => {
 
   it('renders correctly with props', () => {
     const { asJSON, getByRole } = render(<NavigationList {...props} />)
+    const firstRender = asJSON()
 
     fireEvent.press(getByRole('summary'))
-    expect(asJSON()).toMatchSnapshot()
+    expect(firstRender).toMatchSnapshot(asJSON())
   })
   it('renders correctly with empty array as props', () => {
     const { asJSON } = render(<NavigationList items={[]} />)

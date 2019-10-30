@@ -21,67 +21,77 @@ exports[`NavigationList renders correctly with empty array as props 1`] = `
 `;
 
 exports[`NavigationList renders correctly with props 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
-  style={
+Object {
+  "children": Array [
     Object {
-      "flex": 1,
-    }
-  }
->
-  <View
-    style={
-      Array [
-        Object {},
-      ]
-    }
-  >
-    <TouchableOpacity
-      accessibilityRole="summary"
-      activeOpacity={0.2}
-      style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "borderBottomColor": "#E4E4E4",
-            "borderBottomWidth": 1,
-            "flexDirection": "row",
-            "paddingVertical": 28,
+      "children": Array [
+        Object {
+          "children": Array [
+            Object {
+              "children": Array [
+                "title",
+              ],
+              "props": Object {
+                "style": Array [
+                  Object {
+                    "color": "#313131",
+                    "flexBasis": 0,
+                    "flexGrow": 1,
+                    "flexShrink": 1,
+                    "fontFamily": "GothamPro",
+                    "fontSize": 16,
+                    "lineHeight": 20,
+                    "paddingRight": 16,
+                  },
+                ],
+              },
+              "type": "Text",
+            },
+            Object {
+              "children": Array [],
+              "props": Object {
+                "name": "arrow-forward",
+                "size": 20,
+                "style": Array [
+                  Object {
+                    "color": "#313131",
+                  },
+                ],
+              },
+              "type": "Icon",
+            },
+          ],
+          "props": Object {
+            "accessibilityRole": "summary",
+            "activeOpacity": 0.2,
+            "style": Array [
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#E4E4E4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "paddingVertical": 28,
+              },
+            ],
           },
-        ]
-      }
-    >
-      <Text
-        style={
-          Array [
-            Object {
-              "color": "#313131",
-              "flexBasis": 0,
-              "flexGrow": 1,
-              "flexShrink": 1,
-              "fontFamily": "GothamPro",
-              "fontSize": 16,
-              "lineHeight": 20,
-              "paddingRight": 16,
-            },
-          ]
-        }
-      >
-        title
-      </Text>
-      <Icon
-        name="arrow-forward"
-        size={20}
-        style={
-          Array [
-            Object {
-              "color": "#313131",
-            },
-          ]
-        }
-      />
-    </TouchableOpacity>
-  </View>
-</View>
+          "type": "TouchableOpacity",
+        },
+      ],
+      "props": Object {
+        "style": Array [
+          Object {},
+        ],
+      },
+      "type": "View",
+    },
+  ],
+  "props": Object {
+    "collapsable": true,
+    "pointerEvents": "box-none",
+    "style": Object {
+      "flex": 1,
+    },
+  },
+  "type": "View",
+}
 `;

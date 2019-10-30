@@ -1,6 +1,150 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ScrollView renders 1`] = `
+exports[`ScrollView renders correctly 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 16,
+        "paddingHorizontal": 16,
+        "paddingTop": 16,
+        "paddingVertical": 16,
+      }
+    }
+    style={
+      Array [
+        Object {
+          "flexBasis": 0,
+          "flexGrow": 1,
+          "flexShrink": 1,
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`ScrollView renders with addBottomSafePadding === false 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ScrollView
+    addBottomSafePadding={false}
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 20,
+        "paddingHorizontal": 10,
+        "paddingTop": 10,
+        "paddingVertical": 16,
+      }
+    }
+    paddingBottom={20}
+    paddingHorizontal={10}
+    paddingTop={10}
+    paddingVertical={40}
+    style={
+      Array [
+        Object {
+          "flexBasis": 0,
+          "flexGrow": 1,
+          "flexShrink": 1,
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`ScrollView renders with addBottomSafePadding === true 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ScrollView
+    addBottomSafePadding={true}
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 20,
+        "paddingHorizontal": 10,
+        "paddingTop": 10,
+        "paddingVertical": 16,
+      }
+    }
+    paddingBottom={20}
+    paddingHorizontal={10}
+    paddingTop={10}
+    paddingVertical={40}
+    style={
+      Array [
+        Object {
+          "flexBasis": 0,
+          "flexGrow": 1,
+          "flexShrink": 1,
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`ScrollView renders with no vertical and horizontal padding 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <ScrollView
+    contentContainerStyle={
+      Object {
+        "paddingBottom": 20,
+        "paddingHorizontal": 10,
+        "paddingTop": 10,
+        "paddingVertical": 16,
+      }
+    }
+    noHorizontalPadding={false}
+    noVerticalPadding={false}
+    paddingBottom={20}
+    paddingHorizontal={10}
+    paddingTop={10}
+    paddingVertical={40}
+    style={
+      Array [
+        Object {
+          "flexBasis": 0,
+          "flexGrow": 1,
+          "flexShrink": 1,
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`ScrollView renders with noFill === false and noPadding === false 1`] = `
 <View
   collapsable={true}
   pointerEvents="box-none"
@@ -38,7 +182,7 @@ exports[`ScrollView renders 1`] = `
 </View>
 `;
 
-exports[`ScrollView renders 2`] = `
+exports[`ScrollView renders with noFill === true and noPadding === true 1`] = `
 <View
   collapsable={true}
   pointerEvents="box-none"
@@ -72,7 +216,7 @@ exports[`ScrollView renders 2`] = `
 </View>
 `;
 
-exports[`ScrollView renders correctly 1`] = `
+exports[`ScrollView renders with vertical and horizontal padding 1`] = `
 <View
   collapsable={true}
   pointerEvents="box-none"
@@ -85,12 +229,18 @@ exports[`ScrollView renders correctly 1`] = `
   <ScrollView
     contentContainerStyle={
       Object {
-        "paddingBottom": 16,
-        "paddingHorizontal": 16,
-        "paddingTop": 16,
-        "paddingVertical": 16,
+        "paddingBottom": 0,
+        "paddingHorizontal": 0,
+        "paddingTop": 0,
+        "paddingVertical": 0,
       }
     }
+    noHorizontalPadding={true}
+    noVerticalPadding={true}
+    paddingBottom={20}
+    paddingHorizontal={10}
+    paddingTop={10}
+    paddingVertical={40}
     style={
       Array [
         Object {

@@ -18,21 +18,23 @@ describe('AlbumItem', () => {
   }
 
   it('it renders correctly', () => {
-    const { asJSON, getByRole } = render(
+    const { asJSON } = render(
       <ThemeProvider theme={theme}>
         <AlbumItem {...props} />
       </ThemeProvider>,
     )
 
-    fireEvent.press(getByRole('summary'))
     expect(asJSON()).toMatchSnapshot()
   })
-  it('it renders correctly', () => {
-    const { getByRole } = render(
+  it('it renders correctly when AlbumItem has been pressed', () => {
+    const { asJSON, getByRole } = render(
       <ThemeProvider theme={theme}>
         <AlbumItem {...props} />
       </ThemeProvider>,
     )
-    expect(getByRole('summary')).toMatchSnapshot()
+    const firstRender = asJSON()
+
+    fireEvent.press(getByRole('summary'))
+    expect(firstRender).toMatchSnapshot(asJSON())
   })
 })

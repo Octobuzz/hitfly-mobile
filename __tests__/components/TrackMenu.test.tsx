@@ -2,7 +2,7 @@ import { render } from '../../jest/test-utils'
 import { TrackMenu } from 'src/components'
 import React from 'react'
 import { Track } from '../../src/apollo'
-import { fireEvent } from '@testing-library/react-native'
+import { fireEvent } from '../../jest/test-utils'
 
 describe('TrackMenu', () => {
   const track = {
