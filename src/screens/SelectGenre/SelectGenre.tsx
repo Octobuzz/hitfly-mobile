@@ -1,6 +1,6 @@
 import L from 'lodash'
 import React from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, Modal } from 'react-native'
 import {
   View,
   Link,
@@ -11,6 +11,7 @@ import {
   RefreshControl,
   SelectableGenreItem,
 } from 'src/components'
+import SubGenres from './SubGenres'
 import { Genre } from 'src/apollo'
 import { styles } from 'src/constants'
 import styled from 'src/styled-components'
@@ -46,12 +47,17 @@ interface Props {
 }
 
 interface State {
+  isModalVisible: boolean
+  selectedGenre?: Genre
   selectedGenres: Record<number, boolean>
+  selectedSubgenres: Record<number, boolean>
 }
 
 class SelectGenre extends React.Component<Props, State> {
   state: State = {
+    isModalVisible: false,
     selectedGenres: {},
+    selectedSubgenres: {},
   }
 
   private renderGenre = ({ item }: { item: Genre }): JSX.Element => {
@@ -73,8 +79,18 @@ class SelectGenre extends React.Component<Props, State> {
       newGenres = L.set(selectedGenres, genre.id, false)
     } else {
       newGenres = L.set(selectedGenres, genre.id, true)
+      if (genre.hasSubGenres) {
+        this.setState({
+          isModalVisible: true,
+          selectedGenre: genre,
+        })
+      }
     }
     this.setState({ selectedGenres: newGenres })
+  }
+
+  private selectSubGenres = (subGenres: Record<number, boolean>): void => {
+    this.setState({ selectedSubgenres: subGenres })
   }
 
   private submit = () => {
@@ -83,8 +99,15 @@ class SelectGenre extends React.Component<Props, State> {
     onSubmit(selectedGenres)
   }
 
+  private hideModal = () => {
+    this.setState({
+      isModalVisible: false,
+    })
+  }
+
   render() {
     const { onEndReached, isLoading, genres, onSkip, onRefresh } = this.props
+    const { isModalVisible, selectedGenre } = this.state
     return (
       <SafeView>
         <View noFill paddingVertical={0}>
@@ -107,6 +130,20 @@ class SelectGenre extends React.Component<Props, State> {
           <IndentedButton onPress={this.submit} title="Готово" />
           <Link onPress={onSkip} title="Пропустить" />
         </View>
+        <Modal
+          hardwareAccelerated
+          transparent
+          animationType="fade"
+          onRequestClose={this.hideModal}
+          visible={isModalVisible}
+        >
+          <SubGenres
+            onClose={this.hideModal}
+            mainGenre={selectedGenre!}
+            subGenres={[]}
+            onSubmit={this.selectSubGenres}
+          />
+        </Modal>
       </SafeView>
     )
   }

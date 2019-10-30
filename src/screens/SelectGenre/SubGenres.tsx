@@ -1,13 +1,14 @@
 import React, { useState, useCallback } from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
 import { Genre } from 'src/apollo'
-import { View, Stretcher, Button } from 'src/components'
+import Icon from 'react-native-vector-icons/Ionicons'
+import { View, Stretcher, Button, TextBase, SafeView } from 'src/components'
 import GenreCheckBox from './GenreCheckBox'
 import { styles } from 'src/constants'
 import styled from 'src/styled-components'
 
-const Wrapper = styled.View`
-  flex: 1;
+const Wrapper = styled(SafeView)`
+  background-color: ${({ theme }) => theme.colors.black};
 `
 
 const IndentedButton = styled(Button)`
@@ -28,13 +29,25 @@ const Scroll = styled(FlatList as new () => FlatList<Genre>).attrs(() => ({
   height: 300px;
 `
 
+const CloseIcon = styled(Icon).attrs(({ theme }) => ({
+  name: 'md-close',
+  size: 24,
+  color: theme.colors.white,
+}))``
+
+const CloseButton = styled.TouchableOpacity.attrs(() => ({
+  hitSlop: styles.HIT_SLOP,
+}))`
+  align-self: flex-end;
+`
+
 const TitleWrapper = styled.View`
   padding-bottom: 32px;
   border-bottom-width: 2px;
   border-bottom-color: ${({ theme }) => theme.colors.transparentWhite50};
 `
 
-const TitleText = styled.View`
+const TitleText = styled(TextBase)`
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.white};
   text-align: center;
@@ -44,9 +57,11 @@ interface Props {
   mainGenre: Genre
   subGenres: Genre[]
   onSubmit: (subGenres: Record<number, boolean>) => void
+  onClose: () => void
 }
 
 const SubGenres: React.FC<Props> = ({
+  onClose,
   onSubmit,
   subGenres,
   mainGenre: { title: mainTitle },
@@ -88,6 +103,11 @@ const SubGenres: React.FC<Props> = ({
 
   return (
     <Wrapper>
+      <View noFill paddingVertical={0}>
+        <CloseButton onPress={onClose}>
+          <CloseIcon />
+        </CloseButton>
+      </View>
       <Stretcher />
       <TitleWrapper>
         <TitleText>{mainTitle}</TitleText>
