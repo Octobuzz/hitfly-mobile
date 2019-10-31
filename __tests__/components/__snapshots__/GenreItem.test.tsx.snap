@@ -15,10 +15,8 @@ exports[`GenreItem renders correctly 1`] = `
     style={
       Array [
         Object {
-          "alignItems": "center",
           "borderRadius": 4,
           "height": 234,
-          "justifyContent": "center",
           "overflow": "hidden",
           "width": 234,
         },
@@ -34,6 +32,7 @@ exports[`GenreItem renders correctly 1`] = `
           Array [
             Object {
               "height": "100%",
+              "position": "absolute",
               "width": "100%",
             },
           ],
@@ -58,22 +57,36 @@ exports[`GenreItem renders correctly 1`] = `
         }
       />
     </View>
-    <Text
+    <View
       style={
         Array [
           Object {
-            "color": "#ffffff",
-            "fontFamily": "GothamPro-Bold",
-            "fontSize": 16,
-            "lineHeight": 20,
-            "position": "absolute",
-            "textAlign": "center",
+            "alignItems": "center",
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "justifyContent": "center",
           },
         ]
       }
     >
-      title
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontFamily": "GothamPro-Bold",
+              "fontSize": 16,
+              "lineHeight": 20,
+              "position": "absolute",
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        title
+      </Text>
+    </View>
   </TouchableOpacity>
 </View>
 `;
@@ -93,10 +106,8 @@ exports[`SelectableGenreItem renders correctly 1`] = `
     style={
       Array [
         Object {
-          "alignItems": "center",
           "borderRadius": 4,
           "height": 234,
-          "justifyContent": "center",
           "overflow": "hidden",
           "width": 234,
         },
@@ -112,6 +123,7 @@ exports[`SelectableGenreItem renders correctly 1`] = `
           Array [
             Object {
               "height": "100%",
+              "position": "absolute",
               "width": "100%",
             },
           ],
@@ -152,22 +164,36 @@ exports[`SelectableGenreItem renders correctly 1`] = `
         ]
       }
     />
-    <Text
+    <View
       style={
         Array [
           Object {
-            "color": "#ffffff",
-            "fontFamily": "GothamPro-Bold",
-            "fontSize": 16,
-            "lineHeight": 20,
-            "position": "absolute",
-            "textAlign": "center",
+            "alignItems": "center",
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "justifyContent": "center",
           },
         ]
       }
     >
-      title
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontFamily": "GothamPro-Bold",
+              "fontSize": 16,
+              "lineHeight": 20,
+              "position": "absolute",
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        title
+      </Text>
+    </View>
   </TouchableOpacity>
 </View>
 `;
@@ -187,10 +213,8 @@ exports[`SelectableGenreItem renders correctly in selected state 1`] = `
     style={
       Array [
         Object {
-          "alignItems": "center",
           "borderRadius": 4,
           "height": 234,
-          "justifyContent": "center",
           "overflow": "hidden",
           "width": 234,
         },
@@ -206,6 +230,7 @@ exports[`SelectableGenreItem renders correctly in selected state 1`] = `
           Array [
             Object {
               "height": "100%",
+              "position": "absolute",
               "width": "100%",
             },
           ],
@@ -247,22 +272,36 @@ exports[`SelectableGenreItem renders correctly in selected state 1`] = `
         ]
       }
     />
-    <Text
+    <View
       style={
         Array [
           Object {
-            "color": "#ffffff",
-            "fontFamily": "GothamPro-Bold",
-            "fontSize": 16,
-            "lineHeight": 20,
-            "position": "absolute",
-            "textAlign": "center",
+            "alignItems": "center",
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "justifyContent": "center",
           },
         ]
       }
     >
-      title
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontFamily": "GothamPro-Bold",
+              "fontSize": 16,
+              "lineHeight": 20,
+              "position": "absolute",
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        title
+      </Text>
+    </View>
   </TouchableOpacity>
 </View>
 `;
@@ -282,10 +321,8 @@ exports[`SelectableGenreItem renders correctly in unselected state 1`] = `
     style={
       Array [
         Object {
-          "alignItems": "center",
           "borderRadius": 4,
           "height": 234,
-          "justifyContent": "center",
           "overflow": "hidden",
           "width": 234,
         },
@@ -301,6 +338,7 @@ exports[`SelectableGenreItem renders correctly in unselected state 1`] = `
           Array [
             Object {
               "height": "100%",
+              "position": "absolute",
               "width": "100%",
             },
           ],
@@ -342,22 +380,36 @@ exports[`SelectableGenreItem renders correctly in unselected state 1`] = `
         ]
       }
     />
-    <Text
+    <View
       style={
         Array [
           Object {
-            "color": "#ffffff",
-            "fontFamily": "GothamPro-Bold",
-            "fontSize": 16,
-            "lineHeight": 20,
-            "position": "absolute",
-            "textAlign": "center",
+            "alignItems": "center",
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "justifyContent": "center",
           },
         ]
       }
     >
-      title
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontFamily": "GothamPro-Bold",
+              "fontSize": 16,
+              "lineHeight": 20,
+              "position": "absolute",
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        title
+      </Text>
+    </View>
   </TouchableOpacity>
 </View>
 `;
