@@ -1,8 +1,16 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
 import { Genre } from 'src/apollo'
 import Icon from 'react-native-vector-icons/Ionicons'
-import { View, Stretcher, Button, TextBase, SafeView } from 'src/components'
+import {
+  View,
+  Stretcher,
+  Button,
+  TextBase,
+  SafeView,
+  Loader,
+  RefreshControl,
+} from 'src/components'
 import GenreCheckBox from './GenreCheckBox'
 import { styles } from 'src/constants'
 import styled from 'src/styled-components'
@@ -43,6 +51,7 @@ const CloseButton = styled.TouchableOpacity.attrs(() => ({
 
 const TitleWrapper = styled.View`
   padding-bottom: 32px;
+  margin-bottom: 32px;
   border-bottom-width: 2px;
   border-bottom-color: ${({ theme }) => theme.colors.transparentWhite50};
 `
@@ -54,21 +63,37 @@ const TitleText = styled(TextBase)`
 `
 
 interface Props {
+  isLoading: boolean
   mainGenre: Genre
   subGenres: Genre[]
+  onRefresh: () => void
   onSubmit: (subGenres: Record<number, boolean>) => void
   onClose: () => void
+}
+
+const selectAllGenres = (genres: Genre[]): Record<number, boolean> => {
+  const res: Record<number, boolean> = {}
+  for (const genre of genres) {
+    res[genre.id] = true
+  }
+  return res
 }
 
 const SubGenres: React.FC<Props> = ({
   onClose,
   onSubmit,
   subGenres,
+  isLoading,
+  onRefresh,
   mainGenre: { title: mainTitle },
 }) => {
   const [selectedGenres, setSelectedGenres] = useState<Record<number, boolean>>(
     {},
   )
+
+  useEffect(() => {
+    setSelectedGenres(selectAllGenres(subGenres))
+  }, [subGenres])
 
   const toggleGenre = useCallback(
     (genre: Genre): void => {
@@ -84,7 +109,7 @@ const SubGenres: React.FC<Props> = ({
 
   const renderItem: ListRenderItem<Genre> = useCallback(
     ({ item }) => {
-      const isSelected = item.id in selectedGenres
+      const isSelected = selectedGenres[item.id]
       return (
         <GenreCheckBox
           genre={item}
@@ -96,6 +121,10 @@ const SubGenres: React.FC<Props> = ({
     },
     [selectedGenres, toggleGenre, mainTitle],
   )
+
+  const clearSelections = useCallback(() => {
+    setSelectedGenres({})
+  }, [])
 
   const handleSubmit = useCallback((): void => {
     onSubmit(selectedGenres)
@@ -112,10 +141,24 @@ const SubGenres: React.FC<Props> = ({
       <TitleWrapper>
         <TitleText>{mainTitle}</TitleText>
       </TitleWrapper>
-      <Scroll renderItem={renderItem} data={subGenres} />
+      {isLoading ? (
+        <Loader size={150} />
+      ) : (
+        <Scroll
+          refreshControl={
+            <RefreshControl refreshing={false} onRefresh={onRefresh} />
+          }
+          renderItem={renderItem}
+          data={subGenres}
+        />
+      )}
       <Stretcher />
       <View noFill>
-        <IndentedButton title="Очистить" type="outline-black" />
+        <IndentedButton
+          onPress={clearSelections}
+          title="Очистить"
+          type="outline-black"
+        />
         <Button onPress={handleSubmit} title="Сохранить" />
       </View>
     </Wrapper>
