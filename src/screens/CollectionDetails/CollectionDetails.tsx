@@ -25,6 +25,8 @@ const IndentedH1 = styled(H1)`
 
 const Header = <IndentedH1>Плейлисты</IndentedH1>
 
+const SizedLoader = <Loader size={100} />
+
 interface Props {
   isLoading: boolean
   collections: Collection[]
@@ -55,7 +57,7 @@ const CollectionDetails: React.FC<Props> = ({
       }
       renderItem={renderItem}
       ListHeaderComponent={Header}
-      ListFooterComponent={isLoading ? Loader : null}
+      ListFooterComponent={isLoading ? SizedLoader : null}
       onEndReached={onEndReached}
     />
   )

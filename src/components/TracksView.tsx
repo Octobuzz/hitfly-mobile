@@ -2,7 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 import { Track } from 'src/apollo'
 import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/containers/HOCs'
-import { PlaylistTrack } from 'src/components'
+import PlaylistTrack from 'src/components/PlaylistTrack'
 
 interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   tracks: Track[]

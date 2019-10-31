@@ -16,6 +16,7 @@ import {
 import {
   HomeScreen,
   ProfileTabScreen,
+  SelectGenreScreen,
   CollectionDetailsScreen,
 } from 'src/screens'
 import { stackDefaultOptions, playlistConfig } from './configs'
@@ -114,9 +115,14 @@ const MainNavigator = createStackNavigator(
         title: 'Удаление аккаунта',
       },
     },
+    [routeNames.MAIN.SELECT_GENRE]: {
+      screen: SelectGenreScreen,
+      navigationOptions: { title: 'Выбор жанра' },
+    },
   },
   {
-    initialRouteName: routeNames.MAIN.HOME,
+    initialRouteName: routeNames.MAIN.SELECT_GENRE,
+    // initialRouteName: routeNames.MAIN.HOME,
     headerMode: 'screen',
     defaultNavigationOptions: {
       ...stackDefaultOptions,

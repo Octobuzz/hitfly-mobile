@@ -1,4 +1,5 @@
 import L from 'lodash'
+import LFP from 'lodash/fp'
 import { Platform, StatusBar } from 'react-native'
 import { HeaderMode, BonusProgramLevel } from 'src/apollo'
 
@@ -200,4 +201,16 @@ export const getNextBonusProgramHumanReadable = (
   if (nextProgram) {
     return nextProgram.title
   }
+}
+
+const customizer = (objValue: any, srcValue: any): any => {
+  if (L.isArray(objValue)) {
+    return srcValue.concat(objValue)
+  } else if (!L.isObject(objValue)) {
+    return objValue
+  }
+}
+
+export const mergeRight = (source: object, obj: object): object => {
+  return LFP.mergeWith(customizer, obj, source)
 }

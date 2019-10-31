@@ -1,17 +1,20 @@
 import React from 'react'
-import { GenreItem } from 'src/components'
+import { GenreItem, SelectableGenreItem } from 'src/components'
 import { Genre } from 'src/apollo'
 import { ThemeProvider } from 'src/styled-components'
 import { render } from '../../jest/test-utils'
 import theme from 'src/theme'
 
-describe('GenreItem', () => {
+describe('SelectableGenreItem', () => {
   const item = { title: 'title', imageUrl: 'url' } as Genre
-
+  const props = {
+    item,
+    onPress: jest.fn(),
+  }
   it('renders correctly', () => {
     const { asJSON } = render(
       <ThemeProvider theme={theme}>
-        <GenreItem item={item} />
+        <SelectableGenreItem {...props} />
       </ThemeProvider>,
     )
 
@@ -21,7 +24,7 @@ describe('GenreItem', () => {
   it('renders correctly in selected state', () => {
     const { asJSON } = render(
       <ThemeProvider theme={theme}>
-        <GenreItem isSelectable isSelected item={item} />
+        <SelectableGenreItem isSelected {...props} />
       </ThemeProvider>,
     )
 
@@ -31,7 +34,24 @@ describe('GenreItem', () => {
   it('renders correctly in unselected state', () => {
     const { asJSON } = render(
       <ThemeProvider theme={theme}>
-        <GenreItem isSelectable isSelected={false} item={item} />
+        <SelectableGenreItem isSelected={false} {...props} />
+      </ThemeProvider>,
+    )
+
+    expect(asJSON()).toMatchSnapshot()
+  })
+})
+
+describe('GenreItem', () => {
+  const item = { title: 'title', imageUrl: 'url' } as Genre
+  const props = {
+    item,
+    onPress: jest.fn(),
+  }
+  it('renders correctly', () => {
+    const { asJSON } = render(
+      <ThemeProvider theme={theme}>
+        <GenreItem {...props} />
       </ThemeProvider>,
     )
 

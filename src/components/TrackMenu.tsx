@@ -1,9 +1,11 @@
 import React from 'react'
-import { Image, View, Button } from 'src/components'
+import Button from './buttons/Button'
+import { Image } from './Image'
+import View from './views/View'
+import TextBase from './TextBase'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { Track } from 'src/apollo'
 import styled from 'src/styled-components'
-import TextBase from './TextBase'
 
 export const TRACK_MENU_HEIGHT = 300
 
