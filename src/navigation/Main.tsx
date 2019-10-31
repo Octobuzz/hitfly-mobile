@@ -15,6 +15,7 @@ import {
 } from 'src/containers'
 import {
   HomeScreen,
+  MyGenresScreen,
   ProfileTabScreen,
   SelectGenreScreen,
   CollectionDetailsScreen,
@@ -114,6 +115,10 @@ const MainNavigator = createStackNavigator(
       navigationOptions: {
         title: 'Удаление аккаунта',
       },
+    },
+    [routeNames.MAIN.MY_GENRES]: {
+      screen: MyGenresScreen,
+      navigationOptions: { title: 'Любимые жанры' },
     },
     [routeNames.MAIN.SELECT_GENRE]: {
       screen: SelectGenreScreen,

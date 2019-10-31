@@ -43,6 +43,9 @@ class Settings extends React.Component<Props> {
       },
       {
         title: 'Список любимых жанров',
+        onPress: () => {
+          navigation.navigate(ROUTES.MAIN.MY_GENRES)
+        },
       },
       {
         title: 'Настройка входа',
