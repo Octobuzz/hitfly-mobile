@@ -3,6 +3,11 @@ import { Genre } from 'src/apollo'
 import { TextBase, CheckBoxUI } from 'src/components'
 import styled from 'src/styled-components'
 
+const StyledCheckBox = styled(CheckBoxUI)`
+  flex: 1;
+  align-items: flex-end;
+`
+
 const UpperText = styled(TextBase)`
   font-size: 10px;
   line-height: 10px;
@@ -11,7 +16,7 @@ const UpperText = styled(TextBase)`
 
 const GenreText = styled(TextBase)`
   font-size: 12px;
-  line-height: 24px;
+  line-height: 16px;
   color: ${({ theme }) => theme.colors.white};
 `
 
@@ -36,12 +41,12 @@ const GenreCheckBox: React.FC<Props> = ({
   }, [onPress, genre])
 
   return (
-    <CheckBoxUI onPress={handlePress} isChecked={isSelected}>
+    <StyledCheckBox onPress={handlePress} isChecked={isSelected}>
       <RightBlock>
         <UpperText>{upperTitle}</UpperText>
         <GenreText>{title}</GenreText>
       </RightBlock>
-    </CheckBoxUI>
+    </StyledCheckBox>
   )
 }
 

@@ -121,8 +121,7 @@ const MainNavigator = createStackNavigator(
     },
   },
   {
-    initialRouteName: routeNames.MAIN.SELECT_GENRE,
-    // initialRouteName: routeNames.MAIN.HOME,
+    initialRouteName: routeNames.MAIN.HOME,
     headerMode: 'screen',
     defaultNavigationOptions: {
       ...stackDefaultOptions,
