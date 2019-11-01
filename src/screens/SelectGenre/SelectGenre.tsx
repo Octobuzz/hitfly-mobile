@@ -40,15 +40,17 @@ const SizedLoader = <Loader size={100} />
 
 interface Props {
   isLoading: boolean
+  isEditMode?: boolean
   isSubGenresLoading: boolean
   isUpdating: boolean
   genres: Genre[]
   subGenres: Genre[]
+  favouriteGenres?: Genre[]
   onSelectGenreWithSubGenres: (genre: Genre) => void
   onRefresh: () => void
   onEndReached: () => void
   refetchSubGenres: () => void
-  onSkip: () => void
+  onSkip?: () => void
   onSubmit: (genresIds: string[]) => Promise<void>
 }
 
@@ -62,6 +64,21 @@ class SelectGenre extends React.Component<Props, State> {
   state: State = {
     isModalVisible: false,
     selectedGenres: {},
+  }
+
+  componentDidMount() {
+    this.initSelectedGenres()
+  }
+
+  private initSelectedGenres = (): void => {
+    const { favouriteGenres } = this.props
+    if (favouriteGenres && favouriteGenres.length) {
+      const selectedGenres: Record<number, boolean> = {}
+      favouriteGenres.forEach(({ id }) => {
+        selectedGenres[id] = true
+      })
+      this.setState({ selectedGenres })
+    }
   }
 
   private renderGenre = ({ item }: { item: Genre }): JSX.Element => {
@@ -79,22 +96,19 @@ class SelectGenre extends React.Component<Props, State> {
   private toggleGenre = (genre: Genre): void => {
     const { selectedGenres } = this.state
     if (selectedGenres[genre.id]) {
-      this.deselectGenreForSubGenres(genre)
+      this.deselectGenre(genre)
     } else {
-      this.selectGenreForSubGenres(genre)
+      this.selectGenre(genre)
     }
   }
 
-  selectedSubGenres = new Map<number, string[]>()
-
-  private deselectGenreForSubGenres = (genre: Genre): void => {
+  private deselectGenre = (genre: Genre): void => {
     const { selectedGenres } = this.state
     const newGenres = LFP.unset(genre.id, selectedGenres)
     this.setState({ selectedGenres: newGenres })
-    this.selectedSubGenres.delete(genre.id)
   }
 
-  private selectGenreForSubGenres = (genre: Genre): void => {
+  private selectGenre = (genre: Genre): void => {
     const { selectedGenres } = this.state
     const newGenres = LFP.set(genre.id, true, selectedGenres)
     this.setState({ selectedGenres: newGenres })
@@ -109,24 +123,15 @@ class SelectGenre extends React.Component<Props, State> {
   }
 
   private selectSubGenres = (subGenres: Record<number, boolean>): void => {
-    const { selectedGenre } = this.state
-    const selectedSubGenresIds: string[] = []
-    for (const genreId in subGenres) {
-      if (subGenres[genreId]) {
-        selectedSubGenresIds.push(genreId)
-      }
-    }
-    this.selectedSubGenres.set(selectedGenre!.id, selectedSubGenresIds)
-    this.setState({ isModalVisible: false })
+    const { selectedGenres } = this.state
+    const newSelectedGenres = { ...selectedGenres, ...subGenres }
+    this.setState({ isModalVisible: false, selectedGenres: newSelectedGenres })
   }
 
   private submit = () => {
     const { onSubmit } = this.props
     const { selectedGenres } = this.state
-    let allGenres: string[] = []
-    for (const subGenres of this.selectedSubGenres.values()) {
-      allGenres = allGenres.concat(subGenres)
-    }
+    const allGenres: string[] = []
     for (const genreId in selectedGenres) {
       if (selectedGenres[genreId]) {
         allGenres.push(genreId)
@@ -149,6 +154,7 @@ class SelectGenre extends React.Component<Props, State> {
       subGenres,
       isLoading,
       isUpdating,
+      isEditMode,
       onEndReached,
       refetchSubGenres,
       isSubGenresLoading,
@@ -174,12 +180,12 @@ class SelectGenre extends React.Component<Props, State> {
         />
         <View noFill paddingTop={42}>
           <IndentedButton
-            isDisabled={L.isEmpty(selectedGenres)}
+            isDisabled={L.isEmpty(selectedGenres) || isUpdating}
             isLoading={isUpdating}
             onPress={this.submit}
             title="Готово"
           />
-          <Link onPress={onSkip} title="Пропустить" />
+          {!isEditMode && <Link onPress={onSkip} title="Пропустить" />}
         </View>
         <Modal
           hardwareAccelerated
@@ -194,6 +200,8 @@ class SelectGenre extends React.Component<Props, State> {
             onClose={this.hideModal}
             mainGenre={selectedGenre!}
             subGenres={subGenres}
+            isEditMode={isEditMode}
+            allSelectedGenres={selectedGenres}
             onSubmit={this.selectSubGenres}
           />
         </Modal>

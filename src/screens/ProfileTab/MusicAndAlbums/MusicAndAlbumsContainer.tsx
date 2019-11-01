@@ -26,6 +26,7 @@ const MusicAndAlbumsContainer: React.FC<Props> = ({
   mutate,
   ...rest
 }) => {
+  // FIXME: переделать через пропсы и networkStatus === 4
   const [isRefreshing, setRefreshing] = useState(false)
 
   const refresh = useCallback(async () => {

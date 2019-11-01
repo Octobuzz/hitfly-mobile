@@ -12,7 +12,10 @@ interface GenreData {
   genres: Pagination<Genre>
 }
 
-interface Props extends NavigationStackScreenProps {}
+interface Props extends NavigationStackScreenProps {
+  isEditMode?: boolean
+  favouriteGenres?: Genre[]
+}
 
 const LIMIT = 20
 const GET_GENRES = gql`
@@ -56,7 +59,11 @@ const UPDATE_GENRES = gql`
   }
 `
 
-const SelectGenre: React.FC<Props> = ({ navigation }) => {
+const SelectGenre: React.FC<Props> = ({
+  isEditMode,
+  navigation,
+  favouriteGenres,
+}) => {
   const { data, refetch, loading, fetchMore } = useQuery<GenreData>(
     GET_GENRES,
     { notifyOnNetworkStatusChange: true },
@@ -81,24 +88,26 @@ const SelectGenre: React.FC<Props> = ({ navigation }) => {
   }, [hasMorePages, genres, loading])
 
   const onSkip = useCallback(() => {
-    navigation.navigate(ROUTES.MAIN.HOME)
-  }, [])
+    navigation.navigate(ROUTES.APP.MAIN)
+  }, [isEditMode])
 
   const [updateGenres, { loading: isUpdating }] = useMutation<
     Profile,
     { genresIds: string[] }
   >(UPDATE_GENRES)
 
-  const onSubmit = useCallback(async (selectedGenresIds: string[]): Promise<
-    void
-  > => {
-    try {
-      await updateGenres({ variables: { genresIds: selectedGenresIds } })
-      navigation.navigate(ROUTES.MAIN.HOME)
-    } catch (e) {
-      // TODO: добавить обработчик
-    }
-  }, [])
+  const onSubmit = useCallback(
+    async (selectedGenresIds: string[]): Promise<void> => {
+      try {
+        await updateGenres({ variables: { genresIds: selectedGenresIds } })
+        const submitRoute = isEditMode ? ROUTES.MAIN.MY_GENRES : ROUTES.APP.MAIN
+        navigation.navigate(submitRoute)
+      } catch (e) {
+        // TODO: добавить обработчик
+      }
+    },
+    [isEditMode],
+  )
 
   const [
     loadSubGenres,
@@ -120,6 +129,7 @@ const SelectGenre: React.FC<Props> = ({ navigation }) => {
 
   return (
     <SelectGenreScreen
+      isEditMode={isEditMode}
       subGenres={subGenres}
       genres={genres}
       isSubGenresLoading={isSubGenresLoading}
@@ -131,8 +141,53 @@ const SelectGenre: React.FC<Props> = ({ navigation }) => {
       isUpdating={isUpdating}
       refetchSubGenres={refetchSubGenres}
       onSelectGenreWithSubGenres={onSelectGenreWithSubGenres}
+      favouriteGenres={favouriteGenres}
     />
   )
 }
 
 export default SelectGenre
+
+export const SelectGenreForAuthScreen = (props: any) => (
+  <SelectGenre
+    {...props}
+    skipRoute={ROUTES.APP.MAIN}
+    submitRoute={ROUTES.APP.MAIN}
+  />
+)
+
+interface ProfileGenres {
+  profile: Profile
+}
+
+const GET_FAVOURITE_GENRES = gql`
+  query {
+    profile: myProfile {
+      favouriteGenres {
+        id
+        title: name
+        imageUrl: image
+        hasSubGenres: haveSubGenres
+      }
+    }
+  }
+`
+
+export const SelectGenreForProfileScreen: React.FC<any> = props => {
+  const { data } = useQuery<ProfileGenres>(GET_FAVOURITE_GENRES)
+
+  const favouriteGenres = L.get(data, 'profile.favouriteGenres', [])
+
+  return (
+    <SelectGenre
+      {...props}
+      isEditMode
+      favouriteGenres={favouriteGenres}
+      submitRoute={ROUTES.MAIN.MY_GENRES}
+    />
+  )
+}
+// TODO: рефактор
+// 1) разделить модалку SubGenres от компонента SelectGenres
+// 2) сделать кастомный хук для пагинации
+// 3) вынести favouriteGenres в HOC?

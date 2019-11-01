@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { FlatList } from 'react-native'
 import {
   GenreItem,
@@ -18,50 +18,57 @@ const Scroll = styled(FlatList as new () => FlatList<Genre>).attrs(() => ({
   numColumns: 3,
   initialNumToRender: 12,
   columnWrapperStyle: {
-    justifyContent: 'space-between',
     marginBottom: styles.VIEW_HORIZONTAL_INDENTATION / 2,
   },
   contentContainerStyle: {
     paddingVertical: styles.VIEW_VERTICAL_INDENTATION,
-    paddingHorizontal: styles.VIEW_HORIZONTAL_INDENTATION,
+    paddingHorizontal: (styles.VIEW_HORIZONTAL_INDENTATION / 4) * 3,
   },
 }))`
   flex: 1;
 `
 
-const SizedLoader = <Loader size={150} />
+const Col = styled.View`
+  padding-horizontal: ${styles.VIEW_HORIZONTAL_INDENTATION / 4};
+`
 
 interface Props {
   genres: Genre[]
   isLoading: boolean
+  isRefreshing: boolean
   onPressChange: () => void
-  onEndReached: () => void
-  onRefresh: () => void
+  onRefresh: () => Promise<any>
 }
 
 const MyGenres: React.FC<Props> = ({
   genres,
   isLoading,
   onRefresh,
-  onEndReached,
+  isRefreshing,
   onPressChange,
 }) => {
   const renderGenre = useCallback(
-    ({ item }: { item: Genre }): JSX.Element => <GenreItem item={item} />,
+    ({ item }: { item: Genre }): JSX.Element => (
+      <Col>
+        <GenreItem item={item} />
+      </Col>
+    ),
     [],
   )
 
   return (
     <SafeView>
-      <Scroll
-        refreshControl={
-          <RefreshControl refreshing={false} onRefresh={onRefresh} />
-        }
-        onEndReached={onEndReached}
-        ListFooterComponent={isLoading ? SizedLoader : null}
-        renderItem={renderGenre}
-        data={genres}
-      />
+      {isLoading && !isRefreshing ? (
+        <Loader isFilled />
+      ) : (
+        <Scroll
+          refreshControl={
+            <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+          }
+          renderItem={renderGenre}
+          data={genres}
+        />
+      )}
       <View noFill>
         <Button
           type="outline"

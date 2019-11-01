@@ -54,7 +54,7 @@ export const GenreItem: React.FC<GenreItemProps> & Sized = ({
   }
 
   return (
-    <Wrapper onPress={handlePress}>
+    <Wrapper disabled={!onPress} onPress={handlePress}>
       <GenreImage source={{ uri: imageUrl }} />
       <TitleTextWrapper>
         <TitleText>{title}</TitleText>

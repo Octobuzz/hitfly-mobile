@@ -4,11 +4,11 @@ import { Genre } from 'src/apollo'
 import Icon from 'react-native-vector-icons/Ionicons'
 import {
   View,
-  Stretcher,
+  Loader,
   Button,
   TextBase,
   SafeView,
-  Loader,
+  Stretcher,
   RefreshControl,
 } from 'src/components'
 import GenreCheckBox from './GenreCheckBox'
@@ -66,6 +66,8 @@ interface Props {
   isLoading: boolean
   mainGenre: Genre
   subGenres: Genre[]
+  allSelectedGenres: Record<number, boolean>
+  isEditMode?: boolean // это костыль (?) из-за логики рендера поджанров
   onRefresh: () => void
   onSubmit: (subGenres: Record<number, boolean>) => void
   onClose: () => void
@@ -73,9 +75,10 @@ interface Props {
 
 const selectAllGenres = (genres: Genre[]): Record<number, boolean> => {
   const res: Record<number, boolean> = {}
-  for (const genre of genres) {
-    res[genre.id] = true
-  }
+  genres.forEach(({ id }) => {
+    res[id] = true
+  })
+
   return res
 }
 
@@ -85,6 +88,8 @@ const SubGenres: React.FC<Props> = ({
   subGenres,
   isLoading,
   onRefresh,
+  isEditMode,
+  allSelectedGenres,
   mainGenre: { title: mainTitle },
 }) => {
   const [selectedGenres, setSelectedGenres] = useState<Record<number, boolean>>(
@@ -92,8 +97,12 @@ const SubGenres: React.FC<Props> = ({
   )
 
   useEffect(() => {
-    setSelectedGenres(selectAllGenres(subGenres))
-  }, [subGenres])
+    if (isEditMode) {
+      setSelectedGenres(allSelectedGenres)
+    } else {
+      setSelectedGenres(selectAllGenres(subGenres))
+    }
+  }, [subGenres, isEditMode, allSelectedGenres])
 
   const toggleGenre = useCallback(
     (genre: Genre): void => {
