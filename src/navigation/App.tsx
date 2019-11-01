@@ -77,10 +77,9 @@ class AppNavigator extends React.Component {
       storage.getItem(storageKeys.SKIP_WELCOME),
     ])
     if (token) {
-      NavigationService.navigate({ routeName: ROUTES.MAIN.HOME })
-    }
-    if (skipWelcome) {
-      NavigationService.navigate({ routeName: ROUTES.AUTH.LOGIN })
+      NavigationService.navigate({ routeName: ROUTES.APP.MAIN })
+    } else if (skipWelcome) {
+      NavigationService.navigate({ routeName: ROUTES.APP.AUTH })
     } else {
       SplashScreen.hide()
     }
