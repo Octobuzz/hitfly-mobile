@@ -55,7 +55,7 @@ const MyGenres: React.FC<Props> = ({ navigation }) => {
   }, [hasMorePages, genres, loading])
 
   const onChange = useCallback(() => {
-    navigation.navigate(ROUTES.MAIN.HOME)
+    navigation.navigate(ROUTES.MAIN.SELECT_GENRE)
   }, [])
 
   return (
