@@ -43,7 +43,7 @@ const UPDATE_GENRES = gql`
   }
 `
 
-const genresSelector = (data?: GenreData) => L.get(data, 'genres.items', [])
+const itemsSelector = (data?: GenreData) => L.get(data, 'genres.items', [])
 const hasMorePagesSelector = (data?: GenreData) =>
   L.get(data, 'genres.hasMorePages', false)
 
@@ -59,9 +59,9 @@ const SelectGenre: React.FC<Props> = ({
     networkStatus,
     onEndReached,
   } = useQueryWithPagination<GenreData>(GET_GENRES, {
+    itemsSelector,
     hasMorePagesSelector,
     limit: LIMIT,
-    itemsSelector: genresSelector,
     notifyOnNetworkStatusChange: true,
   })
 

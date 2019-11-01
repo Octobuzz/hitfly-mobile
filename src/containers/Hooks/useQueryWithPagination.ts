@@ -36,6 +36,8 @@ function useQueryWithPagination<TData = any, TVariables = OperationVariables>(
 
   const onEndReached = useCallback(() => {
     if (hasMorePages && !loading) {
+      // + 1, потому что для бэка 1 и 0 - одно и то же
+      // поэтому page должна быть больше 1
       const page = Math.trunc(items.length / limit) + 1
       fetchMore({
         variables: { page, limit },
