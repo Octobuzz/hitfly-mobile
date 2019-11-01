@@ -12,13 +12,13 @@ import {
   RefreshControl,
   SelectableGenreItem,
 } from 'src/components'
-import SubGenres from './SubGenres'
+import SubGenres from './SubGenresContainer'
 import { Genre } from 'src/apollo'
 import { styles } from 'src/constants'
 import styled from 'src/styled-components'
 
-const IndentedButton = styled(Button)`
-  margin-bottom: 24px;
+const IndentedLink = styled(Link)`
+  margin-top: 24px;
 `
 
 // https://dev.to/acro5piano/use-styled-components-reactnative-s-flatlist-in-typescript-308e
@@ -40,17 +40,14 @@ const SizedLoader = <Loader size={100} />
 
 interface Props {
   isLoading: boolean
+  isRefreshing: boolean
   isEditMode?: boolean
-  isSubGenresLoading: boolean
   isUpdating: boolean
   genres: Genre[]
-  subGenres: Genre[]
   favouriteGenres?: Genre[]
-  onSelectGenreWithSubGenres: (genre: Genre) => void
   onRefresh: () => void
   onEndReached: () => void
-  refetchSubGenres: () => void
-  onSkip?: () => void
+  onSkip: () => void
   onSubmit: (genresIds: string[]) => Promise<void>
 }
 
@@ -113,8 +110,6 @@ class SelectGenre extends React.Component<Props, State> {
     const newGenres = LFP.set(genre.id, true, selectedGenres)
     this.setState({ selectedGenres: newGenres })
     if (genre.hasSubGenres) {
-      const { onSelectGenreWithSubGenres } = this.props
-      onSelectGenreWithSubGenres(genre)
       this.setState({
         isModalVisible: true,
         selectedGenre: genre,
@@ -151,26 +146,24 @@ class SelectGenre extends React.Component<Props, State> {
       genres,
       onSkip,
       onRefresh,
-      subGenres,
       isLoading,
       isUpdating,
       isEditMode,
       onEndReached,
-      refetchSubGenres,
-      isSubGenresLoading,
+      isRefreshing,
     } = this.props
     const { isModalVisible, selectedGenre, selectedGenres } = this.state
     return (
       <SafeView>
-        <View noFill paddingVertical={0}>
-          <HelperText>
-            Отметьте жанры, которые Вам нравятся. Это поможет получать более
-            точные и интересные рекомендации
-          </HelperText>
-        </View>
         <Scroll
+          ListHeaderComponent={
+            <HelperText>
+              Отметьте жанры, которые Вам нравятся. Это поможет получать более
+              точные и интересные рекомендации
+            </HelperText>
+          }
           refreshControl={
-            <RefreshControl refreshing={false} onRefresh={onRefresh} />
+            <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
           }
           data={genres}
           renderItem={this.renderGenre}
@@ -179,13 +172,19 @@ class SelectGenre extends React.Component<Props, State> {
           ListFooterComponent={isLoading ? SizedLoader : null}
         />
         <View noFill paddingTop={42}>
-          <IndentedButton
+          <Button
             isDisabled={L.isEmpty(selectedGenres) || isUpdating}
             isLoading={isUpdating}
             onPress={this.submit}
             title="Готово"
           />
-          {!isEditMode && <Link onPress={onSkip} title="Пропустить" />}
+          {!isEditMode && (
+            <IndentedLink
+              isDisabled={isUpdating}
+              onPress={onSkip}
+              title="Пропустить"
+            />
+          )}
         </View>
         <Modal
           hardwareAccelerated
@@ -195,13 +194,10 @@ class SelectGenre extends React.Component<Props, State> {
           visible={isModalVisible}
         >
           <SubGenres
-            onRefresh={refetchSubGenres}
-            isLoading={isSubGenresLoading}
-            onClose={this.hideModal}
             mainGenre={selectedGenre!}
-            subGenres={subGenres}
             isEditMode={isEditMode}
             allSelectedGenres={selectedGenres}
+            onClose={this.hideModal}
             onSubmit={this.selectSubGenres}
           />
         </Modal>

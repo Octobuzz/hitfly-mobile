@@ -64,6 +64,7 @@ const TitleText = styled(TextBase)`
 
 interface Props {
   isLoading: boolean
+  isRefreshing: boolean
   mainGenre: Genre
   subGenres: Genre[]
   allSelectedGenres: Record<number, boolean>
@@ -78,7 +79,14 @@ const selectAllGenres = (genres: Genre[]): Record<number, boolean> => {
   genres.forEach(({ id }) => {
     res[id] = true
   })
+  return res
+}
 
+const deselectAllGenres = (genres: Genre[]): Record<number, boolean> => {
+  const res: Record<number, boolean> = {}
+  genres.forEach(({ id }) => {
+    res[id] = false
+  })
   return res
 }
 
@@ -89,6 +97,7 @@ const SubGenres: React.FC<Props> = ({
   isLoading,
   onRefresh,
   isEditMode,
+  isRefreshing,
   allSelectedGenres,
   mainGenre: { title: mainTitle },
 }) => {
@@ -132,8 +141,8 @@ const SubGenres: React.FC<Props> = ({
   )
 
   const clearSelections = useCallback(() => {
-    setSelectedGenres({})
-  }, [])
+    setSelectedGenres(deselectAllGenres(subGenres))
+  }, [subGenres])
 
   const handleSubmit = useCallback((): void => {
     onSubmit(selectedGenres)
@@ -150,12 +159,12 @@ const SubGenres: React.FC<Props> = ({
       <TitleWrapper>
         <TitleText>{mainTitle}</TitleText>
       </TitleWrapper>
-      {isLoading ? (
+      {isLoading && !isRefreshing ? (
         <Loader size={150} />
       ) : (
         <Scroll
           refreshControl={
-            <RefreshControl refreshing={false} onRefresh={onRefresh} />
+            <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
           }
           renderItem={renderItem}
           data={subGenres}

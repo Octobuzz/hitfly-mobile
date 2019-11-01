@@ -2,10 +2,10 @@ import { createStackNavigator } from 'react-navigation-stack'
 import {
   LoginScreen,
   RegisterScreen,
+  SelectGenreScreen,
   RecoveryInfoScreen,
   SocialAuthWebScreen,
   ForgotPasswordScreen,
-  SelectGenreForAuthScreen,
 } from 'src/screens'
 
 import routeNames from './routeNames'
@@ -22,7 +22,7 @@ const AuthNavigator = createStackNavigator(
       navigationOptions: { title: 'Создать аккаунт' },
     },
     [routeNames.AUTH.SELECT_GENRE]: {
-      screen: SelectGenreForAuthScreen,
+      screen: SelectGenreScreen,
       navigationOptions: { title: 'Выбор жанра' },
     },
     [routeNames.AUTH.SOCIAL_AUTH]: SocialAuthWebScreen,
