@@ -6,7 +6,7 @@ import gql from 'graphql-tag'
 import { Genre, Profile, Pagination } from 'src/apollo'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { ROUTES } from 'src/navigation'
-import { helpers } from 'src/utils'
+import { useQueryWithPagination } from 'src/containers/Hooks'
 
 interface GenreData {
   genres: Pagination<Genre>
@@ -43,32 +43,27 @@ const UPDATE_GENRES = gql`
   }
 `
 
+const genresSelector = (data?: GenreData) => L.get(data, 'genres.items', [])
+const hasMorePagesSelector = (data?: GenreData) =>
+  L.get(data, 'genres.hasMorePages', false)
+
 const SelectGenre: React.FC<Props> = ({
   isEditMode,
   navigation,
   favouriteGenres,
 }) => {
-  const { data, refetch, loading, fetchMore, networkStatus } = useQuery<
-    GenreData
-  >(GET_GENRES, { notifyOnNetworkStatusChange: true })
-
-  const genres: Genre[] = L.get(data, 'genres.items', [])
-  const hasMorePages: boolean = L.get(data, 'genres.hasMorePages', false)
-  const onEndReached = useCallback(() => {
-    if (hasMorePages && !loading) {
-      const page = Math.trunc(genres.length / LIMIT) + 1
-      fetchMore({
-        variables: { page, limit: LIMIT },
-        // @ts-ignore
-        updateQuery: (prev, { fetchMoreResult }) => {
-          if (fetchMoreResult) {
-            return helpers.mergeRight(prev, fetchMoreResult)
-          }
-          return prev
-        },
-      })
-    }
-  }, [hasMorePages, genres, loading])
+  const {
+    items,
+    refetch,
+    loading,
+    networkStatus,
+    onEndReached,
+  } = useQueryWithPagination<GenreData>(GET_GENRES, {
+    hasMorePagesSelector,
+    limit: LIMIT,
+    itemsSelector: genresSelector,
+    notifyOnNetworkStatusChange: true,
+  })
 
   const onSkip = useCallback(() => {
     navigation.navigate(ROUTES.APP.MAIN)
@@ -96,7 +91,7 @@ const SelectGenre: React.FC<Props> = ({
     <SelectGenreScreen
       isEditMode={isEditMode}
       isRefreshing={networkStatus === 4}
-      genres={genres}
+      genres={items}
       onEndReached={onEndReached}
       isLoading={loading}
       onRefresh={refetch}
@@ -134,6 +129,3 @@ export const SelectGenreForProfileScreen: React.FC<any> = props => {
 
   return <SelectGenre {...props} isEditMode favouriteGenres={favouriteGenres} />
 }
-// TODO: рефактор
-// 2) сделать кастомный хук для пагинации
-// 3) вынести favouriteGenres в HOC?
