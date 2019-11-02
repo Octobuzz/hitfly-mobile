@@ -74,22 +74,6 @@ interface Props {
   onClose: () => void
 }
 
-const selectAllGenres = (genres: Genre[]): Record<number, boolean> => {
-  const res: Record<number, boolean> = {}
-  genres.forEach(({ id }) => {
-    res[id] = true
-  })
-  return res
-}
-
-const deselectAllGenres = (genres: Genre[]): Record<number, boolean> => {
-  const res: Record<number, boolean> = {}
-  genres.forEach(({ id }) => {
-    res[id] = false
-  })
-  return res
-}
-
 const SubGenres: React.FC<Props> = ({
   onClose,
   onSubmit,
@@ -104,6 +88,28 @@ const SubGenres: React.FC<Props> = ({
   const [selectedGenres, setSelectedGenres] = useState<Record<number, boolean>>(
     {},
   )
+
+  const selectAllGenres = useCallback((genres: Genre[]): Record<
+    number,
+    boolean
+  > => {
+    const res: Record<number, boolean> = {}
+    genres.forEach(({ id }) => {
+      res[id] = true
+    })
+    return res
+  }, [])
+
+  const deselectAllGenres = useCallback((genres: Genre[]): Record<
+    number,
+    boolean
+  > => {
+    const res: Record<number, boolean> = {}
+    genres.forEach(({ id }) => {
+      res[id] = false
+    })
+    return res
+  }, [])
 
   useEffect(() => {
     if (isEditMode) {
