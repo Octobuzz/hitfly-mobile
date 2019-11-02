@@ -44,7 +44,7 @@ interface Props {
   isEditMode?: boolean
   isUpdating: boolean
   genres: Genre[]
-  favouriteGenres?: Genre[]
+  favouriteGenres: Genre[]
   onRefresh: () => void
   onEndReached: () => void
   onSkip: () => void
@@ -63,13 +63,17 @@ class SelectGenre extends React.Component<Props, State> {
     selectedGenres: {},
   }
 
+  static defaultProps = {
+    favouriteGenres: [],
+  }
+
   componentDidMount() {
     this.initSelectedGenres()
   }
 
   private initSelectedGenres = (): void => {
     const { favouriteGenres } = this.props
-    if (favouriteGenres && favouriteGenres.length) {
+    if (favouriteGenres.length) {
       const selectedGenres: Record<number, boolean> = {}
       favouriteGenres.forEach(({ id }) => {
         selectedGenres[id] = true
