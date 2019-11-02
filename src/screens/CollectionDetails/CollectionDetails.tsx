@@ -29,6 +29,7 @@ const SizedLoader = <Loader size={100} />
 
 interface Props {
   isLoading: boolean
+  isRefreshing: boolean
   collections: Collection[]
   onRefresh: () => void
   onEndReached: () => any
@@ -40,6 +41,7 @@ const CollectionDetails: React.FC<Props> = ({
   onRefresh,
   collections,
   onPressItem,
+  isRefreshing,
   onEndReached,
 }) => {
   const renderItem: ListRenderItem<Collection> = useCallback(
@@ -53,7 +55,7 @@ const CollectionDetails: React.FC<Props> = ({
     <Scroll
       data={collections}
       refreshControl={
-        <RefreshControl refreshing={false} onRefresh={onRefresh} />
+        <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
       }
       renderItem={renderItem}
       ListHeaderComponent={Header}

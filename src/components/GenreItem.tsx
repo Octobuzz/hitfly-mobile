@@ -35,7 +35,7 @@ const TitleText = styled(TextBase)`
 
 interface GenreItemProps {
   item: Genre
-  onPress: (item: Genre) => void
+  onPress?: (item: Genre) => void
 }
 
 interface Sized {
@@ -48,11 +48,13 @@ export const GenreItem: React.FC<GenreItemProps> & Sized = ({
 }) => {
   const { imageUrl, title } = item
   const handlePress = (): void => {
-    onPress(item)
+    if (onPress) {
+      onPress(item)
+    }
   }
 
   return (
-    <Wrapper onPress={handlePress}>
+    <Wrapper disabled={!onPress} onPress={handlePress}>
       <GenreImage source={{ uri: imageUrl }} />
       <TitleTextWrapper>
         <TitleText>{title}</TitleText>
@@ -95,7 +97,7 @@ export const SelectableGenreItem: React.FC<SelectableGenreItemProps> = ({
 }) => {
   const { imageUrl, title, hasSubGenres } = item
   const handlePress = (): void => {
-    onPress(item)
+    onPress!(item)
   }
 
   return (

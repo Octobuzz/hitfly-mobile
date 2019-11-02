@@ -12,13 +12,13 @@ import {
   RefreshControl,
   SelectableGenreItem,
 } from 'src/components'
-import SubGenres from './SubGenres'
+import SubGenres from './SubGenresContainer'
 import { Genre } from 'src/apollo'
 import { styles } from 'src/constants'
 import styled from 'src/styled-components'
 
-const IndentedButton = styled(Button)`
-  margin-bottom: 24px;
+const IndentedLink = styled(Link)`
+  margin-top: 24px;
 `
 
 // https://dev.to/acro5piano/use-styled-components-reactnative-s-flatlist-in-typescript-308e
@@ -40,14 +40,13 @@ const SizedLoader = <Loader size={100} />
 
 interface Props {
   isLoading: boolean
-  isSubGenresLoading: boolean
+  isRefreshing: boolean
+  isEditMode?: boolean
   isUpdating: boolean
   genres: Genre[]
-  subGenres: Genre[]
-  onSelectGenreWithSubGenres: (genre: Genre) => void
+  favouriteGenres: Genre[]
   onRefresh: () => void
   onEndReached: () => void
-  refetchSubGenres: () => void
   onSkip: () => void
   onSubmit: (genresIds: string[]) => Promise<void>
 }
@@ -62,6 +61,25 @@ class SelectGenre extends React.Component<Props, State> {
   state: State = {
     isModalVisible: false,
     selectedGenres: {},
+  }
+
+  static defaultProps = {
+    favouriteGenres: [],
+  }
+
+  componentDidMount() {
+    this.initSelectedGenres()
+  }
+
+  private initSelectedGenres = (): void => {
+    const { favouriteGenres } = this.props
+    if (favouriteGenres.length) {
+      const selectedGenres: Record<number, boolean> = {}
+      favouriteGenres.forEach(({ id }) => {
+        selectedGenres[id] = true
+      })
+      this.setState({ selectedGenres })
+    }
   }
 
   private renderGenre = ({ item }: { item: Genre }): JSX.Element => {
@@ -79,28 +97,23 @@ class SelectGenre extends React.Component<Props, State> {
   private toggleGenre = (genre: Genre): void => {
     const { selectedGenres } = this.state
     if (selectedGenres[genre.id]) {
-      this.deselectGenreForSubGenres(genre)
+      this.deselectGenre(genre)
     } else {
-      this.selectGenreForSubGenres(genre)
+      this.selectGenre(genre)
     }
   }
 
-  selectedSubGenres = new Map<number, string[]>()
-
-  private deselectGenreForSubGenres = (genre: Genre): void => {
+  private deselectGenre = (genre: Genre): void => {
     const { selectedGenres } = this.state
     const newGenres = LFP.unset(genre.id, selectedGenres)
     this.setState({ selectedGenres: newGenres })
-    this.selectedSubGenres.delete(genre.id)
   }
 
-  private selectGenreForSubGenres = (genre: Genre): void => {
+  private selectGenre = (genre: Genre): void => {
     const { selectedGenres } = this.state
     const newGenres = LFP.set(genre.id, true, selectedGenres)
     this.setState({ selectedGenres: newGenres })
     if (genre.hasSubGenres) {
-      const { onSelectGenreWithSubGenres } = this.props
-      onSelectGenreWithSubGenres(genre)
       this.setState({
         isModalVisible: true,
         selectedGenre: genre,
@@ -109,24 +122,15 @@ class SelectGenre extends React.Component<Props, State> {
   }
 
   private selectSubGenres = (subGenres: Record<number, boolean>): void => {
-    const { selectedGenre } = this.state
-    const selectedSubGenresIds: string[] = []
-    for (const genreId in subGenres) {
-      if (subGenres[genreId]) {
-        selectedSubGenresIds.push(genreId)
-      }
-    }
-    this.selectedSubGenres.set(selectedGenre!.id, selectedSubGenresIds)
-    this.setState({ isModalVisible: false })
+    const { selectedGenres } = this.state
+    const newSelectedGenres = { ...selectedGenres, ...subGenres }
+    this.setState({ isModalVisible: false, selectedGenres: newSelectedGenres })
   }
 
   private submit = () => {
     const { onSubmit } = this.props
     const { selectedGenres } = this.state
-    let allGenres: string[] = []
-    for (const subGenres of this.selectedSubGenres.values()) {
-      allGenres = allGenres.concat(subGenres)
-    }
+    const allGenres: string[] = []
     for (const genreId in selectedGenres) {
       if (selectedGenres[genreId]) {
         allGenres.push(genreId)
@@ -146,25 +150,24 @@ class SelectGenre extends React.Component<Props, State> {
       genres,
       onSkip,
       onRefresh,
-      subGenres,
       isLoading,
       isUpdating,
+      isEditMode,
       onEndReached,
-      refetchSubGenres,
-      isSubGenresLoading,
+      isRefreshing,
     } = this.props
     const { isModalVisible, selectedGenre, selectedGenres } = this.state
     return (
       <SafeView>
-        <View noFill paddingVertical={0}>
-          <HelperText>
-            Отметьте жанры, которые Вам нравятся. Это поможет получать более
-            точные и интересные рекомендации
-          </HelperText>
-        </View>
         <Scroll
+          ListHeaderComponent={
+            <HelperText>
+              Отметьте жанры, которые Вам нравятся. Это поможет получать более
+              точные и интересные рекомендации
+            </HelperText>
+          }
           refreshControl={
-            <RefreshControl refreshing={false} onRefresh={onRefresh} />
+            <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
           }
           data={genres}
           renderItem={this.renderGenre}
@@ -173,13 +176,19 @@ class SelectGenre extends React.Component<Props, State> {
           ListFooterComponent={isLoading ? SizedLoader : null}
         />
         <View noFill paddingTop={42}>
-          <IndentedButton
-            isDisabled={L.isEmpty(selectedGenres)}
+          <Button
+            isDisabled={L.isEmpty(selectedGenres) || isUpdating}
             isLoading={isUpdating}
             onPress={this.submit}
             title="Готово"
           />
-          <Link onPress={onSkip} title="Пропустить" />
+          {!isEditMode && (
+            <IndentedLink
+              isDisabled={isUpdating}
+              onPress={onSkip}
+              title="Пропустить"
+            />
+          )}
         </View>
         <Modal
           hardwareAccelerated
@@ -189,11 +198,10 @@ class SelectGenre extends React.Component<Props, State> {
           visible={isModalVisible}
         >
           <SubGenres
-            onRefresh={refetchSubGenres}
-            isLoading={isSubGenresLoading}
-            onClose={this.hideModal}
             mainGenre={selectedGenre!}
-            subGenres={subGenres}
+            isEditMode={isEditMode}
+            allSelectedGenres={selectedGenres}
+            onClose={this.hideModal}
             onSubmit={this.selectSubGenres}
           />
         </Modal>

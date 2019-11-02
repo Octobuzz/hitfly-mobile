@@ -7,17 +7,16 @@ import {
   withSelectors,
   SelectorsProps,
 } from 'src/containers/HOCs'
-import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { Pagination, Collection } from 'src/apollo'
 import { ROUTES } from 'src/navigation'
-import { helpers } from 'src/utils'
+import { useQueryWithPagination } from 'src/containers/Hooks'
 
 interface CollectionsData {
   collections?: Pagination<Collection>
 }
 
-const LIMIT = 10
+const LIMIT = 20
 const GET_COLLECTIONS = gql`
   query getCollectionsByType($type: String!, $limit: Int = ${LIMIT}, $page: Int = 1) {
     collectionDetailsType @client @export(as: "type")
@@ -28,6 +27,11 @@ const GET_COLLECTIONS = gql`
 
 interface Props extends SelectorsProps, NavigationStackScreenProps {}
 
+const itemsSelector = (data?: CollectionsData) =>
+  L.get(data, 'collections.items', [])
+const hasMorePagesSelector = (data?: CollectionsData) =>
+  L.get(data, 'collections.hasMorePages', false)
+
 const CollectionDetails: React.FC<Props> = ({
   navigation,
   selectGenre,
@@ -35,30 +39,18 @@ const CollectionDetails: React.FC<Props> = ({
   selectCollectionType,
   ...rest
 }) => {
-  const { data, refetch, loading, fetchMore } = useQuery<CollectionsData>(
-    GET_COLLECTIONS,
-    { notifyOnNetworkStatusChange: true },
-  )
-
-  const collections: Collection[] = L.get(data, 'collections.items', [])
-  const hasMorePages: boolean = L.get(data, 'collections.hasMorePages')
-
-  const onEndReached = useCallback((): void => {
-    if (hasMorePages && !loading) {
-      // + 1, потому что для бэка 1 и 0 - одно и то же
-      // поэтому page должна быть больше 1
-      const page = Math.trunc(collections.length / LIMIT) + 1
-      fetchMore({
-        variables: { page, limit: LIMIT },
-        updateQuery: (prev, { fetchMoreResult }) => {
-          if (fetchMoreResult) {
-            return helpers.mergeRight(prev, fetchMoreResult)
-          }
-          return prev
-        },
-      })
-    }
-  }, [hasMorePages, collections, loading])
+  const {
+    items,
+    onEndReached,
+    refetch,
+    loading,
+    networkStatus,
+  } = useQueryWithPagination<CollectionsData>(GET_COLLECTIONS, {
+    itemsSelector,
+    hasMorePagesSelector,
+    limit: LIMIT,
+    notifyOnNetworkStatusChange: true,
+  })
 
   const title = navigation.getParam('title', '')
 
@@ -74,8 +66,9 @@ const CollectionDetails: React.FC<Props> = ({
 
   return (
     <CollectionDetailsScreen
-      collections={collections}
+      collections={items}
       onRefresh={refetch}
+      isRefreshing={networkStatus === 4}
       isLoading={loading}
       onPressItem={onPressItem}
       onEndReached={onEndReached}

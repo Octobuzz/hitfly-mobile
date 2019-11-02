@@ -1,8 +1,11 @@
+export * from './SelectGenre'
+
 export { default as HomeScreen } from './Home'
 export { default as LoginScreen } from './Login'
 export { default as WelcomeScreen } from './Welcome'
 export { default as SettingsScreen } from './Settings'
 export { default as RegisterScreen } from './Register'
+export { default as MyGenresScreen } from './MyGenres'
 export { default as PlaylistScreen } from './Playlist'
 export { default as ProfileTabScreen } from './ProfileTab'
 export { default as SelectGenreScreen } from './SelectGenre'
