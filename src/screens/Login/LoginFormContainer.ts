@@ -40,7 +40,7 @@ export default L.flowRight(
         const result = await mutate({ variables })
         const token = L.get(result, 'data.login.token')
         if (token) {
-          await storage.setItem(storageKeys.AUTH_TOKEN, token as string)
+          await storage.setToken(token)
           // TODO: это костыль, удалить когда бэк станет лучше
           await storage.setItem(storageKeys.GRAPHQL_ENDPOINT, 'user')
           navigation.navigate(ROUTES.MAIN.HOME)

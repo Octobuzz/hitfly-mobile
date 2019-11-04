@@ -16,7 +16,7 @@ async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
   })
 
   const authLink = setContext(async (_, { headers }) => {
-    const token = await storage.getItem(storageKeys.AUTH_TOKEN)
+    const token = await storage.getToken()
     // FIXME: это костыль, так как есть несколько эндпоинтов.
     // надеюсь в будущем будет 1 и тогда можно удалить
     const endpoint = await storage.getItem(storageKeys.GRAPHQL_ENDPOINT, '')
