@@ -13,6 +13,10 @@ export default L.flowRight(
   // @ts-ignore
   graphql(GET_RECOMMENDED, {
     alias: 'withRecommendedCollections',
+    options: {
+      notifyOnNetworkStatusChange: true,
+      fetchPolicy: 'cache-and-network',
+    },
     props: (
       {
         // @ts-ignore

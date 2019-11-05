@@ -13,6 +13,10 @@ export default L.flowRight(
   // @ts-ignore
   graphql(GET_GENRES, {
     alias: 'withGenres',
+    options: {
+      notifyOnNetworkStatusChange: true,
+      fetchPolicy: 'cache-and-network',
+    },
     props: (
       {
         // @ts-ignore

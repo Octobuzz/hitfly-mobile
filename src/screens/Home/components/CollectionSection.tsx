@@ -42,8 +42,6 @@ interface Props {
 }
 
 class ColleactionSection extends React.Component<Props> {
-  private keyExtractor = (item: Collection): string => item.id.toString()
-
   private renderCollection: ListRenderItem<Collection> = ({ item }) => {
     const { onPressCollection } = this.props
     return (
@@ -86,13 +84,15 @@ class ColleactionSection extends React.Component<Props> {
           subtitle={subtitle}
         />
         <ScrollWrapper>
-          {isLoading && <Loader isAbsolute />}
-          <Scroll
-            getItemLayout={this.getItemLayout}
-            renderItem={this.renderCollection}
-            keyExtractor={this.keyExtractor}
-            data={collections}
-          />
+          {isLoading ? (
+            <Loader isAbsolute />
+          ) : (
+            <Scroll
+              getItemLayout={this.getItemLayout}
+              renderItem={this.renderCollection}
+              data={collections}
+            />
+          )}
         </ScrollWrapper>
       </SectionWrapper>
     )

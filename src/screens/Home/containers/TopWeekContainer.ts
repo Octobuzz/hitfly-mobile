@@ -11,6 +11,10 @@ export default L.flowRight(
   // @ts-ignore
   graphql(GET_TOP_WEEK_TRACKS, {
     alias: 'withTopWeekTracks',
+    options: {
+      notifyOnNetworkStatusChange: true,
+      fetchPolicy: 'cache-and-network',
+    },
     props: (
       {
         // @ts-ignore

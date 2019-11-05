@@ -84,8 +84,6 @@ interface Props {
 }
 
 class TracksSection extends React.Component<Props> {
-  private keyExtractor = (item: Track): string => item.id.toString()
-
   private renderPlaylist = ({ item }: { item: Track }): JSX.Element => {
     const { onPressTrack } = this.props
     return (
@@ -120,13 +118,15 @@ class TracksSection extends React.Component<Props> {
           subtitle={subtitle}
         />
         <ScrollWrapper>
-          {isLoading && <Loader isAbsolute />}
-          <Scroll
-            getItemLayout={this.getItemLayout}
-            renderItem={this.renderPlaylist}
-            keyExtractor={this.keyExtractor}
-            data={playlist}
-          />
+          {isLoading ? (
+            <Loader isAbsolute />
+          ) : (
+            <Scroll
+              getItemLayout={this.getItemLayout}
+              renderItem={this.renderPlaylist}
+              data={playlist}
+            />
+          )}
         </ScrollWrapper>
       </SectionWrapper>
     )

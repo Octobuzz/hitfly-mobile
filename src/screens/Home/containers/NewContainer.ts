@@ -11,6 +11,10 @@ export default L.flowRight(
   // @ts-ignore
   graphql(GET_NEW_TRACKS, {
     alias: 'withNewTracks',
+    options: {
+      notifyOnNetworkStatusChange: true,
+      fetchPolicy: 'cache-and-network',
+    },
     props: (
       {
         // @ts-ignore

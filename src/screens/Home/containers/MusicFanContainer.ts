@@ -13,6 +13,10 @@ export default L.flowRight(
   // @ts-ignore
   graphql(GET_MUSIC_FAN, {
     alias: 'withMusicFunCollections',
+    options: {
+      notifyOnNetworkStatusChange: true,
+      fetchPolicy: 'cache-and-network',
+    },
     props: (
       {
         // @ts-ignore
