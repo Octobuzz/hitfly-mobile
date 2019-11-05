@@ -37,10 +37,12 @@ class Settings extends React.Component<Props> {
 
   private initItems = (): NavigationItem[] => {
     const { navigation } = this.props
+    // закоменченный код пусть пока будет здесь
+    // в первом релизе решили убрать эти экраны (или ссылки на веб)
     const items: NavigationItem[] = [
-      {
-        title: 'Редактировать профиль',
-      },
+      // {
+      //   title: 'Редактировать профиль',
+      // },
       {
         title: 'Список любимых жанров',
         onPress: () => {
@@ -50,12 +52,12 @@ class Settings extends React.Component<Props> {
       {
         title: 'Настройка входа',
       },
-      {
-        title: 'Удалить аккаунт',
-        onPress: () => {
-          navigation.navigate(ROUTES.MAIN.REMOVE_ACCOUNT)
-        },
-      },
+      // {
+      //   title: 'Удалить аккаунт',
+      //   onPress: () => {
+      //     navigation.navigate(ROUTES.MAIN.REMOVE_ACCOUNT)
+      //   },
+      // },
     ]
     return items
   }
