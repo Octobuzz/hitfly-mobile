@@ -9,15 +9,27 @@ const Wrapper = styled.TouchableOpacity`
   ${disabledStyle}
 `
 
-const Icon = styled.Image``
+const Icon = styled.Image<Faded>`
+  ${({ isFaded, theme }) =>
+    isFaded && `tint-color: ${theme.colors.inputBorder};`}
+`
+
+interface Faded {
+  isFaded?: boolean
+}
 
 interface Props {
   buttonData: SocialConnect
+  useFading?: boolean
   style?: StyleProp<ViewStyle>
-  onPress?: (buttonData: SocialConnect) => void
+  onPress: (buttonData: SocialConnect) => void
 }
 
 class SocialButton extends React.Component<Props> {
+  static defaultProps = {
+    onPress: () => {},
+  }
+
   private getIconSource = (): number => {
     const {
       buttonData: { type },
@@ -38,17 +50,19 @@ class SocialButton extends React.Component<Props> {
 
   private handlePress = (): void => {
     const { buttonData, onPress } = this.props
-    if (onPress) {
-      onPress(buttonData)
-    }
+    onPress(buttonData)
   }
 
   render() {
-    const { style } = this.props
+    const {
+      style,
+      useFading,
+      buttonData: { isLinked },
+    } = this.props
     const source = this.getIconSource()
     return (
       <Wrapper onPress={this.handlePress} style={style}>
-        <Icon source={source} />
+        <Icon isFaded={useFading && !isLinked} source={source} />
       </Wrapper>
     )
   }

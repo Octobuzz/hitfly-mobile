@@ -4,6 +4,7 @@ import { Field, FormikProps, withFormik } from 'formik'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { View, SafeView, Button, Stretcher, Input } from 'src/components'
+import { ProfileSocialAuth } from 'src/containers/components'
 import styled from 'src/styled-components'
 import { helpers } from 'src/utils'
 import { strings } from 'src/constants'
@@ -46,6 +47,7 @@ const AuthSettings: React.FC<Props> = ({
           type="outline"
           title="Изменить пароль"
         />
+        <ProfileSocialAuth />
         <Stretcher />
         <Button
           onPress={handleSubmit}

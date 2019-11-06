@@ -18,6 +18,7 @@ import {
   MyGenresScreen,
   ProfileTabScreen,
   AuthSettingsScreen,
+  SocialAuthWebScreen,
   CollectionDetailsScreen,
   SelectGenreForProfileScreen,
 } from 'src/screens'
@@ -129,6 +130,7 @@ const MainNavigator = createStackNavigator(
       screen: AuthSettingsScreen,
       navigationOptions: { title: 'Настройка входа' },
     },
+    [routeNames.MAIN.SOCIAL_AUTH]: SocialAuthWebScreen,
   },
   {
     initialRouteName: routeNames.MAIN.HOME,

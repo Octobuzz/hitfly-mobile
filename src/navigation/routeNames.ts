@@ -32,5 +32,6 @@ export default {
     SELECT_GENRE: `${APP.MAIN}/select_genre`,
     MY_GENRES: `${APP.MAIN}/my_genres`,
     AUTH_SETTINGS: `${APP.MAIN}/auth_settings`,
+    SOCIAL_AUTH: `${APP.MAIN}/social_auth`,
   },
 }
