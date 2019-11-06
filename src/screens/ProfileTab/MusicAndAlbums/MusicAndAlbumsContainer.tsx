@@ -15,6 +15,8 @@ interface Props
     MutateProps<void, { id: number }> {
   tracks: Track[]
   albums: Album[]
+  tracksTitle: string
+  albumTitle: string
   isLoading: boolean
   refreshData: () => Promise<void>
 }
@@ -51,8 +53,6 @@ const MusicAndAlbumsContainer: React.FC<Props> = ({
 
   return (
     <MusicAndAlbumsScreen
-      tracksTitle="Любимые песни"
-      albumTitle="Любимые альбомы"
       refreshing={isRefreshing}
       onPressAlbum={navigateToAlbumPlaylist}
       onRefresh={refresh}
