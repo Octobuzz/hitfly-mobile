@@ -13,17 +13,17 @@ const ChangePasswordButton = styled(Button)`
   margin-vertical: 24px;
 `
 
-export interface AuthSettingsValues {
+interface Values {
   email: string
 }
 
 interface OuterProps extends NavigationStackScreenProps {
   email: string
   onPressChangePassword: () => void
-  onSubmit: (values: AuthSettingsValues) => Promise<any>
+  onSubmit: (values: Values) => Promise<any>
 }
 
-interface Props extends FormikProps<AuthSettingsValues>, OuterProps {}
+interface Props extends FormikProps<Values>, OuterProps {}
 
 const AuthSettings: React.FC<Props> = ({
   isValid,
@@ -38,6 +38,9 @@ const AuthSettings: React.FC<Props> = ({
           name="email"
           label="E-mail"
           component={Input}
+          returnKeyType="send"
+          textContentType="emailAddress"
+          autoCompleteType="email"
           keyboardType="email-address"
           onSubmitEditing={handleSubmit}
           RightIcon={<MaterialIcon size={20} name="mail-outline" />}
@@ -66,7 +69,7 @@ const validationSchema = Yup.object().shape({
     .email(strings.validation.wrongEmail),
 })
 
-export default withFormik<OuterProps, AuthSettingsValues>({
+export default withFormik<OuterProps, Values>({
   validationSchema,
   validateOnMount: true,
   mapPropsToValues: ({ email }) => ({ email }),
