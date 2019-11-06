@@ -8,6 +8,7 @@ describe('Image', () => {
     expect(tree).toMatchSnapshot()
   })
 
+  // TODO: переписать
   it('renders correctly with not svg source', () => {
     const tree = renderer.create(<Image source={{ uri: 'not svg' }} />).toJSON()
     expect(tree).toMatchSnapshot()

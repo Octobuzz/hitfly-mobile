@@ -13,7 +13,6 @@ describe('TrackMenu', () => {
 
   const props = {
     onPressLike: jest.fn(),
-    onPressEdit: jest.fn(),
     onPressCancel: jest.fn(),
     track,
   }

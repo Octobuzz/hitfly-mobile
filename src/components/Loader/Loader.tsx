@@ -41,4 +41,8 @@ const Loader: React.FC<Props> = ({ size, ...props }) => (
   </Wrapper>
 )
 
+export const ListFooterLoader: React.FC<{ isShown?: boolean }> = ({
+  isShown,
+}) => (isShown ? <Loader isFilled size={100} /> : null)
+
 export default Loader

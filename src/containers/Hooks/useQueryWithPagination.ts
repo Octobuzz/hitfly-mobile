@@ -1,15 +1,19 @@
 import { useCallback } from 'react'
-import { OperationVariables, QueryResult } from '@apollo/react-common'
+import { QueryResult } from '@apollo/react-common'
 import { QueryHookOptions } from '@apollo/react-hooks'
 import { useQuery } from '@apollo/react-hooks'
 import { DocumentNode } from 'graphql'
 import { helpers } from 'src/utils'
 
-interface Options<TData, TVariables>
-  extends QueryHookOptions<TData, TVariables> {
+interface Options<TData> extends QueryHookOptions<TData> {
   itemsSelector: (data?: TData) => any[]
   hasMorePagesSelector: (data?: TData) => boolean
   limit: number
+}
+
+interface PaginationVatiables {
+  limit: number
+  page?: number
 }
 
 interface Result<TData, TVariables> extends QueryResult<TData, TVariables> {
@@ -17,17 +21,20 @@ interface Result<TData, TVariables> extends QueryResult<TData, TVariables> {
   items: any
 }
 
-function useQueryWithPagination<TData = any, TVariables = OperationVariables>(
+function useQueryWithPagination<TData = any>(
   query: DocumentNode,
-  options: Options<TData, TVariables>,
-): Result<TData, TVariables> {
+  options: Options<TData>,
+): Result<TData, PaginationVatiables> {
   const {
     limit,
     itemsSelector,
     hasMorePagesSelector,
     ...originalOprions
   } = options
-  const queryResult = useQuery<TData, TVariables>(query, originalOprions)
+  const queryResult = useQuery<TData, PaginationVatiables>(query, {
+    ...originalOprions,
+    variables: { limit },
+  })
 
   const { data, loading, fetchMore } = queryResult
 

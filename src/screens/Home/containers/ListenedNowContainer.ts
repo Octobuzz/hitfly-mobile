@@ -12,6 +12,10 @@ export default L.flowRight(
   // @ts-ignore
   graphql(GET_LISTENED_NOW, {
     alias: 'withListenedNow',
+    options: {
+      notifyOnNetworkStatusChange: true,
+      fetchPolicy: 'cache-and-network',
+    },
     props: (
       {
         // @ts-ignore

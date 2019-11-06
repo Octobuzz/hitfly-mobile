@@ -12,6 +12,7 @@ exports[`GenreItem renders correctly 1`] = `
 >
   <TouchableOpacity
     activeOpacity={0.2}
+    disabled={false}
     style={
       Array [
         Object {

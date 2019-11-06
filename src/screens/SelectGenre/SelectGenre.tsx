@@ -5,11 +5,11 @@ import { FlatList, Modal } from 'react-native'
 import {
   View,
   Link,
-  Loader,
   Button,
   SafeView,
   HelperText,
   RefreshControl,
+  ListFooterLoader,
   SelectableGenreItem,
 } from 'src/components'
 import SubGenres from './SubGenresContainer'
@@ -35,8 +35,6 @@ const Scroll = styled(FlatList as new () => FlatList<Genre>).attrs(() => ({
 }))`
   flex: 1;
 `
-
-const SizedLoader = <Loader size={100} />
 
 interface Props {
   isLoading: boolean
@@ -173,7 +171,7 @@ class SelectGenre extends React.Component<Props, State> {
           renderItem={this.renderGenre}
           onEndReachedThreshold={0.7}
           onEndReached={onEndReached}
-          ListFooterComponent={isLoading ? SizedLoader : null}
+          ListFooterComponent={<ListFooterLoader isShown={isLoading} />}
         />
         <View noFill paddingTop={42}>
           <Button

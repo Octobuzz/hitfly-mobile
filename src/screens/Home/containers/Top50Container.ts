@@ -12,6 +12,10 @@ export default L.flowRight(
   // @ts-ignore
   graphql(GET_TOP50, {
     alias: 'withTop50',
+    options: {
+      notifyOnNetworkStatusChange: true,
+      fetchPolicy: 'cache-and-network',
+    },
     props: (
       {
         // @ts-ignore

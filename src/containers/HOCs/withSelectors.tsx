@@ -4,6 +4,9 @@ import { graphql } from '@apollo/react-hoc'
 import { MutationFunction } from '@apollo/react-common'
 import gql from 'graphql-tag'
 
+// FIXME: стоит сделать через навигацию а не через селекты и стор?
+// TODO: сделать через хук
+
 const SELECT_COLLECTION = gql`
   mutation SelectCollection($id: Int!) {
     selectCollection(id: $id) @client

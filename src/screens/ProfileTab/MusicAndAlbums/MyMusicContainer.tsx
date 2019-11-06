@@ -34,6 +34,8 @@ const MyMusicContainer: React.FC<Props> = ({
 
   return (
     <MusicAndAlbumsContainer
+      tracksTitle="Песни"
+      albumTitle="Альбомы"
       albums={myAlbums}
       tracks={myTracks}
       isLoading={tracksLoading || albumsLoading}
