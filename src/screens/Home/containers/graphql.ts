@@ -1,6 +1,8 @@
 import gql from 'graphql-tag'
 import { Genre, Pagination, Track, User } from 'src/apollo'
 
+// FIXME: перенести в apollo/queries
+
 export interface GenreData {
   genres?: Genre[]
 }
