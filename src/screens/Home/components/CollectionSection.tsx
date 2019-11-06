@@ -1,6 +1,6 @@
 import React from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
-import { Loader, CollectionItem } from 'src/components'
+import { Loader, CollectionItem, ListFooterLoader } from 'src/components'
 import { Collection } from 'src/apollo'
 import SectionWrapper from './SectionWrapper'
 import SectionHeader from './SectionHeader'
@@ -16,7 +16,6 @@ const SizedCollectionItem = styled(CollectionItem).attrs(() => ({
 }))``
 
 const Column = styled.View`
-  flex: 1;
   padding-horizontal: ${DIVIDER_SIZE / 2}px;
 `
 
@@ -36,9 +35,11 @@ interface Props {
   title: string
   subtitle?: string
   isLoading?: boolean
+  isFetchingMore?: boolean
   collections: Collection[]
   onPressCollection: (collection: Collection) => void
   onPressHeader: () => void
+  onEndReached: () => void
 }
 
 class ColleactionSection extends React.Component<Props> {
@@ -51,6 +52,7 @@ class ColleactionSection extends React.Component<Props> {
     )
   }
 
+  // TODO: сделать каррируемую функцию
   private getItemLayout = (
     _: any,
     index: number,
@@ -69,7 +71,9 @@ class ColleactionSection extends React.Component<Props> {
       subtitle,
       isLoading,
       collections,
+      onEndReached,
       onPressHeader,
+      isFetchingMore,
     } = this.props
 
     if (!isLoading && !collections.length) {
@@ -88,6 +92,11 @@ class ColleactionSection extends React.Component<Props> {
             <Loader isAbsolute />
           ) : (
             <Scroll
+              ListFooterComponent={
+                <ListFooterLoader isShown={isFetchingMore} />
+              }
+              onEndReachedThreshold={0.9}
+              onEndReached={onEndReached}
               getItemLayout={this.getItemLayout}
               renderItem={this.renderCollection}
               data={collections}

@@ -11,7 +11,7 @@ const itemsSelector = (data?: PlaylistData) => L.get(data, 'playlist.items', [])
 const hasMorePagesSelector = (data?: PlaylistData) =>
   L.get(data, 'playlist.hasMorePages', false)
 
-const NewContainer: React.FC<any> = ({ navigation, getRefetcher }) => {
+const TopWeekContainer: React.FC<any> = ({ navigation, getRefetcher }) => {
   const {
     items,
     refetch,
@@ -55,4 +55,4 @@ const NewContainer: React.FC<any> = ({ navigation, getRefetcher }) => {
   )
 }
 
-export default withNavigation(NewContainer)
+export default withNavigation(TopWeekContainer)

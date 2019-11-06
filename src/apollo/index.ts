@@ -1,3 +1,5 @@
-export { default as setupClient } from './setupClient'
+export * from './queries'
 export * from './schemas'
 export * from './commonTypes'
+
+export { default as setupClient } from './setupClient'
