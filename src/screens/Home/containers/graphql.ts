@@ -37,8 +37,8 @@ export const GET_LISTENED_NOW = gql`
 `
 
 export const GET_NEW_TRACKS = gql`
-  query {
-    playlist: tracks(limit: 10, page: 0) {
+  query Tracks($limit: Int = 10, $page: Int = 1) {
+    playlist: tracks(limit: $limit, page: $page) {
       items: data {
         id
         title: trackName
@@ -50,6 +50,7 @@ export const GET_NEW_TRACKS = gql`
         }
         singer
       }
+      hasMorePages: has_more_pages
     }
   }
 `
@@ -73,8 +74,8 @@ export const GET_STARS = gql`
 `
 
 export const GET_TOP_WEEK_TRACKS = gql`
-  query {
-    playlist: TopWeeklyQuery(limit: 10, page: 0) {
+  query Tracks($limit: Int = 10, $page: Int = 1) {
+    playlist: TopWeeklyQuery(limit: $limit, page: $page) {
       items: data {
         id
         title: trackName
@@ -86,6 +87,7 @@ export const GET_TOP_WEEK_TRACKS = gql`
         }
         singer
       }
+      hasMorePages: has_more_pages
     }
   }
 `
