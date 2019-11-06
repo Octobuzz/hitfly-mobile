@@ -32,6 +32,11 @@ export const SvgImage: React.FC<SvgImageProps> = ({ uri, style }) => {
         setSource(images.DEFAULT_ALBUM)
         break
       }
+      case 'default_musicgroup':
+      case 'default_playlist': {
+        setSource(images.DEFAULT_GROUP)
+        break
+      }
       default: {
         setSource(images.DEFAULT_TRACK)
         break
