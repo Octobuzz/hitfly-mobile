@@ -33,7 +33,7 @@ const MusicFanContainer: React.FC<any> = ({
   })
 
   useEffect(() => {
-    if (refetch && getRefetcher) {
+    if (getRefetcher) {
       getRefetcher(refetch)
     }
   }, [getRefetcher])

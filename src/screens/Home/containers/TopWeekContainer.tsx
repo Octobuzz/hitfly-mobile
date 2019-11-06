@@ -26,7 +26,7 @@ const TopWeekContainer: React.FC<any> = ({ navigation, getRefetcher }) => {
   })
 
   useEffect(() => {
-    if (refetch && getRefetcher) {
+    if (getRefetcher) {
       getRefetcher(refetch)
     }
   }, [getRefetcher])
