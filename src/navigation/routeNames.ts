@@ -31,5 +31,6 @@ export default {
     REMOVE_ACCOUNT: `${APP.MAIN}/remove_account`,
     SELECT_GENRE: `${APP.MAIN}/select_genre`,
     MY_GENRES: `${APP.MAIN}/my_genres`,
+    AUTH_SETTINGS: `${APP.MAIN}/auth_settings`,
   },
 }

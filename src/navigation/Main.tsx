@@ -17,6 +17,7 @@ import {
   HomeScreen,
   MyGenresScreen,
   ProfileTabScreen,
+  AuthSettingsScreen,
   CollectionDetailsScreen,
   SelectGenreForProfileScreen,
 } from 'src/screens'
@@ -123,6 +124,10 @@ const MainNavigator = createStackNavigator(
     [routeNames.MAIN.SELECT_GENRE]: {
       screen: SelectGenreForProfileScreen,
       navigationOptions: { title: 'Выбор жанра' },
+    },
+    [routeNames.MAIN.AUTH_SETTINGS]: {
+      screen: AuthSettingsScreen,
+      navigationOptions: { title: 'Настройка входа' },
     },
   },
   {
