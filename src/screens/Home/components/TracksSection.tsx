@@ -58,7 +58,6 @@ const TrackItem: React.FC<TrackItemProps> = ({ track, onPress }) => {
 }
 
 const Column = styled.View`
-  flex: 1;
   padding-horizontal: ${DIVIDER_SIZE / 2}px;
 `
 
