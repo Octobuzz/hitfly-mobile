@@ -56,6 +56,7 @@ const NoInfoText = styled(TextBase)`
 interface Props {
   profile: Profile
   isLoading: boolean
+  isRefreshing: boolean
   onRefresh: () => void
 }
 
@@ -186,13 +187,13 @@ class AboutMe extends React.Component<Props> {
   }
 
   render() {
-    const { onRefresh, isLoading } = this.props
+    const { onRefresh, isRefreshing, isLoading } = this.props
     return isLoading ? (
       <Loader isAbsolute />
     ) : (
       <ScrollView
         refreshControl={
-          <RefreshControl refreshing={false} onRefresh={onRefresh} />
+          <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
         }
         addBottomSafePadding
       >
