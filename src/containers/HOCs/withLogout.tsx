@@ -35,6 +35,8 @@ const withLogout = (WrappedComponent: React.ComponentType<LogoutProps>) => {
         await client.mutate({ mutation: LOGOUT })
 
         await storage.clearStorage()
+        // пропуск приветсвенного экрана
+        await storage.setItem(storageKeys.SKIP_WELCOME, true)
 
         NavigationService.navigate({ routeName: ROUTES.AUTH.LOGIN })
         await client.resetStore()
