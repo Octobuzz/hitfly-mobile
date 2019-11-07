@@ -1,13 +1,20 @@
 import React from 'react'
-import { Field, FormikProps } from 'formik'
+import * as Yup from 'yup'
+import { Field, FormikProps, withFormik } from 'formik'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { Input, Button, Stretcher } from 'src/components'
+import { strings } from 'src/constants'
+import { transformFormErrors } from 'src/utils/helpers'
 
-export interface ForgotPasswordFormValues {
+interface Values {
   email: string
 }
 
-interface Props extends FormikProps<ForgotPasswordFormValues> {}
+interface OuterProps {
+  onSubmit: (values: Values) => Promise<any>
+}
+
+interface Props extends FormikProps<Values>, OuterProps {}
 
 const ForgotPasswordForm: React.FC<Props> = ({
   isValid,
@@ -20,6 +27,7 @@ const ForgotPasswordForm: React.FC<Props> = ({
       label="E-mail"
       component={Input}
       keyboardType="email-address"
+      onSubmitEditing={handleSubmit}
       RightIcon={<MaterialIcon size={20} name="mail-outline" />}
     />
     <Stretcher />
@@ -32,4 +40,25 @@ const ForgotPasswordForm: React.FC<Props> = ({
   </>
 )
 
-export default ForgotPasswordForm
+const validationSchema = Yup.object().shape({
+  email: Yup.string()
+    .required(strings.validation.required)
+    .email(strings.validation.wrongEmail),
+})
+
+export default withFormik<OuterProps, Values>({
+  validationSchema,
+  handleSubmit: async (
+    values,
+    { props: { onSubmit }, setErrors, setSubmitting },
+  ) => {
+    try {
+      await onSubmit(values)
+    } catch (error) {
+      const formErrors = transformFormErrors(error)
+      setErrors(formErrors)
+    } finally {
+      setSubmitting(false)
+    }
+  },
+})(ForgotPasswordForm)
