@@ -1,5 +1,6 @@
 import React from 'react'
 import { TextBase, H2 } from 'src/components'
+import { parseISO, format } from 'date-fns'
 import Block from './Block'
 import styled from 'src/styled-components'
 
@@ -27,9 +28,10 @@ interface Props {
 const Description: React.FC<Props> = ({ careerStartDate, description }) => {
   const content: React.ReactNode[] = []
   if (careerStartDate) {
+    const formattedDate = format(parseISO(careerStartDate), 'yyyy')
     content.push(
       <YearText key="year">
-        Год начала карьеры <DescriptionText>{careerStartDate}</DescriptionText>
+        Год начала карьеры <DescriptionText>{formattedDate}</DescriptionText>
       </YearText>,
     )
   }
