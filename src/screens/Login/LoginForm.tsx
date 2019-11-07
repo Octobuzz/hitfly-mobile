@@ -34,11 +34,11 @@ const LoginForm: React.FC<Props> = ({
   isValid,
   handleSubmit,
   isSubmitting,
-  onPressFogrotPassword,
+  // onPressFogrotPassword,
 }) => {
   const passwordRef = useRef()
   const focusPasswordField = useCallback(() => {
-    if (passwordRef && passwordRef.current) {
+    if (passwordRef.current) {
       // @ts-ignore
       passwordRef.current.focus()
     }

@@ -38,7 +38,7 @@ const ChangePassword: React.FC<Props> = ({
   const repeatPasswordRef = useRef()
 
   const focusRepeatPasswordField = useCallback(() => {
-    if (repeatPasswordRef && repeatPasswordRef.current) {
+    if (repeatPasswordRef.current) {
       // @ts-ignore
       repeatPasswordRef.current.focus()
     }

@@ -72,21 +72,21 @@ const RegisterForm: React.FC<Props> = ({
   const birhdayRef = useRef()
 
   const focusPasswordField = useCallback(() => {
-    if (passwordRef && passwordRef.current) {
+    if (passwordRef.current) {
       // @ts-ignore
       passwordRef.current.focus()
     }
   }, [])
 
   const focusRepeatPasswordField = useCallback(() => {
-    if (repeatPasswordRef && repeatPasswordRef.current) {
+    if (repeatPasswordRef.current) {
       // @ts-ignore
       repeatPasswordRef.current.focus()
     }
   }, [])
 
   const focusBirhdayRefField = useCallback(() => {
-    if (birhdayRef && birhdayRef.current) {
+    if (birhdayRef.current) {
       // @ts-ignore
       birhdayRef.current.focus()
     }
