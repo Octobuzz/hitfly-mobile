@@ -3,8 +3,9 @@ import React from 'react'
 import { helpers } from 'src/utils'
 import { Profile } from 'src/apollo'
 import { H2, /* Link, */ TextBase } from 'src/components'
-import styled from 'src/styled-components'
+import Block from './Block'
 import { images /* names */ } from 'src/constants'
+import styled from 'src/styled-components'
 
 const TitleText = styled(H2)`
   margin-bottom: 3px;
@@ -74,7 +75,7 @@ class BonusProgram extends React.PureComponent<Props> {
       favouritesTracksCount,
     } = this.props
     return (
-      <>
+      <Block>
         <TitleText>
           {helpers.getBonusProgramLevelHumanReadable(bonusProgramLevel)}
         </TitleText>
@@ -113,7 +114,7 @@ class BonusProgram extends React.PureComponent<Props> {
           onPress={this.openBonusProgramLink}
           title="Подробнее о бонусной программе"
         /> */}
-      </>
+      </Block>
     )
   }
 }
