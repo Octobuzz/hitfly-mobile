@@ -31,6 +31,7 @@ const Row = styled.View`
 const Icon = styled.Image`
   width: 22px;
   height: 22px;
+  margin-left: 8px;
 `
 
 const TitleText = styled(TextBase)`
