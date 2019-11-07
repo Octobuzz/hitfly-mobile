@@ -17,12 +17,12 @@ interface Props extends NavigationStackScreenProps {}
 const ChangePasswordContainer: React.FC<Props> = props => {
   const [updatePassword] = useMutation(UPDATE_PASSWORD)
 
-  const onSubmit = useCallback(
-    values => updatePassword({ variables: values }),
-    [],
-  )
+  const onSubmit = useCallback(async values => {
+    await updatePassword({ variables: values })
+    props.navigation.goBack()
+  }, [])
 
-  return <ChangePasswordScreen onSubmit={onSubmit} {...props} />
+  return <ChangePasswordScreen onSubmit={onSubmit} />
 }
 
 export default ChangePasswordContainer
