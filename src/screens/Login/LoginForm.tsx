@@ -4,13 +4,14 @@ import { Field, FormikProps, withFormik } from 'formik'
 import { strings } from 'src/constants'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons'
-import { Link, Input, Button } from 'src/components'
+import { /* Link, */ Input, Button } from 'src/components'
 import styled from 'src/styled-components'
 import { transformFormErrors } from 'src/utils/helpers'
 
-const IndentedLink = styled(Link)`
-  margin-bottom: 32px;
-`
+// смотри коммент в месте использования
+// const IndentedLink = styled(Link)`
+//   margin-bottom: 32px;
+// `
 
 const IndentedInput = styled(Input).attrs(() => ({
   containerStyle: { marginBottom: 16 },
@@ -67,7 +68,8 @@ const LoginForm: React.FC<Props> = ({
         onSubmitEditing={handleSubmit}
         RightIcon={<SimpleLineIcon size={20} name="key" />}
       />
-      <IndentedLink onPress={onPressFogrotPassword} title="Забыли пароль?" />
+      {/* временно в коменте, пока не решим что делать дальше. экран остается на месте */}
+      {/* <IndentedLink onPress={onPressFogrotPassword} title="Забыли пароль?" /> */}
       <Button
         title="Войти"
         isDisabled={!isValid || isSubmitting}
