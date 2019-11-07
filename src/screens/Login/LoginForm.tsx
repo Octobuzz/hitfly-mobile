@@ -1,4 +1,5 @@
 import React, { useRef, useCallback } from 'react'
+import { Keyboard } from 'react-native'
 import * as Yup from 'yup'
 import { Field, FormikProps, withFormik } from 'formik'
 import { strings } from 'src/constants'
@@ -63,6 +64,7 @@ const LoginForm: React.FC<Props> = ({
         textContentType="password"
         enablesReturnKeyAutomatically
         secureTextEntry
+        blurOnSubmit={false} // https://github.com/facebook/react-native/issues/21911
         component={IndentedInput}
         returnKeyType="send"
         onSubmitEditing={handleSubmit}
@@ -93,6 +95,9 @@ export default withFormik<OuterProps, Values>({
     payload,
     { props: { onSubmit }, setErrors, setSubmitting },
   ) => {
+    // https://github.com/facebook/react-native/issues/21911
+    // как следствие костыля - убирать надо клавиатуру
+    Keyboard.dismiss()
     try {
       await onSubmit(payload)
     } catch (error) {
