@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useCallback } from 'react'
 import * as Yup from 'yup'
 import { Field, FormikProps, withFormik } from 'formik'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
@@ -35,6 +35,15 @@ const ChangePassword: React.FC<Props> = ({
   handleSubmit,
   isSubmitting,
 }) => {
+  const repeatPasswordRef = useRef()
+
+  const focusRepeatPasswordField = useCallback(() => {
+    if (repeatPasswordRef.current) {
+      // @ts-ignore
+      repeatPasswordRef.current.focus()
+    }
+  }, [])
+
   return (
     <SafeView>
       <View>
@@ -44,10 +53,14 @@ const ChangePassword: React.FC<Props> = ({
           label="Пароль"
           secureTextEntry
           textContentType="newPassword"
+          returnKeyType="next"
+          onSubmitEditing={focusRepeatPasswordField}
+          blurOnSubmit={false} // https://github.com/facebook/react-native/issues/21911
           component={IndentedInput}
           RightIcon={<SimpleLineIcon size={20} name="key" />}
         />
         <Field
+          forwardRef={repeatPasswordRef}
           name="passwordRepeat"
           label="Повторите пароль"
           secureTextEntry
