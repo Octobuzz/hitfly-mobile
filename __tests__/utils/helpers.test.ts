@@ -3,10 +3,10 @@ import { BonusProgramLevel } from 'src/apollo'
 import { getNameForTrack } from '../../src/utils/helpers'
 
 describe('getBonusProgramLevelHumanReadable', () => {
-  it('LEVEL_NOVICE should be: 👶 Новичек', () => {
+  it('LEVEL_NOVICE should be: 👶 Новичок', () => {
     expect(
       helpers.getBonusProgramLevelHumanReadable(BonusProgramLevel.LEVEL_NOVICE),
-    ).toBe('👶 Новичек')
+    ).toBe('👶 Новичок')
   })
 
   it('LEVEL_AMATEUR should be: 🎤 Любитель', () => {
