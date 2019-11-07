@@ -27,6 +27,9 @@ const ForgotPasswordForm: React.FC<Props> = ({
       label="E-mail"
       component={Input}
       keyboardType="email-address"
+      returnKeyType="send"
+      textContentType="emailAddress"
+      enablesReturnKeyAutomatically
       onSubmitEditing={handleSubmit}
       RightIcon={<MaterialIcon size={20} name="mail-outline" />}
     />
