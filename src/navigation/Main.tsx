@@ -17,6 +17,9 @@ import {
   HomeScreen,
   MyGenresScreen,
   ProfileTabScreen,
+  AuthSettingsScreen,
+  SocialAuthWebScreen,
+  ChangePasswordScreen,
   CollectionDetailsScreen,
   SelectGenreForProfileScreen,
 } from 'src/screens'
@@ -124,6 +127,15 @@ const MainNavigator = createStackNavigator(
       screen: SelectGenreForProfileScreen,
       navigationOptions: { title: 'Выбор жанра' },
     },
+    [routeNames.MAIN.AUTH_SETTINGS]: {
+      screen: AuthSettingsScreen,
+      navigationOptions: { title: 'Настройка входа' },
+    },
+    [routeNames.MAIN.CHANGE_PASSWORD]: {
+      screen: ChangePasswordScreen,
+      navigationOptions: { title: 'Создание пароля' },
+    },
+    [routeNames.MAIN.SOCIAL_AUTH]: SocialAuthWebScreen,
   },
   {
     initialRouteName: routeNames.MAIN.HOME,

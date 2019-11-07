@@ -51,6 +51,9 @@ class Settings extends React.Component<Props> {
       },
       {
         title: 'Настройка входа',
+        onPress: () => {
+          navigation.navigate(ROUTES.MAIN.AUTH_SETTINGS)
+        },
       },
       // {
       //   title: 'Удалить аккаунт',
