@@ -24,9 +24,15 @@ const AboutMeContainer: React.FC = () => {
   )
 }
 
+// лишние поля здесь для рефреша
 const GET_PROFILE_FOR_ABOUT = gql`
   query {
     profile: myProfile {
+      userName: username
+      followersCount
+      avatar(sizes: [size_235x235]) {
+        imageUrl: url
+      }
       favouriteGenres {
         id
         title: name

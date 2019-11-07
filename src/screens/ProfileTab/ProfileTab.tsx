@@ -11,7 +11,6 @@ import AboutMeScreen from './AboutMe'
 import TracksFeedbackScreen from './TracksFeedback'
 import { MyMusicScreen, LikedMusicScreen } from './MusicAndAlbums'
 import { Profile } from 'src/apollo'
-import { helpers } from 'src/utils'
 import { TextBase } from 'src/components'
 import { DetailedTrackMenuProps } from 'src/containers/HOCs'
 import styled from 'src/styled-components'
@@ -60,34 +59,16 @@ class ProfileTab extends React.Component<Props, State> {
       navigationState: NavigationState<TabState>
     },
   ): React.ReactNode => {
-    const {
-      profile: { avatar, userName },
-    } = this.props
+    const { profile } = this.props
 
-    const subtitle = this.getSubtitle()
     return (
       <Header
-        title={userName}
-        subtitle={subtitle}
-        imageUrl={avatar[0].imageUrl}
+        profile={profile}
         // @ts-ignore блядская либа не экспортит Scene тип
         TabBar={<StyledTabBar renderLabel={this.renderLabel} {...props} />}
       />
     )
   }
-
-  private getSubtitle = (): string => {
-    const {
-      profile: { followersCount },
-    } = this.props
-    return `${followersCount} ${this.getNameForSubscribers(followersCount)}`
-  }
-
-  private getNameForSubscribers = helpers.getNameForCount({
-    nominative: 'подписчик',
-    genitive: 'подписчика',
-    genitiveMultiple: 'подписчиков',
-  })
 
   private renderLabel = (scene: { route: TabState }): React.ReactNode => (
     <LabelText>{scene.route.title}</LabelText>
