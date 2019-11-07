@@ -1,3 +1,10 @@
+// profile rank
+export const CRITIC = require('../assets/images/profile_rank/critic.png')
+export const EXPERT_PLUS = require('../assets/images/profile_rank/expert_plus.png')
+export const LISTENER = require('../assets/images/profile_rank/listener.png')
+export const MUSICIAN = require('../assets/images/profile_rank/musician.png')
+export const STAR = require('../assets/images/profile_rank/star.png')
+
 // default images
 export const DEFAULT_TRACK = require('../assets/images/default_images/music.png')
 export const DEFAULT_ALBUM = require('../assets/images/default_images/album.png')
