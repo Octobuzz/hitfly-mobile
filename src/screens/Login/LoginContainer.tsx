@@ -40,9 +40,11 @@ const LoginContainer: React.FC<Props> = props => {
         // TODO: это костыль, удалить когда бэк станет лучше
         await storage.removeItem(storageKeys.GRAPHQL_ENDPOINT)
       }
-    } catch {
+    } catch (error) {
       // TODO: это костыль, удалить когда бэк станет лучше
       await storage.removeItem(storageKeys.GRAPHQL_ENDPOINT)
+      // прокинуть ошибку дальше для валидации (последствия костыля)
+      throw error
     }
   }, [])
 

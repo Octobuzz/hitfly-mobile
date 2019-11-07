@@ -30,11 +30,13 @@ const ProfileTab: React.FC<Props> = ({
   return <ProfileTabScreen {...rest} profile={profile} />
 }
 
+// email вытаскивается для предзагрузки в кеш
 const GET_PROFILE = gql`
   query {
     profile: myProfile {
       userName: username
       followersCount
+      email
       avatar(sizes: [size_235x235]) {
         imageUrl: url
       }
