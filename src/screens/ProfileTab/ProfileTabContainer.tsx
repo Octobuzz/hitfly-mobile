@@ -37,6 +37,9 @@ const GET_PROFILE = gql`
       userName: username
       followersCount
       email
+      roles {
+        slug
+      }
       avatar(sizes: [size_235x235]) {
         imageUrl: url
       }
