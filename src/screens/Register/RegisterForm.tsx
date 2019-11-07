@@ -1,5 +1,5 @@
 import L from 'lodash'
-import React, { useRef, useCallback } from 'react'
+import React, { useRef, useCallback, useEffect } from 'react'
 import * as Yup from 'yup'
 import { Field, FormikProps, withFormik } from 'formik'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
@@ -60,7 +60,13 @@ const RegisterForm: React.FC<Props> = ({
   isValid,
   handleSubmit,
   isSubmitting,
+  validateForm,
 }) => {
+  // https://github.com/jaredpalmer/formik/issues/1950
+  useEffect(() => {
+    validateForm()
+  }, [])
+
   const passwordRef = useRef()
   const repeatPasswordRef = useRef()
   const birhdayRef = useRef()
@@ -180,6 +186,7 @@ const validationSchema = Yup.object().shape({
 
 export default withFormik<OuterProps, Values>({
   validationSchema,
+  validateOnMount: true,
   handleSubmit: async (
     values,
     { props: { onSubmit }, setErrors, setSubmitting },
