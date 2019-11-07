@@ -1,16 +1,8 @@
 import React, { useRef, useCallback } from 'react'
 import * as Yup from 'yup'
 import { Field, FormikProps, withFormik } from 'formik'
-import { NavigationStackScreenProps } from 'react-navigation-stack'
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons'
-import {
-  View,
-  Input,
-  Button,
-  SafeView,
-  Stretcher,
-  HelperText,
-} from 'src/components'
+import { View, Input, Button, HelperText, FormWrapper } from 'src/components'
 import { helpers } from 'src/utils'
 import { strings } from 'src/constants'
 import styled from 'src/styled-components'
@@ -24,7 +16,7 @@ interface Values {
   passwordRepeat: string
 }
 
-interface OuterProps extends NavigationStackScreenProps {
+interface OuterProps {
   onSubmit: (values: Values) => Promise<any>
 }
 
@@ -45,8 +37,8 @@ const ChangePassword: React.FC<Props> = ({
   }, [])
 
   return (
-    <SafeView>
-      <View>
+    <>
+      <FormWrapper>
         <HelperText>Введите новый пароль</HelperText>
         <Field
           name="password"
@@ -70,7 +62,8 @@ const ChangePassword: React.FC<Props> = ({
           component={IndentedInput}
           RightIcon={<SimpleLineIcon size={20} name="key" />}
         />
-        <Stretcher />
+      </FormWrapper>
+      <View noFill addBottomSafePadding>
         <Button
           onPress={handleSubmit}
           isDisabled={!isValid || isSubmitting}
@@ -78,7 +71,7 @@ const ChangePassword: React.FC<Props> = ({
           title="Сохранить изменения"
         />
       </View>
-    </SafeView>
+    </>
   )
 }
 
@@ -100,11 +93,10 @@ export default withFormik<OuterProps, Values>({
   validateOnMount: true,
   handleSubmit: async (
     values,
-    { props: { onSubmit, navigation }, setSubmitting, setErrors },
+    { props: { onSubmit }, setSubmitting, setErrors },
   ) => {
     try {
       await onSubmit(values)
-      navigation.goBack()
     } catch (error) {
       const formErrors = helpers.transformFormErrors(error)
       setErrors(formErrors)

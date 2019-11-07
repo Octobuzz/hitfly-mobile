@@ -5,6 +5,7 @@ const theme: ITheme = {
     brandBlue: '#4297FE',
     brandPink: '#C461DD',
 
+    transparent10: 'rgba(49, 49, 49, 0.1)',
     transparent70: 'rgba(49, 49, 49, 0.7)',
     transparentWhite50: 'rgba(255, 255, 255, 0.5)',
 

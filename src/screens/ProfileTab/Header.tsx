@@ -1,5 +1,5 @@
 import React, { useMemo, useCallback } from 'react'
-import { Image, TextBase } from 'src/components'
+import { DarkenImage, TextBase } from 'src/components'
 import { Profile, Role } from 'src/apollo'
 import { helpers } from 'src/utils'
 import LinearGradient from 'react-native-linear-gradient'
@@ -15,7 +15,7 @@ const HeaderWrapper = styled.View`
   overflow: hidden;
 `
 
-const Cover = styled(Image)`
+const Cover = styled(DarkenImage)`
   position: absolute;
   top: 0;
   left: 0;

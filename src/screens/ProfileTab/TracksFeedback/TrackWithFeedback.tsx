@@ -18,7 +18,7 @@ interface Props extends PlaylistTrackProps {}
 
 const TrackWithFeedback: React.FC<Props> = props => (
   <Wrapper>
-    <PlaylistTrack {...props} />
+    <PlaylistTrack hideIndex {...props} />
     <Body>
       <FeedbackCarousel comments={props.track.comments} />
     </Body>

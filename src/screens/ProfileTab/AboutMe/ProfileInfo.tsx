@@ -37,7 +37,7 @@ const ProfileInfo: React.FC<Props> = ({ favouriteGenres, location }) => {
 
   if (location) {
     content.push(
-      <Row withMargin={content.length > 0} key="location">
+      <Row key="location">
         <StyledIcon name="md-pin" />
         <TextBase>{location.title}</TextBase>
       </Row>,
@@ -46,7 +46,7 @@ const ProfileInfo: React.FC<Props> = ({ favouriteGenres, location }) => {
 
   if (favouriteGenres && favouriteGenres.length) {
     content.push(
-      <Row key="genres">
+      <Row withMargin={content.length > 0} key="genres">
         <StyledIcon name="ios-musical-notes" />
         <TextBase>
           {favouriteGenres.map(({ title }) => title).join(', ')}

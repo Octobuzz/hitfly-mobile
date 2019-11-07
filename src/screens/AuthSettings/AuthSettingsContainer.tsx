@@ -16,7 +16,7 @@ const GET_PROFILE = gql`
 
 const UPDATE_EMAIL = gql`
   mutation updateEmail($email: String!) {
-    updateMyProfile(profile: { email: $email, username: "" }) {
+    updateMyProfile(profile: { email: $email }) {
       email
     }
   }
