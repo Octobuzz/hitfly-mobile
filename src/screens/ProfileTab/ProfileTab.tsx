@@ -76,13 +76,11 @@ class ProfileTab extends React.Component<Props, State> {
     )
   }
 
-  private getSubtitle = (): string | undefined => {
+  private getSubtitle = (): string => {
     const {
       profile: { followersCount },
     } = this.props
-    if (followersCount) {
-      return `${followersCount} ${this.getNameForSubscribers(followersCount)}`
-    }
+    return `${followersCount} ${this.getNameForSubscribers(followersCount)}`
   }
 
   private getNameForSubscribers = helpers.getNameForCount({

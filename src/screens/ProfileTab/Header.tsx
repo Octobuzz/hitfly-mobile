@@ -48,7 +48,7 @@ const Gradient = styled(LinearGradient).attrs(({ theme }) => ({
 
 interface Props {
   title: string
-  subtitle?: string
+  subtitle: string
   imageUrl: string
   TabBar: React.ReactNode
 }
@@ -57,7 +57,7 @@ const Header: React.FC<Props> = ({ title, subtitle, imageUrl, TabBar }) => (
   <HeaderWrapper>
     <Cover source={{ uri: imageUrl }} />
     <TitleText>{title}</TitleText>
-    {subtitle && <SubTitleText>{subtitle}</SubTitleText>}
+    <SubTitleText>{subtitle}</SubTitleText>
     <TabBarWrapper>
       <Gradient>{TabBar}</Gradient>
     </TabBarWrapper>
