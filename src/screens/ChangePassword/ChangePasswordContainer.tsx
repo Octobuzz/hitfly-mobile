@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/react-hooks'
 
 const UPDATE_PASSWORD = gql`
   mutation updatePassword($password: String!) {
-    updateMyProfile(profile: { password: $password, username: "" }) {
+    updateMyProfile(profile: { password: $password }) {
       __typename
     }
   }

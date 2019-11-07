@@ -32,12 +32,9 @@ const GET_GENRES = gql`
   }
 `
 
-// тут баг с бэка, параметр username обязателен
-// однако если передать пустую строку - будет пустая строка (перезапишет)
-// А НАХЕР МНЕ ВООБЩЕ ЭТОТ ЮЗЕР НЕЙМ? Я ЖАНРЫ ДОБАВЛЯЮ
 const UPDATE_GENRES = gql`
   mutation updateGenres($genresIds: [ID]) {
-    updateMyProfile(profile: { genres: $genresIds, username: "" }) {
+    updateMyProfile(profile: { genres: $genresIds }) {
       __typename
     }
   }
