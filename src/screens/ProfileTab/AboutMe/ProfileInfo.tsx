@@ -35,6 +35,15 @@ interface Props {
 const ProfileInfo: React.FC<Props> = ({ favouriteGenres, location }) => {
   const content: React.ReactNode[] = []
 
+  if (location) {
+    content.push(
+      <Row withMargin={content.length > 0} key="location">
+        <StyledIcon name="md-pin" />
+        <TextBase>{location.title}</TextBase>
+      </Row>,
+    )
+  }
+
   if (favouriteGenres && favouriteGenres.length) {
     content.push(
       <Row key="genres">
@@ -42,15 +51,6 @@ const ProfileInfo: React.FC<Props> = ({ favouriteGenres, location }) => {
         <TextBase>
           {favouriteGenres.map(({ title }) => title).join(', ')}
         </TextBase>
-      </Row>,
-    )
-  }
-
-  if (location) {
-    content.push(
-      <Row withMargin={content.length > 0} key="location">
-        <StyledIcon name="md-pin" />
-        <TextBase>{location.title}</TextBase>
       </Row>,
     )
   }
