@@ -14,7 +14,9 @@ const Cover = styled(Image)`
   margin-right: 8px;
 `
 
-const Block = styled.View``
+const Block = styled.View`
+  flex: 1;
+`
 
 const TitleText = styled(TextBase)`
   font-size: 12px;
@@ -35,16 +37,14 @@ interface Props {
   subtitle: string
 }
 
-const MusicGroup: React.FC<Props> = ({ imageUrl, title, subtitle }) => {
-  return (
-    <Wrapper>
-      <Cover source={{ uri: imageUrl }} />
-      <Block>
-        <TitleText>{title}</TitleText>
-        <SubTitleText>{subtitle}</SubTitleText>
-      </Block>
-    </Wrapper>
-  )
-}
+const MusicGroup: React.FC<Props> = ({ imageUrl, title, subtitle }) => (
+  <Wrapper>
+    <Cover source={{ uri: imageUrl }} />
+    <Block>
+      <TitleText>{title}</TitleText>
+      <SubTitleText>{subtitle}</SubTitleText>
+    </Block>
+  </Wrapper>
+)
 
 export default MusicGroup
