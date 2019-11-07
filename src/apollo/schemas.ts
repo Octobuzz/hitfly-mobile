@@ -5,6 +5,7 @@ export interface Genre {
   title: string // name
   imageUrl: string // image
   isFavourite: boolean // userFavourite
+  hasSubGenres: boolean // haveSubGenres
   countTracks: number
   countListenedByUser?: number
 }

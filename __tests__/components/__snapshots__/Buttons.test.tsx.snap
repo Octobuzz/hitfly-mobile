@@ -24,7 +24,7 @@ exports[`Button renders as gradient 1`] = `
       colors={
         Array [
           4282554366,
-          4291847871,
+          4291060189,
         ]
       }
       endPoint={
@@ -104,7 +104,7 @@ exports[`Button renders as gradient in disabled state 1`] = `
       colors={
         Array [
           4282554366,
-          4291847871,
+          4291060189,
         ]
       }
       endPoint={
@@ -182,7 +182,7 @@ exports[`Button renders as gradient with loader 1`] = `
       colors={
         Array [
           4282554366,
-          4291847871,
+          4291060189,
         ]
       }
       endPoint={
@@ -283,7 +283,7 @@ exports[`Button renders as outline 1`] = `
       colors={
         Array [
           4282554366,
-          4291847871,
+          4291060189,
         ]
       }
       endPoint={
@@ -363,7 +363,7 @@ exports[`Button renders as outline-black 1`] = `
       colors={
         Array [
           4282554366,
-          4291847871,
+          4291060189,
         ]
       }
       endPoint={
@@ -441,7 +441,7 @@ exports[`Link renders correctly 1`] = `
       style={
         Array [
           Object {
-            "color": "#D066BF",
+            "color": "#C461DD",
             "fontFamily": "GothamPro",
             "fontSize": 16,
             "lineHeight": 20,
@@ -481,7 +481,7 @@ exports[`Link renders correctly in disabled state 1`] = `
       style={
         Array [
           Object {
-            "color": "#D066BF",
+            "color": "#C461DD",
             "fontFamily": "GothamPro",
             "fontSize": 16,
             "lineHeight": 20,

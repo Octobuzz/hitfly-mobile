@@ -1,13 +1,13 @@
 import L from 'lodash'
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import { graphql, DataProps } from '@apollo/react-hoc'
-import TracksFeedback from './TracksFeedback'
+import TracksFeedback, { FeedbackPeriod } from './TracksFeedback'
 import {
   withTrackToggle,
   ToggleTrackProps,
+  withDetailedTrackMenu,
   DetailedTrackMenuProps,
 } from 'src/containers/HOCs'
-import { Loader } from 'src/components'
 import { Pagination, Track } from 'src/apollo'
 import gql from 'graphql-tag'
 
@@ -20,19 +20,25 @@ const TracksFeedbackContainer: React.FC<Props> = ({
   data: { tracks, loading, refetch },
   ...rest
 }) => {
-  if (loading) {
-    return <Loader isAbsolute />
-  }
+  const [period, setPeriod] = useState<FeedbackPeriod>('week')
+  const tracksItems = L.get(tracks, 'items', [])
 
-  if (!tracks) {
-    return null
-  }
+  const changePeriod = useCallback((nextPeriod: FeedbackPeriod) => {
+    setPeriod(nextPeriod)
+    refetch({ period: nextPeriod })
+  }, [])
+
+  const onRefresh = useCallback(() => {
+    refetch({ period })
+  }, [period])
 
   return (
     <TracksFeedback
+      selectedPeriod={period}
+      onPressPeriod={changePeriod}
       isLoading={loading}
-      onRefresh={refetch}
-      tracks={tracks.items}
+      onRefresh={onRefresh}
+      tracks={tracksItems}
       {...rest}
     />
   )
@@ -41,8 +47,17 @@ const TracksFeedbackContainer: React.FC<Props> = ({
 // FIXME: потом заделать пагинацию нормально
 // FIXME: сделать через фрагменты
 const GET_MY_TRACKS_WITH_FEEDBACK = gql`
-  query {
-    tracks(limit: 1000, page: 1, commentPeriod: year, filters: { my: true }) {
+  query feedbackTracks(
+    $limit: Int = 50
+    $page: Int = 1
+    $period: CommentPeriodEnum = week
+  ) {
+    tracks(
+      limit: $limit
+      page: $page
+      commentPeriod: $period
+      filters: { my: true }
+    ) {
       items: data {
         id
         title: trackName
@@ -75,4 +90,5 @@ const GET_MY_TRACKS_WITH_FEEDBACK = gql`
 export default L.flowRight(
   graphql(GET_MY_TRACKS_WITH_FEEDBACK),
   withTrackToggle,
+  withDetailedTrackMenu,
 )(TracksFeedbackContainer)

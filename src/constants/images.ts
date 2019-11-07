@@ -1,3 +1,9 @@
+// default images
+export const DEFAULT_TRACK = require('../assets/images/default_images/music.png')
+export const DEFAULT_ALBUM = require('../assets/images/default_images/album.png')
+export const DEFAULT_PROFILE = require('../assets/images/default_images/profile.png')
+export const DEFAULT_GROUP = require('../assets/images/default_images/group.png')
+
 // profile
 export const RING = require('../assets/images/profile/ring.png')
 export const CALENDAR = require('../assets/images/profile/calendar.png')

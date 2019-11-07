@@ -12,5 +12,5 @@ export const COL2_WIDTH = Math.trunc(
 )
 
 export const COL3_WIDTH = Math.trunc(
-  (width - 5 * VIEW_HORIZONTAL_INDENTATION) / 3,
+  (width - 3 * VIEW_HORIZONTAL_INDENTATION) / 3,
 )

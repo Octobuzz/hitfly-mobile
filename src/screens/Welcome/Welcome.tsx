@@ -39,7 +39,7 @@ class Welcome extends React.Component<NavigationStackScreenProps> {
 
   private navigateToNext = () => {
     const { navigation } = this.props
-    storage.setItem(storageKeys.IS_FIRST_TIME, false)
+    storage.setItem(storageKeys.SKIP_WELCOME, true)
     navigation.navigate(ROUTES.AUTH.LOGIN)
   }
 

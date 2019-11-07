@@ -3,7 +3,12 @@ import { FlatList, ListRenderItem } from 'react-native'
 import { getBottomSpace } from 'react-native-iphone-x-helper'
 import { Collection } from 'src/apollo'
 import { styles } from 'src/constants'
-import { H1, Loader, CollectionItem, RefreshControl } from 'src/components'
+import {
+  H1,
+  CollectionItem,
+  RefreshControl,
+  ListFooterLoader,
+} from 'src/components'
 import styled from 'src/styled-components'
 
 const Scroll = styled(FlatList as new () => FlatList<Collection>).attrs(() => ({
@@ -27,6 +32,7 @@ const Header = <IndentedH1>Плейлисты</IndentedH1>
 
 interface Props {
   isLoading: boolean
+  isRefreshing: boolean
   collections: Collection[]
   onRefresh: () => void
   onEndReached: () => any
@@ -38,6 +44,7 @@ const CollectionDetails: React.FC<Props> = ({
   onRefresh,
   collections,
   onPressItem,
+  isRefreshing,
   onEndReached,
 }) => {
   const renderItem: ListRenderItem<Collection> = useCallback(
@@ -51,11 +58,11 @@ const CollectionDetails: React.FC<Props> = ({
     <Scroll
       data={collections}
       refreshControl={
-        <RefreshControl refreshing={false} onRefresh={onRefresh} />
+        <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
       }
       renderItem={renderItem}
       ListHeaderComponent={Header}
-      ListFooterComponent={isLoading ? Loader : null}
+      ListFooterComponent={<ListFooterLoader isShown={isLoading} />}
       onEndReached={onEndReached}
     />
   )

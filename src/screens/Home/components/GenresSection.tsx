@@ -78,13 +78,16 @@ class GenresSection extends React.Component<Props> {
       <SectionWrapper>
         <SectionHeader title="Жанры" />
         <ScrollWrapper>
-          {isLoading && <Loader isAbsolute />}
-          <Scroll
-            getItemLayout={this.getItemLayout}
-            renderItem={this.renderGenre}
-            keyExtractor={this.keyExtractor}
-            data={pairedGenres}
-          />
+          {isLoading ? (
+            <Loader isAbsolute />
+          ) : (
+            <Scroll
+              getItemLayout={this.getItemLayout}
+              renderItem={this.renderGenre}
+              keyExtractor={this.keyExtractor}
+              data={pairedGenres}
+            />
+          )}
         </ScrollWrapper>
       </SectionWrapper>
     )

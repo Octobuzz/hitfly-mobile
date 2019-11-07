@@ -34,8 +34,7 @@ const withLogout = (WrappedComponent: React.ComponentType<LogoutProps>) => {
 
         await client.mutate({ mutation: LOGOUT })
 
-        // TODO: это костыль, удалить когда бэк станет лучше
-        await storage.removeItem(storageKeys.GRAPHQL_ENDPOINT)
+        await storage.clearStorage()
 
         NavigationService.navigate({ routeName: ROUTES.AUTH.LOGIN })
         await client.resetStore()

@@ -52,6 +52,8 @@ const LikedMusicContainer: React.FC<Props> = ({
 
   return (
     <MusicAndAlbumsContainer
+      tracksTitle="Любимые песни"
+      albumTitle="Альбомы"
       albums={normalAlbums}
       tracks={normalTracks}
       isLoading={tracksLoading || albumsLoading}

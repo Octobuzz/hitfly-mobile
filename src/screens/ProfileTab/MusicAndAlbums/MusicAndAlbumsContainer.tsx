@@ -15,6 +15,8 @@ interface Props
     MutateProps<void, { id: number }> {
   tracks: Track[]
   albums: Album[]
+  tracksTitle: string
+  albumTitle: string
   isLoading: boolean
   refreshData: () => Promise<void>
 }
@@ -26,6 +28,7 @@ const MusicAndAlbumsContainer: React.FC<Props> = ({
   mutate,
   ...rest
 }) => {
+  // FIXME: переделать через пропсы и networkStatus === 4
   const [isRefreshing, setRefreshing] = useState(false)
 
   const refresh = useCallback(async () => {
@@ -50,8 +53,6 @@ const MusicAndAlbumsContainer: React.FC<Props> = ({
 
   return (
     <MusicAndAlbumsScreen
-      tracksTitle="Любимые песни"
-      albumTitle="Любимые альбомы"
       refreshing={isRefreshing}
       onPressAlbum={navigateToAlbumPlaylist}
       onRefresh={refresh}

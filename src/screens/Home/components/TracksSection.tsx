@@ -1,7 +1,7 @@
 import React from 'react'
 import { FlatList } from 'react-native'
 import { Track, Playlist } from 'src/apollo'
-import { Loader, TextBase, Image } from 'src/components'
+import { Loader, TextBase, Image, ListFooterLoader } from 'src/components'
 import SectionWrapper from './SectionWrapper'
 import SectionHeader from './SectionHeader'
 import styled from 'src/styled-components'
@@ -58,7 +58,6 @@ const TrackItem: React.FC<TrackItemProps> = ({ track, onPress }) => {
 }
 
 const Column = styled.View`
-  flex: 1;
   padding-horizontal: ${DIVIDER_SIZE / 2}px;
 `
 
@@ -78,14 +77,14 @@ interface Props {
   title: string
   subtitle?: string
   isLoading?: boolean
+  isFetchingMore?: boolean
   playlist: Playlist
   onPressTrack: (track: Track) => void
   onPressHeader: () => void
+  onEndReached: () => void
 }
 
 class TracksSection extends React.Component<Props> {
-  private keyExtractor = (item: Track): string => item.id.toString()
-
   private renderPlaylist = ({ item }: { item: Track }): JSX.Element => {
     const { onPressTrack } = this.props
     return (
@@ -108,7 +107,15 @@ class TracksSection extends React.Component<Props> {
   }
 
   render() {
-    const { isLoading, playlist, title, subtitle, onPressHeader } = this.props
+    const {
+      title,
+      playlist,
+      subtitle,
+      isLoading,
+      onEndReached,
+      onPressHeader,
+      isFetchingMore,
+    } = this.props
     if (!isLoading && !playlist.length) {
       return null
     }
@@ -120,13 +127,20 @@ class TracksSection extends React.Component<Props> {
           subtitle={subtitle}
         />
         <ScrollWrapper>
-          {isLoading && <Loader isAbsolute />}
-          <Scroll
-            getItemLayout={this.getItemLayout}
-            renderItem={this.renderPlaylist}
-            keyExtractor={this.keyExtractor}
-            data={playlist}
-          />
+          {isLoading ? (
+            <Loader isAbsolute />
+          ) : (
+            <Scroll
+              ListFooterComponent={
+                <ListFooterLoader isShown={isFetchingMore} />
+              }
+              onEndReachedThreshold={0.9}
+              onEndReached={onEndReached}
+              getItemLayout={this.getItemLayout}
+              renderItem={this.renderPlaylist}
+              data={playlist}
+            />
+          )}
         </ScrollWrapper>
       </SectionWrapper>
     )

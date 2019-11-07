@@ -20,15 +20,22 @@ const TextInput = styled(OutlinedTextField).attrs(({ theme }) => ({
 
 const TextInputUI: React.FC<InputBase & TextInputProps> = ({
   value,
+  forwardRef,
   RightIcon,
   ...rest
 }) => {
   const renderRightAccessory = (): JSX.Element => RightIcon
 
-  const ref = useRef(null)
+  const ref = useRef()
 
   useEffect(() => {
-    if (ref && ref.current) {
+    if (forwardRef) {
+      forwardRef.current = ref.current
+    }
+  }, [forwardRef])
+
+  useEffect(() => {
+    if (ref.current) {
       // @ts-ignore
       ref.current.setValue(value)
     }

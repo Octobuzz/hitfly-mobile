@@ -1,7 +1,7 @@
 import L from 'lodash'
 import React, { useCallback } from 'react'
 import { ViewStyle, StyleProp } from 'react-native'
-import { NavigationScreenProps, withNavigation } from 'react-navigation'
+import { NavigationInjectedProps, withNavigation } from 'react-navigation'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { Loader, SocialButton, TextWithLines } from 'src/components'
@@ -31,7 +31,7 @@ const GET_SOCIAL_LINKS = gql`
   }
 `
 
-interface Props extends NavigationStackScreenProps {
+interface Props extends NavigationInjectedProps {
   bottomText: string
   style?: StyleProp<ViewStyle>
 }
@@ -47,8 +47,12 @@ const SocialAuth: React.FC<Props> = ({ navigation, bottomText, style }) => {
     return <Loader />
   }
 
-  const socialData = L.get(data, 'socialConnect')
-  if (socialData) {
+  let socialData: SocialConnect[] = L.get(data, 'socialConnect', [])
+
+  // FIXME: времено, пока не починят инстаграмм
+  socialData = socialData.filter(({ type }) => type !== 'instagram')
+
+  if (socialData.length) {
     return (
       <Wrapper style={style}>
         <Row>

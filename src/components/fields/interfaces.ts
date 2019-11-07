@@ -9,6 +9,7 @@ export interface InputBase {
   error?: string
   style?: any
   containerStyle?: StyleProp<ViewStyle>
+  forwardRef?: any
 }
 
 export interface CheckBoxProps {

@@ -13,6 +13,7 @@ import {
   SlidingPanel,
   PlaylistTrack,
   TextWithLines,
+  SelectableGenreItem,
 } from 'src/components'
 import { PlaylistScreen } from 'src/screens'
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -127,25 +128,27 @@ storiesOf('Inputs', module)
     />
   ))
 
+const genre = {
+  id: 1,
+  title: 'name',
+  imageUrl:
+    'https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-260nw-407021107.jpg',
+} as Genre
+
 const GenreItemStory = () => {
   const [isSelected, setSelected] = React.useState(false)
   return (
-    <GenreItem
-      item={
-        {
-          id: 1,
-          title: 'name',
-          imageUrl:
-            'https://image.shutterstock.com/image-photo/mountains-during-sunset-beautiful-natural-260nw-407021107.jpg',
-        } as Genre
-      }
+    <SelectableGenreItem
+      item={genre}
       onPress={() => setSelected(!isSelected)}
       isSelected={isSelected}
     />
   )
 }
 
-storiesOf('GenreItem', module).add('Default', () => <GenreItemStory />)
+storiesOf('GenreItem', module)
+  .add('SelectableGenreItem', () => <GenreItemStory />)
+  .add('GenreItem', () => <GenreItem item={genre} onPress={() => {}} />)
 
 const track = {
   id: 1,

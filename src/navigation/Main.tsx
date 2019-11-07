@@ -15,8 +15,13 @@ import {
 } from 'src/containers'
 import {
   HomeScreen,
+  MyGenresScreen,
   ProfileTabScreen,
+  AuthSettingsScreen,
+  SocialAuthWebScreen,
+  ChangePasswordScreen,
   CollectionDetailsScreen,
+  SelectGenreForProfileScreen,
 } from 'src/screens'
 import { stackDefaultOptions, playlistConfig } from './configs'
 import routeNames from './routeNames'
@@ -114,6 +119,23 @@ const MainNavigator = createStackNavigator(
         title: 'Удаление аккаунта',
       },
     },
+    [routeNames.MAIN.MY_GENRES]: {
+      screen: MyGenresScreen,
+      navigationOptions: { title: 'Любимые жанры' },
+    },
+    [routeNames.MAIN.SELECT_GENRE]: {
+      screen: SelectGenreForProfileScreen,
+      navigationOptions: { title: 'Выбор жанра' },
+    },
+    [routeNames.MAIN.AUTH_SETTINGS]: {
+      screen: AuthSettingsScreen,
+      navigationOptions: { title: 'Настройка входа' },
+    },
+    [routeNames.MAIN.CHANGE_PASSWORD]: {
+      screen: ChangePasswordScreen,
+      navigationOptions: { title: 'Создание пароля' },
+    },
+    [routeNames.MAIN.SOCIAL_AUTH]: SocialAuthWebScreen,
   },
   {
     initialRouteName: routeNames.MAIN.HOME,

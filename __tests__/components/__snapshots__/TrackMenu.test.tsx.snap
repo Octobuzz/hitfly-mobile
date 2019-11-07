@@ -1,0 +1,314 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TrackMenu renders correctly 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+/>
+`;
+
+exports[`TrackMenu renders correctly with props 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    noFill={true}
+    paddingBottom={32}
+    style={
+      Array [
+        Object {
+          "paddingBottom": 32,
+          "paddingHorizontal": 16,
+          "paddingTop": 16,
+        },
+      ]
+    }
+    testID="like"
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "overflow": "hidden",
+            },
+            Array [
+              Object {
+                "borderRadius": 4,
+                "height": 32,
+                "width": 32,
+              },
+            ],
+          ]
+        }
+      >
+        <FastImageView
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": undefined,
+            }
+          }
+          style={
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "flexBasis": 0,
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "marginHorizontal": 16,
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#ffffff",
+                "fontFamily": "GothamPro-Bold",
+                "fontSize": 12,
+                "lineHeight": 14,
+              },
+            ]
+          }
+        >
+          title
+        </Text>
+        <Text
+          style={
+            Array [
+              Object {
+                "color": "#ffffff",
+                "fontFamily": "GothamPro",
+                "fontSize": 10,
+                "lineHeight": 12,
+                "opacity": 0.6,
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "backgroundColor": "rgba(255, 255, 255, 0.5)",
+            "height": 1,
+            "marginBottom": 34,
+            "marginTop": 24,
+          },
+        ]
+      }
+    />
+    <TouchableOpacity
+      accessibilityRole="summary"
+      activeOpacity={0.2}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginBottom": 34,
+          },
+        ]
+      }
+    >
+      <Text
+        allowFontScaling={false}
+        style={
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontSize": 14,
+            },
+            Array [
+              Object {
+                "marginRight": 11,
+                "textAlign": "center",
+                "width": 32,
+              },
+            ],
+            Object {
+              "fontFamily": "FontAwesome",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontFamily": "GothamPro",
+              "fontSize": 14,
+              "lineHeight": 14,
+            },
+          ]
+        }
+      >
+        Понравилось
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      accessibilityRole="summary"
+      activeOpacity={0.2}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexDirection": "row",
+            "marginBottom": 34,
+          },
+        ]
+      }
+    >
+      <Text
+        allowFontScaling={false}
+        style={
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontSize": 14,
+            },
+            Array [
+              Object {
+                "marginRight": 11,
+                "textAlign": "center",
+                "width": 32,
+              },
+            ],
+            Object {
+              "fontFamily": "FontAwesome",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontFamily": "GothamPro",
+              "fontSize": 14,
+              "lineHeight": 14,
+            },
+          ]
+        }
+        testID="like"
+      >
+        Редактировать
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Array [
+          Object {
+            "marginHorizontal": 20,
+          },
+        ]
+      }
+    >
+      <BVLinearGradient
+        colors={
+          Array [
+            4282554366,
+            4291060189,
+          ]
+        }
+        endPoint={
+          Object {
+            "x": 0.5,
+            "y": 1,
+          }
+        }
+        locations={null}
+        startPoint={
+          Object {
+            "x": 0.5,
+            "y": 0,
+          }
+        }
+        style={
+          Array [
+            Object {
+              "borderRadius": 28,
+              "paddingBottom": 1,
+              "paddingLeft": 1,
+              "paddingRight": 1,
+              "paddingTop": 1,
+            },
+          ]
+        }
+      >
+        <Text
+          style={
+            Array [
+              Object {
+                "backgroundColor": "#313131",
+                "borderRadius": 28,
+                "color": "#ffffff",
+                "fontFamily": "GothamPro",
+                "fontSize": 16,
+                "lineHeight": 20,
+                "overflow": "hidden",
+                "paddingBottom": 20,
+                "paddingLeft": 29,
+                "paddingRight": 29,
+                "paddingTop": 20,
+                "textAlign": "center",
+              },
+            ]
+          }
+          type="outline-black"
+        >
+          Отмена
+        </Text>
+      </BVLinearGradient>
+    </TouchableOpacity>
+  </View>
+</View>
+`;

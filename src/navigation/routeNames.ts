@@ -29,5 +29,10 @@ export default {
     PROFILE: `${APP.MAIN}/profile`,
     SETTINGS: `${APP.MAIN}/settings`,
     REMOVE_ACCOUNT: `${APP.MAIN}/remove_account`,
+    SELECT_GENRE: `${APP.MAIN}/select_genre`,
+    MY_GENRES: `${APP.MAIN}/my_genres`,
+    AUTH_SETTINGS: `${APP.MAIN}/auth_settings`,
+    CHANGE_PASSWORD: `${APP.MAIN}/change_password`,
+    SOCIAL_AUTH: `${APP.MAIN}/social_auth`,
   },
 }

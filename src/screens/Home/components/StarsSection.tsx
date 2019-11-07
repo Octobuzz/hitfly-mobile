@@ -62,12 +62,15 @@ const StarsSection: React.FC<Props> = ({ isLoading, users, onPressStar }) => {
   return (
     <SectionWrapper>
       <SectionHeader title="Звездные эксперты" />
-      {isLoading && <Loader />}
-      <Scroll showsHorizontalScrollIndicator={false}>
-        {users.map(user => (
-          <Star onPress={onPressStar} user={user} key={user.id.toString()} />
-        ))}
-      </Scroll>
+      {isLoading ? (
+        <Loader size={150} />
+      ) : (
+        <Scroll showsHorizontalScrollIndicator={false}>
+          {users.map(user => (
+            <Star onPress={onPressStar} user={user} key={user.id.toString()} />
+          ))}
+        </Scroll>
+      )}
     </SectionWrapper>
   )
 }

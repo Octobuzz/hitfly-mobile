@@ -17,14 +17,14 @@ exports[`CollectionItem renders correctly 1`] = `
         Object {
           "alignItems": "flex-end",
           "borderRadius": 4,
-          "height": 160,
+          "height": 351,
           "justifyContent": "space-between",
           "overflow": "hidden",
           "paddingBottom": 16,
           "paddingLeft": 16,
           "paddingRight": 16,
           "paddingTop": 16,
-          "width": 164,
+          "width": 351,
         },
       ]
     }

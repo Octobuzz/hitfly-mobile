@@ -2,7 +2,8 @@ import React from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
 import TrackWithFeedback from './TrackWithFeedback'
 import { Track } from 'src/apollo'
-import { RefreshControl } from 'src/components'
+import PeriodToggle from './PeriodToggle'
+import { RefreshControl, Loader, View } from 'src/components'
 import { DetailedTrackMenuProps, ToggleTrackProps } from 'src/containers/HOCs'
 import styled from 'src/styled-components'
 
@@ -15,34 +16,17 @@ const Divider = styled.View`
   height: 16px;
 `
 
+export type FeedbackPeriod = 'year' | 'month' | 'week'
+
 interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   tracks: Track[]
   onRefresh: () => void
+  onPressPeriod: (period: FeedbackPeriod) => void
+  selectedPeriod: FeedbackPeriod
   isLoading: boolean
 }
 
-interface State {
-  isRefreshing: boolean
-}
-
-class TracksFeedback extends React.Component<Props, State> {
-  state: State = {
-    isRefreshing: false,
-  }
-
-  static getDerivedStateFromProps = (
-    { isLoading }: Props,
-    { isRefreshing }: State,
-  ): Partial<State> | null => {
-    if (isRefreshing && !isLoading) {
-      return {
-        isRefreshing: false,
-      }
-    }
-
-    return null
-  }
-
+class TracksFeedback extends React.Component<Props> {
   private renderItem: ListRenderItem<Track> = ({ item, index }) => {
     const { toggleTrack, showDetailedTrack } = this.props
     const isPlaying = this.isTrackPlaying(item)
@@ -65,29 +49,36 @@ class TracksFeedback extends React.Component<Props, State> {
     return activeTrack.id === track.id
   }
 
-  private keyExtractor = (item: Track): string => item.id.toString()
-
-  private handleRefresh = (): void => {
-    const { onRefresh } = this.props
-    this.setState({ isRefreshing: true }, onRefresh)
-  }
-
   render() {
-    const { tracks } = this.props
-    const { isRefreshing } = this.state
+    const {
+      tracks,
+      onRefresh,
+      isLoading,
+      onPressPeriod,
+      selectedPeriod,
+    } = this.props
+
     return (
-      <Scroll
-        ItemSeparatorComponent={Divider}
-        refreshControl={
-          <RefreshControl
-            refreshing={isRefreshing}
-            onRefresh={this.handleRefresh}
+      <>
+        <View noFill>
+          <PeriodToggle
+            onPress={onPressPeriod}
+            currentPeriod={selectedPeriod}
           />
-        }
-        data={tracks}
-        keyExtractor={this.keyExtractor}
-        renderItem={this.renderItem}
-      />
+        </View>
+        {isLoading ? (
+          <Loader isAbsolute />
+        ) : (
+          <Scroll
+            ItemSeparatorComponent={Divider}
+            refreshControl={
+              <RefreshControl refreshing={isLoading} onRefresh={onRefresh} />
+            }
+            data={tracks}
+            renderItem={this.renderItem}
+          />
+        )}
+      </>
     )
   }
 }

@@ -43,7 +43,9 @@ const GET_PROFILE = gql`
 `
 
 export default L.flowRight(
-  graphql<Props>(GET_PROFILE),
+  graphql<Props>(GET_PROFILE, {
+    options: { fetchPolicy: 'cache-and-network' },
+  }),
   withChangingHeaderSettings({ state: 'profile', mode: 'light' }),
   withDetailedTrackMenu,
 )(ProfileTab)

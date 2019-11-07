@@ -12,15 +12,14 @@ exports[`GenreItem renders correctly 1`] = `
 >
   <TouchableOpacity
     activeOpacity={0.2}
+    disabled={false}
     style={
       Array [
         Object {
-          "alignItems": "center",
           "borderRadius": 4,
-          "height": 109,
-          "justifyContent": "center",
+          "height": 234,
           "overflow": "hidden",
-          "width": 109,
+          "width": 234,
         },
       ]
     }
@@ -34,6 +33,7 @@ exports[`GenreItem renders correctly 1`] = `
           Array [
             Object {
               "height": "100%",
+              "position": "absolute",
               "width": "100%",
             },
           ],
@@ -58,27 +58,41 @@ exports[`GenreItem renders correctly 1`] = `
         }
       />
     </View>
-    <Text
+    <View
       style={
         Array [
           Object {
-            "color": "#ffffff",
-            "fontFamily": "GothamPro-Bold",
-            "fontSize": 16,
-            "lineHeight": 20,
-            "position": "absolute",
-            "textAlign": "center",
+            "alignItems": "center",
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "justifyContent": "center",
           },
         ]
       }
     >
-      title
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontFamily": "GothamPro-Bold",
+              "fontSize": 16,
+              "lineHeight": 20,
+              "position": "absolute",
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        title
+      </Text>
+    </View>
   </TouchableOpacity>
 </View>
 `;
 
-exports[`GenreItem renders correctly in selected state 1`] = `
+exports[`SelectableGenreItem renders correctly 1`] = `
 <View
   collapsable={true}
   pointerEvents="box-none"
@@ -93,12 +107,10 @@ exports[`GenreItem renders correctly in selected state 1`] = `
     style={
       Array [
         Object {
-          "alignItems": "center",
           "borderRadius": 4,
-          "height": 109,
-          "justifyContent": "center",
+          "height": 234,
           "overflow": "hidden",
-          "width": 109,
+          "width": 234,
         },
       ]
     }
@@ -112,6 +124,114 @@ exports[`GenreItem renders correctly in selected state 1`] = `
           Array [
             Object {
               "height": "100%",
+              "position": "absolute",
+              "width": "100%",
+            },
+          ],
+        ]
+      }
+    >
+      <FastImageView
+        resizeMode="cover"
+        source={
+          Object {
+            "uri": "url",
+          }
+        }
+        style={
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+      />
+    </View>
+    <Image
+      source={
+        Object {
+          "testUri": "../../../src/assets/images/genres/genre_inactive.png",
+        }
+      }
+      style={
+        Array [
+          Object {
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontFamily": "GothamPro-Bold",
+              "fontSize": 16,
+              "lineHeight": 20,
+              "position": "absolute",
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        title
+      </Text>
+    </View>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`SelectableGenreItem renders correctly in selected state 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    style={
+      Array [
+        Object {
+          "borderRadius": 4,
+          "height": 234,
+          "overflow": "hidden",
+          "width": 234,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          Array [
+            Object {
+              "height": "100%",
+              "position": "absolute",
               "width": "100%",
             },
           ],
@@ -153,27 +273,41 @@ exports[`GenreItem renders correctly in selected state 1`] = `
         ]
       }
     />
-    <Text
+    <View
       style={
         Array [
           Object {
-            "color": "#ffffff",
-            "fontFamily": "GothamPro-Bold",
-            "fontSize": 16,
-            "lineHeight": 20,
-            "position": "absolute",
-            "textAlign": "center",
+            "alignItems": "center",
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "justifyContent": "center",
           },
         ]
       }
     >
-      title
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontFamily": "GothamPro-Bold",
+              "fontSize": 16,
+              "lineHeight": 20,
+              "position": "absolute",
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        title
+      </Text>
+    </View>
   </TouchableOpacity>
 </View>
 `;
 
-exports[`GenreItem renders correctly in unselected state 1`] = `
+exports[`SelectableGenreItem renders correctly in unselected state 1`] = `
 <View
   collapsable={true}
   pointerEvents="box-none"
@@ -188,12 +322,10 @@ exports[`GenreItem renders correctly in unselected state 1`] = `
     style={
       Array [
         Object {
-          "alignItems": "center",
           "borderRadius": 4,
-          "height": 109,
-          "justifyContent": "center",
+          "height": 234,
           "overflow": "hidden",
-          "width": 109,
+          "width": 234,
         },
       ]
     }
@@ -207,6 +339,7 @@ exports[`GenreItem renders correctly in unselected state 1`] = `
           Array [
             Object {
               "height": "100%",
+              "position": "absolute",
               "width": "100%",
             },
           ],
@@ -248,22 +381,36 @@ exports[`GenreItem renders correctly in unselected state 1`] = `
         ]
       }
     />
-    <Text
+    <View
       style={
         Array [
           Object {
-            "color": "#ffffff",
-            "fontFamily": "GothamPro-Bold",
-            "fontSize": 16,
-            "lineHeight": 20,
-            "position": "absolute",
-            "textAlign": "center",
+            "alignItems": "center",
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "justifyContent": "center",
           },
         ]
       }
     >
-      title
-    </Text>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontFamily": "GothamPro-Bold",
+              "fontSize": 16,
+              "lineHeight": 20,
+              "position": "absolute",
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        title
+      </Text>
+    </View>
   </TouchableOpacity>
 </View>
 `;

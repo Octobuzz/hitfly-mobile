@@ -10,7 +10,7 @@ const TextBase = styled.Text`
 export const HelperText = styled(TextBase)`
   color: ${({ theme }) => theme.colors.textAlt};
   text-align: center;
-  margin-bottom: 40px;
+  margin-vertical: 40px;
 `
 
 export const H1 = styled(TextBase)`
