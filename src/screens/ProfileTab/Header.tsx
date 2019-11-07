@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, TextBase } from 'src/components'
+import { TextBase, DarkenImage } from 'src/components'
 import LinearGradient from 'react-native-linear-gradient'
 import styled from 'src/styled-components'
 
@@ -12,7 +12,7 @@ const HeaderWrapper = styled.View`
   overflow: hidden;
 `
 
-const Cover = styled(Image)`
+const Cover = styled(DarkenImage)`
   position: absolute;
   top: 0;
   left: 0;

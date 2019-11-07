@@ -5,6 +5,7 @@ import FastImage, {
   FastImageProperties,
 } from 'react-native-fast-image'
 import { images } from 'src/constants'
+import styled from 'src/styled-components'
 
 interface SvgImageProps {
   uri: string
@@ -69,3 +70,19 @@ const getSvgUri = (source: FastImageSource | number): string | undefined => {
     return source.uri
   }
 }
+
+const Wrapper = styled.View``
+
+const Overlay = styled.View`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: ${({ theme }) => theme.colors.transparent10};
+`
+
+export const DarkenImage: React.FC<ImageProps> = ({ style, ...rest }) => (
+  <Wrapper style={style}>
+    <Image style={{ width: '100%', height: '100%' }} {...rest} />
+    <Overlay />
+  </Wrapper>
+)

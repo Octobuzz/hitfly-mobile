@@ -1,6 +1,6 @@
 import React from 'react'
 import { Track, NullableTrack } from 'src/apollo'
-import { Image, SourceType, View, TracksFlatList } from 'src/components'
+import { DarkenImage, SourceType, View, TracksFlatList } from 'src/components'
 import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/containers/HOCs'
 import ControlButton from './ControlButton'
 import ShuffleButton from './ShuffleButton'
@@ -13,7 +13,7 @@ const CoverWrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.white};
 `
 
-const Cover = styled(Image)`
+const Cover = styled(DarkenImage)`
   border-bottom-left-radius: 28px;
   position: absolute;
   height: 100%;
