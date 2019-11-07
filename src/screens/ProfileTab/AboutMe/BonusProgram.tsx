@@ -1,22 +1,13 @@
 import React from 'react'
-import { Linking } from 'react-native'
+// import { Linking } from 'react-native'
 import { helpers } from 'src/utils'
 import { Profile } from 'src/apollo'
-import { H2, Link, TextBase } from 'src/components'
+import { H2, /* Link, */ TextBase } from 'src/components'
 import styled from 'src/styled-components'
-import { images } from 'src/constants'
+import { images /* names */ } from 'src/constants'
 
 const TitleText = styled(H2)`
   margin-bottom: 3px;
-`
-
-const SubtitleText = styled(TextBase)`
-  color: ${({ theme }) => theme.colors.textAlt};
-  font-size: 12px;
-`
-
-const SubtitleBoldText = styled(SubtitleText)`
-  font-family: ${({ theme }) => theme.fonts.medium};
 `
 
 const Row = styled.View`
@@ -70,9 +61,10 @@ class BonusProgram extends React.PureComponent<Props> {
     genitiveMultiple: 'любимых песен',
   })
 
-  private openBonusProgramLink = (): void => {
-    Linking.openURL('https://myhitfly.ru/bonus-program')
-  }
+  // Временно убираем, пока не решим что делать дальше
+  // private openBonusProgramLink = (): void => {
+  //   Linking.openURL(`${names.DOMAIN_URL}/bonus-program`)
+  // }
 
   render() {
     const {
@@ -81,24 +73,11 @@ class BonusProgram extends React.PureComponent<Props> {
       daysInBonusProgram,
       favouritesTracksCount,
     } = this.props
-    const nextLevel = helpers.getNextBonusProgramHumanReadable(
-      bonusProgramLevel,
-    )
-    const nextLevelBonuses = 20
     return (
       <>
         <TitleText>
           {helpers.getBonusProgramLevelHumanReadable(bonusProgramLevel)}
         </TitleText>
-        {nextLevel && (
-          <SubtitleText>
-            до статуса <SubtitleBoldText>{nextLevel}</SubtitleBoldText>{' '}
-            осталось:{' '}
-            <SubtitleBoldText>{`${nextLevelBonuses} ${this.getNameForPoints(
-              nextLevelBonuses,
-            )}`}</SubtitleBoldText>
-          </SubtitleText>
-        )}
 
         <Row>
           <Column>
@@ -129,10 +108,11 @@ class BonusProgram extends React.PureComponent<Props> {
           </Column>
         </Row>
 
-        <Link
+        {/* Временно убираем, пока не решим что делать дальше */}
+        {/* <Link
           onPress={this.openBonusProgramLink}
           title="Подробнее о бонусной программе"
-        />
+        /> */}
       </>
     )
   }
