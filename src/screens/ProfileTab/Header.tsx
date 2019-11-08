@@ -66,9 +66,9 @@ interface Props {
 }
 
 const getNameForSubscribers = helpers.getNameForCount({
-  nominative: 'подписчик',
-  genitive: 'подписчика',
-  genitiveMultiple: 'подписчиков',
+  nominative: 'поклонник',
+  genitive: 'поклонника',
+  genitiveMultiple: 'поклонников',
 })
 
 const Header: React.FC<Props> = ({
