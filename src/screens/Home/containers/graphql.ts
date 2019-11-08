@@ -1,20 +1,7 @@
 import gql from 'graphql-tag'
-import { Genre, Pagination, Track, User } from 'src/apollo'
+import { Pagination, Track, User } from 'src/apollo'
 
 // FIXME: перенести в apollo/queries
-
-export interface GenreData {
-  genres?: Genre[]
-}
-export const GET_GENRES = gql`
-  {
-    genres: genre {
-      id
-      title: name
-      imageUrl: image
-    }
-  }
-`
 
 export interface PlaylistData {
   playlist?: Pagination<Track>

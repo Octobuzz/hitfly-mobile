@@ -33,6 +33,7 @@ interface Props {
   isLoading?: boolean
   genres: Genre[]
   onPressItem: (item: Genre) => void
+  onPressHeader: () => void
 }
 
 class GenresSection extends React.Component<Props> {
@@ -68,7 +69,7 @@ class GenresSection extends React.Component<Props> {
     }
   }
   render() {
-    const { isLoading } = this.props
+    const { isLoading, onPressHeader } = this.props
 
     const pairedGenres = this.getPairedGenres()
     if (!isLoading && !pairedGenres.length) {
@@ -76,7 +77,7 @@ class GenresSection extends React.Component<Props> {
     }
     return (
       <SectionWrapper>
-        <SectionHeader title="Жанры" />
+        <SectionHeader onPress={onPressHeader} title="Жанры" />
         <ScrollWrapper>
           {isLoading ? (
             <Loader isAbsolute />

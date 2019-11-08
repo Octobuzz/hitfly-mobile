@@ -21,6 +21,7 @@ import {
   AuthSettingsScreen,
   SocialAuthWebScreen,
   RemoveAccountScreen,
+  GenresDetailedScreen,
   ChangePasswordScreen,
   CollectionDetailsScreen,
   SelectGenreForProfileScreen,
@@ -89,6 +90,12 @@ const MainNavigator = createStackNavigator(
           title,
           ...playlistConfig,
         }
+      },
+    },
+    [routeNames.MAIN.GENRES_DETAILED]: {
+      screen: GenresDetailedScreen,
+      navigationOptions: {
+        title: 'Жанры',
       },
     },
     // Экраны профиля
