@@ -6,7 +6,7 @@ import { GET_NEW_TRACKS, PlaylistData } from './graphql'
 import { useQueryWithPagination } from 'src/Hooks'
 import { ROUTES } from 'src/navigation'
 
-const LIMIT = 4
+const LIMIT = 20
 const itemsSelector = (data?: PlaylistData) => L.get(data, 'playlist.items', [])
 const hasMorePagesSelector = (data?: PlaylistData) =>
   L.get(data, 'playlist.hasMorePages', false)

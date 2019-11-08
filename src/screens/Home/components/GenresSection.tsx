@@ -17,9 +17,10 @@ const Scroll = styled(FlatList as new () => FlatList<GenrePair>).attrs(() => ({
   horizontal: true,
   initialNumToRender: 5,
   showsHorizontalScrollIndicator: false,
-}))`
-  padding-horizontal: 12px;
-`
+  contentContainerStyle: {
+    paddingHorizontal: 12,
+  },
+}))``
 
 const Column = styled.View`
   flex: 1;

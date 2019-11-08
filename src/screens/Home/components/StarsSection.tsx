@@ -36,9 +36,11 @@ const Star: React.FC<StarProps> = ({ user: { userName, avatar } }) => (
 
 const Scroll = styled.ScrollView.attrs(() => ({
   horizontal: true,
-}))`
-  padding-horizontal: 8px;
-`
+  showsHorizontalScrollIndicator: false,
+  contentContainerStyle: {
+    paddingHorizontal: 8,
+  },
+}))``
 
 interface Props {
   users: User[]
@@ -55,7 +57,7 @@ const StarsSection: React.FC<Props> = ({ isLoading, users }) => {
       {isLoading ? (
         <Loader size={150} />
       ) : (
-        <Scroll showsHorizontalScrollIndicator={false}>
+        <Scroll>
           {users.map(user => (
             <Star user={user} key={user.id.toString()} />
           ))}

@@ -27,9 +27,10 @@ const Scroll = styled(FlatList as new () => FlatList<Collection>).attrs(() => ({
   horizontal: true,
   initialNumToRender: 2,
   showsHorizontalScrollIndicator: false,
-}))`
-  padding-horizontal: 12px;
-`
+  contentContainerStyle: {
+    paddingHorizontal: 12,
+  },
+}))``
 
 interface Props {
   title: string
