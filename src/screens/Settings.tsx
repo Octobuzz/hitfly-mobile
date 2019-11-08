@@ -1,6 +1,6 @@
 import React, { createRef } from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
-import { LogoutProps } from 'src/containers/HOCs'
+import { LogoutProps } from 'src/HOCs'
 import {
   Link,
   View,

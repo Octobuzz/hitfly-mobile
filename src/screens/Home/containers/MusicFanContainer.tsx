@@ -2,10 +2,10 @@ import L from 'lodash'
 import React, { useCallback, useEffect } from 'react'
 import { withNavigation } from 'react-navigation'
 import { CollectionSection } from '../components'
-import { withSelectors } from 'src/containers/HOCs'
+import { withSelectors } from 'src/HOCs'
 import { ROUTES } from 'src/navigation'
 import { Collection, GET_MUSIC_FAN, CollectionsData } from 'src/apollo'
-import { useQueryWithPagination } from 'src/containers/Hooks'
+import { useQueryWithPagination } from 'src/Hooks'
 
 const LIMIT = 20
 const itemsSelector = (data?: CollectionsData) =>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
 import { Track } from 'src/apollo'
-import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/containers/HOCs'
+import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/HOCs'
 import PlaylistTrack from './PlaylistTrack'
 import styled from 'src/styled-components'
 

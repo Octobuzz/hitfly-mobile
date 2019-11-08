@@ -8,7 +8,7 @@ import {
   DetailedTrackMenuProps,
   withTrackToggle,
   withDetailedTrackMenu,
-} from 'src/containers/HOCs'
+} from 'src/HOCs'
 import { Track, Album } from 'src/apollo'
 import { Loader } from 'src/components'
 import { ROUTES } from 'src/navigation'

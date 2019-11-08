@@ -1,10 +1,7 @@
 import L from 'lodash'
 import React, { useCallback } from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
-import {
-  withHidingSplashScreen,
-  withChangingHeaderSettings,
-} from 'src/containers/HOCs'
+import { withHidingSplashScreen, withChangingHeaderSettings } from 'src/HOCs'
 import Login from './Login'
 import { useMutation } from '@apollo/react-hooks'
 import { storageKeys } from 'src/constants'

@@ -4,7 +4,7 @@ import { Track } from 'src/apollo'
 import PeriodToggle from './PeriodToggle'
 import TrackWithFeedback from './TrackWithFeedback'
 import { RefreshControl, Loader, View, ListFooterLoader } from 'src/components'
-import { DetailedTrackMenuProps, ToggleTrackProps } from 'src/containers/HOCs'
+import { DetailedTrackMenuProps, ToggleTrackProps } from 'src/HOCs'
 import styled from 'src/styled-components'
 
 const Scroll = styled(FlatList as new () => FlatList<Track>).attrs(() => ({

@@ -10,7 +10,7 @@ import {
   ScrollView,
   RefreshControl,
 } from 'src/components'
-import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/containers/HOCs'
+import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/HOCs'
 import { helpers } from 'src/utils'
 import styled from 'src/styled-components'
 

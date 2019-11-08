@@ -4,7 +4,7 @@ import { withNavigation } from 'react-navigation'
 import { TracksSection } from '../components'
 import { GET_TOP_WEEK_TRACKS, PlaylistData } from './graphql'
 import { ROUTES } from 'src/navigation'
-import { useQueryWithPagination } from 'src/containers/Hooks'
+import { useQueryWithPagination } from 'src/Hooks'
 
 const LIMIT = 20
 const itemsSelector = (data?: PlaylistData) => L.get(data, 'playlist.items', [])

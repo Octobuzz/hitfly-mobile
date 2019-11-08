@@ -6,8 +6,8 @@ import {
   ToggleTrackProps,
   withDetailedTrackMenu,
   DetailedTrackMenuProps,
-} from 'src/containers/HOCs'
-import { useQueryWithPagination } from 'src/containers/Hooks'
+} from 'src/HOCs'
+import { useQueryWithPagination } from 'src/Hooks'
 import { Pagination, Track } from 'src/apollo'
 import gql from 'graphql-tag'
 
