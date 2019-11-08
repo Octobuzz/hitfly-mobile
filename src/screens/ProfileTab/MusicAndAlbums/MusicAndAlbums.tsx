@@ -47,7 +47,7 @@ interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   albums: Album[]
   tracksTitle: string
   albumTitle: string
-  refreshing: boolean
+  isRefreshing: boolean
   onRefresh: () => void
   onPressAlbum: (album: Album) => void
 }
@@ -130,14 +130,13 @@ class LikedMusic extends React.Component<Props> {
   }
 
   render() {
-    const { refreshing, onRefresh } = this.props
+    const { isRefreshing, onRefresh } = this.props
     return (
       <ScrollView
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
         }
         noHorizontalPadding
-        addBottomSafePadding
       >
         {this.renderTracks()}
         {this.renderAlbums()}
