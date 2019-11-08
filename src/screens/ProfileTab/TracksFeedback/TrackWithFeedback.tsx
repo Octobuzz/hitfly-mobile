@@ -9,7 +9,9 @@ const Wrapper = styled.View`
   border-color: ${({ theme }) => theme.colors.inputBorder};
 `
 
-const Body = styled(View)`
+const Body = styled(View).attrs(() => ({
+  noFill: true,
+}))`
   border-top-width: 1px;
   border-color: ${({ theme }) => theme.colors.inputBorder};
 `
