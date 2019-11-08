@@ -39,7 +39,7 @@ const MusicFanContainer: React.FC<any> = ({
   }, [getRefetcher])
 
   const onPressHeader = useCallback(async () => {
-    await selectCollectionType('recommended')
+    await selectCollectionType('musicFan')
     navigation.navigate(ROUTES.MAIN.COLLECTION_DETAILS, {
       title: 'Супер меломан',
     })
