@@ -3,11 +3,9 @@ import { createStackNavigator } from 'react-navigation-stack'
 import {
   HeaderRightButtons,
   // screens
-  SettingsScreen,
   NewPlaylistScreen,
   AlbumPlaylistScreen,
   GenrePlaylistScreen,
-  RemoveAccountScreen,
   Top50PlaylistScreen,
   TopWeekPlaylistScreen,
   CollectionPlaylistScreen,
@@ -17,10 +15,12 @@ import { DetailedTrackPanel } from 'src/components'
 import { DetailedPanel } from 'src/globalRefs'
 import {
   HomeScreen,
+  SettingsScreen,
   MyGenresScreen,
   ProfileTabScreen,
   AuthSettingsScreen,
   SocialAuthWebScreen,
+  RemoveAccountScreen,
   ChangePasswordScreen,
   CollectionDetailsScreen,
   SelectGenreForProfileScreen,
