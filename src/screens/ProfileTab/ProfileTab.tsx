@@ -12,7 +12,7 @@ import TracksFeedbackScreen from './TracksFeedback'
 import { MyMusicScreen, LikedMusicScreen } from './MusicAndAlbums'
 import { Profile } from 'src/apollo'
 import { TextBase, SafeView } from 'src/components'
-import { DetailedTrackMenuProps } from 'src/containers/HOCs'
+import { DetailedTrackMenuProps } from 'src/HOCs'
 import styled from 'src/styled-components'
 
 const StyledTabBar = styled(TabBar).attrs(({ theme }) => ({

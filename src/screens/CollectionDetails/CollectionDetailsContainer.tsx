@@ -6,11 +6,11 @@ import {
   withChangingHeaderSettings,
   withSelectors,
   SelectorsProps,
-} from 'src/containers/HOCs'
+} from 'src/HOCs'
 import gql from 'graphql-tag'
 import { Pagination, Collection } from 'src/apollo'
 import { ROUTES } from 'src/navigation'
-import { useQueryWithPagination } from 'src/containers/Hooks'
+import { useQueryWithPagination } from 'src/Hooks'
 
 interface CollectionsData {
   collections?: Pagination<Collection>

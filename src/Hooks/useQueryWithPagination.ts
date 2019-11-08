@@ -11,9 +11,10 @@ interface Options<TData> extends QueryHookOptions<TData> {
   limit: number
 }
 
-interface PaginationVatiables {
-  limit: number
+interface PaginationVariables {
+  limit?: number
   page?: number
+  [key: string]: any
 }
 
 interface Result<TData, TVariables> extends QueryResult<TData, TVariables> {
@@ -24,14 +25,14 @@ interface Result<TData, TVariables> extends QueryResult<TData, TVariables> {
 function useQueryWithPagination<TData = any>(
   query: DocumentNode,
   options: Options<TData>,
-): Result<TData, PaginationVatiables> {
+): Result<TData, PaginationVariables> {
   const {
     limit,
     itemsSelector,
     hasMorePagesSelector,
     ...originalOprions
   } = options
-  const queryResult = useQuery<TData, PaginationVatiables>(query, {
+  const queryResult = useQuery<TData, PaginationVariables>(query, {
     ...originalOprions,
     variables: { limit },
   })

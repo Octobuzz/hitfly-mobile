@@ -3,22 +3,24 @@ import { createStackNavigator } from 'react-navigation-stack'
 import {
   HeaderRightButtons,
   // screens
-  SettingsScreen,
   NewPlaylistScreen,
   AlbumPlaylistScreen,
   GenrePlaylistScreen,
-  RemoveAccountScreen,
   Top50PlaylistScreen,
   TopWeekPlaylistScreen,
   CollectionPlaylistScreen,
   ListenedNowPlaylistScreen,
 } from 'src/containers'
+import { DetailedTrackPanel } from 'src/components'
+import { DetailedPanel } from 'src/globalRefs'
 import {
   HomeScreen,
+  SettingsScreen,
   MyGenresScreen,
   ProfileTabScreen,
   AuthSettingsScreen,
   SocialAuthWebScreen,
+  RemoveAccountScreen,
   ChangePasswordScreen,
   CollectionDetailsScreen,
   SelectGenreForProfileScreen,
@@ -147,4 +149,14 @@ const MainNavigator = createStackNavigator(
   },
 )
 
-export default MainNavigator
+const Main: React.FC<any> = props => (
+  <>
+    <MainNavigator {...props} />
+    <DetailedTrackPanel ref={DetailedPanel.setPanel} />
+  </>
+)
+
+// @ts-ignore
+Main.router = MainNavigator.router
+
+export default Main

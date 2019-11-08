@@ -1,73 +1,38 @@
 import L from 'lodash'
-import React, { useMemo, useCallback } from 'react'
-import { withNavigation, NavigationInjectedProps } from 'react-navigation'
-import gql from 'graphql-tag'
-import { DataValue, graphql } from '@apollo/react-hoc'
-import { Pagination, FavouriteAlbum, FavouriteTrack } from 'src/apollo'
+import React, { useCallback } from 'react'
 import MusicAndAlbumsContainer from './MusicAndAlbumsContainer'
-import {
-  withTrackToggle,
-  ToggleTrackProps,
-  DetailedTrackMenuProps,
-} from 'src/containers/HOCs'
+import gql from 'graphql-tag'
 
-interface Props
-  extends ToggleTrackProps,
-    DetailedTrackMenuProps,
-    NavigationInjectedProps {
-  tracksData: DataValue<{ tracksPagination: Pagination<FavouriteTrack> }>
-  albumsData: DataValue<{ albumsPagination: Pagination<FavouriteAlbum> }>
-}
-
-const LikedMusicContainer: React.FC<Props> = ({
-  tracksData: {
-    tracksPagination,
-    loading: tracksLoading,
-    refetch: refetchTracks,
-  },
-  albumsData: {
-    albumsPagination,
-    loading: albumsLoading,
-    refetch: refetchAlbums,
-  },
-  ...rest
-}) => {
-  const favouriteTracks: FavouriteTrack[] = L.get(tracksPagination, 'items', [])
-  const normalTracks = useMemo(
-    () => favouriteTracks.map(({ track }) => track),
-    [favouriteTracks],
-  )
-
-  const favouriteAlbums: FavouriteAlbum[] = L.get(albumsPagination, 'items', [])
-
-  const normalAlbums = useMemo(
-    () => favouriteAlbums.map(({ album }) => album),
-    [favouriteAlbums],
-  )
-
-  const refreshData = useCallback(
-    (): Promise<any> => Promise.all([refetchTracks(), refetchAlbums()]),
+const LikedMusicContainer: React.FC = () => {
+  const tracksSelector = useCallback(
+    (data: any) => L.get(data, 'tracks.items', []),
     [],
   )
 
+  const albumsSelector = useCallback(
+    (data: any) => L.get(data, 'albums.items', []),
+    [],
+  )
+
+  const trackTransformer = useCallback(({ track }) => track, [])
+  const albumTransformer = useCallback(({ album }) => album, [])
   return (
     <MusicAndAlbumsContainer
       tracksTitle="Любимые песни"
       albumTitle="Альбомы"
-      albums={normalAlbums}
-      tracks={normalTracks}
-      isLoading={tracksLoading || albumsLoading}
-      refreshData={refreshData}
-      {...rest}
+      trackTransformer={trackTransformer}
+      albumTransformer={albumTransformer}
+      tracksQuery={GET_LIKED_MUSIC}
+      albumsQuery={GET_LIKED_ALBUMS}
+      tracksSelector={tracksSelector}
+      albumsSelector={albumsSelector}
     />
   )
 }
 
-// FIXME: потом заделать пагинацию нормально
-// FIXME: сделать через фрагменты
 const GET_LIKED_MUSIC = gql`
   query {
-    tracksPagination: favouriteTrack(limit: 1000, page: 1) {
+    tracks: favouriteTrack(limit: 10, page: 1) {
       items: data {
         id
         track {
@@ -84,12 +49,13 @@ const GET_LIKED_MUSIC = gql`
           length
         }
       }
+      hasMorePages: has_more_pages
     }
   }
 `
 const GET_LIKED_ALBUMS = gql`
   query {
-    albumsPagination: favouriteAlbum(limit: 1000, page: 1) {
+    albums: favouriteAlbum(limit: 4, page: 1) {
       items: data {
         id
         album {
@@ -104,13 +70,9 @@ const GET_LIKED_ALBUMS = gql`
           }
         }
       }
+      hasMorePages: has_more_pages
     }
   }
 `
 
-export default L.flowRight(
-  graphql<Props>(GET_LIKED_MUSIC, { name: 'tracksData' }),
-  graphql<Props>(GET_LIKED_ALBUMS, { name: 'albumsData' }),
-  withTrackToggle,
-  withNavigation,
-)(LikedMusicContainer)
+export default LikedMusicContainer

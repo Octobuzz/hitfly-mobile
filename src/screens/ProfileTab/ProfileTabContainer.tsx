@@ -9,7 +9,7 @@ import {
   withDetailedTrackMenu,
   withChangingHeaderSettings,
   DetailedTrackMenuProps,
-} from 'src/containers/HOCs'
+} from 'src/HOCs'
 import gql from 'graphql-tag'
 
 interface Props

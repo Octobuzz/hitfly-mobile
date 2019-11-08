@@ -8,7 +8,7 @@ import {
   withChangingHeaderSettings,
   ToggleTrackProps,
   DetailedTrackMenuProps,
-} from 'src/containers/HOCs'
+} from 'src/HOCs'
 import PlaylistScreen from 'src/screens/Playlist/Playlist'
 import { Collection } from 'src/apollo'
 import { Loader } from 'src/components'

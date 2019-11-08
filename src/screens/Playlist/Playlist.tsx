@@ -1,7 +1,7 @@
 import React from 'react'
 import { Track, NullableTrack } from 'src/apollo'
 import { DarkenImage, SourceType, View, TracksFlatList } from 'src/components'
-import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/containers/HOCs'
+import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/HOCs'
 import ControlButton from './ControlButton'
 import ShuffleButton from './ShuffleButton'
 import PlaylistInfoPanel from './PlaylistInfoPanel'
@@ -58,9 +58,11 @@ class Playlist extends React.Component<Props, State> {
       return {
         playingTrack: activeTrack,
       }
+    } else {
+      return {
+        playingTrack: null,
+      }
     }
-
-    return null
   }
 
   // выбор между обложкой трека или плейлиста

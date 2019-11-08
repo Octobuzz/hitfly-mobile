@@ -3,7 +3,7 @@ import React, { useCallback, useEffect } from 'react'
 import { withNavigation } from 'react-navigation'
 import { TracksSection } from '../components'
 import { GET_NEW_TRACKS, PlaylistData } from './graphql'
-import { useQueryWithPagination } from 'src/containers/Hooks'
+import { useQueryWithPagination } from 'src/Hooks'
 import { ROUTES } from 'src/navigation'
 
 const LIMIT = 4

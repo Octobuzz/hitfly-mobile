@@ -6,7 +6,7 @@ import gql from 'graphql-tag'
 import { Genre, Profile, Pagination } from 'src/apollo'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { ROUTES } from 'src/navigation'
-import { useQueryWithPagination } from 'src/containers/Hooks'
+import { useQueryWithPagination } from 'src/Hooks'
 
 interface GenreData {
   genres: Pagination<Genre>
