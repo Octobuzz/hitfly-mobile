@@ -58,9 +58,11 @@ class Playlist extends React.Component<Props, State> {
       return {
         playingTrack: activeTrack,
       }
+    } else {
+      return {
+        playingTrack: null,
+      }
     }
-
-    return null
   }
 
   // выбор между обложкой трека или плейлиста
