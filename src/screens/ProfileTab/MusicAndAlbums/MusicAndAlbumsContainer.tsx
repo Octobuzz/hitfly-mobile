@@ -1,6 +1,6 @@
 import L from 'lodash'
 import React, { useCallback, useMemo } from 'react'
-import { NavigationInjectedProps } from 'react-navigation'
+import { withNavigation, NavigationInjectedProps } from 'react-navigation'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import MusicAndAlbumsScreen from './MusicAndAlbums'
 import {
@@ -113,4 +113,5 @@ const SELECT_ALBUM = gql`
 export default L.flowRight(
   withDetailedTrackMenu,
   withTrackToggle,
+  withNavigation,
 )(MusicAndAlbumsContainer)

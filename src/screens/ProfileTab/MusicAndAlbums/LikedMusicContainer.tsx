@@ -1,12 +1,9 @@
 import L from 'lodash'
 import React, { useCallback } from 'react'
-import { NavigationInjectedProps } from 'react-navigation'
 import MusicAndAlbumsContainer from './MusicAndAlbumsContainer'
 import gql from 'graphql-tag'
 
-interface Props extends NavigationInjectedProps {}
-
-const LikedMusicContainer: React.FC<Props> = props => {
+const LikedMusicContainer: React.FC = () => {
   const tracksSelector = useCallback(
     (data: any) => L.get(data, 'tracks.items', []),
     [],
@@ -29,7 +26,6 @@ const LikedMusicContainer: React.FC<Props> = props => {
       albumsQuery={GET_LIKED_ALBUMS}
       tracksSelector={tracksSelector}
       albumsSelector={albumsSelector}
-      {...props}
     />
   )
 }
