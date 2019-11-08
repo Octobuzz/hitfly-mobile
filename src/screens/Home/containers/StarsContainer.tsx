@@ -16,7 +16,7 @@ const StarsContainer: React.FC<any> = ({ getRefetcher }) => {
     }
   }, [getRefetcher])
 
-  const users = L.get(data, 'items', [])
+  const users = L.get(data, 'users.items', [])
 
   return <StarsSection users={users} isLoading={loading} />
 }
