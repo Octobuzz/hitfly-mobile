@@ -66,7 +66,7 @@ class Login extends React.Component<Props> {
           />
           <IndentedLink onPress={this.navigateToMain} title="Пропустить" />
           <BottomText>
-            Регистрируясь через эл.почту, Facebook, VK, Instagram или
+            Регистрируясь через эл.почту, Facebook, VK{/* , Instagram */} или
             Одноклассники вы принимаете
           </BottomText>
           <BottomLinkText> Условия использования</BottomLinkText>
