@@ -9,7 +9,7 @@ import gql from 'graphql-tag'
 // либо запросить все треки сразу
 // либо добавить пагинацию в UI
 const GET_ALBUM_TRACKS = gql`
-  query getCurrentGenreTracks($albumId: Int!) {
+  query getCurrentAlbumTracks($albumId: Int!) {
     currentAlbumId @client @export(as: "albumId")
     playlist: tracks(limit: 1000, page: 0, filters: { albumId: $albumId }) {
       items: data {
@@ -31,7 +31,7 @@ const GET_ALBUM_TRACKS = gql`
 `
 
 const GET_SELECTED_ALBUM = gql`
-  query getSelectedGenre($albumId: Int!) {
+  query getSelectedAlbum($albumId: Int!) {
     currentAlbumId @client @export(as: "albumId")
     album(id: $albumId) {
       id
