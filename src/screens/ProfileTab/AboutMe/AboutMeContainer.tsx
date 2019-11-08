@@ -1,29 +1,38 @@
+import L from 'lodash'
 import React from 'react'
 import gql from 'graphql-tag'
-import { DataProps, graphql } from '@apollo/react-hoc'
+import { useQuery } from '@apollo/react-hooks'
 import AboutMeScreen from './AboutMe'
 import { Profile } from 'src/apollo'
-import { Loader } from 'src/components'
 
-interface Props extends DataProps<{ profile: Profile }> {}
-
-const AboutMeContainer: React.FC<Props> = ({
-  data: { profile, loading },
-  ...rest
-}) => {
-  if (loading) {
-    return <Loader isAbsolute />
-  }
+const AboutMeContainer: React.FC = () => {
+  const { data, refetch, networkStatus } = useQuery<{
+    profile?: Profile
+  }>(GET_PROFILE_FOR_ABOUT, { notifyOnNetworkStatusChange: true })
+  const profile = L.get(data, 'profile')
   if (!profile) {
     return null
   }
 
-  return <AboutMeScreen profile={profile} {...rest} />
+  return (
+    <AboutMeScreen
+      isLoading={networkStatus === 1}
+      isRefreshing={networkStatus === 4}
+      onRefresh={refetch}
+      profile={profile}
+    />
+  )
 }
 
+// лишние поля здесь для рефреша
 const GET_PROFILE_FOR_ABOUT = gql`
   query {
     profile: myProfile {
+      userName: username
+      followersCount
+      avatar(sizes: [size_235x235]) {
+        imageUrl: url
+      }
       favouriteGenres {
         id
         title: name
@@ -49,5 +58,4 @@ const GET_PROFILE_FOR_ABOUT = gql`
   }
 `
 
-// @ts-ignore
-export default graphql<Props>(GET_PROFILE_FOR_ABOUT)(AboutMeContainer)
+export default AboutMeContainer

@@ -1,53 +1,34 @@
 import L from 'lodash'
 import React, { useCallback } from 'react'
-import { withNavigation, NavigationInjectedProps } from 'react-navigation'
-import gql from 'graphql-tag'
-import { DataValue, graphql } from '@apollo/react-hoc'
-import { Pagination, FavouriteAlbum, FavouriteTrack } from 'src/apollo'
 import MusicAndAlbumsContainer from './MusicAndAlbumsContainer'
-import {
-  withTrackToggle,
-  ToggleTrackProps,
-  DetailedTrackMenuProps,
-} from 'src/containers/HOCs'
+import gql from 'graphql-tag'
 
-interface Props
-  extends ToggleTrackProps,
-    DetailedTrackMenuProps,
-    NavigationInjectedProps {
-  tracksData: DataValue<{ tracks: Pagination<FavouriteTrack> }>
-  albumsData: DataValue<{ albums: Pagination<FavouriteAlbum> }>
-}
+const MyMusicContainer: React.FC = () => {
+  const tracksSelector = useCallback(
+    (data: any) => L.get(data, 'tracks.items', []),
+    [],
+  )
 
-const MyMusicContainer: React.FC<Props> = ({
-  tracksData: { tracks, loading: tracksLoading, refetch: refetchTracks },
-  albumsData: { albums, loading: albumsLoading, refetch: refetchAlbums },
-  ...rest
-}) => {
-  const myTracks: FavouriteTrack[] = L.get(tracks, 'items', [])
-  const myAlbums: FavouriteAlbum[] = L.get(albums, 'items', [])
-
-  const refreshData = useCallback(
-    (): Promise<any> => Promise.all([refetchTracks(), refetchAlbums()]),
+  const albumsSelector = useCallback(
+    (data: any) => L.get(data, 'albums.items', []),
     [],
   )
 
   return (
     <MusicAndAlbumsContainer
-      albums={myAlbums}
-      tracks={myTracks}
-      isLoading={tracksLoading || albumsLoading}
-      refreshData={refreshData}
-      {...rest}
+      tracksQuery={GET_MY_MUSIC}
+      albumsQuery={GET_MY_ALBUMS}
+      tracksSelector={tracksSelector}
+      albumsSelector={albumsSelector}
+      tracksTitle="Песни"
+      albumTitle="Альбомы"
     />
   )
 }
 
-// FIXME: потом заделать пагинацию нормально
-// FIXME: сделать через фрагменты
 const GET_MY_MUSIC = gql`
   query {
-    tracks(limit: 1000, page: 1, filters: { my: true }) {
+    tracks(limit: 10, page: 1, filters: { my: true }) {
       items: data {
         id
         title: trackName
@@ -61,12 +42,13 @@ const GET_MY_MUSIC = gql`
         }
         length
       }
+      hasMorePages: has_more_pages
     }
   }
 `
 const GET_MY_ALBUMS = gql`
   query {
-    albums(limit: 1000, page: 1, filters: { my: true }) {
+    albums(limit: 4, page: 1, filters: { my: true }) {
       items: data {
         id
         title
@@ -78,13 +60,9 @@ const GET_MY_ALBUMS = gql`
           title: name
         }
       }
+      hasMorePages: has_more_pages
     }
   }
 `
 
-export default L.flowRight(
-  graphql<Props>(GET_MY_MUSIC, { name: 'tracksData' }),
-  graphql<Props>(GET_MY_ALBUMS, { name: 'albumsData' }),
-  withTrackToggle,
-  withNavigation,
-)(MyMusicContainer)
+export default MyMusicContainer

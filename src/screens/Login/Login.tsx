@@ -2,7 +2,7 @@ import React from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { Link, Button, TextBase, SafeView, FormWrapper } from 'src/components'
 import { SocialAuth } from 'src/containers'
-import LoginForm from './LoginFormContainer'
+import LoginForm from './LoginForm'
 import { ROUTES } from 'src/navigation'
 import styled from 'src/styled-components'
 
@@ -29,7 +29,11 @@ const BottomLinkText = styled(BottomText)`
   color: ${({ theme }) => theme.colors.brandPink};
 `
 
-class Login extends React.Component<NavigationStackScreenProps> {
+interface Props extends NavigationStackScreenProps {
+  onSubmit: (values: any) => Promise<any>
+}
+
+class Login extends React.Component<Props> {
   private navigateToRegistration = (): void => {
     const { navigation } = this.props
     navigation.navigate(ROUTES.AUTH.REGISTER)
@@ -46,11 +50,15 @@ class Login extends React.Component<NavigationStackScreenProps> {
   }
 
   render() {
+    const { onSubmit } = this.props
     return (
       <SafeView>
         <FormWrapper>
           <IndentedSocialAuth bottomText="или войдите через почту" />
-          <LoginForm onPressFogrotPassword={this.navigateToPasswordRecovery} />
+          <LoginForm
+            onSubmit={onSubmit}
+            onPressFogrotPassword={this.navigateToPasswordRecovery}
+          />
           <IndentedButton
             onPress={this.navigateToRegistration}
             title="Зарегистрироваться"
@@ -58,7 +66,7 @@ class Login extends React.Component<NavigationStackScreenProps> {
           />
           <IndentedLink onPress={this.navigateToMain} title="Пропустить" />
           <BottomText>
-            Регистрируясь через эл.почту, Facebook, VK, Instagram или
+            Регистрируясь через эл.почту, Facebook, VK{/* , Instagram */} или
             Одноклассники вы принимаете
           </BottomText>
           <BottomLinkText> Условия использования</BottomLinkText>

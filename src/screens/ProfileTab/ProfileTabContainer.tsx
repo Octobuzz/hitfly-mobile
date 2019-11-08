@@ -9,7 +9,7 @@ import {
   withDetailedTrackMenu,
   withChangingHeaderSettings,
   DetailedTrackMenuProps,
-} from 'src/containers/HOCs'
+} from 'src/HOCs'
 import gql from 'graphql-tag'
 
 interface Props
@@ -30,11 +30,16 @@ const ProfileTab: React.FC<Props> = ({
   return <ProfileTabScreen {...rest} profile={profile} />
 }
 
+// email вытаскивается для предзагрузки в кеш
 const GET_PROFILE = gql`
   query {
     profile: myProfile {
       userName: username
       followersCount
+      email
+      roles {
+        slug
+      }
       avatar(sizes: [size_235x235]) {
         imageUrl: url
       }

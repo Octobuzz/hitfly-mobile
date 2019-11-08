@@ -50,6 +50,7 @@ const TimeText = styled(GrayText)`
 export interface PlaylistTrackProps extends Playable {
   onPress?: (track: Track) => void
   onPressMore?: (track: Track) => void
+  hideIndex?: boolean
   track: Track
   index: number
 }
@@ -62,6 +63,7 @@ const PlaylistTrack: React.FC<PlaylistTrackProps> & Sized = ({
   index,
   track,
   onPress,
+  hideIndex,
   isPlaying,
   onPressMore,
 }) => {
@@ -87,7 +89,7 @@ const PlaylistTrack: React.FC<PlaylistTrackProps> & Sized = ({
 
   return (
     <Wrapper isPlaying={isPlaying} onPress={handlePressTrack}>
-      <TrackNumberText>{index + 1}</TrackNumberText>
+      {!hideIndex && <TrackNumberText>{index + 1}</TrackNumberText>}
       <TrackImage isPlaying={isPlaying} imageUrl={cover[0].imageUrl} />
       <CenterBlock>
         <BlackText numberOfLines={1}>{title}</BlackText>

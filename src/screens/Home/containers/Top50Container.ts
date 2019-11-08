@@ -3,7 +3,7 @@ import { withNavigation } from 'react-navigation'
 import { graphql } from '@apollo/react-hoc'
 import { PlaylistSection } from '../components'
 import { GET_TOP50 } from './graphql'
-import { withGraphQLRefetch } from 'src/containers/HOCs'
+import { withGraphQLRefetch } from 'src/HOCs'
 import { ROUTES } from 'src/navigation'
 import { images } from 'src/constants'
 
@@ -12,6 +12,10 @@ export default L.flowRight(
   // @ts-ignore
   graphql(GET_TOP50, {
     alias: 'withTop50',
+    options: {
+      notifyOnNetworkStatusChange: true,
+      fetchPolicy: 'cache-and-network',
+    },
     props: (
       {
         // @ts-ignore

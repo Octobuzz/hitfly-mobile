@@ -3,20 +3,25 @@ import { createStackNavigator } from 'react-navigation-stack'
 import {
   HeaderRightButtons,
   // screens
-  SettingsScreen,
   NewPlaylistScreen,
   AlbumPlaylistScreen,
   GenrePlaylistScreen,
-  RemoveAccountScreen,
   Top50PlaylistScreen,
   TopWeekPlaylistScreen,
   CollectionPlaylistScreen,
   ListenedNowPlaylistScreen,
 } from 'src/containers'
+import { DetailedTrackPanel } from 'src/components'
+import { DetailedPanel } from 'src/globalRefs'
 import {
   HomeScreen,
+  SettingsScreen,
   MyGenresScreen,
   ProfileTabScreen,
+  AuthSettingsScreen,
+  SocialAuthWebScreen,
+  RemoveAccountScreen,
+  ChangePasswordScreen,
   CollectionDetailsScreen,
   SelectGenreForProfileScreen,
 } from 'src/screens'
@@ -124,6 +129,15 @@ const MainNavigator = createStackNavigator(
       screen: SelectGenreForProfileScreen,
       navigationOptions: { title: 'Выбор жанра' },
     },
+    [routeNames.MAIN.AUTH_SETTINGS]: {
+      screen: AuthSettingsScreen,
+      navigationOptions: { title: 'Настройка входа' },
+    },
+    [routeNames.MAIN.CHANGE_PASSWORD]: {
+      screen: ChangePasswordScreen,
+      navigationOptions: { title: 'Создание пароля' },
+    },
+    [routeNames.MAIN.SOCIAL_AUTH]: SocialAuthWebScreen,
   },
   {
     initialRouteName: routeNames.MAIN.HOME,
@@ -135,4 +149,14 @@ const MainNavigator = createStackNavigator(
   },
 )
 
-export default MainNavigator
+const Main: React.FC<any> = props => (
+  <>
+    <MainNavigator {...props} />
+    <DetailedTrackPanel ref={DetailedPanel.setPanel} />
+  </>
+)
+
+// @ts-ignore
+Main.router = MainNavigator.router
+
+export default Main

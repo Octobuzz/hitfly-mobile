@@ -1,9 +1,11 @@
 import React from 'react'
+import { Image as RNImage } from 'react-native'
 import FastImage, {
   FastImageSource,
   FastImageProperties,
 } from 'react-native-fast-image'
-import { SvgXml } from 'react-native-svg'
+import { images } from 'src/constants'
+import styled from 'src/styled-components'
 
 interface SvgImageProps {
   uri: string
@@ -11,28 +13,38 @@ interface SvgImageProps {
 }
 
 export const SvgImage: React.FC<SvgImageProps> = ({ uri, style }) => {
-  const [xml, setXml] = React.useState<string | null>(null)
+  const [source, setSource] = React.useState<number>(images.DEFAULT_TRACK)
   React.useEffect(() => {
-    fetchText(uri)
-      .then(removeStylesFromSvg)
-      .then(setXml)
+    const imageName = uri
+      .split('/')
+      .pop()!
+      .toLowerCase()
+      .split('.svg')![0]
+    switch (imageName) {
+      case 'default_track': {
+        setSource(images.DEFAULT_TRACK)
+        break
+      }
+      case 'default_profile': {
+        setSource(images.DEFAULT_PROFILE)
+        break
+      }
+      case 'default_album': {
+        setSource(images.DEFAULT_ALBUM)
+        break
+      }
+      case 'default_musicgroup':
+      case 'default_playlist': {
+        setSource(images.DEFAULT_GROUP)
+        break
+      }
+      default: {
+        setSource(images.DEFAULT_TRACK)
+        break
+      }
+    }
   }, [uri])
-  return <SvgXml style={style} xml={xml} />
-}
-
-// В картинках есть теги <style> - их надо удалить ибо ошибка
-const fetchText = async (uri: string): Promise<string> => {
-  try {
-    const response = await fetch(uri)
-    return await response.text()
-  } catch {
-    return ''
-  }
-}
-
-const removeStylesFromSvg = (svg: string): string => {
-  const tmp = svg.replace(/<style>.*<\/style>/gi, '')
-  return tmp
+  return <RNImage style={style} source={source} />
 }
 
 export type SourceType = FastImageSource
@@ -58,3 +70,19 @@ const getSvgUri = (source: FastImageSource | number): string | undefined => {
     return source.uri
   }
 }
+
+const Wrapper = styled.View``
+
+const Overlay = styled.View`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: ${({ theme }) => theme.colors.transparent10};
+`
+
+export const DarkenImage: React.FC<ImageProps> = ({ style, ...rest }) => (
+  <Wrapper style={style}>
+    <Image style={{ width: '100%', height: '100%' }} {...rest} />
+    <Overlay />
+  </Wrapper>
+)

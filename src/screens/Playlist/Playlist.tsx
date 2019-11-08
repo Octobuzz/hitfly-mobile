@@ -1,7 +1,7 @@
 import React from 'react'
 import { Track, NullableTrack } from 'src/apollo'
-import { Image, SourceType, View, TracksFlatList } from 'src/components'
-import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/containers/HOCs'
+import { DarkenImage, SourceType, View, TracksFlatList } from 'src/components'
+import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/HOCs'
 import ControlButton from './ControlButton'
 import ShuffleButton from './ShuffleButton'
 import PlaylistInfoPanel from './PlaylistInfoPanel'
@@ -13,13 +13,13 @@ const CoverWrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.white};
 `
 
-const Cover = styled(Image)`
+const Cover = styled(DarkenImage)`
   border-bottom-left-radius: 28px;
   position: absolute;
+  height: 100%;
+  width: 100%;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
 `
 
 const PositionedShuffleButton = styled(ShuffleButton)`
@@ -58,9 +58,11 @@ class Playlist extends React.Component<Props, State> {
       return {
         playingTrack: activeTrack,
       }
+    } else {
+      return {
+        playingTrack: null,
+      }
     }
-
-    return null
   }
 
   // выбор между обложкой трека или плейлиста

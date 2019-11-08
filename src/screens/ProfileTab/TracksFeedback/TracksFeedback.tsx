@@ -1,15 +1,19 @@
 import React from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
-import TrackWithFeedback from './TrackWithFeedback'
 import { Track } from 'src/apollo'
 import PeriodToggle from './PeriodToggle'
-import { RefreshControl, Loader, View } from 'src/components'
-import { DetailedTrackMenuProps, ToggleTrackProps } from 'src/containers/HOCs'
+import TrackWithFeedback from './TrackWithFeedback'
+import { RefreshControl, Loader, View, ListFooterLoader } from 'src/components'
+import { DetailedTrackMenuProps, ToggleTrackProps } from 'src/HOCs'
 import styled from 'src/styled-components'
 
-const Scroll = styled(FlatList as new () => FlatList<Track>)`
+const Scroll = styled(FlatList as new () => FlatList<Track>).attrs(() => ({
+  contentContainerStyle: {
+    paddingHorizontal: 16,
+    paddingBottom: 24,
+  },
+}))`
   flex: 1;
-  padding: 16px;
 `
 
 const Divider = styled.View`
@@ -21,9 +25,12 @@ export type FeedbackPeriod = 'year' | 'month' | 'week'
 interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   tracks: Track[]
   onRefresh: () => void
+  onEndReached: () => void
   onPressPeriod: (period: FeedbackPeriod) => void
   selectedPeriod: FeedbackPeriod
   isLoading: boolean
+  isRefreshing: boolean
+  isFetchingMore: boolean
 }
 
 class TracksFeedback extends React.Component<Props> {
@@ -54,8 +61,11 @@ class TracksFeedback extends React.Component<Props> {
       tracks,
       onRefresh,
       isLoading,
+      isRefreshing,
+      onEndReached,
       onPressPeriod,
       selectedPeriod,
+      isFetchingMore,
     } = this.props
 
     return (
@@ -70,9 +80,12 @@ class TracksFeedback extends React.Component<Props> {
           <Loader isAbsolute />
         ) : (
           <Scroll
+            onEndReached={onEndReached}
+            onEndReachedThreshold={0.9}
             ItemSeparatorComponent={Divider}
+            ListFooterComponent={<ListFooterLoader isShown={isFetchingMore} />}
             refreshControl={
-              <RefreshControl refreshing={isLoading} onRefresh={onRefresh} />
+              <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
             }
             data={tracks}
             renderItem={this.renderItem}

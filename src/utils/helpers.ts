@@ -153,7 +153,7 @@ const bonusProgramMap = new Map<BonusProgramLevel, BonusProgramTexts>([
   [
     BonusProgramLevel.LEVEL_NOVICE,
     {
-      title: '👶 Новичек',
+      title: '👶🏻 Новичок',
       order: 0,
     },
   ],

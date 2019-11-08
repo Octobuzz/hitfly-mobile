@@ -11,9 +11,8 @@ import AboutMeScreen from './AboutMe'
 import TracksFeedbackScreen from './TracksFeedback'
 import { MyMusicScreen, LikedMusicScreen } from './MusicAndAlbums'
 import { Profile } from 'src/apollo'
-import { helpers } from 'src/utils'
-import { TextBase } from 'src/components'
-import { DetailedTrackMenuProps } from 'src/containers/HOCs'
+import { TextBase, SafeView } from 'src/components'
+import { DetailedTrackMenuProps } from 'src/HOCs'
 import styled from 'src/styled-components'
 
 const StyledTabBar = styled(TabBar).attrs(({ theme }) => ({
@@ -60,36 +59,16 @@ class ProfileTab extends React.Component<Props, State> {
       navigationState: NavigationState<TabState>
     },
   ): React.ReactNode => {
-    const {
-      profile: { avatar, userName },
-    } = this.props
+    const { profile } = this.props
 
-    const subtitle = this.getSubtitle()
     return (
       <Header
-        title={userName}
-        subtitle={subtitle}
-        imageUrl={avatar[0].imageUrl}
+        profile={profile}
         // @ts-ignore блядская либа не экспортит Scene тип
         TabBar={<StyledTabBar renderLabel={this.renderLabel} {...props} />}
       />
     )
   }
-
-  private getSubtitle = (): string | undefined => {
-    const {
-      profile: { followersCount },
-    } = this.props
-    if (followersCount) {
-      return `${followersCount} ${this.getNameForSubscribers(followersCount)}`
-    }
-  }
-
-  private getNameForSubscribers = helpers.getNameForCount({
-    nominative: 'подписчик',
-    genitive: 'подписчика',
-    genitiveMultiple: 'подписчиков',
-  })
 
   private renderLabel = (scene: { route: TabState }): React.ReactNode => (
     <LabelText>{scene.route.title}</LabelText>
@@ -103,18 +82,24 @@ class ProfileTab extends React.Component<Props, State> {
     route,
   }: SceneRendererProps & { route: TabState }): React.ReactNode => {
     const { showDetailedTrack } = this.props
+    let Screen = null
     switch (route.key) {
       case 'about':
-        return <AboutMeScreen />
+        Screen = <AboutMeScreen />
+        break
       case 'myMusic':
-        return <MyMusicScreen showDetailedTrack={showDetailedTrack} />
+        Screen = <MyMusicScreen showDetailedTrack={showDetailedTrack} />
+        break
       case 'likedMusic':
-        return <LikedMusicScreen showDetailedTrack={showDetailedTrack} />
+        Screen = <LikedMusicScreen showDetailedTrack={showDetailedTrack} />
+        break
       case 'feedback':
-        return <TracksFeedbackScreen showDetailedTrack={showDetailedTrack} />
+        Screen = <TracksFeedbackScreen showDetailedTrack={showDetailedTrack} />
+        break
       default:
         return null
     }
+    return <SafeView>{Screen}</SafeView>
   }
 
   render() {

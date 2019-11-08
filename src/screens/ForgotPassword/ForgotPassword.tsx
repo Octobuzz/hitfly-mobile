@@ -1,22 +1,21 @@
 import React from 'react'
-import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { View, HelperText, SafeView } from 'src/components'
-import ForgotPasswordForm from './ForgotPasswordFormContainer'
+import ForgotPasswordForm from './ForgotPasswordForm'
 
-class ForgotPassword extends React.Component<NavigationStackScreenProps> {
-  render() {
-    return (
-      <SafeView>
-        <View>
-          <HelperText>
-            Введите ваш e–mail и мы отправим вам письмо с инструкцией по
-            восстановлению пароля
-          </HelperText>
-          <ForgotPasswordForm />
-        </View>
-      </SafeView>
-    )
-  }
+interface Props {
+  onSubmit: (values: any) => Promise<any>
 }
+
+const ForgotPassword: React.FC<Props> = ({ onSubmit }) => (
+  <SafeView>
+    <View>
+      <HelperText>
+        Введите ваш e–mail и мы отправим вам письмо с инструкцией по
+        восстановлению пароля
+      </HelperText>
+      <ForgotPasswordForm onSubmit={onSubmit} />
+    </View>
+  </SafeView>
+)
 
 export default ForgotPassword

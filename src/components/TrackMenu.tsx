@@ -70,16 +70,10 @@ const MenuItemText = styled(TextBase)`
 interface Props {
   track?: Track
   onPressLike?: () => void
-  onPressEdit?: () => void
   onPressCancel?: () => void
 }
 
-const TrackMenu: React.FC<Props> = ({
-  track,
-  onPressLike,
-  onPressEdit,
-  onPressCancel,
-}) => {
+const TrackMenu: React.FC<Props> = ({ track, onPressLike, onPressCancel }) => {
   if (!track) {
     return null
   }
@@ -97,10 +91,6 @@ const TrackMenu: React.FC<Props> = ({
       <MenuItem onPress={onPressLike} accessibilityRole="summary">
         <StyledIcon name="heart-o" />
         <MenuItemText>Понравилось</MenuItemText>
-      </MenuItem>
-      <MenuItem onPress={onPressEdit} accessibilityRole="summary">
-        <StyledIcon name="edit" />
-        <MenuItemText testID="like">Редактировать</MenuItemText>
       </MenuItem>
       <Button onPress={onPressCancel} title="Отмена" type="outline-black" />
     </View>

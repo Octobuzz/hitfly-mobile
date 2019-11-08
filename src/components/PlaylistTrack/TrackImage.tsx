@@ -33,14 +33,13 @@ const ControlOverlay: React.FC = () => {
 const SIZE = 32
 
 const Wrapper = styled.View`
-  width: ${SIZE}px;
-  height: ${SIZE}px;
   border-radius: 4px;
   overflow: hidden;
 `
 
 const StyledImage = styled(Image)`
-  flex: 1;
+  width: ${SIZE}px;
+  height: ${SIZE}px;
 `
 
 interface Props extends Playable {

@@ -3,7 +3,7 @@ import { withNavigation } from 'react-navigation'
 import { graphql } from '@apollo/react-hoc'
 import { GenresSection } from '../components'
 import { GET_GENRES } from './graphql'
-import { withGraphQLRefetch, withSelectors } from 'src/containers/HOCs'
+import { withGraphQLRefetch, withSelectors } from 'src/HOCs'
 import { ROUTES } from 'src/navigation'
 import { Genre } from 'src/apollo'
 
@@ -13,6 +13,10 @@ export default L.flowRight(
   // @ts-ignore
   graphql(GET_GENRES, {
     alias: 'withGenres',
+    options: {
+      notifyOnNetworkStatusChange: true,
+      fetchPolicy: 'cache-and-network',
+    },
     props: (
       {
         // @ts-ignore

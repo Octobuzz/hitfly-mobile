@@ -1,61 +1,104 @@
-import React, { useState, useCallback } from 'react'
-import { NavigationInjectedProps } from 'react-navigation'
-import { graphql, MutateProps } from '@apollo/react-hoc'
+import L from 'lodash'
+import React, { useCallback, useMemo } from 'react'
+import { withNavigation, NavigationInjectedProps } from 'react-navigation'
+import { useMutation, useQuery } from '@apollo/react-hooks'
 import MusicAndAlbumsScreen from './MusicAndAlbums'
-import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/containers/HOCs'
+import {
+  ToggleTrackProps,
+  DetailedTrackMenuProps,
+  withTrackToggle,
+  withDetailedTrackMenu,
+} from 'src/HOCs'
 import { Track, Album } from 'src/apollo'
 import { Loader } from 'src/components'
 import { ROUTES } from 'src/navigation'
+import { DocumentNode } from 'graphql'
 import gql from 'graphql-tag'
 
 interface Props
   extends ToggleTrackProps,
     DetailedTrackMenuProps,
-    NavigationInjectedProps,
-    MutateProps<void, { id: number }> {
-  tracks: Track[]
-  albums: Album[]
-  isLoading: boolean
-  refreshData: () => Promise<void>
+    NavigationInjectedProps {
+  tracksTitle: string
+  tracksQuery: DocumentNode
+  trackTransformer?: (data?: any) => Track
+  tracksSelector: (data: any) => Track[]
+  albumTitle: string
+  albumsQuery: DocumentNode
+  albumTransformer?: (data?: any) => Album
+  albumsSelector: (data: any) => Album[]
 }
 
 const MusicAndAlbumsContainer: React.FC<Props> = ({
-  isLoading,
-  refreshData,
+  tracksQuery,
+  trackTransformer,
+  tracksSelector,
+  albumsQuery,
+  albumTransformer,
+  albumsSelector,
   navigation,
-  mutate,
   ...rest
 }) => {
-  // FIXME: переделать через пропсы и networkStatus === 4
-  const [isRefreshing, setRefreshing] = useState(false)
-
-  const refresh = useCallback(async () => {
-    try {
-      setRefreshing(true)
-      await refreshData()
-    } catch {
-      // добавлять ли что-то?
-    } finally {
-      setRefreshing(false)
+  const {
+    data: tracksData,
+    networkStatus: tracksNetworkStatus,
+    refetch: tracksRefetch,
+  } = useQuery(tracksQuery, {
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'cache-and-network',
+  })
+  const tracks = useMemo(() => {
+    let tTracks = tracksSelector(tracksData)
+    if (trackTransformer) {
+      tTracks = tTracks.map(trackTransformer)
     }
+    return tTracks
+  }, [tracksData])
+
+  const {
+    data: albumsData,
+    networkStatus: albumsNetworkStatus,
+    refetch: albumsRefetch,
+  } = useQuery(albumsQuery, {
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'cache-and-network',
+  })
+  const albums = useMemo(() => {
+    let tAlbums = albumsSelector(albumsData)
+    if (albumTransformer) {
+      tAlbums = tAlbums.map(albumTransformer)
+    }
+    return tAlbums
+  }, [albumsData])
+
+  const isLoading = tracksNetworkStatus === 1 || albumsNetworkStatus === 1
+  const isRefreshing = tracksNetworkStatus === 4 || albumsNetworkStatus === 4
+
+  const onResfresh = useCallback(() => {
+    tracksRefetch()
+    albumsRefetch()
   }, [])
 
-  const navigateToAlbumPlaylist = useCallback((album: Album): void => {
-    mutate({ variables: { id: album.id } })
+  const [selectAlbum] = useMutation(SELECT_ALBUM)
+
+  const navigateToAlbumPlaylist = useCallback(async (album: Album): Promise<
+    void
+  > => {
+    await selectAlbum({ variables: { id: album.id } })
     navigation.navigate(ROUTES.MAIN.ALBUM_PLAYLIST)
   }, [])
 
-  if (!isRefreshing && isLoading) {
+  if (isLoading) {
     return <Loader isAbsolute />
   }
 
   return (
     <MusicAndAlbumsScreen
-      tracksTitle="Любимые песни"
-      albumTitle="Любимые альбомы"
-      refreshing={isRefreshing}
+      albums={albums}
+      tracks={tracks}
+      isRefreshing={isRefreshing}
       onPressAlbum={navigateToAlbumPlaylist}
-      onRefresh={refresh}
+      onRefresh={onResfresh}
       {...rest}
     />
   )
@@ -67,5 +110,8 @@ const SELECT_ALBUM = gql`
   }
 `
 
-// @ts-ignore
-export default graphql(SELECT_ALBUM)(MusicAndAlbumsContainer)
+export default L.flowRight(
+  withDetailedTrackMenu,
+  withTrackToggle,
+  withNavigation,
+)(MusicAndAlbumsContainer)

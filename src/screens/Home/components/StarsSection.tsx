@@ -1,11 +1,11 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { User } from 'src/apollo'
 import SectionWrapper from './SectionWrapper'
 import SectionHeader from './SectionHeader'
 import { Loader, Image, TextBase } from 'src/components'
 import styled from 'src/styled-components'
 
-const StarWrapper = styled.TouchableOpacity`
+const StarWrapper = styled.View`
   align-items: center;
   width: 100px;
 `
@@ -25,23 +25,14 @@ const StarTitleText = styled(TextBase)`
 
 interface StarProps {
   user: User
-  onPress: (user: User) => void
 }
 
-const Star: React.FC<StarProps> = ({ user, onPress }) => {
-  const handlePress = useCallback(() => {
-    onPress(user)
-  }, [user, onPress])
-
-  const { userName, avatar } = user
-
-  return (
-    <StarWrapper onPress={handlePress}>
-      <UserImage source={{ uri: avatar[0].imageUrl }} />
-      <StarTitleText>{userName}</StarTitleText>
-    </StarWrapper>
-  )
-}
+const Star: React.FC<StarProps> = ({ user: { userName, avatar } }) => (
+  <StarWrapper>
+    <UserImage source={{ uri: avatar[0].imageUrl }} />
+    <StarTitleText>{userName}</StarTitleText>
+  </StarWrapper>
+)
 
 const Scroll = styled.ScrollView.attrs(() => ({
   horizontal: true,
@@ -52,22 +43,24 @@ const Scroll = styled.ScrollView.attrs(() => ({
 interface Props {
   users: User[]
   isLoading: boolean
-  onPressStar: (user: User) => void
 }
 
-const StarsSection: React.FC<Props> = ({ isLoading, users, onPressStar }) => {
+const StarsSection: React.FC<Props> = ({ isLoading, users }) => {
   if (!users.length && !isLoading) {
     return null
   }
   return (
     <SectionWrapper>
       <SectionHeader title="Звездные эксперты" />
-      {isLoading && <Loader />}
-      <Scroll showsHorizontalScrollIndicator={false}>
-        {users.map(user => (
-          <Star onPress={onPressStar} user={user} key={user.id.toString()} />
-        ))}
-      </Scroll>
+      {isLoading ? (
+        <Loader size={150} />
+      ) : (
+        <Scroll showsHorizontalScrollIndicator={false}>
+          {users.map(user => (
+            <Star user={user} key={user.id.toString()} />
+          ))}
+        </Scroll>
+      )}
     </SectionWrapper>
   )
 }
