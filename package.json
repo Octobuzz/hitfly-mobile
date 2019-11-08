@@ -1,6 +1,6 @@
 {
-  "name": "digicomob",
-  "version": "0.0.1",
+  "name": "hitfly",
+  "version": "1.0",
   "private": true,
   "scripts": {
     "postuninstall": "yarn run infinite-flatlist-patch",
