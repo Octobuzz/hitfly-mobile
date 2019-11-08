@@ -5,6 +5,7 @@ import styled from 'src/styled-components'
 const Wrapper = styled.View`
   flex-direction: row;
   align-items: center;
+  margin-bottom: 16px;
 `
 
 const Cover = styled(Image)`
