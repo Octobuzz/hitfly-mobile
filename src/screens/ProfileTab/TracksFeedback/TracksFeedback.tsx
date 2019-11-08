@@ -7,9 +7,13 @@ import { RefreshControl, Loader, View } from 'src/components'
 import { DetailedTrackMenuProps, ToggleTrackProps } from 'src/containers/HOCs'
 import styled from 'src/styled-components'
 
-const Scroll = styled(FlatList as new () => FlatList<Track>)`
+const Scroll = styled(FlatList as new () => FlatList<Track>).attrs(() => ({
+  contentContainerStyle: {
+    paddingHorizontal: 16,
+    paddingBottom: 24,
+  },
+}))`
   flex: 1;
-  padding: 16px;
 `
 
 const Divider = styled.View`

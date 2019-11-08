@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
-import { Button, SafeView, View } from 'src/components'
+import { Button, SafeView, View, Stretcher } from 'src/components'
 import { images, storageKeys } from 'src/constants'
 import { ROUTES } from 'src/navigation'
 import Features, { Feature } from './Features'
@@ -11,7 +11,7 @@ const Logo = styled.Image.attrs(() => ({
   source: images.WELCOME_LOGO,
   resizeMode: 'contain',
 }))`
-  flex: 1;
+  flex: 20;
   max-height: 365px;
   margin-bottom: 12px;
   align-self: center;
@@ -49,6 +49,7 @@ class Welcome extends React.Component<NavigationStackScreenProps> {
         <View paddingHorizontal={38}>
           <Logo />
           <Features features={this.features} />
+          <Stretcher />
           <Button
             onPress={this.navigateToNext}
             type="outline"
