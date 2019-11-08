@@ -24,14 +24,14 @@ class DetailedTrackPanel extends React.Component<any, State> {
   private panel = createRef<SlidingPanelInstance>()
 
   hidePanel = (): void => {
-    if (this.panel && this.panel.current) {
+    if (this.panel.current) {
       this.panel.current.hide()
     }
   }
 
   showDetailedTrack = (track: Track): void => {
     this.setState({ detailedTrack: track }, () => {
-      if (this.panel && this.panel.current) {
+      if (this.panel.current) {
         this.panel.current.show()
       }
     })
