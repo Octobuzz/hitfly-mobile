@@ -24,6 +24,9 @@ const StyledTabBar = styled(TabBar).attrs(({ theme }) => ({
     fontFamily: theme.fonts.regular,
     fontSize: 16,
   },
+  tabStyle: {
+    width: 'auto',
+  },
 }))`
   background-color: transparent;
 `
