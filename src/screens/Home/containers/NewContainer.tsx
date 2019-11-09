@@ -2,7 +2,7 @@ import L from 'lodash'
 import React, { useCallback, useEffect } from 'react'
 import { withNavigation } from 'react-navigation'
 import { TracksSection } from '../components'
-import { GET_NEW_TRACKS, PlaylistData } from './graphql'
+import { GET_NEW_TRACKS, PlaylistData } from 'src/apollo'
 import { useQueryWithPagination } from 'src/Hooks'
 import { ROUTES } from 'src/navigation'
 
