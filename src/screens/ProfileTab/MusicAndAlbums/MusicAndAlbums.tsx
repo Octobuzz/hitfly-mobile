@@ -1,6 +1,5 @@
 import L from 'lodash'
 import React from 'react'
-import { Dimensions } from 'react-native'
 import { Track, Album } from 'src/apollo'
 import {
   H1,
@@ -35,11 +34,7 @@ const AlbumsWrapper = styled.View`
   justify-content: space-between;
 `
 
-// минус паддинг по бокам и между колонками
-const COLUMN_WIDH = Dimensions.get('window').width - 48
-
 const Col = styled.View`
-  width: ${Math.trunc(COLUMN_WIDH / 2)}px;
   margin-bottom: 24px;
 `
 
