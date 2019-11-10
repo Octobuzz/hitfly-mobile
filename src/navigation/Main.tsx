@@ -8,6 +8,8 @@ import {
   GenrePlaylistScreen,
   Top50PlaylistScreen,
   TopWeekPlaylistScreen,
+  MyMusicPlaylistScreen,
+  LikedMusicPlaylistScreen,
   CollectionPlaylistScreen,
   ListenedNowPlaylistScreen,
 } from 'src/containers'
@@ -154,6 +156,14 @@ const MainNavigator = createStackNavigator(
     [routeNames.MAIN.LIKED_ALBUMS_DETAILED]: {
       screen: LikedAlbumsDetailedScreen,
       navigationOptions: { title: 'Любимые альбомы' },
+    },
+    [routeNames.MAIN.MY_MUSIC_PLAYLIST]: {
+      screen: MyMusicPlaylistScreen,
+      navigationOptions: { title: 'Мои песни' },
+    },
+    [routeNames.MAIN.LIKED_MUSIC_PLAYLIST]: {
+      screen: LikedMusicPlaylistScreen,
+      navigationOptions: { title: 'Любимые песни' },
     },
   },
   {

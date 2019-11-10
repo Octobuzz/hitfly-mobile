@@ -36,6 +36,8 @@ export default {
     CHANGE_PASSWORD: `${APP.MAIN}/change_password`,
     SOCIAL_AUTH: `${APP.MAIN}/social_auth`,
     MY_ALBUMS_DETAILED: `${APP.MAIN}/my_albums_detailed`,
+    MY_MUSIC_PLAYLIST: `${APP.MAIN}/my_music_playlist`,
     LIKED_ALBUMS_DETAILED: `${APP.MAIN}/liked_albums_detailed`,
+    LIKED_MUSIC_PLAYLIST: `${APP.MAIN}/liked_music_playlist`,
   },
 }

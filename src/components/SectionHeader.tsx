@@ -19,6 +19,13 @@ const TitleText = styled(TextBase)`
   line-height: 24px;
 `
 
+const RightText = styled(TextBase)`
+  color: ${({ theme }) => theme.colors.textGray};
+  font-size: 12px;
+  flex: 1;
+  text-align: right;
+`
+
 const SubtitleText = styled(TextBase)`
   color: ${({ theme }) => theme.colors.textAlt};
   font-size: 12px;
@@ -26,16 +33,23 @@ const SubtitleText = styled(TextBase)`
 `
 
 interface Props {
-  onPress?: () => void
   title: string
   subtitle?: string
+  rightText?: string
+  onPress?: () => void
 }
 
-const SectionHeader: React.FC<Props> = ({ title, subtitle, onPress }) => (
+const SectionHeader: React.FC<Props> = ({
+  title,
+  onPress,
+  subtitle,
+  rightText,
+}) => (
   <Wrapper disabled={!onPress} onPress={onPress}>
     <Inner>
       <TitleText>{title}</TitleText>
       {onPress && <Icon name="arrow-forward" size={20} />}
+      {rightText && <RightText>{rightText}</RightText>}
     </Inner>
     {subtitle && <SubtitleText>{subtitle}</SubtitleText>}
   </Wrapper>

@@ -2,8 +2,6 @@ import L from 'lodash'
 import React from 'react'
 import { Track, Album } from 'src/apollo'
 import {
-  H1,
-  TextBase,
   AlbumItem,
   TracksView,
   ScrollView,
@@ -14,24 +12,15 @@ import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/HOCs'
 import { helpers } from 'src/utils'
 import styled from 'src/styled-components'
 
-const HeaderWrapper = styled.View`
-  flex-direction: row;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  padding-horizontal: 16px;
-`
-
-const InfoText = styled(TextBase)`
-  color: ${({ theme }) => theme.colors.textGray};
-  font-size: 12px;
-`
-
 const AlbumsWrapper = styled.View`
-  padding-horizontal: 16px;
+  padding: 12px 16px;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+`
+
+const Divider = styled.View`
+  height: 12px;
 `
 
 const Col = styled.View`
@@ -47,6 +36,7 @@ interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   onRefresh: () => void
   onPressAlbum: (album: Album) => void
   onPressAlbumsHeader: () => void
+  onPressTracksHeader: () => void
 }
 
 class LikedMusic extends React.Component<Props> {
@@ -55,8 +45,9 @@ class LikedMusic extends React.Component<Props> {
       tracks,
       toggleTrack,
       activeTrack,
-      showDetailedTrack,
       tracksTitle,
+      showDetailedTrack,
+      onPressTracksHeader,
     } = this.props
 
     if (!tracks.length) {
@@ -67,10 +58,11 @@ class LikedMusic extends React.Component<Props> {
 
     return (
       <>
-        <HeaderWrapper>
-          <H1>{tracksTitle}</H1>
-          <InfoText>{tracksInfo}</InfoText>
-        </HeaderWrapper>
+        <SectionHeader
+          title={tracksTitle}
+          onPress={onPressTracksHeader}
+          rightText={tracksInfo}
+        />
 
         <TracksView
           showDetailedTrack={showDetailedTrack}
@@ -134,6 +126,7 @@ class LikedMusic extends React.Component<Props> {
         noHorizontalPadding
       >
         {this.renderTracks()}
+        <Divider />
         {this.renderAlbums()}
       </ScrollView>
     )

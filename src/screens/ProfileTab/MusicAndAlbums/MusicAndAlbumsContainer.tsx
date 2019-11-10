@@ -26,6 +26,7 @@ interface Props extends NavigationInjectedProps {
   albumTransformer?: (data?: any) => Album
   albumsSelector: (data: any) => Album[]
   onPressAlbumsHeader: () => void
+  onPressTracksHeader: () => void
 }
 
 interface HOCsProps

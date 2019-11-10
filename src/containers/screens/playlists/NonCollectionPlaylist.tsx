@@ -1,7 +1,6 @@
 import L from 'lodash'
 import React from 'react'
 import { DocumentNode } from 'graphql'
-import { useQuery } from '@apollo/react-hooks'
 import {
   withTrackToggle,
   withDetailedTrackMenu,
@@ -10,41 +9,68 @@ import {
   DetailedTrackMenuProps,
 } from 'src/HOCs'
 import PlaylistScreen from 'src/screens/Playlist'
-import { Pagination, Track } from 'src/apollo'
 import { Loader } from 'src/components'
+import { useQueryWithPagination } from 'src/Hooks'
+import { Track } from 'src/apollo'
 
-interface Data {
-  playlist?: Pagination<Track>
-}
+const LIMIT = 50
 
-interface Props extends DetailedTrackMenuProps, ToggleTrackProps {
+interface Props {
   query: DocumentNode
   cover: any // FIXME: вытащить проп из PlaylistScreen
+  itemTransformer?: (data: any) => any
+  itemsSelector: (data: any) => any[]
+  hasMorePagesSelector: (data: any) => boolean
 }
 
-const NonCollectionPlaylist: React.FC<Props> = ({ query, cover, ...rest }) => {
-  const { data, loading } = useQuery<Data>(query)
+interface HOCsProps extends Props, DetailedTrackMenuProps, ToggleTrackProps {}
+
+const NonCollectionPlaylist: React.FC<HOCsProps> = ({
+  query,
+  cover,
+  itemsSelector,
+  itemTransformer,
+  hasMorePagesSelector,
+  ...rest
+}) => {
+  const {
+    items,
+    networkStatus,
+    refetch,
+    onEndReached,
+  } = useQueryWithPagination(query, {
+    itemsSelector,
+    hasMorePagesSelector,
+    limit: LIMIT,
+    fetchPolicy: 'cache-and-network',
+    notifyOnNetworkStatusChange: true,
+  })
+
+  let tracks: Track[] = items
+  if (itemTransformer) {
+    tracks = tracks.map(itemTransformer)
+  }
 
   const favouritesCount = React.useMemo((): number => {
-    if (!data || !data.playlist) {
+    if (!tracks.length) {
       return 0
     }
-    const count = L.sumBy<Track>(data.playlist.items, 'favouritesCount')
+    const count = L.sumBy(tracks, 'favouritesCount')
     return count
-  }, [data])
+  }, [tracks])
 
-  if (loading) {
+  if (networkStatus === 1) {
     return <Loader isAbsolute />
   }
 
-  if (!data || !data.playlist) {
+  if (!tracks.length) {
     return null
   }
-  const { items } = data.playlist
+
   return (
     <PlaylistScreen
       cover={cover}
-      tracks={items}
+      tracks={tracks}
       favouritesCount={favouritesCount}
       {...rest}
     />
@@ -55,4 +81,4 @@ export default L.flowRight(
   withChangingHeaderSettings({ state: 'main', mode: 'light' }),
   withDetailedTrackMenu,
   withTrackToggle,
-)(NonCollectionPlaylist)
+)(NonCollectionPlaylist) as React.FC<Props>
