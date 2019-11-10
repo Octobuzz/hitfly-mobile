@@ -1,18 +1,16 @@
 import React from 'react'
 import { Image } from './Image'
-import TextBase from 'src/components/TextBase'
+import TextBase from './TextBase'
 import { Album } from 'src/apollo'
+import { styles } from 'src/constants'
 import styled from 'src/styled-components'
 
-const IMAGE_HEIGHT = 160
-
-// сумма высот и отступов
-const ITEM_HEIGHT = IMAGE_HEIGHT + 14 + 16 + 8 + 12
-
-const Wrapper = styled.TouchableOpacity``
+const Wrapper = styled.TouchableOpacity`
+  width: ${styles.COL2_WIDTH}px;
+`
 
 const AlbumImage = styled(Image)`
-  height: ${IMAGE_HEIGHT}px;
+  height: ${styles.COL2_WIDTH}px;
   width: 100%;
   margin-bottom: 14px;
   border-radius: 4px;
@@ -40,11 +38,7 @@ interface Props {
   onPress?: (item: Album) => void
 }
 
-interface Sized {
-  height: number
-}
-
-const AlbumItem: React.FC<Props> & Sized = ({ item, onPress }) => {
+const AlbumItem: React.FC<Props> = ({ item, onPress }) => {
   const { cover, title, group, author } = item
   const handlePress = React.useCallback(() => {
     if (onPress) {
@@ -60,7 +54,5 @@ const AlbumItem: React.FC<Props> & Sized = ({ item, onPress }) => {
     </Wrapper>
   )
 }
-
-AlbumItem.height = ITEM_HEIGHT
 
 export default AlbumItem

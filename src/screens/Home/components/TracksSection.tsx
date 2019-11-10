@@ -1,9 +1,14 @@
 import React from 'react'
 import { FlatList } from 'react-native'
 import { Track, Playlist } from 'src/apollo'
-import { Loader, TextBase, Image, ListFooterLoader } from 'src/components'
+import {
+  Image,
+  Loader,
+  TextBase,
+  SectionHeader,
+  ListFooterLoader,
+} from 'src/components'
 import SectionWrapper from './SectionWrapper'
-import SectionHeader from './SectionHeader'
 import styled from 'src/styled-components'
 
 const ITEM_WIDTH = 164

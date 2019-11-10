@@ -1,9 +1,8 @@
 import L from 'lodash'
 import React from 'react'
 import { FlatList } from 'react-native'
-import { Loader, GenreItem } from 'src/components'
+import { Loader, GenreItem, SectionHeader } from 'src/components'
 import SectionWrapper from './SectionWrapper'
-import SectionHeader from './SectionHeader'
 import { Genre } from 'src/apollo'
 import styled from 'src/styled-components'
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { TextBase } from 'src/components'
+import TextBase from './TextBase'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import styled from 'src/styled-components'
 

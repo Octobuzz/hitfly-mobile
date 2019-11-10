@@ -1,27 +1,31 @@
-import L from 'lodash'
+import LFP from 'lodash/fp'
 import React, { useCallback } from 'react'
+import { withNavigation, NavigationInjectedProps } from 'react-navigation'
 import MusicAndAlbumsContainer from './MusicAndAlbumsContainer'
+import { GET_MY_ALBUMS } from 'src/apollo'
 import gql from 'graphql-tag'
+import { ROUTES } from 'src/navigation'
 
-const MyMusicContainer: React.FC = () => {
-  const tracksSelector = useCallback(
-    (data: any) => L.get(data, 'tracks.items', []),
-    [],
-  )
+interface Props extends NavigationInjectedProps {}
 
-  const albumsSelector = useCallback(
-    (data: any) => L.get(data, 'albums.items', []),
-    [],
-  )
+const albumsSelector = LFP.getOr([], 'albums.items')
+const tracksSelector = LFP.getOr([], 'tracks.items')
+
+const MyMusicContainer: React.FC<Props> = props => {
+  const onPressAlbumsHeader = useCallback(() => {
+    props.navigation.navigate(ROUTES.MAIN.MY_ALBUMS_DETAILED)
+  }, [])
 
   return (
     <MusicAndAlbumsContainer
+      onPressAlbumsHeader={onPressAlbumsHeader}
       tracksQuery={GET_MY_MUSIC}
       albumsQuery={GET_MY_ALBUMS}
       tracksSelector={tracksSelector}
       albumsSelector={albumsSelector}
       tracksTitle="Песни"
       albumTitle="Альбомы"
+      {...props}
     />
   )
 }
@@ -46,23 +50,5 @@ const GET_MY_MUSIC = gql`
     }
   }
 `
-const GET_MY_ALBUMS = gql`
-  query {
-    albums(limit: 4, page: 1, filters: { my: true }) {
-      items: data {
-        id
-        title
-        author
-        cover(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        group: musicGroup {
-          title: name
-        }
-      }
-      hasMorePages: has_more_pages
-    }
-  }
-`
 
-export default MyMusicContainer
+export default withNavigation(MyMusicContainer)

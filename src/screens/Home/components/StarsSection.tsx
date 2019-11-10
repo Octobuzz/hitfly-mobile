@@ -1,7 +1,7 @@
 import React from 'react'
 import { User } from 'src/apollo'
 import SectionWrapper from './SectionWrapper'
-import SectionHeader from './SectionHeader'
+import { SectionHeader } from 'src/components'
 import { Loader, Image, TextBase } from 'src/components'
 import styled from 'src/styled-components'
 

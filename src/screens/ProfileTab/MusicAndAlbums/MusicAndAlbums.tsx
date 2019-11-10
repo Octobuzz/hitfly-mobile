@@ -8,6 +8,7 @@ import {
   AlbumItem,
   TracksView,
   ScrollView,
+  SectionHeader,
   RefreshControl,
 } from 'src/components'
 import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/HOCs'
@@ -50,6 +51,7 @@ interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   isRefreshing: boolean
   onRefresh: () => void
   onPressAlbum: (album: Album) => void
+  onPressAlbumsHeader: () => void
 }
 
 class LikedMusic extends React.Component<Props> {
@@ -106,7 +108,7 @@ class LikedMusic extends React.Component<Props> {
   }
 
   private renderAlbums = (): React.ReactNode => {
-    const { albums, albumTitle, onPressAlbum } = this.props
+    const { albums, albumTitle, onPressAlbum, onPressAlbumsHeader } = this.props
 
     if (!albums.length) {
       return null
@@ -114,9 +116,7 @@ class LikedMusic extends React.Component<Props> {
 
     return (
       <>
-        <HeaderWrapper>
-          <H1>{albumTitle}</H1>
-        </HeaderWrapper>
+        <SectionHeader title={albumTitle} onPress={onPressAlbumsHeader} />
 
         <AlbumsWrapper>
           {albums.map(album => (

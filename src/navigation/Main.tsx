@@ -23,7 +23,9 @@ import {
   RemoveAccountScreen,
   GenresDetailedScreen,
   ChangePasswordScreen,
+  MyAlbumsDetailedScreen,
   CollectionDetailsScreen,
+  LikedAlbumsDetailedScreen,
   SelectGenreForProfileScreen,
 } from 'src/screens'
 import { stackDefaultOptions, playlistConfig } from './configs'
@@ -145,6 +147,14 @@ const MainNavigator = createStackNavigator(
       navigationOptions: { title: 'Создание пароля' },
     },
     [routeNames.MAIN.SOCIAL_AUTH]: SocialAuthWebScreen,
+    [routeNames.MAIN.MY_ALBUMS_DETAILED]: {
+      screen: MyAlbumsDetailedScreen,
+      navigationOptions: { title: 'Мои альбомы' },
+    },
+    [routeNames.MAIN.LIKED_ALBUMS_DETAILED]: {
+      screen: LikedAlbumsDetailedScreen,
+      navigationOptions: { title: 'Любимые альбомы' },
+    },
   },
   {
     initialRouteName: routeNames.MAIN.HOME,

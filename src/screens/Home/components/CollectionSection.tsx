@@ -1,9 +1,13 @@
 import React from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
-import { Loader, CollectionItem, ListFooterLoader } from 'src/components'
+import {
+  Loader,
+  SectionHeader,
+  CollectionItem,
+  ListFooterLoader,
+} from 'src/components'
 import { Collection } from 'src/apollo'
 import SectionWrapper from './SectionWrapper'
-import SectionHeader from './SectionHeader'
 import styled from 'src/styled-components'
 
 const ITEM_WIDTH = 214
