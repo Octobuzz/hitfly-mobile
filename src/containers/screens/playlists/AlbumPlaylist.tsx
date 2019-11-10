@@ -1,4 +1,4 @@
-import L from 'lodash'
+import LFP from 'lodash/fp'
 import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import NonCollectionPlaylist from './NonCollectionPlaylist'
@@ -41,6 +41,8 @@ const GET_SELECTED_ALBUM = gql`
     }
   }
 `
+const hasMorePagesSelector = LFP.get('playlist.hasMorePagesSelector')
+const itemsSelector = LFP.getOr([], 'playlist.items')
 
 interface SelectedAlbumData {
   album?: Album
@@ -48,13 +50,19 @@ interface SelectedAlbumData {
 
 const AlbumPlaylist: React.FC = props => {
   const { data } = useQuery<SelectedAlbumData>(GET_SELECTED_ALBUM)
-  const imageUrl = L.get(data, 'album.cover[0].imageUrl')
+  const imageUrl = LFP.get('album.cover[0].imageUrl', data)
   let cover
   if (imageUrl) {
     cover = { uri: imageUrl }
   }
   return (
-    <NonCollectionPlaylist query={GET_ALBUM_TRACKS} cover={cover} {...props} />
+    <NonCollectionPlaylist
+      hasMorePagesSelector={hasMorePagesSelector}
+      itemsSelector={itemsSelector}
+      query={GET_ALBUM_TRACKS}
+      cover={cover}
+      {...props}
+    />
   )
 }
 export default AlbumPlaylist

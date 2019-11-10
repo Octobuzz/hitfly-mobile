@@ -1,3 +1,4 @@
+import LFP from 'lodash/fp'
 import React from 'react'
 import gql from 'graphql-tag'
 import NonCollectionPlaylist from './NonCollectionPlaylist'
@@ -24,8 +25,13 @@ const GET_TOP50_TRACKS = gql`
   }
 `
 
+const hasMorePagesSelector = LFP.get('playlist.hasMorePagesSelector')
+const itemsSelector = LFP.getOr([], 'playlist.items')
+
 const Top50Playlist: React.FC = props => (
   <NonCollectionPlaylist
+    hasMorePagesSelector={hasMorePagesSelector}
+    itemsSelector={itemsSelector}
     query={GET_TOP50_TRACKS}
     cover={images.TOP50_PLAYLIST}
     {...props}

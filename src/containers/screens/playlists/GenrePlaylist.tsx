@@ -1,4 +1,4 @@
-import L from 'lodash'
+import LFP from 'lodash/fp'
 import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
@@ -39,19 +39,28 @@ const GET_SELECTED_GENRE = gql`
   }
 `
 
+const hasMorePagesSelector = LFP.get('playlist.hasMorePagesSelector')
+const itemsSelector = LFP.getOr([], 'playlist.items')
+
 interface SelectedGenreData {
   genre?: Genre
 }
 
 const GenrePlaylist: React.FC = props => {
   const { data } = useQuery<SelectedGenreData>(GET_SELECTED_GENRE)
-  const imageUrl = L.get(data, 'genre.imageUrl')
+  const imageUrl = LFP.get('genre.imageUrl', data)
   let cover
   if (imageUrl) {
     cover = { uri: imageUrl }
   }
   return (
-    <NonCollectionPlaylist query={GET_GENRE_TRACKS} cover={cover} {...props} />
+    <NonCollectionPlaylist
+      hasMorePagesSelector={hasMorePagesSelector}
+      itemsSelector={itemsSelector}
+      query={GET_GENRE_TRACKS}
+      cover={cover}
+      {...props}
+    />
   )
 }
 export default GenrePlaylist

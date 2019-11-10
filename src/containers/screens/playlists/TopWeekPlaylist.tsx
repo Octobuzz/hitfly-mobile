@@ -1,3 +1,4 @@
+import LFP from 'lodash/fp'
 import React from 'react'
 import gql from 'graphql-tag'
 import NonCollectionPlaylist from './NonCollectionPlaylist'
@@ -27,8 +28,13 @@ export const GET_TOP_WEEK_TRACKS = gql`
   }
 `
 
+const hasMorePagesSelector = LFP.get('playlist.hasMorePagesSelector')
+const itemsSelector = LFP.getOr([], 'playlist.items')
+
 const TopWeekPlaylist: React.FC = props => (
   <NonCollectionPlaylist
+    hasMorePagesSelector={hasMorePagesSelector}
+    itemsSelector={itemsSelector}
     query={GET_TOP_WEEK_TRACKS}
     cover={images.TOP_WEEK_PLAYLIST}
     {...props}
