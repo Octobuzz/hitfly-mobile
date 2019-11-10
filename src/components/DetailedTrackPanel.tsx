@@ -1,4 +1,5 @@
 import React, { createRef } from 'react'
+import { Animated } from 'react-native'
 import { NullableTrack, Track } from 'src/apollo'
 import SlidingPanel, { SlidingPanelInstance } from './SlidingPanel'
 import TrackMenu, { TRACK_MENU_HEIGHT } from './TrackMenu'
@@ -21,6 +22,8 @@ class DetailedTrackPanel extends React.Component<any, State> {
     detailedTrack: null,
   }
 
+  private animatedValue = new Animated.Value(0)
+
   private panel = createRef<SlidingPanelInstance>()
 
   hidePanel = (): void => {
@@ -40,7 +43,7 @@ class DetailedTrackPanel extends React.Component<any, State> {
   render() {
     const { detailedTrack } = this.state
     return (
-      <SlidingPanel forwardRef={this.panel}>
+      <SlidingPanel animatedValue={this.animatedValue} forwardRef={this.panel}>
         {detailedTrack ? (
           <TrackMenu onPressCancel={this.hidePanel} track={detailedTrack} />
         ) : (
