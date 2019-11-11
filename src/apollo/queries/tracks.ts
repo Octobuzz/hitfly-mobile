@@ -184,6 +184,7 @@ export const GET_MY_MUSIC = gql`
           imageUrl: url
         }
         length
+        favouritesCount
       }
       hasMorePages: has_more_pages
     }
@@ -207,6 +208,7 @@ export const GET_LIKED_MUSIC = gql`
             imageUrl: url
           }
           length
+          favouritesCount
         }
       }
       hasMorePages: has_more_pages
