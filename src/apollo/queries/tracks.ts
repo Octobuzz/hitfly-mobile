@@ -147,6 +147,28 @@ export const GET_LISTENED_NOW = gql`
   }
 `
 
+export const GET_LISTENED_NOW_TRACKS = gql`
+  query ListenedNowTracks($limit: Int = 10, $page: Int = 1) {
+    playlist: GetListenedNow(limit: $limit, page: $page) {
+      items: data {
+        id
+        title: trackName
+        group: musicGroup {
+          title: name
+        }
+        singer
+        fileUrl: filename
+        cover(sizes: [size_290x290]) {
+          imageUrl: url
+        }
+        length
+        favouritesCount
+      }
+      hasMorePages: has_more_pages
+    }
+  }
+`
+
 export const GET_MY_MUSIC = gql`
   query MyTracks($limit: Int = 10, $page: Int = 1) {
     tracks(limit: $limit, page: $page, filters: { my: true }) {
