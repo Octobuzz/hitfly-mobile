@@ -29,8 +29,6 @@ const withTrackToggle = (
     }
 
     private initActiveTrack = async (): Promise<void> => {
-      // TODO: когда будет готов плеер, сделать запрос на выбор текущего играемого трека
-      // и записать его в activeTrack
       const id = await TrackPlayer.getCurrentTrack()
       const activeTrackId = id || null
       this.setState({ activeTrackId })
