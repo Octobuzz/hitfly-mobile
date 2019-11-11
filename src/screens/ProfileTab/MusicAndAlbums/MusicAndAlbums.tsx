@@ -44,8 +44,8 @@ class LikedMusic extends React.Component<Props> {
     const {
       tracks,
       toggleTrack,
-      activeTrack,
       tracksTitle,
+      activeTrackId,
       showDetailedTrack,
       onPressTracksHeader,
     } = this.props
@@ -67,7 +67,7 @@ class LikedMusic extends React.Component<Props> {
         <TracksView
           showDetailedTrack={showDetailedTrack}
           toggleTrack={toggleTrack}
-          activeTrack={activeTrack}
+          activeTrackId={activeTrackId}
           tracks={tracks}
         />
       </>

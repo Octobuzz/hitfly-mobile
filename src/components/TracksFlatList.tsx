@@ -21,25 +21,30 @@ const Scroll = styled(FlatList as new () => FlatList<Track>).attrs(() => ({
 
 class TracksList extends React.Component<Props> {
   private renderTrack: ListRenderItem<Track> = ({ item, index }) => {
-    const { toggleTrack, showDetailedTrack } = this.props
+    const { showDetailedTrack } = this.props
     const isPlaying = this.isTrackPlaying(item)
     return (
       <PlaylistTrack
         index={index}
         isPlaying={isPlaying}
-        onPress={toggleTrack}
+        onPress={this.handlePressTrack}
         onPressMore={showDetailedTrack}
         track={item}
       />
     )
   }
 
+  private handlePressTrack = (track: Track) => {
+    const { toggleTrack, tracks } = this.props
+    toggleTrack({ track, playlist: tracks })
+  }
+
   private isTrackPlaying = (track: Track): boolean => {
-    const { activeTrack } = this.props
-    if (!activeTrack) {
+    const { activeTrackId } = this.props
+    if (!activeTrackId) {
       return false
     }
-    return activeTrack.id === track.id
+    return +activeTrackId === track.id
   }
 
   private getItemLayout = (

@@ -10,26 +10,31 @@ interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
 
 class TracksView extends React.Component<Props> {
   private renderTrack = (item: Track, index: number): React.ReactNode => {
-    const { toggleTrack, showDetailedTrack } = this.props
+    const { showDetailedTrack } = this.props
     const isPlaying = this.isTrackPlaying(item)
     return (
       <PlaylistTrack
         key={item.id.toString()}
         index={index}
         isPlaying={isPlaying}
-        onPress={toggleTrack}
+        onPress={this.handlePressTrack}
         onPressMore={showDetailedTrack}
         track={item}
       />
     )
   }
 
+  private handlePressTrack = (track: Track) => {
+    const { toggleTrack, tracks } = this.props
+    toggleTrack({ track, playlist: tracks })
+  }
+
   private isTrackPlaying = (track: Track): boolean => {
-    const { activeTrack } = this.props
-    if (!activeTrack) {
+    const { activeTrackId } = this.props
+    if (!activeTrackId) {
       return false
     }
-    return activeTrack.id === track.id
+    return +activeTrackId === track.id
   }
 
   render() {

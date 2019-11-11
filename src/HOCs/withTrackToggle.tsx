@@ -1,13 +1,19 @@
 import React from 'react'
-import { NullableTrack } from 'src/apollo'
+import TrackPlayer, { Track as RNTrack } from 'react-native-track-player'
+import { Track } from 'src/apollo'
+
+interface ToggleTrackOptions {
+  track: Track
+  playlist: Track[]
+}
 
 export interface ToggleTrackProps {
-  toggleTrack: (track: NullableTrack) => void
-  activeTrack: NullableTrack
+  toggleTrack: (options?: ToggleTrackOptions) => void
+  activeTrackId: string | null
 }
 
 interface State {
-  activeTrack: NullableTrack
+  activeTrackId: string | null
 }
 
 const withTrackToggle = (
@@ -15,49 +21,79 @@ const withTrackToggle = (
 ) =>
   class TrackToggle extends React.Component<any, State> {
     state: State = {
-      activeTrack: null,
+      activeTrackId: null,
     }
 
     componentDidMount() {
       this.initActiveTrack()
     }
 
-    private initActiveTrack = (): void => {
+    private initActiveTrack = async (): Promise<void> => {
       // TODO: когда будет готов плеер, сделать запрос на выбор текущего играемого трека
       // и записать его в activeTrack
-      const activeTrack = null
-      this.setState({ activeTrack })
+      const id = await TrackPlayer.getCurrentTrack()
+      const activeTrackId = id || null
+      this.setState({ activeTrackId })
     }
 
-    private toggleTrack = (track: NullableTrack): void => {
-      const { activeTrack } = this.state
-      if (!track) {
-        // TODO: пауза в глобальном плеере
-        this.setState({ activeTrack: null })
+    private toggleTrack = (options?: ToggleTrackOptions): void => {
+      const { activeTrackId } = this.state
+      if (!options) {
+        this.pauseTrack()
+        this.setState({ activeTrackId: null })
         return
       }
-      let newTrack: NullableTrack
-      if (activeTrack) {
-        if (activeTrack.id !== track.id) {
-          // TODO: поменять трек в глобальном плеере
-          newTrack = track
+      let newTrackId: string | null = options.track.id.toString()
+      if (activeTrackId) {
+        if (activeTrackId !== newTrackId) {
+          this.playTrack(options)
         } else {
-          // TODO: пауза в глобальном плеере
-          newTrack = null
+          this.pauseTrack()
+          newTrackId = null
         }
       } else {
-        // TODO: новый трек в глобальном плеере
-        newTrack = track
+        this.playTrack(options)
       }
-      this.setState({ activeTrack: newTrack })
+      this.setState({ activeTrackId: newTrackId })
+    }
+
+    private playTrack = async ({
+      track,
+    }: ToggleTrackOptions): Promise<void> => {
+      await TrackPlayer.stop()
+      await TrackPlayer.add(this.createTrack(track))
+      await TrackPlayer.play()
+    }
+
+    private pauseTrack = async (): Promise<void> => {
+      await TrackPlayer.stop()
+    }
+
+    private createTrack = ({
+      id,
+      fileUrl,
+      title,
+      group,
+      singer,
+    }: Track): RNTrack => {
+      return {
+        id: id.toString(),
+        url: fileUrl,
+        title,
+        artist: group ? group.title : singer,
+      }
+    }
+
+    private createPlaylist = (playlist: Track[]): RNTrack[] => {
+      return playlist.map(this.createTrack)
     }
 
     render() {
-      const { activeTrack } = this.state
+      const { activeTrackId } = this.state
       return (
         <WrappedComponent
           toggleTrack={this.toggleTrack}
-          activeTrack={activeTrack}
+          activeTrackId={activeTrackId}
           {...this.props}
         />
       )

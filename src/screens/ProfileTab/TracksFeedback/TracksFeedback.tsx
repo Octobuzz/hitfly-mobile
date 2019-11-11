@@ -35,11 +35,11 @@ interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
 
 class TracksFeedback extends React.Component<Props> {
   private renderItem: ListRenderItem<Track> = ({ item, index }) => {
-    const { toggleTrack, showDetailedTrack } = this.props
+    const { showDetailedTrack } = this.props
     const isPlaying = this.isTrackPlaying(item)
     return (
       <TrackWithFeedback
-        onPress={toggleTrack}
+        onPress={this.handlePressTrack}
         onPressMore={showDetailedTrack}
         isPlaying={isPlaying}
         index={index}
@@ -48,12 +48,17 @@ class TracksFeedback extends React.Component<Props> {
     )
   }
 
+  private handlePressTrack = (track: Track) => {
+    const { toggleTrack, tracks } = this.props
+    toggleTrack({ track, playlist: tracks })
+  }
+
   private isTrackPlaying = (track: Track): boolean => {
-    const { activeTrack } = this.props
-    if (!activeTrack) {
+    const { activeTrackId } = this.props
+    if (!activeTrackId) {
       return false
     }
-    return activeTrack.id === track.id
+    return +activeTrackId === track.id
   }
 
   render() {

@@ -14,14 +14,14 @@ describe('TrackView', () => {
 
   const props = {
     tracks: [item],
-    activeTrack: item,
+    activeTrackId: '20',
     toggleTrack: jest.fn(),
     showDetailedTrack: jest.fn(),
   }
 
   const emptyProps = {
     tracks: [],
-    activeTrack: null,
+    activeTrackId: null,
     toggleTrack: jest.fn(),
     showDetailedTrack: jest.fn(),
   }

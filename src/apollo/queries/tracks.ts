@@ -27,6 +27,7 @@ export const GET_NEW_TRACKS = gql`
         group: musicGroup {
           title: name
         }
+        fileUrl: filename
         singer
         length
         favouritesCount

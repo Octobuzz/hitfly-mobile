@@ -55,12 +55,13 @@ class Playlist extends React.Component<Props, State> {
   // играемый трек может меняться, поэтому надо каждый раз проверять
   // что бы правильно отображать паузу на текущем экране
   static getDerivedStateFromProps = ({
-    activeTrack,
+    activeTrackId,
     tracks,
   }: Props): Partial<State> | null => {
-    if (activeTrack && tracks.includes(activeTrack)) {
+    if (activeTrackId) {
+      const playingTrack = tracks.find(({ id }) => +activeTrackId === id)
       return {
-        playingTrack: activeTrack,
+        playingTrack,
       }
     } else {
       return {
@@ -83,24 +84,14 @@ class Playlist extends React.Component<Props, State> {
     const { tracks, toggleTrack } = this.props
     const { playingTrack } = this.state
     if (playingTrack) {
-      toggleTrack(null)
+      toggleTrack()
     } else {
-      toggleTrack(tracks[0])
+      toggleTrack({ track: tracks[0], playlist: tracks })
     }
   }
 
   render() {
-    const {
-      tracks,
-      onRefresh,
-      toggleTrack,
-      activeTrack,
-      onEndReached,
-      isRefreshing,
-      isFetchingMore,
-      favouritesCount,
-      showDetailedTrack,
-    } = this.props
+    const { tracks, favouritesCount, ...rest } = this.props
     const { playingTrack } = this.state
     const activeCover = this.getCover()
     return (
@@ -119,16 +110,7 @@ class Playlist extends React.Component<Props, State> {
           favouritesCount={favouritesCount}
           playlist={tracks}
         />
-        <TracksFlatList
-          onRefresh={onRefresh}
-          onEndReached={onEndReached}
-          isRefreshing={isRefreshing}
-          isFetchingMore={isFetchingMore}
-          toggleTrack={toggleTrack}
-          activeTrack={activeTrack}
-          showDetailedTrack={showDetailedTrack}
-          tracks={tracks}
-        />
+        <TracksFlatList {...rest} tracks={tracks} />
       </View>
     )
   }
