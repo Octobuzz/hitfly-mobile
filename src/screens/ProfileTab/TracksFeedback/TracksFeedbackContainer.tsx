@@ -8,12 +8,11 @@ import {
   DetailedTrackMenuProps,
 } from 'src/HOCs'
 import { useQueryWithPagination } from 'src/Hooks'
-import { Pagination, Track } from 'src/apollo'
 import gql from 'graphql-tag'
 
 const LIMIT = 20
 const GET_MY_TRACKS_WITH_FEEDBACK = gql`
-  query feedbackTracks(
+  query FeedbackTracks(
     $limit: Int = 20
     $page: Int = 1
     $period: CommentPeriodEnum = week
@@ -54,26 +53,23 @@ const GET_MY_TRACKS_WITH_FEEDBACK = gql`
   }
 `
 
-interface TracksData {
-  tracks: Pagination<Track>
-}
-
-const itemsSelector = (data?: TracksData) => L.get(data, 'tracks.items', [])
-const hasMorePagesSelector = (data?: TracksData) =>
+const itemsSelector = (data: any) => L.get(data, 'tracks.items', [])
+const hasMorePagesSelector = (data: any) =>
   L.get(data, 'tracks.hasMorePages', false)
 
 interface Props extends ToggleTrackProps, DetailedTrackMenuProps {}
 
-const TracksFeedbackContainer: React.FC<Props> = ({ ...rest }) => {
-  const { data, refetch, networkStatus, onEndReached } = useQueryWithPagination<
-    TracksData
-  >(GET_MY_TRACKS_WITH_FEEDBACK, {
-    itemsSelector,
-    hasMorePagesSelector,
-    limit: LIMIT,
-    notifyOnNetworkStatusChange: true,
-    fetchPolicy: 'cache-and-network',
-  })
+const TracksFeedbackContainer: React.FC<Props> = props => {
+  const { data, refetch, networkStatus, onEndReached } = useQueryWithPagination(
+    GET_MY_TRACKS_WITH_FEEDBACK,
+    {
+      itemsSelector,
+      hasMorePagesSelector,
+      limit: LIMIT,
+      notifyOnNetworkStatusChange: true,
+      fetchPolicy: 'cache-and-network',
+    },
+  )
 
   const [period, setPeriod] = useState<FeedbackPeriod>('week')
   const tracksItems = L.get(data, 'tracks.items', [])
@@ -97,7 +93,7 @@ const TracksFeedbackContainer: React.FC<Props> = ({ ...rest }) => {
       onEndReached={onEndReached}
       onRefresh={onRefresh}
       tracks={tracksItems}
-      {...rest}
+      {...props}
     />
   )
 }
@@ -105,4 +101,4 @@ const TracksFeedbackContainer: React.FC<Props> = ({ ...rest }) => {
 export default L.flowRight(
   withTrackToggle,
   withDetailedTrackMenu,
-)(TracksFeedbackContainer)
+)(TracksFeedbackContainer) as React.FC<any>

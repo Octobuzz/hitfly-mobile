@@ -33,4 +33,4 @@ const MyMusicContainer: React.FC<Props> = props => {
   )
 }
 
-export default withNavigation(MyMusicContainer)
+export default withNavigation(MyMusicContainer) as React.FC<any>

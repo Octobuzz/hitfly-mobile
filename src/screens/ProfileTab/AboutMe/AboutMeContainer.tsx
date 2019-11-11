@@ -8,7 +8,10 @@ import { Profile } from 'src/apollo'
 const AboutMeContainer: React.FC = () => {
   const { data, refetch, networkStatus } = useQuery<{
     profile?: Profile
-  }>(GET_PROFILE_FOR_ABOUT, { notifyOnNetworkStatusChange: true })
+  }>(GET_PROFILE_FOR_ABOUT, {
+    fetchPolicy: 'cache-and-network',
+    notifyOnNetworkStatusChange: true,
+  })
   const profile = L.get(data, 'profile')
   if (!profile) {
     return null
