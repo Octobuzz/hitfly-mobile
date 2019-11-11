@@ -12,6 +12,7 @@ export const DEFAULT_PROFILE = require('../assets/images/default_images/profile.
 export const DEFAULT_GROUP = require('../assets/images/default_images/group.png')
 
 // profile
+export const RING = require('../assets/images/profile/ring.png')
 export const LIKED_MUSIC = require('../assets/images/profile/liked_music.png')
 export const MY_MUSIC = require('../assets/images/profile/my_music.png')
 export const CALENDAR = require('../assets/images/profile/calendar.png')

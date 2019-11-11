@@ -28,11 +28,11 @@ interface Indentable {
 }
 
 interface Props {
-  favouriteGenres: Genre[] | null
+  genres: Genre[] | null
   location: City | null
 }
 
-const ProfileInfo: React.FC<Props> = ({ favouriteGenres, location }) => {
+const ProfileInfo: React.FC<Props> = ({ genres, location }) => {
   const content: React.ReactNode[] = []
 
   if (location) {
@@ -44,13 +44,11 @@ const ProfileInfo: React.FC<Props> = ({ favouriteGenres, location }) => {
     )
   }
 
-  if (favouriteGenres && favouriteGenres.length) {
+  if (genres && genres.length) {
     content.push(
       <Row withMargin={content.length > 0} key="genres">
         <StyledIcon name="ios-musical-notes" />
-        <TextBase>
-          {favouriteGenres.map(({ title }) => title).join(', ')}
-        </TextBase>
+        <TextBase>{genres.map(({ title }) => title).join(', ')}</TextBase>
       </Row>,
     )
   }
