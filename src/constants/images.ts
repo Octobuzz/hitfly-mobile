@@ -47,7 +47,3 @@ export const SOCIAL_VKONTAKTE = require('../assets/images/social/vkontakte.png')
 export const SOCIAL_GOOGLE = require('../assets/images/social/google.png')
 export const SOCIAL_INSTAGRAM = require('../assets/images/social/instagram.png')
 export const SOCIAL_ODNOKLASSNIKI = require('../assets/images/social/odnoklassniki.png')
-
-// music
-export const MUSIC_ARTWORK_EMPTY_ALBUM = require('../assets/images/music/artwork_empty_album.png')
-export const MUSIC_ARTWORK_EMPTY_TRACK = require('../assets/images/music/artwork_empty_track.png')
