@@ -36,15 +36,18 @@ const GET_PROFILE_FOR_ABOUT = gql`
       avatar(sizes: [size_235x235]) {
         imageUrl: url
       }
-      favouriteGenres {
+      roles {
+        slug
+      }
+      playsInGenres: genresPlay {
         id
         title: name
       }
       location {
         title
       }
-      careerStartDate: careerStart
       description
+      careerStartDate: careerStart
       bonusProgramLevel: bpLevelBonusProgram
       bonusProgramPoints: bpPoints
       daysInBonusProgram: bpDaysInProgram

@@ -21,8 +21,8 @@ const AboutMe: React.FC<Props> = ({
     location,
     musicGroups,
     description,
+    playsInGenres,
     careerStartDate,
-    favouriteGenres,
     bonusProgramLevel,
     bonusProgramPoints,
     daysInBonusProgram,
@@ -38,7 +38,7 @@ const AboutMe: React.FC<Props> = ({
       }
       addBottomSafePadding
     >
-      <ProfileInfo favouriteGenres={favouriteGenres} location={location} />
+      <ProfileInfo genres={playsInGenres} location={location} />
       <ProfileGroup musicGroups={musicGroups} />
       <BonusProgram
         bonusProgramLevel={bonusProgramLevel}
