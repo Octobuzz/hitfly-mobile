@@ -28,7 +28,7 @@ const GET_LISTENED_NOW_TRACKS = gql`
   }
 `
 
-const hasMorePagesSelector = LFP.get('playlist.hasMorePagesSelector')
+const hasMorePagesSelector = LFP.get('playlist.hasMorePages')
 const itemsSelector = LFP.getOr([], 'playlist.items')
 
 const ListenedNowPlaylist: React.FC = props => (

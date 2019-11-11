@@ -37,6 +37,10 @@ interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   cover: SourceType
   tracks: Track[]
   favouritesCount: number
+  onRefresh: () => void
+  onEndReached: () => void
+  isRefreshing: boolean
+  isFetchingMore: boolean
 }
 
 interface State {
@@ -88,9 +92,13 @@ class Playlist extends React.Component<Props, State> {
   render() {
     const {
       tracks,
-      favouritesCount,
+      onRefresh,
       toggleTrack,
       activeTrack,
+      onEndReached,
+      isRefreshing,
+      isFetchingMore,
+      favouritesCount,
       showDetailedTrack,
     } = this.props
     const { playingTrack } = this.state
@@ -112,6 +120,10 @@ class Playlist extends React.Component<Props, State> {
           playlist={tracks}
         />
         <TracksFlatList
+          onRefresh={onRefresh}
+          onEndReached={onEndReached}
+          isRefreshing={isRefreshing}
+          isFetchingMore={isFetchingMore}
           toggleTrack={toggleTrack}
           activeTrack={activeTrack}
           showDetailedTrack={showDetailedTrack}

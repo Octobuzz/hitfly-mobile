@@ -13,7 +13,9 @@ import { Loader } from 'src/components'
 import { useQueryWithPagination } from 'src/Hooks'
 import { Track } from 'src/apollo'
 
-const LIMIT = 50
+// FIXME: какая-то херня при передаче onEndReached - 2 раза делает запрос с page = 2
+// надо поправить позже. пока "отклюена пагинация"
+const LIMIT = 500
 
 interface Props {
   query: DocumentNode
@@ -35,9 +37,9 @@ const NonCollectionPlaylist: React.FC<HOCsProps> = ({
 }) => {
   const {
     items,
-    networkStatus,
     refetch,
     onEndReached,
+    networkStatus,
   } = useQueryWithPagination(query, {
     itemsSelector,
     hasMorePagesSelector,
@@ -69,6 +71,10 @@ const NonCollectionPlaylist: React.FC<HOCsProps> = ({
 
   return (
     <PlaylistScreen
+      onEndReached={onEndReached}
+      isRefreshing={networkStatus === 4}
+      isFetchingMore={networkStatus === 3}
+      onRefresh={refetch}
       cover={cover}
       tracks={tracks}
       favouritesCount={favouritesCount}

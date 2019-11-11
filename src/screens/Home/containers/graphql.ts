@@ -20,22 +20,3 @@ export const GET_STARS = gql`
     }
   }
 `
-
-export const GET_TOP_WEEK_TRACKS = gql`
-  query Tracks($limit: Int = 10, $page: Int = 1) {
-    playlist: TopWeeklyQuery(limit: $limit, page: $page) {
-      items: data {
-        id
-        title: trackName
-        cover(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        group: musicGroup {
-          title: name
-        }
-        singer
-      }
-      hasMorePages: has_more_pages
-    }
-  }
-`

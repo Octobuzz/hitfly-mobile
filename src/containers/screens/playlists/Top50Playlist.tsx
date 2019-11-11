@@ -25,7 +25,8 @@ const GET_TOP50_TRACKS = gql`
   }
 `
 
-const hasMorePagesSelector = LFP.get('playlist.hasMorePagesSelector')
+// тут без пагинации, всегда 50 треков
+const hasMorePagesSelector = LFP.F
 const itemsSelector = LFP.getOr([], 'playlist.items')
 
 const Top50Playlist: React.FC = props => (

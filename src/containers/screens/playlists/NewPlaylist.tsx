@@ -1,34 +1,10 @@
 import LFP from 'lodash/fp'
 import React from 'react'
-import gql from 'graphql-tag'
 import NonCollectionPlaylist from './NonCollectionPlaylist'
 import { images } from 'src/constants'
+import { GET_NEW_TRACKS } from 'src/apollo'
 
-// FIXME: тут чтото сделать с пагинацей:
-// либо запросить все треки сразу
-// либо добавить пагинацию в UI
-export const GET_NEW_TRACKS = gql`
-  query {
-    playlist: tracks(limit: 1000, page: 0) {
-      items: data {
-        id
-        title: trackName
-        group: musicGroup {
-          title: name
-        }
-        singer
-        fileUrl: filename
-        cover(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        length
-        favouritesCount
-      }
-    }
-  }
-`
-
-const hasMorePagesSelector = LFP.get('playlist.hasMorePagesSelector')
+const hasMorePagesSelector = LFP.get('playlist.hasMorePages')
 const itemsSelector = LFP.getOr([], 'playlist.items')
 
 const NewPlaylist: React.FC = props => (

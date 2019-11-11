@@ -1,7 +1,7 @@
 import L from 'lodash'
+import LFP from 'lodash/fp'
 import React from 'react'
 import gql from 'graphql-tag'
-import { DataProps, graphql } from '@apollo/react-hoc'
 import {
   withTrackToggle,
   withDetailedTrackMenu,
@@ -10,67 +10,70 @@ import {
   DetailedTrackMenuProps,
 } from 'src/HOCs'
 import PlaylistScreen from 'src/screens/Playlist/Playlist'
-import { Collection } from 'src/apollo'
 import { Loader } from 'src/components'
-
-interface Props
-  extends DataProps<{ collection?: Collection }>,
-    ToggleTrackProps,
-    DetailedTrackMenuProps {}
-
-const CollectionPlaylist: React.FC<Props> = ({
-  data: { loading, collection },
-  ...rest
-}) => {
-  if (loading) {
-    return <Loader isAbsolute />
-  }
-
-  if (!collection) {
-    return null
-  }
-
-  const { image, favouritesCount, tracks } = collection
-  return (
-    <PlaylistScreen
-      cover={{ uri: image[0].imageUrl }}
-      tracks={tracks}
-      favouritesCount={favouritesCount || 0}
-      {...rest}
-    />
-  )
-}
+import { useQueryWithPagination } from 'src/Hooks'
+import { GET_COLLECTION_TRACKS } from 'src/apollo'
+import { useQuery } from '@apollo/react-hooks'
 
 const GET_CURRENT_COLLECTION = gql`
   query getCurrentCollection($collectionId: Int!) {
     currentCollectionId @client @export(as: "collectionId")
     collection(id: $collectionId) {
       id
+      favouritesCount
       image(sizes: [size_290x290]) {
         imageUrl: url
-      }
-      title
-      favouritesCount
-      tracks {
-        id
-        title: trackName
-        group: musicGroup {
-          title: name
-        }
-        singer
-        fileUrl: filename
-        cover(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        length
       }
     }
   }
 `
 
+const LIMIT = 500
+
+interface Props extends ToggleTrackProps, DetailedTrackMenuProps {}
+
+const hasMorePagesSelector = LFP.get('playlist.hasMorePages')
+const itemsSelector = LFP.getOr([], 'playlist.items')
+
+const CollectionPlaylist: React.FC<Props> = props => {
+  const {
+    items,
+    refetch,
+    onEndReached,
+    networkStatus,
+  } = useQueryWithPagination(GET_COLLECTION_TRACKS, {
+    itemsSelector,
+    hasMorePagesSelector,
+    limit: LIMIT,
+    fetchPolicy: 'cache-and-network',
+    notifyOnNetworkStatusChange: true,
+  })
+
+  const { data, loading } = useQuery(GET_CURRENT_COLLECTION)
+
+  const uri = L.get(data, 'collection.image[0].imageUrl')
+  const favouritesCount = L.get(data, 'collection.favouritesCount', 0)
+
+  if (networkStatus === 1 || loading) {
+    return <Loader isAbsolute />
+  }
+
+  return (
+    <PlaylistScreen
+      isRefreshing={networkStatus === 4}
+      isFetchingMore={networkStatus === 3}
+      onRefresh={refetch}
+      onEndReached={onEndReached}
+      cover={{ uri }}
+      tracks={items}
+      favouritesCount={favouritesCount}
+      {...props}
+    />
+  )
+}
+
 export default L.flowRight(
   withChangingHeaderSettings({ state: 'main', mode: 'light' }),
-  graphql<Props>(GET_CURRENT_COLLECTION),
   withDetailedTrackMenu,
   withTrackToggle,
 )(CollectionPlaylist)

@@ -4,7 +4,7 @@ import NonCollectionPlaylist from './NonCollectionPlaylist'
 import { images } from 'src/constants'
 import { GET_MY_MUSIC } from 'src/apollo'
 
-const hasMorePagesSelector = LFP.get('tracks.hasMorePagesSelector')
+const hasMorePagesSelector = LFP.get('tracks.hasMorePages')
 const itemsSelector = LFP.getOr([], 'tracks.items')
 
 const NewPlaylist: React.FC = props => (
