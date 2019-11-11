@@ -1,6 +1,6 @@
 import L from 'lodash'
 import LFP from 'lodash/fp'
-import React from 'react'
+import React, { useCallback } from 'react'
 import gql from 'graphql-tag'
 import {
   withTrackToggle,
@@ -38,9 +38,9 @@ const itemsSelector = LFP.getOr([], 'playlist.items')
 const CollectionPlaylist: React.FC<Props> = props => {
   const {
     items,
-    refetch,
     onEndReached,
     networkStatus,
+    refetch: refetchTracks,
   } = useQueryWithPagination(GET_COLLECTION_TRACKS, {
     itemsSelector,
     hasMorePagesSelector,
@@ -49,7 +49,12 @@ const CollectionPlaylist: React.FC<Props> = props => {
     notifyOnNetworkStatusChange: true,
   })
 
-  const { data, loading } = useQuery(GET_CURRENT_COLLECTION)
+  const { data, loading, refetch: refetchCollection } = useQuery(
+    GET_CURRENT_COLLECTION,
+    {
+      fetchPolicy: 'cache-and-network',
+    },
+  )
 
   const uri = L.get(data, 'collection.image[0].imageUrl')
   const favouritesCount = L.get(data, 'collection.favouritesCount', 0)
@@ -58,11 +63,16 @@ const CollectionPlaylist: React.FC<Props> = props => {
     return <Loader isAbsolute />
   }
 
+  const onRefresh = useCallback(() => {
+    refetchTracks()
+    refetchCollection()
+  }, [])
+
   return (
     <PlaylistScreen
       isRefreshing={networkStatus === 4}
       isFetchingMore={networkStatus === 3}
-      onRefresh={refetch}
+      onRefresh={onRefresh}
       onEndReached={onEndReached}
       cover={{ uri }}
       tracks={items}

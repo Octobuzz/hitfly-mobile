@@ -12,7 +12,7 @@ const NewPlaylist: React.FC = props => (
     hasMorePagesSelector={hasMorePagesSelector}
     itemsSelector={itemsSelector}
     query={GET_MY_MUSIC}
-    cover={images.DEFAULT_ALBUM}
+    cover={images.MY_MUSIC}
     {...props}
   />
 )

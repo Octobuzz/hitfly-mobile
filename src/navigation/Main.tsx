@@ -159,11 +159,11 @@ const MainNavigator = createStackNavigator(
     },
     [routeNames.MAIN.MY_MUSIC_PLAYLIST]: {
       screen: MyMusicPlaylistScreen,
-      navigationOptions: { title: 'Мои песни' },
+      navigationOptions: { title: 'Мои песни', ...playlistConfig },
     },
     [routeNames.MAIN.LIKED_MUSIC_PLAYLIST]: {
       screen: LikedMusicPlaylistScreen,
-      navigationOptions: { title: 'Любимые песни' },
+      navigationOptions: { title: 'Любимые песни', ...playlistConfig },
     },
   },
   {

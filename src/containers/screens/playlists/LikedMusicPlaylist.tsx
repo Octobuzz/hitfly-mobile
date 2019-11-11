@@ -14,7 +14,7 @@ const NewPlaylist: React.FC = props => (
     itemsSelector={itemsSelector}
     itemTransformer={itemTransformer}
     query={GET_LIKED_MUSIC}
-    cover={images.DEFAULT_ALBUM}
+    cover={images.LIKED_MUSIC}
     {...props}
   />
 )
