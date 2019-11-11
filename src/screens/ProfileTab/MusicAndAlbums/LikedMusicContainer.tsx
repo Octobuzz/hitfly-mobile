@@ -38,4 +38,4 @@ const LikedMusicContainer: React.FC<Props> = props => {
   )
 }
 
-export default withNavigation(LikedMusicContainer)
+export default withNavigation(LikedMusicContainer) as React.FC<any>

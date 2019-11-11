@@ -40,7 +40,10 @@ const SocialAuth: React.FC<Props> = ({ navigation, bottomText, style }) => {
   const { data, loading } = useQuery<SocialConnectData>(GET_SOCIAL_LINKS)
 
   const navigateToSocialAuth = useCallback(({ url }: SocialConnect) => {
-    navigation.navigate(ROUTES.AUTH.SOCIAL_AUTH, { url })
+    navigation.navigate(ROUTES.AUTH.SOCIAL_AUTH, {
+      url,
+      nextRoute: ROUTES.APP.MAIN,
+    })
   }, [])
 
   if (loading) {

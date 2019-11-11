@@ -53,7 +53,10 @@ const ProfileSocialAuth: React.FC<Props> = ({
   }, [isFocused])
 
   const navigateToSocialAuth = useCallback(({ url }: SocialConnect) => {
-    navigation.navigate(ROUTES.MAIN.SOCIAL_AUTH, { url })
+    navigation.navigate(ROUTES.MAIN.SOCIAL_AUTH, {
+      url,
+      nextRoute: ROUTES.MAIN.AUTH_SETTINGS,
+    })
   }, [])
 
   let socialData: SocialConnect[] = L.get(data, 'socialConnect', [])
