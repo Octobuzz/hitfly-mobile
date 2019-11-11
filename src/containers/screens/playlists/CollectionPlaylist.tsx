@@ -59,14 +59,14 @@ const CollectionPlaylist: React.FC<Props> = props => {
   const uri = L.get(data, 'collection.image[0].imageUrl')
   const favouritesCount = L.get(data, 'collection.favouritesCount', 0)
 
-  if (networkStatus === 1 || loading) {
-    return <Loader isAbsolute />
-  }
-
   const onRefresh = useCallback(() => {
     refetchTracks()
     refetchCollection()
   }, [])
+
+  if (networkStatus === 1 || loading) {
+    return <Loader isAbsolute />
+  }
 
   return (
     <PlaylistScreen
