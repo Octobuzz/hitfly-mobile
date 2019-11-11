@@ -65,10 +65,6 @@ const NonCollectionPlaylist: React.FC<HOCsProps> = ({
     return <Loader isAbsolute />
   }
 
-  if (!tracks.length) {
-    return null
-  }
-
   return (
     <PlaylistScreen
       onEndReached={onEndReached}
