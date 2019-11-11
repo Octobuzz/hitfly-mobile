@@ -23,13 +23,21 @@ const SELECT_COLLECTIONS_TYPE = gql`
   }
 `
 
+const SELECT_ALBUM = gql`
+  mutation SelectAlbum($id: Int!) {
+    selectAlbum(id: $id) @client
+  }
+`
+
 export interface SelectorsProps {
   selectCollection: (collectionId: number) => Promise<any>
   selectCollectionType: (type: string) => Promise<any>
   selectGenre: (genreId: number) => Promise<any>
+  selectAlbum: (albumId: number) => Promise<any>
 }
 
 interface Props {
+  mutSelectAlbum: MutationFunction<any, { id: number }>
   mutSelectGenre: MutationFunction<any, { id: number }>
   mutSelectCollection: MutationFunction<any, { id: number }>
   mutSelectCollectionType: MutationFunction<any, { type: string }>
@@ -39,6 +47,7 @@ const withSelectors = (
   WrappedComponent: React.ComponentType<SelectorsProps>,
 ) => {
   const Selectors: React.FC<Props> = ({
+    mutSelectAlbum,
     mutSelectGenre,
     mutSelectCollection,
     mutSelectCollectionType,
@@ -48,6 +57,10 @@ const withSelectors = (
       (collectionId: number) =>
         mutSelectCollection({ variables: { id: collectionId } }),
       [mutSelectCollection],
+    )
+    const selectAlbum = useCallback(
+      (albumId: number) => mutSelectAlbum({ variables: { id: albumId } }),
+      [mutSelectAlbum],
     )
     const selectGenre = useCallback(
       (genreId: number) => mutSelectGenre({ variables: { id: genreId } }),
@@ -60,6 +73,7 @@ const withSelectors = (
 
     return (
       <WrappedComponent
+        selectAlbum={selectAlbum}
         selectCollection={selectCollection}
         selectCollectionType={selectCollectionType}
         selectGenre={selectGenre}
@@ -72,6 +86,7 @@ const withSelectors = (
     graphql(SELECT_COLLECTION, { name: 'mutSelectCollection' }),
     graphql(SELECT_GENRE, { name: 'mutSelectGenre' }),
     graphql(SELECT_COLLECTIONS_TYPE, { name: 'mutSelectCollectionType' }),
+    graphql(SELECT_ALBUM, { name: 'mutSelectAlbum' }),
     // @ts-ignore
   )(Selectors)
 }

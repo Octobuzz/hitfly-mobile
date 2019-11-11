@@ -1,24 +1,22 @@
 import L from 'lodash'
 import React, { useCallback, useMemo } from 'react'
-import { withNavigation, NavigationInjectedProps } from 'react-navigation'
-import { useMutation, useQuery } from '@apollo/react-hooks'
+import { NavigationInjectedProps } from 'react-navigation'
+import { useQuery } from '@apollo/react-hooks'
 import MusicAndAlbumsScreen from './MusicAndAlbums'
 import {
-  ToggleTrackProps,
-  DetailedTrackMenuProps,
+  withSelectors,
+  SelectorsProps,
   withTrackToggle,
+  ToggleTrackProps,
   withDetailedTrackMenu,
+  DetailedTrackMenuProps,
 } from 'src/HOCs'
 import { Track, Album } from 'src/apollo'
 import { Loader } from 'src/components'
 import { ROUTES } from 'src/navigation'
 import { DocumentNode } from 'graphql'
-import gql from 'graphql-tag'
 
-interface Props
-  extends ToggleTrackProps,
-    DetailedTrackMenuProps,
-    NavigationInjectedProps {
+interface Props extends NavigationInjectedProps {
   tracksTitle: string
   tracksQuery: DocumentNode
   trackTransformer?: (data?: any) => Track
@@ -27,9 +25,18 @@ interface Props
   albumsQuery: DocumentNode
   albumTransformer?: (data?: any) => Album
   albumsSelector: (data: any) => Album[]
+  onPressAlbumsHeader: () => void
+  onPressTracksHeader: () => void
 }
 
-const MusicAndAlbumsContainer: React.FC<Props> = ({
+interface HOCsProps
+  extends Props,
+    ToggleTrackProps,
+    SelectorsProps,
+    DetailedTrackMenuProps {}
+
+const MusicAndAlbumsContainer: React.FC<HOCsProps> = ({
+  selectAlbum,
   tracksQuery,
   trackTransformer,
   tracksSelector,
@@ -44,6 +51,9 @@ const MusicAndAlbumsContainer: React.FC<Props> = ({
     networkStatus: tracksNetworkStatus,
     refetch: tracksRefetch,
   } = useQuery(tracksQuery, {
+    variables: {
+      limit: 10,
+    },
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'cache-and-network',
   })
@@ -60,6 +70,9 @@ const MusicAndAlbumsContainer: React.FC<Props> = ({
     networkStatus: albumsNetworkStatus,
     refetch: albumsRefetch,
   } = useQuery(albumsQuery, {
+    variables: {
+      limit: 4,
+    },
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'cache-and-network',
   })
@@ -79,12 +92,10 @@ const MusicAndAlbumsContainer: React.FC<Props> = ({
     albumsRefetch()
   }, [])
 
-  const [selectAlbum] = useMutation(SELECT_ALBUM)
-
   const navigateToAlbumPlaylist = useCallback(async (album: Album): Promise<
     void
   > => {
-    await selectAlbum({ variables: { id: album.id } })
+    await selectAlbum(album.id)
     navigation.navigate(ROUTES.MAIN.ALBUM_PLAYLIST)
   }, [])
 
@@ -104,14 +115,8 @@ const MusicAndAlbumsContainer: React.FC<Props> = ({
   )
 }
 
-const SELECT_ALBUM = gql`
-  mutation SelectAlbum($id: Int!) {
-    selectAlbum(id: $id) @client
-  }
-`
-
 export default L.flowRight(
   withDetailedTrackMenu,
   withTrackToggle,
-  withNavigation,
-)(MusicAndAlbumsContainer)
+  withSelectors,
+)(MusicAndAlbumsContainer) as React.FC<Props>

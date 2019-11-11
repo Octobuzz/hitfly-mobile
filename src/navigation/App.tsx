@@ -73,7 +73,7 @@ class AppNavigator extends React.Component {
 
   private handleInitialNavigation = async () => {
     const [token, skipWelcome] = await Promise.all([
-      storage.getItem(storageKeys.AUTH_TOKEN),
+      storage.getToken(),
       storage.getItem(storageKeys.SKIP_WELCOME),
     ])
     if (token) {

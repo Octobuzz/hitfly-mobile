@@ -1,23 +1,30 @@
-import L from 'lodash'
+import LFP from 'lodash/fp'
 import React, { useCallback } from 'react'
+import { withNavigation, NavigationInjectedProps } from 'react-navigation'
 import MusicAndAlbumsContainer from './MusicAndAlbumsContainer'
-import gql from 'graphql-tag'
+import { GET_LIKED_ALBUMS, GET_LIKED_MUSIC } from 'src/apollo'
+import { ROUTES } from 'src/navigation'
 
-const LikedMusicContainer: React.FC = () => {
-  const tracksSelector = useCallback(
-    (data: any) => L.get(data, 'tracks.items', []),
-    [],
-  )
+interface Props extends NavigationInjectedProps {}
 
-  const albumsSelector = useCallback(
-    (data: any) => L.get(data, 'albums.items', []),
-    [],
-  )
+const albumsSelector = LFP.getOr([], 'albums.items')
+const tracksSelector = LFP.getOr([], 'tracks.items')
+const albumTransformer = LFP.get('album')
+const trackTransformer = LFP.get('track')
 
-  const trackTransformer = useCallback(({ track }) => track, [])
-  const albumTransformer = useCallback(({ album }) => album, [])
+const LikedMusicContainer: React.FC<Props> = props => {
+  const onPressTracksHeader = useCallback(() => {
+    props.navigation.navigate(ROUTES.MAIN.LIKED_MUSIC_PLAYLIST)
+  }, [])
+
+  const onPressAlbumsHeader = useCallback(() => {
+    props.navigation.navigate(ROUTES.MAIN.LIKED_ALBUMS_DETAILED)
+  }, [])
+
   return (
     <MusicAndAlbumsContainer
+      onPressTracksHeader={onPressTracksHeader}
+      onPressAlbumsHeader={onPressAlbumsHeader}
       tracksTitle="Любимые песни"
       albumTitle="Альбомы"
       trackTransformer={trackTransformer}
@@ -26,53 +33,9 @@ const LikedMusicContainer: React.FC = () => {
       albumsQuery={GET_LIKED_ALBUMS}
       tracksSelector={tracksSelector}
       albumsSelector={albumsSelector}
+      {...props}
     />
   )
 }
 
-const GET_LIKED_MUSIC = gql`
-  query {
-    tracks: favouriteTrack(limit: 10, page: 1) {
-      items: data {
-        id
-        track {
-          id
-          title: trackName
-          group: musicGroup {
-            title: name
-          }
-          singer
-          fileUrl: filename
-          cover(sizes: [size_290x290]) {
-            imageUrl: url
-          }
-          length
-        }
-      }
-      hasMorePages: has_more_pages
-    }
-  }
-`
-const GET_LIKED_ALBUMS = gql`
-  query {
-    albums: favouriteAlbum(limit: 4, page: 1) {
-      items: data {
-        id
-        album {
-          id
-          title
-          author
-          cover(sizes: [size_290x290]) {
-            imageUrl: url
-          }
-          group: musicGroup {
-            title: name
-          }
-        }
-      }
-      hasMorePages: has_more_pages
-    }
-  }
-`
-
-export default LikedMusicContainer
+export default withNavigation(LikedMusicContainer)

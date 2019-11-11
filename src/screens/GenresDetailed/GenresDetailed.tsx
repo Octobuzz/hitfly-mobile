@@ -1,13 +1,6 @@
 import React, { useCallback } from 'react'
 import { FlatList } from 'react-native'
-import {
-  View,
-  Button,
-  Loader,
-  SafeView,
-  GenreItem,
-  RefreshControl,
-} from 'src/components'
+import { Loader, SafeView, GenreItem, RefreshControl } from 'src/components'
 import { Genre } from 'src/apollo'
 import { styles } from 'src/constants'
 import styled from 'src/styled-components'
@@ -34,23 +27,23 @@ const Col = styled.View`
 
 interface Props {
   genres: Genre[]
+  onPressGenre: (genre: Genre) => void
+  onRefresh: () => void
   isLoading: boolean
   isRefreshing: boolean
-  onPressChange: () => void
-  onRefresh: () => Promise<any>
 }
 
-const MyGenres: React.FC<Props> = ({
+const GenresDetailed: React.FC<Props> = ({
   genres,
   isLoading,
   onRefresh,
   isRefreshing,
-  onPressChange,
+  onPressGenre,
 }) => {
   const renderGenre = useCallback(
     ({ item }: { item: Genre }): JSX.Element => (
       <Col>
-        <GenreItem item={item} />
+        <GenreItem onPress={onPressGenre} item={item} />
       </Col>
     ),
     [],
@@ -58,7 +51,7 @@ const MyGenres: React.FC<Props> = ({
 
   return (
     <SafeView>
-      {isLoading && !isRefreshing ? (
+      {isLoading ? (
         <Loader isFilled />
       ) : (
         <Scroll
@@ -69,15 +62,8 @@ const MyGenres: React.FC<Props> = ({
           data={genres}
         />
       )}
-      <View noFill>
-        <Button
-          type="outline"
-          onPress={onPressChange}
-          title="Изменить любимые жанры"
-        />
-      </View>
     </SafeView>
   )
 }
 
-export default MyGenres
+export default GenresDetailed

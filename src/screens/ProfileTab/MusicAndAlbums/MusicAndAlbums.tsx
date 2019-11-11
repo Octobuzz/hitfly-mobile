@@ -1,44 +1,29 @@
 import L from 'lodash'
 import React from 'react'
-import { Dimensions } from 'react-native'
 import { Track, Album } from 'src/apollo'
 import {
-  H1,
-  TextBase,
   AlbumItem,
   TracksView,
   ScrollView,
+  SectionHeader,
   RefreshControl,
 } from 'src/components'
 import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/HOCs'
 import { helpers } from 'src/utils'
 import styled from 'src/styled-components'
 
-const HeaderWrapper = styled.View`
-  flex-direction: row;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  padding-horizontal: 16px;
-`
-
-const InfoText = styled(TextBase)`
-  color: ${({ theme }) => theme.colors.textGray};
-  font-size: 12px;
-`
-
 const AlbumsWrapper = styled.View`
-  padding-horizontal: 16px;
+  padding: 12px 16px;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
 `
 
-// минус паддинг по бокам и между колонками
-const COLUMN_WIDH = Dimensions.get('window').width - 48
+const Divider = styled.View`
+  height: 12px;
+`
 
 const Col = styled.View`
-  width: ${Math.trunc(COLUMN_WIDH / 2)}px;
   margin-bottom: 24px;
 `
 
@@ -50,6 +35,8 @@ interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   isRefreshing: boolean
   onRefresh: () => void
   onPressAlbum: (album: Album) => void
+  onPressAlbumsHeader: () => void
+  onPressTracksHeader: () => void
 }
 
 class LikedMusic extends React.Component<Props> {
@@ -58,8 +45,9 @@ class LikedMusic extends React.Component<Props> {
       tracks,
       toggleTrack,
       activeTrack,
-      showDetailedTrack,
       tracksTitle,
+      showDetailedTrack,
+      onPressTracksHeader,
     } = this.props
 
     if (!tracks.length) {
@@ -70,10 +58,11 @@ class LikedMusic extends React.Component<Props> {
 
     return (
       <>
-        <HeaderWrapper>
-          <H1>{tracksTitle}</H1>
-          <InfoText>{tracksInfo}</InfoText>
-        </HeaderWrapper>
+        <SectionHeader
+          title={tracksTitle}
+          onPress={onPressTracksHeader}
+          rightText={tracksInfo}
+        />
 
         <TracksView
           showDetailedTrack={showDetailedTrack}
@@ -106,7 +95,7 @@ class LikedMusic extends React.Component<Props> {
   }
 
   private renderAlbums = (): React.ReactNode => {
-    const { albums, albumTitle, onPressAlbum } = this.props
+    const { albums, albumTitle, onPressAlbum, onPressAlbumsHeader } = this.props
 
     if (!albums.length) {
       return null
@@ -114,9 +103,7 @@ class LikedMusic extends React.Component<Props> {
 
     return (
       <>
-        <HeaderWrapper>
-          <H1>{albumTitle}</H1>
-        </HeaderWrapper>
+        <SectionHeader title={albumTitle} onPress={onPressAlbumsHeader} />
 
         <AlbumsWrapper>
           {albums.map(album => (
@@ -139,6 +126,7 @@ class LikedMusic extends React.Component<Props> {
         noHorizontalPadding
       >
         {this.renderTracks()}
+        <Divider />
         {this.renderAlbums()}
       </ScrollView>
     )

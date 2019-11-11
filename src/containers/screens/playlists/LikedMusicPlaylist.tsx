@@ -2,17 +2,19 @@ import LFP from 'lodash/fp'
 import React from 'react'
 import NonCollectionPlaylist from './NonCollectionPlaylist'
 import { images } from 'src/constants'
-import { GET_NEW_TRACKS } from 'src/apollo'
+import { GET_LIKED_MUSIC } from 'src/apollo'
 
-const hasMorePagesSelector = LFP.get('playlist.hasMorePages')
-const itemsSelector = LFP.getOr([], 'playlist.items')
+const hasMorePagesSelector = LFP.get('tracks.hasMorePages')
+const itemsSelector = LFP.getOr([], 'tracks.items')
+const itemTransformer = LFP.get('track')
 
 const NewPlaylist: React.FC = props => (
   <NonCollectionPlaylist
     hasMorePagesSelector={hasMorePagesSelector}
     itemsSelector={itemsSelector}
-    query={GET_NEW_TRACKS}
-    cover={images.NEW_PLAYLIST}
+    itemTransformer={itemTransformer}
+    query={GET_LIKED_MUSIC}
+    cover={images.DEFAULT_ALBUM}
     {...props}
   />
 )

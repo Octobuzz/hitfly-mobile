@@ -68,13 +68,13 @@ class Settings extends React.Component<Props> {
   private logoutPanel = createRef<SlidingPanelInstance>()
 
   private showLogoutPanel = (): void => {
-    if (this.logoutPanel && this.logoutPanel.current) {
+    if (this.logoutPanel.current) {
       this.logoutPanel.current.show()
     }
   }
 
   private hideLogoutPanel = (): void => {
-    if (this.logoutPanel && this.logoutPanel.current) {
+    if (this.logoutPanel.current) {
       this.logoutPanel.current.hide()
     }
   }

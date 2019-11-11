@@ -1,9 +1,8 @@
 import L from 'lodash'
 import React from 'react'
 import { FlatList } from 'react-native'
-import { Loader, GenreItem } from 'src/components'
+import { Loader, GenreItem, SectionHeader } from 'src/components'
 import SectionWrapper from './SectionWrapper'
-import SectionHeader from './SectionHeader'
 import { Genre } from 'src/apollo'
 import styled from 'src/styled-components'
 
@@ -17,9 +16,10 @@ const Scroll = styled(FlatList as new () => FlatList<GenrePair>).attrs(() => ({
   horizontal: true,
   initialNumToRender: 5,
   showsHorizontalScrollIndicator: false,
-}))`
-  padding-horizontal: 12px;
-`
+  contentContainerStyle: {
+    paddingHorizontal: 12,
+  },
+}))``
 
 const Column = styled.View`
   flex: 1;
@@ -33,6 +33,7 @@ interface Props {
   isLoading?: boolean
   genres: Genre[]
   onPressItem: (item: Genre) => void
+  onPressHeader: () => void
 }
 
 class GenresSection extends React.Component<Props> {
@@ -68,7 +69,7 @@ class GenresSection extends React.Component<Props> {
     }
   }
   render() {
-    const { isLoading } = this.props
+    const { isLoading, onPressHeader } = this.props
 
     const pairedGenres = this.getPairedGenres()
     if (!isLoading && !pairedGenres.length) {
@@ -76,7 +77,7 @@ class GenresSection extends React.Component<Props> {
     }
     return (
       <SectionWrapper>
-        <SectionHeader title="Жанры" />
+        <SectionHeader onPress={onPressHeader} title="Жанры" />
         <ScrollWrapper>
           {isLoading ? (
             <Loader isAbsolute />

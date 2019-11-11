@@ -8,6 +8,8 @@ import {
   GenrePlaylistScreen,
   Top50PlaylistScreen,
   TopWeekPlaylistScreen,
+  MyMusicPlaylistScreen,
+  LikedMusicPlaylistScreen,
   CollectionPlaylistScreen,
   ListenedNowPlaylistScreen,
 } from 'src/containers'
@@ -21,8 +23,11 @@ import {
   AuthSettingsScreen,
   SocialAuthWebScreen,
   RemoveAccountScreen,
+  GenresDetailedScreen,
   ChangePasswordScreen,
+  MyAlbumsDetailedScreen,
   CollectionDetailsScreen,
+  LikedAlbumsDetailedScreen,
   SelectGenreForProfileScreen,
 } from 'src/screens'
 import { stackDefaultOptions, playlistConfig } from './configs'
@@ -91,6 +96,12 @@ const MainNavigator = createStackNavigator(
         }
       },
     },
+    [routeNames.MAIN.GENRES_DETAILED]: {
+      screen: GenresDetailedScreen,
+      navigationOptions: {
+        title: 'Жанры',
+      },
+    },
     // Экраны профиля
     [routeNames.MAIN.PROFILE]: {
       screen: ProfileTabScreen,
@@ -138,6 +149,22 @@ const MainNavigator = createStackNavigator(
       navigationOptions: { title: 'Создание пароля' },
     },
     [routeNames.MAIN.SOCIAL_AUTH]: SocialAuthWebScreen,
+    [routeNames.MAIN.MY_ALBUMS_DETAILED]: {
+      screen: MyAlbumsDetailedScreen,
+      navigationOptions: { title: 'Мои альбомы' },
+    },
+    [routeNames.MAIN.LIKED_ALBUMS_DETAILED]: {
+      screen: LikedAlbumsDetailedScreen,
+      navigationOptions: { title: 'Любимые альбомы' },
+    },
+    [routeNames.MAIN.MY_MUSIC_PLAYLIST]: {
+      screen: MyMusicPlaylistScreen,
+      navigationOptions: { title: 'Мои песни' },
+    },
+    [routeNames.MAIN.LIKED_MUSIC_PLAYLIST]: {
+      screen: LikedMusicPlaylistScreen,
+      navigationOptions: { title: 'Любимые песни' },
+    },
   },
   {
     initialRouteName: routeNames.MAIN.HOME,

@@ -24,6 +24,7 @@ export default {
     NEW_PLAYLIST: `${APP.MAIN}/new_playlist`,
     TOP_WEEK_PLAYLIST: `${APP.MAIN}/top_week_playlist`,
     GENRE_PLAYLIST: `${APP.MAIN}/genre_playlist`,
+    GENRES_DETAILED: `${APP.MAIN}/genres_detailed`,
     ALBUM_PLAYLIST: `${APP.MAIN}/album_playlist`,
 
     PROFILE: `${APP.MAIN}/profile`,
@@ -34,5 +35,9 @@ export default {
     AUTH_SETTINGS: `${APP.MAIN}/auth_settings`,
     CHANGE_PASSWORD: `${APP.MAIN}/change_password`,
     SOCIAL_AUTH: `${APP.MAIN}/social_auth`,
+    MY_ALBUMS_DETAILED: `${APP.MAIN}/my_albums_detailed`,
+    MY_MUSIC_PLAYLIST: `${APP.MAIN}/my_music_playlist`,
+    LIKED_ALBUMS_DETAILED: `${APP.MAIN}/liked_albums_detailed`,
+    LIKED_MUSIC_PLAYLIST: `${APP.MAIN}/liked_music_playlist`,
   },
 }

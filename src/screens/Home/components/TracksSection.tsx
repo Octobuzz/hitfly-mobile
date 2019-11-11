@@ -1,9 +1,14 @@
 import React from 'react'
 import { FlatList } from 'react-native'
 import { Track, Playlist } from 'src/apollo'
-import { Loader, TextBase, Image, ListFooterLoader } from 'src/components'
+import {
+  Image,
+  Loader,
+  TextBase,
+  SectionHeader,
+  ListFooterLoader,
+} from 'src/components'
 import SectionWrapper from './SectionWrapper'
-import SectionHeader from './SectionHeader'
 import styled from 'src/styled-components'
 
 const ITEM_WIDTH = 164
@@ -69,9 +74,10 @@ const Scroll = styled(FlatList as new () => FlatList<Track>).attrs(() => ({
   horizontal: true,
   initialNumToRender: 3,
   showsHorizontalScrollIndicator: false,
-}))`
-  padding-horizontal: 12px;
-`
+  contentContainerStyle: {
+    paddingHorizontal: 12,
+  },
+}))``
 
 interface Props {
   title: string

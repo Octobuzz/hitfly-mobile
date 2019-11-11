@@ -34,9 +34,9 @@ type BottomTextType = 'tracksCount' | 'tracksLength'
 interface Props {
   title: string
   subtitle?: string
-  playlist: Playlist
+  playlist?: Playlist
   isLoading?: boolean
-  tracksCount: number
+  tracksCount?: number
   bottomTextType?: BottomTextType
   imageSource: ImageSourcePropType
   onPress: () => void
@@ -45,12 +45,12 @@ interface Props {
 const PlaylistSection: React.FC<Props> = ({
   title,
   onPress,
-  playlist,
   subtitle,
   isLoading,
-  tracksCount,
   imageSource,
   bottomTextType,
+  playlist = [],
+  tracksCount = 0,
 }) => {
   if (!isLoading) {
     // разделил для читаемости

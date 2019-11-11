@@ -3,10 +3,16 @@ import { FlatList, ListRenderItem } from 'react-native'
 import { Track } from 'src/apollo'
 import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/HOCs'
 import PlaylistTrack from './PlaylistTrack'
+import RefreshControl from './RefreshControl'
+import { ListFooterLoader } from './Loader'
 import styled from 'src/styled-components'
 
 interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   tracks: Track[]
+  onRefresh: () => void
+  onEndReached: () => void
+  isRefreshing: boolean
+  isFetchingMore: boolean
 }
 
 const Scroll = styled(FlatList as new () => FlatList<Track>).attrs(() => ({
@@ -14,8 +20,6 @@ const Scroll = styled(FlatList as new () => FlatList<Track>).attrs(() => ({
 }))``
 
 class TracksList extends React.Component<Props> {
-  private keyExtractor = (item: Track): string => item.id.toString()
-
   private renderTrack: ListRenderItem<Track> = ({ item, index }) => {
     const { toggleTrack, showDetailedTrack } = this.props
     const isPlaying = this.isTrackPlaying(item)
@@ -51,12 +55,23 @@ class TracksList extends React.Component<Props> {
   }
 
   render() {
-    const { tracks } = this.props
+    const {
+      tracks,
+      isFetchingMore,
+      isRefreshing,
+      onEndReached,
+      onRefresh,
+    } = this.props
     return (
       <Scroll
         data={tracks}
+        onEndReached={onEndReached}
+        onEndReachedThreshold={0.9}
+        ListFooterComponent={<ListFooterLoader isShown={isFetchingMore} />}
+        refreshControl={
+          <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+        }
         getItemLayout={this.getItemLayout}
-        keyExtractor={this.keyExtractor}
         renderItem={this.renderTrack}
       />
     )
