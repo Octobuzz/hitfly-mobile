@@ -1,5 +1,9 @@
+import L from 'lodash'
 import React from 'react'
-import TrackPlayer, { Track as RNTrack } from 'react-native-track-player'
+import TrackPlayer, {
+  Track as RNTrack,
+  EmitterSubscription,
+} from 'react-native-track-player'
 import { Track } from 'src/apollo'
 
 interface ToggleTrackOptions {
@@ -9,45 +13,62 @@ interface ToggleTrackOptions {
 
 export interface ToggleTrackProps {
   toggleTrack: (options?: ToggleTrackOptions) => void
-  activeTrackId: string | null
+  activeTrackId: string | undefined
 }
 
 interface State {
-  activeTrackId: string | null
+  activeTrackId: string | undefined
 }
 
 const withTrackToggle = (
   WrappedComponent: React.ComponentType<ToggleTrackProps>,
 ) =>
   class TrackToggle extends React.Component<any, State> {
-    state: State = {
-      activeTrackId: null,
+    trackChangedSubscription: EmitterSubscription
+
+    constructor(props: any) {
+      super(props)
+
+      this.state = {
+        activeTrackId: undefined,
+      }
+
+      this.trackChangedSubscription = TrackPlayer.addEventListener(
+        'playback-track-changed',
+        this.setActiveTrack,
+      )
     }
 
     componentDidMount() {
-      this.initActiveTrack()
+      this.setActiveTrack()
     }
 
-    private initActiveTrack = async (): Promise<void> => {
+    componentWillUnmount() {
+      this.trackChangedSubscription.remove()
+    }
+
+    private setActiveTrack = async (): Promise<void> => {
+      const { activeTrackId } = this.state
       const id = await TrackPlayer.getCurrentTrack()
-      const activeTrackId = id || null
-      this.setState({ activeTrackId })
+      if (id !== activeTrackId) {
+        this.setState({ activeTrackId })
+      }
     }
 
     private toggleTrack = (options?: ToggleTrackOptions): void => {
       const { activeTrackId } = this.state
       if (!options) {
         this.pauseTrack()
-        this.setState({ activeTrackId: null })
+        this.setState({ activeTrackId: undefined })
         return
       }
-      let newTrackId: string | null = options.track.id.toString()
+      let newTrackId: string | undefined = options.track.id.toString()
       if (activeTrackId) {
         if (activeTrackId !== newTrackId) {
           this.playTrack(options)
         } else {
           this.pauseTrack()
-          newTrackId = null
+          newTrackId = undefined
         }
       } else {
         this.playTrack(options)
@@ -57,14 +78,25 @@ const withTrackToggle = (
 
     private playTrack = async ({
       track,
+      playlist,
     }: ToggleTrackOptions): Promise<void> => {
-      await TrackPlayer.stop()
-      await TrackPlayer.add(this.createTrack(track))
+      // TODO: добавить проверку на PAUSED state
+      const queue = await TrackPlayer.getQueue()
+      const isEqualPlaylists = L.isEqualWith(
+        queue,
+        playlist,
+        (obj, oth) => +obj.id === oth.id,
+      )
+      if (!isEqualPlaylists) {
+        TrackPlayer.reset()
+        await TrackPlayer.add(this.createPlaylist(playlist))
+      }
+      await TrackPlayer.skip(track.id.toString())
       await TrackPlayer.play()
     }
 
     private pauseTrack = async (): Promise<void> => {
-      await TrackPlayer.stop()
+      await TrackPlayer.pause()
     }
 
     private createTrack = ({
