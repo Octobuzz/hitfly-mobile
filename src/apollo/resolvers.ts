@@ -2,7 +2,7 @@ import L from 'lodash'
 import { InMemoryCache, IdGetter } from 'apollo-cache-inmemory'
 import ApolloClient, { Resolvers } from 'apollo-client'
 import gql from 'graphql-tag'
-import { Genre } from './schemas'
+import { Genre, Track } from './schemas'
 import { HeaderSettings, CollectionsType } from './commonTypes'
 import { helpers } from 'src/utils'
 
@@ -98,6 +98,34 @@ export default {
       }
       cache.writeData({ data: { headerSettings: newSettings } })
       return null
+    },
+    setActiveTrack: (
+      _,
+      { track }: { track: Track },
+      { cache }: ContextArgs,
+    ) => {
+      const data = {
+        activeTrack: track,
+        isPlaying: true,
+      }
+      cache.writeData({ data })
+      return null
+    },
+    setIsPlaying: (
+      _,
+      { isPlaying }: { isPlaying: boolean },
+      { cache }: ContextArgs,
+    ) => {
+      cache.writeData({ data: { isPlaying } })
+      return null
+    },
+    setActivePlaylist: (
+      _,
+      { playlist }: { playlist: Track[] },
+      { cache }: ContextArgs,
+    ) => {
+      cache.writeData({ data: { playlist } })
+      return playlist
     },
   },
   Query: {

@@ -54,11 +54,11 @@ class TracksFeedback extends React.Component<Props> {
   }
 
   private isTrackPlaying = (track: Track): boolean => {
-    const { activeTrackId } = this.props
-    if (!activeTrackId) {
+    const { activeTrack } = this.props
+    if (!activeTrack) {
       return false
     }
-    return +activeTrackId === track.id
+    return activeTrack.id === track.id
   }
 
   render() {

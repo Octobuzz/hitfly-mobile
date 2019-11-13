@@ -11,7 +11,7 @@ import AboutMeScreen from './AboutMe'
 import TracksFeedbackScreen from './TracksFeedback'
 import { MyMusicScreen, LikedMusicScreen } from './MusicAndAlbums'
 import { Profile } from 'src/apollo'
-import { TextBase, SafeView } from 'src/components'
+import { TextBase } from 'src/components'
 import { DetailedTrackMenuProps } from 'src/HOCs'
 import styled from 'src/styled-components'
 
@@ -85,24 +85,18 @@ class ProfileTab extends React.Component<Props, State> {
     route,
   }: SceneRendererProps & { route: TabState }): React.ReactNode => {
     const { showDetailedTrack } = this.props
-    let Screen = null
     switch (route.key) {
       case 'about':
-        Screen = <AboutMeScreen />
-        break
+        return <AboutMeScreen />
       case 'myMusic':
-        Screen = <MyMusicScreen showDetailedTrack={showDetailedTrack} />
-        break
+        return <MyMusicScreen showDetailedTrack={showDetailedTrack} />
       case 'likedMusic':
-        Screen = <LikedMusicScreen showDetailedTrack={showDetailedTrack} />
-        break
+        return <LikedMusicScreen showDetailedTrack={showDetailedTrack} />
       case 'feedback':
-        Screen = <TracksFeedbackScreen showDetailedTrack={showDetailedTrack} />
-        break
+        return <TracksFeedbackScreen showDetailedTrack={showDetailedTrack} />
       default:
         return null
     }
-    return <SafeView>{Screen}</SafeView>
   }
 
   render() {

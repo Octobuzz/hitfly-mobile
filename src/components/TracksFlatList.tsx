@@ -40,11 +40,11 @@ class TracksList extends React.Component<Props> {
   }
 
   private isTrackPlaying = (track: Track): boolean => {
-    const { activeTrackId } = this.props
-    if (!activeTrackId) {
+    const { activeTrack, isPlaying } = this.props
+    if (!activeTrack || !isPlaying) {
       return false
     }
-    return +activeTrackId === track.id
+    return activeTrack.id === track.id
   }
 
   private getItemLayout = (

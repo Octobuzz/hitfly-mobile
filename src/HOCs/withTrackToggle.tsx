@@ -1,10 +1,20 @@
 import L from 'lodash'
-import React from 'react'
-import TrackPlayer, {
-  Track as RNTrack,
-  EmitterSubscription,
-} from 'react-native-track-player'
-import { Track } from 'src/apollo'
+import React, { useCallback } from 'react'
+import TrackPlayer, { Track as RNTrack } from 'react-native-track-player'
+// @ts-ignore больные ублюдки
+import { usePlaybackState } from 'react-native-track-player/lib/hooks'
+import { useMutation, useQuery } from '@apollo/react-hooks'
+import {
+  Track,
+  GET_ACTIVE_TRACK,
+  ActiveTrackData,
+  SET_ACTIVE_TRACK,
+  SetActiveTrackVariables,
+  SET_ACTIVE_PLAYLIST,
+  SetActivePlaylistVariables,
+  SET_IS_PLAYING,
+  SetIsPlayingVariables,
+} from 'src/apollo'
 
 interface ToggleTrackOptions {
   track: Track
@@ -12,122 +22,105 @@ interface ToggleTrackOptions {
 }
 
 export interface ToggleTrackProps {
+  isPlaying: boolean
   toggleTrack: (options?: ToggleTrackOptions) => void
-  activeTrackId: string | undefined
-}
-
-interface State {
-  activeTrackId: string | undefined
+  activeTrack?: Track
 }
 
 const withTrackToggle = (
   WrappedComponent: React.ComponentType<ToggleTrackProps>,
-) =>
-  class TrackToggle extends React.Component<any, State> {
-    trackChangedSubscription: EmitterSubscription
+) => {
+  const TrackToggle: React.FC<any> = props => {
+    const [setActiveTrack] = useMutation<any, SetActiveTrackVariables>(
+      SET_ACTIVE_TRACK,
+    )
+    const [setActivePlaylist] = useMutation<any, SetActivePlaylistVariables>(
+      SET_ACTIVE_PLAYLIST,
+    )
+    const [setIsPlaying] = useMutation<any, SetIsPlayingVariables>(
+      SET_IS_PLAYING,
+    )
 
-    constructor(props: any) {
-      super(props)
+    const { data } = useQuery<ActiveTrackData>(GET_ACTIVE_TRACK)
+    const activeTrack = L.get(data, 'activeTrack')
+    const isPlaying = L.get(data, 'isPlaying')
 
-      this.state = {
-        activeTrackId: undefined,
-      }
-
-      this.trackChangedSubscription = TrackPlayer.addEventListener(
-        'playback-track-changed',
-        this.setActiveTrack,
-      )
-    }
-
-    componentDidMount() {
-      this.setActiveTrack()
-    }
-
-    componentWillUnmount() {
-      this.trackChangedSubscription.remove()
-    }
-
-    private setActiveTrack = async (): Promise<void> => {
-      const { activeTrackId } = this.state
-      const id = await TrackPlayer.getCurrentTrack()
-      if (id !== activeTrackId) {
-        this.setState({ activeTrackId })
-      }
-    }
-
-    private toggleTrack = (options?: ToggleTrackOptions): void => {
-      const { activeTrackId } = this.state
-      if (!options) {
-        this.pauseTrack()
-        this.setState({ activeTrackId: undefined })
-        return
-      }
-      let newTrackId: string | undefined = options.track.id.toString()
-      if (activeTrackId) {
-        if (activeTrackId !== newTrackId) {
-          this.playTrack(options)
-        } else {
-          this.pauseTrack()
-          newTrackId = undefined
+    const toggleTrack = useCallback(
+      (options?: ToggleTrackOptions): void => {
+        // когда нет опций - на паузу
+        if (!options) {
+          pauseTrack()
+          return
         }
-      } else {
-        this.playTrack(options)
-      }
-      this.setState({ activeTrackId: newTrackId })
-    }
+        if (!activeTrack) {
+          playTrack(options)
+          return
+        }
+        // когда новый трек не равен текущему - играем новый трек
+        if (activeTrack.id !== options.track.id) {
+          playTrack(options)
+          return
+        }
+        // когда новый трек равен текущему - пауза или продолжить играть
+        else {
+          if (isPlaying) {
+            pauseTrack()
+          } else {
+            continueTrack()
+          }
+        }
+      },
+      [activeTrack, isPlaying],
+    )
 
-    private playTrack = async ({
-      track,
-      playlist,
-    }: ToggleTrackOptions): Promise<void> => {
-      // TODO: добавить проверку на PAUSED state
-      const queue = await TrackPlayer.getQueue()
-      const isEqualPlaylists = L.isEqualWith(
-        queue,
-        playlist,
-        (obj, oth) => +obj.id === oth.id,
-      )
-      if (!isEqualPlaylists) {
-        TrackPlayer.reset()
-        await TrackPlayer.add(this.createPlaylist(playlist))
-      }
-      await TrackPlayer.skip(track.id.toString())
-      await TrackPlayer.play()
-    }
+    const continueTrack = useCallback(async () => {
+      setIsPlaying({ variables: { isPlaying: true } })
+      TrackPlayer.play()
+    }, [])
 
-    private pauseTrack = async (): Promise<void> => {
-      await TrackPlayer.pause()
-    }
+    const playTrack = useCallback(
+      async ({ track, playlist }: ToggleTrackOptions): Promise<void> => {
+        setActiveTrack({
+          variables: { track },
+        })
+        setActivePlaylist({ variables: { playlist } })
+        const newPlaylist = playlist.map(createTrack)
+        await TrackPlayer.reset()
+        await TrackPlayer.add(newPlaylist)
+        await TrackPlayer.skip(track.id.toString())
+        TrackPlayer.play()
+      },
+      [],
+    )
 
-    private createTrack = ({
-      id,
-      fileUrl,
-      title,
-      group,
-      singer,
-    }: Track): RNTrack => {
-      return {
-        id: id.toString(),
-        url: fileUrl,
-        title,
-        artist: group ? group.title : singer,
-      }
-    }
+    const createTrack = useCallback(
+      ({ id, fileUrl, title, group, singer }: Track): RNTrack => {
+        return {
+          id: id.toString(),
+          url: fileUrl,
+          title,
+          artist: group ? group.title : singer,
+        }
+      },
+      [],
+    )
 
-    private createPlaylist = (playlist: Track[]): RNTrack[] => {
-      return playlist.map(this.createTrack)
-    }
+    const pauseTrack = useCallback((): void => {
+      setIsPlaying({ variables: { isPlaying: false } })
+      TrackPlayer.pause()
+    }, [])
 
-    render() {
-      const { activeTrackId } = this.state
-      return (
-        <WrappedComponent
-          toggleTrack={this.toggleTrack}
-          activeTrackId={activeTrackId}
-          {...this.props}
-        />
-      )
-    }
+    return (
+      <WrappedComponent
+        isPlaying={isPlaying}
+        toggleTrack={toggleTrack}
+        activeTrack={activeTrack}
+        {...props}
+      />
+    )
   }
+
+  return TrackToggle
+}
 
 export default withTrackToggle

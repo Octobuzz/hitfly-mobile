@@ -55,11 +55,11 @@ class Playlist extends React.Component<Props, State> {
   // играемый трек может меняться, поэтому надо каждый раз проверять
   // что бы правильно отображать паузу на текущем экране
   static getDerivedStateFromProps = ({
-    activeTrackId,
+    activeTrack,
     tracks,
   }: Props): Partial<State> | null => {
-    if (activeTrackId) {
-      const playingTrack = tracks.find(({ id }) => +activeTrackId === id)
+    if (activeTrack) {
+      const playingTrack = tracks.find(({ id }) => activeTrack.id === id)
       return {
         playingTrack,
       }
@@ -84,7 +84,7 @@ class Playlist extends React.Component<Props, State> {
     const { tracks, toggleTrack } = this.props
     const { playingTrack } = this.state
     if (playingTrack) {
-      toggleTrack()
+      toggleTrack({ track: playingTrack, playlist: tracks })
     } else {
       toggleTrack({ track: tracks[0], playlist: tracks })
     }
@@ -95,13 +95,13 @@ class Playlist extends React.Component<Props, State> {
     const { playingTrack } = this.state
     const activeCover = this.getCover()
     return (
-      <View noPadding addBottomSafePadding>
+      <View noPadding>
         <CoverWrapper>
           <Cover source={activeCover} />
           {!!tracks.length && (
             <PositionedControlButton
               onPress={this.pauseOrPlayFirstTrack}
-              isPlaying={!!playingTrack}
+              isPlaying={!!playingTrack && rest.isPlaying}
             />
           )}
           <PositionedShuffleButton />

@@ -15,7 +15,7 @@ describe('TrackFlatList', () => {
   const props = {
     toggleTrack: jest.fn(),
     showDetailedTrack: jest.fn(),
-    activeTrackId: null,
+    activeTrack: null,
     tracks: [items],
   }
 
