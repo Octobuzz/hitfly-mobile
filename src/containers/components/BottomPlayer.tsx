@@ -9,10 +9,13 @@ interface Props extends ToggleTrackProps {}
 const BottomPlayerContainer: React.FC<Props> = ({
   activeTrack,
   toggleTrack,
+  isPlaying,
 }) => {
-  const { duration, progress } = useTrackPlayerProgress()
+  const { duration, position } = useTrackPlayerProgress()
 
-  const handleToggleTrack = useCallback(() => {}, [])
+  const handlePressControl = useCallback(() => {
+    toggleTrack()
+  }, [toggleTrack])
 
   const onPressMore = useCallback(() => {
     // TODO: навигация в модалку плеера
@@ -20,9 +23,10 @@ const BottomPlayerContainer: React.FC<Props> = ({
 
   return (
     <BottomPlayer
-      toggleTrack={handleToggleTrack}
+      isPlaying={isPlaying}
+      onPressControl={handlePressControl}
       onPressMore={onPressMore}
-      progress={progress}
+      progress={position}
       duration={duration}
       track={activeTrack}
     />

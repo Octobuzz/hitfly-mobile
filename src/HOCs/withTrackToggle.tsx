@@ -49,7 +49,11 @@ const withTrackToggle = (
       (options?: ToggleTrackOptions): void => {
         // когда нет опций - на паузу
         if (!options) {
-          pauseTrack()
+          if (isPlaying) {
+            pauseTrack()
+          } else {
+            continueTrack()
+          }
           return
         }
         if (!activeTrack) {
