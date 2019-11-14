@@ -99,13 +99,9 @@ export default {
       cache.writeData({ data: { headerSettings: newSettings } })
       return null
     },
-    setActiveTrack: (
-      _,
-      { track }: { track: Track },
-      { cache }: ContextArgs,
-    ) => {
+    setActiveTrackId: (_, { id }: { id: number }, { cache }: ContextArgs) => {
       const data = {
-        activeTrack: track,
+        activeTrackId: id,
         isPlaying: true,
       }
       cache.writeData({ data })

@@ -8,8 +8,8 @@ import {
   Track,
   GET_ACTIVE_TRACK,
   ActiveTrackData,
-  SET_ACTIVE_TRACK,
-  SetActiveTrackVariables,
+  SET_ACTIVE_TRACK_ID,
+  SetActiveTrackIdVariables,
   SET_ACTIVE_PLAYLIST,
   SetActivePlaylistVariables,
   SET_IS_PLAYING,
@@ -31,8 +31,8 @@ const withTrackToggle = (
   WrappedComponent: React.ComponentType<ToggleTrackProps>,
 ) => {
   const TrackToggle: React.FC<any> = props => {
-    const [setActiveTrack] = useMutation<any, SetActiveTrackVariables>(
-      SET_ACTIVE_TRACK,
+    const [setActiveTrackId] = useMutation<any, SetActiveTrackIdVariables>(
+      SET_ACTIVE_TRACK_ID,
     )
     const [setActivePlaylist] = useMutation<any, SetActivePlaylistVariables>(
       SET_ACTIVE_PLAYLIST,
@@ -41,9 +41,10 @@ const withTrackToggle = (
       SET_IS_PLAYING,
     )
 
-    const { data } = useQuery<ActiveTrackData>(GET_ACTIVE_TRACK)
-    const activeTrack = L.get(data, 'activeTrack')
-    const isPlaying = L.get(data, 'isPlaying')
+    const activeTrackData = useQuery<ActiveTrackData>(GET_ACTIVE_TRACK)
+
+    const activeTrack = L.get(activeTrackData, 'data.activeTrack')
+    const isPlaying = L.get(activeTrackData, 'data.isPlaying')
 
     const toggleTrack = useCallback(
       (options?: ToggleTrackOptions): void => {
@@ -84,8 +85,8 @@ const withTrackToggle = (
 
     const playTrack = useCallback(
       async ({ track, playlist }: ToggleTrackOptions): Promise<void> => {
-        setActiveTrack({
-          variables: { track },
+        setActiveTrackId({
+          variables: { id: track.id },
         })
         setActivePlaylist({ variables: { playlist } })
         const newPlaylist = playlist.map(createTrack)

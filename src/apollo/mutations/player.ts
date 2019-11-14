@@ -1,16 +1,13 @@
 import gql from 'graphql-tag'
 import { Track } from '../schemas'
 
-export interface SetActiveTrackData {
-  setActiveTrack: Track
-}
-export interface SetActiveTrackVariables {
-  track: Track
+export interface SetActiveTrackIdVariables {
+  id: number
 }
 
-export const SET_ACTIVE_TRACK = gql`
-  mutation SetActiveTrack($track: Track!) {
-    setActiveTrack(track: $track) @client
+export const SET_ACTIVE_TRACK_ID = gql`
+  mutation SetActiveTrackId($id: Int!) {
+    setActiveTrackId(id: $id) @client
   }
 `
 

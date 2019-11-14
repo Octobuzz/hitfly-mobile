@@ -7,19 +7,20 @@ export interface ActiveTrackData {
 
 export const GET_ACTIVE_TRACK = gql`
   query {
-    isPlaying
-    activeTrack {
+    isPlaying @client
+    activeTrack @client {
       id
-      title
+      title: trackName
       cover(sizes: [size_290x290]) {
-        imageUrl
+        imageUrl: url
       }
-      group {
-        title
+      group: musicGroup {
+        title: name
       }
-      fileUrl
+      fileUrl: filename
       singer
       length
+      favouritesCount
     }
   }
 `
@@ -30,18 +31,19 @@ export interface ActivePlaylistData {
 
 export const GET_ACTIVE_PLAYLIST = gql`
   query {
-    playlist {
+    playlist @client {
       id
-      title
+      title: trackName
       cover(sizes: [size_290x290]) {
-        imageUrl
+        imageUrl: url
       }
-      group {
-        title
+      group: musicGroup {
+        title: name
       }
-      fileUrl
+      fileUrl: filename
       singer
       length
+      favouritesCount
     }
   }
 `

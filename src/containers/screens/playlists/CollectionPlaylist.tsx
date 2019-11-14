@@ -49,7 +49,7 @@ const CollectionPlaylist: React.FC<Props> = props => {
     notifyOnNetworkStatusChange: true,
   })
 
-  const { data, loading, refetch: refetchCollection } = useQuery(
+  const { data, refetch: refetchCollection } = useQuery(
     GET_CURRENT_COLLECTION,
     {
       fetchPolicy: 'cache-and-network',
@@ -64,7 +64,7 @@ const CollectionPlaylist: React.FC<Props> = props => {
     refetchCollection()
   }, [])
 
-  if (networkStatus === 1 || loading) {
+  if (networkStatus === 1) {
     return <Loader isAbsolute />
   }
 
