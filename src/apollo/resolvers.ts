@@ -2,7 +2,7 @@ import L from 'lodash'
 import { InMemoryCache, IdGetter } from 'apollo-cache-inmemory'
 import ApolloClient, { Resolvers } from 'apollo-client'
 import gql from 'graphql-tag'
-import { Genre, Track } from './schemas'
+import { Track } from './schemas'
 import { HeaderSettings, CollectionsType } from './commonTypes'
 import { helpers } from 'src/utils'
 
@@ -11,15 +11,6 @@ interface ContextArgs {
   cache: InMemoryCache
   getCacheKey: IdGetter
 }
-
-const GET_GENRES = gql`
-  query {
-    genres: genre {
-      id
-      imageUrl: image
-    }
-  }
-`
 
 const GET_RECOMMENDED = gql`
   query Collections($limit: Int = 10, $page: Int = 1) {
@@ -125,16 +116,6 @@ export default {
     },
   },
   Query: {
-    genreById: (_, { genreId }, { cache }: ContextArgs) => {
-      const resultGenres = cache.readQuery<{ genres?: Genre[] }>({
-        query: GET_GENRES,
-      })
-      const genres = L.get(resultGenres, 'genres')
-      if (genreId && genres) {
-        return genres.find(({ id }) => id === genreId)
-      }
-      return null
-    },
     collectionsByType: (
       _,
       { type, ...variables }: { type: CollectionsType },

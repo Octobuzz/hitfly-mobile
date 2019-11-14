@@ -33,6 +33,8 @@ export default async (): Promise<InMemoryCache> => {
       Query: {
         activeTrack: ({ activeTrackId }, _, { getCacheKey }) =>
           getCacheKey({ __typename: 'Track', id: activeTrackId }),
+        selectedGenre: ({ currentGenreId }, _, { getCacheKey }) =>
+          getCacheKey({ __typename: 'Genre', id: currentGenreId }),
       },
     },
   })

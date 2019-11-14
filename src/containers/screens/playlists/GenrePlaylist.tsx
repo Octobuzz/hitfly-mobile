@@ -6,9 +6,8 @@ import { GET_GENRE_TRACKS } from 'src/apollo'
 import gql from 'graphql-tag'
 
 const GET_SELECTED_GENRE = gql`
-  query getSelectedGenre($genreId: Int!) {
-    currentGenreId @client @export(as: "genreId")
-    genre: genreById(genreId: $genreId) @client {
+  query {
+    genre: selectedGenre @client {
       imageUrl: image
     }
   }
