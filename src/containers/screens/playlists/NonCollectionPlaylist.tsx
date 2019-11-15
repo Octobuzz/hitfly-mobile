@@ -19,6 +19,7 @@ const LIMIT = 500
 
 interface Props {
   query: DocumentNode
+  playlistKey: string
   cover: any // FIXME: вытащить проп из PlaylistScreen
   itemTransformer?: (data: any) => any
   itemsSelector: (data: any) => any[]
@@ -30,6 +31,7 @@ interface HOCsProps extends Props, DetailedTrackMenuProps, ToggleTrackProps {}
 const NonCollectionPlaylist: React.FC<HOCsProps> = ({
   query,
   cover,
+  playlistKey,
   itemsSelector,
   itemTransformer,
   hasMorePagesSelector,
@@ -65,6 +67,8 @@ const NonCollectionPlaylist: React.FC<HOCsProps> = ({
     return <Loader isAbsolute />
   }
 
+  const paginatedPlaylistKey = `${playlistKey}:${items.length}`
+
   return (
     <PlaylistScreen
       onEndReached={onEndReached}
@@ -73,6 +77,7 @@ const NonCollectionPlaylist: React.FC<HOCsProps> = ({
       onRefresh={refetch}
       cover={cover}
       tracks={tracks}
+      playlistKey={paginatedPlaylistKey}
       favouritesCount={favouritesCount}
       {...rest}
     />

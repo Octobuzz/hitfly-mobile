@@ -1,3 +1,4 @@
+export { default as Player } from './Player'
 export { default as SocialAuth } from './SocialAuth'
 export { default as BottomPlayer } from './BottomPlayer'
 export { default as ProfileSocialAuth } from './ProfileSocialAuth'

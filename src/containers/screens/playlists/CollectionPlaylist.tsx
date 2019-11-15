@@ -9,11 +9,12 @@ import {
   ToggleTrackProps,
   DetailedTrackMenuProps,
 } from 'src/HOCs'
+import { useQuery } from '@apollo/react-hooks'
 import PlaylistScreen from 'src/screens/Playlist/Playlist'
 import { Loader } from 'src/components'
 import { useQueryWithPagination } from 'src/Hooks'
-import { GET_COLLECTION_TRACKS } from 'src/apollo'
-import { useQuery } from '@apollo/react-hooks'
+import { GET_COLLECTION_TRACKS, Collection } from 'src/apollo'
+import { names } from 'src/constants'
 
 const GET_CURRENT_COLLECTION = gql`
   query getCurrentCollection($collectionId: Int!) {
@@ -49,13 +50,13 @@ const CollectionPlaylist: React.FC<Props> = props => {
     notifyOnNetworkStatusChange: true,
   })
 
-  const { data, refetch: refetchCollection } = useQuery(
-    GET_CURRENT_COLLECTION,
-    {
-      fetchPolicy: 'cache-and-network',
-    },
-  )
+  const { data, refetch: refetchCollection } = useQuery<{
+    collection: Collection
+  }>(GET_CURRENT_COLLECTION, {
+    fetchPolicy: 'cache-and-network',
+  })
 
+  const id = L.get(data, 'collection.id')
   const uri = L.get(data, 'collection.image[0].imageUrl')
   const favouritesCount = L.get(data, 'collection.favouritesCount', 0)
 
@@ -77,6 +78,7 @@ const CollectionPlaylist: React.FC<Props> = props => {
       cover={{ uri }}
       tracks={items}
       favouritesCount={favouritesCount}
+      playlistKey={`${names.PLAYLIST_KEYS.COLLECTION}:${id}:${items.length}`}
       {...props}
     />
   )

@@ -1,6 +1,7 @@
 import React from 'react'
 import { createStackNavigator } from 'react-navigation-stack'
 import {
+  Player,
   BottomPlayer,
   HeaderRightButtons,
   // screens
@@ -189,6 +190,7 @@ const Main: React.FC<any> = props => (
     <MainNavigator {...props} />
     <BottomPlayer />
     <DetailedTrackPanel ref={DetailedPanel.setPanel} />
+    <Player />
   </Wrapper>
 )
 

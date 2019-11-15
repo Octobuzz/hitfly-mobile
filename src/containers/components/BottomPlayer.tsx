@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react'
+import TrackPlayer from 'react-native-track-player'
 // @ts-ignore больные ублюдки
 import { useTrackPlayerProgress } from 'react-native-track-player/lib/hooks'
 import { BottomPlayer } from 'src/components'
@@ -20,9 +21,13 @@ const BottomPlayerContainer: React.FC<Props> = ({
   const onPressMore = useCallback(() => {
     // TODO: навигация в модалку плеера
   }, [])
+  const onSlideEnd = useCallback(progress => {
+    TrackPlayer.seekTo(progress)
+  }, [])
 
   return (
     <BottomPlayer
+      onSlideEnd={onSlideEnd}
       isPlaying={isPlaying}
       onPressControl={handlePressControl}
       onPressMore={onPressMore}

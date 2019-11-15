@@ -12,12 +12,13 @@ export const SET_ACTIVE_TRACK_ID = gql`
 `
 
 export interface SetActivePlaylistVariables {
+  playlistKey: string
   playlist: Track[]
 }
 
 export const SET_ACTIVE_PLAYLIST = gql`
-  mutation SetActivePlaylist($playlist: [Track]!) {
-    setActivePlaylist(playlist: $playlist) @client
+  mutation SetActivePlaylist($playlist: [Track]!, $playlistKey: String!) {
+    setActivePlaylist(playlist: $playlist, playlistKey: $playlistKey) @client
   }
 `
 

@@ -19,7 +19,7 @@ interface PaginationVariables {
 
 interface Result<TData, TVariables> extends QueryResult<TData, TVariables> {
   onEndReached: () => void
-  items: any
+  items: any[]
 }
 
 function useQueryWithPagination<TData = any>(

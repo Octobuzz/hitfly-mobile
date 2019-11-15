@@ -2,7 +2,7 @@ import LFP from 'lodash/fp'
 import React from 'react'
 import gql from 'graphql-tag'
 import NonCollectionPlaylist from './NonCollectionPlaylist'
-import { images } from 'src/constants'
+import { images, names } from 'src/constants'
 
 const GET_TOP50_TRACKS = gql`
   query {
@@ -35,6 +35,7 @@ const Top50Playlist: React.FC = props => (
     itemsSelector={itemsSelector}
     query={GET_TOP50_TRACKS}
     cover={images.TOP50_PLAYLIST}
+    playlistKey={names.PLAYLIST_KEYS.TOP_50}
     {...props}
   />
 )

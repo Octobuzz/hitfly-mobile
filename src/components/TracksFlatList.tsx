@@ -9,6 +9,7 @@ import styled from 'src/styled-components'
 
 interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   tracks: Track[]
+  playlistKey: string
   onRefresh: () => void
   onEndReached: () => void
   isRefreshing: boolean
@@ -17,7 +18,9 @@ interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
 
 const Scroll = styled(FlatList as new () => FlatList<Track>).attrs(() => ({
   initialNumToRender: 10,
-}))``
+}))`
+  flex: 1;
+`
 
 class TracksList extends React.Component<Props> {
   private renderTrack: ListRenderItem<Track> = ({ item, index }) => {
@@ -35,8 +38,8 @@ class TracksList extends React.Component<Props> {
   }
 
   private handlePressTrack = (track: Track) => {
-    const { toggleTrack, tracks } = this.props
-    toggleTrack({ track, playlist: tracks })
+    const { toggleTrack, tracks, playlistKey } = this.props
+    toggleTrack({ track, playlist: tracks, playlistKey })
   }
 
   private isTrackPlaying = (track: Track): boolean => {

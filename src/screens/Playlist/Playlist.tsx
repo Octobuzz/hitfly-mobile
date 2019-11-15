@@ -37,6 +37,7 @@ interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   cover: SourceType
   tracks: Track[]
   favouritesCount: number
+  playlistKey: string
   onRefresh: () => void
   onEndReached: () => void
   isRefreshing: boolean
@@ -81,12 +82,12 @@ class Playlist extends React.Component<Props, State> {
   }
 
   private pauseOrPlayFirstTrack = (): void => {
-    const { tracks, toggleTrack } = this.props
+    const { tracks, toggleTrack, playlistKey } = this.props
     const { playingTrack } = this.state
     if (playingTrack) {
-      toggleTrack({ track: playingTrack, playlist: tracks })
+      toggleTrack({ track: playingTrack, playlist: tracks, playlistKey })
     } else {
-      toggleTrack({ track: tracks[0], playlist: tracks })
+      toggleTrack({ track: tracks[0], playlist: tracks, playlistKey })
     }
   }
 

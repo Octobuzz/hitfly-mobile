@@ -14,10 +14,13 @@ import {
   SetActivePlaylistVariables,
   SET_IS_PLAYING,
   SetIsPlayingVariables,
+  ActivePlaylistData,
+  GET_ACTIVE_PLAYLIST,
 } from 'src/apollo'
 
 interface ToggleTrackOptions {
   track: Track
+  playlistKey: string
   playlist: Track[]
 }
 
@@ -41,42 +44,41 @@ const withTrackToggle = (
       SET_IS_PLAYING,
     )
 
-    const activeTrackData = useQuery<ActiveTrackData>(GET_ACTIVE_TRACK)
+    const { data: activeTrackData } = useQuery<ActiveTrackData>(
+      GET_ACTIVE_TRACK,
+    )
+    const { activeTrack, isPlaying } = L.pick(activeTrackData, [
+      'activeTrack',
+      'isPlaying',
+    ])
 
-    const activeTrack = L.get(activeTrackData, 'data.activeTrack')
-    const isPlaying = L.get(activeTrackData, 'data.isPlaying')
+    const { data: activePlaylistData } = useQuery<ActivePlaylistData>(
+      GET_ACTIVE_PLAYLIST,
+    )
+    const activePlaylistKey = L.get(activePlaylistData, 'activePlaylistKey')
 
     const toggleTrack = useCallback(
       (options?: ToggleTrackOptions): void => {
-        // когда нет опций - на паузу
         if (!options) {
-          if (isPlaying) {
-            pauseTrack()
-          } else {
-            continueTrack()
-          }
-          return
-        }
-        if (!activeTrack) {
+          pauseOrContinue()
+        } else if (!activeTrack) {
           playTrack(options)
-          return
-        }
-        // когда новый трек не равен текущему - играем новый трек
-        if (activeTrack.id !== options.track.id) {
+        } else if (activeTrack.id !== options.track.id) {
           playTrack(options)
-          return
-        }
-        // когда новый трек равен текущему - пауза или продолжить играть
-        else {
-          if (isPlaying) {
-            pauseTrack()
-          } else {
-            continueTrack()
-          }
+        } else {
+          pauseOrContinue()
         }
       },
       [activeTrack, isPlaying],
     )
+
+    const pauseOrContinue = useCallback(() => {
+      if (isPlaying) {
+        pauseTrack()
+      } else {
+        continueTrack()
+      }
+    }, [isPlaying])
 
     const continueTrack = useCallback(async () => {
       setIsPlaying({ variables: { isPlaying: true } })
@@ -84,18 +86,33 @@ const withTrackToggle = (
     }, [])
 
     const playTrack = useCallback(
-      async ({ track, playlist }: ToggleTrackOptions): Promise<void> => {
-        setActiveTrackId({
+      async ({
+        track,
+        playlist,
+        playlistKey,
+      }: ToggleTrackOptions): Promise<void> => {
+        // playlistKey служит для идентификации плейлиста
+        // формат: key:id:items.length
+        // key - уникальный ключ для плейлиста
+        // id - еще один уникальный ключ (может не быть) - возможно не надо разделять через ':' ?
+        // items.length - определяет количество треков в плейлисте
+        // нужен для изменения ключа при пагинации плейлиста
+        await TrackPlayer.pause()
+        if (playlistKey === activePlaylistKey) {
+          await TrackPlayer.skip(track.id.toString())
+        } else {
+          await setActivePlaylist({ variables: { playlist, playlistKey } })
+          const newPlaylist = playlist.map(createTrack)
+          await TrackPlayer.reset()
+          await TrackPlayer.add(newPlaylist)
+          await TrackPlayer.skip(track.id.toString())
+        }
+        await setActiveTrackId({
           variables: { id: track.id },
         })
-        setActivePlaylist({ variables: { playlist } })
-        const newPlaylist = playlist.map(createTrack)
-        await TrackPlayer.reset()
-        await TrackPlayer.add(newPlaylist)
-        await TrackPlayer.skip(track.id.toString())
-        TrackPlayer.play()
+        await TrackPlayer.play()
       },
-      [],
+      [activePlaylistKey],
     )
 
     const createTrack = useCallback(

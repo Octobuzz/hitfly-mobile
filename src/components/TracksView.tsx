@@ -6,6 +6,7 @@ import PlaylistTrack from 'src/components/PlaylistTrack'
 
 interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   tracks: Track[]
+  playlistKey: string
 }
 
 class TracksView extends React.Component<Props> {
@@ -25,8 +26,8 @@ class TracksView extends React.Component<Props> {
   }
 
   private handlePressTrack = (track: Track) => {
-    const { toggleTrack, tracks } = this.props
-    toggleTrack({ track, playlist: tracks })
+    const { toggleTrack, tracks, playlistKey } = this.props
+    toggleTrack({ track, playlist: tracks, playlistKey })
   }
 
   private isTrackPlaying = (track: Track): boolean => {

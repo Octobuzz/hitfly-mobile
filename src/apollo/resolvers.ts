@@ -108,10 +108,12 @@ export default {
     },
     setActivePlaylist: (
       _,
-      { playlist }: { playlist: Track[] },
+      { playlist, playlistKey }: { playlist: Track[]; playlistKey: string },
       { cache }: ContextArgs,
     ) => {
-      cache.writeData({ data: { playlist } })
+      cache.writeData({
+        data: { activePlaylist: playlist, activePlaylistKey: playlistKey },
+      })
       return playlist
     },
   },

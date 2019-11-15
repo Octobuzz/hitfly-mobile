@@ -67,16 +67,18 @@ interface Props {
   duration?: number
   isPlaying: boolean
   onPressMore: () => void
+  onSlideEnd: (progress: number) => void
   onPressControl: () => void
 }
 
 const BottomPlayer: React.FC<Props> = ({
   track,
-  progress,
-  duration,
   isPlaying,
+  onSlideEnd,
   onPressMore,
   onPressControl,
+  progress = 0,
+  duration = 1,
 }) => {
   if (!track) {
     return null
@@ -84,9 +86,12 @@ const BottomPlayer: React.FC<Props> = ({
   const { title, group, singer, cover } = track
   return (
     <Wrapper>
-      {!!progress && !!duration && (
-        <AbsoluteSlider maximumValue={duration} value={progress} step={1} />
-      )}
+      <Slider
+        onSlidingComplete={onSlideEnd}
+        maximumValue={duration}
+        value={progress}
+        step={1}
+      />
       <Inner>
         <TrackImage source={{ uri: cover[0].imageUrl }} />
         <CenterBlock>

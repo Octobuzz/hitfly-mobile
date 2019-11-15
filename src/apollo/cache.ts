@@ -11,6 +11,7 @@ export const defaults = {
   },
   isPlaying: false,
   activeTrackId: null,
+  activePlaylistKey: null,
   playlist: [],
 }
 
@@ -23,6 +24,7 @@ export const typeDefs = gql`
     headerSettings: HeaderSettings!
     isPlaying: Boolean!
     activeTrackId: Int
+    activePlaylistKey: String
   }
 `
 
@@ -35,6 +37,8 @@ export default async (): Promise<InMemoryCache> => {
           getCacheKey({ __typename: 'Track', id: activeTrackId }),
         selectedGenre: ({ currentGenreId }, _, { getCacheKey }) =>
           getCacheKey({ __typename: 'Genre', id: currentGenreId }),
+        selectedCollection: ({ currentCollectionId }, _, { getCacheKey }) =>
+          getCacheKey({ __typename: 'Collection', id: currentCollectionId }),
       },
     },
   })

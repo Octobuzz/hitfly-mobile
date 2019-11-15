@@ -4,6 +4,7 @@ import { withNavigation, NavigationInjectedProps } from 'react-navigation'
 import MusicAndAlbumsContainer from './MusicAndAlbumsContainer'
 import { GET_LIKED_ALBUMS, GET_LIKED_MUSIC } from 'src/apollo'
 import { ROUTES } from 'src/navigation'
+import { names } from 'src/constants'
 
 interface Props extends NavigationInjectedProps {}
 
@@ -33,6 +34,7 @@ const LikedMusicContainer: React.FC<Props> = props => {
       albumsQuery={GET_LIKED_ALBUMS}
       tracksSelector={tracksSelector}
       albumsSelector={albumsSelector}
+      playlistKey={names.PLAYLIST_KEYS.LIKED_MUSIC}
       {...props}
     />
   )
