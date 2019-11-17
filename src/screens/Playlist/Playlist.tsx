@@ -84,11 +84,8 @@ class Playlist extends React.Component<Props, State> {
   private pauseOrPlayFirstTrack = (): void => {
     const { tracks, toggleTrack, playlistKey } = this.props
     const { playingTrack } = this.state
-    if (playingTrack) {
-      toggleTrack({ track: playingTrack, playlist: tracks, playlistKey })
-    } else {
-      toggleTrack({ track: tracks[0], playlist: tracks, playlistKey })
-    }
+    const track = playingTrack || tracks[0]
+    toggleTrack({ track, playlist: tracks, playlistKey })
   }
 
   render() {
