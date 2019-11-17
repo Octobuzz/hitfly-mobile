@@ -15,6 +15,8 @@ YellowBox.ignoreWarnings([
   'Warning: componentWillUpdate',
   'Warning: componentWillReceiveProps',
   'cancelTouches',
+  'UIManager',
+  '`virtualizedCell.cellKey` of type `number`',
 ])
 
 class App extends React.Component {

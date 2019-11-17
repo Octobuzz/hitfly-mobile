@@ -1,6 +1,8 @@
 import React from 'react'
 import { createStackNavigator } from 'react-navigation-stack'
 import {
+  Player,
+  BottomPlayer,
   HeaderRightButtons,
   // screens
   NewPlaylistScreen,
@@ -32,6 +34,8 @@ import {
 } from 'src/screens'
 import { stackDefaultOptions, playlistConfig } from './configs'
 import routeNames from './routeNames'
+import styled from 'src/styled-components'
+import { getBottomSpace } from 'react-native-iphone-x-helper'
 
 const MainNavigator = createStackNavigator(
   {
@@ -176,11 +180,18 @@ const MainNavigator = createStackNavigator(
   },
 )
 
+const Wrapper = styled.View`
+  flex: 1;
+  padding-bottom: ${getBottomSpace()};
+`
+
 const Main: React.FC<any> = props => (
-  <>
+  <Wrapper>
     <MainNavigator {...props} />
+    <BottomPlayer />
     <DetailedTrackPanel ref={DetailedPanel.setPanel} />
-  </>
+    <Player />
+  </Wrapper>
 )
 
 // @ts-ignore

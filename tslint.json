@@ -7,7 +7,7 @@
     "tslint-react-hooks"
   ],
   "linterOptions": {
-    "exclude": ["cache/**", "coverage/**", "jest/setup.js"]
+    "exclude": ["cache/**", "coverage/**", "jest/setup.js", "vendor/**"]
   },
   "rules": {
     "interface-name": false,

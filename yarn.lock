@@ -6685,10 +6685,9 @@ react-native-tab-view@^2.10.0:
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-2.10.0.tgz#5e249e5650502010013449ffd4e5edc18a95364b"
   integrity sha512-qgexVz5eO4yaFjdkmn/sURXgVvaBo6pZD/q1eoca96SbPVbaH3WzVhF3bRUfeTHwZkXwznFTpS3JURqIFU8vQA==
 
-react-native-track-player@^1.1.4:
-  version "1.1.8"
-  resolved "https://registry.yarnpkg.com/react-native-track-player/-/react-native-track-player-1.1.8.tgz#4827d46a14320c405d19f34593c3f999c2424b0f"
-  integrity sha512-pAGMgEHtnrnHQYI53qxeZ/dNbw5CNiCTMjj6L09CQrWvZ6cJwjOQeyz4/6aOs7HfUDJc3HLntzKwTHYT7ges0g==
+"react-native-track-player@https://github.com/ZebrainsDev/react-native-track-player#master":
+  version "1.2.0"
+  resolved "https://github.com/ZebrainsDev/react-native-track-player#b33180b6097255e936bcd412104b2a4a8847cc25"
 
 react-native-typescript-transformer@^1.2.13:
   version "1.2.13"

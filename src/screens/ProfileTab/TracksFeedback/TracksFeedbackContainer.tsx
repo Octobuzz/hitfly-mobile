@@ -9,6 +9,7 @@ import {
 } from 'src/HOCs'
 import { useQueryWithPagination } from 'src/Hooks'
 import gql from 'graphql-tag'
+import { names } from 'src/constants'
 
 const LIMIT = 20
 const GET_MY_TRACKS_WITH_FEEDBACK = gql`
@@ -72,7 +73,7 @@ const TracksFeedbackContainer: React.FC<Props> = props => {
   )
 
   const [period, setPeriod] = useState<FeedbackPeriod>('week')
-  const tracksItems = L.get(data, 'tracks.items', [])
+  const tracks = L.get(data, 'tracks.items', [])
 
   const changePeriod = useCallback((nextPeriod: FeedbackPeriod) => {
     setPeriod(nextPeriod)
@@ -83,6 +84,8 @@ const TracksFeedbackContainer: React.FC<Props> = props => {
     refetch({ period })
   }, [period])
 
+  const paginatedPlaylistKey = `${names.PLAYLIST_KEYS.TRACKS_FEEDBACK}:${tracks.length}`
+
   return (
     <TracksFeedback
       selectedPeriod={period}
@@ -92,7 +95,8 @@ const TracksFeedbackContainer: React.FC<Props> = props => {
       isFetchingMore={networkStatus === 3}
       onEndReached={onEndReached}
       onRefresh={onRefresh}
-      tracks={tracksItems}
+      tracks={tracks}
+      playlistKey={paginatedPlaylistKey}
       {...props}
     />
   )

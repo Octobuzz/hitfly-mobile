@@ -3,12 +3,13 @@ import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import NonCollectionPlaylist from './NonCollectionPlaylist'
 import { GET_GENRE_TRACKS } from 'src/apollo'
+import { names } from 'src/constants'
 import gql from 'graphql-tag'
 
 const GET_SELECTED_GENRE = gql`
-  query getSelectedGenre($genreId: Int!) {
-    currentGenreId @client @export(as: "genreId")
-    genre: genreById(genreId: $genreId) @client {
+  query {
+    genre: selectedGenre @client {
+      id
       imageUrl: image
     }
   }
@@ -19,6 +20,7 @@ const itemsSelector = LFP.getOr([], 'playlist.items')
 
 const GenrePlaylist: React.FC = props => {
   const { data } = useQuery(GET_SELECTED_GENRE)
+  const id = LFP.get('genre.id', data)
   const imageUrl = LFP.get('genre.imageUrl', data)
   let cover
   if (imageUrl) {
@@ -30,6 +32,7 @@ const GenrePlaylist: React.FC = props => {
       itemsSelector={itemsSelector}
       query={GET_GENRE_TRACKS}
       cover={cover}
+      playlistKey={`${names.PLAYLIST_KEYS.GENRE}:${id}`}
       {...props}
     />
   )

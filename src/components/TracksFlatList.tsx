@@ -9,6 +9,7 @@ import styled from 'src/styled-components'
 
 interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   tracks: Track[]
+  playlistKey: string
   onRefresh: () => void
   onEndReached: () => void
   isRefreshing: boolean
@@ -17,26 +18,33 @@ interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
 
 const Scroll = styled(FlatList as new () => FlatList<Track>).attrs(() => ({
   initialNumToRender: 10,
-}))``
+}))`
+  flex: 1;
+`
 
 class TracksList extends React.Component<Props> {
   private renderTrack: ListRenderItem<Track> = ({ item, index }) => {
-    const { toggleTrack, showDetailedTrack } = this.props
+    const { showDetailedTrack } = this.props
     const isPlaying = this.isTrackPlaying(item)
     return (
       <PlaylistTrack
         index={index}
         isPlaying={isPlaying}
-        onPress={toggleTrack}
+        onPress={this.handlePressTrack}
         onPressMore={showDetailedTrack}
         track={item}
       />
     )
   }
 
+  private handlePressTrack = (track: Track) => {
+    const { toggleTrack, tracks, playlistKey } = this.props
+    toggleTrack({ track, playlist: tracks, playlistKey })
+  }
+
   private isTrackPlaying = (track: Track): boolean => {
-    const { activeTrack } = this.props
-    if (!activeTrack) {
+    const { activeTrack, isPlaying } = this.props
+    if (!activeTrack || !isPlaying) {
       return false
     }
     return activeTrack.id === track.id

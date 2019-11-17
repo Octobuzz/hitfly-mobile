@@ -17,6 +17,7 @@ import { ROUTES } from 'src/navigation'
 import { DocumentNode } from 'graphql'
 
 interface Props extends NavigationInjectedProps {
+  playlistKey: string
   tracksTitle: string
   tracksQuery: DocumentNode
   trackTransformer?: (data?: any) => Track
@@ -36,6 +37,7 @@ interface HOCsProps
     DetailedTrackMenuProps {}
 
 const MusicAndAlbumsContainer: React.FC<HOCsProps> = ({
+  playlistKey,
   selectAlbum,
   tracksQuery,
   trackTransformer,
@@ -103,6 +105,8 @@ const MusicAndAlbumsContainer: React.FC<HOCsProps> = ({
     return <Loader isAbsolute />
   }
 
+  const paginatedPlaylistKey = `${playlistKey}:${tracks.length}`
+
   return (
     <MusicAndAlbumsScreen
       albums={albums}
@@ -110,6 +114,7 @@ const MusicAndAlbumsContainer: React.FC<HOCsProps> = ({
       isRefreshing={isRefreshing}
       onPressAlbum={navigateToAlbumPlaylist}
       onRefresh={onResfresh}
+      playlistKey={paginatedPlaylistKey}
       {...rest}
     />
   )

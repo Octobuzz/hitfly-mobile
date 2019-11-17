@@ -37,6 +37,7 @@ interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   cover: SourceType
   tracks: Track[]
   favouritesCount: number
+  playlistKey: string
   onRefresh: () => void
   onEndReached: () => void
   isRefreshing: boolean
@@ -58,9 +59,10 @@ class Playlist extends React.Component<Props, State> {
     activeTrack,
     tracks,
   }: Props): Partial<State> | null => {
-    if (activeTrack && tracks.includes(activeTrack)) {
+    if (activeTrack) {
+      const playingTrack = tracks.find(({ id }) => activeTrack.id === id)
       return {
-        playingTrack: activeTrack,
+        playingTrack,
       }
     } else {
       return {
@@ -80,37 +82,24 @@ class Playlist extends React.Component<Props, State> {
   }
 
   private pauseOrPlayFirstTrack = (): void => {
-    const { tracks, toggleTrack } = this.props
+    const { tracks, toggleTrack, playlistKey } = this.props
     const { playingTrack } = this.state
-    if (playingTrack) {
-      toggleTrack(null)
-    } else {
-      toggleTrack(tracks[0])
-    }
+    const track = playingTrack || tracks[0]
+    toggleTrack({ track, playlist: tracks, playlistKey })
   }
 
   render() {
-    const {
-      tracks,
-      onRefresh,
-      toggleTrack,
-      activeTrack,
-      onEndReached,
-      isRefreshing,
-      isFetchingMore,
-      favouritesCount,
-      showDetailedTrack,
-    } = this.props
+    const { tracks, favouritesCount, ...rest } = this.props
     const { playingTrack } = this.state
     const activeCover = this.getCover()
     return (
-      <View noPadding addBottomSafePadding>
+      <View noPadding>
         <CoverWrapper>
           <Cover source={activeCover} />
           {!!tracks.length && (
             <PositionedControlButton
               onPress={this.pauseOrPlayFirstTrack}
-              isPlaying={!!playingTrack}
+              isPlaying={!!playingTrack && rest.isPlaying}
             />
           )}
           <PositionedShuffleButton />
@@ -119,16 +108,7 @@ class Playlist extends React.Component<Props, State> {
           favouritesCount={favouritesCount}
           playlist={tracks}
         />
-        <TracksFlatList
-          onRefresh={onRefresh}
-          onEndReached={onEndReached}
-          isRefreshing={isRefreshing}
-          isFetchingMore={isFetchingMore}
-          toggleTrack={toggleTrack}
-          activeTrack={activeTrack}
-          showDetailedTrack={showDetailedTrack}
-          tracks={tracks}
-        />
+        <TracksFlatList {...rest} tracks={tracks} />
       </View>
     )
   }

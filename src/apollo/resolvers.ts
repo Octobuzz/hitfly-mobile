@@ -2,7 +2,7 @@ import L from 'lodash'
 import { InMemoryCache, IdGetter } from 'apollo-cache-inmemory'
 import ApolloClient, { Resolvers } from 'apollo-client'
 import gql from 'graphql-tag'
-import { Genre } from './schemas'
+import { Track } from './schemas'
 import { HeaderSettings, CollectionsType } from './commonTypes'
 import { helpers } from 'src/utils'
 
@@ -11,15 +11,6 @@ interface ContextArgs {
   cache: InMemoryCache
   getCacheKey: IdGetter
 }
-
-const GET_GENRES = gql`
-  query {
-    genres: genre {
-      id
-      imageUrl: image
-    }
-  }
-`
 
 const GET_RECOMMENDED = gql`
   query Collections($limit: Int = 10, $page: Int = 1) {
@@ -99,18 +90,34 @@ export default {
       cache.writeData({ data: { headerSettings: newSettings } })
       return null
     },
-  },
-  Query: {
-    genreById: (_, { genreId }, { cache }: ContextArgs) => {
-      const resultGenres = cache.readQuery<{ genres?: Genre[] }>({
-        query: GET_GENRES,
-      })
-      const genres = L.get(resultGenres, 'genres')
-      if (genreId && genres) {
-        return genres.find(({ id }) => id === genreId)
+    setActiveTrackId: (_, { id }: { id: number }, { cache }: ContextArgs) => {
+      const data = {
+        activeTrackId: id,
+        isPlaying: true,
       }
+      cache.writeData({ data })
       return null
     },
+    setIsPlaying: (
+      _,
+      { isPlaying }: { isPlaying: boolean },
+      { cache }: ContextArgs,
+    ) => {
+      cache.writeData({ data: { isPlaying } })
+      return null
+    },
+    setActivePlaylist: (
+      _,
+      { playlist, playlistKey }: { playlist: Track[]; playlistKey: string },
+      { cache }: ContextArgs,
+    ) => {
+      cache.writeData({
+        data: { activePlaylist: playlist, activePlaylistKey: playlistKey },
+      })
+      return playlist
+    },
+  },
+  Query: {
     collectionsByType: (
       _,
       { type, ...variables }: { type: CollectionsType },

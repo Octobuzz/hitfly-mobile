@@ -24,6 +24,7 @@ export type FeedbackPeriod = 'year' | 'month' | 'week'
 
 interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   tracks: Track[]
+  playlistKey: string
   onRefresh: () => void
   onEndReached: () => void
   onPressPeriod: (period: FeedbackPeriod) => void
@@ -35,11 +36,11 @@ interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
 
 class TracksFeedback extends React.Component<Props> {
   private renderItem: ListRenderItem<Track> = ({ item, index }) => {
-    const { toggleTrack, showDetailedTrack } = this.props
+    const { showDetailedTrack } = this.props
     const isPlaying = this.isTrackPlaying(item)
     return (
       <TrackWithFeedback
-        onPress={toggleTrack}
+        onPress={this.handlePressTrack}
         onPressMore={showDetailedTrack}
         isPlaying={isPlaying}
         index={index}
@@ -48,9 +49,14 @@ class TracksFeedback extends React.Component<Props> {
     )
   }
 
+  private handlePressTrack = (track: Track) => {
+    const { toggleTrack, tracks, playlistKey } = this.props
+    toggleTrack({ track, playlist: tracks, playlistKey })
+  }
+
   private isTrackPlaying = (track: Track): boolean => {
-    const { activeTrack } = this.props
-    if (!activeTrack) {
+    const { activeTrack, isPlaying } = this.props
+    if (!activeTrack || !isPlaying) {
       return false
     }
     return activeTrack.id === track.id

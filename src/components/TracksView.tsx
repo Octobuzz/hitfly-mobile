@@ -6,22 +6,28 @@ import PlaylistTrack from 'src/components/PlaylistTrack'
 
 interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   tracks: Track[]
+  playlistKey: string
 }
 
 class TracksView extends React.Component<Props> {
   private renderTrack = (item: Track, index: number): React.ReactNode => {
-    const { toggleTrack, showDetailedTrack } = this.props
+    const { showDetailedTrack } = this.props
     const isPlaying = this.isTrackPlaying(item)
     return (
       <PlaylistTrack
         key={item.id.toString()}
         index={index}
         isPlaying={isPlaying}
-        onPress={toggleTrack}
+        onPress={this.handlePressTrack}
         onPressMore={showDetailedTrack}
         track={item}
       />
     )
+  }
+
+  private handlePressTrack = (track: Track) => {
+    const { toggleTrack, tracks, playlistKey } = this.props
+    toggleTrack({ track, playlist: tracks, playlistKey })
   }
 
   private isTrackPlaying = (track: Track): boolean => {

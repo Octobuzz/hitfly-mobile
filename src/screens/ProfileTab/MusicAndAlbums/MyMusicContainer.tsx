@@ -4,6 +4,7 @@ import { withNavigation, NavigationInjectedProps } from 'react-navigation'
 import MusicAndAlbumsContainer from './MusicAndAlbumsContainer'
 import { GET_MY_ALBUMS, GET_MY_MUSIC } from 'src/apollo'
 import { ROUTES } from 'src/navigation'
+import { names } from 'src/constants'
 
 interface Props extends NavigationInjectedProps {}
 
@@ -28,6 +29,7 @@ const MyMusicContainer: React.FC<Props> = props => {
       albumsSelector={albumsSelector}
       tracksTitle="Песни"
       albumTitle="Альбомы"
+      playlistKey={names.PLAYLIST_KEYS.MY_MUSIC}
       {...props}
     />
   )

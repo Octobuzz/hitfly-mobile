@@ -30,6 +30,7 @@ const Col = styled.View`
 interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   tracks: Track[]
   albums: Album[]
+  playlistKey: string
   tracksTitle: string
   albumTitle: string
   isRefreshing: boolean
@@ -43,9 +44,11 @@ class LikedMusic extends React.Component<Props> {
   private renderTracks = (): React.ReactNode => {
     const {
       tracks,
+      isPlaying,
       toggleTrack,
-      activeTrack,
       tracksTitle,
+      activeTrack,
+      playlistKey,
       showDetailedTrack,
       onPressTracksHeader,
     } = this.props
@@ -68,6 +71,8 @@ class LikedMusic extends React.Component<Props> {
           showDetailedTrack={showDetailedTrack}
           toggleTrack={toggleTrack}
           activeTrack={activeTrack}
+          playlistKey={playlistKey}
+          isPlaying={isPlaying}
           tracks={tracks}
         />
       </>

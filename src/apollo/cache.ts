@@ -9,6 +9,10 @@ export const defaults = {
     state: 'main',
     __typename: 'HeaderSettings',
   },
+  isPlaying: false,
+  activeTrackId: null,
+  activePlaylistKey: null,
+  playlist: [],
 }
 
 export const typeDefs = gql`
@@ -16,11 +20,27 @@ export const typeDefs = gql`
     style: String!
     state: String!
   }
+  type Query {
+    headerSettings: HeaderSettings!
+    isPlaying: Boolean!
+    activeTrackId: Int
+    activePlaylistKey: String
+  }
 `
 
 export default async (): Promise<InMemoryCache> => {
   const cache = new InMemoryCache({
     freezeResults: true,
+    cacheRedirects: {
+      Query: {
+        activeTrack: ({ activeTrackId }, _, { getCacheKey }) =>
+          getCacheKey({ __typename: 'Track', id: activeTrackId }),
+        selectedGenre: ({ currentGenreId }, _, { getCacheKey }) =>
+          getCacheKey({ __typename: 'Genre', id: currentGenreId }),
+        selectedCollection: ({ currentCollectionId }, _, { getCacheKey }) =>
+          getCacheKey({ __typename: 'Collection', id: currentCollectionId }),
+      },
+    },
   })
 
   await persistCache({
