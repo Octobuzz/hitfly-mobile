@@ -54,13 +54,6 @@ const PlayerIcon = styled(Icon).attrs(({ theme }) => ({
   size: 36,
 }))``
 
-const AbsoluteSlider = styled(Slider)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-`
-
 interface Props {
   track?: Track
   progress?: number

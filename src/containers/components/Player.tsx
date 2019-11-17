@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react'
 import TrackPlayer from 'react-native-track-player'
 import { useMutation } from '@apollo/react-hooks'
-import { SET_ACTIVE_TRACK_ID, SetActiveTrackIdVariables } from 'src/apollo'
+import {
+  SET_ACTIVE_TRACK_ID,
+  SetActiveTrackIdVariables,
+  SET_IS_PLAYING,
+  SetIsPlayingVariables,
+} from 'src/apollo'
 
 const setup = async () => {
   await TrackPlayer.setupPlayer()
@@ -21,9 +26,13 @@ const Player: React.FC = () => {
   const [setActiveTrackId] = useMutation<any, SetActiveTrackIdVariables>(
     SET_ACTIVE_TRACK_ID,
   )
+  const [setIsPlaying] = useMutation<any, SetIsPlayingVariables>(SET_IS_PLAYING)
 
   useEffect(() => {
     setup()
+    const ended = TrackPlayer.addEventListener('playback-queue-ended', () => {
+      setIsPlaying({ variables: { isPlaying: false } })
+    })
     const changed = TrackPlayer.addEventListener(
       'playback-track-changed',
       async () => {
@@ -34,6 +43,7 @@ const Player: React.FC = () => {
     return () => {
       TrackPlayer.destroy()
       changed.remove()
+      ended.remove()
     }
   }, [])
 

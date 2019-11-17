@@ -61,15 +61,13 @@ const withTrackToggle = (
       (options?: ToggleTrackOptions): void => {
         if (!options) {
           pauseOrContinue()
-        } else if (!activeTrack) {
-          playTrack(options)
-        } else if (activeTrack.id !== options.track.id) {
+        } else if (!activeTrack || activeTrack.id !== options.track.id) {
           playTrack(options)
         } else {
           pauseOrContinue()
         }
       },
-      [activeTrack, isPlaying],
+      [activeTrack, isPlaying, activePlaylistKey],
     )
 
     const pauseOrContinue = useCallback(() => {
@@ -80,7 +78,7 @@ const withTrackToggle = (
       }
     }, [isPlaying])
 
-    const continueTrack = useCallback(async () => {
+    const continueTrack = useCallback(() => {
       setIsPlaying({ variables: { isPlaying: true } })
       TrackPlayer.play()
     }, [])
@@ -97,20 +95,17 @@ const withTrackToggle = (
         // id - еще один уникальный ключ (может не быть) - возможно не надо разделять через ':' ?
         // items.length - определяет количество треков в плейлисте
         // нужен для изменения ключа при пагинации плейлиста
-        await TrackPlayer.pause()
-        if (playlistKey === activePlaylistKey) {
-          await TrackPlayer.skip(track.id.toString())
-        } else {
-          await setActivePlaylist({ variables: { playlist, playlistKey } })
-          const newPlaylist = playlist.map(createTrack)
-          await TrackPlayer.reset()
-          await TrackPlayer.add(newPlaylist)
-          await TrackPlayer.skip(track.id.toString())
-        }
-        await setActiveTrackId({
+        setActiveTrackId({
           variables: { id: track.id },
         })
-        await TrackPlayer.play()
+        if (playlistKey === activePlaylistKey) {
+          TrackPlayer.skip(track.id.toString())
+        } else {
+          await setActivePlaylist({ variables: { playlist, playlistKey } })
+          const newQueue = playlist.map(createTrack)
+          await TrackPlayer.initQueue(newQueue, track.id.toString())
+          TrackPlayer.play()
+        }
       },
       [activePlaylistKey],
     )
