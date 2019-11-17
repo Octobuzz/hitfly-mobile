@@ -32,6 +32,7 @@ const Player: React.FC = () => {
     setup()
     const ended = TrackPlayer.addEventListener('playback-queue-ended', () => {
       setIsPlaying({ variables: { isPlaying: false } })
+      TrackPlayer.seekTo(0)
     })
     const changed = TrackPlayer.addEventListener(
       'playback-track-changed',
@@ -46,8 +47,6 @@ const Player: React.FC = () => {
       ended.remove()
     }
   }, [])
-
-  useEffect(() => {}, [])
 
   return null
 }

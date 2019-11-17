@@ -46,7 +46,8 @@ const SubTitleText = styled(TextBase).attrs(() => ({
 `
 
 const PlayerButton = styled.TouchableOpacity`
-  padding-horizontal: 24px;
+  width: 34px;
+  align-items: center;
 `
 
 const PlayerIcon = styled(Icon).attrs(({ theme }) => ({
