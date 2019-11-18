@@ -1,5 +1,6 @@
 import LFP from 'lodash/fp'
 import React from 'react'
+import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { useQuery } from '@apollo/react-hooks'
 import NonCollectionPlaylist from './NonCollectionPlaylist'
 import { GET_GENRE_TRACKS } from 'src/apollo'
@@ -18,7 +19,7 @@ const GET_SELECTED_GENRE = gql`
 const hasMorePagesSelector = LFP.get('playlist.hasMorePages')
 const itemsSelector = LFP.getOr([], 'playlist.items')
 
-const GenrePlaylist: React.FC = props => {
+const GenrePlaylist: React.FC<NavigationStackScreenProps> = props => {
   const { data } = useQuery(GET_SELECTED_GENRE)
   const id = LFP.get('genre.id', data)
   const imageUrl = LFP.get('genre.imageUrl', data)

@@ -4,7 +4,7 @@ import { withNavigation } from 'react-navigation'
 import { TracksSection } from '../components'
 import { ROUTES } from 'src/navigation'
 import { useQueryWithPagination } from 'src/Hooks'
-import { GET_TOP_WEEK_TRACKS } from 'src/apollo'
+import { GET_TOP_WEEK_TRACKS, Track } from 'src/apollo'
 
 const LIMIT = 20
 const itemsSelector = (data: any) => L.get(data, 'playlist.items', [])
@@ -34,9 +34,9 @@ const TopWeekContainer: React.FC<any> = ({ navigation, getRefetcher }) => {
   const onPressHeader = useCallback(() => {
     navigation.navigate(ROUTES.MAIN.TOP_WEEK_PLAYLIST)
   }, [])
-  // TODO: когда будет плеер, сделать HOC и прокинуть нужную функцию сюда
-  const onPressTrack = useCallback(() => {
-    navigation.navigate(ROUTES.MAIN.TOP_WEEK_PLAYLIST)
+
+  const onPressTrack = useCallback((track: Track) => {
+    navigation.navigate(ROUTES.MAIN.TOP_WEEK_PLAYLIST, { trackToPlay: track })
   }, [])
 
   const isLoading = networkStatus === 4 || networkStatus === 1

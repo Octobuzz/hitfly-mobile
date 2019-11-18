@@ -2,7 +2,7 @@ import L from 'lodash'
 import React, { useCallback, useEffect } from 'react'
 import { withNavigation } from 'react-navigation'
 import { TracksSection } from '../components'
-import { GET_NEW_TRACKS, PlaylistData } from 'src/apollo'
+import { GET_NEW_TRACKS, PlaylistData, Track } from 'src/apollo'
 import { useQueryWithPagination } from 'src/Hooks'
 import { ROUTES } from 'src/navigation'
 
@@ -34,9 +34,9 @@ const NewContainer: React.FC<any> = ({ navigation, getRefetcher }) => {
   const onPressHeader = useCallback(() => {
     navigation.navigate(ROUTES.MAIN.NEW_PLAYLIST)
   }, [])
-  // TODO: когда будет плеер, сделать HOC и прокинуть нужную функцию сюда
-  const onPressTrack = useCallback(() => {
-    navigation.navigate(ROUTES.MAIN.NEW_PLAYLIST)
+
+  const onPressTrack = useCallback((track: Track) => {
+    navigation.navigate(ROUTES.MAIN.NEW_PLAYLIST, { trackToPlay: track })
   }, [])
 
   const isLoading = networkStatus === 4 || networkStatus === 1
