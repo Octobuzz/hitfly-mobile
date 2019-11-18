@@ -17,6 +17,7 @@ import {
   ActivePlaylistData,
   GET_ACTIVE_PLAYLIST,
 } from 'src/apollo'
+import { images } from 'src/constants'
 
 interface ToggleTrackOptions {
   track: Track
@@ -111,12 +112,20 @@ const withTrackToggle = (
     )
 
     const createTrack = useCallback(
-      ({ id, fileUrl, title, group, singer }: Track): RNTrack => {
+      ({
+        id,
+        title,
+        group,
+        singer,
+        fileUrl,
+        cover: [{ imageUrl }],
+      }: Track): RNTrack => {
         return {
-          id: id.toString(),
-          url: fileUrl,
           title,
+          url: fileUrl,
+          id: id.toString(),
           artist: group ? group.title : singer,
+          artwork: imageUrl.endsWith('.svg') ? images.DEFAULT_TRACK : imageUrl,
         }
       },
       [],

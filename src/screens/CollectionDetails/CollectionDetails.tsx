@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
-import { getBottomSpace } from 'react-native-iphone-x-helper'
 import { Collection } from 'src/apollo'
 import { styles } from 'src/constants'
 import {
@@ -21,7 +20,6 @@ const Scroll = styled(FlatList as new () => FlatList<Collection>).attrs(() => ({
 }))`
   flex: 1;
   padding: 24px 16px;
-  margin-bottom: ${getBottomSpace()}px;
 `
 
 const IndentedH1 = styled(H1)`
