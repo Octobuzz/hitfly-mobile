@@ -13,6 +13,9 @@ import resolvers from './resolvers'
 async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
   const httpLink = createHttpLink({
     uri: names.BASE_URL,
+    headers: {
+      Accept: 'application/json',
+    },
   })
 
   const authLink = setContext(async (_, { headers }) => {
@@ -35,7 +38,7 @@ async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
 
   const cache = await initCache()
 
-  const errorLink = onError(({ networkError }) => {
+  const errorLink = onError(({ networkError, graphQLErrors, response }) => {
     if (networkError) {
       Alert.alert('Ошибка сети', networkError.message)
     }
