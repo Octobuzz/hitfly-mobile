@@ -50,10 +50,6 @@ const DEFAULT_ANIMATION_CONFIGS = {
     easing: Easing.inOut(Easing.ease),
     delay: 0,
   },
-  // decay : { // This has a serious bug
-  //   velocity     : 1,
-  //   deceleration : 0.997
-  // }
 }
 
 interface TouchOverflowStyle {
@@ -183,6 +179,11 @@ export interface SliderProps {
    * Used to configure the animation parameters.  These are the same parameters in the Animated library.
    */
   animationConfig?: {}
+
+  /**
+   * Set to true to update the value whilst clicking the Slider
+   */
+  trackClickable?: boolean
 }
 
 interface State {
@@ -340,7 +341,8 @@ export default class Slider extends PureComponent<SliderProps, State> {
     e: GestureResponderEvent /*gestureState: PanResponderGestureState*/,
   ): boolean => {
     // Should we become active when the user presses down on the thumb?
-    return this.thumbHitTest(e)
+    const { trackClickable } = this.props
+    return trackClickable ? true : this.thumbHitTest(e)
   }
 
   private handleMoveShouldSetPanResponder(/*e: GestureResponderEvent, gestureState: PanResponderGestureState*/): boolean {
@@ -350,8 +352,15 @@ export default class Slider extends PureComponent<SliderProps, State> {
 
   private previousLeft: number = 0
 
-  private handlePanResponderGrant = (/*e: GestureResponderEvent, gestureState: PanResponderGestureState*/) => {
-    this.previousLeft = this.getThumbLeft(this.getCurrentValue())
+  private handlePanResponderGrant = (
+    e: GestureResponderEvent,
+    gestureState: PanResponderGestureState,
+  ) => {
+    const { trackClickable } = this.props
+    const { thumbSize } = this.state
+    this.previousLeft = trackClickable
+      ? gestureState.x0 - thumbSize.width / 2
+      : this.getThumbLeft(this.getCurrentValue())
     this.fireChangeEvent('onSlidingStart')
   }
 
