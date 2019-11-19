@@ -52,15 +52,6 @@ const DEFAULT_ANIMATION_CONFIGS = {
   },
 }
 
-interface TouchOverflowStyle {
-  marginTop?: number
-  marginBottom?: number
-  marginLeft?: number
-  marginRight?: number
-  backgroundColor?: string
-  opacity?: number
-}
-
 export interface SliderProps {
   /**
    * Initial value of the slider. The value should be between minimumValue
@@ -196,6 +187,15 @@ interface State {
 interface Size {
   width: number
   height: number
+}
+
+interface TouchOverflowStyle {
+  marginTop?: number
+  marginBottom?: number
+  marginLeft?: number
+  marginRight?: number
+  backgroundColor?: string
+  opacity?: number
 }
 
 type MeasureName = 'containerSize' | 'trackSize' | 'thumbSize'
