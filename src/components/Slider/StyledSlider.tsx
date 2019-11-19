@@ -28,7 +28,7 @@ const StyledSlider = styled(Slider).attrs(({ theme }) => ({
     borderRadius: 0,
     backgroundColor: theme.colors.black,
   },
-  trackClickable: true,
+  trackPressable: true,
 }))`
   height: 8px;
 `

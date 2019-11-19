@@ -15,6 +15,12 @@ import {
   PanResponderGestureState,
 } from 'react-native'
 
+// Slider одолжен из react-native-slider
+// однако он заброшен и много вещей устарело
+// перенес на TS, поправил устаревшее API
+// так же добавил некоторые PR сюда
+// наверно стоит залить в отдельный NPM модуль
+
 const TRACK_SIZE = 4
 const THUMB_SIZE = 20
 
@@ -172,9 +178,9 @@ export interface SliderProps {
   animationConfig?: {}
 
   /**
-   * Set to true to update the value whilst clicking the Slider
+   * Set to true to update the value whilst pressing the Slider
    */
-  trackClickable?: boolean
+  trackPressable?: boolean
 
   /**
    * Custom component used for the track to the left of the button.
@@ -230,6 +236,7 @@ export default class Slider extends PureComponent<SliderProps, State> {
   private panResponder: PanResponderInstance
   private animatedValue: Animated.Value
   private value: number
+  private canChangeValue: boolean = true
 
   constructor(props: SliderProps) {
     super(props)
@@ -257,6 +264,10 @@ export default class Slider extends PureComponent<SliderProps, State> {
 
   componentDidUpdate({ value: oldValue }: SliderProps) {
     const { value, animateTransitions } = this.props
+
+    if (!this.canChangeValue) {
+      return
+    }
 
     if (value !== oldValue) {
       if (animateTransitions) {
@@ -359,8 +370,8 @@ export default class Slider extends PureComponent<SliderProps, State> {
     e: GestureResponderEvent /*gestureState: PanResponderGestureState*/,
   ): boolean => {
     // Should we become active when the user presses down on the thumb?
-    const { trackClickable } = this.props
-    return trackClickable ? true : this.thumbHitTest(e)
+    const { trackPressable } = this.props
+    return trackPressable ? true : this.thumbHitTest(e)
   }
 
   private handleMoveShouldSetPanResponder(/*e: GestureResponderEvent, gestureState: PanResponderGestureState*/): boolean {
@@ -372,12 +383,12 @@ export default class Slider extends PureComponent<SliderProps, State> {
 
   private handlePanResponderGrant = (
     e: GestureResponderEvent,
-    gestureState: PanResponderGestureState,
+    // gestureState: PanResponderGestureState,
   ) => {
-    const { trackClickable } = this.props
-    const { thumbSize } = this.state
-    this.previousLeft = trackClickable
-      ? gestureState.x0 - thumbSize.width / 2
+    this.canChangeValue = false
+    const { trackPressable, thumbTouchSize } = this.props
+    this.previousLeft = trackPressable
+      ? e.nativeEvent.locationX - thumbTouchSize.width / 2
       : this.getThumbLeft(this.getCurrentValue())
     this.fireChangeEvent('onSlidingStart')
   }
@@ -394,10 +405,10 @@ export default class Slider extends PureComponent<SliderProps, State> {
     this.fireChangeEvent('onValueChange')
   }
 
-  handlePanResponderRequestEnd(
+  handlePanResponderRequestEnd() /* 
     e: GestureResponderEvent,
-    gestureState: PanResponderGestureState,
-  ) {
+    gestureState: PanResponderGestureState, 
+    */ {
     // Should we allow another component to take over this pan?
     return false
   }
@@ -409,6 +420,8 @@ export default class Slider extends PureComponent<SliderProps, State> {
     if (this.props.disabled) {
       return
     }
+
+    this.canChangeValue = true
 
     this.setCurrentValue(this.getValue(gestureState))
     this.fireChangeEvent('onSlidingComplete')
@@ -501,11 +514,11 @@ export default class Slider extends PureComponent<SliderProps, State> {
     }
   }
 
-  setCurrentValue = (value: number) => {
+  private setCurrentValue = (value: number) => {
     this.animatedValue.setValue(value)
   }
 
-  getCurrentValue = (): number => {
+  private getCurrentValue = (): number => {
     return this.value
   }
 
