@@ -1,9 +1,9 @@
 import React from 'react'
-import Button from './buttons/Button'
-import { Image } from './Image'
-import View from './views/View'
-import TextBase from './TextBase'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import Button from '../buttons/Button'
+import { Image } from '../Image'
+import View from '../views/View'
+import TextBase from '../TextBase'
 import { Track } from 'src/apollo'
 import styled from 'src/styled-components'
 
