@@ -1,5 +1,6 @@
 import LFP from 'lodash/fp'
 import React from 'react'
+import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { useQuery } from '@apollo/react-hooks'
 import NonCollectionPlaylist from './NonCollectionPlaylist'
 import { Album, GET_ALBUM_TRACKS } from 'src/apollo'
@@ -24,7 +25,7 @@ interface SelectedAlbumData {
   album?: Album
 }
 
-const AlbumPlaylist: React.FC = props => {
+const AlbumPlaylist: React.FC<NavigationStackScreenProps> = props => {
   const { data } = useQuery<SelectedAlbumData>(GET_SELECTED_ALBUM)
   const id = LFP.get('album.id', data)
   const imageUrl = LFP.get('album.cover[0].imageUrl', data)

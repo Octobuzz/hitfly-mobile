@@ -38,6 +38,7 @@ const TitleText = styled(TextBase)`
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.white};
   font-size: 24px;
+  line-height: 28px;
 `
 
 const SubTitleText = styled(TextBase)`

@@ -1,6 +1,7 @@
 import L from 'lodash'
 import LFP from 'lodash/fp'
 import React, { useCallback } from 'react'
+import { NavigationStackScreenProps } from 'react-navigation-stack'
 import gql from 'graphql-tag'
 import {
   withTrackToggle,
@@ -11,7 +12,6 @@ import {
 } from 'src/HOCs'
 import { useQuery } from '@apollo/react-hooks'
 import PlaylistScreen from 'src/screens/Playlist/Playlist'
-import { Loader } from 'src/components'
 import { useQueryWithPagination } from 'src/Hooks'
 import { GET_COLLECTION_TRACKS, Collection } from 'src/apollo'
 import { names } from 'src/constants'
@@ -31,7 +31,10 @@ const GET_CURRENT_COLLECTION = gql`
 
 const LIMIT = 500
 
-interface Props extends ToggleTrackProps, DetailedTrackMenuProps {}
+interface Props
+  extends ToggleTrackProps,
+    DetailedTrackMenuProps,
+    NavigationStackScreenProps {}
 
 const hasMorePagesSelector = LFP.get('playlist.hasMorePages')
 const itemsSelector = LFP.getOr([], 'playlist.items')
@@ -65,12 +68,9 @@ const CollectionPlaylist: React.FC<Props> = props => {
     refetchCollection()
   }, [])
 
-  if (networkStatus === 1) {
-    return <Loader isAbsolute />
-  }
-
   return (
     <PlaylistScreen
+      isLoading={networkStatus === 1}
       isRefreshing={networkStatus === 4}
       isFetchingMore={networkStatus === 3}
       onRefresh={onRefresh}

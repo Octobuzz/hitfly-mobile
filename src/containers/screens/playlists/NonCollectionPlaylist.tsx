@@ -1,6 +1,7 @@
 import L from 'lodash'
 import React from 'react'
 import { DocumentNode } from 'graphql'
+import { NavigationStackScreenProps } from 'react-navigation-stack'
 import {
   withTrackToggle,
   withDetailedTrackMenu,
@@ -9,7 +10,6 @@ import {
   DetailedTrackMenuProps,
 } from 'src/HOCs'
 import PlaylistScreen from 'src/screens/Playlist'
-import { Loader } from 'src/components'
 import { useQueryWithPagination } from 'src/Hooks'
 import { Track } from 'src/apollo'
 
@@ -17,7 +17,7 @@ import { Track } from 'src/apollo'
 // надо поправить позже. пока "отклюена пагинация"
 const LIMIT = 500
 
-interface Props {
+interface Props extends NavigationStackScreenProps {
   query: DocumentNode
   playlistKey: string
   cover: any // FIXME: вытащить проп из PlaylistScreen
@@ -63,15 +63,12 @@ const NonCollectionPlaylist: React.FC<HOCsProps> = ({
     return count
   }, [tracks])
 
-  if (networkStatus === 1) {
-    return <Loader isAbsolute />
-  }
-
   const paginatedPlaylistKey = `${playlistKey}:${items.length}`
 
   return (
     <PlaylistScreen
       onEndReached={onEndReached}
+      isLoading={networkStatus === 1}
       isRefreshing={networkStatus === 4}
       isFetchingMore={networkStatus === 3}
       onRefresh={refetch}

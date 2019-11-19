@@ -1,5 +1,6 @@
 import LFP from 'lodash/fp'
 import React from 'react'
+import { NavigationStackScreenProps } from 'react-navigation-stack'
 import NonCollectionPlaylist from './NonCollectionPlaylist'
 import { GET_TOP_WEEK_TRACKS } from 'src/apollo'
 import { images, names } from 'src/constants'
@@ -7,7 +8,7 @@ import { images, names } from 'src/constants'
 const hasMorePagesSelector = LFP.get('playlist.hasMorePages')
 const itemsSelector = LFP.getOr([], 'playlist.items')
 
-const TopWeekPlaylist: React.FC = props => (
+const TopWeekPlaylist: React.FC<NavigationStackScreenProps> = props => (
   <NonCollectionPlaylist
     hasMorePagesSelector={hasMorePagesSelector}
     itemsSelector={itemsSelector}

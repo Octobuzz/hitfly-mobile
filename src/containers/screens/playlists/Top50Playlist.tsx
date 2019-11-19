@@ -1,5 +1,6 @@
 import LFP from 'lodash/fp'
 import React from 'react'
+import { NavigationStackScreenProps } from 'react-navigation-stack'
 import gql from 'graphql-tag'
 import NonCollectionPlaylist from './NonCollectionPlaylist'
 import { images, names } from 'src/constants'
@@ -29,7 +30,7 @@ const GET_TOP50_TRACKS = gql`
 const hasMorePagesSelector = LFP.F
 const itemsSelector = LFP.getOr([], 'playlist.items')
 
-const Top50Playlist: React.FC = props => (
+const Top50Playlist: React.FC<NavigationStackScreenProps> = props => (
   <NonCollectionPlaylist
     hasMorePagesSelector={hasMorePagesSelector}
     itemsSelector={itemsSelector}

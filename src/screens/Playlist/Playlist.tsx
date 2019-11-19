@@ -1,6 +1,13 @@
 import React from 'react'
+import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { Track, NullableTrack } from 'src/apollo'
-import { DarkenImage, SourceType, View, TracksFlatList } from 'src/components'
+import {
+  View,
+  Loader,
+  SourceType,
+  DarkenImage,
+  TracksFlatList,
+} from 'src/components'
 import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/HOCs'
 import ControlButton from './ControlButton'
 import ShuffleButton from './ShuffleButton'
@@ -33,13 +40,17 @@ const PositionedControlButton = styled(ControlButton)`
   align-self: center;
 `
 
-interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
+interface Props
+  extends ToggleTrackProps,
+    DetailedTrackMenuProps,
+    NavigationStackScreenProps<{ trackToPlay?: Track }> {
   cover: SourceType
   tracks: Track[]
   favouritesCount: number
   playlistKey: string
   onRefresh: () => void
   onEndReached: () => void
+  isLoading: boolean
   isRefreshing: boolean
   isFetchingMore: boolean
 }
@@ -51,6 +62,14 @@ interface State {
 class Playlist extends React.Component<Props, State> {
   state: State = {
     playingTrack: null,
+  }
+
+  componentDidMount() {
+    const { toggleTrack, navigation, playlistKey, tracks } = this.props
+    const trackToPlay = navigation.getParam('trackToPlay')
+    if (trackToPlay) {
+      toggleTrack({ track: trackToPlay, playlistKey, playlist: tracks })
+    }
   }
 
   // играемый трек может меняться, поэтому надо каждый раз проверять
@@ -89,7 +108,7 @@ class Playlist extends React.Component<Props, State> {
   }
 
   render() {
-    const { tracks, favouritesCount, ...rest } = this.props
+    const { tracks, favouritesCount, isLoading, ...rest } = this.props
     const { playingTrack } = this.state
     const activeCover = this.getCover()
     return (
@@ -104,11 +123,17 @@ class Playlist extends React.Component<Props, State> {
           )}
           <PositionedShuffleButton />
         </CoverWrapper>
-        <PlaylistInfoPanel
-          favouritesCount={favouritesCount}
-          playlist={tracks}
-        />
-        <TracksFlatList {...rest} tracks={tracks} />
+        {isLoading ? (
+          <Loader isFilled />
+        ) : (
+          <>
+            <PlaylistInfoPanel
+              favouritesCount={favouritesCount}
+              playlist={tracks}
+            />
+            <TracksFlatList {...rest} tracks={tracks} />
+          </>
+        )}
       </View>
     )
   }
