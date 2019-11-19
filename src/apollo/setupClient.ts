@@ -1,13 +1,12 @@
 import { ApolloClient } from 'apollo-client'
-import { Alert } from 'react-native'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloLink } from 'apollo-link'
 import { createHttpLink } from 'apollo-link-http'
-import { onError } from 'apollo-link-error'
 import { setContext } from 'apollo-link-context'
 import { storage } from 'src/utils'
 import { names } from 'src/constants'
 import initCache, { defaults, typeDefs } from './cache'
+import errorLink from './errorLink'
 import resolvers from './resolvers'
 
 async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
@@ -31,12 +30,6 @@ async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
   })
 
   const cache = await initCache()
-
-  const errorLink = onError(({ networkError, graphQLErrors, response }) => {
-    if (networkError) {
-      Alert.alert('Ошибка сети', networkError.message)
-    }
-  })
 
   const link = ApolloLink.from([authLink, errorLink, httpLink])
 

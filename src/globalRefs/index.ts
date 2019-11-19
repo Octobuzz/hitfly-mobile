@@ -1,1 +1,2 @@
-export { default as DetailedPanel } from './DetailedPanel'
+export { default as DetailedPanelRef } from './DetailedPanel'
+export { default as AuthErrorPanelRef } from './AuthErrorPanel'
