@@ -15,7 +15,7 @@ import { Track } from 'src/apollo'
 
 // FIXME: какая-то херня при передаче onEndReached - 2 раза делает запрос с page = 2
 // надо поправить позже. пока "отклюена пагинация"
-const LIMIT = 500
+const LIMIT = 1000
 
 interface Props extends NavigationStackScreenProps {
   query: DocumentNode

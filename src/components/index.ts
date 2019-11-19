@@ -1,6 +1,7 @@
 export * from './views'
 export * from './Image'
 export * from './Loader'
+export * from './Slider'
 export * from './fields'
 export * from './buttons'
 export * from './TextBase'

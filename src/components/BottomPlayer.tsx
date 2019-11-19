@@ -1,12 +1,12 @@
 import React from 'react'
-import { styles } from 'src/constants'
+import Icon from 'react-native-vector-icons/Foundation'
 import { Image } from './Image'
 import { More } from './buttons'
-import TextBase from './TextBase'
-import Icon from 'react-native-vector-icons/Foundation'
-import Slider from './Slider'
-import styled from 'src/styled-components'
+import { StyledSlider } from './Slider'
+import { styles } from 'src/constants'
 import { Track } from 'src/apollo'
+import TextBase from './TextBase'
+import styled from 'src/styled-components'
 
 const Wrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.white};
@@ -80,7 +80,7 @@ const BottomPlayer: React.FC<Props> = ({
   const { title, group, singer, cover } = track
   return (
     <Wrapper>
-      <Slider
+      <StyledSlider
         onSlidingComplete={onSlideEnd}
         maximumValue={duration}
         value={progress}
