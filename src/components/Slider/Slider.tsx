@@ -175,6 +175,16 @@ export interface SliderProps {
    * Set to true to update the value whilst clicking the Slider
    */
   trackClickable?: boolean
+
+  /**
+   * Custom component used for the track to the left of the button.
+   */
+  customMinimumTrack: React.ReactNode
+
+  /**
+   * Custom component used for the track to the right of the button.
+   */
+  customMaximumTrack: React.ReactNode
 }
 
 interface State {
@@ -213,6 +223,8 @@ export default class Slider extends PureComponent<SliderProps, State> {
     thumbTintColor: '#343434',
     thumbTouchSize: { width: 40, height: 40 },
     animationType: 'timing',
+    customMinimumTrack: null,
+    customMaximumTrack: null,
   }
 
   private panResponder: PanResponderInstance
@@ -262,6 +274,8 @@ export default class Slider extends PureComponent<SliderProps, State> {
       maximumValue,
       minimumTrackTintColor,
       maximumTrackTintColor,
+      customMinimumTrack,
+      customMaximumTrack,
       thumbTintColor,
       thumbImage,
       trackStyle,
@@ -314,11 +328,15 @@ export default class Slider extends PureComponent<SliderProps, State> {
           ]}
           renderToHardwareTextureAndroid={true}
           onLayout={this.measureTrack}
-        />
+        >
+          {customMaximumTrack}
+        </View>
         <Animated.View
           renderToHardwareTextureAndroid={true}
           style={[defaultStyles.track, trackStyle, minimumTrackStyle]}
-        />
+        >
+          {customMinimumTrack}
+        </Animated.View>
         <Animated.View
           onLayout={this.measureThumb}
           renderToHardwareTextureAndroid={true}
