@@ -1,8 +1,7 @@
-// @ts-ignore
-import RNSlider from 'react-native-slider'
+import Slider from './Slider'
 import styled from 'src/styled-components'
 
-const Slider = styled(RNSlider).attrs(({ theme }) => ({
+const StyledSlider = styled(Slider).attrs(({ theme }) => ({
   minimumTrackTintColor: theme.colors.brandPink,
   maximumTrackTintColor: theme.colors.gray,
   trackStyle: {
@@ -19,4 +18,4 @@ const Slider = styled(RNSlider).attrs(({ theme }) => ({
   height: 8px;
 `
 
-export default Slider
+export default StyledSlider
