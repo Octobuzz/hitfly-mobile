@@ -6,7 +6,7 @@ import { createHttpLink } from 'apollo-link-http'
 import { onError } from 'apollo-link-error'
 import { setContext } from 'apollo-link-context'
 import { storage } from 'src/utils'
-import { names, storageKeys } from 'src/constants'
+import { names } from 'src/constants'
 import initCache, { defaults, typeDefs } from './cache'
 import resolvers from './resolvers'
 
@@ -20,9 +20,6 @@ async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
 
   const authLink = setContext(async (_, { headers }) => {
     const token = await storage.getToken()
-    // FIXME: это костыль, так как есть несколько эндпоинтов.
-    // надеюсь в будущем будет 1 и тогда можно удалить
-    const endpoint = await storage.getItem(storageKeys.GRAPHQL_ENDPOINT, '')
     const context: any = {
       headers: {
         ...headers,
@@ -30,9 +27,6 @@ async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
       },
     }
 
-    if (endpoint) {
-      context.uri = `${names.BASE_URL}/${endpoint}`
-    }
     return context
   })
 

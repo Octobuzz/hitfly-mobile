@@ -79,8 +79,9 @@ class Settings extends React.Component<Props> {
     }
   }
 
+  // TODO: Вынести панель в навигатор, как для DetailedTrackPanel
   render() {
-    const { logout } = this.props
+    const { logout, isLoginingOut } = this.props
     return (
       <View paddingTop={0} addBottomSafePadding>
         <NavigationList items={this.items} />
@@ -89,7 +90,12 @@ class Settings extends React.Component<Props> {
         <SlidingPanel forwardRef={this.logoutPanel}>
           <View paddingBottom={32} noFill>
             <LogoutText>Вы уверены, что хотите выйти из аккаута?</LogoutText>
-            <IndetedButton onPress={logout} title="Выйти" />
+            <IndetedButton
+              isLoading={isLoginingOut}
+              isDisabled={isLoginingOut}
+              onPress={logout}
+              title="Выйти"
+            />
             <Link type="dark" title="Отмена" onPress={this.hideLogoutPanel} />
           </View>
         </SlidingPanel>

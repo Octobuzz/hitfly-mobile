@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import ApolloClient from 'apollo-client'
 import { withApollo } from '@apollo/react-hoc'
 import { InMemoryCache } from 'apollo-cache-inmemory'
@@ -9,6 +9,7 @@ import gql from 'graphql-tag'
 
 export interface LogoutProps {
   logout: () => Promise<void>
+  isLoginingOut: boolean
 }
 
 interface Props {
@@ -23,30 +24,28 @@ const LOGOUT = gql`
 
 const withLogout = (WrappedComponent: React.ComponentType<LogoutProps>) => {
   const Logout: React.FC<Props> = ({ client, ...rest }) => {
+    const [isLoading, setLoading] = useState(false)
+
     const logout = useCallback(async () => {
-      const prevEndpoint = (await storage.getItem(
-        storageKeys.GRAPHQL_ENDPOINT,
-        '',
-      )) as string
       try {
-        // TODO: это костыль, удалить когда бэк станет лучше
-        await storage.setItem(storageKeys.GRAPHQL_ENDPOINT, 'auth')
-
+        setLoading(true)
         await client.mutate({ mutation: LOGOUT })
-
+      } catch (error) {
+        // TODO: добавить обработчик в error-link тогда ошибка сюда не должна дойти
+      } finally {
         await storage.clearStorage()
         // пропуск приветсвенного экрана
         await storage.setItem(storageKeys.SKIP_WELCOME, true)
 
         NavigationService.navigate({ routeName: ROUTES.AUTH.LOGIN })
-        await client.resetStore()
-      } catch (error) {
-        // TODO: это костыль, удалить когда бэк станет лучше
-        await storage.setItem(storageKeys.GRAPHQL_ENDPOINT, prevEndpoint)
+        client.resetStore()
+        setLoading(false)
       }
     }, [])
 
-    return <WrappedComponent logout={logout} {...rest} />
+    return (
+      <WrappedComponent isLoginingOut={isLoading} logout={logout} {...rest} />
+    )
   }
   // @ts-ignore
   return withApollo(Logout)
