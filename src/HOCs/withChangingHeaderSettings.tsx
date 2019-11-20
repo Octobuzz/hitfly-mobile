@@ -6,18 +6,15 @@ import {
   NavigationEventSubscription,
 } from 'react-navigation'
 import { MutateProps, withMutation } from '@apollo/react-hoc'
-import { HeaderSettings } from 'src/apollo'
-import gql from 'graphql-tag'
+import {
+  HeaderSettings,
+  SET_HEADER_SETTINGS,
+  SetHeaderSettingsVariables,
+} from 'src/apollo'
 
 interface Props
   extends NavigationInjectedProps,
-    MutateProps<void, { settings: Partial<HeaderSettings> }> {}
-
-const SET_HEADER_SETTINGS = gql`
-  mutation SetHeaderSettings($settings: HeaderSettings!) {
-    setHeaderSettings(settings: $settings) @client
-  }
-`
+    MutateProps<void, SetHeaderSettingsVariables> {}
 
 const withChangingHeaderSettings = (nextSettings: Partial<HeaderSettings>) => (
   WrappedComponent: React.ComponentType<any>,
@@ -36,14 +33,11 @@ const withChangingHeaderSettings = (nextSettings: Partial<HeaderSettings>) => (
 
     private setupFocusListeners = (): void => {
       const { navigation, mutate } = this.props
-      this.willFocusSubscription = navigation.addListener(
-        'didFocus',
-        async () => {
-          await mutate({
-            variables: { settings: nextSettings },
-          })
-        },
-      )
+      this.willFocusSubscription = navigation.addListener('didFocus', () => {
+        mutate({
+          variables: { settings: nextSettings },
+        })
+      })
     }
 
     private removeFocusListeners = (): void => {

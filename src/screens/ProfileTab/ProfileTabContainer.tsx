@@ -5,11 +5,7 @@ import { NavigationStackScreenProps } from 'react-navigation-stack'
 import ProfileTabScreen from './ProfileTab'
 import { Profile, GET_PROFILE_HEAD } from 'src/apollo'
 import { Loader, TextBase, Button, Link, View } from 'src/components'
-import {
-  withDetailedTrackMenu,
-  withChangingHeaderSettings,
-  DetailedTrackMenuProps,
-} from 'src/HOCs'
+import { withChangingHeaderSettings } from 'src/HOCs'
 import styled from 'src/styled-components'
 import { ROUTES } from 'src/navigation'
 
@@ -30,12 +26,14 @@ const Wrapper = styled(View)`
   justify-content: center;
 `
 
-interface Props extends NavigationStackScreenProps, DetailedTrackMenuProps {}
+interface Props extends NavigationStackScreenProps {}
 
 const ProfileTab: React.FC<Props> = ({ navigation, ...rest }) => {
   const { data, loading } = useQuery<{ profile: Profile }>(GET_PROFILE_HEAD, {
     fetchPolicy: 'cache-and-network',
   })
+
+  const profile = L.get(data, 'profile')
 
   const navigateToLogin = useCallback(() => {
     navigation.navigate(ROUTES.APP.AUTH)
@@ -47,7 +45,6 @@ const ProfileTab: React.FC<Props> = ({ navigation, ...rest }) => {
   if (loading) {
     return <Loader isAbsolute />
   }
-  const profile = L.get(data, 'profile')
   if (!profile) {
     return (
       <Wrapper>
@@ -63,7 +60,6 @@ const ProfileTab: React.FC<Props> = ({ navigation, ...rest }) => {
   return <ProfileTabScreen {...rest} profile={profile} />
 }
 
-export default L.flowRight(
-  withChangingHeaderSettings({ state: 'profile', mode: 'light' }),
-  withDetailedTrackMenu,
-)(ProfileTab)
+export default withChangingHeaderSettings({ state: 'profile', mode: 'light' })(
+  ProfileTab,
+)
