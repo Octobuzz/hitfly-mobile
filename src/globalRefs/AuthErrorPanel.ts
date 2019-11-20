@@ -1,21 +1,18 @@
-import AuthErrorPanel from 'src/components/Panels/AuthErrorPanel'
+import { createRef } from 'react'
+import { SlidingPanelInstance } from 'src/components/Panels/SlidingPanel'
 
-let authPanelRef: AuthErrorPanel
-
-function setPanel(ref: AuthErrorPanel) {
-  authPanelRef = ref
-}
+const authPanelRef = createRef<SlidingPanelInstance>()
 
 function showPanel() {
-  if (authPanelRef) {
-    authPanelRef.showPanel()
+  if (authPanelRef.current) {
+    authPanelRef.current.show()
   }
 }
 
 function hidePanel() {
-  if (authPanelRef) {
-    authPanelRef.hidePanel()
+  if (authPanelRef.current) {
+    authPanelRef.current.hide()
   }
 }
 
-export default { setPanel, showPanel, hidePanel }
+export default { authPanelRef, showPanel, hidePanel }

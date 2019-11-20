@@ -5,6 +5,7 @@ import {
   Player,
   LogoutPanel,
   BottomPlayer,
+  AuthErrorPanel,
   HeaderRightButtons,
   // screens
   NewPlaylistScreen,
@@ -17,7 +18,7 @@ import {
   CollectionPlaylistScreen,
   ListenedNowPlaylistScreen,
 } from 'src/containers'
-import { DetailedTrackPanel, AuthErrorPanel } from 'src/components'
+import { DetailedTrackPanel } from 'src/components'
 import {
   LogoutPanelRef,
   DetailedPanelRef,
@@ -195,7 +196,7 @@ const Main: React.FC<any> = props => (
     <MainNavigator {...props} />
     <BottomPlayer />
     <DetailedTrackPanel ref={DetailedPanelRef.setPanel} />
-    <AuthErrorPanel ref={AuthErrorPanelRef.setPanel} />
+    <AuthErrorPanel ref={AuthErrorPanelRef.authPanelRef} />
     <LogoutPanel ref={LogoutPanelRef.logoutPanelRef} />
     <Player />
   </Wrapper>
