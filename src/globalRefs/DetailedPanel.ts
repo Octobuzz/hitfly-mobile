@@ -1,5 +1,5 @@
 import { Track } from 'src/apollo'
-import DetailedTrackPanel from 'src/components/Panels/DetailedTrackPanel'
+import DetailedTrackPanel from 'src/containers/components/DetailedTrackPanel'
 
 let panelRef: DetailedTrackPanel
 

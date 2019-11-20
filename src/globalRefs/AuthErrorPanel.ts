@@ -1,5 +1,5 @@
 import { createRef } from 'react'
-import { SlidingPanelInstance } from 'src/components/Panels/SlidingPanel'
+import { SlidingPanelInstance } from 'src/components/SlidingPanel'
 
 const authPanelRef = createRef<SlidingPanelInstance>()
 

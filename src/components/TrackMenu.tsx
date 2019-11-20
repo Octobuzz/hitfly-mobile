@@ -1,13 +1,16 @@
 import React from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import Button from '../buttons/Button'
-import { Image } from '../Image'
-import View from '../views/View'
-import TextBase from '../TextBase'
+import Button from './buttons/Button'
+import { Image } from './Image'
+import View from './views/View'
+import TextBase from './TextBase'
 import { Track } from 'src/apollo'
 import styled from 'src/styled-components'
 
-export const TRACK_MENU_HEIGHT = 300
+// это фактическая высота меню. костыль для выплывающей панели
+// потому что там нужно отрисовать какой-то контент,
+// ибо с динамическим не очень хорошо справляется
+export const TRACK_MENU_HEIGHT = 251.5
 
 const TrackWrapper = styled.View`
   flex-direction: row;

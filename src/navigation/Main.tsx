@@ -7,6 +7,7 @@ import {
   BottomPlayer,
   AuthErrorPanel,
   HeaderRightButtons,
+  DetailedTrackPanel,
   // screens
   NewPlaylistScreen,
   AlbumPlaylistScreen,
@@ -18,7 +19,6 @@ import {
   CollectionPlaylistScreen,
   ListenedNowPlaylistScreen,
 } from 'src/containers'
-import { DetailedTrackPanel } from 'src/components'
 import {
   LogoutPanelRef,
   DetailedPanelRef,

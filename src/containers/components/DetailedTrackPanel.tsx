@@ -1,8 +1,10 @@
 import React, { createRef } from 'react'
 import { Animated } from 'react-native'
 import { NullableTrack, Track } from 'src/apollo'
-import SlidingPanel, { SlidingPanelInstance } from './SlidingPanel'
-import TrackMenu, { TRACK_MENU_HEIGHT } from './TrackMenu'
+import SlidingPanel, {
+  SlidingPanelInstance,
+} from '../../components/SlidingPanel'
+import TrackMenu, { TRACK_MENU_HEIGHT } from '../../components/TrackMenu'
 import styled from 'src/styled-components'
 
 const Dump = styled.View`
@@ -33,11 +35,10 @@ class DetailedTrackPanel extends React.Component<any, State> {
   }
 
   showDetailedTrack = (track: Track): void => {
-    this.setState({ detailedTrack: track }, () => {
-      if (this.panel.current) {
-        this.panel.current.show()
-      }
-    })
+    this.setState({ detailedTrack: track })
+    if (this.panel.current) {
+      this.panel.current.show()
+    }
   }
 
   render() {
