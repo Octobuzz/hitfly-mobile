@@ -1,31 +1,17 @@
-import React, { createRef } from 'react'
+import React from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
-import { LogoutProps } from 'src/HOCs'
 import {
   Link,
   View,
-  Button,
-  TextBase,
   Stretcher,
-  SlidingPanel,
   NavigationList,
   NavigationItem,
-  SlidingPanelInstance,
 } from 'src/components'
-import styled from 'src/styled-components'
 import { ROUTES } from 'src/navigation'
 
-const LogoutText = styled(TextBase)`
-  text-align: center;
-  color: ${({ theme }) => theme.colors.white};
-`
-
-const IndetedButton = styled(Button)`
-  margin-top: 32px;
-  margin-bottom: 24px;
-`
-
-interface Props extends NavigationStackScreenProps, LogoutProps {}
+interface Props extends NavigationStackScreenProps {
+  onPressLogout: () => void
+}
 
 class Settings extends React.Component<Props> {
   private items: NavigationItem[]
@@ -65,40 +51,13 @@ class Settings extends React.Component<Props> {
     return items
   }
 
-  private logoutPanel = createRef<SlidingPanelInstance>()
-
-  private showLogoutPanel = (): void => {
-    if (this.logoutPanel.current) {
-      this.logoutPanel.current.show()
-    }
-  }
-
-  private hideLogoutPanel = (): void => {
-    if (this.logoutPanel.current) {
-      this.logoutPanel.current.hide()
-    }
-  }
-
-  // TODO: Вынести панель в навигатор, как для DetailedTrackPanel
   render() {
-    const { logout, isLoginingOut } = this.props
+    const { onPressLogout } = this.props
     return (
-      <View paddingTop={0} addBottomSafePadding>
+      <View paddingTop={0}>
         <NavigationList items={this.items} />
         <Stretcher />
-        <Link title="Выйти" onPress={this.showLogoutPanel} />
-        <SlidingPanel forwardRef={this.logoutPanel}>
-          <View paddingBottom={32} noFill>
-            <LogoutText>Вы уверены, что хотите выйти из аккаута?</LogoutText>
-            <IndetedButton
-              isLoading={isLoginingOut}
-              isDisabled={isLoginingOut}
-              onPress={logout}
-              title="Выйти"
-            />
-            <Link type="dark" title="Отмена" onPress={this.hideLogoutPanel} />
-          </View>
-        </SlidingPanel>
+        <Link title="Выйти" onPress={onPressLogout} />
       </View>
     )
   }

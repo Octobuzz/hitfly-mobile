@@ -1,7 +1,6 @@
 import { useCallback } from 'react'
 import { QueryResult } from '@apollo/react-common'
-import { QueryHookOptions } from '@apollo/react-hooks'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, QueryHookOptions } from '@apollo/react-hooks'
 import { DocumentNode } from 'graphql'
 import { helpers } from 'src/utils'
 

@@ -3,6 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack'
 import { getBottomSpace } from 'react-native-iphone-x-helper'
 import {
   Player,
+  LogoutPanel,
   BottomPlayer,
   HeaderRightButtons,
   // screens
@@ -17,7 +18,11 @@ import {
   ListenedNowPlaylistScreen,
 } from 'src/containers'
 import { DetailedTrackPanel, AuthErrorPanel } from 'src/components'
-import { DetailedPanelRef, AuthErrorPanelRef } from 'src/globalRefs'
+import {
+  LogoutPanelRef,
+  DetailedPanelRef,
+  AuthErrorPanelRef,
+} from 'src/globalRefs'
 import {
   HomeScreen,
   SettingsScreen,
@@ -191,6 +196,7 @@ const Main: React.FC<any> = props => (
     <BottomPlayer />
     <DetailedTrackPanel ref={DetailedPanelRef.setPanel} />
     <AuthErrorPanel ref={AuthErrorPanelRef.setPanel} />
+    <LogoutPanel ref={LogoutPanelRef.logoutPanelRef} />
     <Player />
   </Wrapper>
 )

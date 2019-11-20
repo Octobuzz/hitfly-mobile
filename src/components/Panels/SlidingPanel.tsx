@@ -1,4 +1,4 @@
-import React, { Ref } from 'react'
+import React, { Ref, forwardRef, useState, useCallback, useMemo } from 'react'
 import { LayoutChangeEvent } from 'react-native'
 import { getBottomSpace } from 'react-native-iphone-x-helper'
 import SlidingUpPanel, { SlidingUpPanelProps } from 'rn-sliding-up-panel'
@@ -26,53 +26,41 @@ const TopNotch = styled.View`
 
 export type SlidingPanelInstance = SlidingUpPanel
 
-interface Props extends SlidingUpPanelProps {
-  forwardRef?: Ref<SlidingUpPanel>
-}
+interface Props extends SlidingUpPanelProps {}
 
-interface State {
-  contentHeight: number
-}
+const SlidingPanel = forwardRef<SlidingUpPanel, Props>(
+  ({ children, ...rest }, ref) => {
+    const [contentHeight, setHeight] = useState<number>(0)
 
-class SlidingPanel extends React.Component<Props, State> {
-  state: State = {
-    contentHeight: 0,
-  }
+    const setContentHeight = useCallback((event: LayoutChangeEvent): void => {
+      const height = event.nativeEvent.layout.height + getBottomSpace()
+      setHeight(height)
+    }, [])
 
-  private setContentHeight = (event: LayoutChangeEvent): void => {
-    const contentHeight = event.nativeEvent.layout.height + getBottomSpace()
-    this.setState({ contentHeight })
-  }
+    const draggableRange = useMemo((): { top: number; bottom: number } => {
+      const top = contentHeight
+      return {
+        top,
+        bottom: 0,
+      }
+    }, [contentHeight])
 
-  private getDraggableRange = (): { top: number; bottom: number } => {
-    const { contentHeight } = this.state
-    const top = contentHeight
-    return {
-      top,
-      bottom: 0,
-    }
-  }
-
-  render() {
-    const { children, forwardRef, ...rest } = this.props
-    const { contentHeight } = this.state
-    const draggableRange = this.getDraggableRange()
     return (
       // @ts-ignore
       <StyledPanel
         snappingPoints={[draggableRange.top]}
         draggableRange={draggableRange}
         height={contentHeight || undefined}
-        ref={forwardRef}
+        ref={ref}
         {...rest}
       >
-        <Body onLayout={this.setContentHeight}>
+        <Body onLayout={setContentHeight}>
           <TopNotch />
           {children}
         </Body>
       </StyledPanel>
     )
-  }
-}
+  },
+)
 
 export default SlidingPanel

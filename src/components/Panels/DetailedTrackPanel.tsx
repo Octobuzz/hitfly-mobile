@@ -43,7 +43,7 @@ class DetailedTrackPanel extends React.Component<any, State> {
   render() {
     const { detailedTrack } = this.state
     return (
-      <SlidingPanel animatedValue={this.animatedValue} forwardRef={this.panel}>
+      <SlidingPanel animatedValue={this.animatedValue} ref={this.panel}>
         {detailedTrack ? (
           <TrackMenu onPressCancel={this.hidePanel} track={detailedTrack} />
         ) : (

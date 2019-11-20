@@ -44,7 +44,7 @@ class AuthErrorPanel extends React.Component<any> {
 
   render() {
     return (
-      <SlidingPanel animatedValue={this.animatedValue} forwardRef={this.panel}>
+      <SlidingPanel animatedValue={this.animatedValue} ref={this.panel}>
         <View paddingBottom={32} noFill>
           <LogoutText>
             Для выполнения следующего действия требуется{' '}
