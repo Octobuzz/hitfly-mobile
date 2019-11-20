@@ -32,7 +32,7 @@ const useLogout = () => {
       await storage.setItem(storageKeys.SKIP_WELCOME, true)
 
       NavigationService.navigate({ routeName: ROUTES.AUTH.LOGIN })
-      client.resetStore()
+      client.clearStore()
       setLoading(false)
     }
   }, [])

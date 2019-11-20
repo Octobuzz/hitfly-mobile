@@ -46,7 +46,7 @@ async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
     data: defaults,
   })
 
-  client.onResetStore(() => {
+  client.onClearStore(() => {
     cache.writeData({
       data: defaults,
     })
