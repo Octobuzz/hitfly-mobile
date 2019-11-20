@@ -1,5 +1,4 @@
 import React from 'react'
-import { NavigationStackScreenProps } from 'react-navigation-stack'
 import {
   TabBar,
   TabView,
@@ -42,7 +41,7 @@ interface TabState {
 
 interface State extends NavigationState<TabState> {}
 
-interface Props extends NavigationStackScreenProps, DetailedTrackMenuProps {
+interface Props extends DetailedTrackMenuProps {
   profile: Profile
 }
 
