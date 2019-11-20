@@ -1,10 +1,12 @@
 import React, { createRef } from 'react'
 import { Animated } from 'react-native'
 import { NullableTrack, Track } from 'src/apollo'
-import SlidingPanel, {
+import {
+  TrackMenu,
+  SlidingPanel,
   SlidingPanelInstance,
-} from '../../components/SlidingPanel'
-import TrackMenu, { TRACK_MENU_HEIGHT } from '../../components/TrackMenu'
+  TRACK_MENU_HEIGHT,
+} from 'src/components'
 import styled from 'src/styled-components'
 
 const Dump = styled.View`
