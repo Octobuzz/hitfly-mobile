@@ -50,12 +50,6 @@ const HeaderRightButtons: React.FC<Props> = ({ navigation, theme }) => {
 
   return (
     <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-      <Item
-        color={color}
-        iconSize={ICON_SIZE}
-        title="Уведомления"
-        iconName="md-notifications-outline"
-      />
       {state === 'main' ? (
         <Item
           color={color}
