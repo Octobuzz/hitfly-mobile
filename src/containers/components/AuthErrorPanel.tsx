@@ -1,5 +1,6 @@
-import React, { useCallback, useMemo, forwardRef } from 'react'
+import React, { useCallback, useMemo, forwardRef, useContext } from 'react'
 import { Animated } from 'react-native'
+import { NavigationContext } from 'react-navigation'
 import {
   View,
   Link,
@@ -8,7 +9,6 @@ import {
   SlidingPanel,
   SlidingPanelInstance,
 } from 'src/components'
-import { NavigationService } from 'src/navigation'
 import { routes } from 'src/constants'
 import styled from 'src/styled-components'
 
@@ -37,8 +37,10 @@ const AuthErrorPanel = forwardRef<SlidingPanelInstance>((_, ref) => {
     }
   }, [])
 
+  const navigation = useContext(NavigationContext)
+
   const navigateToLogin = useCallback(() => {
-    NavigationService.navigate({ routeName: routes.APP.AUTH })
+    navigation.navigate(routes.APP.AUTH)
   }, [])
 
   return (

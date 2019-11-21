@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { QueryResult } from '@apollo/react-common'
 import { useQuery, QueryHookOptions } from '@apollo/react-hooks'
 import { DocumentNode } from 'graphql'
-import { helpers } from 'src/utils'
+import { mergeRight } from 'src/helpers'
 
 interface Options<TData> extends QueryHookOptions<TData> {
   itemsSelector: (data?: TData) => any[]
@@ -51,7 +51,7 @@ function useQueryWithPagination<TData = any>(
         updateQuery: (prev, { fetchMoreResult }) => {
           if (fetchMoreResult) {
             // @ts-ignore
-            return helpers.mergeRight(prev, fetchMoreResult)
+            return mergeRight(prev, fetchMoreResult)
           }
           return prev
         },

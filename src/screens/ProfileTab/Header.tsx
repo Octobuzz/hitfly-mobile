@@ -1,7 +1,7 @@
 import React, { useMemo, useCallback } from 'react'
 import { DarkenImage, TextBase } from 'src/components'
 import { Profile, Role } from 'src/apollo'
-import { helpers } from 'src/utils'
+import { getNameForCount } from 'src/helpers'
 import LinearGradient from 'react-native-linear-gradient'
 import { images } from 'src/constants'
 import styled from 'src/styled-components'
@@ -66,7 +66,7 @@ interface Props {
   TabBar: React.ReactNode
 }
 
-const getNameForSubscribers = helpers.getNameForCount({
+const getNameForSubscribers = getNameForCount({
   nominative: 'поклонник',
   genitive: 'поклонника',
   genitiveMultiple: 'поклонников',

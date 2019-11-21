@@ -1,6 +1,6 @@
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { persistCache } from 'apollo-cache-persist'
-import { storageInstance } from 'src/utils'
+import storage from './storage'
 import gql from 'graphql-tag'
 
 export const defaults = {
@@ -47,7 +47,7 @@ export default async (): Promise<InMemoryCache> => {
     cache,
     debug: __DEV__,
     // @ts-ignore
-    storage: storageInstance,
+    storage,
   })
 
   return cache

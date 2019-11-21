@@ -3,7 +3,7 @@ import { MusicGroup } from 'src/apollo'
 import { H2 } from 'src/components'
 import Block from './Block'
 import Group from './MusicGroup'
-import { helpers } from 'src/utils'
+import { getNameForCount } from 'src/helpers'
 import styled from 'src/styled-components'
 
 const IndentedH2 = styled(H2)`
@@ -14,7 +14,7 @@ interface Props {
   musicGroups: MusicGroup[] | null
 }
 
-const getNameForFollowers = helpers.getNameForCount({
+const getNameForFollowers = getNameForCount({
   nominative: 'поклонник',
   genitive: 'поклонника',
   genitiveMultiple: 'поклонников',

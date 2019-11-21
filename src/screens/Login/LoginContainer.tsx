@@ -1,11 +1,11 @@
 import L from 'lodash'
 import React, { useCallback } from 'react'
+import { useMutation } from '@apollo/react-hooks'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { withHidingSplashScreen, withChangingHeaderSettings } from 'src/HOCs'
-import Login from './Login'
-import { useMutation } from '@apollo/react-hooks'
 import { routes } from 'src/constants'
-import { storage } from 'src/utils'
+import { storage } from 'src/apollo'
+import Login from './Login'
 import gql from 'graphql-tag'
 
 const LOGIN = gql`

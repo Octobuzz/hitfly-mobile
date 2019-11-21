@@ -13,7 +13,7 @@ import {
   DatePicker,
 } from 'src/components'
 import { strings } from 'src/constants'
-import { helpers } from 'src/utils'
+import { transformFormErrors } from 'src/helpers'
 import styled from 'src/styled-components'
 
 const indentAttrs = () => ({
@@ -194,7 +194,7 @@ export default withFormik<OuterProps, Values>({
     try {
       await onSubmit(values)
     } catch (error) {
-      const formErrors = helpers.transformFormErrors(error)
+      const formErrors = transformFormErrors(error)
       setErrors(formErrors)
     } finally {
       setSubmitting(false)

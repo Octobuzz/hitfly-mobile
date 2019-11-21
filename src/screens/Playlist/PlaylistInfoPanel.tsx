@@ -4,7 +4,7 @@ import { ViewStyle } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { TextBase } from 'src/components'
 import { Playlist } from 'src/apollo'
-import { helpers } from 'src/utils'
+import { formatTracksCount, formatTimeDurationForPlaylist } from 'src/helpers'
 import styled from 'src/styled-components'
 
 const Wrapper = styled.View`
@@ -42,7 +42,7 @@ const PlaylistInfoPanel: React.FC<Props> = ({
   favouritesCount,
 }) => {
   const playlistInfo = React.useMemo(() => {
-    const count = helpers.formatTracksCount(playlist.length)
+    const count = formatTracksCount(playlist.length)
     if (!playlist.length) {
       return count
     }
@@ -50,7 +50,7 @@ const PlaylistInfoPanel: React.FC<Props> = ({
     if (!fullLength) {
       return count
     }
-    const formattedTime = helpers.formatTimeDurationForPlaylist(fullLength, {
+    const formattedTime = formatTimeDurationForPlaylist(fullLength, {
       withSeconds: true,
     })
     return `${count}, ${formattedTime}`

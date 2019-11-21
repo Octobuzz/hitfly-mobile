@@ -3,7 +3,7 @@ import * as Yup from 'yup'
 import { Field, FormikProps, withFormik } from 'formik'
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons'
 import { View, Input, Button, HelperText, FormWrapper } from 'src/components'
-import { helpers } from 'src/utils'
+import { transformFormErrors } from 'src/helpers'
 import { strings } from 'src/constants'
 import styled from 'src/styled-components'
 
@@ -98,7 +98,7 @@ export default withFormik<OuterProps, Values>({
     try {
       await onSubmit(values)
     } catch (error) {
-      const formErrors = helpers.transformFormErrors(error)
+      const formErrors = transformFormErrors(error)
       setErrors(formErrors)
     } finally {
       setSubmitting(false)

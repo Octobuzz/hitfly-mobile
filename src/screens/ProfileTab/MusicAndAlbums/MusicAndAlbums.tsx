@@ -9,7 +9,7 @@ import {
   RefreshControl,
 } from 'src/components'
 import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/HOCs'
-import { helpers } from 'src/utils'
+import { formatTracksCount, formatTimeDurationForPlaylist } from 'src/helpers'
 import styled from 'src/styled-components'
 
 const AlbumsWrapper = styled.View`
@@ -82,7 +82,7 @@ class LikedMusic extends React.Component<Props> {
   private getTracksInfo = (): string => {
     const { tracks } = this.props
 
-    const count = helpers.formatTracksCount(tracks.length)
+    const count = formatTracksCount(tracks.length)
     if (!tracks.length) {
       return count
     }
@@ -92,7 +92,7 @@ class LikedMusic extends React.Component<Props> {
       return count
     }
 
-    const formattedTime = helpers.formatTimeDurationForPlaylist(fullLength, {
+    const formattedTime = formatTimeDurationForPlaylist(fullLength, {
       useShortSyntax: true,
     })
 

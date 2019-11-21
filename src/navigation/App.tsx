@@ -10,7 +10,7 @@ import MainNavigator from './Main'
 import Storybook from '../../storybook'
 import styled from 'src/styled-components'
 import { styles, storageKeys, routes } from 'src/constants'
-import { storage } from 'src/utils'
+import { storage } from 'src/apollo'
 
 const SwitchRoutes = {
   [routes.APP.WELCOME]: {

@@ -6,7 +6,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { View, SafeView, Button, Stretcher, Input } from 'src/components'
 import { ProfileSocialAuth } from 'src/containers/components'
 import styled from 'src/styled-components'
-import { helpers } from 'src/utils'
+import { transformFormErrors } from 'src/helpers'
 import { strings } from 'src/constants'
 
 const ChangePasswordButton = styled(Button)`
@@ -83,7 +83,7 @@ export default withFormik<OuterProps, Values>({
       }
       navigation.goBack()
     } catch (error) {
-      const formErrors = helpers.transformFormErrors(error)
+      const formErrors = transformFormErrors(error)
       setErrors(formErrors)
     } finally {
       setSubmitting(false)

@@ -3,9 +3,9 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloLink } from 'apollo-link'
 import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
-import { storage } from 'src/utils'
 import { names } from 'src/constants'
 import initCache, { defaults, typeDefs } from './cache'
+import { getToken } from './storage'
 import errorLink from './errorLink'
 import resolvers from './resolvers'
 
@@ -18,7 +18,7 @@ async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
   })
 
   const authLink = setContext(async (_, { headers }) => {
-    const token = await storage.getToken()
+    const token = await getToken()
     const context: any = {
       headers: {
         ...headers,

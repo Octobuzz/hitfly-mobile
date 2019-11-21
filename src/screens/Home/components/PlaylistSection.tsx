@@ -5,7 +5,7 @@ import { Loader, TextBase } from 'src/components'
 import { Playlist } from 'src/apollo'
 import SectionWrapper from './SectionWrapper'
 import PlaylistHeader from './PlaylistHeader'
-import { helpers } from 'src/utils'
+import { formatTracksCount, formatTimeDurationForPlaylist } from 'src/helpers'
 import styled from 'src/styled-components'
 
 const Inner = styled.TouchableOpacity`
@@ -64,12 +64,12 @@ const PlaylistSection: React.FC<Props> = ({
   const bottomText = React.useMemo(() => {
     switch (bottomTextType) {
       case 'tracksCount': {
-        const text = helpers.formatTracksCount(tracksCount || 0)
+        const text = formatTracksCount(tracksCount || 0)
         return text
       }
       case 'tracksLength': {
         const fullLength: number = L.sumBy(playlist, 'length')
-        const formattedTime = helpers.formatTimeDurationForPlaylist(fullLength)
+        const formattedTime = formatTimeDurationForPlaylist(fullLength)
         return formattedTime
       }
     }

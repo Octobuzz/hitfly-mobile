@@ -1,6 +1,6 @@
 import React from 'react'
 // import { Linking } from 'react-native'
-import { helpers } from 'src/utils'
+import { getNameForCount } from 'src/helpers'
 import { Profile } from 'src/apollo'
 import { H2, /* Link, */ TextBase } from 'src/components'
 import Block from './Block'
@@ -46,17 +46,17 @@ interface Props
   > {}
 
 class BonusProgram extends React.PureComponent<Props> {
-  private getNameForPoints = helpers.getNameForCount({
+  private getNameForPoints = getNameForCount({
     nominative: 'балл',
     genitive: 'балла',
     genitiveMultiple: 'баллов',
   })
-  private getNameForDays = helpers.getNameForCount({
+  private getNameForDays = getNameForCount({
     nominative: 'день',
     genitive: 'дня',
     genitiveMultiple: 'дней',
   })
-  private getNameForSongs = helpers.getNameForCount({
+  private getNameForSongs = getNameForCount({
     nominative: 'любимая песня',
     genitive: 'любимые песни',
     genitiveMultiple: 'любимых песен',
@@ -77,7 +77,7 @@ class BonusProgram extends React.PureComponent<Props> {
     return (
       <Block>
         <TitleText>
-          {helpers.getBonusProgramLevelHumanReadable(bonusProgramLevel)}
+          {getBonusProgramLevelHumanReadable(bonusProgramLevel)}
         </TitleText>
 
         <Row>

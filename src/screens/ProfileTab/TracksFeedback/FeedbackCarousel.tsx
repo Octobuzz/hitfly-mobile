@@ -89,19 +89,11 @@ class FeedbackCarousel extends React.Component<Props, State> {
   private openPage = async (page: number): Promise<void> => {
     // блять, ts не поддерживает ?.
     // не хочу использовать L.get так как придется типизировать
-    if (
-      this.animatedView &&
-      this.animatedView.current &&
-      this.animatedView.current.fadeOut
-    ) {
+    if (this.animatedView.current && this.animatedView.current.fadeOut) {
       await this.animatedView.current.fadeOut(300)
     }
     this.setState({ currentPage: page }, () => {
-      if (
-        this.animatedView &&
-        this.animatedView.current &&
-        this.animatedView.current.fadeIn
-      ) {
+      if (this.animatedView.current && this.animatedView.current.fadeIn) {
         this.animatedView.current.fadeIn(300)
       }
     })

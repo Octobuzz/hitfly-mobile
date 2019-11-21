@@ -2,7 +2,7 @@ import React, { useMemo, useCallback } from 'react'
 import { ViewStyle } from 'react-native'
 import TextBase from './TextBase'
 import { Image } from './Image'
-import { helpers } from 'src/utils'
+import { formatTracksCount } from 'src/helpers'
 import { Collection } from 'src/apollo'
 import { styles } from 'src/constants'
 import styled from 'src/styled-components'
@@ -63,10 +63,9 @@ const CollectionItem: React.FC<CollectionItemProps> = ({
   }, [onPress, collection])
 
   const { tracksCountInPlaylist, title, image } = collection
-  const bottomText = useMemo(
-    () => helpers.formatTracksCount(tracksCountInPlaylist),
-    [tracksCountInPlaylist],
-  )
+  const bottomText = useMemo(() => formatTracksCount(tracksCountInPlaylist), [
+    tracksCountInPlaylist,
+  ])
   return (
     <ItemWrapper
       style={style}

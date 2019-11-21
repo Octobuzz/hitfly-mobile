@@ -4,7 +4,7 @@ import ApolloClient, { Resolvers } from 'apollo-client'
 import gql from 'graphql-tag'
 import { Track } from './schemas'
 import { HeaderSettings, CollectionsType } from './commonTypes'
-import { helpers } from 'src/utils'
+import { setStatusBarColor } from 'src/helpers'
 
 interface ContextArgs {
   client: ApolloClient<InMemoryCache>
@@ -85,7 +85,7 @@ export default {
         ...settings,
       }
       if (newSettings.mode) {
-        helpers.setStatusBarColor(newSettings.mode)
+        setStatusBarColor(newSettings.mode)
       }
       cache.writeData({ data: { headerSettings: newSettings } })
       return null

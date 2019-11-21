@@ -4,7 +4,7 @@ import { Playable } from './interfaces'
 import More from 'src/components/buttons/More'
 import TextBase from 'src/components/TextBase'
 import TrackImage from './TrackImage'
-import { helpers } from 'src/utils'
+import { formatTimeDurationForTrack } from 'src/helpers'
 import styled from 'src/styled-components'
 
 const VERTICAL_PADDING = 16
@@ -70,7 +70,7 @@ const PlaylistTrack: React.FC<PlaylistTrackProps> & Sized = ({
   const { cover, title, group, singer, length } = track
   const trackLength = React.useMemo(() => {
     if (typeof length === 'number') {
-      return helpers.formatTimeDurationForTrack(length)
+      return formatTimeDurationForTrack(length)
     }
     return '0:00'
   }, [length])

@@ -4,7 +4,7 @@ import { Field, FormikProps, withFormik } from 'formik'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import { Input, Button, Stretcher } from 'src/components'
 import { strings } from 'src/constants'
-import { helpers } from 'src/utils'
+import { transformFormErrors } from 'src/helpers'
 
 interface Values {
   email: string
@@ -58,7 +58,7 @@ export default withFormik<OuterProps, Values>({
     try {
       await onSubmit(values)
     } catch (error) {
-      const formErrors = helpers.transformFormErrors(error)
+      const formErrors = transformFormErrors(error)
       setErrors(formErrors)
     } finally {
       setSubmitting(false)

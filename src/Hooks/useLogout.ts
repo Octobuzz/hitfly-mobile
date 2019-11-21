@@ -1,13 +1,9 @@
-import { useCallback, useState } from 'react'
-import { NavigationService } from 'src/navigation'
+import { useCallback, useState, useContext } from 'react'
+import { NavigationContext } from 'react-navigation'
 import { useApolloClient } from '@apollo/react-hooks'
 import { storageKeys, routes } from 'src/constants'
-import { storage } from 'src/utils'
+import { storage } from 'src/apollo'
 import gql from 'graphql-tag'
-
-export interface LogoutProps {
-  showLogoutPanel: () => void
-}
 
 const LOGOUT = gql`
   mutation {
@@ -20,6 +16,7 @@ const useLogout = () => {
 
   const client = useApolloClient()
 
+  const navigation = useContext(NavigationContext)
   const logout = useCallback(async () => {
     try {
       setLoading(true)
@@ -31,7 +28,7 @@ const useLogout = () => {
       // пропуск приветсвенного экрана
       await storage.setItem(storageKeys.SKIP_WELCOME, true)
 
-      NavigationService.navigate({ routeName: routes.AUTH.LOGIN })
+      navigation.navigate({ routeName: routes.AUTH.LOGIN })
       client.clearStore()
       setLoading(false)
     }

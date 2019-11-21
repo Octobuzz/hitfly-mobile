@@ -6,7 +6,7 @@ import { strings } from 'src/constants'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons'
 import { /* Link, */ Input, Button } from 'src/components'
-import { helpers } from 'src/utils'
+import { transformFormErrors } from 'src/helpers'
 import styled from 'src/styled-components'
 
 // смотри коммент в месте использования
@@ -101,7 +101,7 @@ export default withFormik<OuterProps, Values>({
     try {
       await onSubmit(payload)
     } catch (error) {
-      const formErrors = helpers.transformFormErrors(error)
+      const formErrors = transformFormErrors(error)
       setErrors(formErrors)
     } finally {
       setSubmitting(false)
