@@ -1,10 +1,10 @@
 import L from 'lodash'
+import { Platform, StatusBar } from 'react-native'
 import { InMemoryCache, IdGetter } from 'apollo-cache-inmemory'
 import ApolloClient, { Resolvers } from 'apollo-client'
-import gql from 'graphql-tag'
+import { HeaderSettings, CollectionsType, HeaderMode } from './commonTypes'
 import { Track } from './schemas'
-import { HeaderSettings, CollectionsType } from './commonTypes'
-import { setStatusBarColor } from 'src/helpers'
+import gql from 'graphql-tag'
 
 interface ContextArgs {
   client: ApolloClient<InMemoryCache>
@@ -53,6 +53,15 @@ const GET_HEADER_SETTINGS = gql`
     }
   }
 `
+
+const setStatusBarColor = (mode: HeaderMode): void => {
+  if (Platform.OS === 'ios') {
+    StatusBar.setBarStyle(
+      mode === 'dark' ? 'dark-content' : 'light-content',
+      true,
+    )
+  }
+}
 
 export default {
   Mutation: {
