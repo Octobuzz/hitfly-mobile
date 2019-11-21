@@ -2,8 +2,10 @@ import React, { useCallback } from 'react'
 import TrackPlayer from 'react-native-track-player'
 // @ts-ignore больные ублюдки
 import { useTrackPlayerProgress } from 'react-native-track-player/lib/hooks'
-import { BottomPlayer } from 'src/components'
 import { withTrackToggle, ToggleTrackProps } from 'src/HOCs'
+import { useNavigation } from 'src/Hooks'
+import { BottomPlayer } from 'src/components'
+import { routes } from 'src/constants'
 
 interface Props extends ToggleTrackProps {}
 
@@ -13,13 +15,14 @@ const BottomPlayerContainer: React.FC<Props> = ({
   isPlaying,
 }) => {
   const { duration, position } = useTrackPlayerProgress()
+  const navigation = useNavigation()
 
   const handlePressControl = useCallback(() => {
     toggleTrack()
   }, [toggleTrack])
 
-  const onPressMore = useCallback(() => {
-    // TODO: навигация в модалку плеера
+  const onPressPlayer = useCallback(() => {
+    navigation.navigate(routes.PLAYER.MODAL_PLAYER)
   }, [])
   const onSlideEnd = useCallback(progress => {
     TrackPlayer.seekTo(progress)
@@ -30,7 +33,7 @@ const BottomPlayerContainer: React.FC<Props> = ({
       onSlideEnd={onSlideEnd}
       isPlaying={isPlaying}
       onPressControl={handlePressControl}
-      onPressMore={onPressMore}
+      onPressPlayer={onPressPlayer}
       progress={position}
       duration={duration}
       track={activeTrack}

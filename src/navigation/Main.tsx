@@ -1,6 +1,5 @@
 import React from 'react'
 import { createStackNavigator } from 'react-navigation-stack'
-import { getBottomSpace } from 'react-native-iphone-x-helper'
 import {
   Player,
   LogoutPanel,
@@ -39,9 +38,10 @@ import {
   LikedAlbumsDetailedScreen,
   SelectGenreForProfileScreen,
 } from 'src/screens'
+import PlayerNavigator from './Player'
 import { stackDefaultOptions, playlistConfig } from './configs'
 import { routes } from 'src/constants'
-import styled from 'src/styled-components'
+import { View } from 'src/components'
 
 const MainNavigator = createStackNavigator(
   {
@@ -186,23 +186,29 @@ const MainNavigator = createStackNavigator(
   },
 )
 
-const Wrapper = styled.View`
-  flex: 1;
-  padding-bottom: ${getBottomSpace()};
-`
-
 const Main: React.FC<any> = props => (
-  <Wrapper>
+  <View noPadding addBottomSafePadding>
     <MainNavigator {...props} />
     <BottomPlayer />
     <DetailedTrackPanel ref={DetailedPanelRef.setPanel} />
     <AuthErrorPanel ref={AuthErrorPanelRef.authPanelRef} />
     <LogoutPanel ref={LogoutPanelRef.logoutPanelRef} />
     <Player />
-  </Wrapper>
+  </View>
 )
 
 // @ts-ignore
 Main.router = MainNavigator.router
 
-export default Main
+const MainStack = createStackNavigator(
+  {
+    Main,
+    PlayerNavigator,
+  },
+  {
+    headerMode: 'none',
+    mode: 'modal',
+  },
+)
+
+export default MainStack

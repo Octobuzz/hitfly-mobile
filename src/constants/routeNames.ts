@@ -1,6 +1,7 @@
 const APP = {
   AUTH: 'auth',
   MAIN: 'main',
+  PLAYER: 'player',
   WELCOME: 'welcome',
   STORYBOOK: 'storybook',
 }
@@ -39,5 +40,10 @@ export default {
     MY_MUSIC_PLAYLIST: `${APP.MAIN}/my_music_playlist`,
     LIKED_ALBUMS_DETAILED: `${APP.MAIN}/liked_albums_detailed`,
     LIKED_MUSIC_PLAYLIST: `${APP.MAIN}/liked_music_playlist`,
+  },
+
+  PLAYER: {
+    MODAL_PLAYER: `${APP.PLAYER}/modal_player`,
+    MODAL_PLAYLIST: `${APP.PLAYER}/modal_playlist`,
   },
 }

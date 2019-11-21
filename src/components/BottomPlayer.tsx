@@ -1,7 +1,6 @@
 import React from 'react'
 import Icon from 'react-native-vector-icons/Foundation'
 import { Image } from './Image'
-import { More } from './buttons'
 import { StyledSlider } from './Slider'
 import { styles } from 'src/constants'
 import { Track } from 'src/apollo'
@@ -12,7 +11,9 @@ const Wrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.white};
 `
 
-const Inner = styled.View`
+const Inner = styled.TouchableOpacity.attrs(() => ({
+  activeOpacity: 0.8,
+}))`
   padding: 16px ${styles.VIEW_HORIZONTAL_INDENTATION}px;
   flex-direction: row;
   align-items: center;
@@ -60,7 +61,7 @@ interface Props {
   progress?: number
   duration?: number
   isPlaying: boolean
-  onPressMore: () => void
+  onPressPlayer: () => void
   onSlideEnd: (progress: number) => void
   onPressControl: () => void
 }
@@ -69,7 +70,7 @@ const BottomPlayer: React.FC<Props> = ({
   track,
   isPlaying,
   onSlideEnd,
-  onPressMore,
+  onPressPlayer,
   onPressControl,
   progress = 0,
   duration = 1,
@@ -86,13 +87,12 @@ const BottomPlayer: React.FC<Props> = ({
         value={progress}
         step={1}
       />
-      <Inner>
+      <Inner onPress={onPressPlayer}>
         <TrackImage source={{ uri: cover[0].imageUrl }} />
         <CenterBlock>
           <TitleText>{title}</TitleText>
           <SubTitleText>{group ? group.title : singer}</SubTitleText>
         </CenterBlock>
-        <More onPress={onPressMore} />
         <PlayerButton onPress={onPressControl}>
           <PlayerIcon name={isPlaying ? 'pause' : 'play'} />
         </PlayerButton>
