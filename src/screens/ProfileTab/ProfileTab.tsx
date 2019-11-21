@@ -1,5 +1,4 @@
 import React from 'react'
-import { NavigationStackScreenProps } from 'react-navigation-stack'
 import {
   TabBar,
   TabView,
@@ -12,7 +11,6 @@ import TracksFeedbackScreen from './TracksFeedback'
 import { MyMusicScreen, LikedMusicScreen } from './MusicAndAlbums'
 import { Profile } from 'src/apollo'
 import { TextBase } from 'src/components'
-import { DetailedTrackMenuProps } from 'src/HOCs'
 import styled from 'src/styled-components'
 
 const StyledTabBar = styled(TabBar).attrs(({ theme }) => ({
@@ -42,7 +40,7 @@ interface TabState {
 
 interface State extends NavigationState<TabState> {}
 
-interface Props extends NavigationStackScreenProps, DetailedTrackMenuProps {
+interface Props {
   profile: Profile
 }
 
@@ -84,16 +82,15 @@ class ProfileTab extends React.Component<Props, State> {
   private renderScene = ({
     route,
   }: SceneRendererProps & { route: TabState }): React.ReactNode => {
-    const { showDetailedTrack } = this.props
     switch (route.key) {
       case 'about':
         return <AboutMeScreen />
       case 'myMusic':
-        return <MyMusicScreen showDetailedTrack={showDetailedTrack} />
+        return <MyMusicScreen />
       case 'likedMusic':
-        return <LikedMusicScreen showDetailedTrack={showDetailedTrack} />
+        return <LikedMusicScreen />
       case 'feedback':
-        return <TracksFeedbackScreen showDetailedTrack={showDetailedTrack} />
+        return <TracksFeedbackScreen />
       default:
         return null
     }

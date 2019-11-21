@@ -36,8 +36,6 @@ const RegisterContainer: React.FC<Props> = props => {
     const token = L.get(result, 'data.register.token')
     if (token) {
       await storage.setToken(token)
-      // TODO: это костыль, удалить когда бэк станет лучше
-      await storage.setItem(storageKeys.GRAPHQL_ENDPOINT, 'user')
       props.navigation.navigate(ROUTES.AUTH.SELECT_GENRE)
     }
   }, [])

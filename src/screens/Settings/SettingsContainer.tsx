@@ -1,8 +1,14 @@
-import L from 'lodash'
+import React from 'react'
+import { NavigationStackScreenProps } from 'react-navigation-stack'
 import SettingsScreen from './Settings'
-import { withLogout, withChangingHeaderSettings } from 'src/HOCs'
+import { LogoutPanelRef } from 'src/globalRefs'
+import { useChangingHeaderSettings } from 'src/Hooks'
 
-export default L.flowRight(
-  withLogout,
-  withChangingHeaderSettings({ state: 'main', mode: 'dark' }),
-)(SettingsScreen)
+interface Props extends NavigationStackScreenProps {}
+
+const SettingsContainer: React.FC<Props> = props => {
+  useChangingHeaderSettings({ state: 'main', mode: 'dark' })
+  return <SettingsScreen {...props} onPressLogout={LogoutPanelRef.showPanel} />
+}
+
+export default SettingsContainer

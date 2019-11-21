@@ -31,7 +31,7 @@ const SlidingPanelStory: React.FC = () => {
   return (
     <>
       <Button onPress={openPanel} title="Open panel" />
-      <SlidingPanel forwardRef={panel}>
+      <SlidingPanel ref={panel}>
         <Button title="Gradient" type="gradient" />
       </SlidingPanel>
     </>

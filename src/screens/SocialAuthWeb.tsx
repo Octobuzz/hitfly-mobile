@@ -19,8 +19,6 @@ class SocialAuthWeb extends React.Component<NavigationStackScreenProps> {
     if (query && query.token) {
       // успешно вошел если есть токен в query
       await storage.setItem(storageKeys.AUTH_TOKEN, query.token as string)
-      // TODO: это костыль, удалить когда бэк станет лучше
-      await storage.setItem(storageKeys.GRAPHQL_ENDPOINT, 'user')
 
       const nextRoute = navigation.getParam('nextRoute')
       navigation.navigate(nextRoute)
