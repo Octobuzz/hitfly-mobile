@@ -2,7 +2,7 @@ import L from 'lodash'
 import React, { useEffect, useCallback } from 'react'
 import { withNavigation } from 'react-navigation'
 import { TracksSection } from '../components'
-import { ROUTES } from 'src/navigation'
+import { routes } from 'src/constants'
 import { useQueryWithPagination } from 'src/Hooks'
 import { GET_TOP_WEEK_TRACKS, Track } from 'src/apollo'
 
@@ -32,11 +32,11 @@ const TopWeekContainer: React.FC<any> = ({ navigation, getRefetcher }) => {
   }, [getRefetcher])
 
   const onPressHeader = useCallback(() => {
-    navigation.navigate(ROUTES.MAIN.TOP_WEEK_PLAYLIST)
+    navigation.navigate(routes.MAIN.TOP_WEEK_PLAYLIST)
   }, [])
 
   const onPressTrack = useCallback((track: Track) => {
-    navigation.navigate(ROUTES.MAIN.TOP_WEEK_PLAYLIST, { trackToPlay: track })
+    navigation.navigate(routes.MAIN.TOP_WEEK_PLAYLIST, { trackToPlay: track })
   }, [])
 
   const isLoading = networkStatus === 4 || networkStatus === 1

@@ -1,11 +1,10 @@
 import React from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { Button, SafeView, View, Stretcher } from 'src/components'
-import { images, storageKeys } from 'src/constants'
-import { ROUTES } from 'src/navigation'
+import { images, storageKeys, routes } from 'src/constants'
 import Features, { Feature } from './Features'
-import styled from 'src/styled-components'
 import { storage } from 'src/utils'
+import styled from 'src/styled-components'
 
 const Logo = styled.Image.attrs(() => ({
   source: images.WELCOME_LOGO,
@@ -40,7 +39,7 @@ class Welcome extends React.Component<NavigationStackScreenProps> {
   private navigateToNext = () => {
     const { navigation } = this.props
     storage.setItem(storageKeys.SKIP_WELCOME, true)
-    navigation.navigate(ROUTES.AUTH.LOGIN)
+    navigation.navigate(routes.AUTH.LOGIN)
   }
 
   render() {

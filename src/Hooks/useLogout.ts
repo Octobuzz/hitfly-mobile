@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
-import { NavigationService, ROUTES } from 'src/navigation'
+import { NavigationService } from 'src/navigation'
 import { useApolloClient } from '@apollo/react-hooks'
-import { storageKeys } from 'src/constants'
+import { storageKeys, routes } from 'src/constants'
 import { storage } from 'src/utils'
 import gql from 'graphql-tag'
 
@@ -31,7 +31,7 @@ const useLogout = () => {
       // пропуск приветсвенного экрана
       await storage.setItem(storageKeys.SKIP_WELCOME, true)
 
-      NavigationService.navigate({ routeName: ROUTES.AUTH.LOGIN })
+      NavigationService.navigate({ routeName: routes.AUTH.LOGIN })
       client.clearStore()
       setLoading(false)
     }

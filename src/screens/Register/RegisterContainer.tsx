@@ -2,9 +2,8 @@ import L from 'lodash'
 import React, { useCallback } from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { useMutation } from '@apollo/react-hooks'
-import { storageKeys } from 'src/constants'
 import RegisterScreen from './Register'
-import { ROUTES } from 'src/navigation'
+import { routes } from 'src/constants'
 import { storage } from 'src/utils'
 import gql from 'graphql-tag'
 
@@ -36,7 +35,7 @@ const RegisterContainer: React.FC<Props> = props => {
     const token = L.get(result, 'data.register.token')
     if (token) {
       await storage.setToken(token)
-      props.navigation.navigate(ROUTES.AUTH.SELECT_GENRE)
+      props.navigation.navigate(routes.AUTH.SELECT_GENRE)
     }
   }, [])
 

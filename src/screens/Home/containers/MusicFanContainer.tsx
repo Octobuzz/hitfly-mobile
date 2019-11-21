@@ -3,7 +3,7 @@ import React, { useCallback, useEffect } from 'react'
 import { withNavigation } from 'react-navigation'
 import { CollectionSection } from '../components'
 import { withSelectors } from 'src/HOCs'
-import { ROUTES } from 'src/navigation'
+import { routes } from 'src/constants'
 import { Collection, GET_MUSIC_FAN, CollectionsData } from 'src/apollo'
 import { useQueryWithPagination } from 'src/Hooks'
 
@@ -40,14 +40,14 @@ const MusicFanContainer: React.FC<any> = ({
 
   const onPressHeader = useCallback(async () => {
     await selectCollectionType('musicFan')
-    navigation.navigate(ROUTES.MAIN.COLLECTION_DETAILS, {
+    navigation.navigate(routes.MAIN.COLLECTION_DETAILS, {
       title: 'Супер меломан',
     })
   }, [])
 
   const onPressCollection = useCallback(async (collection: Collection) => {
     await selectCollection(collection.id)
-    navigation.navigate(ROUTES.MAIN.COLLECTION_PLAYLIST, {
+    navigation.navigate(routes.MAIN.COLLECTION_PLAYLIST, {
       title: 'Супер меломан',
     })
   }, [])

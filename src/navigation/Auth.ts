@@ -8,35 +8,35 @@ import {
   ForgotPasswordScreen,
 } from 'src/screens'
 
-import routeNames from './routeNames'
+import { routes } from 'src/constants'
 import { stackDefaultOptions } from './configs'
 
 const AuthNavigator = createStackNavigator(
   {
-    [routeNames.AUTH.LOGIN]: {
+    [routes.AUTH.LOGIN]: {
       screen: LoginScreen,
       navigationOptions: { title: 'Вход' },
     },
-    [routeNames.AUTH.REGISTER]: {
+    [routes.AUTH.REGISTER]: {
       screen: RegisterScreen,
       navigationOptions: { title: 'Создать аккаунт' },
     },
-    [routeNames.AUTH.SELECT_GENRE]: {
+    [routes.AUTH.SELECT_GENRE]: {
       screen: SelectGenreScreen,
       navigationOptions: { title: 'Выбор жанра' },
     },
-    [routeNames.AUTH.SOCIAL_AUTH]: SocialAuthWebScreen,
-    [routeNames.AUTH.FORGOT_PASSWORD]: {
+    [routes.AUTH.SOCIAL_AUTH]: SocialAuthWebScreen,
+    [routes.AUTH.FORGOT_PASSWORD]: {
       screen: ForgotPasswordScreen,
       navigationOptions: { title: 'Восстановление пароля' },
     },
-    [routeNames.AUTH.RECOVERY_INFO]: {
+    [routes.AUTH.RECOVERY_INFO]: {
       screen: RecoveryInfoScreen,
       navigationOptions: { title: 'Проверьте электронную почту' },
     },
   },
   {
-    initialRouteName: routeNames.AUTH.LOGIN,
+    initialRouteName: routes.AUTH.LOGIN,
     defaultNavigationOptions: stackDefaultOptions,
   },
 )

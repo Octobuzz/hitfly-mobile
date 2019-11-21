@@ -8,25 +8,24 @@ import { WelcomeScreen } from 'src/screens'
 import AuthNavigator from './Auth'
 import MainNavigator from './Main'
 import Storybook from '../../storybook'
-import ROUTES from './routeNames'
 import styled from 'src/styled-components'
-import { styles, storageKeys } from 'src/constants'
+import { styles, storageKeys, routes } from 'src/constants'
 import { storage } from 'src/utils'
 
 const SwitchRoutes = {
-  [ROUTES.APP.WELCOME]: {
+  [routes.APP.WELCOME]: {
     screen: WelcomeScreen,
     navigationOptions: { header: null },
   },
-  [ROUTES.APP.AUTH]: AuthNavigator,
-  [ROUTES.APP.MAIN]: MainNavigator,
-  [ROUTES.APP.STORYBOOK]: Storybook,
+  [routes.APP.AUTH]: AuthNavigator,
+  [routes.APP.MAIN]: MainNavigator,
+  [routes.APP.STORYBOOK]: Storybook,
 }
 
 const AppContainer = createAppContainer(
   // @ts-ignore
   createAnimatedSwitchNavigator(SwitchRoutes, {
-    initialRouteName: ROUTES.APP.WELCOME,
+    initialRouteName: routes.APP.WELCOME,
   }),
 )
 
@@ -51,7 +50,7 @@ const DebugButton = styled.TouchableOpacity.attrs(() => ({
 
 const StorybookButton = styled(DebugButton).attrs(() => ({
   onPress: () => {
-    NavigationService.navigate({ routeName: ROUTES.APP.STORYBOOK })
+    NavigationService.navigate({ routeName: routes.APP.STORYBOOK })
   },
 }))`
   background-color: rgba(150, 10, 50, 0.5);
@@ -77,9 +76,9 @@ class AppNavigator extends React.Component {
       storage.getItem(storageKeys.SKIP_WELCOME),
     ])
     if (token) {
-      NavigationService.navigate({ routeName: ROUTES.APP.MAIN })
+      NavigationService.navigate({ routeName: routes.APP.MAIN })
     } else if (skipWelcome) {
-      NavigationService.navigate({ routeName: ROUTES.APP.AUTH })
+      NavigationService.navigate({ routeName: routes.APP.AUTH })
     } else {
       SplashScreen.hide()
     }

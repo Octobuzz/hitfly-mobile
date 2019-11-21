@@ -3,7 +3,7 @@ import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { Link, Button, TextBase, SafeView, FormWrapper } from 'src/components'
 import { SocialAuth } from 'src/containers'
 import LoginForm from './LoginForm'
-import { ROUTES } from 'src/navigation'
+import { routes } from 'src/constants'
 import styled from 'src/styled-components'
 
 const IndentedLink = styled(Link)`
@@ -36,17 +36,17 @@ interface Props extends NavigationStackScreenProps {
 class Login extends React.Component<Props> {
   private navigateToRegistration = (): void => {
     const { navigation } = this.props
-    navigation.navigate(ROUTES.AUTH.REGISTER)
+    navigation.navigate(routes.AUTH.REGISTER)
   }
 
   private navigateToPasswordRecovery = (): void => {
     const { navigation } = this.props
-    navigation.navigate(ROUTES.AUTH.FORGOT_PASSWORD)
+    navigation.navigate(routes.AUTH.FORGOT_PASSWORD)
   }
 
   private navigateToMain = (): void => {
     const { navigation } = this.props
-    navigation.navigate(ROUTES.MAIN.HOME)
+    navigation.navigate(routes.MAIN.HOME)
   }
 
   render() {

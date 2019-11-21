@@ -8,7 +8,7 @@ import {
   SelectorsProps,
 } from 'src/HOCs'
 import { Album } from 'src/apollo'
-import { ROUTES } from 'src/navigation'
+import { routes } from 'src/constants'
 import { useQueryWithPagination } from 'src/Hooks'
 import { DocumentNode } from 'graphql'
 
@@ -49,7 +49,7 @@ const AlbumsDetailedContainer: React.FC<Props & SelectorsProps> = ({
 
   const onPressAlbum = useCallback(async (album: Album) => {
     await selectAlbum(album.id)
-    navigation.navigate(ROUTES.MAIN.ALBUM_PLAYLIST)
+    navigation.navigate(routes.MAIN.ALBUM_PLAYLIST)
   }, [])
 
   return (

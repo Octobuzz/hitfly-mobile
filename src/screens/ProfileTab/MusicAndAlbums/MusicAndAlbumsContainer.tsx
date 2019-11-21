@@ -13,7 +13,7 @@ import {
 } from 'src/HOCs'
 import { Track, Album } from 'src/apollo'
 import { Loader } from 'src/components'
-import { ROUTES } from 'src/navigation'
+import { routes } from 'src/constants'
 import { DocumentNode } from 'graphql'
 
 interface Props extends NavigationInjectedProps {
@@ -98,7 +98,7 @@ const MusicAndAlbumsContainer: React.FC<HOCsProps> = ({
     void
   > => {
     await selectAlbum(album.id)
-    navigation.navigate(ROUTES.MAIN.ALBUM_PLAYLIST)
+    navigation.navigate(routes.MAIN.ALBUM_PLAYLIST)
   }, [])
 
   if (isLoading) {

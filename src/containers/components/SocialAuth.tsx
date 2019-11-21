@@ -5,7 +5,7 @@ import { NavigationInjectedProps, withNavigation } from 'react-navigation'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { Loader, SocialButton, TextWithLines } from 'src/components'
-import { ROUTES } from 'src/navigation'
+import { routes } from 'src/constants'
 import { SocialConnect } from 'src/apollo'
 import styled from 'src/styled-components'
 
@@ -40,9 +40,9 @@ const SocialAuth: React.FC<Props> = ({ navigation, bottomText, style }) => {
   const { data, loading } = useQuery<SocialConnectData>(GET_SOCIAL_LINKS)
 
   const navigateToSocialAuth = useCallback(({ url }: SocialConnect) => {
-    navigation.navigate(ROUTES.AUTH.SOCIAL_AUTH, {
+    navigation.navigate(routes.AUTH.SOCIAL_AUTH, {
       url,
-      nextRoute: ROUTES.APP.MAIN,
+      nextRoute: routes.APP.MAIN,
     })
   }, [])
 

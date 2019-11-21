@@ -8,7 +8,8 @@ import {
   SlidingPanel,
   SlidingPanelInstance,
 } from 'src/components'
-import { NavigationService, ROUTES } from 'src/navigation'
+import { NavigationService } from 'src/navigation'
+import { routes } from 'src/constants'
 import styled from 'src/styled-components'
 
 const LogoutText = styled(TextBase)`
@@ -37,7 +38,7 @@ const AuthErrorPanel = forwardRef<SlidingPanelInstance>((_, ref) => {
   }, [])
 
   const navigateToLogin = useCallback(() => {
-    NavigationService.navigate({ routeName: ROUTES.APP.AUTH })
+    NavigationService.navigate({ routeName: routes.APP.AUTH })
   }, [])
 
   return (

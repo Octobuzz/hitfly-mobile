@@ -9,7 +9,7 @@ import {
 } from 'src/HOCs'
 import gql from 'graphql-tag'
 import { Pagination, Collection } from 'src/apollo'
-import { ROUTES } from 'src/navigation'
+import { routes } from 'src/constants'
 import { useQueryWithPagination } from 'src/Hooks'
 
 interface CollectionsData {
@@ -57,7 +57,7 @@ const CollectionDetails: React.FC<Props> = ({
   const onPressItem = useCallback(
     async (collection: Collection) => {
       await selectCollection(collection.id)
-      navigation.navigate(ROUTES.MAIN.COLLECTION_PLAYLIST, {
+      navigation.navigate(routes.MAIN.COLLECTION_PLAYLIST, {
         title,
       })
     },

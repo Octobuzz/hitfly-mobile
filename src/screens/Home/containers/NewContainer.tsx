@@ -4,7 +4,7 @@ import { withNavigation } from 'react-navigation'
 import { TracksSection } from '../components'
 import { GET_NEW_TRACKS, PlaylistData, Track } from 'src/apollo'
 import { useQueryWithPagination } from 'src/Hooks'
-import { ROUTES } from 'src/navigation'
+import { routes } from 'src/constants'
 
 const LIMIT = 20
 const itemsSelector = (data?: PlaylistData) => L.get(data, 'playlist.items', [])
@@ -32,11 +32,11 @@ const NewContainer: React.FC<any> = ({ navigation, getRefetcher }) => {
   }, [getRefetcher])
 
   const onPressHeader = useCallback(() => {
-    navigation.navigate(ROUTES.MAIN.NEW_PLAYLIST)
+    navigation.navigate(routes.MAIN.NEW_PLAYLIST)
   }, [])
 
   const onPressTrack = useCallback((track: Track) => {
-    navigation.navigate(ROUTES.MAIN.NEW_PLAYLIST, { trackToPlay: track })
+    navigation.navigate(routes.MAIN.NEW_PLAYLIST, { trackToPlay: track })
   }, [])
 
   const isLoading = networkStatus === 4 || networkStatus === 1

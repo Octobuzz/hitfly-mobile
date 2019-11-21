@@ -5,7 +5,7 @@ import SelectGenreScreen from './SelectGenre'
 import gql from 'graphql-tag'
 import { Genre, Profile, Pagination } from 'src/apollo'
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import { ROUTES } from 'src/navigation'
+import { routes } from 'src/constants'
 import { useQueryWithPagination } from 'src/Hooks'
 
 interface GenreData {
@@ -63,7 +63,7 @@ const SelectGenre: React.FC<Props> = ({
   })
 
   const onSkip = useCallback(() => {
-    navigation.navigate(ROUTES.APP.MAIN)
+    navigation.navigate(routes.APP.MAIN)
   }, [isEditMode])
 
   const [updateGenres, { loading: isUpdating }] = useMutation<
@@ -75,7 +75,7 @@ const SelectGenre: React.FC<Props> = ({
     async (selectedGenresIds: string[]): Promise<void> => {
       try {
         await updateGenres({ variables: { genresIds: selectedGenresIds } })
-        const submitRoute = isEditMode ? ROUTES.MAIN.MY_GENRES : ROUTES.APP.MAIN
+        const submitRoute = isEditMode ? routes.MAIN.MY_GENRES : routes.APP.MAIN
         navigation.navigate(submitRoute)
       } catch (e) {
         // TODO: добавить обработчик

@@ -4,7 +4,7 @@ import { NavigationStackScreenProps } from 'react-navigation-stack'
 import GenresDetailedScreen from './GenresDetailed'
 import { Genre, GET_GENRES, GenreData } from 'src/apollo'
 import { useQuery } from '@apollo/react-hooks'
-import { ROUTES } from 'src/navigation'
+import { routes } from 'src/constants'
 import { withSelectors, SelectorsProps } from 'src/HOCs'
 
 interface Props extends NavigationStackScreenProps, SelectorsProps {}
@@ -18,7 +18,7 @@ const MyGenres: React.FC<Props> = ({ navigation, selectGenre }) => {
 
   const onPressGenre = useCallback(async (genre: Genre) => {
     await selectGenre(genre.id)
-    navigation.navigate(ROUTES.MAIN.GENRE_PLAYLIST, { title: genre.title })
+    navigation.navigate(routes.MAIN.GENRE_PLAYLIST, { title: genre.title })
   }, [])
 
   return (

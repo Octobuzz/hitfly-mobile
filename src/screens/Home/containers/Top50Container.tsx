@@ -4,8 +4,7 @@ import { withNavigation } from 'react-navigation'
 import { useQuery } from '@apollo/react-hooks'
 import { PlaylistSection } from '../components'
 import { GET_TOP50, PlaylistData } from 'src/apollo'
-import { ROUTES } from 'src/navigation'
-import { images } from 'src/constants'
+import { routes, images } from 'src/constants'
 
 const Top50Container: React.FC<any> = ({ getRefetcher, navigation }) => {
   const { data, refetch, loading } = useQuery<PlaylistData>(GET_TOP50, {
@@ -22,7 +21,7 @@ const Top50Container: React.FC<any> = ({ getRefetcher, navigation }) => {
   }, [getRefetcher])
 
   const onPress = useCallback(() => {
-    navigation.navigate(ROUTES.MAIN.TOP_50_PLAYLIST)
+    navigation.navigate(routes.MAIN.TOP_50_PLAYLIST)
   }, [])
 
   return (

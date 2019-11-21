@@ -7,7 +7,7 @@ import { Profile, GET_PROFILE_HEAD } from 'src/apollo'
 import { Loader, TextBase, Button, Link, View } from 'src/components'
 import { useChangingHeaderSettings } from 'src/Hooks'
 import styled from 'src/styled-components'
-import { ROUTES } from 'src/navigation'
+import { routes } from 'src/constants'
 
 const LogoutText = styled(TextBase)`
   text-align: center;
@@ -38,7 +38,7 @@ const ProfileTab: React.FC<Props> = ({ navigation, ...rest }) => {
   const profile = L.get(data, 'profile')
 
   const navigateToLogin = useCallback(() => {
-    navigation.navigate(ROUTES.APP.AUTH)
+    navigation.navigate(routes.APP.AUTH)
   }, [])
   const goBack = useCallback(() => {
     navigation.goBack()

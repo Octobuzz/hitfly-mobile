@@ -7,7 +7,7 @@ import {
   NavigationList,
   NavigationItem,
 } from 'src/components'
-import { ROUTES } from 'src/navigation'
+import { routes } from 'src/constants'
 
 interface Props extends NavigationStackScreenProps {
   onPressLogout: () => void
@@ -32,19 +32,19 @@ class Settings extends React.Component<Props> {
       {
         title: 'Список любимых жанров',
         onPress: () => {
-          navigation.navigate(ROUTES.MAIN.MY_GENRES)
+          navigation.navigate(routes.MAIN.MY_GENRES)
         },
       },
       {
         title: 'Настройка входа',
         onPress: () => {
-          navigation.navigate(ROUTES.MAIN.AUTH_SETTINGS)
+          navigation.navigate(routes.MAIN.AUTH_SETTINGS)
         },
       },
       // {
       //   title: 'Удалить аккаунт',
       //   onPress: () => {
-      //     navigation.navigate(ROUTES.MAIN.REMOVE_ACCOUNT)
+      //     navigation.navigate(routes.MAIN.REMOVE_ACCOUNT)
       //   },
       // },
     ]

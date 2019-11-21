@@ -1,8 +1,7 @@
-import { render } from '../../jest/test-utils'
+import { render, fireEvent } from '../../jest/test-utils'
 import { TrackMenu } from 'src/components'
 import React from 'react'
 import { Track } from '../../src/apollo'
-import { fireEvent } from '../../jest/test-utils'
 
 describe('TrackMenu', () => {
   const track = {

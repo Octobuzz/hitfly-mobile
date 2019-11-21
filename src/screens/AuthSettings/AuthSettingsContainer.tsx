@@ -4,7 +4,7 @@ import { NavigationStackScreenProps } from 'react-navigation-stack'
 import AuthSettingsScreen from './AuthSettings'
 import gql from 'graphql-tag'
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import { ROUTES } from 'src/navigation'
+import { routes } from 'src/constants'
 
 const GET_PROFILE = gql`
   query {
@@ -34,7 +34,7 @@ const AuthSettingsContainer: React.FC<Props> = props => {
   const onSubmit = useCallback(values => updateEmail({ variables: values }), [])
 
   const onPressChangePassword = useCallback(() => {
-    props.navigation.navigate(ROUTES.MAIN.CHANGE_PASSWORD)
+    props.navigation.navigate(routes.MAIN.CHANGE_PASSWORD)
   }, [])
 
   return (

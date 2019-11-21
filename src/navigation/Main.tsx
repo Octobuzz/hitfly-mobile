@@ -40,16 +40,16 @@ import {
   SelectGenreForProfileScreen,
 } from 'src/screens'
 import { stackDefaultOptions, playlistConfig } from './configs'
-import routeNames from './routeNames'
+import { routes } from 'src/constants'
 import styled from 'src/styled-components'
 
 const MainNavigator = createStackNavigator(
   {
-    [routeNames.MAIN.HOME]: {
+    [routes.MAIN.HOME]: {
       screen: HomeScreen,
       navigationOptions: { headerTitle: 'Главное' },
     },
-    [routeNames.MAIN.COLLECTION_DETAILS]: {
+    [routes.MAIN.COLLECTION_DETAILS]: {
       screen: CollectionDetailsScreen,
       navigationOptions: ({ navigation }) => {
         const title = navigation.getParam('title')
@@ -58,7 +58,7 @@ const MainNavigator = createStackNavigator(
         }
       },
     },
-    [routeNames.MAIN.COLLECTION_PLAYLIST]: {
+    [routes.MAIN.COLLECTION_PLAYLIST]: {
       screen: CollectionPlaylistScreen,
       navigationOptions: ({ navigation }) => {
         const title = navigation.getParam('title')
@@ -68,35 +68,35 @@ const MainNavigator = createStackNavigator(
         }
       },
     },
-    [routeNames.MAIN.TOP_50_PLAYLIST]: {
+    [routes.MAIN.TOP_50_PLAYLIST]: {
       screen: Top50PlaylistScreen,
       navigationOptions: {
         title: 'Топ 50',
         ...playlistConfig,
       },
     },
-    [routeNames.MAIN.LISTENED_NOW_PLAYLIST]: {
+    [routes.MAIN.LISTENED_NOW_PLAYLIST]: {
       screen: ListenedNowPlaylistScreen,
       navigationOptions: {
         title: 'Слушают сейчас',
         ...playlistConfig,
       },
     },
-    [routeNames.MAIN.NEW_PLAYLIST]: {
+    [routes.MAIN.NEW_PLAYLIST]: {
       screen: NewPlaylistScreen,
       navigationOptions: {
         title: 'Новое',
         ...playlistConfig,
       },
     },
-    [routeNames.MAIN.TOP_WEEK_PLAYLIST]: {
+    [routes.MAIN.TOP_WEEK_PLAYLIST]: {
       screen: TopWeekPlaylistScreen,
       navigationOptions: {
         title: 'Открытие недели',
         ...playlistConfig,
       },
     },
-    [routeNames.MAIN.GENRE_PLAYLIST]: {
+    [routes.MAIN.GENRE_PLAYLIST]: {
       screen: GenrePlaylistScreen,
       navigationOptions: ({ navigation }) => {
         const title = navigation.getParam('title')
@@ -106,21 +106,21 @@ const MainNavigator = createStackNavigator(
         }
       },
     },
-    [routeNames.MAIN.GENRES_DETAILED]: {
+    [routes.MAIN.GENRES_DETAILED]: {
       screen: GenresDetailedScreen,
       navigationOptions: {
         title: 'Жанры',
       },
     },
     // Экраны профиля
-    [routeNames.MAIN.PROFILE]: {
+    [routes.MAIN.PROFILE]: {
       screen: ProfileTabScreen,
       navigationOptions: {
         headerTransparent: true,
         headerTintColor: 'white',
       },
     },
-    [routeNames.MAIN.ALBUM_PLAYLIST]: {
+    [routes.MAIN.ALBUM_PLAYLIST]: {
       screen: AlbumPlaylistScreen,
       navigationOptions: ({ navigation }) => {
         const title = navigation.getParam('title')
@@ -130,54 +130,54 @@ const MainNavigator = createStackNavigator(
         }
       },
     },
-    [routeNames.MAIN.SETTINGS]: {
+    [routes.MAIN.SETTINGS]: {
       screen: SettingsScreen,
       navigationOptions: {
         title: 'Настройки',
       },
     },
-    [routeNames.MAIN.REMOVE_ACCOUNT]: {
+    [routes.MAIN.REMOVE_ACCOUNT]: {
       screen: RemoveAccountScreen,
       navigationOptions: {
         title: 'Удаление аккаунта',
       },
     },
-    [routeNames.MAIN.MY_GENRES]: {
+    [routes.MAIN.MY_GENRES]: {
       screen: MyGenresScreen,
       navigationOptions: { title: 'Любимые жанры' },
     },
-    [routeNames.MAIN.SELECT_GENRE]: {
+    [routes.MAIN.SELECT_GENRE]: {
       screen: SelectGenreForProfileScreen,
       navigationOptions: { title: 'Выбор жанра' },
     },
-    [routeNames.MAIN.AUTH_SETTINGS]: {
+    [routes.MAIN.AUTH_SETTINGS]: {
       screen: AuthSettingsScreen,
       navigationOptions: { title: 'Настройка входа' },
     },
-    [routeNames.MAIN.CHANGE_PASSWORD]: {
+    [routes.MAIN.CHANGE_PASSWORD]: {
       screen: ChangePasswordScreen,
       navigationOptions: { title: 'Создание пароля' },
     },
-    [routeNames.MAIN.SOCIAL_AUTH]: SocialAuthWebScreen,
-    [routeNames.MAIN.MY_ALBUMS_DETAILED]: {
+    [routes.MAIN.SOCIAL_AUTH]: SocialAuthWebScreen,
+    [routes.MAIN.MY_ALBUMS_DETAILED]: {
       screen: MyAlbumsDetailedScreen,
       navigationOptions: { title: 'Мои альбомы' },
     },
-    [routeNames.MAIN.LIKED_ALBUMS_DETAILED]: {
+    [routes.MAIN.LIKED_ALBUMS_DETAILED]: {
       screen: LikedAlbumsDetailedScreen,
       navigationOptions: { title: 'Любимые альбомы' },
     },
-    [routeNames.MAIN.MY_MUSIC_PLAYLIST]: {
+    [routes.MAIN.MY_MUSIC_PLAYLIST]: {
       screen: MyMusicPlaylistScreen,
       navigationOptions: { title: 'Мои песни', ...playlistConfig },
     },
-    [routeNames.MAIN.LIKED_MUSIC_PLAYLIST]: {
+    [routes.MAIN.LIKED_MUSIC_PLAYLIST]: {
       screen: LikedMusicPlaylistScreen,
       navigationOptions: { title: 'Любимые песни', ...playlistConfig },
     },
   },
   {
-    initialRouteName: routeNames.MAIN.HOME,
+    initialRouteName: routes.MAIN.HOME,
     headerMode: 'screen',
     defaultNavigationOptions: {
       ...stackDefaultOptions,

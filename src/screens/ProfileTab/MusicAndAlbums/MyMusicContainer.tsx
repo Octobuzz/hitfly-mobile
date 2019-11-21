@@ -3,8 +3,7 @@ import React, { useCallback } from 'react'
 import { withNavigation, NavigationInjectedProps } from 'react-navigation'
 import MusicAndAlbumsContainer from './MusicAndAlbumsContainer'
 import { GET_MY_ALBUMS, GET_MY_MUSIC } from 'src/apollo'
-import { ROUTES } from 'src/navigation'
-import { names } from 'src/constants'
+import { routes, names } from 'src/constants'
 
 interface Props extends NavigationInjectedProps {}
 
@@ -13,10 +12,10 @@ const tracksSelector = LFP.getOr([], 'tracks.items')
 
 const MyMusicContainer: React.FC<Props> = props => {
   const onPressTracksHeader = useCallback(() => {
-    props.navigation.navigate(ROUTES.MAIN.MY_MUSIC_PLAYLIST)
+    props.navigation.navigate(routes.MAIN.MY_MUSIC_PLAYLIST)
   }, [])
   const onPressAlbumsHeader = useCallback(() => {
-    props.navigation.navigate(ROUTES.MAIN.MY_ALBUMS_DETAILED)
+    props.navigation.navigate(routes.MAIN.MY_ALBUMS_DETAILED)
   }, [])
 
   return (

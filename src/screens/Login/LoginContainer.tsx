@@ -4,7 +4,7 @@ import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { withHidingSplashScreen, withChangingHeaderSettings } from 'src/HOCs'
 import Login from './Login'
 import { useMutation } from '@apollo/react-hooks'
-import { ROUTES } from 'src/navigation'
+import { routes } from 'src/constants'
 import { storage } from 'src/utils'
 import gql from 'graphql-tag'
 
@@ -26,7 +26,7 @@ const LoginContainer: React.FC<Props> = props => {
     const token = L.get(result, 'data.login.token')
     if (token) {
       await storage.setToken(token)
-      props.navigation.navigate(ROUTES.MAIN.HOME)
+      props.navigation.navigate(routes.MAIN.HOME)
     }
   }, [])
 

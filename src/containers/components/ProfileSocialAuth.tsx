@@ -10,7 +10,7 @@ import {
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { SocialButton } from 'src/components'
-import { ROUTES } from 'src/navigation'
+import { routes } from 'src/constants'
 import { SocialConnect } from 'src/apollo'
 import styled from 'src/styled-components'
 
@@ -53,9 +53,9 @@ const ProfileSocialAuth: React.FC<Props> = ({
   }, [isFocused])
 
   const navigateToSocialAuth = useCallback(({ url }: SocialConnect) => {
-    navigation.navigate(ROUTES.MAIN.SOCIAL_AUTH, {
+    navigation.navigate(routes.MAIN.SOCIAL_AUTH, {
       url,
-      nextRoute: ROUTES.MAIN.AUTH_SETTINGS,
+      nextRoute: routes.MAIN.AUTH_SETTINGS,
     })
   }, [])
 

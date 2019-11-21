@@ -9,7 +9,7 @@ import {
   HeaderButtons,
 } from 'react-navigation-header-buttons'
 import gql from 'graphql-tag'
-import { ROUTES } from 'src/navigation'
+import { routes } from 'src/constants'
 import { HeaderSettings } from 'src/apollo'
 import { withTheme, ITheme } from 'src/styled-components'
 
@@ -34,11 +34,11 @@ interface Props extends NavigationInjectedProps {
 
 const HeaderRightButtons: React.FC<Props> = ({ navigation, theme }) => {
   const navigateToProfile = useCallback((): void => {
-    navigation.navigate(ROUTES.MAIN.PROFILE)
+    navigation.navigate(routes.MAIN.PROFILE)
   }, [])
 
   const navigateToSettings = useCallback((): void => {
-    navigation.navigate(ROUTES.MAIN.SETTINGS)
+    navigation.navigate(routes.MAIN.SETTINGS)
   }, [])
 
   const { data } = useQuery<{ headerSettings: HeaderSettings }>(

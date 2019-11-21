@@ -4,8 +4,7 @@ import { withNavigation } from 'react-navigation'
 import { useQuery } from '@apollo/react-hooks'
 import { GET_LISTENED_NOW, PlaylistData } from 'src/apollo'
 import { PlaylistSection } from '../components'
-import { ROUTES } from 'src/navigation'
-import { images } from 'src/constants'
+import { routes, images } from 'src/constants'
 
 const ListenedNowContainer: React.FC<any> = ({ getRefetcher, navigation }) => {
   const { data, refetch, loading } = useQuery<PlaylistData>(GET_LISTENED_NOW, {
@@ -22,7 +21,7 @@ const ListenedNowContainer: React.FC<any> = ({ getRefetcher, navigation }) => {
   }, [getRefetcher])
 
   const onPress = useCallback(() => {
-    navigation.navigate(ROUTES.MAIN.LISTENED_NOW_PLAYLIST)
+    navigation.navigate(routes.MAIN.LISTENED_NOW_PLAYLIST)
   }, [])
 
   return (

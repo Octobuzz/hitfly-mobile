@@ -6,7 +6,7 @@ import MyGenresScreen from './MyGenres'
 import gql from 'graphql-tag'
 import { Genre, Profile } from 'src/apollo'
 import { useLazyQuery } from '@apollo/react-hooks'
-import { ROUTES } from 'src/navigation'
+import { routes } from 'src/constants'
 
 interface GenreData {
   profile: Profile
@@ -35,7 +35,7 @@ const MyGenres: React.FC<Props> = ({ navigation }) => {
   const genres: Genre[] = L.get(data, 'profile.favouriteGenres', [])
 
   const onChange = useCallback(() => {
-    navigation.navigate(ROUTES.MAIN.SELECT_GENRE)
+    navigation.navigate(routes.MAIN.SELECT_GENRE)
   }, [])
 
   const handleFocus = useCallback(() => {
