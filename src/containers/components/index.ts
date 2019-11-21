@@ -1,6 +1,7 @@
 export { default as Player } from './Player'
 export { default as SocialAuth } from './SocialAuth'
 export { default as LogoutPanel } from './LogoutPanel'
+export { default as PlayerSlider } from './PlayerSlider'
 export { default as BottomPlayer } from './BottomPlayer'
 export { default as AuthErrorPanel } from './AuthErrorPanel'
 export { default as ProfileSocialAuth } from './ProfileSocialAuth'

@@ -27,8 +27,10 @@ interface ToggleTrackOptions {
 
 export interface ToggleTrackProps {
   isPlaying: boolean
-  toggleTrack: (options?: ToggleTrackOptions) => void
   activeTrack?: Track
+  prevTrack: () => void
+  nextTrack: () => void
+  toggleTrack: (options?: ToggleTrackOptions) => void
 }
 
 const withTrackToggle = (
@@ -136,8 +138,19 @@ const withTrackToggle = (
       TrackPlayer.pause()
     }, [])
 
+    const nextTrack = useCallback((): void => {
+      // TODO: обработать?
+      TrackPlayer.skipToNext().catch(() => {})
+    }, [])
+    const prevTrack = useCallback((): void => {
+      // TODO: обработать?
+      TrackPlayer.skipToPrevious().catch(() => {})
+    }, [])
+
     return (
       <WrappedComponent
+        nextTrack={nextTrack}
+        prevTrack={prevTrack}
         isPlaying={isPlaying}
         toggleTrack={toggleTrack}
         activeTrack={activeTrack}

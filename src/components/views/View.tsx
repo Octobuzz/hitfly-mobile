@@ -1,5 +1,9 @@
 import L from 'lodash'
-import { getBottomSpace } from 'react-native-iphone-x-helper'
+import {
+  getBottomSpace,
+  getStatusBarHeight,
+} from 'react-native-iphone-x-helper'
+import { Header } from 'react-navigation-stack'
 import { IView } from './interfaces'
 import { styles } from 'src/constants'
 import styled from 'src/styled-components'
@@ -8,16 +12,30 @@ const View = styled.View<IView>`
   ${({ noFill }) => !noFill && 'flex: 1;'}
   padding-top: ${({
     noPadding,
-    noVerticalPadding,
     paddingTop,
     paddingVertical,
-  }) =>
-    noVerticalPadding || noPadding
-      ? 0
-      : L.without(
-          [paddingTop, paddingVertical, styles.VIEW_VERTICAL_INDENTATION],
-          undefined,
-        )[0]}px;
+    noVerticalPadding,
+    addTopSafePadding,
+    addTopNavigationHeaderPadding,
+  }) => {
+    let padding =
+      noVerticalPadding || noPadding
+        ? 0
+        : (L.without(
+            [paddingTop, paddingVertical, styles.VIEW_VERTICAL_INDENTATION],
+            undefined,
+          )[0] as number)
+
+    if (addTopNavigationHeaderPadding) {
+      padding += Header.HEIGHT
+    }
+
+    if (addTopSafePadding) {
+      padding += getStatusBarHeight(true)
+    }
+
+    return padding
+  }}px;
   padding-bottom: ${({
     noPadding,
     noVerticalPadding,
