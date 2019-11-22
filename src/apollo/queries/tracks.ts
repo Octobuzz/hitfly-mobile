@@ -1,6 +1,8 @@
 import { Pagination, Track } from '../schemas'
 import gql from 'graphql-tag'
 
+// TODO: использовать фрагменты
+
 export interface PlaylistData {
   playlist?: Pagination<Track>
 }
@@ -31,6 +33,7 @@ export const GET_NEW_TRACKS = gql`
         singer
         length
         favouritesCount
+        isFavorite: userFavourite
       }
       hasMorePages: has_more_pages
     }
@@ -58,6 +61,7 @@ export const GET_ALBUM_TRACKS = gql`
         }
         length
         favouritesCount
+        isFavorite: userFavourite
       }
       hasMorePages: has_more_pages
     }
@@ -89,6 +93,7 @@ export const GET_COLLECTION_TRACKS = gql`
         }
         length
         favouritesCount
+        isFavorite: userFavourite
       }
       hasMorePages: has_more_pages
     }
@@ -112,6 +117,7 @@ export const GET_GENRE_TRACKS = gql`
         }
         length
         favouritesCount
+        isFavorite: userFavourite
       }
       hasMorePages: has_more_pages
     }
@@ -134,6 +140,7 @@ export const GET_TOP_WEEK_TRACKS = gql`
         }
         length
         favouritesCount
+        isFavorite: userFavourite
       }
       hasMorePages: has_more_pages
     }
@@ -164,6 +171,7 @@ export const GET_LISTENED_NOW_TRACKS = gql`
         }
         length
         favouritesCount
+        isFavorite: userFavourite
       }
       hasMorePages: has_more_pages
     }
@@ -186,6 +194,7 @@ export const GET_MY_MUSIC = gql`
         }
         length
         favouritesCount
+        isFavorite: userFavourite
       }
       hasMorePages: has_more_pages
     }
@@ -210,6 +219,7 @@ export const GET_LIKED_MUSIC = gql`
           }
           length
           favouritesCount
+          isFavorite: userFavourite
         }
       }
       hasMorePages: has_more_pages

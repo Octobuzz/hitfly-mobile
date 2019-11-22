@@ -33,8 +33,8 @@ export interface ToggleTrackProps {
   toggleTrack: (options?: ToggleTrackOptions) => void
 }
 
-const withTrackToggle = (
-  WrappedComponent: React.ComponentType<ToggleTrackProps>,
+const withTrackToggle = <T extends ToggleTrackProps>(
+  WrappedComponent: React.ComponentType<T>,
 ) => {
   const TrackToggle: React.FC<any> = props => {
     const [setActiveTrackId] = useMutation<any, SetActiveTrackIdVariables>(

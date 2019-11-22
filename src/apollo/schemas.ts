@@ -4,7 +4,7 @@ export interface Genre {
   id: number
   title: string // name
   imageUrl: string // image
-  isFavourite: boolean // userFavourite
+  isFavorite: boolean // userFavourite
   hasSubGenres: boolean // haveSubGenres
   countTracks: number
   countListenedByUser?: number
@@ -49,7 +49,7 @@ export interface Track {
   date: string // trackDate
   songText: string
   fileUrl: string // filename
-  isFavourite: boolean // userFavourite
+  isFavorite: boolean // userFavourite
   favouritesCount: number
   userPlayLists: Collection[] // не знаю что это
   musicWave: number[]
@@ -77,7 +77,7 @@ export interface Album {
   year: string
   cover: Image[]
   group: MusicGroup // musicGroup
-  isFavourite: boolean // userFavourite
+  isFavorite: boolean // userFavourite
   favouritesCount: number
   isMine: boolean // my
   tracksCount: number
@@ -128,7 +128,7 @@ export interface Collection {
   image: Image[]
   tracks: Playlist
   user: User
-  isFavourite: boolean // userFavourite
+  isFavorite: boolean // userFavourite
   favouritesCount: number | null
   isSet: boolean
   isMine: boolean // my
@@ -186,4 +186,22 @@ export interface Profile extends User {
   bonusProgramListenedGenres: Genre[] // bpListenedTracksByGenres
   myTracksCount: number
   myTracksTime: number
+}
+
+interface Favorite {
+  id: number
+  userId: number
+  createdAt: string
+}
+
+export interface FacoriteTrack extends Favorite {
+  track: Track
+}
+
+export interface FacoriteAlbum extends Favorite {
+  album: Album
+}
+
+export interface FacoriteCollection extends Favorite {
+  collection: Collection
 }
