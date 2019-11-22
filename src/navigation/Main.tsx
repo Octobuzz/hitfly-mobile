@@ -206,6 +206,7 @@ const MainStack = createStackNavigator(
     PlayerNavigator,
   },
   {
+    initialRouteName: 'Main',
     headerMode: 'none',
     mode: 'modal',
   },
