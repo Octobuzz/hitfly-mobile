@@ -31,7 +31,7 @@ const View = styled.View<IView>`
     }
 
     if (addTopSafePadding) {
-      padding += getStatusBarHeight(true)
+      padding += getStatusBarHeight()
     }
 
     return padding

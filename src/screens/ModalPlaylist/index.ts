@@ -1,1 +1,1 @@
-export { default } from './ModalPlaylist'
+export { default } from './ModalPlaylistContainer'

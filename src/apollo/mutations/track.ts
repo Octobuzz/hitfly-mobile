@@ -26,8 +26,8 @@ export const ADD_TRACK_TO_FAVORITES = gql`
 `
 
 export const DELETE_TRACK_FROM_FAVORITES = gql`
-  mutation DeleteTrackToFavorites($id: Int!) {
-    deleteToFavourites(
+  mutation DeleteTrackFromFavorites($id: Int!) {
+    deleteFromFavourite(
       Favourite: { favouriteableId: $id, favouritableType: track }
     ) {
       ... on FavouriteTrack {

@@ -20,20 +20,15 @@ const PlayerNavigator = createStackNavigator(
     },
     [routes.PLAYER.MODAL_PLAYLIST]: {
       screen: ModalPlaylistScreen,
-      navigationOptions: {
-        headerStyle: {
-          borderBottomWidth: 0,
-          elevation: 0,
-          backgroundColor: theme.colors.black,
-        },
-      },
     },
   },
   {
     initialRouteName: routes.PLAYER.MODAL_PLAYER,
+    headerMode: 'screen',
     defaultNavigationOptions: {
       headerBackTitle: null,
       headerTintColor: theme.colors.white,
+      headerTransparent: true,
     },
   },
 )

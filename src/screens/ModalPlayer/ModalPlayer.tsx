@@ -7,7 +7,7 @@ import Cover from './Cover'
 import Controls from './Controls'
 import BottomControls from './BottomControls'
 import { routes } from 'src/constants'
-import { Track } from 'src/apollo'
+import { TrackActionsProps } from 'src/Hooks'
 import styled from 'src/styled-components'
 
 const Wrapper = styled(SafeView)`
@@ -28,12 +28,13 @@ const SubTitleText = styled(TextBase)`
   font-size: 16px;
 `
 
-interface Props extends ToggleTrackProps, NavigationStackScreenProps {
-  addTrackToFavorites: (track: Track) => void
-}
+interface Props
+  extends ToggleTrackProps,
+    TrackActionsProps,
+    NavigationStackScreenProps {}
 
 const ModalPlayer: React.FC<Props> = ({
-  addTrackToFavorites,
+  toggleTrackToFavorites,
   activeTrack,
   navigation,
   screenProps,
@@ -54,8 +55,8 @@ const ModalPlayer: React.FC<Props> = ({
   }, [])
 
   const handlePressLikeTrack = useCallback(() => {
-    addTrackToFavorites(activeTrack!)
-  }, [activeTrack, addTrackToFavorites])
+    toggleTrackToFavorites(activeTrack!)
+  }, [activeTrack, toggleTrackToFavorites])
 
   return (
     <Wrapper>
