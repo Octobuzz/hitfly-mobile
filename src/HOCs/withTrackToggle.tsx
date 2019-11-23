@@ -21,18 +21,23 @@ import { images } from 'src/constants'
 
 interface ToggleTrackOptions {
   track: Track
-  playlistKey: string
-  playlist: Track[]
+  playlistData?: {
+    playlistKey: string
+    playlist: Track[]
+  }
 }
 
 export interface ToggleTrackProps {
   isPlaying: boolean
-  toggleTrack: (options?: ToggleTrackOptions) => void
   activeTrack?: Track
+  activePlaylist?: Track[]
+  prevTrack: () => void
+  nextTrack: () => void
+  toggleTrack: (options?: ToggleTrackOptions) => void
 }
 
-const withTrackToggle = (
-  WrappedComponent: React.ComponentType<ToggleTrackProps>,
+const withTrackToggle = <T extends ToggleTrackProps>(
+  WrappedComponent: React.ComponentType<T>,
 ) => {
   const TrackToggle: React.FC<any> = props => {
     const [setActiveTrackId] = useMutation<any, SetActiveTrackIdVariables>(
@@ -56,7 +61,23 @@ const withTrackToggle = (
     const { data: activePlaylistData } = useQuery<ActivePlaylistData>(
       GET_ACTIVE_PLAYLIST,
     )
-    const activePlaylistKey = L.get(activePlaylistData, 'activePlaylistKey')
+    const { activePlaylist, activePlaylistKey } = L.pick(activePlaylistData, [
+      'activePlaylist',
+      'activePlaylistKey',
+    ])
+
+    const continueTrack = useCallback(() => {
+      setIsPlaying({ variables: { isPlaying: true } })
+      TrackPlayer.play()
+    }, [])
+
+    const pauseOrContinue = useCallback(() => {
+      if (isPlaying) {
+        pauseTrack()
+      } else {
+        continueTrack()
+      }
+    }, [isPlaying, continueTrack])
 
     const toggleTrack = useCallback(
       (options?: ToggleTrackOptions): void => {
@@ -68,28 +89,11 @@ const withTrackToggle = (
           pauseOrContinue()
         }
       },
-      [activeTrack, isPlaying, activePlaylistKey],
+      [activeTrack, pauseOrContinue],
     )
 
-    const pauseOrContinue = useCallback(() => {
-      if (isPlaying) {
-        pauseTrack()
-      } else {
-        continueTrack()
-      }
-    }, [isPlaying])
-
-    const continueTrack = useCallback(() => {
-      setIsPlaying({ variables: { isPlaying: true } })
-      TrackPlayer.play()
-    }, [])
-
     const playTrack = useCallback(
-      async ({
-        track,
-        playlist,
-        playlistKey,
-      }: ToggleTrackOptions): Promise<void> => {
+      async ({ track, playlistData }: ToggleTrackOptions): Promise<void> => {
         // playlistKey служит для идентификации плейлиста
         // формат: key:id:items.length
         // key - уникальный ключ для плейлиста
@@ -99,10 +103,11 @@ const withTrackToggle = (
         setActiveTrackId({
           variables: { id: track.id },
         })
-        if (playlistKey === activePlaylistKey) {
+        if (!playlistData || playlistData.playlistKey === activePlaylistKey) {
           TrackPlayer.skip(track.id.toString())
-        } else {
-          await setActivePlaylist({ variables: { playlist, playlistKey } })
+        } else if (playlistData) {
+          const { playlist, playlistKey } = playlistData
+          setActivePlaylist({ variables: { playlist, playlistKey } })
           const newQueue = playlist.map(createTrack)
           await TrackPlayer.initQueue(newQueue, track.id.toString())
           TrackPlayer.play()
@@ -136,11 +141,23 @@ const withTrackToggle = (
       TrackPlayer.pause()
     }, [])
 
+    const nextTrack = useCallback((): void => {
+      // TODO: обработать?
+      TrackPlayer.skipToNext().catch(() => {})
+    }, [])
+    const prevTrack = useCallback((): void => {
+      // TODO: обработать?
+      TrackPlayer.skipToPrevious().catch(() => {})
+    }, [])
+
     return (
       <WrappedComponent
+        nextTrack={nextTrack}
+        prevTrack={prevTrack}
         isPlaying={isPlaying}
         toggleTrack={toggleTrack}
         activeTrack={activeTrack}
+        activePlaylist={activePlaylist}
         {...props}
       />
     )

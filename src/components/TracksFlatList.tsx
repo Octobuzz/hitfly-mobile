@@ -39,7 +39,7 @@ class TracksList extends React.Component<Props> {
 
   private handlePressTrack = (track: Track) => {
     const { toggleTrack, tracks, playlistKey } = this.props
-    toggleTrack({ track, playlist: tracks, playlistKey })
+    toggleTrack({ track, playlistData: { playlist: tracks, playlistKey } })
   }
 
   private isTrackPlaying = (track: Track): boolean => {

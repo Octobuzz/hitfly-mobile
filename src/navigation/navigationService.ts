@@ -6,6 +6,7 @@ import {
 
 let navigator: NavigationContainerComponent
 
+// TODO: не вижу необходимости в этом сервисе
 function setTopLevelNavigator(navigatorRef: NavigationContainerComponent) {
   navigator = navigatorRef
 }

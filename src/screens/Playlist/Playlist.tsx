@@ -68,7 +68,10 @@ class Playlist extends React.Component<Props, State> {
     const { toggleTrack, navigation, playlistKey, tracks } = this.props
     const trackToPlay = navigation.getParam('trackToPlay')
     if (trackToPlay) {
-      toggleTrack({ track: trackToPlay, playlistKey, playlist: tracks })
+      toggleTrack({
+        track: trackToPlay,
+        playlistData: { playlist: tracks, playlistKey },
+      })
     }
   }
 
@@ -104,7 +107,7 @@ class Playlist extends React.Component<Props, State> {
     const { tracks, toggleTrack, playlistKey } = this.props
     const { playingTrack } = this.state
     const track = playingTrack || tracks[0]
-    toggleTrack({ track, playlist: tracks, playlistKey })
+    toggleTrack({ track, playlistData: { playlist: tracks, playlistKey } })
   }
 
   render() {

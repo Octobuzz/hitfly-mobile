@@ -22,6 +22,7 @@ export const GET_ACTIVE_TRACK = gql`
       singer
       length
       favouritesCount
+      isFavorite: userFavourite
     }
   }
 `
@@ -47,6 +48,7 @@ export const GET_ACTIVE_PLAYLIST = gql`
       singer
       length
       favouritesCount
+      isFavorite: userFavourite
     }
   }
 `

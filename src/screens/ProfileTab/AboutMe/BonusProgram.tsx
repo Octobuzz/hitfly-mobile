@@ -1,6 +1,6 @@
 import React from 'react'
 // import { Linking } from 'react-native'
-import { getNameForCount } from 'src/helpers'
+import { getNameForCount, getBonusProgramLevelHumanReadable } from 'src/helpers'
 import { Profile } from 'src/apollo'
 import { H2, /* Link, */ TextBase } from 'src/components'
 import Block from './Block'

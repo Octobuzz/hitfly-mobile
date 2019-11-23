@@ -8,4 +8,6 @@ export interface IView {
   paddingVertical?: number
   paddingHorizontal?: number
   addBottomSafePadding?: boolean
+  addTopSafePadding?: boolean
+  addTopNavigationHeaderPadding?: boolean
 }
