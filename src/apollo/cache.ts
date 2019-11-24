@@ -1,4 +1,4 @@
-import { InMemoryCache } from 'apollo-cache-inmemory'
+import { InMemoryCache, defaultDataIdFromObject } from 'apollo-cache-inmemory'
 import { persistCache } from 'apollo-cache-persist'
 import storage from './storage'
 import gql from 'graphql-tag'
@@ -31,6 +31,17 @@ export const typeDefs = gql`
 export default async (): Promise<InMemoryCache> => {
   const cache = new InMemoryCache({
     freezeResults: true,
+    dataIdFromObject: (object: any) => {
+      switch (object.__typename) {
+        case 'ImageSizesType':
+          return `ImageSizesType:${object.imageUrl}`
+        case 'SocialConnectType':
+          return `SocialConnectType:${object.type}`
+        default:
+          return defaultDataIdFromObject(object)
+      }
+    },
+
     cacheRedirects: {
       Query: {
         activeTrack: ({ activeTrackId }, _, { getCacheKey }) =>
