@@ -97,7 +97,7 @@ export default {
         setStatusBarColor(newSettings.mode)
       }
       cache.writeData({ data: { headerSettings: newSettings } })
-      return null
+      return newSettings
     },
     setActiveTrackId: (_, { id }: { id: number }, { cache }: ContextArgs) => {
       const data = {
