@@ -103,6 +103,11 @@ class Playlist extends React.Component<Props, State> {
     return cover
   }
 
+  private handlePressShuffle = (): void => {
+    const { shuffle, tracks } = this.props
+    shuffle({ playlist: tracks })
+  }
+
   private pauseOrPlayFirstTrack = (): void => {
     const { tracks, toggleTrack, playlistKey } = this.props
     const { playingTrack } = this.state
@@ -124,7 +129,7 @@ class Playlist extends React.Component<Props, State> {
               isPlaying={!!playingTrack && rest.isPlaying}
             />
           )}
-          <PositionedShuffleButton />
+          <PositionedShuffleButton onPress={this.handlePressShuffle} />
         </CoverWrapper>
         {isLoading ? (
           <Loader isFilled />

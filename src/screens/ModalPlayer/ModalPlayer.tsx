@@ -38,6 +38,7 @@ const ModalPlayer: React.FC<Props> = ({
   activeTrack,
   navigation,
   screenProps,
+  shuffle,
   theme,
   ...toggleTrackProps
 }) => {
@@ -58,6 +59,10 @@ const ModalPlayer: React.FC<Props> = ({
     toggleTrackToFavorites(activeTrack!)
   }, [activeTrack, toggleTrackToFavorites])
 
+  const handlePressShuffle = useCallback(() => {
+    shuffle()
+  }, [shuffle])
+
   return (
     <Wrapper>
       <View addTopNavigationHeaderPadding>
@@ -71,6 +76,7 @@ const ModalPlayer: React.FC<Props> = ({
       </View>
       <PlayerSlider />
       <BottomControls
+        onPressShuffle={handlePressShuffle}
         onPressLike={handlePressLikeTrack}
         onPressPlaylist={navigateToPlaylist}
         isLiked={isFavorite}

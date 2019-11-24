@@ -50,22 +50,20 @@ const BottomControls: React.FC<Props> = ({
   onPressShuffle,
   onPressPlaylist,
   likesCount = 0,
-}) => {
-  return (
-    <Row>
-      <ControlWrapper onPress={onPressShuffle}>
-        <ControlIcon name="shuffle-variant" />
-      </ControlWrapper>
-      <ControlWrapper onPress={onPressLike}>
-        <Text>
-          <LikeIcon isActive={isLiked} name="heart" /> {likesCount}
-        </Text>
-      </ControlWrapper>
-      <ControlWrapper onPress={onPressPlaylist}>
-        <ControlIcon name="playlist-music" />
-      </ControlWrapper>
-    </Row>
-  )
-}
+}) => (
+  <Row>
+    <ControlWrapper onPress={onPressShuffle}>
+      <ControlIcon name="shuffle-variant" />
+    </ControlWrapper>
+    <ControlWrapper onPress={onPressLike}>
+      <Text>
+        <LikeIcon isActive={isLiked} name="heart" /> {likesCount}
+      </Text>
+    </ControlWrapper>
+    <ControlWrapper onPress={onPressPlaylist}>
+      <ControlIcon name="playlist-music" />
+    </ControlWrapper>
+  </Row>
+)
 
 export default BottomControls

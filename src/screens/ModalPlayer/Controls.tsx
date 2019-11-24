@@ -20,7 +20,7 @@ const ControlIcon = styled(Icon).attrs(({ theme }) => ({
   color: theme.colors.white,
 }))``
 
-interface Props extends Omit<ToggleTrackProps, 'activeTrack'> {}
+interface Props extends Omit<ToggleTrackProps, 'activeTrack' | 'shuffle'> {}
 
 const Controls: React.FC<Props> = ({
   isPlaying,
