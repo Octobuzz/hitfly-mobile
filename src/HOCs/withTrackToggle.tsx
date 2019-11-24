@@ -26,6 +26,9 @@ interface ToggleTrackOptions {
     playlist: Track[]
   }
 }
+interface ShuffleOptions {
+  playlist: Track[]
+}
 
 export interface ToggleTrackProps {
   isPlaying: boolean
@@ -34,6 +37,7 @@ export interface ToggleTrackProps {
   prevTrack: () => void
   nextTrack: () => void
   toggleTrack: (options?: ToggleTrackOptions) => void
+  shuffle: (options?: ShuffleOptions) => void
 }
 
 const withTrackToggle = <T extends ToggleTrackProps>(
@@ -150,8 +154,27 @@ const withTrackToggle = <T extends ToggleTrackProps>(
       TrackPlayer.skipToPrevious().catch(() => {})
     }, [])
 
+    const shuffle = useCallback(
+      (options?: ShuffleOptions): void => {
+        let shuffledPlaylist: Track[] = []
+        if (!options) {
+          shuffledPlaylist = L.shuffle(activePlaylist)
+        } else {
+          const { playlist } = options
+          shuffledPlaylist = L.shuffle(playlist)
+        }
+        const trackToPlay = shuffledPlaylist[0]
+        playTrack({
+          track: trackToPlay,
+          playlistData: { playlist: shuffledPlaylist, playlistKey: 'shuffled' },
+        })
+      },
+      [activePlaylist, activePlaylistKey, playTrack],
+    )
+
     return (
       <WrappedComponent
+        shuffle={shuffle}
         nextTrack={nextTrack}
         prevTrack={prevTrack}
         isPlaying={isPlaying}
