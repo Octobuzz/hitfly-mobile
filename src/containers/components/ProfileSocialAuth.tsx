@@ -8,29 +8,18 @@ import {
   NavigationFocusInjectedProps,
 } from 'react-navigation'
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 import { SocialButton } from 'src/components'
 import { routes } from 'src/constants'
-import { SocialConnect } from 'src/apollo'
+import {
+  SocialConnect,
+  SocialLinksData,
+  GET_PROFILE_SOCIAL_LINKS,
+} from 'src/apollo'
 import styled from 'src/styled-components'
 
 const Wrapper = styled.View`
   flex-direction: row;
   justify-content: space-around;
-`
-
-interface SocialConnectData {
-  socialConnect?: SocialConnect[]
-}
-
-const GET_SOCIAL_LINKS = gql`
-  {
-    socialConnect: SocialConnectQuery(filters: { mobile: true }) {
-      type: social_type
-      url: link
-      isLinked: connected
-    }
-  }
 `
 
 interface Props extends NavigationInjectedProps, NavigationFocusInjectedProps {
@@ -42,9 +31,12 @@ const ProfileSocialAuth: React.FC<Props> = ({
   navigation,
   isFocused,
 }) => {
-  const { data, refetch } = useQuery<SocialConnectData>(GET_SOCIAL_LINKS, {
-    fetchPolicy: 'cache-and-network',
-  })
+  const { data, refetch } = useQuery<SocialLinksData>(
+    GET_PROFILE_SOCIAL_LINKS,
+    {
+      fetchPolicy: 'cache-and-network',
+    },
+  )
 
   useEffect(() => {
     if (isFocused) {
