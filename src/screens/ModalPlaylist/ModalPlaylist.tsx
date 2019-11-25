@@ -27,6 +27,7 @@ const Scroll = styled(FlatList as new () => FlatList<Track>).attrs(() => ({
 interface Props extends ToggleTrackProps, TrackActionsProps {}
 
 const ModalPlaylist: React.FC<Props> = ({
+  isPlaying,
   activeTrack,
   toggleTrack,
   activePlaylist,
@@ -41,12 +42,12 @@ const ModalPlaylist: React.FC<Props> = ({
 
   const isTrackPlaying = useCallback(
     (track: Track): boolean => {
-      if (!activeTrack) {
+      if (!activeTrack || !isPlaying) {
         return false
       }
       return activeTrack.id === track.id
     },
-    [activeTrack],
+    [activeTrack, isPlaying],
   )
 
   const renderTrack: ListRenderItem<Track> = useCallback(
