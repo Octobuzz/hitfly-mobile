@@ -204,3 +204,11 @@ const customizer = (objValue: any, srcValue: any): any => {
 export const mergeRight = (source: object, obj: object): object => {
   return LFP.mergeWith(customizer, obj, source)
 }
+
+export const randomString = (): string =>
+  Math.random()
+    .toString(36)
+    .substring(2, 15) +
+  Math.random()
+    .toString(36)
+    .substring(2, 15)

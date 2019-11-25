@@ -31,8 +31,8 @@ class TracksView extends React.Component<Props> {
   }
 
   private isTrackPlaying = (track: Track): boolean => {
-    const { activeTrack } = this.props
-    if (!activeTrack) {
+    const { activeTrack, isPlaying } = this.props
+    if (!activeTrack || !isPlaying) {
       return false
     }
     return activeTrack.id === track.id

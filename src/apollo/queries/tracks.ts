@@ -1,7 +1,6 @@
 import { Pagination, Track } from '../schemas'
+import { COMMON_TRACK } from '../fragments'
 import gql from 'graphql-tag'
-
-// TODO: использовать фрагменты
 
 export interface PlaylistData {
   playlist?: Pagination<Track>
@@ -17,27 +16,27 @@ export const GET_TOP50 = gql`
   }
 `
 
+export const GET_TOP50_TRACKS = gql`
+  query {
+    playlist: GetTopFifty(limit: 50, page: 0) {
+      items: data {
+        ...CommonTrack
+      }
+    }
+  }
+  ${COMMON_TRACK}
+`
+
 export const GET_NEW_TRACKS = gql`
   query NewTracks($limit: Int = 10, $page: Int = 1) {
     playlist: tracks(limit: $limit, page: $page) {
       items: data {
-        id
-        title: trackName
-        cover(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        group: musicGroup {
-          title: name
-        }
-        fileUrl: filename
-        singer
-        length
-        favouritesCount
-        isFavorite: userFavourite
+        ...CommonTrack
       }
       hasMorePages: has_more_pages
     }
   }
+  ${COMMON_TRACK}
 `
 
 export const GET_ALBUM_TRACKS = gql`
@@ -49,23 +48,12 @@ export const GET_ALBUM_TRACKS = gql`
       filters: { albumId: $albumId }
     ) {
       items: data {
-        id
-        title: trackName
-        group: musicGroup {
-          title: name
-        }
-        singer
-        fileUrl: filename
-        cover(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        length
-        favouritesCount
-        isFavorite: userFavourite
+        ...CommonTrack
       }
       hasMorePages: has_more_pages
     }
   }
+  ${COMMON_TRACK}
 `
 
 export const GET_COLLECTION_TRACKS = gql`
@@ -81,23 +69,12 @@ export const GET_COLLECTION_TRACKS = gql`
       filters: { collectionId: $collectionId }
     ) {
       items: data {
-        id
-        title: trackName
-        group: musicGroup {
-          title: name
-        }
-        singer
-        fileUrl: filename
-        cover(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        length
-        favouritesCount
-        isFavorite: userFavourite
+        ...CommonTrack
       }
       hasMorePages: has_more_pages
     }
   }
+  ${COMMON_TRACK}
 `
 
 export const GET_GENRE_TRACKS = gql`
@@ -105,46 +82,24 @@ export const GET_GENRE_TRACKS = gql`
     currentGenreId @client @export(as: "genreId")
     playlist: tracks(limit: $limit, page: $page, filters: { genre: $genreId }) {
       items: data {
-        id
-        title: trackName
-        group: musicGroup {
-          title: name
-        }
-        singer
-        fileUrl: filename
-        cover(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        length
-        favouritesCount
-        isFavorite: userFavourite
+        ...CommonTrack
       }
       hasMorePages: has_more_pages
     }
   }
+  ${COMMON_TRACK}
 `
 
 export const GET_TOP_WEEK_TRACKS = gql`
   query TopWeekTracks($limit: Int = 10, $page: Int = 1) {
     playlist: TopWeeklyQuery(limit: $limit, page: $page) {
       items: data {
-        id
-        title: trackName
-        group: musicGroup {
-          title: name
-        }
-        singer
-        fileUrl: filename
-        cover(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        length
-        favouritesCount
-        isFavorite: userFavourite
+        ...CommonTrack
       }
       hasMorePages: has_more_pages
     }
   }
+  ${COMMON_TRACK}
 `
 
 export const GET_LISTENED_NOW = gql`
@@ -159,46 +114,24 @@ export const GET_LISTENED_NOW_TRACKS = gql`
   query ListenedNowTracks($limit: Int = 10, $page: Int = 1) {
     playlist: GetListenedNow(limit: $limit, page: $page) {
       items: data {
-        id
-        title: trackName
-        group: musicGroup {
-          title: name
-        }
-        singer
-        fileUrl: filename
-        cover(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        length
-        favouritesCount
-        isFavorite: userFavourite
+        ...CommonTrack
       }
       hasMorePages: has_more_pages
     }
   }
+  ${COMMON_TRACK}
 `
 
 export const GET_MY_MUSIC = gql`
   query MyTracks($limit: Int = 10, $page: Int = 1) {
     tracks(limit: $limit, page: $page, filters: { my: true }) {
       items: data {
-        id
-        title: trackName
-        group: musicGroup {
-          title: name
-        }
-        singer
-        fileUrl: filename
-        cover(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        length
-        favouritesCount
-        isFavorite: userFavourite
+        ...CommonTrack
       }
       hasMorePages: has_more_pages
     }
   }
+  ${COMMON_TRACK}
 `
 
 export const GET_LIKED_MUSIC = gql`
@@ -207,22 +140,49 @@ export const GET_LIKED_MUSIC = gql`
       items: data {
         id
         track {
-          id
-          title: trackName
-          group: musicGroup {
-            title: name
-          }
-          singer
-          fileUrl: filename
-          cover(sizes: [size_290x290]) {
-            imageUrl: url
-          }
-          length
-          favouritesCount
-          isFavorite: userFavourite
+          ...CommonTrack
         }
       }
       hasMorePages: has_more_pages
     }
   }
+  ${COMMON_TRACK}
+`
+
+// FIXME: это общий интерфейс для всех треков должен быть
+export interface TracksWithFeedbackData {
+  tracks: Pagination<Track>
+}
+
+export const GET_MY_TRACKS_WITH_FEEDBACK = gql`
+  query FeedbackTracks(
+    $limit: Int = 20
+    $page: Int = 1
+    $period: CommentPeriodEnum = week
+  ) {
+    tracks(
+      limit: $limit
+      page: $page
+      commentPeriod: $period
+      filters: { my: true }
+    ) {
+      items: data {
+        ...CommonTrack
+        comments(commentPeriod: year) {
+          id
+          comment
+          createdAt
+          createdBy: user {
+            id
+            userName: username
+            avatar(sizes: [size_235x235]) {
+              imageUrl: url
+            }
+          }
+        }
+      }
+      hasMorePages: has_more_pages
+    }
+  }
+  ${COMMON_TRACK}
 `

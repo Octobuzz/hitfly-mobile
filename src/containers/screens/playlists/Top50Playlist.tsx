@@ -1,30 +1,9 @@
 import LFP from 'lodash/fp'
 import React from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
-import gql from 'graphql-tag'
 import NonCollectionPlaylist from './NonCollectionPlaylist'
 import { images, names } from 'src/constants'
-
-const GET_TOP50_TRACKS = gql`
-  query {
-    playlist: GetTopFifty(limit: 50, page: 0) {
-      items: data {
-        id
-        title: trackName
-        group: musicGroup {
-          title: name
-        }
-        singer
-        fileUrl: filename
-        cover(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        length
-        favouritesCount
-      }
-    }
-  }
-`
+import { GET_TOP50_TRACKS } from 'src/apollo'
 
 // тут без пагинации, всегда 50 треков
 const hasMorePagesSelector = LFP.F

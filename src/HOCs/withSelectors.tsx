@@ -1,11 +1,6 @@
-import L from 'lodash'
 import React, { useCallback } from 'react'
-import { graphql } from '@apollo/react-hoc'
-import { MutationFunction } from '@apollo/react-common'
+import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-
-// FIXME: стоит сделать через навигацию а не через селекты и стор?
-// TODO: сделать через хук
 
 const SELECT_COLLECTION = gql`
   mutation SelectCollection($id: Int!) {
@@ -36,23 +31,15 @@ export interface SelectorsProps {
   selectAlbum: (albumId: number) => Promise<any>
 }
 
-interface Props {
-  mutSelectAlbum: MutationFunction<any, { id: number }>
-  mutSelectGenre: MutationFunction<any, { id: number }>
-  mutSelectCollection: MutationFunction<any, { id: number }>
-  mutSelectCollectionType: MutationFunction<any, { type: string }>
-}
-
-const withSelectors = (
-  WrappedComponent: React.ComponentType<SelectorsProps>,
+const withSelectors = <T extends SelectorsProps>(
+  WrappedComponent: React.ComponentType<T>,
 ) => {
-  const Selectors: React.FC<Props> = ({
-    mutSelectAlbum,
-    mutSelectGenre,
-    mutSelectCollection,
-    mutSelectCollectionType,
-    ...rest
-  }) => {
+  const Selectors: React.FC<any> = props => {
+    const [mutSelectGenre] = useMutation(SELECT_GENRE)
+    const [mutSelectAlbum] = useMutation(SELECT_ALBUM)
+    const [mutSelectCollection] = useMutation(SELECT_COLLECTION)
+    const [mutSelectCollectionType] = useMutation(SELECT_COLLECTIONS_TYPE)
+
     const selectCollection = useCallback(
       (collectionId: number) =>
         mutSelectCollection({ variables: { id: collectionId } }),
@@ -77,18 +64,12 @@ const withSelectors = (
         selectCollection={selectCollection}
         selectCollectionType={selectCollectionType}
         selectGenre={selectGenre}
-        {...rest}
+        {...props}
       />
     )
   }
 
-  return L.flowRight(
-    graphql(SELECT_COLLECTION, { name: 'mutSelectCollection' }),
-    graphql(SELECT_GENRE, { name: 'mutSelectGenre' }),
-    graphql(SELECT_COLLECTIONS_TYPE, { name: 'mutSelectCollectionType' }),
-    graphql(SELECT_ALBUM, { name: 'mutSelectAlbum' }),
-    // @ts-ignore
-  )(Selectors)
+  return Selectors
 }
 
 export default withSelectors

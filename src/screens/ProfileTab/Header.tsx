@@ -7,7 +7,7 @@ import { images } from 'src/constants'
 import styled from 'src/styled-components'
 
 const HeaderWrapper = styled.View`
-  height: 45%;
+  height: 365px;
   padding-left: 56px;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.white};

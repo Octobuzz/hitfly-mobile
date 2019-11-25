@@ -3,8 +3,9 @@ import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { Button, SafeView, View, Stretcher } from 'src/components'
 import { images, storageKeys, routes } from 'src/constants'
 import Features, { Feature } from './Features'
-import { storage } from 'src/apollo'
+import { storage, GET_SOCIAL_LINKS } from 'src/apollo'
 import styled from 'src/styled-components'
+import { graphql } from '@apollo/react-hoc'
 
 const Logo = styled.Image.attrs(() => ({
   source: images.WELCOME_LOGO,
@@ -60,4 +61,4 @@ class Welcome extends React.Component<NavigationStackScreenProps> {
   }
 }
 
-export default Welcome
+export default graphql<NavigationStackScreenProps>(GET_SOCIAL_LINKS)(Welcome)

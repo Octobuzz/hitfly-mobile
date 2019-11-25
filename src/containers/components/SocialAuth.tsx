@@ -3,10 +3,9 @@ import React, { useCallback } from 'react'
 import { ViewStyle, StyleProp } from 'react-native'
 import { NavigationInjectedProps, withNavigation } from 'react-navigation'
 import { useQuery } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 import { Loader, SocialButton, TextWithLines } from 'src/components'
+import { SocialConnect, GET_SOCIAL_LINKS, SocialLinksData } from 'src/apollo'
 import { routes } from 'src/constants'
-import { SocialConnect } from 'src/apollo'
 import styled from 'src/styled-components'
 
 const Wrapper = styled.View``
@@ -18,26 +17,13 @@ const Row = styled.View`
   margin-bottom: 32px;
 `
 
-interface SocialConnectData {
-  socialConnect?: SocialConnect[]
-}
-
-const GET_SOCIAL_LINKS = gql`
-  {
-    socialConnect: SocialConnectQuery(filters: { mobile: true }) {
-      type: social_type
-      url: link
-    }
-  }
-`
-
 interface Props extends NavigationInjectedProps {
   bottomText: string
   style?: StyleProp<ViewStyle>
 }
 
 const SocialAuth: React.FC<Props> = ({ navigation, bottomText, style }) => {
-  const { data, loading } = useQuery<SocialConnectData>(GET_SOCIAL_LINKS)
+  const { data, loading } = useQuery<SocialLinksData>(GET_SOCIAL_LINKS)
 
   const navigateToSocialAuth = useCallback(({ url }: SocialConnect) => {
     navigation.navigate(routes.AUTH.SOCIAL_AUTH, {

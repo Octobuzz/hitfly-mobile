@@ -1,4 +1,5 @@
 import { Track } from '../schemas'
+import { COMMON_TRACK } from '../fragments'
 import gql from 'graphql-tag'
 
 export interface ActiveTrackData {
@@ -10,21 +11,10 @@ export const GET_ACTIVE_TRACK = gql`
   query {
     isPlaying @client
     activeTrack @client {
-      id
-      title: trackName
-      cover(sizes: [size_290x290]) {
-        imageUrl: url
-      }
-      group: musicGroup {
-        title: name
-      }
-      fileUrl: filename
-      singer
-      length
-      favouritesCount
-      isFavorite: userFavourite
+      ...CommonTrack
     }
   }
+  ${COMMON_TRACK}
 `
 
 export interface ActivePlaylistData {
@@ -36,19 +26,8 @@ export const GET_ACTIVE_PLAYLIST = gql`
   query {
     activePlaylistKey @client
     activePlaylist @client {
-      id
-      title: trackName
-      cover(sizes: [size_290x290]) {
-        imageUrl: url
-      }
-      group: musicGroup {
-        title: name
-      }
-      fileUrl: filename
-      singer
-      length
-      favouritesCount
-      isFavorite: userFavourite
+      ...CommonTrack
     }
   }
+  ${COMMON_TRACK}
 `

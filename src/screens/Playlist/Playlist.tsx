@@ -15,7 +15,7 @@ import PlaylistInfoPanel from './PlaylistInfoPanel'
 import styled from 'src/styled-components'
 
 const CoverWrapper = styled.View`
-  height: 45%;
+  height: 365px;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.white};
 `

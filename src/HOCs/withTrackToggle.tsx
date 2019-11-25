@@ -18,6 +18,7 @@ import {
   GET_ACTIVE_PLAYLIST,
 } from 'src/apollo'
 import { images } from 'src/constants'
+import { randomString } from 'src/helpers'
 
 interface ToggleTrackOptions {
   track: Track
@@ -166,10 +167,13 @@ const withTrackToggle = <T extends ToggleTrackProps>(
         const trackToPlay = shuffledPlaylist[0]
         playTrack({
           track: trackToPlay,
-          playlistData: { playlist: shuffledPlaylist, playlistKey: 'shuffled' },
+          playlistData: {
+            playlist: shuffledPlaylist,
+            playlistKey: randomString(),
+          },
         })
       },
-      [activePlaylist, activePlaylistKey, playTrack],
+      [activePlaylist, playTrack],
     )
 
     return (

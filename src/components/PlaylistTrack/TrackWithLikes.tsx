@@ -7,12 +7,10 @@ import TrackImage from './TrackImage'
 import { styles } from 'src/constants'
 import styled from 'src/styled-components'
 
-const VERTICAL_PADDING = 16
-
 const Wrapper = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
-  padding: 12px ${VERTICAL_PADDING}px;
+  padding: 12px 16px;
 `
 
 const CenterBlock = styled.View`
@@ -36,7 +34,8 @@ const SubTitleText = styled(TextBase)`
 // @ts-ignore
 const LikeIcon = styled(Icon).attrs(({ theme, isActive }) => ({
   color: isActive ? theme.colors.brandPink : theme.colors.white,
-  size: 24,
+  size: 20,
+  name: 'heart',
 }))<{ isActive: boolean }>``
 
 const LikeWrapper = styled.TouchableOpacity.attrs(() => ({
@@ -76,7 +75,7 @@ const TrackWithLikes: React.FC<TrackWithLikesProps> = ({
         </SubTitleText>
       </CenterBlock>
       <LikeWrapper onPress={handlePressLike}>
-        <LikeIcon isAtive={track.isFavorite} />
+        <LikeIcon isActive={track.isFavorite} />
       </LikeWrapper>
     </Wrapper>
   )
