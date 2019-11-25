@@ -3,6 +3,7 @@ import { Platform, StatusBar } from 'react-native'
 import { InMemoryCache, IdGetter } from 'apollo-cache-inmemory'
 import ApolloClient, { Resolvers } from 'apollo-client'
 import { HeaderSettings, CollectionsType, HeaderMode } from './commonTypes'
+import { GET_RECOMMENDED, GET_MUSIC_FAN } from './queries'
 import { Track } from './schemas'
 import gql from 'graphql-tag'
 
@@ -11,39 +12,6 @@ interface ContextArgs {
   cache: InMemoryCache
   getCacheKey: IdGetter
 }
-
-const GET_RECOMMENDED = gql`
-  query Collections($limit: Int = 10, $page: Int = 1) {
-    collections(limit: $limit, page: $page, filters: { collection: true }) {
-      items: data {
-        id
-        image: image(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        title
-        tracksCountInPlaylist: tracksCount
-      }
-      hasMorePages: has_more_pages
-    }
-  }
-`
-
-// TODO: использовать фрагменты?
-const GET_MUSIC_FAN = gql`
-  query Collections($limit: Int = 10, $page: Int = 1) {
-    collections(limit: $limit, page: $page, filters: { superMusicFan: true }) {
-      items: data {
-        id
-        image: image(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        title
-        tracksCountInPlaylist: tracksCount
-      }
-      hasMorePages: has_more_pages
-    }
-  }
-`
 
 const GET_HEADER_SETTINGS = gql`
   query {

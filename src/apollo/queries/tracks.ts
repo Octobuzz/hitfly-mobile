@@ -2,8 +2,6 @@ import { Pagination, Track } from '../schemas'
 import { COMMON_TRACK } from '../fragments'
 import gql from 'graphql-tag'
 
-// TODO: использовать фрагменты
-
 export interface PlaylistData {
   playlist?: Pagination<Track>
 }
