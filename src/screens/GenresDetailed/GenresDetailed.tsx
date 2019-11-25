@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import { FlatList } from 'react-native'
-import { Loader, SafeView, GenreItem, RefreshControl } from 'src/components'
+import { Loader, GenreItem, RefreshControl } from 'src/components'
 import { Genre } from 'src/apollo'
 import { styles } from 'src/constants'
 import styled from 'src/styled-components'
@@ -49,20 +49,16 @@ const GenresDetailed: React.FC<Props> = ({
     [],
   )
 
-  return (
-    <SafeView>
-      {isLoading ? (
-        <Loader isFilled />
-      ) : (
-        <Scroll
-          refreshControl={
-            <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
-          }
-          renderItem={renderGenre}
-          data={genres}
-        />
-      )}
-    </SafeView>
+  return isLoading ? (
+    <Loader isFilled />
+  ) : (
+    <Scroll
+      refreshControl={
+        <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+      }
+      renderItem={renderGenre}
+      data={genres}
+    />
   )
 }
 
