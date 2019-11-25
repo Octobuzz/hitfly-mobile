@@ -17,11 +17,12 @@ import styled from 'src/styled-components'
 const CoverWrapper = styled.View`
   height: 365px;
   justify-content: center;
+  border-bottom-left-radius: 28px;
+  overflow: hidden;
   background-color: ${({ theme }) => theme.colors.white};
 `
 
 const Cover = styled(DarkenImage)`
-  border-bottom-left-radius: 28px;
   position: absolute;
   height: 100%;
   width: 100%;

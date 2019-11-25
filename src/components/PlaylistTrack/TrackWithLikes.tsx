@@ -2,7 +2,7 @@ import React from 'react'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Track } from 'src/apollo'
 import { Playable } from './interfaces'
-import TextBase from '../TextBase'
+import { CenterBlock, TitleWhiteText, SubTitleWhiteText } from './styles'
 import TrackImage from './TrackImage'
 import { styles } from 'src/constants'
 import styled from 'src/styled-components'
@@ -11,24 +11,6 @@ const Wrapper = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   padding: 12px 16px;
-`
-
-const CenterBlock = styled.View`
-  flex: 1;
-  margin-horizontal: 16px;
-`
-
-const TitleText = styled(TextBase)`
-  font-size: 12px;
-  line-height: 14px;
-  color: ${({ theme }) => theme.colors.white};
-  font-family: ${({ theme }) => theme.fonts.bold};
-`
-
-const SubTitleText = styled(TextBase)`
-  font-size: 10px;
-  line-height: 12px;
-  color: ${({ theme }) => theme.colors.white};
 `
 
 // @ts-ignore
@@ -69,10 +51,10 @@ const TrackWithLikes: React.FC<TrackWithLikesProps> = ({
     <Wrapper onPress={handlePressTrack}>
       <TrackImage isPlaying={isPlaying} imageUrl={cover[0].imageUrl} />
       <CenterBlock>
-        <TitleText numberOfLines={2}>{title}</TitleText>
-        <SubTitleText numberOfLines={2}>
+        <TitleWhiteText numberOfLines={1}>{title}</TitleWhiteText>
+        <SubTitleWhiteText numberOfLines={1}>
           {group ? group.title : singer}
-        </SubTitleText>
+        </SubTitleWhiteText>
       </CenterBlock>
       <LikeWrapper onPress={handlePressLike}>
         <LikeIcon isActive={track.isFavorite} />

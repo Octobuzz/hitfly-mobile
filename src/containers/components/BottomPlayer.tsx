@@ -21,7 +21,7 @@ const BottomPlayerContainer: React.FC<Props> = ({
     toggleTrack()
   }, [toggleTrack])
 
-  const onPressPlayer = useCallback(() => {
+  const onPress = useCallback(() => {
     navigation.navigate(routes.PLAYER.MODAL_PLAYER)
   }, [])
   const onSlideEnd = useCallback(progress => {
@@ -33,7 +33,7 @@ const BottomPlayerContainer: React.FC<Props> = ({
       onSlideEnd={onSlideEnd}
       isPlaying={isPlaying}
       onPressControl={handlePressControl}
-      onPressPlayer={onPressPlayer}
+      onPress={onPress}
       progress={position}
       duration={duration}
       track={activeTrack}

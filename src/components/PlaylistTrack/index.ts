@@ -1,4 +1,5 @@
 export * from './PlaylistTrack'
 export * from './TrackWithLikes'
 export { default as TrackWithLikes } from './TrackWithLikes'
+export { default as BottomPlayerTrack } from './BottomPlayerTrack'
 export { default } from './PlaylistTrack'
