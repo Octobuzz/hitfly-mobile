@@ -1,4 +1,5 @@
 import { Genre, Profile, Pagination } from '../schemas'
+import { COMMON_GENRE } from '../fragments'
 import gql from 'graphql-tag'
 
 // deprecated
@@ -9,11 +10,10 @@ export interface GenreData {
 export const DEPRECATED_GET_GENRES = gql`
   {
     genres: genre {
-      id
-      title: name
-      imageUrl: image
+      ...CommonGenre
     }
   }
+  ${COMMON_GENRE}
 `
 
 export interface GenresData {
@@ -24,14 +24,13 @@ export const GET_GENRES = gql`
   query getGenres($limit: Int = 20, $page: Int = 1) {
     genres(limit: $limit, page: $page) {
       items: data {
-        id
-        title: name
-        imageUrl: image
+        ...CommonGenre
         hasSubGenres: haveSubGenres
       }
       hasMorePages: has_more_pages
     }
   }
+  ${COMMON_GENRE}
 `
 
 // limit = 1000 - костыль, ибо так произошло
@@ -42,12 +41,11 @@ export const GET_SUB_GENRES = gql`
   query getSubGenres($limit: Int = 1000, $page: Int = 1, $rootGenreId: Int) {
     genres(limit: $limit, page: $page, rootGenreId: $rootGenreId) {
       items: data {
-        id
-        title: name
-        imageUrl: image
+        ...CommonGenre
       }
     }
   }
+  ${COMMON_GENRE}
 `
 
 export interface FavoriteGenresData {
@@ -58,11 +56,10 @@ export const GET_FAVORITE_GENRES = gql`
   query {
     profile: myProfile {
       favouriteGenres {
-        id
-        title: name
-        imageUrl: image
+        ...CommonGenre
         hasSubGenres: haveSubGenres
       }
     }
   }
+  ${COMMON_GENRE}
 `
