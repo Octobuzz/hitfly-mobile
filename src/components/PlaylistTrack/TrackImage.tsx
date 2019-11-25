@@ -22,20 +22,18 @@ const ControlOverlayWrapper = styled.View<Playable>`
   background-color: ${({ theme }) => theme.colors.transparent70};
 `
 
-const ControlOverlay: React.FC = () => {
-  return (
-    <ControlOverlayWrapper>
-      <PauseIcon />
-    </ControlOverlayWrapper>
-  )
-}
-
-const SIZE = 32
+const ControlOverlay: React.FC = () => (
+  <ControlOverlayWrapper>
+    <PauseIcon />
+  </ControlOverlayWrapper>
+)
 
 const Wrapper = styled.View`
   border-radius: 4px;
   overflow: hidden;
 `
+
+const SIZE = 32
 
 const StyledImage = styled(Image)`
   width: ${SIZE}px;
@@ -55,14 +53,12 @@ const TrackImage: React.FC<Props> & Sized = ({
   isPlaying,
   imageUrl,
   style,
-}) => {
-  return (
-    <Wrapper style={style}>
-      <StyledImage source={{ uri: imageUrl }} />
-      {isPlaying && <ControlOverlay />}
-    </Wrapper>
-  )
-}
+}) => (
+  <Wrapper style={style}>
+    <StyledImage source={{ uri: imageUrl }} />
+    {isPlaying && <ControlOverlay />}
+  </Wrapper>
+)
 
 TrackImage.size = SIZE
 
