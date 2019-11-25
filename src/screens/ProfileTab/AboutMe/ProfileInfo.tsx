@@ -61,7 +61,7 @@ const ProfileInfo: React.FC<Props> = ({ genres, location }) => {
     )
   }
 
-  return <Block>{content}</Block>
+  return <Block hideBorder>{content}</Block>
 }
 
 export default ProfileInfo
