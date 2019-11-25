@@ -8,9 +8,8 @@ import {
   HeaderButton,
   HeaderButtons,
 } from 'react-navigation-header-buttons'
-import gql from 'graphql-tag'
 import { routes } from 'src/constants'
-import { HeaderSettings } from 'src/apollo'
+import { GET_HEADER_SETTINGS, HeaderSettingsData } from 'src/apollo'
 import { withTheme, ITheme } from 'src/styled-components'
 
 const IoniconsHeaderButton = (passMeFurther: any) => (
@@ -18,15 +17,6 @@ const IoniconsHeaderButton = (passMeFurther: any) => (
 )
 
 const ICON_SIZE = 23
-
-const GET_HEADER_SETTINGS = gql`
-  query {
-    headerSettings @client {
-      mode
-      state
-    }
-  }
-`
 
 interface Props extends NavigationInjectedProps {
   theme: ITheme
@@ -41,9 +31,7 @@ const HeaderRightButtons: React.FC<Props> = ({ navigation, theme }) => {
     navigation.navigate(routes.MAIN.SETTINGS)
   }, [])
 
-  const { data } = useQuery<{ headerSettings: HeaderSettings }>(
-    GET_HEADER_SETTINGS,
-  )
+  const { data } = useQuery<HeaderSettingsData>(GET_HEADER_SETTINGS)
   const mode = L.get(data, 'headerSettings.mode', 'dark')
   const state = L.get(data, 'headerSettings.state', 'main')
   const color = mode === 'dark' ? theme.colors.black : theme.colors.white

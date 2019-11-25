@@ -1,16 +1,12 @@
 import L from 'lodash'
 import React, { useCallback } from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
-import SelectGenreScreen from './SelectGenre'
-import gql from 'graphql-tag'
-import { Genre, Profile, Pagination } from 'src/apollo'
-import { useQuery, useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/react-hooks'
 import { routes } from 'src/constants'
+import SelectGenreScreen from './SelectGenre'
 import { useQueryWithPagination } from 'src/Hooks'
-
-interface GenreData {
-  genres: Pagination<Genre>
-}
+import { Genre, Profile, GenresData, GET_GENRES } from 'src/apollo'
+import gql from 'graphql-tag'
 
 interface Props extends NavigationStackScreenProps {
   isEditMode?: boolean
@@ -18,19 +14,6 @@ interface Props extends NavigationStackScreenProps {
 }
 
 const LIMIT = 20
-const GET_GENRES = gql`
-  query getGenres($limit: Int = ${LIMIT}, $page: Int = 1) {
-    genres(limit: $limit, page: $page) {
-      items: data {
-        id
-        title: name
-        imageUrl: image
-        hasSubGenres: haveSubGenres
-      }
-      hasMorePages: has_more_pages
-    }
-  }
-`
 
 const UPDATE_GENRES = gql`
   mutation updateGenres($genresIds: [ID]) {
@@ -40,8 +23,8 @@ const UPDATE_GENRES = gql`
   }
 `
 
-const itemsSelector = (data?: GenreData) => L.get(data, 'genres.items', [])
-const hasMorePagesSelector = (data?: GenreData) =>
+const itemsSelector = (data?: GenresData) => L.get(data, 'genres.items', [])
+const hasMorePagesSelector = (data?: GenresData) =>
   L.get(data, 'genres.hasMorePages', false)
 
 const SelectGenre: React.FC<Props> = ({
@@ -55,7 +38,7 @@ const SelectGenre: React.FC<Props> = ({
     loading,
     networkStatus,
     onEndReached,
-  } = useQueryWithPagination<GenreData>(GET_GENRES, {
+  } = useQueryWithPagination<GenresData>(GET_GENRES, {
     itemsSelector,
     hasMorePagesSelector,
     limit: LIMIT,
@@ -101,28 +84,3 @@ const SelectGenre: React.FC<Props> = ({
 }
 
 export default SelectGenre
-
-interface ProfileGenres {
-  profile: Profile
-}
-
-const GET_FAVOURITE_GENRES = gql`
-  query {
-    profile: myProfile {
-      favouriteGenres {
-        id
-        title: name
-        imageUrl: image
-        hasSubGenres: haveSubGenres
-      }
-    }
-  }
-`
-
-export const SelectGenreForProfileScreen: React.FC<any> = props => {
-  const { data } = useQuery<ProfileGenres>(GET_FAVOURITE_GENRES)
-
-  const favouriteGenres = L.get(data, 'profile.favouriteGenres', [])
-
-  return <SelectGenre {...props} isEditMode favouriteGenres={favouriteGenres} />
-}

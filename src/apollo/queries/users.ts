@@ -1,9 +1,7 @@
+import { Pagination, User } from '../schemas'
 import gql from 'graphql-tag'
-import { Pagination, User } from 'src/apollo'
 
-// FIXME: перенести в apollo/queries
-
-export interface StarsData {
+export interface UsersData {
   users?: Pagination<User>
 }
 

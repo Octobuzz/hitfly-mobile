@@ -8,51 +8,10 @@ import {
   DetailedTrackMenuProps,
 } from 'src/HOCs'
 import { useQueryWithPagination } from 'src/Hooks'
-import gql from 'graphql-tag'
+import { GET_MY_TRACKS_WITH_FEEDBACK, TracksWithFeedbackData } from 'src/apollo'
 import { names } from 'src/constants'
 
 const LIMIT = 20
-const GET_MY_TRACKS_WITH_FEEDBACK = gql`
-  query FeedbackTracks(
-    $limit: Int = 20
-    $page: Int = 1
-    $period: CommentPeriodEnum = week
-  ) {
-    tracks(
-      limit: $limit
-      page: $page
-      commentPeriod: $period
-      filters: { my: true }
-    ) {
-      items: data {
-        id
-        title: trackName
-        group: musicGroup {
-          title: name
-        }
-        singer
-        fileUrl: filename
-        cover(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        length
-        comments(commentPeriod: year) {
-          id
-          comment
-          createdAt
-          createdBy: user {
-            id
-            userName: username
-            avatar(sizes: [size_235x235]) {
-              imageUrl: url
-            }
-          }
-        }
-      }
-      hasMorePages: has_more_pages
-    }
-  }
-`
 
 const itemsSelector = (data: any) => L.get(data, 'tracks.items', [])
 const hasMorePagesSelector = (data: any) =>
@@ -61,16 +20,15 @@ const hasMorePagesSelector = (data: any) =>
 interface Props extends ToggleTrackProps, DetailedTrackMenuProps {}
 
 const TracksFeedbackContainer: React.FC<Props> = props => {
-  const { data, refetch, networkStatus, onEndReached } = useQueryWithPagination(
-    GET_MY_TRACKS_WITH_FEEDBACK,
-    {
-      itemsSelector,
-      hasMorePagesSelector,
-      limit: LIMIT,
-      notifyOnNetworkStatusChange: true,
-      fetchPolicy: 'cache-and-network',
-    },
-  )
+  const { data, refetch, networkStatus, onEndReached } = useQueryWithPagination<
+    TracksWithFeedbackData
+  >(GET_MY_TRACKS_WITH_FEEDBACK, {
+    itemsSelector,
+    hasMorePagesSelector,
+    limit: LIMIT,
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'cache-and-network',
+  })
 
   const [period, setPeriod] = useState<FeedbackPeriod>('week')
   const tracks = L.get(data, 'tracks.items', [])

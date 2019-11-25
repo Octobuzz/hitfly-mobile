@@ -16,6 +16,17 @@ export const GET_TOP50 = gql`
   }
 `
 
+export const GET_TOP50_TRACKS = gql`
+  query {
+    playlist: GetTopFifty(limit: 50, page: 0) {
+      items: data {
+        ...CommonTrack
+      }
+    }
+  }
+  ${COMMON_TRACK}
+`
+
 export const GET_NEW_TRACKS = gql`
   query NewTracks($limit: Int = 10, $page: Int = 1) {
     playlist: tracks(limit: $limit, page: $page) {
@@ -130,6 +141,44 @@ export const GET_LIKED_MUSIC = gql`
         id
         track {
           ...CommonTrack
+        }
+      }
+      hasMorePages: has_more_pages
+    }
+  }
+  ${COMMON_TRACK}
+`
+
+// FIXME: это общий интерфейс для всех треков должен быть
+export interface TracksWithFeedbackData {
+  tracks: Pagination<Track>
+}
+
+export const GET_MY_TRACKS_WITH_FEEDBACK = gql`
+  query FeedbackTracks(
+    $limit: Int = 20
+    $page: Int = 1
+    $period: CommentPeriodEnum = week
+  ) {
+    tracks(
+      limit: $limit
+      page: $page
+      commentPeriod: $period
+      filters: { my: true }
+    ) {
+      items: data {
+        ...CommonTrack
+        comments(commentPeriod: year) {
+          id
+          comment
+          createdAt
+          createdBy: user {
+            id
+            userName: username
+            avatar(sizes: [size_235x235]) {
+              imageUrl: url
+            }
+          }
         }
       }
       hasMorePages: has_more_pages

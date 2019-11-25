@@ -2,7 +2,7 @@ import L from 'lodash'
 import React, { useCallback, useEffect } from 'react'
 import { withNavigation } from 'react-navigation'
 import { GenresSection } from '../components'
-import { GET_GENRES, GenreData, Genre } from 'src/apollo'
+import { DEPRECATED_GET_GENRES, GenreData, Genre } from 'src/apollo'
 import { withSelectors } from 'src/HOCs'
 import { routes } from 'src/constants'
 import { useQuery } from '@apollo/react-hooks'
@@ -12,10 +12,13 @@ const GenresContainer: React.FC<any> = ({
   navigation,
   selectGenre,
 }) => {
-  const { data, refetch, loading } = useQuery<GenreData>(GET_GENRES, {
-    notifyOnNetworkStatusChange: true,
-    fetchPolicy: 'cache-and-network',
-  })
+  const { data, refetch, loading } = useQuery<GenreData>(
+    DEPRECATED_GET_GENRES,
+    {
+      notifyOnNetworkStatusChange: true,
+      fetchPolicy: 'cache-and-network',
+    },
+  )
 
   useEffect(() => {
     if (getRefetcher) {

@@ -3,24 +3,14 @@ import { Platform, StatusBar } from 'react-native'
 import { InMemoryCache, IdGetter } from 'apollo-cache-inmemory'
 import ApolloClient, { Resolvers } from 'apollo-client'
 import { HeaderSettings, CollectionsType, HeaderMode } from './commonTypes'
-import { GET_RECOMMENDED, GET_MUSIC_FAN } from './queries'
+import { GET_RECOMMENDED, GET_MUSIC_FAN, GET_HEADER_SETTINGS } from './queries'
 import { Track } from './schemas'
-import gql from 'graphql-tag'
 
 interface ContextArgs {
   client: ApolloClient<InMemoryCache>
   cache: InMemoryCache
   getCacheKey: IdGetter
 }
-
-const GET_HEADER_SETTINGS = gql`
-  query {
-    headerSettings @client {
-      mode
-      state
-    }
-  }
-`
 
 const setStatusBarColor = (mode: HeaderMode): void => {
   if (Platform.OS === 'ios') {
