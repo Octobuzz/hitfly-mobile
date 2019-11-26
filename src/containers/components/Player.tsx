@@ -42,6 +42,7 @@ const Player: React.FC = () => {
       },
     )
     return () => {
+      TrackPlayer.stop()
       TrackPlayer.destroy()
       changed.remove()
       ended.remove()
