@@ -30,7 +30,6 @@ const ListenedNowContainer: React.FC<any> = ({ getRefetcher, navigation }) => {
       onPress={onPress}
       tracksCount={tracksCount}
       imageSource={images.LISTENED_NOW}
-      bottomTextType="tracksCount"
       subtitle="Обновлен вчера"
       title="Сейчас слушают"
     />

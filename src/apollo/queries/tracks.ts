@@ -9,9 +9,7 @@ export interface PlaylistData {
 export const GET_TOP50 = gql`
   query {
     playlist: GetTopFifty(limit: 50, page: 0) {
-      items: data {
-        length
-      }
+      total
     }
   }
 `

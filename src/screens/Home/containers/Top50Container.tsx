@@ -12,7 +12,7 @@ const Top50Container: React.FC<any> = ({ getRefetcher, navigation }) => {
     fetchPolicy: 'cache-and-network',
   })
 
-  const playlist = L.get(data, 'playlist.items', [])
+  const tracksCount = L.get(data, 'playlist.total', 0)
 
   useEffect(() => {
     if (getRefetcher) {
@@ -26,11 +26,10 @@ const Top50Container: React.FC<any> = ({ getRefetcher, navigation }) => {
 
   return (
     <PlaylistSection
-      isLoading={loading}
-      playlist={playlist}
       onPress={onPress}
+      isLoading={loading}
+      tracksCount={tracksCount}
       imageSource={images.TOP50_BACKGROUND}
-      bottomTextType="tracksLength"
       subtitle="Рейтинг лучших музыкантов"
       title="Топ 50"
     />
