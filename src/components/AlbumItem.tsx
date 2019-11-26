@@ -39,7 +39,7 @@ interface Props {
 }
 
 const AlbumItem: React.FC<Props> = ({ item, onPress }) => {
-  const { cover, title, group, author } = item
+  const { cover, title, author } = item
   const handlePress = React.useCallback(() => {
     if (onPress) {
       onPress(item)
@@ -50,7 +50,7 @@ const AlbumItem: React.FC<Props> = ({ item, onPress }) => {
     <Wrapper onPress={handlePress} accessibilityRole="summary">
       <AlbumImage source={{ uri: cover[0].imageUrl }} />
       <TitleText>{title}</TitleText>
-      <SubTitleText>{group ? group.title : author}</SubTitleText>
+      <SubTitleText>{author}</SubTitleText>
     </Wrapper>
   )
 }

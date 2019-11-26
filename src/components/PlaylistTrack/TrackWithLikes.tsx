@@ -37,7 +37,7 @@ const TrackWithLikes: React.FC<TrackWithLikesProps> = ({
   isPlaying,
   onPressLike,
 }) => {
-  const { cover, title, group, singer } = track
+  const { cover, title, singer } = track
 
   const handlePressTrack = React.useCallback(() => {
     onPress(track)
@@ -52,9 +52,7 @@ const TrackWithLikes: React.FC<TrackWithLikesProps> = ({
       <TrackImage isPlaying={isPlaying} imageUrl={cover[0].imageUrl} />
       <CenterBlock>
         <TitleWhiteText numberOfLines={1}>{title}</TitleWhiteText>
-        <SubTitleWhiteText numberOfLines={1}>
-          {group ? group.title : singer}
-        </SubTitleWhiteText>
+        <SubTitleWhiteText numberOfLines={1}>{singer}</SubTitleWhiteText>
       </CenterBlock>
       <LikeWrapper onPress={handlePressLike}>
         <LikeIcon isActive={track.isFavorite} />

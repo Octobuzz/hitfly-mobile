@@ -67,7 +67,7 @@ const PlaylistTrack: React.FC<PlaylistTrackProps> & Sized = ({
   isPlaying,
   onPressMore,
 }) => {
-  const { cover, title, group, singer, length } = track
+  const { cover, title, singer, length } = track
   const trackLength = React.useMemo(() => {
     if (typeof length === 'number') {
       return formatTimeDurationForTrack(length)
@@ -93,7 +93,7 @@ const PlaylistTrack: React.FC<PlaylistTrackProps> & Sized = ({
       <TrackImage isPlaying={isPlaying} imageUrl={cover[0].imageUrl} />
       <CenterBlock>
         <BlackText numberOfLines={1}>{title}</BlackText>
-        <GrayText numberOfLines={1}>{group ? group.title : singer}</GrayText>
+        <GrayText numberOfLines={1}>{singer}</GrayText>
       </CenterBlock>
       <More onPress={handlePressMore} />
       <TimeText>{trackLength}</TimeText>

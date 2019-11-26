@@ -1,22 +1,16 @@
 import gql from 'graphql-tag'
+import { COMMON_ALBUM } from '../fragments'
 
 export const GET_MY_ALBUMS = gql`
   query getMyAlbums($limit: Int = 10, $page: Int = 1) {
     albums(limit: $limit, page: $page, filters: { my: true }) {
       items: data {
-        id
-        title
-        author
-        cover(sizes: [size_290x290]) {
-          imageUrl: url
-        }
-        group: musicGroup {
-          title: name
-        }
+        ...CommonAlbum
       }
       hasMorePages: has_more_pages
     }
   }
+  ${COMMON_ALBUM}
 `
 
 export const GET_LIKED_ALBUMS = gql`
@@ -25,18 +19,11 @@ export const GET_LIKED_ALBUMS = gql`
       items: data {
         id
         album {
-          id
-          title
-          author
-          cover(sizes: [size_290x290]) {
-            imageUrl: url
-          }
-          group: musicGroup {
-            title: name
-          }
+          ...CommonAlbum
         }
       }
       hasMorePages: has_more_pages
     }
   }
+  ${COMMON_ALBUM}
 `

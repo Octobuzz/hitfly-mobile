@@ -7,9 +7,6 @@ export const COMMON_TRACK = gql`
     cover(sizes: [size_290x290]) {
       imageUrl: url
     }
-    group: musicGroup {
-      title: name
-    }
     fileUrl: filename
     singer
     length

@@ -134,7 +134,7 @@ const withTrackToggle = <T extends ToggleTrackProps>(
           title,
           url: fileUrl,
           id: id.toString(),
-          artist: group ? group.title : singer,
+          artist: singer,
           artwork: imageUrl.endsWith('.svg') ? images.DEFAULT_TRACK : imageUrl,
         }
       },
