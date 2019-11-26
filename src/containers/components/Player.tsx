@@ -10,7 +10,7 @@ import {
 
 const setup = async () => {
   await TrackPlayer.setupPlayer()
-  TrackPlayer.updateOptions({
+  await TrackPlayer.updateOptions({
     stopWithApp: true,
     capabilities: [
       TrackPlayer.CAPABILITY_PLAY,
@@ -29,18 +29,22 @@ const Player: React.FC = () => {
   const [setIsPlaying] = useMutation<any, SetIsPlayingVariables>(SET_IS_PLAYING)
 
   useEffect(() => {
-    setup()
-    const ended = TrackPlayer.addEventListener('playback-queue-ended', () => {
-      setIsPlaying({ variables: { isPlaying: false } })
-      TrackPlayer.seekTo(0)
+    let ended: TrackPlayer.EmitterSubscription
+    let changed: TrackPlayer.EmitterSubscription
+    setup().then(() => {
+      ended = TrackPlayer.addEventListener('playback-queue-ended', () => {
+        setIsPlaying({ variables: { isPlaying: false } })
+        TrackPlayer.seekTo(0)
+      })
+      changed = TrackPlayer.addEventListener(
+        'playback-track-changed',
+        async () => {
+          const currentTrackId = await TrackPlayer.getCurrentTrack()
+          setActiveTrackId({ variables: { id: +currentTrackId } })
+        },
+      )
     })
-    const changed = TrackPlayer.addEventListener(
-      'playback-track-changed',
-      async () => {
-        const currentTrackId = await TrackPlayer.getCurrentTrack()
-        setActiveTrackId({ variables: { id: +currentTrackId } })
-      },
-    )
+
     return () => {
       TrackPlayer.destroy()
       changed.remove()
