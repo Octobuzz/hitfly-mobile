@@ -26,6 +26,7 @@ const Cover = styled(DarkenImage)`
 const Row = styled.View`
   flex-direction: row;
   align-items: center;
+  padding-right: 56px;
 `
 
 const Icon = styled.Image`
@@ -35,6 +36,7 @@ const Icon = styled.Image`
 `
 
 const TitleText = styled(TextBase)`
+  flex: 1;
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.white};
   font-size: 24px;

@@ -36,7 +36,6 @@ const AboutMe: React.FC<Props> = ({
       refreshControl={
         <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
       }
-      addBottomSafePadding
     >
       <ProfileInfo genres={playsInGenres} location={location} />
       <ProfileGroup musicGroups={musicGroups} />
