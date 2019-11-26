@@ -1,11 +1,10 @@
-import L from 'lodash'
 import React from 'react'
 import { ImageSourcePropType } from 'react-native'
 import { Loader, TextBase } from 'src/components'
 import { Playlist } from 'src/apollo'
 import SectionWrapper from './SectionWrapper'
 import PlaylistHeader from './PlaylistHeader'
-import { formatTracksCount, formatTimeDurationForPlaylist } from 'src/helpers'
+import { formatTracksCount } from 'src/helpers'
 import styled from 'src/styled-components'
 
 const Inner = styled.TouchableOpacity`
@@ -29,15 +28,12 @@ const BottomText = styled(TextBase)`
   font-size: 12px;
 `
 
-type BottomTextType = 'tracksCount' | 'tracksLength'
-
 interface Props {
   title: string
   subtitle?: string
   playlist?: Playlist
   isLoading?: boolean
-  tracksCount?: number
-  bottomTextType?: BottomTextType
+  tracksCount: number
   imageSource: ImageSourcePropType
   onPress: () => void
 }
@@ -48,32 +44,16 @@ const PlaylistSection: React.FC<Props> = ({
   subtitle,
   isLoading,
   imageSource,
-  bottomTextType,
+  tracksCount,
   playlist = [],
-  tracksCount = 0,
 }) => {
-  if (!isLoading) {
-    // разделил для читаемости
-    if (bottomTextType === 'tracksCount' && tracksCount === 0) {
-      return null
-    }
-    if (bottomTextType === 'tracksLength' && !playlist.length) {
-      return null
-    }
+  if (!isLoading && tracksCount === 0) {
+    return null
   }
-  const bottomText = React.useMemo(() => {
-    switch (bottomTextType) {
-      case 'tracksCount': {
-        const text = formatTracksCount(tracksCount || 0)
-        return text
-      }
-      case 'tracksLength': {
-        const fullLength: number = L.sumBy(playlist, 'length')
-        const formattedTime = formatTimeDurationForPlaylist(fullLength)
-        return formattedTime
-      }
-    }
-  }, [playlist, bottomTextType, tracksCount])
+  const bottomText = React.useMemo(() => formatTracksCount(tracksCount), [
+    playlist,
+    tracksCount,
+  ])
 
   return (
     <SectionWrapper withPadding>
@@ -84,7 +64,7 @@ const PlaylistSection: React.FC<Props> = ({
         ) : (
           <>
             <PlaylistHeader title={title} subtitle={subtitle} />
-            {!!bottomText && <BottomText>{bottomText}</BottomText>}
+            <BottomText>{bottomText}</BottomText>
           </>
         )}
       </Inner>
