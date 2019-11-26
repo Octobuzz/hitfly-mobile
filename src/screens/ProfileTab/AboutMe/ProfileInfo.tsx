@@ -23,6 +23,10 @@ const NoInfoText = styled(TextBase)`
   text-align: center;
 `
 
+const Text = styled(TextBase)`
+  flex: 1;
+`
+
 interface Indentable {
   withMargin?: boolean
 }
@@ -39,7 +43,7 @@ const ProfileInfo: React.FC<Props> = ({ genres, location }) => {
     content.push(
       <Row key="location">
         <StyledIcon name="md-pin" />
-        <TextBase>{location.title}</TextBase>
+        <Text>{location.title}</Text>
       </Row>,
     )
   }
@@ -48,7 +52,7 @@ const ProfileInfo: React.FC<Props> = ({ genres, location }) => {
     content.push(
       <Row withMargin={content.length > 0} key="genres">
         <StyledIcon name="ios-musical-notes" />
-        <TextBase>{genres.map(({ title }) => title).join(', ')}</TextBase>
+        <Text>{genres.map(({ title }) => title).join(', ')}</Text>
       </Row>,
     )
   }
