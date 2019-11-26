@@ -30,7 +30,6 @@ class SocialAuthWeb extends React.Component<NavigationStackScreenProps> {
     return (
       <SafeView>
         <WebView
-          incognito
           startInLoadingState
           onNavigationStateChange={this.handleNavigationStateChange}
           renderLoading={this.renderLoader}
