@@ -44,7 +44,6 @@ const ModalPlayer: React.FC<Props> = ({
 }) => {
   const {
     title,
-    group,
     singer,
     isFavorite,
     favouritesCount,
@@ -69,7 +68,7 @@ const ModalPlayer: React.FC<Props> = ({
         <Cover source={{ uri: imageUrl }} />
         <Stretcher />
         <TitleText>{title}</TitleText>
-        <SubTitleText>{group ? group.title : singer}</SubTitleText>
+        <SubTitleText>{singer}</SubTitleText>
         <Stretcher gravity={3} />
         <Controls {...toggleTrackProps} />
         <Stretcher gravity={3} />

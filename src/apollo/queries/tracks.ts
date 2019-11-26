@@ -166,7 +166,7 @@ export const GET_MY_TRACKS_WITH_FEEDBACK = gql`
     ) {
       items: data {
         ...CommonTrack
-        comments(commentPeriod: year) {
+        comments(commentPeriod: $period) {
           id
           comment
           createdAt

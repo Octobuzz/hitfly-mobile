@@ -80,14 +80,14 @@ const TrackMenu: React.FC<Props> = ({ track, onPressLike, onPressCancel }) => {
   if (!track) {
     return null
   }
-  const { cover, group, singer, title } = track
+  const { cover, singer, title } = track
   return (
     <View paddingBottom={32} noFill testID="like">
       <TrackWrapper>
         <StyledImage source={{ uri: cover[0].imageUrl }} />
         <CenterBlock>
           <TitleText>{title}</TitleText>
-          <SubtitleText>{group ? group.title : singer}</SubtitleText>
+          <SubtitleText>{singer}</SubtitleText>
         </CenterBlock>
       </TrackWrapper>
       <Divider />

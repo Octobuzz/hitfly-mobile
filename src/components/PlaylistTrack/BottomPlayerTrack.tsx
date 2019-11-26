@@ -41,15 +41,13 @@ const BottomPlayerTrack: React.FC<Props> = ({
   onPress,
   isPlaying,
   onPressControl,
-  track: { cover, title, group, singer },
+  track: { cover, title, singer },
 }) => (
   <Wrapper onPress={onPress}>
     <TrackImage source={{ uri: cover[0].imageUrl }} />
     <CenterBlock>
       <TitleText numberOfLines={2}>{title}</TitleText>
-      <SubTitleText numberOfLines={2}>
-        {group ? group.title : singer}
-      </SubTitleText>
+      <SubTitleText numberOfLines={2}>{singer}</SubTitleText>
     </CenterBlock>
     <PlayerButton onPress={onPressControl}>
       <PlayerIcon name={isPlaying ? 'pause' : 'play'} />

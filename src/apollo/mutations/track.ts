@@ -14,12 +14,10 @@ export const ADD_TRACK_TO_FAVORITES = gql`
     addToFavourites(
       Favourite: { favouriteableId: $id, favouritableType: track }
     ) {
-      ... on FavouriteTrack {
-        track {
-          id
-          favouritesCount
-          isFavorite: userFavourite
-        }
+      ... on Track {
+        id
+        favouritesCount
+        isFavorite: userFavourite
       }
     }
   }
@@ -30,12 +28,10 @@ export const DELETE_TRACK_FROM_FAVORITES = gql`
     deleteFromFavourite(
       Favourite: { favouriteableId: $id, favouritableType: track }
     ) {
-      ... on FavouriteTrack {
-        track {
-          id
-          favouritesCount
-          isFavorite: userFavourite
-        }
+      ... on Track {
+        id
+        favouritesCount
+        isFavorite: userFavourite
       }
     }
   }

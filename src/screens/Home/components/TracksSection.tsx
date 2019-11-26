@@ -51,13 +51,12 @@ const TrackItem: React.FC<TrackItemProps> = ({ track, onPress }) => {
       onPress(track)
     }
   }, [onPress, track])
-  const { title, cover, singer, group } = track
-  const subtitle = group ? group.title : singer
+  const { title, cover, singer } = track
   return (
     <ItemWrapper onPress={handlePress}>
       <BackgroundImage source={{ uri: cover[0].imageUrl }} />
       <TopText>{title}</TopText>
-      <BottomText>{subtitle}</BottomText>
+      <BottomText>{singer}</BottomText>
     </ItemWrapper>
   )
 }
