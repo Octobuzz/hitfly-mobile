@@ -9,14 +9,29 @@ import {
   HeaderButtons,
 } from 'react-navigation-header-buttons'
 import { routes } from 'src/constants'
-import { GET_HEADER_SETTINGS, HeaderSettingsData } from 'src/apollo'
-import { withTheme, ITheme } from 'src/styled-components'
+import {
+  GET_HEADER_SETTINGS,
+  HeaderSettingsData,
+  GET_PROFILE_AVATAR,
+  GetProfileAvatarData,
+} from 'src/apollo'
+import styled, { withTheme, ITheme } from 'src/styled-components'
+import { Image } from 'src/components'
+
+const AvatarButton = styled.TouchableOpacity`
+  width: 42px;
+  align-items: center;
+`
+
+const AvatarImage = styled(Image)`
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+`
 
 const IoniconsHeaderButton = (passMeFurther: any) => (
   <HeaderButton {...passMeFurther} IconComponent={Icon} />
 )
-
-const ICON_SIZE = 23
 
 interface Props extends NavigationInjectedProps {
   theme: ITheme
@@ -30,6 +45,13 @@ const HeaderRightButtons: React.FC<Props> = ({ navigation, theme }) => {
   const navigateToSettings = useCallback((): void => {
     navigation.navigate(routes.MAIN.SETTINGS)
   }, [])
+  const { data: profileData } = useQuery<GetProfileAvatarData>(
+    GET_PROFILE_AVATAR,
+    {
+      fetchPolicy: 'cache-only',
+    },
+  )
+  const profileUrl = L.get(profileData, 'profile.avatar[0].imageUrl')
 
   const { data } = useQuery<HeaderSettingsData>(GET_HEADER_SETTINGS)
   const mode = L.get(data, 'headerSettings.mode', 'dark')
@@ -39,17 +61,28 @@ const HeaderRightButtons: React.FC<Props> = ({ navigation, theme }) => {
   return (
     <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
       {state === 'main' ? (
-        <Item
-          color={color}
-          iconSize={ICON_SIZE}
-          title="Профиль"
-          iconName="md-contact"
-          onPress={navigateToProfile}
-        />
+        profileUrl ? (
+          <Item
+            title="Профиль"
+            ButtonElement={
+              <AvatarButton onPress={navigateToProfile}>
+                <AvatarImage source={{ uri: profileUrl }} />
+              </AvatarButton>
+            }
+          />
+        ) : (
+          <Item
+            color={color}
+            iconSize={23}
+            title="Профиль"
+            iconName="md-contact"
+            onPress={navigateToProfile}
+          />
+        )
       ) : (
         <Item
           color={color}
-          iconSize={ICON_SIZE}
+          iconSize={23}
           title="Настройки"
           iconName="md-cog"
           onPress={navigateToSettings}
