@@ -44,7 +44,6 @@ class Home extends React.Component<Props> {
             />
           }
         >
-          {/* беда с типами и похер */}
           <StarsSection getRefetcher={this.setRefetcher('stars')} />
 
           <NewSection getRefetcher={this.setRefetcher('newTracks')} />

@@ -19,6 +19,7 @@ const ControlOverlayWrapper = styled.View<Playable>`
   bottom: 0;
   justify-content: center;
   align-items: center;
+  border-radius: 4px;
   background-color: ${({ theme }) => theme.colors.transparent70};
 `
 
@@ -28,16 +29,14 @@ const ControlOverlay: React.FC = () => (
   </ControlOverlayWrapper>
 )
 
-const Wrapper = styled.View`
-  border-radius: 4px;
-  overflow: hidden;
-`
+const Wrapper = styled.View``
 
 const SIZE = 32
 
 const StyledImage = styled(Image)`
   width: ${SIZE}px;
   height: ${SIZE}px;
+  border-radius: 4px;
 `
 
 interface Props extends Playable {
