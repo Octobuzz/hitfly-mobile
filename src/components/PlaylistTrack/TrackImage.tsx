@@ -19,6 +19,7 @@ const ControlOverlayWrapper = styled.View<Playable>`
   bottom: 0;
   justify-content: center;
   align-items: center;
+  border-radius: 4px;
   background-color: ${({ theme }) => theme.colors.transparent70};
 `
 
