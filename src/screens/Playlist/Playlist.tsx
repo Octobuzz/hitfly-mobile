@@ -12,10 +12,11 @@ import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/HOCs'
 import ControlButton from './ControlButton'
 import ShuffleButton from './ShuffleButton'
 import PlaylistInfoPanel from './PlaylistInfoPanel'
+import { styles } from 'src/constants'
 import styled from 'src/styled-components'
 
 const CoverWrapper = styled.View`
-  height: 365px;
+  height: ${styles.COVER_HEIGHT}px;
   justify-content: center;
   border-bottom-left-radius: 28px;
   overflow: hidden;

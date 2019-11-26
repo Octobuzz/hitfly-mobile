@@ -3,11 +3,11 @@ import { DarkenImage, TextBase } from 'src/components'
 import { Profile, Role } from 'src/apollo'
 import { getNameForCount } from 'src/helpers'
 import LinearGradient from 'react-native-linear-gradient'
-import { images } from 'src/constants'
+import { images, styles } from 'src/constants'
 import styled from 'src/styled-components'
 
 const HeaderWrapper = styled.View`
-  height: 365px;
+  height: ${styles.COVER_HEIGHT}px;
   padding-left: 56px;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.white};
