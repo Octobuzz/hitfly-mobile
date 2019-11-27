@@ -47,9 +47,6 @@ const HeaderRightButtons: React.FC<Props> = ({ navigation, theme }) => {
   }, [])
   const { data: profileData } = useQuery<GetProfileAvatarData>(
     GET_PROFILE_AVATAR,
-    {
-      fetchPolicy: 'cache-only',
-    },
   )
   const profileUrl = L.get(profileData, 'profile.avatar[0].imageUrl')
 
