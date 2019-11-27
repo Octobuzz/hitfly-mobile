@@ -1,6 +1,7 @@
 import L from 'lodash'
 import LFP from 'lodash/fp'
 import { BonusProgramLevel } from 'src/apollo'
+import { images } from 'src/constants'
 
 export const delay = (ms: number): Promise<void> =>
   new Promise(res => setTimeout(res, ms))
@@ -135,6 +136,7 @@ export const formatTimeDurationForTrack = (initialSeconds: number): string => {
 }
 
 interface BonusProgramTexts {
+  icon: number
   title: string
   order: number
 }
@@ -143,28 +145,32 @@ const bonusProgramMap = new Map<BonusProgramLevel, BonusProgramTexts>([
   [
     BonusProgramLevel.LEVEL_NOVICE,
     {
-      title: '👶🏻 Новичок',
+      title: 'Новичок',
+      icon: images.CHILD,
       order: 0,
     },
   ],
   [
     BonusProgramLevel.LEVEL_AMATEUR,
     {
-      title: '🎤 Любитель',
+      title: 'Любитель',
+      icon: images.KARAOKE,
       order: 1,
     },
   ],
   [
     BonusProgramLevel.LEVEL_CONNOISSEUR_OF_THE_GENRE,
     {
-      title: '🎸 Знаток жанра',
+      title: 'Знаток жанра',
+      icon: images.GUITAR,
       order: 2,
     },
   ],
   [
     BonusProgramLevel.LEVEL_SUPER_MUSIC_LOVER,
     {
-      title: '🎧 Супер меломан',
+      title: 'Супер меломан',
+      icon: images.HEADPHONE,
       order: 3,
     },
   ],
@@ -172,14 +178,14 @@ const bonusProgramMap = new Map<BonusProgramLevel, BonusProgramTexts>([
 
 export const getBonusProgramLevelHumanReadable = (
   level: BonusProgramLevel,
-): string => {
-  const bonusProgramTexts = bonusProgramMap.get(level) as BonusProgramTexts
-  return bonusProgramTexts.title
+): BonusProgramTexts => {
+  const bonusProgramTexts = bonusProgramMap.get(level)!
+  return bonusProgramTexts
 }
 
 export const getNextBonusProgramHumanReadable = (
   level: BonusProgramLevel,
-): string | undefined => {
+): BonusProgramTexts | undefined => {
   const currentProgram = bonusProgramMap.get(level) as BonusProgramTexts
   let nextProgram: BonusProgramTexts | undefined
   for (const bp of bonusProgramMap.values()) {
@@ -189,7 +195,7 @@ export const getNextBonusProgramHumanReadable = (
     }
   }
   if (nextProgram) {
-    return nextProgram.title
+    return nextProgram
   }
 }
 
