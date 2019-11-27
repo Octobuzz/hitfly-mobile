@@ -136,18 +136,23 @@ class FeedbackCarousel extends React.Component<Props, State> {
           </Row>
           <CommentText>{comment}</CommentText>
         </Animated.View>
-        <ArrowButtonsWrapper>
-          <ArrowButton disabled={currentPage === 0} onPress={this.previousPage}>
-            <StyledIcon name="arrowleft" />
-          </ArrowButton>
-          <ArrowButtonsDivider />
-          <ArrowButton
-            disabled={currentPage === comments.length - 1}
-            onPress={this.nextPage}
-          >
-            <StyledIcon name="arrowright" />
-          </ArrowButton>
-        </ArrowButtonsWrapper>
+        {comments.length > 0 && (
+          <ArrowButtonsWrapper>
+            <ArrowButton
+              disabled={currentPage === 0}
+              onPress={this.previousPage}
+            >
+              <StyledIcon name="arrowleft" />
+            </ArrowButton>
+            <ArrowButtonsDivider />
+            <ArrowButton
+              disabled={currentPage === comments.length - 1}
+              onPress={this.nextPage}
+            >
+              <StyledIcon name="arrowright" />
+            </ArrowButton>
+          </ArrowButtonsWrapper>
+        )}
       </Wrapper>
     )
   }
