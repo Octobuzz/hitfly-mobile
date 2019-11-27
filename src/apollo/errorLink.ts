@@ -5,7 +5,7 @@ import { onError } from 'apollo-link-error'
 import { AuthErrorPanelRef } from 'src/globalRefs'
 
 const handle401Error = (error: GraphQLError, operation: Operation) => {
-  // FIXME: это костыль (?) так как я не понял почему не вытаскивает профиль
+  // FIXME: это костыль так как я не понял почему не вытаскивает профиль
   // пришедший после мутации логина
   if (operation.operationName === 'ProfileAvatar') {
     return
