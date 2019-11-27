@@ -84,19 +84,6 @@ const withTrackToggle = <T extends ToggleTrackProps>(
       }
     }, [isPlaying, continueTrack])
 
-    const toggleTrack = useCallback(
-      (options?: ToggleTrackOptions): void => {
-        if (!options) {
-          pauseOrContinue()
-        } else if (!activeTrack || activeTrack.id !== options.track.id) {
-          playTrack(options)
-        } else {
-          pauseOrContinue()
-        }
-      },
-      [activeTrack, pauseOrContinue],
-    )
-
     const playTrack = useCallback(
       async ({ track, playlistData }: ToggleTrackOptions): Promise<void> => {
         // playlistKey служит для идентификации плейлиста
@@ -139,6 +126,19 @@ const withTrackToggle = <T extends ToggleTrackProps>(
         }
       },
       [],
+    )
+
+    const toggleTrack = useCallback(
+      (options?: ToggleTrackOptions): void => {
+        if (!options) {
+          pauseOrContinue()
+        } else if (!activeTrack || activeTrack.id !== options.track.id) {
+          playTrack(options)
+        } else {
+          pauseOrContinue()
+        }
+      },
+      [activeTrack, pauseOrContinue, playTrack],
     )
 
     const pauseTrack = useCallback((): void => {
