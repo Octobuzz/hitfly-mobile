@@ -8,6 +8,15 @@ import { images /* names */ } from 'src/constants'
 import styled from 'src/styled-components'
 
 const TitleText = styled(H2)`
+  flex: 1;
+`
+
+const Icon = styled.Image`
+  margin-right: 8px;
+`
+
+const TitleRow = styled.View`
+  flex-direction: row;
   margin-bottom: 3px;
 `
 
@@ -74,11 +83,14 @@ class BonusProgram extends React.PureComponent<Props> {
       daysInBonusProgram,
       favouritesTracksCount,
     } = this.props
+
+    const { icon, title } = getBonusProgramLevelHumanReadable(bonusProgramLevel)
     return (
       <Block>
-        <TitleText>
-          {getBonusProgramLevelHumanReadable(bonusProgramLevel)}
-        </TitleText>
+        <TitleRow>
+          <Icon source={icon} />
+          <TitleText>{title}</TitleText>
+        </TitleRow>
 
         <Row>
           <Column>
