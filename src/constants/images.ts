@@ -1,3 +1,9 @@
+// bonus program level
+export const CHILD = require('../assets/images/bonus_program_level/child.png')
+export const GUITAR = require('../assets/images/bonus_program_level/guitar.png')
+export const HEADPHONE = require('../assets/images/bonus_program_level/headphone.png')
+export const KARAOKE = require('../assets/images/bonus_program_level/karaoke.png')
+
 // profile rank
 export const CRITIC = require('../assets/images/profile_rank/critic.png')
 export const EXPERT_PLUS = require('../assets/images/profile_rank/expert_plus.png')
