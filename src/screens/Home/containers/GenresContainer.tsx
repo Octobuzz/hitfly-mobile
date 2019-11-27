@@ -2,23 +2,35 @@ import L from 'lodash'
 import React, { useCallback, useEffect } from 'react'
 import { withNavigation } from 'react-navigation'
 import { GenresSection } from '../components'
-import { DEPRECATED_GET_GENRES, GenreData, Genre } from 'src/apollo'
+import { GET_GENRES, GenresData, Genre } from 'src/apollo'
 import { withSelectors } from 'src/HOCs'
+import { useQueryWithPagination } from 'src/Hooks'
 import { routes } from 'src/constants'
-import { useQuery } from '@apollo/react-hooks'
+
+const LIMIT = 10
+
+const hasMorePagesSelector = (data?: GenresData) =>
+  L.get(data, 'genres.hasMorePages')
+const itemsSelector = (data?: GenresData) => L.get(data, 'genres.items', [])
 
 const GenresContainer: React.FC<any> = ({
   getRefetcher,
   navigation,
   selectGenre,
 }) => {
-  const { data, refetch, loading } = useQuery<GenreData>(
-    DEPRECATED_GET_GENRES,
-    {
-      notifyOnNetworkStatusChange: true,
-      fetchPolicy: 'cache-and-network',
-    },
-  )
+  const {
+    items,
+    refetch,
+    onEndReached,
+    networkStatus,
+  } = useQueryWithPagination<GenresData>(GET_GENRES, {
+    itemsSelector,
+    hasMorePagesSelector,
+    variables: { all: true },
+    notifyOnNetworkStatusChange: true,
+    fetchPolicy: 'cache-and-network',
+    limit: LIMIT,
+  })
 
   useEffect(() => {
     if (getRefetcher) {
@@ -35,12 +47,14 @@ const GenresContainer: React.FC<any> = ({
     navigation.navigate(routes.MAIN.GENRE_PLAYLIST, { title: genre.title })
   }, [])
 
-  const genres = L.get(data, 'genres', [])
+  const isLoading = networkStatus === 1 || networkStatus === 4
 
   return (
     <GenresSection
-      isLoading={loading}
-      genres={genres}
+      genres={items}
+      isLoading={isLoading}
+      isFetchingMore={networkStatus === 3}
+      onEndReached={onEndReached}
       onPressHeader={onPressHeader}
       onPressItem={onPressItem}
     />

@@ -21,8 +21,8 @@ export interface GenresData {
 }
 
 export const GET_GENRES = gql`
-  query getGenres($limit: Int = 20, $page: Int = 1) {
-    genres(limit: $limit, page: $page) {
+  query getGenres($limit: Int = 20, $page: Int = 1, $all: Boolean = false) {
+    genres(limit: $limit, page: $page, all: $all) {
       items: data {
         ...CommonGenre
         hasSubGenres: haveSubGenres
