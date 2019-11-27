@@ -2,10 +2,16 @@ import L from 'lodash'
 import React, { useCallback } from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import GenresDetailedScreen from './GenresDetailed'
-import { Genre, GenreData, DEPRECATED_GET_GENRES } from 'src/apollo'
-import { useQuery } from '@apollo/react-hooks'
-import { routes } from 'src/constants'
+import { Genre, GET_GENRES, GenresData } from 'src/apollo'
 import { withSelectors, SelectorsProps } from 'src/HOCs'
+import { useQueryWithPagination } from 'src/Hooks'
+import { routes } from 'src/constants'
+
+const LIMIT = 20
+
+const hasMorePagesSelector = (data?: GenresData) =>
+  L.get(data, 'genres.hasMorePages')
+const itemsSelector = (data?: GenresData) => L.get(data, 'genres.items', [])
 
 interface Props extends NavigationStackScreenProps, SelectorsProps {}
 
@@ -13,14 +19,20 @@ const GenresDetailedContainer: React.FC<Props> = ({
   navigation,
   selectGenre,
 }) => {
-  const { data, refetch, networkStatus } = useQuery<GenreData>(
-    DEPRECATED_GET_GENRES,
-    {
-      fetchPolicy: 'cache-and-network',
+  const {
+    items,
+    refetch,
+    onEndReached,
+    networkStatus,
+  } = useQueryWithPagination<GenresData>(GET_GENRES, {
+    itemsSelector,
+    hasMorePagesSelector,
+    limit: LIMIT,
+    variables: {
+      all: true,
     },
-  )
-
-  const genres: Genre[] = L.get(data, 'genres', [])
+    fetchPolicy: 'cache-and-network',
+  })
 
   const onPressGenre = useCallback(async (genre: Genre) => {
     await selectGenre(genre.id)
@@ -29,8 +41,10 @@ const GenresDetailedContainer: React.FC<Props> = ({
 
   return (
     <GenresDetailedScreen
-      genres={genres}
+      genres={items}
       onRefresh={refetch}
+      onEndReached={onEndReached}
+      isFetchingMore={networkStatus === 3}
       isLoading={networkStatus === 1}
       isRefreshing={networkStatus === 4}
       onPressGenre={onPressGenre}
