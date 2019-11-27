@@ -31,3 +31,9 @@ export const SET_IS_PLAYING = gql`
     setIsPlaying(isPlaying: $isPlaying) @client
   }
 `
+
+export const RESET_PLAYER = gql`
+  mutation {
+    resetPlayer @client
+  }
+`

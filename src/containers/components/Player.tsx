@@ -6,6 +6,7 @@ import {
   SetActiveTrackIdVariables,
   SET_IS_PLAYING,
   SetIsPlayingVariables,
+  RESET_PLAYER,
 } from 'src/apollo'
 
 const Player: React.FC = () => {
@@ -13,6 +14,7 @@ const Player: React.FC = () => {
     SET_ACTIVE_TRACK_ID,
   )
   const [setIsPlaying] = useMutation<any, SetIsPlayingVariables>(SET_IS_PLAYING)
+  const [resetPlayer] = useMutation(RESET_PLAYER)
 
   useEffect(() => {
     const ended = TrackPlayer.addEventListener('playback-queue-ended', () => {
@@ -28,6 +30,7 @@ const Player: React.FC = () => {
     )
 
     return () => {
+      resetPlayer()
       TrackPlayer.stop()
       changed.remove()
       ended.remove()

@@ -83,6 +83,17 @@ export default {
       })
       return playlist
     },
+    resetPlayer: (_, __, { cache }: ContextArgs) => {
+      cache.writeData({
+        data: {
+          activePlaylist: [],
+          activePlaylistKey: null,
+          isPlaying: null,
+          activeTrackId: null,
+        },
+      })
+      return null
+    },
   },
   Query: {
     collectionsByType: (
