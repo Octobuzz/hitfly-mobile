@@ -34,9 +34,10 @@ import {
   GenresDetailedScreen,
   ChangePasswordScreen,
   MyAlbumsDetailedScreen,
-  CollectionDetailsScreen,
   LikedAlbumsDetailedScreen,
   SelectGenreForProfileScreen,
+  MusicFanCollectionsDetailedScreen,
+  RecommenedCollectionsDetailedScreen,
 } from 'src/screens'
 import PlayerNavigator from './Player'
 import { stackDefaultOptions, playlistConfig } from './configs'
@@ -49,13 +50,16 @@ const MainNavigator = createStackNavigator(
       screen: HomeScreen,
       navigationOptions: { headerTitle: 'Главное' },
     },
-    [routes.MAIN.COLLECTION_DETAILS]: {
-      screen: CollectionDetailsScreen,
-      navigationOptions: ({ navigation }) => {
-        const title = navigation.getParam('title')
-        return {
-          title,
-        }
+    [routes.MAIN.RECOMMENDED_DETAILS]: {
+      screen: RecommenedCollectionsDetailedScreen,
+      navigationOptions: {
+        title: 'Рекомендуем',
+      },
+    },
+    [routes.MAIN.MUSIC_FAN_DETAILS]: {
+      screen: MusicFanCollectionsDetailedScreen,
+      navigationOptions: {
+        title: 'Супер меломан',
       },
     },
     [routes.MAIN.COLLECTION_PLAYLIST]: {

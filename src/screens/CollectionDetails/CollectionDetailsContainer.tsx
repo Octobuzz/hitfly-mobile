@@ -7,25 +7,20 @@ import {
   withSelectors,
   SelectorsProps,
 } from 'src/HOCs'
-import gql from 'graphql-tag'
 import { Pagination, Collection } from 'src/apollo'
 import { routes } from 'src/constants'
 import { useQueryWithPagination } from 'src/Hooks'
+import { DocumentNode } from 'graphql'
 
 interface CollectionsData {
   collections?: Pagination<Collection>
 }
 
 const LIMIT = 20
-const GET_COLLECTIONS = gql`
-  query getCollectionsByType($type: String!, $limit: Int = ${LIMIT}, $page: Int = 1) {
-    collectionDetailsType @client @export(as: "type")
-    collections: collectionsByType(type: $type, limit: $limit, page: $page)
-      @client
-  }
-`
 
-interface Props extends SelectorsProps, NavigationStackScreenProps {}
+interface Props extends SelectorsProps, NavigationStackScreenProps {
+  query: DocumentNode
+}
 
 const itemsSelector = (data?: CollectionsData) =>
   L.get(data, 'collections.items', [])
@@ -33,10 +28,10 @@ const hasMorePagesSelector = (data?: CollectionsData) =>
   L.get(data, 'collections.hasMorePages', false)
 
 const CollectionDetails: React.FC<Props> = ({
+  query,
   navigation,
   selectGenre,
   selectCollection,
-  selectCollectionType,
   ...rest
 }) => {
   const {
@@ -45,7 +40,7 @@ const CollectionDetails: React.FC<Props> = ({
     refetch,
     loading,
     networkStatus,
-  } = useQueryWithPagination<CollectionsData>(GET_COLLECTIONS, {
+  } = useQueryWithPagination<CollectionsData>(query, {
     itemsSelector,
     hasMorePagesSelector,
     limit: LIMIT,
