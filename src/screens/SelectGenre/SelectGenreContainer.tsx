@@ -5,8 +5,14 @@ import { useMutation } from '@apollo/react-hooks'
 import { routes } from 'src/constants'
 import SelectGenreScreen from './SelectGenre'
 import { useQueryWithPagination } from 'src/Hooks'
-import { Genre, Profile, GenresData, GET_GENRES } from 'src/apollo'
-import gql from 'graphql-tag'
+import {
+  Genre,
+  UpdateGenresVariables,
+  GenresData,
+  GET_GENRES,
+  UPDATE_GENRES,
+  FavoriteGenresData,
+} from 'src/apollo'
 
 interface Props extends NavigationStackScreenProps {
   isEditMode?: boolean
@@ -14,14 +20,6 @@ interface Props extends NavigationStackScreenProps {
 }
 
 const LIMIT = 20
-// TODO: возвращать жанры в с ответом?
-const UPDATE_GENRES = gql`
-  mutation updateGenres($genresIds: [ID]) {
-    updateMyProfile(profile: { genres: $genresIds }) {
-      __typename
-    }
-  }
-`
 
 const itemsSelector = (data?: GenresData) => L.get(data, 'genres.items', [])
 const hasMorePagesSelector = (data?: GenresData) =>
@@ -50,8 +48,8 @@ const SelectGenre: React.FC<Props> = ({
   }, [isEditMode])
 
   const [updateGenres, { loading: isUpdating }] = useMutation<
-    Profile,
-    { genresIds: string[] }
+    FavoriteGenresData,
+    UpdateGenresVariables
   >(UPDATE_GENRES)
 
   const onSubmit = useCallback(

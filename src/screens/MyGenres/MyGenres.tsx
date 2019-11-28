@@ -57,7 +57,7 @@ const MyGenres: React.FC<Props> = ({
   )
 
   return (
-    <SafeView>
+    <>
       {isLoading && !isRefreshing ? (
         <Loader isFilled />
       ) : (
@@ -76,7 +76,7 @@ const MyGenres: React.FC<Props> = ({
           title="Изменить любимые жанры"
         />
       </View>
-    </SafeView>
+    </>
   )
 }
 
