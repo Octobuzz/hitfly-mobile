@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { COMMON_ALBUM } from '../fragments'
 
 export const GET_MY_ALBUMS = gql`
-  query getMyAlbums($limit: Int = 10, $page: Int = 1) {
+  query MyAlbums($limit: Int = 10, $page: Int = 1) {
     albums(limit: $limit, page: $page, filters: { my: true }) {
       items: data {
         ...CommonAlbum
@@ -14,7 +14,7 @@ export const GET_MY_ALBUMS = gql`
 `
 
 export const GET_LIKED_ALBUMS = gql`
-  query getLikedAlbums($limit: Int = 10, $page: Int = 1) {
+  query LikedAlbums($limit: Int = 10, $page: Int = 1) {
     albums: favouriteAlbum(limit: $limit, page: $page) {
       items: data {
         id

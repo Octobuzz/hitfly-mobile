@@ -6,7 +6,7 @@ export interface UsersData {
 }
 
 export const GET_STARS = gql`
-  query {
+  query Stars {
     users(role: star, limit: 30, page: 1) {
       items: data {
         id

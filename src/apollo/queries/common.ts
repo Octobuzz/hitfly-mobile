@@ -6,7 +6,7 @@ export interface HeaderSettingsData {
 }
 
 export const GET_HEADER_SETTINGS = gql`
-  query {
+  query HeaderSettings {
     headerSettings @client {
       mode
       state

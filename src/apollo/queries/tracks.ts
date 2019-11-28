@@ -3,7 +3,7 @@ import { COMMON_TRACK } from '../fragments'
 import gql from 'graphql-tag'
 
 export const GET_DETAILED_TRACK = gql`
-  query {
+  query DetailedTrack {
     detailedTrack @client {
       ...CommonTrack
     }
@@ -16,7 +16,7 @@ export interface PlaylistData {
 }
 
 export const GET_TOP50 = gql`
-  query {
+  query Top50Total {
     playlist: GetTopFifty(limit: 50, page: 0) {
       total
     }
@@ -24,7 +24,7 @@ export const GET_TOP50 = gql`
 `
 
 export const GET_TOP50_TRACKS = gql`
-  query {
+  query Top50Tracks {
     playlist: GetTopFifty(limit: 50, page: 0) {
       items: data {
         ...CommonTrack
@@ -107,7 +107,7 @@ export const GET_TOP_WEEK_TRACKS = gql`
 `
 
 export const GET_LISTENED_NOW = gql`
-  query {
+  query ListenedNowTotal {
     playlist: GetListenedNow(limit: 0, page: 0) {
       total
     }

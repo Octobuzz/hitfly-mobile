@@ -8,7 +8,7 @@ export interface ActiveTrackData {
 }
 
 export const GET_ACTIVE_TRACK = gql`
-  query {
+  query ActiveTrack {
     isPlaying @client
     activeTrack @client {
       ...CommonTrack
@@ -23,7 +23,7 @@ export interface ActivePlaylistData {
 }
 
 export const GET_ACTIVE_PLAYLIST = gql`
-  query {
+  query ActivePlaylist {
     activePlaylistKey @client
     activePlaylist @client {
       ...CommonTrack

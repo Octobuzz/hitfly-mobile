@@ -7,7 +7,7 @@ export interface CollectionsData {
 }
 
 export const GET_RECOMMENDED = gql`
-  query Collections($limit: Int = 10, $page: Int = 1) {
+  query RecommendedCollections($limit: Int = 10, $page: Int = 1) {
     collections(limit: $limit, page: $page, filters: { collection: true }) {
       items: data {
         ...CommonCollection
@@ -19,7 +19,7 @@ export const GET_RECOMMENDED = gql`
 `
 
 export const GET_MUSIC_FAN = gql`
-  query Collections($limit: Int = 10, $page: Int = 1) {
+  query MusicFanCollections($limit: Int = 10, $page: Int = 1) {
     collections(limit: $limit, page: $page, filters: { superMusicFan: true }) {
       items: data {
         ...CommonCollection

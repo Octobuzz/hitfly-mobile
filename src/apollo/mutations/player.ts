@@ -33,7 +33,7 @@ export const SET_IS_PLAYING = gql`
 `
 
 export const RESET_PLAYER = gql`
-  mutation {
+  mutation ResetPlayer {
     resetPlayer @client
   }
 `

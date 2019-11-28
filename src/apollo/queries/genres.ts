@@ -2,26 +2,12 @@ import { Genre, Profile, Pagination } from '../schemas'
 import { COMMON_GENRE } from '../fragments'
 import gql from 'graphql-tag'
 
-// deprecated
-export interface GenreData {
-  genres?: Genre[]
-}
-// deprecated
-export const DEPRECATED_GET_GENRES = gql`
-  {
-    genres: genre {
-      ...CommonGenre
-    }
-  }
-  ${COMMON_GENRE}
-`
-
 export interface GenresData {
   genres: Pagination<Genre>
 }
 
 export const GET_GENRES = gql`
-  query getGenres($limit: Int = 20, $page: Int = 1, $all: Boolean = false) {
+  query Genres($limit: Int = 20, $page: Int = 1, $all: Boolean = false) {
     genres(limit: $limit, page: $page, all: $all) {
       items: data {
         ...CommonGenre
@@ -38,7 +24,7 @@ export const GET_GENRES = gql`
 // сейчас все поджанры автоматически должны быть выбраны
 // а значит они нужны все и сразу, но запрос только с пагинацией
 export const GET_SUB_GENRES = gql`
-  query getSubGenres($limit: Int = 1000, $page: Int = 1, $rootGenreId: Int) {
+  query SubGenres($limit: Int = 1000, $page: Int = 1, $rootGenreId: Int) {
     genres(limit: $limit, page: $page, rootGenreId: $rootGenreId) {
       items: data {
         ...CommonGenre
@@ -53,7 +39,7 @@ export interface FavoriteGenresData {
 }
 
 export const GET_FAVORITE_GENRES = gql`
-  query {
+  query FavoriteGenres {
     profile: myProfile {
       favouriteGenres {
         ...CommonGenre

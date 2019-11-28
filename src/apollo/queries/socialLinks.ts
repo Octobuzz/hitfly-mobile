@@ -7,7 +7,7 @@ export interface SocialLinksData {
 }
 
 export const GET_SOCIAL_LINKS = gql`
-  query {
+  query SocialLinks {
     socialConnect: SocialConnectQuery(filters: { mobile: true }) {
       ...CommonSocialLink
     }
@@ -16,7 +16,7 @@ export const GET_SOCIAL_LINKS = gql`
 `
 
 export const GET_PROFILE_SOCIAL_LINKS = gql`
-  query {
+  query ProfileSocialLinks {
     socialConnect: SocialConnectQuery(filters: { mobile: true }) {
       ...CommonSocialLink
       isLinked: connected
