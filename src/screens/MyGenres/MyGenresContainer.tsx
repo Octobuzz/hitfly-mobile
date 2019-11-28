@@ -1,16 +1,15 @@
 import L from 'lodash'
 import React, { useCallback } from 'react'
-import { NavigationEvents } from 'react-navigation'
+import { useQuery } from '@apollo/react-hooks'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
-import MyGenresScreen from './MyGenres'
 import { Genre, FavoriteGenresData, GET_FAVORITE_GENRES } from 'src/apollo'
-import { useLazyQuery } from '@apollo/react-hooks'
+import MyGenresScreen from './MyGenres'
 import { routes } from 'src/constants'
 
 interface Props extends NavigationStackScreenProps {}
 
 const MyGenres: React.FC<Props> = ({ navigation }) => {
-  const [getGenres, { data, refetch, loading, networkStatus }] = useLazyQuery<
+  const { data, refetch, loading, networkStatus } = useQuery<
     FavoriteGenresData
   >(GET_FAVORITE_GENRES, { fetchPolicy: 'cache-and-network' })
 
@@ -20,21 +19,14 @@ const MyGenres: React.FC<Props> = ({ navigation }) => {
     navigation.navigate(routes.MAIN.SELECT_GENRE)
   }, [])
 
-  const handleFocus = useCallback(() => {
-    getGenres()
-  }, [])
-
   return (
-    <>
-      <NavigationEvents onDidFocus={handleFocus} />
-      <MyGenresScreen
-        genres={genres}
-        isLoading={loading}
-        onRefresh={refetch}
-        isRefreshing={networkStatus === 4}
-        onPressChange={onChange}
-      />
-    </>
+    <MyGenresScreen
+      genres={genres}
+      isLoading={loading}
+      onRefresh={refetch}
+      isRefreshing={networkStatus === 4}
+      onPressChange={onChange}
+    />
   )
 }
 

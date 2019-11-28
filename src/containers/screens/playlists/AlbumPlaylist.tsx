@@ -3,7 +3,7 @@ import React from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { useQuery } from '@apollo/react-hooks'
 import NonCollectionPlaylist from './NonCollectionPlaylist'
-import { Album, GET_ALBUM_TRACKS } from 'src/apollo'
+import { Album, GET_ALBUM_TRACKS, Track } from 'src/apollo'
 import { names } from 'src/constants'
 import gql from 'graphql-tag'
 
@@ -25,7 +25,13 @@ interface SelectedAlbumData {
   album?: Album
 }
 
-const AlbumPlaylist: React.FC<NavigationStackScreenProps> = props => {
+interface Props
+  extends NavigationStackScreenProps<{
+    trackToPlay?: Track
+    title: string
+  }> {}
+
+const AlbumPlaylist: React.FC<Props> = props => {
   const { data } = useQuery<SelectedAlbumData>(GET_SELECTED_ALBUM)
   const id = LFP.get('album.id', data)
   const imageUrl = LFP.get('album.cover[0].imageUrl', data)
@@ -38,6 +44,7 @@ const AlbumPlaylist: React.FC<NavigationStackScreenProps> = props => {
       hasMorePagesSelector={hasMorePagesSelector}
       itemsSelector={itemsSelector}
       query={GET_ALBUM_TRACKS}
+      variables={{ albumId: id }}
       cover={cover}
       playlistKey={`${names.PLAYLIST_KEYS.ALBUM}:${id}`}
       {...props}

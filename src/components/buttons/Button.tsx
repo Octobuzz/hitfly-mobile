@@ -14,10 +14,24 @@ const Wrapper = styled.TouchableOpacity<IndentedHorizontal>`
   ${({ withoutMargin }) => !withoutMargin && `margin-horizontal: 20px;`}
 `
 
+const Inner = styled.View<ColorType & Loadable>`
+  padding: ${({ isLoading }) => (isLoading ? 0 : 20)}px 29px;
+  border-radius: 28px;
+  margin: 1px;
+  ${({ theme, type }) => {
+    switch (type) {
+      case 'outline': {
+        return `background-color: ${theme.colors.white}`
+      }
+      case 'outline-black': {
+        return `background-color: ${theme.colors.black}`
+      }
+    }
+  }};
+`
+
 const Text = styled(TextBase)<ColorType>`
   text-align: center;
-  padding: 20px 29px;
-  border-radius: 28px;
   overflow: hidden;
   color: ${({ theme, type = 'gradient' }) => {
     switch (type) {
@@ -33,22 +47,11 @@ const Text = styled(TextBase)<ColorType>`
       }
     }
   }};
-  ${({ theme, type }) => {
-    switch (type) {
-      case 'outline': {
-        return `background-color: ${theme.colors.white}`
-      }
-      case 'outline-black': {
-        return `background-color: ${theme.colors.black}`
-      }
-    }
-  }};
 `
 
 const Gradient = styled(LinearGradient).attrs(({ theme }) => ({
   colors: [theme.colors.brandBlue, theme.colors.brandPink],
 }))`
-  padding: 1px;
   border-radius: 28px;
 `
 
@@ -60,9 +63,11 @@ interface IndentedHorizontal {
   withoutMargin?: boolean
 }
 
-interface Props extends ColorType, ButtonBase, IndentedHorizontal {
+interface Loadable {
   isLoading?: boolean
 }
+
+interface Props extends ColorType, ButtonBase, IndentedHorizontal, Loadable {}
 
 const Button: React.FC<Props> = ({
   type,
@@ -80,7 +85,9 @@ const Button: React.FC<Props> = ({
     style={style}
   >
     <Gradient>
-      {isLoading ? <Loader size={61.7} /> : <Text type={type}>{title}</Text>}
+      <Inner isLoading={isLoading} type={type}>
+        {isLoading ? <Loader size={61.7} /> : <Text type={type}>{title}</Text>}
+      </Inner>
     </Gradient>
   </Wrapper>
 )
