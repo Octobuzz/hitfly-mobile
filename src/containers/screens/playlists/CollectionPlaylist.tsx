@@ -29,9 +29,7 @@ const GET_CURRENT_COLLECTION = gql`
   }
 `
 
-// FIXME: какая-то херня при передаче onEndReached - 2 раза делает запрос с page = 2
-// надо поправить позже. пока "отклюена пагинация"
-const LIMIT = 1000
+const LIMIT = 30
 
 interface Props
   extends ToggleTrackProps,

@@ -14,8 +14,8 @@ const Wrapper = styled.TouchableOpacity<IndentedHorizontal>`
   ${({ withoutMargin }) => !withoutMargin && `margin-horizontal: 20px;`}
 `
 
-const Inner = styled.View<ColorType>`
-  padding: 20px 29px;
+const Inner = styled.View<ColorType & Loadable>`
+  padding: ${({ isLoading }) => (isLoading ? 0 : 20)}px 29px;
   border-radius: 28px;
   margin: 1px;
   ${({ theme, type }) => {
@@ -63,9 +63,11 @@ interface IndentedHorizontal {
   withoutMargin?: boolean
 }
 
-interface Props extends ColorType, ButtonBase, IndentedHorizontal {
+interface Loadable {
   isLoading?: boolean
 }
+
+interface Props extends ColorType, ButtonBase, IndentedHorizontal, Loadable {}
 
 const Button: React.FC<Props> = ({
   type,
@@ -83,7 +85,7 @@ const Button: React.FC<Props> = ({
     style={style}
   >
     <Gradient>
-      <Inner type={type}>
+      <Inner isLoading={isLoading} type={type}>
         {isLoading ? <Loader size={61.7} /> : <Text type={type}>{title}</Text>}
       </Inner>
     </Gradient>

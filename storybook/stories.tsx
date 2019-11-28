@@ -42,10 +42,15 @@ storiesOf('SlidingPanel', module).add('Default', () => <SlidingPanelStory />)
 
 storiesOf('Button', module)
   .add('Gradient', () => <Button title="Gradient" type="gradient" />)
+  .add('Outline black', () => <Button title="Black" type="outline-black" />)
   .add('Outline', () => <Button title="Outline" type="outline" />)
-  .add('Gradient with Loader', () => (
+  .add('Outline with Loader', () => (
     <Button isLoading title="Outline" type="outline" />
   ))
+  .add('Outline black with Loader', () => (
+    <Button title="Black" isLoading type="outline-black" />
+  ))
+  .add('Gradient with Loader', () => <Button isLoading title="Gradient" />)
 storiesOf('More', module).add('Default', () => (
   <More style={{ backgroundColor: 'green' }} />
 ))

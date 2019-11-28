@@ -13,9 +13,7 @@ import PlaylistScreen from 'src/screens/Playlist'
 import { useQueryWithPagination } from 'src/Hooks'
 import { Track } from 'src/apollo'
 
-// FIXME: какая-то херня при передаче onEndReached - 2 раза делает запрос с page = 2
-// надо поправить позже. пока "отклюена пагинация"
-const LIMIT = 1000
+const LIMIT = 20
 
 interface Props
   extends NavigationStackScreenProps<{ trackToPlay?: Track; title: string }> {
@@ -46,10 +44,10 @@ const NonCollectionPlaylist: React.FC<HOCsProps> = ({
     onEndReached,
     networkStatus,
   } = useQueryWithPagination(query, {
+    variables,
     itemsSelector,
     hasMorePagesSelector,
     limit: LIMIT,
-    variables,
     fetchPolicy: 'cache-and-network',
     notifyOnNetworkStatusChange: true,
   })

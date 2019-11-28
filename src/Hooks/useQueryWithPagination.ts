@@ -27,9 +27,9 @@ function useQueryWithPagination<TData = any>(
 ): Result<TData, PaginationVariables> {
   const {
     limit,
+    variables,
     itemsSelector,
     hasMorePagesSelector,
-    variables,
     ...originalOprions
   } = options
   const queryResult = useQuery<TData, PaginationVariables>(query, {
