@@ -13,7 +13,7 @@ import {
 import { useQuery } from '@apollo/react-hooks'
 import PlaylistScreen from 'src/screens/Playlist/Playlist'
 import { useQueryWithPagination } from 'src/Hooks'
-import { GET_COLLECTION_TRACKS, Collection } from 'src/apollo'
+import { GET_COLLECTION_TRACKS, Collection, Track } from 'src/apollo'
 import { names } from 'src/constants'
 
 const GET_CURRENT_COLLECTION = gql`
@@ -36,7 +36,7 @@ const LIMIT = 1000
 interface Props
   extends ToggleTrackProps,
     DetailedTrackMenuProps,
-    NavigationStackScreenProps {}
+    NavigationStackScreenProps<{ trackToPlay?: Track; title: string }> {}
 
 const hasMorePagesSelector = LFP.get('playlist.hasMorePages')
 const itemsSelector = LFP.getOr([], 'playlist.items')

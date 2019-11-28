@@ -52,17 +52,12 @@ const CollectionDetails: React.FC<Props> = ({
     notifyOnNetworkStatusChange: true,
   })
 
-  const title = navigation.getParam('title', '')
-
-  const onPressItem = useCallback(
-    async (collection: Collection) => {
-      await selectCollection(collection.id)
-      navigation.navigate(routes.MAIN.COLLECTION_PLAYLIST, {
-        title,
-      })
-    },
-    [title],
-  )
+  const onPressItem = useCallback(async (collection: Collection) => {
+    await selectCollection(collection.id)
+    navigation.navigate(routes.MAIN.COLLECTION_PLAYLIST, {
+      title: collection.title,
+    })
+  }, [])
 
   return (
     <CollectionDetailsScreen

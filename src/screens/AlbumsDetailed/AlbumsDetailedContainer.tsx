@@ -49,7 +49,9 @@ const AlbumsDetailedContainer: React.FC<Props & SelectorsProps> = ({
 
   const onPressAlbum = useCallback(async (album: Album) => {
     await selectAlbum(album.id)
-    navigation.navigate(routes.MAIN.ALBUM_PLAYLIST)
+    navigation.navigate(routes.MAIN.ALBUM_PLAYLIST, {
+      title: album.title,
+    })
   }, [])
 
   return (

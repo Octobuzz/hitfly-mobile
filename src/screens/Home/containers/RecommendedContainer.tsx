@@ -48,7 +48,7 @@ const RecommendedContainer: React.FC<any> = ({
   const onPressCollection = useCallback(async (collection: Collection) => {
     await selectCollection(collection.id)
     navigation.navigate(routes.MAIN.COLLECTION_PLAYLIST, {
-      title: 'Рекомендуем',
+      title: collection.title,
     })
   }, [])
 

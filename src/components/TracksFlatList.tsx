@@ -6,15 +6,23 @@ import PlaylistTrack from './PlaylistTrack'
 import RefreshControl from './RefreshControl'
 import { ListFooterLoader } from './Loader'
 import styled from 'src/styled-components'
+import TextBase from './TextBase'
 
 interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   tracks: Track[]
+  playlistTitle: string
   playlistKey: string
   onRefresh: () => void
   onEndReached: () => void
   isRefreshing: boolean
   isFetchingMore: boolean
 }
+
+const ListEmptyText = styled(TextBase)`
+  color: ${({ theme }) => theme.colors.textAlt};
+  text-align: center;
+  padding-vertical: 50px;
+`
 
 const Scroll = styled(FlatList as new () => FlatList<Track>).attrs(() => ({
   initialNumToRender: 10,
@@ -65,6 +73,7 @@ class TracksList extends React.Component<Props> {
   render() {
     const {
       tracks,
+      playlistTitle,
       isFetchingMore,
       isRefreshing,
       onEndReached,
@@ -76,6 +85,9 @@ class TracksList extends React.Component<Props> {
         onEndReached={onEndReached}
         onEndReachedThreshold={0.9}
         ListFooterComponent={<ListFooterLoader isShown={isFetchingMore} />}
+        ListEmptyComponent={
+          <ListEmptyText>{`Плейлист "${playlistTitle}" пуст`}</ListEmptyText>
+        }
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
         }

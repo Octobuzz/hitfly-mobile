@@ -48,7 +48,7 @@ const MusicFanContainer: React.FC<any> = ({
   const onPressCollection = useCallback(async (collection: Collection) => {
     await selectCollection(collection.id)
     navigation.navigate(routes.MAIN.COLLECTION_PLAYLIST, {
-      title: 'Супер меломан',
+      title: collection.title,
     })
   }, [])
 
