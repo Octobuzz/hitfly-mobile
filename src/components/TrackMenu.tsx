@@ -55,10 +55,12 @@ export const MenuItem = styled.TouchableOpacity`
   margin-bottom: 34px;
 `
 
-const StyledIcon = styled(Icon).attrs(({ theme }) => ({
-  color: theme.colors.white,
-  size: 14,
-}))`
+const StyledIcon = styled(Icon).attrs<{ isActive: boolean }>(
+  ({ theme, isActive }) => ({
+    color: isActive ? theme.colors.brandPink : theme.colors.white,
+    size: 14,
+  }),
+)<{ isActive: boolean }>`
   margin-right: 11px;
   text-align: center;
   width: 32px;
@@ -82,7 +84,7 @@ const TrackMenu: React.FC<TrackMenuProps> = ({
   onPressCancel,
 }) => {
   const handlePressLike = useCallback(() => {
-    onPressLike(track!)
+    onPressLike(track)
   }, [onPressLike, track])
   const { cover, singer, title } = track
   return (
@@ -96,7 +98,7 @@ const TrackMenu: React.FC<TrackMenuProps> = ({
       </TrackWrapper>
       <Divider />
       <MenuItem onPress={handlePressLike} testID="summary">
-        <StyledIcon name="heart-o" />
+        <StyledIcon isActive={track.isFavorite} name="heart-o" />
         <MenuItemText>Понравилось</MenuItemText>
       </MenuItem>
       <Button onPress={onPressCancel} title="Отмена" type="outline-black" />
