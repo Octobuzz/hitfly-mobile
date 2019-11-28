@@ -17,8 +17,10 @@ import { Track } from 'src/apollo'
 // надо поправить позже. пока "отклюена пагинация"
 const LIMIT = 1000
 
-interface Props extends NavigationStackScreenProps {
+interface Props
+  extends NavigationStackScreenProps<{ trackToPlay?: Track; title: string }> {
   query: DocumentNode
+  variables?: Record<string, any>
   playlistKey: string
   cover: any // FIXME: вытащить проп из PlaylistScreen
   itemTransformer?: (data: any) => any
@@ -31,6 +33,7 @@ interface HOCsProps extends Props, DetailedTrackMenuProps, ToggleTrackProps {}
 const NonCollectionPlaylist: React.FC<HOCsProps> = ({
   query,
   cover,
+  variables,
   playlistKey,
   itemsSelector,
   itemTransformer,
@@ -46,6 +49,7 @@ const NonCollectionPlaylist: React.FC<HOCsProps> = ({
     itemsSelector,
     hasMorePagesSelector,
     limit: LIMIT,
+    variables,
     fetchPolicy: 'cache-and-network',
     notifyOnNetworkStatusChange: true,
   })

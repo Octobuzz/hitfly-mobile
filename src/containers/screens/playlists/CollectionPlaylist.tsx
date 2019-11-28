@@ -36,25 +36,15 @@ const LIMIT = 1000
 interface Props
   extends ToggleTrackProps,
     DetailedTrackMenuProps,
-    NavigationStackScreenProps<{ trackToPlay?: Track; title: string }> {}
+    NavigationStackScreenProps<{
+      trackToPlay?: Track
+      title: string
+    }> {}
 
 const hasMorePagesSelector = LFP.get('playlist.hasMorePages')
 const itemsSelector = LFP.getOr([], 'playlist.items')
 
 const CollectionPlaylist: React.FC<Props> = props => {
-  const {
-    items,
-    onEndReached,
-    networkStatus,
-    refetch: refetchTracks,
-  } = useQueryWithPagination(GET_COLLECTION_TRACKS, {
-    itemsSelector,
-    hasMorePagesSelector,
-    limit: LIMIT,
-    fetchPolicy: 'cache-and-network',
-    notifyOnNetworkStatusChange: true,
-  })
-
   const { data, refetch: refetchCollection } = useQuery<{
     collection: Collection
   }>(GET_CURRENT_COLLECTION, {
@@ -64,6 +54,22 @@ const CollectionPlaylist: React.FC<Props> = props => {
   const id = L.get(data, 'collection.id')
   const uri = L.get(data, 'collection.image[0].imageUrl')
   const favouritesCount = L.get(data, 'collection.favouritesCount', 0)
+
+  const {
+    items,
+    onEndReached,
+    networkStatus,
+    refetch: refetchTracks,
+  } = useQueryWithPagination(GET_COLLECTION_TRACKS, {
+    itemsSelector,
+    hasMorePagesSelector,
+    variables: {
+      collectionId: id,
+    },
+    limit: LIMIT,
+    fetchPolicy: 'cache-and-network',
+    notifyOnNetworkStatusChange: true,
+  })
 
   const onRefresh = useCallback(() => {
     refetchTracks()

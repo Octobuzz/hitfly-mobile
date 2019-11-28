@@ -48,7 +48,6 @@ export const GET_NEW_TRACKS = gql`
 
 export const GET_ALBUM_TRACKS = gql`
   query CurrentAlbumTracks($albumId: Int!, $limit: Int = 10, $page: Int = 1) {
-    currentAlbumId @client @export(as: "albumId")
     playlist: tracks(
       limit: $limit
       page: $page
@@ -69,7 +68,6 @@ export const GET_COLLECTION_TRACKS = gql`
     $limit: Int = 10
     $page: Int = 1
   ) {
-    currentCollectionId @client @export(as: "collectionId")
     playlist: tracks(
       limit: $limit
       page: $page
@@ -86,7 +84,6 @@ export const GET_COLLECTION_TRACKS = gql`
 
 export const GET_GENRE_TRACKS = gql`
   query CurrentGenreTracks($genreId: Int!, $limit: Int = 10, $page: Int = 1) {
-    currentGenreId @client @export(as: "genreId")
     playlist: tracks(limit: $limit, page: $page, filters: { genre: $genreId }) {
       items: data {
         ...CommonTrack
