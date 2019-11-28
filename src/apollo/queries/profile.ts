@@ -3,7 +3,7 @@ import { Image } from '../schemas'
 
 // email вытаскивается для предзагрузки в кеш
 export const GET_PROFILE_HEAD = gql`
-  query {
+  query ProfileHead {
     profile: myProfile {
       userName: username
       followersCount
@@ -25,7 +25,7 @@ export interface GetProfileAvatarData {
 }
 
 export const GET_PROFILE_AVATAR = gql`
-  query {
+  query ProfileAvatar {
     profile: myProfile {
       avatar(sizes: [size_235x235]) {
         imageUrl: url

@@ -86,7 +86,7 @@ export default {
     resetPlayer: (_, __, { cache }: ContextArgs) => {
       cache.writeData({
         data: {
-          activePlaylist: [],
+          playlist: [],
           activePlaylistKey: null,
           isPlaying: null,
           activeTrackId: null,

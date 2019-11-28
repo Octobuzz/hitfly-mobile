@@ -12,6 +12,9 @@ const LOGIN = gql`
   mutation Login($email: String!, $password: String!) {
     login: loginMutation(email: $email, password: $password) {
       token: accessToken
+      avatar(sizes: [size_235x235]) {
+        imageUrl: url
+      }
     }
   }
 `

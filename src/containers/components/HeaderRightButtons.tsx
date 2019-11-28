@@ -45,11 +45,9 @@ const HeaderRightButtons: React.FC<Props> = ({ navigation, theme }) => {
   const navigateToSettings = useCallback((): void => {
     navigation.navigate(routes.MAIN.SETTINGS)
   }, [])
+  // FIXME: смотри костыль в src/apollo/errorLink.tsx
   const { data: profileData } = useQuery<GetProfileAvatarData>(
     GET_PROFILE_AVATAR,
-    {
-      fetchPolicy: 'cache-only',
-    },
   )
   const profileUrl = L.get(profileData, 'profile.avatar[0].imageUrl')
 
