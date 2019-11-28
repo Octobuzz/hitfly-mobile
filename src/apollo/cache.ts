@@ -1,5 +1,10 @@
-import { InMemoryCache, defaultDataIdFromObject } from 'apollo-cache-inmemory'
+import {
+  InMemoryCache,
+  defaultDataIdFromObject,
+  IntrospectionFragmentMatcher,
+} from 'apollo-cache-inmemory'
 import { persistCache } from 'apollo-cache-persist'
+import introspectionQueryResultData from './fragmentTypes.json'
 import storage from './storage'
 import gql from 'graphql-tag'
 
@@ -29,7 +34,12 @@ export const typeDefs = gql`
 `
 
 export default async (): Promise<InMemoryCache> => {
+  const fragmentMatcher = new IntrospectionFragmentMatcher({
+    introspectionQueryResultData,
+  })
+
   const cache = new InMemoryCache({
+    fragmentMatcher,
     freezeResults: true,
     dataIdFromObject: (object: any) => {
       switch (object.__typename) {
