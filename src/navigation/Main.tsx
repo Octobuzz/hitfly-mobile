@@ -194,7 +194,7 @@ const Main: React.FC<any> = props => (
   <View noPadding addBottomSafePadding>
     <MainNavigator {...props} />
     <BottomPlayer />
-    <DetailedTrackPanel ref={DetailedPanelRef.setPanel} />
+    <DetailedTrackPanel ref={DetailedPanelRef.detaledPanelRef} />
     <AuthErrorPanel ref={AuthErrorPanelRef.authPanelRef} />
     <LogoutPanel ref={LogoutPanelRef.logoutPanelRef} />
     <Player />

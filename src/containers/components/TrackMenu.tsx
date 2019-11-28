@@ -1,8 +1,8 @@
 import React from 'react'
-import { TrackMenu } from 'src/components'
+import { TrackMenu, TrackMenuProps } from 'src/components'
 import { useTrackActions } from 'src/Hooks'
 
-interface Props {}
+interface Props extends Omit<TrackMenuProps, 'onPressLike'> {}
 
 const TrackMenuContainer: React.FC<Props> = props => {
   const { toggleTrackToFavorites } = useTrackActions()

@@ -1,6 +1,7 @@
-import React, { createRef } from 'react'
+import L from 'lodash'
+import React, { useMemo, useCallback, forwardRef } from 'react'
 import { Animated } from 'react-native'
-import { NullableTrack, Track } from 'src/apollo'
+import { GET_DETAILED_TRACK, NullableTrack } from 'src/apollo'
 import {
   SlidingPanel,
   SlidingPanelInstance,
@@ -8,53 +9,35 @@ import {
 } from 'src/components'
 import TrackMenu from './TrackMenu'
 import styled from 'src/styled-components'
+import { useQuery } from '@apollo/react-hooks'
 
 const Dump = styled.View`
   height: ${TRACK_MENU_HEIGHT}px;
 `
 
-export interface DetailedTrackMenuProps {
-  showDetailedTrack: (track: Track) => void
-}
+const DetailedTrackPanel = forwardRef<SlidingPanelInstance>((_, ref) => {
+  const animatedValue: Animated.Value = useMemo(() => {
+    return new Animated.Value(0)
+  }, [])
 
-interface State {
-  detailedTrack: NullableTrack
-}
-
-class DetailedTrackPanel extends React.Component<any, State> {
-  state: State = {
-    detailedTrack: null,
-  }
-
-  private animatedValue = new Animated.Value(0)
-
-  private panel = createRef<SlidingPanelInstance>()
-
-  hidePanel = (): void => {
-    if (this.panel.current) {
-      this.panel.current.hide()
+  const hidePanel = useCallback((): void => {
+    if (typeof ref === 'object' && ref && ref.current) {
+      ref.current.hide()
     }
-  }
+  }, [])
 
-  showDetailedTrack = (track: Track): void => {
-    this.setState({ detailedTrack: track })
-    if (this.panel.current) {
-      this.panel.current.show()
-    }
-  }
+  const { data } = useQuery(GET_DETAILED_TRACK)
+  const detailedTrack: NullableTrack = L.get(data, 'detailedTrack')
 
-  render() {
-    const { detailedTrack } = this.state
-    return (
-      <SlidingPanel animatedValue={this.animatedValue} ref={this.panel}>
-        {detailedTrack ? (
-          <TrackMenu onPressCancel={this.hidePanel} track={detailedTrack} />
-        ) : (
-          <Dump />
-        )}
-      </SlidingPanel>
-    )
-  }
-}
+  return (
+    <SlidingPanel animatedValue={animatedValue} ref={ref}>
+      {detailedTrack ? (
+        <TrackMenu onPressCancel={hidePanel} track={detailedTrack} />
+      ) : (
+        <Dump />
+      )}
+    </SlidingPanel>
+  )
+})
 
 export default DetailedTrackPanel

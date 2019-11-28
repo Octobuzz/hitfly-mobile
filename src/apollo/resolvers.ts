@@ -35,6 +35,10 @@ export default {
       cache.writeData({ data: { currentAlbumId: id } })
       return null
     },
+    selectDetailedTrack: (_, { id }, { cache }: ContextArgs) => {
+      cache.writeData({ data: { detailedTrackId: id } })
+      return null
+    },
     setHeaderSettings: (
       _,
       { settings }: { settings: Partial<HeaderSettings> },

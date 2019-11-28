@@ -70,20 +70,20 @@ const MenuItemText = styled(TextBase)`
   color: ${({ theme }) => theme.colors.white};
 `
 
-interface Props {
-  track?: Track
+export interface TrackMenuProps {
+  track: Track
   onPressLike: (track: Track) => void
   onPressCancel?: () => void
 }
 
-const TrackMenu: React.FC<Props> = ({ track, onPressLike, onPressCancel }) => {
+const TrackMenu: React.FC<TrackMenuProps> = ({
+  track,
+  onPressLike,
+  onPressCancel,
+}) => {
   const handlePressLike = useCallback(() => {
     onPressLike(track!)
   }, [onPressLike, track])
-
-  if (!track) {
-    return null
-  }
   const { cover, singer, title } = track
   return (
     <View paddingBottom={32} noFill testID="like">

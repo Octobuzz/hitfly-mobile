@@ -1,22 +1,18 @@
-import { Track } from 'src/apollo'
-import DetailedTrackPanel from 'src/containers/components/DetailedTrackPanel'
+import { createRef } from 'react'
+import { SlidingPanelInstance } from 'src/components/SlidingPanel'
 
-let panelRef: DetailedTrackPanel
+const detaledPanelRef = createRef<SlidingPanelInstance>()
 
-function setPanel(ref: DetailedTrackPanel) {
-  panelRef = ref
-}
-
-function showPanel(track: Track) {
-  if (panelRef) {
-    panelRef.showDetailedTrack(track)
+function showPanel() {
+  if (detaledPanelRef.current) {
+    detaledPanelRef.current.show()
   }
 }
 
 function hidePanel() {
-  if (panelRef) {
-    panelRef.hidePanel()
+  if (detaledPanelRef.current) {
+    detaledPanelRef.current.hide()
   }
 }
 
-export default { setPanel, showPanel, hidePanel }
+export default { detaledPanelRef, showPanel, hidePanel }
