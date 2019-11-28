@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Button from './buttons/Button'
 import { Image } from './Image'
@@ -72,11 +72,15 @@ const MenuItemText = styled(TextBase)`
 
 interface Props {
   track?: Track
-  onPressLike?: () => void
+  onPressLike: (track: Track) => void
   onPressCancel?: () => void
 }
 
 const TrackMenu: React.FC<Props> = ({ track, onPressLike, onPressCancel }) => {
+  const handlePressLike = useCallback(() => {
+    onPressLike(track!)
+  }, [onPressLike, track])
+
   if (!track) {
     return null
   }
@@ -91,7 +95,7 @@ const TrackMenu: React.FC<Props> = ({ track, onPressLike, onPressCancel }) => {
         </CenterBlock>
       </TrackWrapper>
       <Divider />
-      <MenuItem onPress={onPressLike} accessibilityRole="summary">
+      <MenuItem onPress={handlePressLike} testID="summary">
         <StyledIcon name="heart-o" />
         <MenuItemText>Понравилось</MenuItemText>
       </MenuItem>
