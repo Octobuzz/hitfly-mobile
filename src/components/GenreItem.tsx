@@ -76,7 +76,9 @@ const CornerImage = styled.Image.attrs(({ isSelected }: Selectable) => ({
   right: 0;
 `
 
-const SubGenresWrapper = styled.View`
+const SubGenresWrapper = styled.TouchableOpacity.attrs(() => ({
+  activeOpacity: 0.8,
+}))`
   background-color: ${({ theme }) => theme.colors.white};
   padding-vertical: 12px;
 `
@@ -88,16 +90,22 @@ const SubGenresText = styled(TextBase)`
   text-align: center;
 `
 
-interface SelectableGenreItemProps extends GenreItemProps, Selectable {}
+interface SelectableGenreItemProps extends GenreItemProps, Selectable {
+  onPressSubGenres: (genre: Genre) => void
+}
 
 export const SelectableGenreItem: React.FC<SelectableGenreItemProps> = ({
   item,
   onPress,
   isSelected,
+  onPressSubGenres,
 }) => {
   const { imageUrl, title, hasSubGenres } = item
   const handlePress = (): void => {
     onPress!(item)
+  }
+  const handlePressSubGenres = (): void => {
+    onPressSubGenres(item)
   }
 
   return (
@@ -108,7 +116,7 @@ export const SelectableGenreItem: React.FC<SelectableGenreItemProps> = ({
         <TitleText>{title}</TitleText>
       </TitleTextWrapper>
       {hasSubGenres && (
-        <SubGenresWrapper>
+        <SubGenresWrapper onPress={handlePressSubGenres}>
           <SubGenresText>+ Поджанры</SubGenresText>
         </SubGenresWrapper>
       )}

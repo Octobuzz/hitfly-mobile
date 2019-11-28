@@ -13,10 +13,9 @@ interface Props {
 }
 
 const SubGenres: React.FC<Props> = props => {
-  const [
-    loadSubGenres,
-    { data, loading, refetch, networkStatus },
-  ] = useLazyQuery<GenresData>(GET_SUB_GENRES, {
+  const [loadSubGenres, { data, refetch, networkStatus }] = useLazyQuery<
+    GenresData
+  >(GET_SUB_GENRES, {
     notifyOnNetworkStatusChange: true,
   })
 
@@ -33,7 +32,7 @@ const SubGenres: React.FC<Props> = props => {
     <SubGenresComponent
       onRefresh={refetch}
       isRefreshing={networkStatus === 4}
-      isLoading={loading}
+      isLoading={networkStatus === 1}
       subGenres={subGenres}
       {...props}
     />
