@@ -1,9 +1,9 @@
 import L from 'lodash'
 import React, { useCallback } from 'react'
-import { NavigationStackScreenProps } from 'react-navigation-stack'
-import MyGenresScreen from './MyGenres'
-import { Genre, FavoriteGenresData, GET_FAVORITE_GENRES } from 'src/apollo'
 import { useQuery } from '@apollo/react-hooks'
+import { NavigationStackScreenProps } from 'react-navigation-stack'
+import { Genre, FavoriteGenresData, GET_FAVORITE_GENRES } from 'src/apollo'
+import MyGenresScreen from './MyGenres'
 import { routes } from 'src/constants'
 
 interface Props extends NavigationStackScreenProps {}

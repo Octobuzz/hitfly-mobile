@@ -1,13 +1,6 @@
 import React, { useCallback } from 'react'
 import { FlatList } from 'react-native'
-import {
-  View,
-  Button,
-  Loader,
-  SafeView,
-  GenreItem,
-  RefreshControl,
-} from 'src/components'
+import { View, Button, Loader, GenreItem, RefreshControl } from 'src/components'
 import { Genre } from 'src/apollo'
 import { styles } from 'src/constants'
 import styled from 'src/styled-components'

@@ -7,11 +7,11 @@ import SelectGenreScreen from './SelectGenre'
 import { useQueryWithPagination } from 'src/Hooks'
 import {
   Genre,
-  UpdateGenresVariables,
   GenresData,
+  FavoriteGenresData,
+  UpdateGenresVariables,
   GET_GENRES,
   UPDATE_GENRES,
-  FavoriteGenresData,
 } from 'src/apollo'
 
 interface Props extends NavigationStackScreenProps {
