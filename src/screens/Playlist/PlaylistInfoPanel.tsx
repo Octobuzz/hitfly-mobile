@@ -50,9 +50,7 @@ const PlaylistInfoPanel: React.FC<Props> = ({
     if (!fullLength) {
       return count
     }
-    const formattedTime = formatTimeDurationForPlaylist(fullLength, {
-      withSeconds: true,
-    })
+    const formattedTime = formatTimeDurationForPlaylist(fullLength)
     return `${count}, ${formattedTime}`
   }, [playlist])
 

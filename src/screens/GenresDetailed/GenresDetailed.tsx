@@ -1,6 +1,11 @@
 import React, { useCallback } from 'react'
 import { FlatList } from 'react-native'
-import { Loader, GenreItem, RefreshControl } from 'src/components'
+import {
+  Loader,
+  GenreItem,
+  RefreshControl,
+  ListFooterLoader,
+} from 'src/components'
 import { Genre } from 'src/apollo'
 import { styles } from 'src/constants'
 import styled from 'src/styled-components'
@@ -27,18 +32,22 @@ const Col = styled.View`
 
 interface Props {
   genres: Genre[]
+  onEndReached: () => void
   onPressGenre: (genre: Genre) => void
   onRefresh: () => void
   isLoading: boolean
   isRefreshing: boolean
+  isFetchingMore: boolean
 }
 
 const GenresDetailed: React.FC<Props> = ({
   genres,
   isLoading,
   onRefresh,
+  onEndReached,
   isRefreshing,
   onPressGenre,
+  isFetchingMore,
 }) => {
   const renderGenre = useCallback(
     ({ item }: { item: Genre }): JSX.Element => (
@@ -56,6 +65,9 @@ const GenresDetailed: React.FC<Props> = ({
       refreshControl={
         <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
       }
+      ListFooterComponent={<ListFooterLoader isShown={isFetchingMore} />}
+      onEndReachedThreshold={0.9}
+      onEndReached={onEndReached}
       renderItem={renderGenre}
       data={genres}
     />

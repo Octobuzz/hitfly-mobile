@@ -36,3 +36,13 @@ export const DELETE_TRACK_FROM_FAVORITES = gql`
     }
   }
 `
+
+export interface SelectDetailedTrackVariables {
+  id: number
+}
+
+export const SELECT_DETAILED_TRACK = gql`
+  mutation SelectDetailedTrack($id: Int!) {
+    selectDetailedTrack(id: $id) @client
+  }
+`

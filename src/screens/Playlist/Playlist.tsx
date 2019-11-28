@@ -45,7 +45,7 @@ const PositionedControlButton = styled(ControlButton)`
 interface Props
   extends ToggleTrackProps,
     DetailedTrackMenuProps,
-    NavigationStackScreenProps<{ trackToPlay?: Track }> {
+    NavigationStackScreenProps<{ trackToPlay?: Track; title: string }> {
   cover: SourceType
   tracks: Track[]
   favouritesCount: number
@@ -118,9 +118,16 @@ class Playlist extends React.Component<Props, State> {
   }
 
   render() {
-    const { tracks, favouritesCount, isLoading, ...rest } = this.props
+    const {
+      tracks,
+      favouritesCount,
+      isLoading,
+      navigation,
+      ...rest
+    } = this.props
     const { playingTrack } = this.state
     const activeCover = this.getCover()
+    const title = navigation.getParam('title', '')
     return (
       <View noPadding>
         <CoverWrapper>
@@ -141,7 +148,7 @@ class Playlist extends React.Component<Props, State> {
               favouritesCount={favouritesCount}
               playlist={tracks}
             />
-            <TracksFlatList {...rest} tracks={tracks} />
+            <TracksFlatList playlistTitle={title} {...rest} tracks={tracks} />
           </>
         )}
       </View>

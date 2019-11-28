@@ -32,13 +32,10 @@ const useTrackActions = () => {
               // @ts-ignore
               __typename: 'Mutation',
               deleteFromFavourite: {
-                __typename: 'FavouriteTrack',
-                track: {
-                  __typename: 'Track',
-                  favouritesCount: favouritesCount - 1,
-                  id,
-                  isFavorite: false,
-                },
+                id,
+                isFavorite: false,
+                favouritesCount: favouritesCount - 1,
+                __typename: 'Track',
               },
             },
           })
@@ -49,13 +46,10 @@ const useTrackActions = () => {
               // @ts-ignore
               __typename: 'Mutation',
               addToFavourites: {
-                __typename: 'FavouriteTrack',
-                track: {
-                  __typename: 'Track',
-                  favouritesCount: favouritesCount + 1,
-                  id,
-                  isFavorite: true,
-                },
+                id,
+                isFavorite: true,
+                favouritesCount: favouritesCount + 1,
+                __typename: 'Track',
               },
             },
           })

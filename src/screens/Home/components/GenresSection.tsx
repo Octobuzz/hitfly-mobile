@@ -1,7 +1,12 @@
 import L from 'lodash'
 import React from 'react'
 import { FlatList } from 'react-native'
-import { Loader, GenreItem, SectionHeader } from 'src/components'
+import {
+  Loader,
+  GenreItem,
+  SectionHeader,
+  ListFooterLoader,
+} from 'src/components'
 import SectionWrapper from './SectionWrapper'
 import { Genre } from 'src/apollo'
 import styled from 'src/styled-components'
@@ -14,7 +19,7 @@ const ScrollWrapper = styled.View`
 
 const Scroll = styled(FlatList as new () => FlatList<GenrePair>).attrs(() => ({
   horizontal: true,
-  initialNumToRender: 5,
+  initialNumToRender: 10,
   showsHorizontalScrollIndicator: false,
   contentContainerStyle: {
     paddingHorizontal: 12,
@@ -22,7 +27,7 @@ const Scroll = styled(FlatList as new () => FlatList<GenrePair>).attrs(() => ({
 }))``
 
 const Column = styled.View`
-  flex: 1;
+  flex-grow: 1;
   padding-horizontal: ${DIVIDER_SIZE / 2}px;
   justify-content: space-between;
 `
@@ -31,7 +36,9 @@ type GenrePair = [Genre, Genre?]
 
 interface Props {
   isLoading?: boolean
+  isFetchingMore?: boolean
   genres: Genre[]
+  onEndReached: () => void
   onPressItem: (item: Genre) => void
   onPressHeader: () => void
 }
@@ -69,8 +76,12 @@ class GenresSection extends React.Component<Props> {
     }
   }
   render() {
-    const { isLoading, onPressHeader } = this.props
-
+    const {
+      isLoading,
+      onEndReached,
+      onPressHeader,
+      isFetchingMore,
+    } = this.props
     const pairedGenres = this.getPairedGenres()
     if (!isLoading && !pairedGenres.length) {
       return null
@@ -83,6 +94,11 @@ class GenresSection extends React.Component<Props> {
             <Loader isAbsolute />
           ) : (
             <Scroll
+              ListFooterComponent={
+                <ListFooterLoader isShown={isFetchingMore} />
+              }
+              onEndReachedThreshold={0.9}
+              onEndReached={onEndReached}
               getItemLayout={this.getItemLayout}
               renderItem={this.renderGenre}
               keyExtractor={this.keyExtractor}

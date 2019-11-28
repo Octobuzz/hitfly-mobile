@@ -1,0 +1,77 @@
+{
+  "__schema": {
+    "types": [
+      {
+        "kind": "UNION",
+        "name": "AttributeResult",
+        "possibleTypes": [
+          {
+            "name": "User"
+          },
+          {
+            "name": "Track"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "SearchResult",
+        "possibleTypes": [
+          {
+            "name": "Album"
+          },
+          {
+            "name": "Track"
+          },
+          {
+            "name": "User"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "CommentResult",
+        "possibleTypes": [
+          {
+            "name": "CommentAlbum"
+          },
+          {
+            "name": "CommentTrack"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "FavouriteResult",
+        "possibleTypes": [
+          {
+            "name": "Album"
+          },
+          {
+            "name": "Track"
+          },
+          {
+            "name": "Collection"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "FollowResult",
+        "possibleTypes": [
+          {
+            "name": "FollowUser"
+          },
+          {
+            "name": "FollowMusicGroup"
+          }
+        ]
+      },
+      {
+        "kind": "INTERFACE",
+        "name": "UserInterface",
+        "possibleTypes": []
+      }
+    ]
+  }
+}

@@ -17,7 +17,6 @@ const RecommendedContainer: React.FC<any> = ({
   navigation,
   getRefetcher,
   selectCollection,
-  selectCollectionType,
 }) => {
   const {
     items,
@@ -38,17 +37,14 @@ const RecommendedContainer: React.FC<any> = ({
     }
   }, [getRefetcher])
 
-  const onPressHeader = useCallback(async () => {
-    await selectCollectionType('recommended')
-    navigation.navigate(routes.MAIN.COLLECTION_DETAILS, {
-      title: 'Рекомендуем',
-    })
+  const onPressHeader = useCallback(() => {
+    navigation.navigate(routes.MAIN.RECOMMENDED_DETAILS)
   }, [])
 
   const onPressCollection = useCallback(async (collection: Collection) => {
     await selectCollection(collection.id)
     navigation.navigate(routes.MAIN.COLLECTION_PLAYLIST, {
-      title: 'Рекомендуем',
+      title: collection.title,
     })
   }, [])
 

@@ -12,11 +12,6 @@ const SELECT_GENRE = gql`
     selectGenre(id: $id) @client
   }
 `
-const SELECT_COLLECTIONS_TYPE = gql`
-  mutation SetCollectionsForDetails($type: String!) {
-    setCollectionsForDetails(type: $type) @client
-  }
-`
 
 const SELECT_ALBUM = gql`
   mutation SelectAlbum($id: Int!) {
@@ -26,7 +21,6 @@ const SELECT_ALBUM = gql`
 
 export interface SelectorsProps {
   selectCollection: (collectionId: number) => Promise<any>
-  selectCollectionType: (type: string) => Promise<any>
   selectGenre: (genreId: number) => Promise<any>
   selectAlbum: (albumId: number) => Promise<any>
 }
@@ -38,7 +32,6 @@ const withSelectors = <T extends SelectorsProps>(
     const [mutSelectGenre] = useMutation(SELECT_GENRE)
     const [mutSelectAlbum] = useMutation(SELECT_ALBUM)
     const [mutSelectCollection] = useMutation(SELECT_COLLECTION)
-    const [mutSelectCollectionType] = useMutation(SELECT_COLLECTIONS_TYPE)
 
     const selectCollection = useCallback(
       (collectionId: number) =>
@@ -53,16 +46,11 @@ const withSelectors = <T extends SelectorsProps>(
       (genreId: number) => mutSelectGenre({ variables: { id: genreId } }),
       [mutSelectGenre],
     )
-    const selectCollectionType = useCallback(
-      (type: string) => mutSelectCollectionType({ variables: { type } }),
-      [mutSelectCollectionType],
-    )
 
     return (
       <WrappedComponent
         selectAlbum={selectAlbum}
         selectCollection={selectCollection}
-        selectCollectionType={selectCollectionType}
         selectGenre={selectGenre}
         {...props}
       />

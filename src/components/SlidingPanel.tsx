@@ -48,6 +48,7 @@ const SlidingPanel = forwardRef<SlidingUpPanel, Props>(
     return (
       // @ts-ignore
       <StyledPanel
+        // FIXME: надо добавить в самой либе свойство alwaysSnapToTop
         snappingPoints={[draggableRange.top]}
         draggableRange={draggableRange}
         height={contentHeight || undefined}

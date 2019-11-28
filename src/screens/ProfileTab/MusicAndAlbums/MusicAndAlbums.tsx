@@ -40,7 +40,7 @@ interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
   onPressTracksHeader: () => void
 }
 
-class LikedMusic extends React.Component<Props> {
+class MusicAndAlbums extends React.Component<Props> {
   private renderTracks = (): React.ReactNode => {
     const {
       tracks,
@@ -138,4 +138,4 @@ class LikedMusic extends React.Component<Props> {
   }
 }
 
-export default LikedMusic
+export default MusicAndAlbums

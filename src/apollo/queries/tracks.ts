@@ -2,6 +2,15 @@ import { Pagination, Track } from '../schemas'
 import { COMMON_TRACK } from '../fragments'
 import gql from 'graphql-tag'
 
+export const GET_DETAILED_TRACK = gql`
+  query {
+    detailedTrack @client {
+      ...CommonTrack
+    }
+  }
+  ${COMMON_TRACK}
+`
+
 export interface PlaylistData {
   playlist?: Pagination<Track>
 }

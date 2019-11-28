@@ -2,8 +2,8 @@ import L from 'lodash'
 import { Platform, StatusBar } from 'react-native'
 import { InMemoryCache, IdGetter } from 'apollo-cache-inmemory'
 import ApolloClient, { Resolvers } from 'apollo-client'
-import { HeaderSettings, CollectionsType, HeaderMode } from './commonTypes'
-import { GET_RECOMMENDED, GET_MUSIC_FAN, GET_HEADER_SETTINGS } from './queries'
+import { HeaderSettings, HeaderMode } from './commonTypes'
+import { GET_HEADER_SETTINGS } from './queries'
 import { Track } from './schemas'
 
 interface ContextArgs {
@@ -23,10 +23,6 @@ const setStatusBarColor = (mode: HeaderMode): void => {
 
 export default {
   Mutation: {
-    setCollectionsForDetails: (_, { type }, { cache }: ContextArgs) => {
-      cache.writeData({ data: { collectionDetailsType: type } })
-      return null
-    },
     selectCollection: (_, { id }, { cache }: ContextArgs) => {
       cache.writeData({ data: { currentCollectionId: id } })
       return null
@@ -37,6 +33,10 @@ export default {
     },
     selectAlbum: (_, { id }, { cache }: ContextArgs) => {
       cache.writeData({ data: { currentAlbumId: id } })
+      return null
+    },
+    selectDetailedTrack: (_, { id }, { cache }: ContextArgs) => {
+      cache.writeData({ data: { detailedTrackId: id } })
       return null
     },
     setHeaderSettings: (
@@ -93,21 +93,6 @@ export default {
         },
       })
       return null
-    },
-  },
-  Query: {
-    collectionsByType: (
-      _,
-      { type, ...variables }: { type: CollectionsType },
-      { client }: ContextArgs,
-    ) => {
-      if (!type) {
-        return null
-      }
-      const query = type === 'recommended' ? GET_RECOMMENDED : GET_MUSIC_FAN
-      return client
-        .query({ query, variables })
-        .then(res => L.get(res, 'data.collections'))
     },
   },
 } as Resolvers

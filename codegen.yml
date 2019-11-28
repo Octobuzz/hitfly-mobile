@@ -1,0 +1,6 @@
+overwrite: true
+schema: 'http://digico.itech-test.ru/graphql'
+generates:
+  src/apollo/fragmentTypes.json:
+    plugins:
+      - 'fragment-matcher'

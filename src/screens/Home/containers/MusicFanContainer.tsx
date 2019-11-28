@@ -17,7 +17,6 @@ const MusicFanContainer: React.FC<any> = ({
   navigation,
   getRefetcher,
   selectCollection,
-  selectCollectionType,
 }) => {
   const {
     items,
@@ -38,17 +37,14 @@ const MusicFanContainer: React.FC<any> = ({
     }
   }, [getRefetcher])
 
-  const onPressHeader = useCallback(async () => {
-    await selectCollectionType('musicFan')
-    navigation.navigate(routes.MAIN.COLLECTION_DETAILS, {
-      title: 'Супер меломан',
-    })
+  const onPressHeader = useCallback(() => {
+    navigation.navigate(routes.MAIN.MUSIC_FAN_DETAILS)
   }, [])
 
   const onPressCollection = useCallback(async (collection: Collection) => {
     await selectCollection(collection.id)
     navigation.navigate(routes.MAIN.COLLECTION_PLAYLIST, {
-      title: 'Супер меломан',
+      title: collection.title,
     })
   }, [])
 

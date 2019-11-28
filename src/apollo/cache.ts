@@ -1,5 +1,10 @@
-import { InMemoryCache, defaultDataIdFromObject } from 'apollo-cache-inmemory'
+import {
+  InMemoryCache,
+  defaultDataIdFromObject,
+  IntrospectionFragmentMatcher,
+} from 'apollo-cache-inmemory'
 import { persistCache } from 'apollo-cache-persist'
+import introspectionQueryResultData from './fragmentTypes.json'
 import storage from './storage'
 import gql from 'graphql-tag'
 
@@ -11,6 +16,7 @@ export const defaults = {
   },
   isPlaying: false,
   activeTrackId: null,
+  detailedTrackId: null,
   activePlaylistKey: null,
   playlist: [],
 }
@@ -24,12 +30,18 @@ export const typeDefs = gql`
     headerSettings: HeaderSettings!
     isPlaying: Boolean!
     activeTrackId: Int
+    detailedTrackId: Int
     activePlaylistKey: String
   }
 `
 
 export default async (): Promise<InMemoryCache> => {
+  const fragmentMatcher = new IntrospectionFragmentMatcher({
+    introspectionQueryResultData,
+  })
+
   const cache = new InMemoryCache({
+    fragmentMatcher,
     freezeResults: true,
     dataIdFromObject: (object: any) => {
       switch (object.__typename) {
@@ -49,6 +61,8 @@ export default async (): Promise<InMemoryCache> => {
       Query: {
         activeTrack: ({ activeTrackId }, _, { getCacheKey }) =>
           getCacheKey({ __typename: 'Track', id: activeTrackId }),
+        detailedTrack: ({ detailedTrackId }, _, { getCacheKey }) =>
+          getCacheKey({ __typename: 'Track', id: detailedTrackId }),
         selectedGenre: ({ currentGenreId }, _, { getCacheKey }) =>
           getCacheKey({ __typename: 'Genre', id: currentGenreId }),
         selectedCollection: ({ currentCollectionId }, _, { getCacheKey }) =>
