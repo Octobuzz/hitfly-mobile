@@ -13,6 +13,7 @@ import PlaylistScreen from 'src/screens/Playlist'
 import { useQueryWithPagination } from 'src/Hooks'
 import { Track } from 'src/apollo'
 
+// при значении 20 пагинация работает плохо
 const LIMIT = 20
 
 interface Props

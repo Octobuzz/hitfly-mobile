@@ -29,6 +29,7 @@ const GET_CURRENT_COLLECTION = gql`
   }
 `
 
+// при значении 20 пагинация работает плохо
 const LIMIT = 30
 
 interface Props
