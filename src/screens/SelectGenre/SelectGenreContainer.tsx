@@ -14,7 +14,7 @@ interface Props extends NavigationStackScreenProps {
 }
 
 const LIMIT = 20
-
+// TODO: возвращать жанры в с ответом?
 const UPDATE_GENRES = gql`
   mutation updateGenres($genresIds: [ID]) {
     updateMyProfile(profile: { genres: $genresIds }) {

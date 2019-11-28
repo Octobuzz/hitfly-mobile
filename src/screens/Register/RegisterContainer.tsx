@@ -21,6 +21,9 @@ const REGISTER = gql`
       gender: $gender
     ) {
       token: accessToken
+      avatar(sizes: [size_235x235]) {
+        imageUrl: url
+      }
     }
   }
 `

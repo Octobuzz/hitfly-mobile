@@ -37,6 +37,9 @@ export default async (): Promise<InMemoryCache> => {
           return `ImageSizesType:${object.imageUrl}`
         case 'SocialConnectType':
           return `SocialConnectType:${object.type}`
+        // MyProfile - единственный в своем роде
+        case 'MyProfile':
+          return `MyProfile`
         default:
           return defaultDataIdFromObject(object)
       }
