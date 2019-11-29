@@ -52,6 +52,7 @@ interface Values {
 
 interface OuterProps {
   onSubmit: (values: Values) => Promise<any>
+  onPressPolicy: () => void
 }
 
 interface Props extends FormikProps<Values>, OuterProps {}
@@ -61,6 +62,7 @@ const RegisterForm: React.FC<Props> = ({
   handleSubmit,
   isSubmitting,
   validateForm,
+  onPressPolicy,
 }) => {
   // https://github.com/jaredpalmer/formik/issues/1950
   useEffect(() => {
@@ -149,7 +151,8 @@ const RegisterForm: React.FC<Props> = ({
 
       <Field name="policy" component={StyledCheckBox}>
         <CheckBoxText>
-          Согласен с <BrandText>условиями использования</BrandText>
+          Согласен с{' '}
+          <BrandText onPress={onPressPolicy}>условиями использования</BrandText>
         </CheckBoxText>
       </Field>
 

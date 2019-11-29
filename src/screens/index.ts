@@ -1,7 +1,9 @@
+export * from './HTML'
 export * from './SelectGenre'
 export * from './AlbumsDetailed'
 export * from './CollectionDetails'
 
+export { default as HTMLScreen } from './HTML'
 export { default as HomeScreen } from './Home'
 export { default as LoginScreen } from './Login'
 export { default as WelcomeScreen } from './Welcome'
