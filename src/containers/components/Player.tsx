@@ -17,10 +17,14 @@ const Player: React.FC = () => {
   const [resetPlayer] = useMutation(RESET_PLAYER)
 
   useEffect(() => {
-    const ended = TrackPlayer.addEventListener('playback-queue-ended', () => {
-      setIsPlaying({ variables: { isPlaying: false } })
-      TrackPlayer.seekTo(0)
-    })
+    const ended = TrackPlayer.addEventListener(
+      'playback-queue-ended',
+      async () => {
+        setIsPlaying({ variables: { isPlaying: false } })
+        await TrackPlayer.pause()
+        TrackPlayer.seekTo(0)
+      },
+    )
     const changed = TrackPlayer.addEventListener(
       'playback-track-changed',
       async () => {
@@ -31,7 +35,7 @@ const Player: React.FC = () => {
 
     return () => {
       resetPlayer()
-      TrackPlayer.stop()
+      TrackPlayer.reset()
       changed.remove()
       ended.remove()
     }
