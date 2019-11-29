@@ -136,7 +136,7 @@ class FeedbackCarousel extends React.Component<Props, State> {
           </Row>
           <CommentText>{comment}</CommentText>
         </Animated.View>
-        {comments.length > 0 && (
+        {comments.length > 1 && (
           <ArrowButtonsWrapper>
             <ArrowButton
               disabled={currentPage === 0}
