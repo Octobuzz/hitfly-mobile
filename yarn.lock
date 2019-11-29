@@ -7410,7 +7410,7 @@ react-native-tab-view@^2.10.0:
 
 "react-native-track-player@https://github.com/ZebrainsDev/react-native-track-player#master":
   version "1.2.0"
-  resolved "https://github.com/ZebrainsDev/react-native-track-player#da8371953810bdf5e4730b671ce03bf201e5ab92"
+  resolved "https://github.com/ZebrainsDev/react-native-track-player#c577a97a367c74d883cd0e976e36e35bde28be69"
 
 react-native-typescript-transformer@^1.2.13:
   version "1.2.13"
