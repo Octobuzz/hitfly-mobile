@@ -81,7 +81,10 @@
     "@babel/runtime": "^7.7.1",
     "@graphql-codegen/cli": "^1.9.0",
     "@graphql-codegen/fragment-matcher": "1.0",
+    "@graphql-codegen/introspection": "1.0",
     "@graphql-codegen/typescript": "1.0",
+    "@graphql-codegen/typescript-operations": "1.0",
+    "@graphql-codegen/typescript-react-apollo": "1.0",
     "@storybook/react-native": "^5.2.4",
     "@testing-library/react-native": "^5.0.0",
     "@types/jest": "^24.0.22",
@@ -113,10 +116,7 @@
     "tslint-eslint-rules": "^5.4.0",
     "tslint-react": "^4.1.0",
     "tslint-react-hooks": "^2.2.1",
-    "typescript": "^3.7.2",
-    "@graphql-codegen/typescript-operations": "1.0",
-    "@graphql-codegen/typescript-react-apollo": "1.0",
-    "@graphql-codegen/introspection": "1.0"
+    "typescript": "^3.7.2"
   },
   "husky": {
     "hooks": {
