@@ -1,4 +1,5 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import L from 'lodash'
+import React, { useState, useCallback, useEffect, useMemo } from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
 import { Genre } from 'src/apollo'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -154,6 +155,14 @@ const SubGenres: React.FC<Props> = ({
     onSubmit(selectedGenres)
   }, [selectedGenres, onSubmit])
 
+  const isClearDisabled = useMemo(() => {
+    const truthyItem = L.find(
+      subGenres,
+      ({ id }) => selectedGenres[id] === true,
+    )
+    return !truthyItem
+  }, [selectedGenres, subGenres])
+
   return (
     <Wrapper>
       <View noFill paddingVertical={0}>
@@ -165,7 +174,7 @@ const SubGenres: React.FC<Props> = ({
       <TitleWrapper>
         <TitleText>{mainTitle}</TitleText>
       </TitleWrapper>
-      {isLoading && !isRefreshing ? (
+      {isLoading ? (
         <Loader size={150} />
       ) : (
         <Scroll
@@ -179,6 +188,7 @@ const SubGenres: React.FC<Props> = ({
       <Stretcher />
       <View noFill>
         <IndentedButton
+          isDisabled={isClearDisabled}
           onPress={clearSelections}
           title="Очистить"
           type="outline-black"

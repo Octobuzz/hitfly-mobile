@@ -88,6 +88,7 @@ class SelectGenre extends React.Component<Props, State> {
         item={item}
         isSelected={isSelected}
         onPress={this.toggleGenre}
+        onPressSubGenres={this.showSubGenres}
       />
     )
   }
@@ -101,6 +102,13 @@ class SelectGenre extends React.Component<Props, State> {
     }
   }
 
+  private showSubGenres = (genre: Genre): void => {
+    this.setState({
+      isModalVisible: true,
+      selectedGenre: genre,
+    })
+  }
+
   private deselectGenre = (genre: Genre): void => {
     const { selectedGenres } = this.state
     const newGenres = LFP.unset(genre.id, selectedGenres)
@@ -111,12 +119,6 @@ class SelectGenre extends React.Component<Props, State> {
     const { selectedGenres } = this.state
     const newGenres = LFP.set(genre.id, true, selectedGenres)
     this.setState({ selectedGenres: newGenres })
-    if (genre.hasSubGenres) {
-      this.setState({
-        isModalVisible: true,
-        selectedGenre: genre,
-      })
-    }
   }
 
   private selectSubGenres = (subGenres: Record<number, boolean>): void => {
