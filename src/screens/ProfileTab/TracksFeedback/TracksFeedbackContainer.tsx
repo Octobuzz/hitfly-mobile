@@ -11,7 +11,7 @@ import { useQueryWithPagination } from 'src/Hooks'
 import { GET_MY_TRACKS_WITH_FEEDBACK, TracksWithFeedbackData } from 'src/apollo'
 import { names } from 'src/constants'
 
-const LIMIT = 20
+const LIMIT = 30
 
 const itemsSelector = (data: any) => L.get(data, 'tracks.items', [])
 const hasMorePagesSelector = (data: any) =>

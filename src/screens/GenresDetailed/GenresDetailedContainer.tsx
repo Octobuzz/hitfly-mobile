@@ -7,7 +7,7 @@ import { withSelectors, SelectorsProps } from 'src/HOCs'
 import { useQueryWithPagination } from 'src/Hooks'
 import { routes } from 'src/constants'
 
-const LIMIT = 20
+const LIMIT = 30
 
 const hasMorePagesSelector = (data?: GenresData) =>
   L.get(data, 'genres.hasMorePages')

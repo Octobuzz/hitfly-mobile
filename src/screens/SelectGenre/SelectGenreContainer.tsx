@@ -19,7 +19,7 @@ interface Props extends NavigationStackScreenProps {
   favouriteGenres?: Genre[]
 }
 
-const LIMIT = 20
+const LIMIT = 30
 
 const itemsSelector = (data?: GenresData) => L.get(data, 'genres.items', [])
 const hasMorePagesSelector = (data?: GenresData) =>

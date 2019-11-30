@@ -6,7 +6,7 @@ import { GET_NEW_TRACKS, PlaylistData, Track } from 'src/apollo'
 import { useQueryWithPagination } from 'src/Hooks'
 import { routes } from 'src/constants'
 
-const LIMIT = 20
+const LIMIT = 30
 const itemsSelector = (data?: PlaylistData) => L.get(data, 'playlist.items', [])
 const hasMorePagesSelector = (data?: PlaylistData) =>
   L.get(data, 'playlist.hasMorePages', false)
