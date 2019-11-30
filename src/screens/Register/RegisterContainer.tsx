@@ -42,7 +42,11 @@ const RegisterContainer: React.FC<Props> = props => {
     }
   }, [])
 
-  return <RegisterScreen onSubmit={onSubmit} />
+  const onPressPolicy = useCallback(() => {
+    props.navigation.navigate(routes.AUTH.POLICY)
+  }, [])
+
+  return <RegisterScreen onPressPolicy={onPressPolicy} onSubmit={onSubmit} />
 }
 
 export default RegisterContainer

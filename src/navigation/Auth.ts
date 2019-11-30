@@ -1,6 +1,7 @@
 import { createStackNavigator } from 'react-navigation-stack'
 import {
   LoginScreen,
+  PolicyScreen,
   RegisterScreen,
   SelectGenreScreen,
   RecoveryInfoScreen,
@@ -34,6 +35,7 @@ const AuthNavigator = createStackNavigator(
       screen: RecoveryInfoScreen,
       navigationOptions: { title: 'Проверьте электронную почту' },
     },
+    [routes.AUTH.POLICY]: PolicyScreen,
   },
   {
     initialRouteName: routes.AUTH.LOGIN,

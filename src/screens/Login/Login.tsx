@@ -49,6 +49,11 @@ class Login extends React.Component<Props> {
     navigation.navigate(routes.MAIN.HOME)
   }
 
+  private navigateToPolicy = (): void => {
+    const { navigation } = this.props
+    navigation.navigate(routes.AUTH.POLICY)
+  }
+
   render() {
     const { onSubmit } = this.props
     return (
@@ -69,7 +74,10 @@ class Login extends React.Component<Props> {
             Регистрируясь через эл.почту, Facebook, VK{/* , Instagram */} или
             Одноклассники вы принимаете
           </BottomText>
-          <BottomLinkText> Условия использования</BottomLinkText>
+          <BottomLinkText onPress={this.navigateToPolicy}>
+            {' '}
+            Условия использования
+          </BottomLinkText>
         </FormWrapper>
       </SafeView>
     )

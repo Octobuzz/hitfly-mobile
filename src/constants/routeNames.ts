@@ -15,6 +15,7 @@ export default {
     SOCIAL_AUTH: `${APP.AUTH}/social_auth`,
     FORGOT_PASSWORD: `${APP.AUTH}/forgot_password`,
     RECOVERY_INFO: `${APP.AUTH}/recovery_info`,
+    POLICY: `${APP.AUTH}/policy`,
   },
   MAIN: {
     HOME: `${APP.MAIN}/home`,

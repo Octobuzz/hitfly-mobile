@@ -10,13 +10,14 @@ const IndentedSocialAuth = styled(SocialAuth)`
 
 interface Props {
   onSubmit: (values: any) => Promise<any>
+  onPressPolicy: () => void
 }
 
-const Register: React.FC<Props> = ({ onSubmit }) => (
+const Register: React.FC<Props> = ({ onSubmit, onPressPolicy }) => (
   <SafeView>
     <FormWrapper>
       <IndentedSocialAuth bottomText="или зарегистрируйтесь через почту" />
-      <RegisterForm onSubmit={onSubmit} />
+      <RegisterForm onPressPolicy={onPressPolicy} onSubmit={onSubmit} />
     </FormWrapper>
   </SafeView>
 )
