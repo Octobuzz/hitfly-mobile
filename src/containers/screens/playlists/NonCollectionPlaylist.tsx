@@ -14,7 +14,7 @@ import { useQueryWithPagination } from 'src/Hooks'
 import { Track } from 'src/apollo'
 
 // при значении 20 пагинация работает плохо
-const LIMIT = 20
+const LIMIT = 30
 
 interface Props
   extends NavigationStackScreenProps<{ trackToPlay?: Track; title: string }> {

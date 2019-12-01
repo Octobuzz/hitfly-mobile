@@ -7,7 +7,7 @@ import { routes } from 'src/constants'
 import { Collection, GET_MUSIC_FAN, CollectionsData } from 'src/apollo'
 import { useQueryWithPagination } from 'src/Hooks'
 
-const LIMIT = 20
+const LIMIT = 30
 const itemsSelector = (data?: CollectionsData) =>
   L.get(data, 'collections.items', [])
 const hasMorePagesSelector = (data?: CollectionsData) =>

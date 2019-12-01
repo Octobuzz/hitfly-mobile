@@ -7,7 +7,7 @@ import { Collection, GET_RECOMMENDED, CollectionsData } from 'src/apollo'
 import { useQueryWithPagination } from 'src/Hooks'
 import { routes } from 'src/constants'
 
-const LIMIT = 20
+const LIMIT = 30
 const itemsSelector = (data?: CollectionsData) =>
   L.get(data, 'collections.items', [])
 const hasMorePagesSelector = (data?: CollectionsData) =>

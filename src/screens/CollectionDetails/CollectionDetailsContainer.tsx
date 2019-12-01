@@ -16,7 +16,7 @@ interface CollectionsData {
   collections?: Pagination<Collection>
 }
 
-const LIMIT = 20
+const LIMIT = 30
 
 interface Props extends SelectorsProps, NavigationStackScreenProps {
   query: DocumentNode

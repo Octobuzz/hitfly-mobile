@@ -12,7 +12,7 @@ import { routes } from 'src/constants'
 import { useQueryWithPagination } from 'src/Hooks'
 import { DocumentNode } from 'graphql'
 
-const LIMIT = 20
+const LIMIT = 30
 
 interface Props extends NavigationStackScreenProps {
   query: DocumentNode
