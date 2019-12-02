@@ -1,9 +1,10 @@
 import React from 'react'
 import { Image } from './Image'
 import TextBase from './TextBase'
-import { Album } from 'src/apollo'
+import { Album, ImageSizeNames } from 'src/apollo'
 import { styles } from 'src/constants'
 import styled from 'src/styled-components'
+import { useImageSource } from 'src/Hooks'
 
 const Wrapper = styled.TouchableOpacity`
   width: ${styles.COL2_WIDTH}px;
@@ -46,9 +47,11 @@ const AlbumItem: React.FC<Props> = ({ item, onPress }) => {
     }
   }, [onPress, item])
 
+  const source = useImageSource(cover, ImageSizeNames.S_160)
+
   return (
     <Wrapper onPress={handlePress} accessibilityRole="summary">
-      <AlbumImage source={{ uri: cover[0].imageUrl }} />
+      <AlbumImage source={source} />
       <TitleText>{title}</TitleText>
       <SubTitleText>{author}</SubTitleText>
     </Wrapper>

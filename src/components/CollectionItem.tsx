@@ -2,8 +2,9 @@ import React, { useMemo, useCallback } from 'react'
 import { ViewStyle } from 'react-native'
 import TextBase from './TextBase'
 import { Image } from './Image'
+import { Collection, ImageSizeNames } from 'src/apollo'
 import { formatTracksCount } from 'src/helpers'
-import { Collection } from 'src/apollo'
+import { useImageSource } from 'src/Hooks'
 import { styles } from 'src/constants'
 import styled from 'src/styled-components'
 
@@ -66,6 +67,9 @@ const CollectionItem: React.FC<CollectionItemProps> = ({
   const bottomText = useMemo(() => formatTracksCount(tracksCountInPlaylist), [
     tracksCountInPlaylist,
   ])
+
+  const source = useImageSource(image, ImageSizeNames.S_235)
+
   return (
     <ItemWrapper
       style={style}
@@ -73,7 +77,7 @@ const CollectionItem: React.FC<CollectionItemProps> = ({
       height={height}
       onPress={handlePress}
     >
-      <BackgroundImage source={{ uri: image[0].imageUrl }} />
+      <BackgroundImage source={source} />
       <TopText>{title}</TopText>
       <BottomText>{bottomText}</BottomText>
     </ItemWrapper>

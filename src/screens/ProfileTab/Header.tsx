@@ -36,7 +36,6 @@ const Icon = styled.Image`
 `
 
 const TitleText = styled(TextBase)`
-  flex: 1;
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.white};
   font-size: 24px;
