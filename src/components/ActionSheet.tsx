@@ -34,14 +34,22 @@ const styles = StyleSheet.create({
   body: {
     backgroundColor: theme.colors.black,
   },
+  titleText: {
+    color: theme.colors.white,
+    fontFamily: theme.fonts.bold,
+  },
   messageText: {
     color: theme.colors.white,
     fontSize: 14,
     textAlign: 'center',
+    fontFamily: theme.fonts.regular,
   },
   messageBox: {
     height: 50,
     paddingBottom: 0,
+    backgroundColor: theme.colors.black,
+  },
+  titleBox: {
     backgroundColor: theme.colors.black,
   },
   buttonBox: {
@@ -50,6 +58,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: theme.colors.white,
+    fontFamily: theme.fonts.regular,
   },
   cancelButtonBox: {
     height: 50,
