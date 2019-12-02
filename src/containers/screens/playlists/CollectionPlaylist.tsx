@@ -29,9 +29,6 @@ const GET_CURRENT_COLLECTION = gql`
   }
 `
 
-// при значении 20 пагинация работает плохо
-const LIMIT = 30
-
 interface Props
   extends ToggleTrackProps,
     DetailedTrackMenuProps,
@@ -65,7 +62,7 @@ const CollectionPlaylist: React.FC<Props> = props => {
     variables: {
       collectionId: id,
     },
-    limit: LIMIT,
+    limit: names.PLAYLIST_LIMIT,
     fetchPolicy: 'cache-and-network',
     notifyOnNetworkStatusChange: true,
   })

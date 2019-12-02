@@ -14,6 +14,7 @@ export interface ThemeColors {
   transparent70: string
   transparent10: string
   transparentWhite50: string
+  buttonUnderlayColor: string
 }
 
 export interface ThemeFonts {

@@ -3,7 +3,11 @@ import { Platform, StatusBar } from 'react-native'
 import { InMemoryCache, IdGetter } from 'apollo-cache-inmemory'
 import ApolloClient, { Resolvers } from 'apollo-client'
 import { HeaderSettings, HeaderMode } from './commonTypes'
-import { GET_HEADER_SETTINGS } from './queries'
+import {
+  GET_HEADER_SETTINGS,
+  GET_ACTIVE_PLAYLIST,
+  ActivePlaylistData,
+} from './queries'
 import { Track } from './schemas'
 
 interface ContextArgs {
@@ -58,9 +62,16 @@ export default {
       return newSettings
     },
     setActiveTrackId: (_, { id }: { id: number }, { cache }: ContextArgs) => {
+      const activeListdata = cache.readQuery<ActivePlaylistData>({
+        query: GET_ACTIVE_PLAYLIST,
+      })
+      const activePlaylist = L.get(activeListdata, 'activePlaylist', [])
+      const index = activePlaylist.findIndex(track => id === track.id)
       const data = {
         activeTrackId: id,
         isPlaying: true,
+        canPlayNext: index !== -1 && index < activePlaylist.length - 1,
+        canPlayPrev: index !== -1 && index > 0,
       }
       cache.writeData({ data })
       return null
@@ -86,10 +97,12 @@ export default {
     resetPlayer: (_, __, { cache }: ContextArgs) => {
       cache.writeData({
         data: {
-          playlist: [],
+          activePlaylist: [],
           activePlaylistKey: null,
-          isPlaying: null,
+          isPlaying: false,
           activeTrackId: null,
+          canPlayNext: false,
+          canPlayPrev: false,
         },
       })
       return null

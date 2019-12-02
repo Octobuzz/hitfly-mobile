@@ -1,59 +1,29 @@
-import React, { useCallback, useMemo, forwardRef, useContext } from 'react'
-import { Animated } from 'react-native'
-import { NavigationContext } from 'react-navigation'
-import {
-  View,
-  Link,
-  Button,
-  TextBase,
-  SlidingPanel,
-  SlidingPanelInstance,
-} from 'src/components'
+import React, { useCallback, forwardRef } from 'react'
+import { ActionSheet, ActionSheetInstance } from 'src/components'
 import { routes } from 'src/constants'
-import styled from 'src/styled-components'
 
-const LogoutText = styled(TextBase)`
-  text-align: center;
-  color: ${({ theme }) => theme.colors.white};
-`
+import { useNavigation } from 'src/Hooks'
 
-const LogoutBoldText = styled(LogoutText)`
-  font-family: ${({ theme }) => theme.fonts.bold};
-`
+const AuthErrorPanel = forwardRef<ActionSheetInstance>((_, ref) => {
+  const navigation = useNavigation()
 
-const IndetedButton = styled(Button)`
-  margin-top: 32px;
-  margin-bottom: 24px;
-`
-
-const AuthErrorPanel = forwardRef<SlidingPanelInstance>((_, ref) => {
-  const animatedValue: Animated.Value = useMemo(() => {
-    return new Animated.Value(0)
-  }, [])
-
-  const hidePanel = useCallback((): void => {
-    if (typeof ref === 'object' && ref && ref.current) {
-      ref.current.hide()
+  const handlePress = useCallback((index: number): void => {
+    switch (index) {
+      case 0: {
+        navigation.navigate(routes.APP.AUTH)
+        break
+      }
     }
   }, [])
 
-  const navigation = useContext(NavigationContext)
-
-  const navigateToLogin = useCallback(() => {
-    navigation.navigate(routes.APP.AUTH)
-  }, [])
-
   return (
-    <SlidingPanel animatedValue={animatedValue} ref={ref}>
-      <View paddingBottom={32} noFill>
-        <LogoutText>
-          Для выполнения следующего действия требуется{' '}
-          <LogoutBoldText>Авторизация</LogoutBoldText>
-        </LogoutText>
-        <IndetedButton onPress={navigateToLogin} title="Войти" />
-        <Link type="dark" title="Отмена" onPress={hidePanel} />
-      </View>
-    </SlidingPanel>
+    <ActionSheet
+      ref={ref}
+      message="Для выполнения следующего действия требуется Авторизация"
+      options={['Войти', 'Отмена']}
+      cancelButtonIndex={1}
+      onPress={handlePress}
+    />
   )
 })
 

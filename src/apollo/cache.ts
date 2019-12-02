@@ -15,10 +15,12 @@ export const defaults = {
     __typename: 'HeaderSettings',
   },
   isPlaying: false,
+  canPlayNext: false,
+  canPlayPrev: false,
   activeTrackId: null,
   detailedTrackId: null,
   activePlaylistKey: null,
-  playlist: [],
+  activePlaylist: [],
 }
 
 export const typeDefs = gql`

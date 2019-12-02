@@ -4,7 +4,9 @@ import { Track } from 'src/apollo'
 import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/HOCs'
 import PlaylistTrack from 'src/components/PlaylistTrack'
 
-interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
+interface Props
+  extends Pick<ToggleTrackProps, 'toggleTrack' | 'isPlaying' | 'activeTrack'>,
+    DetailedTrackMenuProps {
   tracks: Track[]
   playlistKey: string
 }

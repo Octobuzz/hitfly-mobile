@@ -4,9 +4,8 @@ import { withNavigation } from 'react-navigation'
 import { TracksSection } from '../components'
 import { GET_NEW_TRACKS, PlaylistData, Track } from 'src/apollo'
 import { useQueryWithPagination } from 'src/Hooks'
-import { routes } from 'src/constants'
+import { routes, names } from 'src/constants'
 
-const LIMIT = 30
 const itemsSelector = (data?: PlaylistData) => L.get(data, 'playlist.items', [])
 const hasMorePagesSelector = (data?: PlaylistData) =>
   L.get(data, 'playlist.hasMorePages', false)
@@ -20,7 +19,7 @@ const NewContainer: React.FC<any> = ({ navigation, getRefetcher }) => {
   } = useQueryWithPagination<PlaylistData>(GET_NEW_TRACKS, {
     itemsSelector,
     hasMorePagesSelector,
-    limit: LIMIT,
+    limit: names.PLAYLIST_LIMIT,
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'cache-and-network',
   })

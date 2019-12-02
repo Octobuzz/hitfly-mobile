@@ -2,6 +2,7 @@ import L from 'lodash'
 import React from 'react'
 import { Track, Album } from 'src/apollo'
 import {
+  TextBase,
   AlbumItem,
   TracksView,
   ScrollView,
@@ -17,6 +18,12 @@ const AlbumsWrapper = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+`
+
+const ListEmptyText = styled(TextBase)`
+  color: ${({ theme }) => theme.colors.textAlt};
+  text-align: center;
+  padding-vertical: 50px;
 `
 
 const Divider = styled.View`
@@ -122,7 +129,8 @@ class MusicAndAlbums extends React.Component<Props> {
   }
 
   render() {
-    const { isRefreshing, onRefresh } = this.props
+    const { isRefreshing, onRefresh, tracks, albums } = this.props
+    const isNoData = !tracks.length && !albums.length
     return (
       <ScrollView
         refreshControl={
@@ -130,9 +138,15 @@ class MusicAndAlbums extends React.Component<Props> {
         }
         noHorizontalPadding
       >
-        {this.renderTracks()}
-        <Divider />
-        {this.renderAlbums()}
+        {isNoData ? (
+          <ListEmptyText>Пока здесь пусто</ListEmptyText>
+        ) : (
+          <>
+            {this.renderTracks()}
+            <Divider />
+            {this.renderAlbums()}
+          </>
+        )}
       </ScrollView>
     )
   }

@@ -11,7 +11,7 @@ const Row = styled.View`
 `
 
 const Text = styled(TextBase)`
-  font-size: 12px;
+  font-size: 16px;
   line-height: 16px;
   color: ${({ theme }) => theme.colors.white};
 `
@@ -31,9 +31,10 @@ const ControlIcon = styled(Icon).attrs(({ theme }) => ({
 // @ts-ignore
 const LikeIcon = styled(Icon).attrs(({ theme, isActive }) => ({
   color: isActive ? theme.colors.brandPink : theme.colors.white,
-  size: 12,
+  size: 20,
 }))<{ isActive: boolean }>`
   margin-right: 8px;
+  line-height: 20px;
 `
 
 interface Props {

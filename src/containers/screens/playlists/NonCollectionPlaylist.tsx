@@ -12,9 +12,7 @@ import {
 import PlaylistScreen from 'src/screens/Playlist'
 import { useQueryWithPagination } from 'src/Hooks'
 import { Track } from 'src/apollo'
-
-// при значении 20 пагинация работает плохо
-const LIMIT = 30
+import { names } from 'src/constants'
 
 interface Props
   extends NavigationStackScreenProps<{ trackToPlay?: Track; title: string }> {
@@ -48,7 +46,7 @@ const NonCollectionPlaylist: React.FC<HOCsProps> = ({
     variables,
     itemsSelector,
     hasMorePagesSelector,
-    limit: LIMIT,
+    limit: names.PLAYLIST_LIMIT,
     fetchPolicy: 'cache-and-network',
     notifyOnNetworkStatusChange: true,
   })

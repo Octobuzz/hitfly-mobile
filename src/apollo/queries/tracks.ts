@@ -36,7 +36,7 @@ export const GET_TOP50_TRACKS = gql`
 
 export const GET_NEW_TRACKS = gql`
   query NewTracks($limit: Int = 10, $page: Int = 1) {
-    playlist: tracks(limit: $limit, page: $page) {
+    playlist: tracks(limit: $limit, page: $page, filters: { new: true }) {
       items: data {
         ...CommonTrack
       }
