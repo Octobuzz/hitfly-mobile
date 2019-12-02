@@ -12,7 +12,7 @@ const Row = styled.View`
 
 const Text = styled(TextBase)`
   font-size: 16px;
-  line-height: 16px;
+  line-height: 20px;
   color: ${({ theme }) => theme.colors.white};
 `
 
@@ -34,7 +34,6 @@ const LikeIcon = styled(Icon).attrs(({ theme, isActive }) => ({
   size: 20,
 }))<{ isActive: boolean }>`
   margin-right: 8px;
-  line-height: 20px;
 `
 
 interface Props {
