@@ -4,7 +4,8 @@ import Button from './buttons/Button'
 import { Image } from './Image'
 import View from './views/View'
 import TextBase from './TextBase'
-import { Track } from 'src/apollo'
+import { Track, ImageSizeNames } from 'src/apollo'
+import { useImageSource } from 'src/Hooks'
 import styled from 'src/styled-components'
 
 // это фактическая высота меню. костыль для выплывающей панели
@@ -87,10 +88,13 @@ const TrackMenu: React.FC<TrackMenuProps> = ({
     onPressLike(track)
   }, [onPressLike, track])
   const { cover, singer, title } = track
+
+  const source = useImageSource(cover, ImageSizeNames.S_32)
+
   return (
     <View paddingBottom={32} noFill testID="like">
       <TrackWrapper>
-        <StyledImage source={{ uri: cover[0].imageUrl }} />
+        <StyledImage source={source} />
         <CenterBlock>
           <TitleText>{title}</TitleText>
           <SubtitleText>{singer}</SubtitleText>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
-import { Track, NullableTrack } from 'src/apollo'
+import { Track, NullableTrack, ImageSizeNames } from 'src/apollo'
 import {
   View,
   Loader,
@@ -14,6 +14,7 @@ import ShuffleButton from './ShuffleButton'
 import PlaylistInfoPanel from './PlaylistInfoPanel'
 import { styles } from 'src/constants'
 import styled from 'src/styled-components'
+import { getImageForSize } from 'src/helpers'
 
 const CoverWrapper = styled.View`
   height: ${styles.COVER_HEIGHT}px;
@@ -100,7 +101,8 @@ class Playlist extends React.Component<Props, State> {
     const { cover } = this.props
     const { playingTrack } = this.state
     if (playingTrack) {
-      return { uri: playingTrack.cover[0].imageUrl }
+      const image = getImageForSize(playingTrack.cover, ImageSizeNames.S_300)
+      return { uri: image.imageUrl }
     }
     return cover
   }
@@ -120,9 +122,9 @@ class Playlist extends React.Component<Props, State> {
   render() {
     const {
       tracks,
-      favouritesCount,
       isLoading,
       navigation,
+      favouritesCount,
       ...rest
     } = this.props
     const { playingTrack } = this.state

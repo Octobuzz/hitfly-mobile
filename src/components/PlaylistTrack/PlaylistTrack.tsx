@@ -1,11 +1,12 @@
 import React from 'react'
-import { Track } from 'src/apollo'
+import { Track, ImageSizeNames } from 'src/apollo'
 import { Playable } from './interfaces'
 import More from 'src/components/buttons/More'
 import TextBase from 'src/components/TextBase'
 import TrackImage from './TrackImage'
 import { formatTimeDurationForTrack } from 'src/helpers'
 import styled from 'src/styled-components'
+import { useImageSource } from 'src/Hooks'
 
 const VERTICAL_PADDING = 16
 
@@ -87,10 +88,12 @@ const PlaylistTrack: React.FC<PlaylistTrackProps> & Sized = ({
     }
   }, [onPressMore, track])
 
+  const source = useImageSource(cover, ImageSizeNames.S_32)
+
   return (
     <Wrapper isPlaying={isPlaying} onPress={handlePressTrack}>
       {!hideIndex && <TrackNumberText>{index + 1}</TrackNumberText>}
-      <TrackImage isPlaying={isPlaying} imageUrl={cover[0].imageUrl} />
+      <TrackImage isPlaying={isPlaying} imageUrl={source.uri} />
       <CenterBlock>
         <BlackText numberOfLines={1}>{title}</BlackText>
         <GrayText numberOfLines={1}>{singer}</GrayText>

@@ -1,7 +1,7 @@
 import L from 'lodash'
 import LFP from 'lodash/fp'
-import { BonusProgramLevel } from 'src/apollo'
-import { images } from 'src/constants'
+import { BonusProgramLevel, Image, ImageSizeNames } from 'src/apollo'
+import { images as localImages } from 'src/constants'
 
 export const delay = (ms: number): Promise<void> =>
   new Promise(res => setTimeout(res, ms))
@@ -146,7 +146,7 @@ const bonusProgramMap = new Map<BonusProgramLevel, BonusProgramTexts>([
     BonusProgramLevel.LEVEL_NOVICE,
     {
       title: 'Новичок',
-      icon: images.CHILD,
+      icon: localImages.CHILD,
       order: 0,
     },
   ],
@@ -154,7 +154,7 @@ const bonusProgramMap = new Map<BonusProgramLevel, BonusProgramTexts>([
     BonusProgramLevel.LEVEL_AMATEUR,
     {
       title: 'Любитель',
-      icon: images.KARAOKE,
+      icon: localImages.KARAOKE,
       order: 1,
     },
   ],
@@ -162,7 +162,7 @@ const bonusProgramMap = new Map<BonusProgramLevel, BonusProgramTexts>([
     BonusProgramLevel.LEVEL_CONNOISSEUR_OF_THE_GENRE,
     {
       title: 'Знаток жанра',
-      icon: images.GUITAR,
+      icon: localImages.GUITAR,
       order: 2,
     },
   ],
@@ -170,7 +170,7 @@ const bonusProgramMap = new Map<BonusProgramLevel, BonusProgramTexts>([
     BonusProgramLevel.LEVEL_SUPER_MUSIC_LOVER,
     {
       title: 'Супер меломан',
-      icon: images.HEADPHONE,
+      icon: localImages.HEADPHONE,
       order: 3,
     },
   ],
@@ -218,3 +218,14 @@ export const randomString = (): string =>
   Math.random()
     .toString(36)
     .substring(2, 15)
+
+export const getImageForSize = (
+  images: Image[],
+  size: ImageSizeNames,
+): Image => {
+  let image = images[0] || ({ imageUrl: '' } as Image)
+  if (images.length > 1) {
+    image = images.find(img => img.sizeName === size) || image
+  }
+  return image
+}

@@ -1,10 +1,11 @@
 import React from 'react'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import { Track } from 'src/apollo'
+import { Track, ImageSizeNames } from 'src/apollo'
 import { Playable } from './interfaces'
 import { CenterBlock, TitleWhiteText, SubTitleWhiteText } from './styles'
 import TrackImage from './TrackImage'
 import { styles } from 'src/constants'
+import { useImageSource } from 'src/Hooks'
 import styled from 'src/styled-components'
 
 const Wrapper = styled.TouchableOpacity`
@@ -47,9 +48,11 @@ const TrackWithLikes: React.FC<TrackWithLikesProps> = ({
     onPressLike(track)
   }, [onPressLike, track])
 
+  const source = useImageSource(cover, ImageSizeNames.S_32)
+
   return (
     <Wrapper onPress={handlePressTrack}>
-      <TrackImage isPlaying={isPlaying} imageUrl={cover[0].imageUrl} />
+      <TrackImage isPlaying={isPlaying} imageUrl={source.uri} />
       <CenterBlock>
         <TitleWhiteText numberOfLines={1}>{title}</TitleWhiteText>
         <SubTitleWhiteText numberOfLines={1}>{singer}</SubTitleWhiteText>
