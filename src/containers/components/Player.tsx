@@ -33,9 +33,26 @@ const Player: React.FC = () => {
       },
     )
 
+    const stateChanged = TrackPlayer.addEventListener(
+      'playback-state',
+      ({ state }) => {
+        switch (state) {
+          case TrackPlayer.STATE_PAUSED: {
+            setIsPlaying({ variables: { isPlaying: false } })
+            break
+          }
+          case TrackPlayer.STATE_PLAYING: {
+            setIsPlaying({ variables: { isPlaying: true } })
+            break
+          }
+        }
+      },
+    )
+
     return () => {
       resetPlayer()
       TrackPlayer.reset()
+      stateChanged.remove()
       changed.remove()
       ended.remove()
     }
