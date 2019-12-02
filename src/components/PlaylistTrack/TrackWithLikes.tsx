@@ -1,6 +1,6 @@
 import React from 'react'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import { Track, ImageSizeNames } from 'src/apollo'
+import { Track, NoAvatarSizeNames } from 'src/apollo'
 import { Playable } from './interfaces'
 import { CenterBlock, TitleWhiteText, SubTitleWhiteText } from './styles'
 import TrackImage from './TrackImage'
@@ -48,7 +48,7 @@ const TrackWithLikes: React.FC<TrackWithLikesProps> = ({
     onPressLike(track)
   }, [onPressLike, track])
 
-  const source = useImageSource(cover, ImageSizeNames.S_32)
+  const source = useImageSource(cover, NoAvatarSizeNames.S_32)
 
   return (
     <Wrapper onPress={handlePressTrack}>

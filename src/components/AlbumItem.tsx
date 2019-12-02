@@ -1,7 +1,7 @@
 import React from 'react'
 import { Image } from './Image'
 import TextBase from './TextBase'
-import { Album, ImageSizeNames } from 'src/apollo'
+import { Album, NoAvatarSizeNames } from 'src/apollo'
 import { styles } from 'src/constants'
 import styled from 'src/styled-components'
 import { useImageSource } from 'src/Hooks'
@@ -47,7 +47,7 @@ const AlbumItem: React.FC<Props> = ({ item, onPress }) => {
     }
   }, [onPress, item])
 
-  const source = useImageSource(cover, ImageSizeNames.S_160)
+  const source = useImageSource(cover, NoAvatarSizeNames.S_160)
 
   return (
     <Wrapper onPress={handlePress} accessibilityRole="summary">

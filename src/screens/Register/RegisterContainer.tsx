@@ -4,7 +4,7 @@ import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { useMutation } from '@apollo/react-hooks'
 import RegisterScreen from './Register'
 import { routes } from 'src/constants'
-import { storage } from 'src/apollo'
+import { storage, PROFILE_AVATAR } from 'src/apollo'
 import gql from 'graphql-tag'
 
 const REGISTER = gql`
@@ -21,11 +21,10 @@ const REGISTER = gql`
       gender: $gender
     ) {
       token: accessToken
-      avatar(sizes: [size_235x235]) {
-        imageUrl: url
-      }
+      ...ProfileAvatar
     }
   }
+  ${PROFILE_AVATAR}
 `
 
 interface Props extends NavigationStackScreenProps {}

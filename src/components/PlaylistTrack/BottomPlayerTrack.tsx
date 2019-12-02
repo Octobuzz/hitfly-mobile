@@ -2,7 +2,7 @@ import React from 'react'
 import Icon from 'react-native-vector-icons/Foundation'
 import { Image } from '../Image'
 import { styles } from 'src/constants'
-import { Track, ImageSizeNames } from 'src/apollo'
+import { Track, NoAvatarSizeNames } from 'src/apollo'
 import styled from 'src/styled-components'
 import { CenterBlock, TitleText, SubTitleText } from './styles'
 import { useImageSource } from 'src/Hooks'
@@ -44,7 +44,7 @@ const BottomPlayerTrack: React.FC<Props> = ({
   onPressControl,
   track: { cover, title, singer },
 }) => {
-  const source = useImageSource(cover, ImageSizeNames.S_32)
+  const source = useImageSource(cover, NoAvatarSizeNames.S_32)
 
   return (
     <Wrapper onPress={onPress}>

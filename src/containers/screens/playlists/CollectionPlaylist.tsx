@@ -14,10 +14,10 @@ import { useQuery } from '@apollo/react-hooks'
 import PlaylistScreen from 'src/screens/Playlist/Playlist'
 import { useQueryWithPagination, useImageSource } from 'src/Hooks'
 import {
-  GET_COLLECTION_TRACKS,
-  Collection,
   Track,
-  ImageSizeNames,
+  Collection,
+  NoAvatarSizeNames,
+  GET_COLLECTION_TRACKS,
 } from 'src/apollo'
 import { names } from 'src/constants'
 
@@ -56,7 +56,7 @@ const CollectionPlaylist: React.FC<Props> = props => {
   const image = L.get(data, 'collection.image', [])
   const favouritesCount = L.get(data, 'collection.favouritesCount', 0)
 
-  const source = useImageSource(image, ImageSizeNames.S_300)
+  const source = useImageSource(image, NoAvatarSizeNames.S_300)
 
   const {
     items,

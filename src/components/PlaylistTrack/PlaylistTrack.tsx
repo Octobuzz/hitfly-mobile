@@ -1,5 +1,5 @@
 import React from 'react'
-import { Track, ImageSizeNames } from 'src/apollo'
+import { Track, NoAvatarSizeNames } from 'src/apollo'
 import { Playable } from './interfaces'
 import More from 'src/components/buttons/More'
 import TextBase from 'src/components/TextBase'
@@ -88,7 +88,7 @@ const PlaylistTrack: React.FC<PlaylistTrackProps> & Sized = ({
     }
   }, [onPressMore, track])
 
-  const source = useImageSource(cover, ImageSizeNames.S_32)
+  const source = useImageSource(cover, NoAvatarSizeNames.S_32)
 
   return (
     <Wrapper isPlaying={isPlaying} onPress={handlePressTrack}>

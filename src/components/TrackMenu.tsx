@@ -4,7 +4,7 @@ import Button from './buttons/Button'
 import { Image } from './Image'
 import View from './views/View'
 import TextBase from './TextBase'
-import { Track, ImageSizeNames } from 'src/apollo'
+import { Track, NoAvatarSizeNames } from 'src/apollo'
 import { useImageSource } from 'src/Hooks'
 import styled from 'src/styled-components'
 
@@ -89,7 +89,7 @@ const TrackMenu: React.FC<TrackMenuProps> = ({
   }, [onPressLike, track])
   const { cover, singer, title } = track
 
-  const source = useImageSource(cover, ImageSizeNames.S_32)
+  const source = useImageSource(cover, NoAvatarSizeNames.S_32)
 
   return (
     <View paddingBottom={32} noFill testID="like">

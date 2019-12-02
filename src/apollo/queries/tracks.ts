@@ -1,5 +1,5 @@
 import { Pagination, Track } from '../schemas'
-import { COMMON_TRACK } from '../fragments'
+import { COMMON_TRACK, USER_AVATAR } from '../fragments'
 import gql from 'graphql-tag'
 
 export const GET_DETAILED_TRACK = gql`
@@ -179,9 +179,7 @@ export const GET_MY_TRACKS_WITH_FEEDBACK = gql`
           createdBy: user {
             id
             userName: username
-            avatar(sizes: [size_235x235]) {
-              imageUrl: url
-            }
+            ...UserAvatar
           }
         }
       }
@@ -189,4 +187,5 @@ export const GET_MY_TRACKS_WITH_FEEDBACK = gql`
     }
   }
   ${COMMON_TRACK}
+  ${USER_AVATAR}
 `

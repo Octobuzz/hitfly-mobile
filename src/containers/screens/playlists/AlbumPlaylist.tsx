@@ -3,7 +3,7 @@ import React from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { useQuery } from '@apollo/react-hooks'
 import NonCollectionPlaylist from './NonCollectionPlaylist'
-import { Album, GET_ALBUM_TRACKS, Track, ImageSizeNames } from 'src/apollo'
+import { Album, GET_ALBUM_TRACKS, Track, NoAvatarSizeNames } from 'src/apollo'
 import { names } from 'src/constants'
 import gql from 'graphql-tag'
 import { useImageSource } from 'src/Hooks'
@@ -36,7 +36,7 @@ const AlbumPlaylist: React.FC<Props> = props => {
   const { data } = useQuery<SelectedAlbumData>(GET_SELECTED_ALBUM)
   const id = LFP.get('album.id', data)
   const cover = LFP.getOr([], 'album.cover', data)
-  const source = useImageSource(cover, ImageSizeNames.S_300)
+  const source = useImageSource(cover, NoAvatarSizeNames.S_300)
   return (
     <NonCollectionPlaylist
       hasMorePagesSelector={hasMorePagesSelector}

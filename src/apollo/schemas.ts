@@ -100,7 +100,7 @@ export interface FavouriteAlbum extends FavouriteBase {
 
 export type Playlist = Track[]
 
-export enum ImageSizeNames {
+export enum NoAvatarSizeNames {
   S_32 = 'size_32x32',
   S_40 = 'size_40x40',
   S_48 = 'size_48x48',
@@ -114,6 +114,14 @@ export enum ImageSizeNames {
   S_300 = 'size_300x300',
   S_800 = 'size_800x800',
 }
+
+export enum AvatarSizeNames {
+  S_56 = 'size_56x56',
+  S_72 = 'size_72x72',
+  S_235 = 'size_235x235',
+}
+
+export type ImageSizeNames = NoAvatarSizeNames | AvatarSizeNames
 
 export interface Image {
   sizeName: ImageSizeNames // size

@@ -2,7 +2,7 @@ import React, { useMemo, useCallback } from 'react'
 import { ViewStyle } from 'react-native'
 import TextBase from './TextBase'
 import { Image } from './Image'
-import { Collection, ImageSizeNames } from 'src/apollo'
+import { Collection, NoAvatarSizeNames } from 'src/apollo'
 import { formatTracksCount } from 'src/helpers'
 import { useImageSource } from 'src/Hooks'
 import { styles } from 'src/constants'
@@ -68,7 +68,7 @@ const CollectionItem: React.FC<CollectionItemProps> = ({
     tracksCountInPlaylist,
   ])
 
-  const source = useImageSource(image, ImageSizeNames.S_235)
+  const source = useImageSource(image, NoAvatarSizeNames.S_235)
 
   return (
     <ItemWrapper

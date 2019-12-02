@@ -1,6 +1,6 @@
 import React from 'react'
 import { FlatList } from 'react-native'
-import { Track, Playlist, ImageSizeNames } from 'src/apollo'
+import { Track, Playlist, NoAvatarSizeNames } from 'src/apollo'
 import {
   Image,
   Loader,
@@ -53,7 +53,7 @@ const TrackItem: React.FC<TrackItemProps> = ({ track, onPress }) => {
     }
   }, [onPress, track])
   const { title, cover, singer } = track
-  const source = useImageSource(cover, ImageSizeNames.S_160)
+  const source = useImageSource(cover, NoAvatarSizeNames.S_160)
   return (
     <ItemWrapper onPress={handlePress}>
       <BackgroundImage source={source} />

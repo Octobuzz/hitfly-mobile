@@ -4,10 +4,11 @@ import * as Animated from 'react-native-animatable'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { parseISO, formatRelative } from 'date-fns'
 import { ru } from 'date-fns/locale'
-import { TrackComment } from 'src/apollo'
+import { TrackComment, AvatarSizeNames } from 'src/apollo'
 import { TextBase, Image } from 'src/components'
 import { styles } from 'src/constants'
 import styled from 'src/styled-components'
+import { getImageForSize } from 'src/helpers'
 
 const Wrapper = styled.View``
 
@@ -115,6 +116,16 @@ class FeedbackCarousel extends React.Component<Props, State> {
     return newFormat
   }
 
+  private getAvatarSource = (): { uri: string } => {
+    const { comments } = this.props
+    const { currentPage } = this.state
+    const {
+      createdBy: { avatar },
+    } = comments[currentPage]
+    const image = getImageForSize(avatar, AvatarSizeNames.S_56)
+    return { uri: image.imageUrl }
+  }
+
   render() {
     const { comments, style } = this.props
     const { currentPage } = this.state
@@ -126,11 +137,12 @@ class FeedbackCarousel extends React.Component<Props, State> {
       createdAt,
       createdBy: { userName, avatar },
     } = comments[currentPage]
+    const source = this.getAvatarSource()
     return (
       <Wrapper style={style}>
         <Animated.View useNativeDriver ref={this.animatedView}>
           <Row>
-            <Avatar source={{ uri: avatar[0].imageUrl }} />
+            <Avatar source={source} />
             <UserNameText>{userName}</UserNameText>
             <DateText>{this.formatCreatedAtDate(createdAt)}</DateText>
           </Row>
