@@ -2,11 +2,10 @@ import L from 'lodash'
 import React, { useEffect, useCallback } from 'react'
 import { withNavigation } from 'react-navigation'
 import { TracksSection } from '../components'
-import { routes } from 'src/constants'
+import { routes, names } from 'src/constants'
 import { useQueryWithPagination } from 'src/Hooks'
 import { GET_TOP_WEEK_TRACKS, Track } from 'src/apollo'
 
-const LIMIT = 30
 const itemsSelector = (data: any) => L.get(data, 'playlist.items', [])
 const hasMorePagesSelector = (data: any) =>
   L.get(data, 'playlist.hasMorePages', false)
@@ -20,7 +19,7 @@ const TopWeekContainer: React.FC<any> = ({ navigation, getRefetcher }) => {
   } = useQueryWithPagination(GET_TOP_WEEK_TRACKS, {
     itemsSelector,
     hasMorePagesSelector,
-    limit: LIMIT,
+    limit: names.PLAYLIST_LIMIT,
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'cache-and-network',
   })
