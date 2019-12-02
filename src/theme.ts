@@ -17,6 +17,8 @@ const theme: ITheme = {
     textGray: '#a6a6a6',
     textWhite: '#ffffff',
     inputBorder: '#E4E4E4',
+
+    buttonUnderlayColor: '#414141',
   },
 
   fonts: {
