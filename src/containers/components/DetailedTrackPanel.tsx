@@ -1,42 +1,49 @@
 import L from 'lodash'
 import React, { useMemo, useCallback, forwardRef } from 'react'
-import { Animated } from 'react-native'
 import { GET_DETAILED_TRACK, NullableTrack } from 'src/apollo'
-import {
-  SlidingPanel,
-  SlidingPanelInstance,
-  TRACK_MENU_HEIGHT,
-} from 'src/components'
-import TrackMenu from './TrackMenu'
-import styled from 'src/styled-components'
+import { ActionSheet, ActionSheetInstance } from 'src/components'
 import { useQuery } from '@apollo/react-hooks'
+import { useTrackActions } from 'src/Hooks'
 
-const Dump = styled.View`
-  height: ${TRACK_MENU_HEIGHT}px;
-`
-
-const DetailedTrackPanel = forwardRef<SlidingPanelInstance>((_, ref) => {
-  const animatedValue: Animated.Value = useMemo(() => {
-    return new Animated.Value(0)
-  }, [])
-
-  const hidePanel = useCallback((): void => {
-    if (typeof ref === 'object' && ref && ref.current) {
-      ref.current.hide()
-    }
-  }, [])
-
+const DetailedTrackPanel = forwardRef<ActionSheetInstance>((_, ref) => {
+  const { toggleTrackToFavorites } = useTrackActions()
   const { data } = useQuery(GET_DETAILED_TRACK)
   const detailedTrack: NullableTrack = L.get(data, 'detailedTrack')
 
+  const handlePress = useCallback(
+    (index: number): void => {
+      switch (index) {
+        case 0: {
+          toggleTrackToFavorites(detailedTrack!)
+          break
+        }
+      }
+    },
+    [toggleTrackToFavorites, detailedTrack],
+  )
+
+  const likeText = useMemo(() => {
+    if (detailedTrack && detailedTrack.isFavorite) {
+      return 'Из избранного'
+    } else {
+      return 'В избранное'
+    }
+  }, [detailedTrack])
+
+  const messageText = useMemo(() => {
+    if (detailedTrack) {
+      return `${detailedTrack.title} - ${detailedTrack.singer}`
+    }
+  }, [detailedTrack])
+
   return (
-    <SlidingPanel animatedValue={animatedValue} ref={ref}>
-      {detailedTrack ? (
-        <TrackMenu onPressCancel={hidePanel} track={detailedTrack} />
-      ) : (
-        <Dump />
-      )}
-    </SlidingPanel>
+    <ActionSheet
+      ref={ref}
+      message={messageText}
+      options={[likeText, 'Отмена']}
+      cancelButtonIndex={1}
+      onPress={handlePress}
+    />
   )
 })
 
