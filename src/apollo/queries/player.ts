@@ -5,10 +5,14 @@ import gql from 'graphql-tag'
 export interface ActiveTrackData {
   isPlaying: boolean
   activeTrack?: Track
+  canPlayNext: boolean
+  canPlayPrev: boolean
 }
 
 export const GET_ACTIVE_TRACK = gql`
   query ActiveTrack {
+    canPlayNext @client
+    canPlayPrev @client
     isPlaying @client
     activeTrack @client {
       ...CommonTrack

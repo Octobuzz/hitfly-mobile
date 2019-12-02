@@ -33,6 +33,8 @@ interface ShuffleOptions {
 
 export interface ToggleTrackProps {
   isPlaying: boolean
+  canPlayNext: boolean
+  canPlayPrev: boolean
   activeTrack?: Track
   activePlaylist?: Track[]
   prevTrack: () => void
@@ -58,10 +60,10 @@ const withTrackToggle = <T extends ToggleTrackProps>(
     const { data: activeTrackData } = useQuery<ActiveTrackData>(
       GET_ACTIVE_TRACK,
     )
-    const { activeTrack, isPlaying } = L.pick(activeTrackData, [
-      'activeTrack',
-      'isPlaying',
-    ])
+    const { activeTrack, isPlaying, canPlayNext, canPlayPrev } = L.pick(
+      activeTrackData,
+      ['activeTrack', 'isPlaying', 'canPlayNext', 'canPlayPrev'],
+    )
 
     const { data: activePlaylistData } = useQuery<ActivePlaylistData>(
       GET_ACTIVE_PLAYLIST,
@@ -92,18 +94,19 @@ const withTrackToggle = <T extends ToggleTrackProps>(
         // id - еще один уникальный ключ (может не быть) - возможно не надо разделять через ':' ?
         // items.length - определяет количество треков в плейлисте
         // нужен для изменения ключа при пагинации плейлиста
-        setActiveTrackId({
-          variables: { id: track.id },
-        })
+
         if (!playlistData || playlistData.playlistKey === activePlaylistKey) {
           TrackPlayer.skip(track.id.toString())
         } else if (playlistData) {
           const { playlist, playlistKey } = playlistData
-          setActivePlaylist({ variables: { playlist, playlistKey } })
+          await setActivePlaylist({ variables: { playlist, playlistKey } })
           const newQueue = playlist.map(createTrack)
           await TrackPlayer.initQueue(newQueue, track.id.toString())
           TrackPlayer.play()
         }
+        setActiveTrackId({
+          variables: { id: track.id },
+        })
       },
       [activePlaylistKey],
     )
@@ -178,6 +181,8 @@ const withTrackToggle = <T extends ToggleTrackProps>(
 
     return (
       <WrappedComponent
+        canPlayNext={canPlayNext}
+        canPlayPrev={canPlayPrev}
         shuffle={shuffle}
         nextTrack={nextTrack}
         prevTrack={prevTrack}

@@ -12,6 +12,7 @@ const Row = styled.View`
 const ControlWrapper = styled.TouchableOpacity.attrs(() => ({
   activeOpacity: 0.8,
 }))`
+  opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
   width: 30px;
   align-items: center;
 `
@@ -24,9 +25,11 @@ interface Props extends Omit<ToggleTrackProps, 'activeTrack' | 'shuffle'> {}
 
 const Controls: React.FC<Props> = ({
   isPlaying,
-  toggleTrack,
   prevTrack,
   nextTrack,
+  toggleTrack,
+  canPlayNext,
+  canPlayPrev,
 }) => {
   // приходит ивент в onPress, поэтому так сделано
   const handlePressPlay = useCallback(() => {
@@ -34,13 +37,13 @@ const Controls: React.FC<Props> = ({
   }, [toggleTrack])
   return (
     <Row>
-      <ControlWrapper onPress={prevTrack}>
+      <ControlWrapper disabled={!canPlayPrev} onPress={prevTrack}>
         <ControlIcon size={40} name="previous" />
       </ControlWrapper>
       <ControlWrapper onPress={handlePressPlay}>
         <ControlIcon size={50} name={isPlaying ? 'pause' : 'play'} />
       </ControlWrapper>
-      <ControlWrapper onPress={nextTrack}>
+      <ControlWrapper disabled={!canPlayNext} onPress={nextTrack}>
         <ControlIcon size={40} name="next" />
       </ControlWrapper>
     </Row>
