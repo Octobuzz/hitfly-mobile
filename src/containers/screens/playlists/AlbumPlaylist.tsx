@@ -3,9 +3,10 @@ import React from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { useQuery } from '@apollo/react-hooks'
 import NonCollectionPlaylist from './NonCollectionPlaylist'
-import { Album, GET_ALBUM_TRACKS, Track } from 'src/apollo'
+import { Album, GET_ALBUM_TRACKS, Track, NoAvatarSizeNames } from 'src/apollo'
 import { names } from 'src/constants'
 import gql from 'graphql-tag'
+import { useImageSource } from 'src/Hooks'
 
 const GET_SELECTED_ALBUM = gql`
   query getSelectedAlbum($albumId: Int!) {
@@ -34,18 +35,15 @@ interface Props
 const AlbumPlaylist: React.FC<Props> = props => {
   const { data } = useQuery<SelectedAlbumData>(GET_SELECTED_ALBUM)
   const id = LFP.get('album.id', data)
-  const imageUrl = LFP.get('album.cover[0].imageUrl', data)
-  let cover
-  if (imageUrl) {
-    cover = { uri: imageUrl }
-  }
+  const cover = LFP.getOr([], 'album.cover', data)
+  const source = useImageSource(cover, NoAvatarSizeNames.S_300)
   return (
     <NonCollectionPlaylist
       hasMorePagesSelector={hasMorePagesSelector}
       itemsSelector={itemsSelector}
       query={GET_ALBUM_TRACKS}
       variables={{ albumId: id }}
-      cover={cover}
+      cover={source}
       playlistKey={`${names.PLAYLIST_KEYS.ALBUM}:${id}`}
       {...props}
     />

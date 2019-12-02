@@ -12,8 +12,13 @@ import {
 } from 'src/HOCs'
 import { useQuery } from '@apollo/react-hooks'
 import PlaylistScreen from 'src/screens/Playlist/Playlist'
-import { useQueryWithPagination } from 'src/Hooks'
-import { GET_COLLECTION_TRACKS, Collection, Track } from 'src/apollo'
+import { useQueryWithPagination, useImageSource } from 'src/Hooks'
+import {
+  Track,
+  Collection,
+  NoAvatarSizeNames,
+  GET_COLLECTION_TRACKS,
+} from 'src/apollo'
 import { names } from 'src/constants'
 
 const GET_CURRENT_COLLECTION = gql`
@@ -48,8 +53,10 @@ const CollectionPlaylist: React.FC<Props> = props => {
   })
 
   const id = L.get(data, 'collection.id')
-  const uri = L.get(data, 'collection.image[0].imageUrl')
+  const image = L.get(data, 'collection.image', [])
   const favouritesCount = L.get(data, 'collection.favouritesCount', 0)
+
+  const source = useImageSource(image, NoAvatarSizeNames.S_300)
 
   const {
     items,
@@ -79,7 +86,7 @@ const CollectionPlaylist: React.FC<Props> = props => {
       isFetchingMore={networkStatus === 3}
       onRefresh={onRefresh}
       onEndReached={onEndReached}
-      cover={{ uri }}
+      cover={source}
       tracks={items}
       favouritesCount={favouritesCount}
       playlistKey={`${names.PLAYLIST_KEYS.COLLECTION}:${id}:${items.length}`}

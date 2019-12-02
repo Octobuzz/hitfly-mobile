@@ -1,7 +1,8 @@
 import React from 'react'
-import { User } from 'src/apollo'
-import SectionWrapper from './SectionWrapper'
+import { User, AvatarSizeNames } from 'src/apollo'
 import { Loader, Image, TextBase, SectionHeader } from 'src/components'
+import SectionWrapper from './SectionWrapper'
+import { useImageSource } from 'src/Hooks'
 import styled from 'src/styled-components'
 
 const StarWrapper = styled.View`
@@ -26,12 +27,15 @@ interface StarProps {
   user: User
 }
 
-const Star: React.FC<StarProps> = ({ user: { userName, avatar } }) => (
-  <StarWrapper>
-    <UserImage source={{ uri: avatar[0].imageUrl }} />
-    <StarTitleText>{userName}</StarTitleText>
-  </StarWrapper>
-)
+const Star: React.FC<StarProps> = ({ user: { userName, avatar } }) => {
+  const source = useImageSource(avatar, AvatarSizeNames.S_235)
+  return (
+    <StarWrapper>
+      <UserImage source={source} />
+      <StarTitleText>{userName}</StarTitleText>
+    </StarWrapper>
+  )
+}
 
 const Scroll = styled.ScrollView.attrs(() => ({
   horizontal: true,

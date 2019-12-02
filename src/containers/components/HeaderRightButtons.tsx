@@ -14,9 +14,11 @@ import {
   HeaderSettingsData,
   GET_PROFILE_AVATAR,
   GetProfileAvatarData,
+  AvatarSizeNames,
 } from 'src/apollo'
 import styled, { withTheme, ITheme } from 'src/styled-components'
 import { Image } from 'src/components'
+import { useImageSource } from 'src/Hooks'
 
 const AvatarButton = styled.TouchableOpacity`
   width: 42px;
@@ -46,10 +48,9 @@ const HeaderRightButtons: React.FC<Props> = ({ navigation, theme }) => {
     navigation.navigate(routes.MAIN.SETTINGS)
   }, [])
   // FIXME: смотри костыль в src/apollo/errorLink.tsx
-  const { data: profileData } = useQuery<GetProfileAvatarData>(
-    GET_PROFILE_AVATAR,
-  )
-  const profileUrl = L.get(profileData, 'profile.avatar[0].imageUrl')
+  const profileData = useQuery<GetProfileAvatarData>(GET_PROFILE_AVATAR)
+  const avatar = L.get(profileData, 'data.profile.avatar', [])
+  const source = useImageSource(avatar, AvatarSizeNames.S_56)
 
   const { data } = useQuery<HeaderSettingsData>(GET_HEADER_SETTINGS)
   const mode = L.get(data, 'headerSettings.mode', 'dark')
@@ -59,12 +60,12 @@ const HeaderRightButtons: React.FC<Props> = ({ navigation, theme }) => {
   return (
     <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
       {state === 'main' ? (
-        profileUrl ? (
+        source.uri ? (
           <Item
             title="Профиль"
             ButtonElement={
               <AvatarButton onPress={navigateToProfile}>
-                <AvatarImage source={{ uri: profileUrl }} />
+                <AvatarImage source={source} />
               </AvatarButton>
             }
           />

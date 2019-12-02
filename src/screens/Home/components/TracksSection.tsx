@@ -1,6 +1,6 @@
 import React from 'react'
 import { FlatList } from 'react-native'
-import { Track, Playlist } from 'src/apollo'
+import { Track, Playlist, NoAvatarSizeNames } from 'src/apollo'
 import {
   Image,
   Loader,
@@ -9,6 +9,7 @@ import {
   ListFooterLoader,
 } from 'src/components'
 import SectionWrapper from './SectionWrapper'
+import { useImageSource } from 'src/Hooks'
 import styled from 'src/styled-components'
 
 const ITEM_WIDTH = 164
@@ -52,9 +53,10 @@ const TrackItem: React.FC<TrackItemProps> = ({ track, onPress }) => {
     }
   }, [onPress, track])
   const { title, cover, singer } = track
+  const source = useImageSource(cover, NoAvatarSizeNames.S_160)
   return (
     <ItemWrapper onPress={handlePress}>
-      <BackgroundImage source={{ uri: cover[0].imageUrl }} />
+      <BackgroundImage source={source} />
       <TopText>{title}</TopText>
       <BottomText>{singer}</BottomText>
     </ItemWrapper>

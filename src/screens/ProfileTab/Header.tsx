@@ -1,9 +1,10 @@
 import React, { useMemo, useCallback } from 'react'
-import { DarkenImage, TextBase } from 'src/components'
-import { Profile, Role } from 'src/apollo'
-import { getNameForCount } from 'src/helpers'
 import LinearGradient from 'react-native-linear-gradient'
+import { DarkenImage, TextBase } from 'src/components'
+import { Profile, Role, AvatarSizeNames } from 'src/apollo'
+import { getNameForCount } from 'src/helpers'
 import { images, styles } from 'src/constants'
+import { useImageSource } from 'src/Hooks'
 import styled from 'src/styled-components'
 
 const HeaderWrapper = styled.View`
@@ -36,7 +37,6 @@ const Icon = styled.Image`
 `
 
 const TitleText = styled(TextBase)`
-  flex: 1;
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.white};
   font-size: 24px;
@@ -126,9 +126,11 @@ const Header: React.FC<Props> = ({
     }
   }, [roles])
 
+  const avatarSource = useImageSource(avatar, AvatarSizeNames.S_235)
+
   return (
     <HeaderWrapper>
-      <Cover source={{ uri: avatar[0].imageUrl }} />
+      <Cover source={avatarSource} />
       <Row>
         <TitleText>{userName}</TitleText>
         <Icon source={source} />

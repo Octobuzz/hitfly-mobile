@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import { Image } from '../schemas'
+import { PROFILE_AVATAR } from '../fragments'
 
 // email вытаскивается для предзагрузки в кеш
 export const GET_PROFILE_HEAD = gql`
@@ -11,11 +12,10 @@ export const GET_PROFILE_HEAD = gql`
       roles {
         slug
       }
-      avatar(sizes: [size_235x235]) {
-        imageUrl: url
-      }
+      ...ProfileAvatar
     }
   }
+  ${PROFILE_AVATAR}
 `
 
 export interface GetProfileAvatarData {
@@ -27,9 +27,8 @@ export interface GetProfileAvatarData {
 export const GET_PROFILE_AVATAR = gql`
   query ProfileAvatar {
     profile: myProfile {
-      avatar(sizes: [size_235x235]) {
-        imageUrl: url
-      }
+      ...ProfileAvatar
     }
   }
+  ${PROFILE_AVATAR}
 `

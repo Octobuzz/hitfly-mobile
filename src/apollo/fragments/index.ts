@@ -1,3 +1,4 @@
+export * from './users'
 export * from './albums'
 export * from './genres'
 export * from './tracks'

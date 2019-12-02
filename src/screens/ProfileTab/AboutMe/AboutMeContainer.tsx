@@ -2,8 +2,8 @@ import L from 'lodash'
 import React from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
+import { Profile, PROFILE_AVATAR } from 'src/apollo'
 import AboutMeScreen from './AboutMe'
-import { Profile } from 'src/apollo'
 
 const AboutMeContainer: React.FC = () => {
   const { data, refetch, networkStatus } = useQuery<{
@@ -33,9 +33,7 @@ const GET_PROFILE_FOR_ABOUT = gql`
     profile: myProfile {
       userName: username
       followersCount
-      avatar(sizes: [size_235x235]) {
-        imageUrl: url
-      }
+      ...ProfileAvatar
       roles {
         slug
       }
@@ -56,12 +54,13 @@ const GET_PROFILE_FOR_ABOUT = gql`
         id
         title: name
         followersCount
-        cover: avatarGroup(sizes: [size_290x290]) {
+        cover: avatarGroup(sizes: [size_32x32]) {
           imageUrl: url
         }
       }
     }
   }
+  ${PROFILE_AVATAR}
 `
 
 export default AboutMeContainer

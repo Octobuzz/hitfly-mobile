@@ -3,8 +3,8 @@ import React, { useCallback } from 'react'
 import { useMutation } from '@apollo/react-hooks'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { withHidingSplashScreen, withChangingHeaderSettings } from 'src/HOCs'
+import { storage, PROFILE_AVATAR } from 'src/apollo'
 import { routes } from 'src/constants'
-import { storage } from 'src/apollo'
 import Login from './Login'
 import gql from 'graphql-tag'
 
@@ -12,11 +12,10 @@ const LOGIN = gql`
   mutation Login($email: String!, $password: String!) {
     login: loginMutation(email: $email, password: $password) {
       token: accessToken
-      avatar(sizes: [size_235x235]) {
-        imageUrl: url
-      }
+      ...ProfileAvatar
     }
   }
+  ${PROFILE_AVATAR}
 `
 
 interface Props extends NavigationStackScreenProps {}

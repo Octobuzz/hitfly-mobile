@@ -1,5 +1,6 @@
 import { Pagination, User } from '../schemas'
 import gql from 'graphql-tag'
+import { USER_AVATAR } from '../fragments'
 
 export interface UsersData {
   users?: Pagination<User>
@@ -11,10 +12,9 @@ export const GET_STARS = gql`
       items: data {
         id
         userName: username
-        avatar(sizes: [size_235x235]) {
-          imageUrl: url
-        }
+        ...UserAvatar
       }
     }
   }
+  ${USER_AVATAR}
 `

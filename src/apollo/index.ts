@@ -3,6 +3,7 @@ export const storage = _storage
 
 export * from './queries'
 export * from './schemas'
+export * from './fragments'
 export * from './mutations'
 export * from './commonTypes'
 
