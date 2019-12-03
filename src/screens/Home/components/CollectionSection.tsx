@@ -10,7 +10,7 @@ import { Collection } from 'src/apollo'
 import SectionWrapper from './SectionWrapper'
 import styled from 'src/styled-components'
 
-const ITEM_WIDTH = 214
+const ITEM_WIDTH = 160
 const ITEM_HEIGHT = 160
 const DIVIDER_SIZE = 8
 
