@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
-import { Track, NullableTrack, ImageSizeNames } from 'src/apollo'
+import { Track, NullableTrack, NoAvatarSizeNames } from 'src/apollo'
 import {
   View,
   Loader,
@@ -101,7 +101,7 @@ class Playlist extends React.Component<Props, State> {
     const { cover } = this.props
     const { playingTrack } = this.state
     if (playingTrack) {
-      const image = getImageForSize(playingTrack.cover, ImageSizeNames.S_300)
+      const image = getImageForSize(playingTrack.cover, NoAvatarSizeNames.S_300)
       return { uri: image.imageUrl }
     }
     return cover
