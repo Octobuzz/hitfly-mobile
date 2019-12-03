@@ -12,7 +12,7 @@ import SectionWrapper from './SectionWrapper'
 import { useImageSource } from 'src/Hooks'
 import styled from 'src/styled-components'
 
-const ITEM_WIDTH = 164
+const ITEM_WIDTH = 160
 const ITEM_HEIGHT = 212
 const DIVIDER_SIZE = 8
 

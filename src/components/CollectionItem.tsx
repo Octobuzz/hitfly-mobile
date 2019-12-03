@@ -68,7 +68,7 @@ const CollectionItem: React.FC<CollectionItemProps> = ({
     tracksCountInPlaylist,
   ])
 
-  const source = useImageSource(image, NoAvatarSizeNames.S_235)
+  const source = useImageSource(image, NoAvatarSizeNames.S_160)
 
   return (
     <ItemWrapper
