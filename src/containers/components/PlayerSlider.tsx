@@ -6,7 +6,9 @@ import { StyledSlider, TextBase } from 'src/components'
 import { addSeconds, format } from 'date-fns'
 import styled from 'src/styled-components'
 
-const Wrapper = styled.View``
+const Wrapper = styled.View.attrs(() => ({
+  pointerEvents: 'box-none',
+}))``
 
 const Row = styled.View`
   flex-direction: row;
