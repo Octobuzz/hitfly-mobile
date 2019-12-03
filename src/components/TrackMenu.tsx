@@ -8,25 +8,15 @@ import { Track, NoAvatarSizeNames } from 'src/apollo'
 import { useImageSource } from 'src/Hooks'
 import styled from 'src/styled-components'
 
-// это фактическая высота меню. костыль для выплывающей панели
-// потому что там нужно отрисовать какой-то контент,
-// ибо с динамическим не очень хорошо справляется
-export const TRACK_MENU_HEIGHT = 251.5
+const TrackWrapper = styled.View``
 
-const TrackWrapper = styled.View`
-  flex-direction: row;
-  align-items: center;
-`
-
+// под размеры меню: 200 - 16 - 16
+// может стоит завести константы?
 const StyledImage = styled(Image)`
-  width: 32px;
-  height: 32px;
+  width: 168px;
+  height: 168px;
   border-radius: 4px;
-`
-
-const CenterBlock = styled.View`
-  flex: 1;
-  margin-horizontal: 16px;
+  margin-bottom: 4px;
 `
 
 const TitleText = styled(TextBase)`
@@ -89,16 +79,14 @@ const TrackMenu: React.FC<TrackMenuProps> = ({
   }, [onPressLike, track])
   const { cover, singer, title } = track
 
-  const source = useImageSource(cover, NoAvatarSizeNames.S_32)
+  const source = useImageSource(cover, NoAvatarSizeNames.S_235)
 
   return (
     <View paddingBottom={32} noFill testID="like">
       <TrackWrapper>
         <StyledImage source={source} />
-        <CenterBlock>
-          <TitleText>{title}</TitleText>
-          <SubtitleText>{singer}</SubtitleText>
-        </CenterBlock>
+        <TitleText>{title}</TitleText>
+        <SubtitleText>{singer}</SubtitleText>
       </TrackWrapper>
       <Divider />
       <MenuItem onPress={handlePressLike} testID="summary">
