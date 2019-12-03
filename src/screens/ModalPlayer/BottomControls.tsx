@@ -12,7 +12,7 @@ const Row = styled.View`
 
 const Text = styled(TextBase)`
   font-size: 16px;
-  line-height: 20px;
+  line-height: 16px;
   color: ${({ theme }) => theme.colors.white};
 `
 
@@ -20,7 +20,7 @@ const ControlWrapper = styled.TouchableOpacity.attrs(() => ({
   activeOpacity: 0.8,
 }))`
   flex-direction: row;
-  align-items: center;
+  align-items: baseline;
 `
 
 const ControlIcon = styled(Icon).attrs(({ theme }) => ({
@@ -56,9 +56,8 @@ const BottomControls: React.FC<Props> = ({
       <ControlIcon name="shuffle-variant" />
     </ControlWrapper>
     <ControlWrapper onPress={onPressLike}>
-      <Text>
-        <LikeIcon isActive={isLiked} name="heart" /> {likesCount}
-      </Text>
+      <LikeIcon isActive={isLiked} name="heart" />
+      <Text>{likesCount}</Text>
     </ControlWrapper>
     <ControlWrapper onPress={onPressPlaylist}>
       <ControlIcon name="playlist-music" />

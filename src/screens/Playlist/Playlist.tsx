@@ -12,9 +12,9 @@ import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/HOCs'
 import ControlButton from './ControlButton'
 import ShuffleButton from './ShuffleButton'
 import PlaylistInfoPanel from './PlaylistInfoPanel'
+import { getImageForSize } from 'src/helpers'
 import { styles } from 'src/constants'
 import styled from 'src/styled-components'
-import { getImageForSize } from 'src/helpers'
 
 const CoverWrapper = styled.View`
   height: ${styles.COVER_HEIGHT}px;
