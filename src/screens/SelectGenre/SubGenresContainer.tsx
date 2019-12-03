@@ -7,7 +7,7 @@ import { useLazyQuery } from '@apollo/react-hooks'
 interface Props {
   mainGenre: Genre
   allSelectedGenres: Record<number, boolean>
-  selectAllSubGenres: boolean
+  isEditMode?: boolean // это костыль (?) из-за логики рендера поджанров
   onSubmit: (subGenres: Record<number, boolean>) => void
   onClose: () => void
 }

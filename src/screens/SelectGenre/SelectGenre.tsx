@@ -51,7 +51,6 @@ interface Props {
 
 interface State {
   isModalVisible: boolean
-  selectAllSubGenres: boolean
   selectedGenre?: Genre
   selectedGenres: Record<number, boolean>
 }
@@ -59,7 +58,6 @@ interface State {
 class SelectGenre extends React.Component<Props, State> {
   state: State = {
     isModalVisible: false,
-    selectAllSubGenres: false,
     selectedGenres: {},
   }
 
@@ -107,7 +105,6 @@ class SelectGenre extends React.Component<Props, State> {
   private showSubGenres = (genre: Genre): void => {
     this.setState({
       isModalVisible: true,
-      selectAllSubGenres: false,
       selectedGenre: genre,
     })
   }
@@ -121,16 +118,7 @@ class SelectGenre extends React.Component<Props, State> {
   private selectGenre = (genre: Genre): void => {
     const { selectedGenres } = this.state
     const newGenres = LFP.set(genre.id, true, selectedGenres)
-    if (genre.hasSubGenres) {
-      this.setState({
-        selectAllSubGenres: true,
-        selectedGenres: newGenres,
-        isModalVisible: true,
-        selectedGenre: genre,
-      })
-    } else {
-      this.setState({ selectedGenres: newGenres })
-    }
+    this.setState({ selectedGenres: newGenres })
   }
 
   private selectSubGenres = (subGenres: Record<number, boolean>): void => {
@@ -163,17 +151,12 @@ class SelectGenre extends React.Component<Props, State> {
       onSkip,
       onRefresh,
       isLoading,
-      isEditMode,
       isUpdating,
+      isEditMode,
       onEndReached,
       isRefreshing,
     } = this.props
-    const {
-      isModalVisible,
-      selectedGenre,
-      selectedGenres,
-      selectAllSubGenres,
-    } = this.state
+    const { isModalVisible, selectedGenre, selectedGenres } = this.state
     return (
       <SafeView>
         <Scroll
@@ -216,7 +199,7 @@ class SelectGenre extends React.Component<Props, State> {
         >
           <SubGenres
             mainGenre={selectedGenre!}
-            selectAllSubGenres={selectAllSubGenres}
+            isEditMode={isEditMode}
             allSelectedGenres={selectedGenres}
             onClose={this.hideModal}
             onSubmit={this.selectSubGenres}

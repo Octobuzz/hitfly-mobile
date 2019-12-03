@@ -69,7 +69,7 @@ interface Props {
   mainGenre: Genre
   subGenres: Genre[]
   allSelectedGenres: Record<number, boolean>
-  selectAllSubGenres: boolean
+  isEditMode?: boolean // это костыль (?) из-за логики рендера поджанров
   onRefresh: () => void
   onSubmit: (subGenres: Record<number, boolean>) => void
   onClose: () => void
@@ -81,9 +81,9 @@ const SubGenres: React.FC<Props> = ({
   subGenres,
   isLoading,
   onRefresh,
+  isEditMode,
   isRefreshing,
   allSelectedGenres,
-  selectAllSubGenres,
   mainGenre: { title: mainTitle },
 }) => {
   const [selectedGenres, setSelectedGenres] = useState<Record<number, boolean>>(
@@ -113,12 +113,12 @@ const SubGenres: React.FC<Props> = ({
   }, [])
 
   useEffect(() => {
-    if (selectAllSubGenres) {
-      setSelectedGenres(selectAllGenres(subGenres))
-    } else {
+    if (isEditMode) {
       setSelectedGenres(allSelectedGenres)
+    } else {
+      setSelectedGenres(selectAllGenres(subGenres))
     }
-  }, [subGenres, selectAllSubGenres, allSelectedGenres])
+  }, [subGenres, isEditMode, allSelectedGenres])
 
   const toggleGenre = useCallback(
     (genre: Genre): void => {
