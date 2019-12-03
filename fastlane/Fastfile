@@ -44,7 +44,7 @@ platform :ios do
       notification(subtitle: 'iOS', message: "#{APP_NAME} Finished Building")
 
       IOS_IPA = "#{APP_NAME}.ipa"
-      pilot(ipa: IOS_IPA)
+      pilot(ipa: IOS_IPA, skip_submission: true)
       notification(subtitle: 'iOS', message: "#{APP_NAME} Uploaded to TestFlight")
 
       clean_build_artifacts
