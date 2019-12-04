@@ -6,19 +6,15 @@ import { usePlaybackState } from 'react-native-track-player/lib/hooks'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import {
   Track,
-  GET_ACTIVE_TRACK,
   ActiveTrackData,
-  SET_ACTIVE_TRACK_ID,
-  SetActiveTrackIdVariables,
-  SET_ACTIVE_PLAYLIST,
-  SetActivePlaylistVariables,
-  SET_IS_PLAYING,
-  SetIsPlayingVariables,
   ActivePlaylistData,
+  SetPlayerPropertiesVariables,
+  GET_ACTIVE_TRACK,
   GET_ACTIVE_PLAYLIST,
+  SET_PLAYER_PROPERTIES,
 } from 'src/apollo'
 import { images } from 'src/constants'
-import { randomString } from 'src/helpers'
+import { randomString, getSkipOptions } from 'src/helpers'
 
 interface ToggleTrackOptions {
   track: Track
@@ -27,6 +23,7 @@ interface ToggleTrackOptions {
     playlist: Track[]
   }
 }
+
 interface ShuffleOptions {
   playlist: Track[]
 }
@@ -47,16 +44,9 @@ const withTrackToggle = <T extends ToggleTrackProps>(
   WrappedComponent: React.ComponentType<T>,
 ) => {
   const TrackToggle: React.FC<any> = props => {
-    const [setActiveTrackId] = useMutation<any, SetActiveTrackIdVariables>(
-      SET_ACTIVE_TRACK_ID,
+    const [setProperties] = useMutation<any, SetPlayerPropertiesVariables>(
+      SET_PLAYER_PROPERTIES,
     )
-    const [setActivePlaylist] = useMutation<any, SetActivePlaylistVariables>(
-      SET_ACTIVE_PLAYLIST,
-    )
-    const [setIsPlaying] = useMutation<any, SetIsPlayingVariables>(
-      SET_IS_PLAYING,
-    )
-
     const { data: activeTrackData } = useQuery<ActiveTrackData>(
       GET_ACTIVE_TRACK,
     )
@@ -74,7 +64,7 @@ const withTrackToggle = <T extends ToggleTrackProps>(
     ])
 
     const continueTrack = useCallback(() => {
-      setIsPlaying({ variables: { isPlaying: true } })
+      setProperties({ variables: { isPlaying: true } })
       TrackPlayer.play()
     }, [])
 
@@ -94,18 +84,24 @@ const withTrackToggle = <T extends ToggleTrackProps>(
         // id - еще один уникальный ключ (может не быть) - возможно не надо разделять через ':' ?
         // items.length - определяет количество треков в плейлисте
         // нужен для изменения ключа при пагинации плейлиста
-
         if (!playlistData || playlistData.playlistKey === activePlaylistKey) {
           TrackPlayer.skip(track.id.toString())
         } else if (playlistData) {
           const { playlist, playlistKey } = playlistData
-          await setActivePlaylist({ variables: { playlist, playlistKey } })
+          const skipOptions = getSkipOptions<number, Track>(track.id, playlist)
+          await setProperties({
+            variables: {
+              activePlaylist: playlist,
+              activePlaylistKey: playlistKey,
+              ...skipOptions,
+            },
+          })
           const newQueue = playlist.map(createTrack)
           await TrackPlayer.initQueue(newQueue, track.id.toString())
           TrackPlayer.play()
         }
-        setActiveTrackId({
-          variables: { id: track.id },
+        setProperties({
+          variables: { activeTrackId: track.id },
         })
       },
       [activePlaylistKey],
@@ -115,7 +111,6 @@ const withTrackToggle = <T extends ToggleTrackProps>(
       ({
         id,
         title,
-        group,
         singer,
         fileUrl,
         cover: [{ imageUrl }],
@@ -145,18 +140,20 @@ const withTrackToggle = <T extends ToggleTrackProps>(
     )
 
     const pauseTrack = useCallback((): void => {
-      setIsPlaying({ variables: { isPlaying: false } })
+      setProperties({ variables: { isPlaying: false } })
       TrackPlayer.pause()
     }, [])
 
     const nextTrack = useCallback((): void => {
-      // TODO: обработать?
-      TrackPlayer.skipToNext().catch(() => {})
-    }, [])
+      if (canPlayNext) {
+        TrackPlayer.skipToNext()
+      }
+    }, [canPlayNext])
     const prevTrack = useCallback((): void => {
-      // TODO: обработать?
-      TrackPlayer.skipToPrevious().catch(() => {})
-    }, [])
+      if (canPlayPrev) {
+        TrackPlayer.skipToPrevious()
+      }
+    }, [canPlayPrev])
 
     const shuffle = useCallback(
       (options?: ShuffleOptions): void => {

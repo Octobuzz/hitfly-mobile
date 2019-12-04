@@ -1,5 +1,6 @@
 import L from 'lodash'
 import LFP from 'lodash/fp'
+import TrackPlayer from 'react-native-track-player'
 import { BonusProgramLevel, Image, ImageSizeNames } from 'src/apollo'
 import { images as localImages } from 'src/constants'
 
@@ -228,4 +229,38 @@ export const getImageForSize = (
     image = images.find(img => img.sizeName === size) || image
   }
   return image
+}
+
+export const getSkipOptions = <ID, TRACK extends { id: ID }>(
+  trackId: ID,
+  playlist: TRACK[],
+): { canPlayNext: boolean; canPlayPrev: boolean } => {
+  const index = playlist.findIndex(({ id }) => trackId === id)
+  return {
+    canPlayNext: index !== -1 && index < playlist.length - 1,
+    canPlayPrev: index > 0,
+  }
+}
+
+interface Options {
+  canPlayNext?: boolean
+  canPlayPrev?: boolean
+}
+
+export const disableSkips = ({ canPlayNext, canPlayPrev }: Options) => {
+  const caps = []
+  if (canPlayNext) {
+    caps.push(TrackPlayer.CAPABILITY_SKIP_TO_NEXT)
+  }
+  if (canPlayPrev) {
+    caps.push(TrackPlayer.CAPABILITY_SKIP_TO_PREVIOUS)
+  }
+  TrackPlayer.updateOptions({
+    capabilities: [
+      TrackPlayer.CAPABILITY_PLAY,
+      TrackPlayer.CAPABILITY_PAUSE,
+      TrackPlayer.CAPABILITY_SEEK_TO,
+      ...caps,
+    ],
+  })
 }

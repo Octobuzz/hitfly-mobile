@@ -2,12 +2,11 @@ import React, { useEffect } from 'react'
 import TrackPlayer from 'react-native-track-player'
 import { useMutation } from '@apollo/react-hooks'
 import {
-  SET_ACTIVE_TRACK_ID,
-  SetActiveTrackIdVariables,
-  SET_IS_PLAYING,
-  SetIsPlayingVariables,
+  SetPlayerPropertiesVariables,
+  SET_PLAYER_PROPERTIES,
   RESET_PLAYER,
 } from 'src/apollo'
+import { disableSkips, getSkipOptions } from 'src/helpers'
 
 const setup = async (onSuccess: () => any) => {
   await TrackPlayer.setupPlayer()
@@ -25,10 +24,9 @@ const setup = async (onSuccess: () => any) => {
 }
 
 const Player: React.FC = () => {
-  const [setActiveTrackId] = useMutation<any, SetActiveTrackIdVariables>(
-    SET_ACTIVE_TRACK_ID,
+  const [setProperties] = useMutation<any, SetPlayerPropertiesVariables>(
+    SET_PLAYER_PROPERTIES,
   )
-  const [setIsPlaying] = useMutation<any, SetIsPlayingVariables>(SET_IS_PLAYING)
   const [resetPlayer] = useMutation(RESET_PLAYER)
 
   useEffect(() => {
@@ -37,15 +35,25 @@ const Player: React.FC = () => {
     let stateChanged: TrackPlayer.EmitterSubscription
     setup(() => {
       ended = TrackPlayer.addEventListener('playback-queue-ended', async () => {
-        setIsPlaying({ variables: { isPlaying: false } })
+        setProperties({ variables: { isPlaying: false } })
         await TrackPlayer.pause()
         TrackPlayer.seekTo(0)
       })
       changed = TrackPlayer.addEventListener(
         'playback-track-changed',
-        async () => {
-          const currentTrackId = await TrackPlayer.getCurrentTrack()
-          setActiveTrackId({ variables: { id: +currentTrackId } })
+        async ({ nextTrack }) => {
+          const queue = await TrackPlayer.getQueue()
+          const skipOptions = getSkipOptions<string, TrackPlayer.Track>(
+            nextTrack,
+            queue,
+          )
+          setProperties({
+            variables: {
+              activeTrackId: +nextTrack,
+              ...skipOptions,
+            },
+          })
+          disableSkips(skipOptions)
         },
       )
 
@@ -54,11 +62,11 @@ const Player: React.FC = () => {
         ({ state }) => {
           switch (state) {
             case TrackPlayer.STATE_PAUSED: {
-              setIsPlaying({ variables: { isPlaying: false } })
+              setProperties({ variables: { isPlaying: false } })
               break
             }
             case TrackPlayer.STATE_PLAYING: {
-              setIsPlaying({ variables: { isPlaying: true } })
+              setProperties({ variables: { isPlaying: true } })
               break
             }
           }
