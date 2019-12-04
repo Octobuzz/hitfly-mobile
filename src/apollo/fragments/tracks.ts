@@ -5,7 +5,7 @@ export const COMMON_TRACK = gql`
   fragment CommonTrack on Track {
     id
     title: trackName
-    cover(sizes: [size_300x300, size_160x160, size_32x32], factor: ${getAdjustedPixelRatio()}) {
+    cover(sizes: [size_300x300, size_160x160, size_32x32, size_235x235], factor: ${getAdjustedPixelRatio()}) {
       sizeName: size
       imageUrl: url
     }

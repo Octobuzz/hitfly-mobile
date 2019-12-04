@@ -5,8 +5,8 @@ import {
   LogoutPanel,
   BottomPlayer,
   AuthErrorPanel,
+  DetailedTrackMenu,
   HeaderRightButtons,
-  DetailedTrackPanel,
   // screens
   NewPlaylistScreen,
   AlbumPlaylistScreen,
@@ -191,14 +191,15 @@ const MainNavigator = createStackNavigator(
 )
 
 const Main: React.FC<any> = props => (
-  <View noPadding addBottomSafePadding>
-    <MainNavigator {...props} />
-    <BottomPlayer />
-    <DetailedTrackPanel ref={DetailedPanelRef.detaledPanelRef} />
-    <AuthErrorPanel ref={AuthErrorPanelRef.authPanelRef} />
-    <LogoutPanel ref={LogoutPanelRef.logoutPanelRef} />
-    <Player />
-  </View>
+  <DetailedTrackMenu ref={DetailedPanelRef.detaledPanelRef}>
+    <View noPadding addBottomSafePadding>
+      <MainNavigator {...props} />
+      <BottomPlayer />
+      <AuthErrorPanel ref={AuthErrorPanelRef.authPanelRef} />
+      <LogoutPanel ref={LogoutPanelRef.logoutPanelRef} />
+      <Player />
+    </View>
+  </DetailedTrackMenu>
 )
 
 // @ts-ignore

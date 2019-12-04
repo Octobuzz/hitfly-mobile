@@ -1,17 +1,17 @@
 import { createRef } from 'react'
-import { SlidingPanelInstance } from 'src/components/SlidingPanel'
+import DrawerLayout from 'react-native-gesture-handler/DrawerLayout'
 
-const detaledPanelRef = createRef<SlidingPanelInstance>()
+const detaledPanelRef = createRef<DrawerLayout>()
 
 function showPanel() {
   if (detaledPanelRef.current) {
-    detaledPanelRef.current.show()
+    detaledPanelRef.current.openDrawer()
   }
 }
 
 function hidePanel() {
   if (detaledPanelRef.current) {
-    detaledPanelRef.current.hide()
+    detaledPanelRef.current.closeDrawer()
   }
 }
 
