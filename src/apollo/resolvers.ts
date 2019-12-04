@@ -3,12 +3,8 @@ import { Platform, StatusBar } from 'react-native'
 import { InMemoryCache, IdGetter } from 'apollo-cache-inmemory'
 import ApolloClient, { Resolvers } from 'apollo-client'
 import { HeaderSettings, HeaderMode } from './commonTypes'
-import {
-  GET_HEADER_SETTINGS,
-  GET_ACTIVE_PLAYLIST,
-  ActivePlaylistData,
-} from './queries'
-import { Track } from './schemas'
+import { GET_HEADER_SETTINGS } from './queries'
+import { SetPlayerPropertiesVariables } from './mutations'
 
 interface ContextArgs {
   client: ApolloClient<InMemoryCache>
@@ -61,38 +57,19 @@ export default {
       cache.writeData({ data: { headerSettings: newSettings } })
       return newSettings
     },
-    setActiveTrackId: (_, { id }: { id: number }, { cache }: ContextArgs) => {
-      const activeListdata = cache.readQuery<ActivePlaylistData>({
-        query: GET_ACTIVE_PLAYLIST,
-      })
-      const activePlaylist = L.get(activeListdata, 'activePlaylist', [])
-      const index = activePlaylist.findIndex(track => id === track.id)
-      const data = {
-        activeTrackId: id,
-        isPlaying: true,
-        canPlayNext: index !== -1 && index < activePlaylist.length - 1,
-        canPlayPrev: index !== -1 && index > 0,
+    setPlayerProperties: (
+      _,
+      vars: SetPlayerPropertiesVariables,
+      { cache }: ContextArgs,
+    ) => {
+      const data: any = {}
+      for (const prop in vars) {
+        if (!L.isNil(vars[prop])) {
+          data[prop] = vars[prop]
+        }
       }
       cache.writeData({ data })
       return null
-    },
-    setIsPlaying: (
-      _,
-      { isPlaying }: { isPlaying: boolean },
-      { cache }: ContextArgs,
-    ) => {
-      cache.writeData({ data: { isPlaying } })
-      return null
-    },
-    setActivePlaylist: (
-      _,
-      { playlist, playlistKey }: { playlist: Track[]; playlistKey: string },
-      { cache }: ContextArgs,
-    ) => {
-      cache.writeData({
-        data: { activePlaylist: playlist, activePlaylistKey: playlistKey },
-      })
-      return playlist
     },
     resetPlayer: (_, __, { cache }: ContextArgs) => {
       cache.writeData({
