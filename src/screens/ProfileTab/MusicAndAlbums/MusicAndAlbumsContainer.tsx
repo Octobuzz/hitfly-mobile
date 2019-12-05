@@ -4,8 +4,6 @@ import { NavigationInjectedProps } from 'react-navigation'
 import { useQuery } from '@apollo/react-hooks'
 import MusicAndAlbumsScreen from './MusicAndAlbums'
 import {
-  withSelectors,
-  SelectorsProps,
   withTrackToggle,
   ToggleTrackProps,
   withDetailedTrackMenu,
@@ -30,15 +28,10 @@ interface Props extends NavigationInjectedProps {
   onPressTracksHeader: () => void
 }
 
-interface HOCsProps
-  extends Props,
-    ToggleTrackProps,
-    SelectorsProps,
-    DetailedTrackMenuProps {}
+interface HOCsProps extends Props, ToggleTrackProps, DetailedTrackMenuProps {}
 
 const MusicAndAlbumsContainer: React.FC<HOCsProps> = ({
   playlistKey,
-  selectAlbum,
   tracksQuery,
   trackTransformer,
   tracksSelector,
@@ -94,10 +87,7 @@ const MusicAndAlbumsContainer: React.FC<HOCsProps> = ({
     albumsRefetch()
   }, [])
 
-  const navigateToAlbumPlaylist = useCallback(async (album: Album): Promise<
-    void
-  > => {
-    await selectAlbum(album.id)
+  const navigateToAlbumPlaylist = useCallback((album: Album): void => {
     navigation.navigate(routes.MAIN.ALBUM_PLAYLIST, {
       title: album.title,
       albumId: album.id,
@@ -126,5 +116,4 @@ const MusicAndAlbumsContainer: React.FC<HOCsProps> = ({
 export default L.flowRight(
   withDetailedTrackMenu,
   withTrackToggle,
-  withSelectors,
 )(MusicAndAlbumsContainer) as React.FC<Props>

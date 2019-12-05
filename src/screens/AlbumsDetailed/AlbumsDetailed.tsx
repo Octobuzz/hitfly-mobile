@@ -31,7 +31,7 @@ interface Props {
   isFetchingMore: boolean
   onRefresh: () => void
   onEndReached: () => void
-  onPressAlbum: (album: Album) => Promise<void>
+  onPressAlbum: (album: Album) => void
 }
 
 const AlbumsDetailed: React.FC<Props> = ({

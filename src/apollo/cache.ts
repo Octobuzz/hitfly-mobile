@@ -69,8 +69,8 @@ export default async (): Promise<InMemoryCache> => {
           getCacheKey({ __typename: 'Genre', id: currentGenreId }),
         collection: (_, { id }, { getCacheKey }) =>
           getCacheKey({ __typename: 'Collection', id }),
-        selectedCollection: ({ currentCollectionId }, _, { getCacheKey }) =>
-          getCacheKey({ __typename: 'Collection', id: currentCollectionId }),
+        album: (_, { id }, { getCacheKey }) =>
+          getCacheKey({ __typename: 'Album', id }),
       },
     },
   })

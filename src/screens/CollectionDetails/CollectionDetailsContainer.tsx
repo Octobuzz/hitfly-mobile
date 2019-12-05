@@ -2,21 +2,16 @@ import L from 'lodash'
 import React, { useCallback } from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import CollectionDetailsScreen from './CollectionDetails'
-import {
-  withChangingHeaderSettings,
-  withSelectors,
-  SelectorsProps,
-} from 'src/HOCs'
 import { Pagination, Collection } from 'src/apollo'
 import { routes, names } from 'src/constants'
-import { useQueryWithPagination } from 'src/Hooks'
+import { useQueryWithPagination, useChangingHeaderSettings } from 'src/Hooks'
 import { DocumentNode } from 'graphql'
 
 interface CollectionsData {
   collections?: Pagination<Collection>
 }
 
-interface Props extends SelectorsProps, NavigationStackScreenProps {
+interface Props extends NavigationStackScreenProps {
   query: DocumentNode
 }
 
@@ -25,13 +20,7 @@ const itemsSelector = (data?: CollectionsData) =>
 const hasMorePagesSelector = (data?: CollectionsData) =>
   L.get(data, 'collections.hasMorePages', false)
 
-const CollectionDetails: React.FC<Props> = ({
-  query,
-  navigation,
-  selectGenre,
-  selectCollection,
-  ...rest
-}) => {
+const CollectionDetails: React.FC<Props> = ({ query, navigation, ...rest }) => {
   const {
     items,
     onEndReached,
@@ -45,8 +34,9 @@ const CollectionDetails: React.FC<Props> = ({
     notifyOnNetworkStatusChange: true,
   })
 
-  const onPressItem = useCallback(async (collection: Collection) => {
-    await selectCollection(collection.id)
+  useChangingHeaderSettings({ state: 'main', mode: 'dark' })
+
+  const onPressItem = useCallback((collection: Collection) => {
     navigation.navigate(routes.MAIN.COLLECTION_PLAYLIST, {
       title: collection.title,
       collectionId: collection.id,
@@ -66,7 +56,4 @@ const CollectionDetails: React.FC<Props> = ({
   )
 }
 
-export default L.flowRight(
-  withChangingHeaderSettings({ state: 'main', mode: 'dark' }),
-  withSelectors,
-)(CollectionDetails)
+export default CollectionDetails

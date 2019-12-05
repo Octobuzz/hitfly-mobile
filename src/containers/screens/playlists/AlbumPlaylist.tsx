@@ -30,8 +30,10 @@ const AlbumPlaylist: React.FC<Props> = props => {
     GetAlbumForPlaylistData,
     GetAlbumForPlaylistVariables
   >(GET_ALBUM_FOR_PLAYLIST, { variables: { id: albumId } })
+
   const cover = LFP.getOr([], 'album.cover', data)
   const source = useImageSource(cover, NoAvatarSizeNames.S_300)
+
   return (
     <NonCollectionPlaylist
       hasMorePagesSelector={hasMorePagesSelector}

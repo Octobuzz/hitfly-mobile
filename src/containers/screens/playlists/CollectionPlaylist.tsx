@@ -44,7 +44,6 @@ const CollectionPlaylist: React.FC<Props> = props => {
     variables: {
       id: collectionId,
     },
-    fetchPolicy: 'cache-and-network',
   })
 
   const image = L.get(data, 'collection.image', [])

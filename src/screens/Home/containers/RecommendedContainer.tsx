@@ -1,10 +1,8 @@
 import L from 'lodash'
 import React, { useCallback, useEffect } from 'react'
-import { withNavigation } from 'react-navigation'
 import { CollectionSection } from '../components'
-import { withSelectors } from 'src/HOCs'
 import { Collection, GET_RECOMMENDED, CollectionsData } from 'src/apollo'
-import { useQueryWithPagination } from 'src/Hooks'
+import { useQueryWithPagination, useNavigation } from 'src/Hooks'
 import { routes, names } from 'src/constants'
 
 const itemsSelector = (data?: CollectionsData) =>
@@ -12,11 +10,7 @@ const itemsSelector = (data?: CollectionsData) =>
 const hasMorePagesSelector = (data?: CollectionsData) =>
   L.get(data, 'collections.hasMorePages', false)
 
-const RecommendedContainer: React.FC<any> = ({
-  navigation,
-  getRefetcher,
-  selectCollection,
-}) => {
+const RecommendedContainer: React.FC<any> = ({ getRefetcher }) => {
   const {
     items,
     refetch,
@@ -36,12 +30,13 @@ const RecommendedContainer: React.FC<any> = ({
     }
   }, [getRefetcher])
 
+  const navigation = useNavigation()
+
   const onPressHeader = useCallback(() => {
     navigation.navigate(routes.MAIN.RECOMMENDED_DETAILS)
   }, [])
 
-  const onPressCollection = useCallback(async (collection: Collection) => {
-    await selectCollection(collection.id)
+  const onPressCollection = useCallback((collection: Collection) => {
     navigation.navigate(routes.MAIN.COLLECTION_PLAYLIST, {
       title: collection.title,
       collectionId: collection.id,
@@ -64,7 +59,4 @@ const RecommendedContainer: React.FC<any> = ({
   )
 }
 
-export default L.flowRight(
-  withSelectors,
-  withNavigation,
-)(RecommendedContainer)
+export default RecommendedContainer

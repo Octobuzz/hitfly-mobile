@@ -1,15 +1,9 @@
-import L from 'lodash'
 import React, { useCallback } from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import AlbumsDetailedScreen from './AlbumsDetailed'
-import {
-  withChangingHeaderSettings,
-  withSelectors,
-  SelectorsProps,
-} from 'src/HOCs'
-import { Album } from 'src/apollo'
+import { useQueryWithPagination, useChangingHeaderSettings } from 'src/Hooks'
 import { routes, names } from 'src/constants'
-import { useQueryWithPagination } from 'src/Hooks'
+import { Album } from 'src/apollo'
 import { DocumentNode } from 'graphql'
 
 interface Props extends NavigationStackScreenProps {
@@ -19,13 +13,12 @@ interface Props extends NavigationStackScreenProps {
   hasMorePagesSelector: (data: any) => boolean
 }
 
-const AlbumsDetailedContainer: React.FC<Props & SelectorsProps> = ({
+const AlbumsDetailedContainer: React.FC<Props> = ({
   query,
+  navigation,
+  transformer,
   itemsSelector,
   hasMorePagesSelector,
-  transformer,
-  navigation,
-  selectAlbum,
   ...rest
 }) => {
   const {
@@ -40,13 +33,14 @@ const AlbumsDetailedContainer: React.FC<Props & SelectorsProps> = ({
     notifyOnNetworkStatusChange: true,
   })
 
+  useChangingHeaderSettings({ state: 'main', mode: 'dark' })
+
   let albums = items
   if (transformer) {
     albums = albums.map(transformer)
   }
 
-  const onPressAlbum = useCallback(async (album: Album) => {
-    await selectAlbum(album.id)
+  const onPressAlbum = useCallback((album: Album) => {
     navigation.navigate(routes.MAIN.ALBUM_PLAYLIST, {
       title: album.title,
       albumId: album.id,
@@ -67,7 +61,4 @@ const AlbumsDetailedContainer: React.FC<Props & SelectorsProps> = ({
   )
 }
 
-export default L.flowRight(
-  withChangingHeaderSettings({ state: 'main', mode: 'dark' }),
-  withSelectors,
-)(AlbumsDetailedContainer) as React.FC<Props>
+export default AlbumsDetailedContainer

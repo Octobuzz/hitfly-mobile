@@ -23,16 +23,8 @@ const setStatusBarColor = (mode: HeaderMode): void => {
 
 export default {
   Mutation: {
-    selectCollection: (_, { id }, { cache }: ContextArgs) => {
-      cache.writeData({ data: { currentCollectionId: id } })
-      return null
-    },
     selectGenre: (_, { id }, { cache }: ContextArgs) => {
       cache.writeData({ data: { currentGenreId: id } })
-      return null
-    },
-    selectAlbum: (_, { id }, { cache }: ContextArgs) => {
-      cache.writeData({ data: { currentAlbumId: id } })
       return null
     },
     selectDetailedTrack: (_, { id }, { cache }: ContextArgs) => {
@@ -64,7 +56,9 @@ export default {
     ) => {
       const data: any = {}
       for (const prop in vars) {
+        // @ts-ignore
         if (!L.isNil(vars[prop])) {
+          // @ts-ignore
           data[prop] = vars[prop]
         }
       }

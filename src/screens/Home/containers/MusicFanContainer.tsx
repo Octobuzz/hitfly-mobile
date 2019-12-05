@@ -1,22 +1,16 @@
 import L from 'lodash'
 import React, { useCallback, useEffect } from 'react'
-import { withNavigation } from 'react-navigation'
 import { CollectionSection } from '../components'
-import { withSelectors } from 'src/HOCs'
 import { routes, names } from 'src/constants'
 import { Collection, GET_MUSIC_FAN, CollectionsData } from 'src/apollo'
-import { useQueryWithPagination } from 'src/Hooks'
+import { useQueryWithPagination, useNavigation } from 'src/Hooks'
 
 const itemsSelector = (data?: CollectionsData) =>
   L.get(data, 'collections.items', [])
 const hasMorePagesSelector = (data?: CollectionsData) =>
   L.get(data, 'collections.hasMorePages', false)
 
-const MusicFanContainer: React.FC<any> = ({
-  navigation,
-  getRefetcher,
-  selectCollection,
-}) => {
+const MusicFanContainer: React.FC<any> = ({ getRefetcher }) => {
   const {
     items,
     refetch,
@@ -36,12 +30,13 @@ const MusicFanContainer: React.FC<any> = ({
     }
   }, [getRefetcher])
 
+  const navigation = useNavigation()
+
   const onPressHeader = useCallback(() => {
     navigation.navigate(routes.MAIN.MUSIC_FAN_DETAILS)
   }, [])
 
-  const onPressCollection = useCallback(async (collection: Collection) => {
-    await selectCollection(collection.id)
+  const onPressCollection = useCallback((collection: Collection) => {
     navigation.navigate(routes.MAIN.COLLECTION_PLAYLIST, {
       title: collection.title,
       collectionId: collection.id,
@@ -64,7 +59,4 @@ const MusicFanContainer: React.FC<any> = ({
   )
 }
 
-export default L.flowRight(
-  withSelectors,
-  withNavigation,
-)(MusicFanContainer)
+export default MusicFanContainer
