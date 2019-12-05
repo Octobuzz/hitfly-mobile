@@ -5,9 +5,7 @@ import GenresDetailedScreen from './GenresDetailed'
 import { Genre, GET_GENRES, GenresData } from 'src/apollo'
 import { withSelectors, SelectorsProps } from 'src/HOCs'
 import { useQueryWithPagination } from 'src/Hooks'
-import { routes } from 'src/constants'
-
-const LIMIT = 30
+import { routes, names } from 'src/constants'
 
 const hasMorePagesSelector = (data?: GenresData) =>
   L.get(data, 'genres.hasMorePages')
@@ -27,7 +25,7 @@ const GenresDetailedContainer: React.FC<Props> = ({
   } = useQueryWithPagination<GenresData>(GET_GENRES, {
     itemsSelector,
     hasMorePagesSelector,
-    limit: LIMIT,
+    limit: names.DETAILED_LIMIT,
     variables: {
       all: true,
     },

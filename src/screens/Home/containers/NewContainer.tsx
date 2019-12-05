@@ -19,7 +19,7 @@ const NewContainer: React.FC<any> = ({ navigation, getRefetcher }) => {
   } = useQueryWithPagination<PlaylistData>(GET_NEW_TRACKS, {
     itemsSelector,
     hasMorePagesSelector,
-    limit: names.PLAYLIST_LIMIT,
+    limit: names.HOME_SECTION_LIMIT,
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'cache-and-network',
   })

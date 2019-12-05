@@ -4,7 +4,11 @@ export const BASE_URL = `${DOMAIN_URL}graphql`
 
 export const SERVER_DATE_FORMAT = 'yyyy-MM-dd HH:mm:ss'
 
+// лимиты для одного и того же запроса должны быть разными,
+// иначе будет баг с повторяющимися onEndReached
 export const PLAYLIST_LIMIT = 20
+export const HOME_SECTION_LIMIT = 10
+export const DETAILED_LIMIT = 30
 
 export const PLAYLIST_KEYS = {
   TRACKS_FEEDBACK: 'tracks_feedback',

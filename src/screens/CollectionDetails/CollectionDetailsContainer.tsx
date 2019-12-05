@@ -8,15 +8,13 @@ import {
   SelectorsProps,
 } from 'src/HOCs'
 import { Pagination, Collection } from 'src/apollo'
-import { routes } from 'src/constants'
+import { routes, names } from 'src/constants'
 import { useQueryWithPagination } from 'src/Hooks'
 import { DocumentNode } from 'graphql'
 
 interface CollectionsData {
   collections?: Pagination<Collection>
 }
-
-const LIMIT = 30
 
 interface Props extends SelectorsProps, NavigationStackScreenProps {
   query: DocumentNode
@@ -43,7 +41,7 @@ const CollectionDetails: React.FC<Props> = ({
   } = useQueryWithPagination<CollectionsData>(query, {
     itemsSelector,
     hasMorePagesSelector,
-    limit: LIMIT,
+    limit: names.DETAILED_LIMIT,
     notifyOnNetworkStatusChange: true,
   })
 

@@ -5,9 +5,7 @@ import { GenresSection } from '../components'
 import { GET_GENRES, GenresData, Genre } from 'src/apollo'
 import { withSelectors } from 'src/HOCs'
 import { useQueryWithPagination } from 'src/Hooks'
-import { routes } from 'src/constants'
-
-const LIMIT = 10
+import { routes, names } from 'src/constants'
 
 const hasMorePagesSelector = (data?: GenresData) =>
   L.get(data, 'genres.hasMorePages')
@@ -29,7 +27,7 @@ const GenresContainer: React.FC<any> = ({
     variables: { all: true },
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'cache-and-network',
-    limit: LIMIT,
+    limit: names.HOME_SECTION_LIMIT,
   })
 
   useEffect(() => {

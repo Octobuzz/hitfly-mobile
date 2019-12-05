@@ -19,7 +19,7 @@ const TopWeekContainer: React.FC<any> = ({ navigation, getRefetcher }) => {
   } = useQueryWithPagination(GET_TOP_WEEK_TRACKS, {
     itemsSelector,
     hasMorePagesSelector,
-    limit: names.PLAYLIST_LIMIT,
+    limit: names.HOME_SECTION_LIMIT,
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'cache-and-network',
   })

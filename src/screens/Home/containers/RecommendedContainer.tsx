@@ -5,9 +5,8 @@ import { CollectionSection } from '../components'
 import { withSelectors } from 'src/HOCs'
 import { Collection, GET_RECOMMENDED, CollectionsData } from 'src/apollo'
 import { useQueryWithPagination } from 'src/Hooks'
-import { routes } from 'src/constants'
+import { routes, names } from 'src/constants'
 
-const LIMIT = 30
 const itemsSelector = (data?: CollectionsData) =>
   L.get(data, 'collections.items', [])
 const hasMorePagesSelector = (data?: CollectionsData) =>
@@ -26,7 +25,7 @@ const RecommendedContainer: React.FC<any> = ({
   } = useQueryWithPagination<CollectionsData>(GET_RECOMMENDED, {
     itemsSelector,
     hasMorePagesSelector,
-    limit: LIMIT,
+    limit: names.HOME_SECTION_LIMIT,
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'cache-and-network',
   })

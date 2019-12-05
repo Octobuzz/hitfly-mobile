@@ -3,11 +3,10 @@ import React, { useCallback, useEffect } from 'react'
 import { withNavigation } from 'react-navigation'
 import { CollectionSection } from '../components'
 import { withSelectors } from 'src/HOCs'
-import { routes } from 'src/constants'
+import { routes, names } from 'src/constants'
 import { Collection, GET_MUSIC_FAN, CollectionsData } from 'src/apollo'
 import { useQueryWithPagination } from 'src/Hooks'
 
-const LIMIT = 30
 const itemsSelector = (data?: CollectionsData) =>
   L.get(data, 'collections.items', [])
 const hasMorePagesSelector = (data?: CollectionsData) =>
@@ -26,7 +25,7 @@ const MusicFanContainer: React.FC<any> = ({
   } = useQueryWithPagination<CollectionsData>(GET_MUSIC_FAN, {
     itemsSelector,
     hasMorePagesSelector,
-    limit: LIMIT,
+    limit: names.HOME_SECTION_LIMIT,
     notifyOnNetworkStatusChange: true,
     fetchPolicy: 'cache-and-network',
   })
