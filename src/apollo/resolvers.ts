@@ -58,8 +58,13 @@ export default {
       for (const prop in vars) {
         // @ts-ignore
         if (!L.isNil(vars[prop])) {
-          // @ts-ignore
-          data[prop] = vars[prop]
+          if (prop === 'activePlaylist') {
+            // @ts-ignore
+            data.activePlaylistIds = vars[prop].map(({ id }) => id)
+          } else {
+            // @ts-ignore
+            data[prop] = vars[prop]
+          }
         }
       }
       cache.writeData({ data })

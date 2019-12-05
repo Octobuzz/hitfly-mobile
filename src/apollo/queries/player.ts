@@ -35,3 +35,9 @@ export const GET_ACTIVE_PLAYLIST = gql`
   }
   ${COMMON_TRACK}
 `
+
+export const GET_ACTIVE_PLAYLIST_IDS = gql`
+  query ActivePlaylistIds {
+    activePlaylistIds @client
+  }
+`
