@@ -100,6 +100,7 @@ const MusicAndAlbumsContainer: React.FC<HOCsProps> = ({
     await selectAlbum(album.id)
     navigation.navigate(routes.MAIN.ALBUM_PLAYLIST, {
       title: album.title,
+      albumId: album.id,
     })
   }, [])
 

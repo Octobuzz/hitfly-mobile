@@ -44,6 +44,7 @@ const RecommendedContainer: React.FC<any> = ({
     await selectCollection(collection.id)
     navigation.navigate(routes.MAIN.COLLECTION_PLAYLIST, {
       title: collection.title,
+      collectionId: collection.id,
     })
   }, [])
 

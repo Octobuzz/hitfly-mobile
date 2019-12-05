@@ -49,6 +49,7 @@ const AlbumsDetailedContainer: React.FC<Props & SelectorsProps> = ({
     await selectAlbum(album.id)
     navigation.navigate(routes.MAIN.ALBUM_PLAYLIST, {
       title: album.title,
+      albumId: album.id,
     })
   }, [])
 

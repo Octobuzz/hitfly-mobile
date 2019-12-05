@@ -1,5 +1,25 @@
-import gql from 'graphql-tag'
+import { Album } from '../schemas'
 import { COMMON_ALBUM } from '../fragments'
+import gql from 'graphql-tag'
+
+export interface GetAlbumForPlaylistData {
+  collection: Pick<Album, 'id' | 'cover'>
+}
+
+export interface GetAlbumForPlaylistVariables {
+  id: number
+}
+
+export const GET_ALBUM_FOR_PLAYLIST = gql`
+  query getSelectedAlbum($id: Int!) {
+    album(id: $id) {
+      id
+      cover(sizes: [size_300x300]) {
+        imageUrl: url
+      }
+    }
+  }
+`
 
 export const GET_MY_ALBUMS = gql`
   query MyAlbums($limit: Int = 10, $page: Int = 1) {

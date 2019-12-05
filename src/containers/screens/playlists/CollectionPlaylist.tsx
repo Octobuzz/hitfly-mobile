@@ -2,7 +2,6 @@ import L from 'lodash'
 import LFP from 'lodash/fp'
 import React, { useCallback } from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
-import gql from 'graphql-tag'
 import {
   withTrackToggle,
   withDetailedTrackMenu,
@@ -15,30 +14,20 @@ import PlaylistScreen from 'src/screens/Playlist/Playlist'
 import { useQueryWithPagination, useImageSource } from 'src/Hooks'
 import {
   Track,
-  Collection,
   NoAvatarSizeNames,
+  GetCollectionForPlaylistData,
+  GetCollectionForPlaylistVariables,
+  GET_COLLECTION_FOR_PLAYLIST,
   GET_COLLECTION_TRACKS,
 } from 'src/apollo'
 import { names } from 'src/constants'
-
-const GET_CURRENT_COLLECTION = gql`
-  query getCurrentCollection($collectionId: Int!) {
-    currentCollectionId @client @export(as: "collectionId")
-    collection(id: $collectionId) {
-      id
-      favouritesCount
-      image(sizes: [size_290x290]) {
-        imageUrl: url
-      }
-    }
-  }
-`
 
 interface Props
   extends ToggleTrackProps,
     DetailedTrackMenuProps,
     NavigationStackScreenProps<{
       trackToPlay?: Track
+      collectionId: number
       title: string
     }> {}
 
@@ -46,13 +35,18 @@ const hasMorePagesSelector = LFP.get('playlist.hasMorePages')
 const itemsSelector = LFP.getOr([], 'playlist.items')
 
 const CollectionPlaylist: React.FC<Props> = props => {
-  const { data, refetch: refetchCollection } = useQuery<{
-    collection: Collection
-  }>(GET_CURRENT_COLLECTION, {
+  const collectionId = props.navigation.getParam('collectionId')
+
+  const { data, refetch: refetchCollection } = useQuery<
+    GetCollectionForPlaylistData,
+    GetCollectionForPlaylistVariables
+  >(GET_COLLECTION_FOR_PLAYLIST, {
+    variables: {
+      id: collectionId,
+    },
     fetchPolicy: 'cache-and-network',
   })
 
-  const id = L.get(data, 'collection.id')
   const image = L.get(data, 'collection.image', [])
   const favouritesCount = L.get(data, 'collection.favouritesCount', 0)
 
@@ -67,7 +61,7 @@ const CollectionPlaylist: React.FC<Props> = props => {
     itemsSelector,
     hasMorePagesSelector,
     variables: {
-      collectionId: id,
+      collectionId,
     },
     limit: names.PLAYLIST_LIMIT,
     fetchPolicy: 'cache-and-network',
@@ -89,7 +83,7 @@ const CollectionPlaylist: React.FC<Props> = props => {
       cover={source}
       tracks={items}
       favouritesCount={favouritesCount}
-      playlistKey={`${names.PLAYLIST_KEYS.COLLECTION}:${id}:${items.length}`}
+      playlistKey={`${names.PLAYLIST_KEYS.COLLECTION}:${collectionId}:${items.length}`}
       {...props}
     />
   )

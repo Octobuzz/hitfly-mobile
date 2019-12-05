@@ -49,6 +49,7 @@ const CollectionDetails: React.FC<Props> = ({
     await selectCollection(collection.id)
     navigation.navigate(routes.MAIN.COLLECTION_PLAYLIST, {
       title: collection.title,
+      collectionId: collection.id,
     })
   }, [])
 
