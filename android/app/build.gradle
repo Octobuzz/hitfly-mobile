@@ -134,7 +134,7 @@ android {
         applicationId "com.zebrains.hitfly"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 24
+        versionCode 25
         versionName "1.0"
         multiDexEnabled true
     }
