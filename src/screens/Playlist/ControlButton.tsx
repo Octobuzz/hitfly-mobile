@@ -7,9 +7,7 @@ const ControlIcon = styled(Icon).attrs(({ theme }) => ({
   color: theme.colors.textWhite,
   size: 36,
 }))`
-  top: 2px;
-  line-height: 36px;
-  text-align: center;
+  height: 36px;
 `
 
 const PauseIcon = styled(ControlIcon).attrs(() => ({
