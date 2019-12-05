@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import AlbumsDetailedScreen from './AlbumsDetailed'
-import { useQueryWithPagination, useChangingHeaderSettings } from 'src/Hooks'
+import { useQueryWithPagination, useChangingHeaderSettings } from 'src/hooks'
 import { routes, names } from 'src/constants'
 import { Album } from 'src/apollo'
 import { DocumentNode } from 'graphql'

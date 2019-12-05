@@ -5,7 +5,7 @@ import { Image } from './Image'
 import View from './views/View'
 import TextBase from './TextBase'
 import { Track, NoAvatarSizeNames } from 'src/apollo'
-import { useImageSource } from 'src/Hooks'
+import { useImageSource } from 'src/hooks'
 import styled from 'src/styled-components'
 
 const TrackWrapper = styled.View``

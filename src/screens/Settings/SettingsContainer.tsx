@@ -2,7 +2,7 @@ import React from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import SettingsScreen from './Settings'
 import { LogoutPanelRef } from 'src/globalRefs'
-import { useChangingHeaderSettings } from 'src/Hooks'
+import { useChangingHeaderSettings } from 'src/hooks'
 
 interface Props extends NavigationStackScreenProps {}
 

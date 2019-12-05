@@ -3,7 +3,7 @@ import TrackPlayer from 'react-native-track-player'
 // @ts-ignore больные ублюдки
 import { useTrackPlayerProgress } from 'react-native-track-player/lib/hooks'
 import { withTrackToggle, ToggleTrackProps } from 'src/HOCs'
-import { useNavigation } from 'src/Hooks'
+import { useNavigation } from 'src/hooks'
 import { BottomPlayer } from 'src/components'
 import { routes } from 'src/constants'
 

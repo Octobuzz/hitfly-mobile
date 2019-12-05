@@ -18,7 +18,7 @@ import {
 } from 'src/apollo'
 import styled, { withTheme, ITheme } from 'src/styled-components'
 import { Image } from 'src/components'
-import { useImageSource } from 'src/Hooks'
+import { useImageSource } from 'src/hooks'
 
 const AvatarButton = styled.TouchableOpacity`
   width: 42px;

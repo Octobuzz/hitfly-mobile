@@ -3,9 +3,9 @@ import Icon from 'react-native-vector-icons/Foundation'
 import { Image } from '../Image'
 import { styles } from 'src/constants'
 import { Track, NoAvatarSizeNames } from 'src/apollo'
-import styled from 'src/styled-components'
+import { useImageSource } from 'src/hooks'
 import { CenterBlock, TitleText, SubTitleText } from './styles'
-import { useImageSource } from 'src/Hooks'
+import styled from 'src/styled-components'
 
 const Wrapper = styled.TouchableOpacity.attrs(() => ({
   activeOpacity: 0.8,

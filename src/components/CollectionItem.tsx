@@ -4,7 +4,7 @@ import TextBase from './TextBase'
 import { Image } from './Image'
 import { Collection, NoAvatarSizeNames } from 'src/apollo'
 import { formatTracksCount } from 'src/helpers'
-import { useImageSource } from 'src/Hooks'
+import { useImageSource } from 'src/hooks'
 import { styles } from 'src/constants'
 import styled from 'src/styled-components'
 

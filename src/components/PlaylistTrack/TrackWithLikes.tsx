@@ -5,7 +5,7 @@ import { Playable } from './interfaces'
 import { CenterBlock, TitleWhiteText, SubTitleWhiteText } from './styles'
 import TrackImage from './TrackImage'
 import { styles } from 'src/constants'
-import { useImageSource } from 'src/Hooks'
+import { useImageSource } from 'src/hooks'
 import styled from 'src/styled-components'
 
 const Wrapper = styled.TouchableOpacity`

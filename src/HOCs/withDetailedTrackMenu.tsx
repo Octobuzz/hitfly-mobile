@@ -14,7 +14,7 @@ export interface DetailedTrackMenuProps {
 const withDetailedTrackMenu = (
   WrappedComponent: React.ComponentType<DetailedTrackMenuProps>,
 ) => {
-  const C: React.FC = (props: any) => {
+  return (props: any): JSX.Element => {
     const [selectTrack] = useMutation<void, SelectDetailedTrackVariables>(
       SELECT_DETAILED_TRACK,
     )
@@ -24,7 +24,6 @@ const withDetailedTrackMenu = (
     }, [])
     return <WrappedComponent showDetailedTrack={showDetailedTrack} {...props} />
   }
-  return C
 }
 
 export default withDetailedTrackMenu

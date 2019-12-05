@@ -4,7 +4,7 @@ import { NavigationStackScreenProps } from 'react-navigation-stack'
 import GenresDetailedScreen from './GenresDetailed'
 import { Genre, GET_GENRES, GenresData } from 'src/apollo'
 import { withSelectors, SelectorsProps } from 'src/HOCs'
-import { useQueryWithPagination } from 'src/Hooks'
+import { useQueryWithPagination } from 'src/hooks'
 import { routes, names } from 'src/constants'
 
 const hasMorePagesSelector = (data?: GenresData) =>

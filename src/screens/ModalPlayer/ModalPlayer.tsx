@@ -7,7 +7,7 @@ import Cover from './Cover'
 import Controls from './Controls'
 import BottomControls from './BottomControls'
 import { routes } from 'src/constants'
-import { TrackActionsProps } from 'src/Hooks'
+import { TrackActionsProps } from 'src/hooks'
 import styled from 'src/styled-components'
 
 const Wrapper = styled(SafeView)`

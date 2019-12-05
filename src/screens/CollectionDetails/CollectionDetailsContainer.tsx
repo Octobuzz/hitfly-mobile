@@ -4,7 +4,7 @@ import { NavigationStackScreenProps } from 'react-navigation-stack'
 import CollectionDetailsScreen from './CollectionDetails'
 import { Pagination, Collection } from 'src/apollo'
 import { routes, names } from 'src/constants'
-import { useQueryWithPagination, useChangingHeaderSettings } from 'src/Hooks'
+import { useQueryWithPagination, useChangingHeaderSettings } from 'src/hooks'
 import { DocumentNode } from 'graphql'
 
 interface CollectionsData {

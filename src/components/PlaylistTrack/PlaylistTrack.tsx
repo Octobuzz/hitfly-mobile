@@ -5,8 +5,8 @@ import More from 'src/components/buttons/More'
 import TextBase from 'src/components/TextBase'
 import TrackImage from './TrackImage'
 import { formatTimeDurationForTrack } from 'src/helpers'
+import { useImageSource } from 'src/hooks'
 import styled from 'src/styled-components'
-import { useImageSource } from 'src/Hooks'
 
 const VERTICAL_PADDING = 16
 

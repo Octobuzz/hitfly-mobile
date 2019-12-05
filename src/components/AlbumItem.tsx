@@ -3,8 +3,8 @@ import { Image } from './Image'
 import TextBase from './TextBase'
 import { Album, NoAvatarSizeNames } from 'src/apollo'
 import { styles } from 'src/constants'
+import { useImageSource } from 'src/hooks'
 import styled from 'src/styled-components'
-import { useImageSource } from 'src/Hooks'
 
 const Wrapper = styled.TouchableOpacity`
   width: ${styles.COL2_WIDTH}px;

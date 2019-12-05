@@ -1,6 +1,6 @@
 import React, { useCallback, forwardRef } from 'react'
 import { ActionSheet, ActionSheetInstance } from 'src/components'
-import { useLogout } from 'src/Hooks'
+import { useLogout } from 'src/hooks'
 
 const LogoutPanel = forwardRef<ActionSheetInstance>((_, ref) => {
   const { logout } = useLogout()

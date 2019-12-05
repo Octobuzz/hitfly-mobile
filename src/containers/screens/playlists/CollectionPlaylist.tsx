@@ -11,7 +11,7 @@ import {
 } from 'src/HOCs'
 import { useQuery } from '@apollo/react-hooks'
 import PlaylistScreen from 'src/screens/Playlist/Playlist'
-import { useQueryWithPagination, useImageSource } from 'src/Hooks'
+import { useQueryWithPagination, useImageSource } from 'src/hooks'
 import {
   Track,
   NoAvatarSizeNames,

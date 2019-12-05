@@ -2,7 +2,7 @@ import React from 'react'
 import { User, AvatarSizeNames } from 'src/apollo'
 import { Loader, Image, TextBase, SectionHeader } from 'src/components'
 import SectionWrapper from './SectionWrapper'
-import { useImageSource } from 'src/Hooks'
+import { useImageSource } from 'src/hooks'
 import styled from 'src/styled-components'
 
 const StarWrapper = styled.View`

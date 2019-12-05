@@ -2,7 +2,7 @@ import React from 'react'
 import ModalPlaylist from './ModalPlaylist'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { withTrackToggle, ToggleTrackProps } from 'src/HOCs'
-import { useTrackActions } from 'src/Hooks'
+import { useTrackActions } from 'src/hooks'
 
 interface Props extends ToggleTrackProps, NavigationStackScreenProps {}
 

@@ -5,7 +5,7 @@ import { NavigationStackScreenProps } from 'react-navigation-stack'
 import ProfileTabScreen from './ProfileTab'
 import { Profile, GET_PROFILE_HEAD } from 'src/apollo'
 import { Loader, TextBase, Button, Link, View } from 'src/components'
-import { useChangingHeaderSettings } from 'src/Hooks'
+import { useChangingHeaderSettings } from 'src/hooks'
 import styled from 'src/styled-components'
 import { routes } from 'src/constants'
 

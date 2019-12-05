@@ -12,7 +12,7 @@ import {
   GetAlbumForPlaylistVariables,
 } from 'src/apollo'
 import { names } from 'src/constants'
-import { useImageSource } from 'src/Hooks'
+import { useImageSource } from 'src/hooks'
 
 const hasMorePagesSelector = LFP.get('playlist.hasMorePages')
 const itemsSelector = LFP.getOr([], 'playlist.items')

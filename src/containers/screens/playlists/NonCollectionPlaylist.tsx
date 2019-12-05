@@ -10,7 +10,7 @@ import {
   DetailedTrackMenuProps,
 } from 'src/HOCs'
 import PlaylistScreen from 'src/screens/Playlist'
-import { useQueryWithPagination } from 'src/Hooks'
+import { useQueryWithPagination } from 'src/hooks'
 import { Track } from 'src/apollo'
 import { names } from 'src/constants'
 

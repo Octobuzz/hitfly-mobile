@@ -4,7 +4,7 @@ import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { useMutation } from '@apollo/react-hooks'
 import { routes } from 'src/constants'
 import SelectGenreScreen from './SelectGenre'
-import { useQueryWithPagination } from 'src/Hooks'
+import { useQueryWithPagination } from 'src/hooks'
 import {
   Genre,
   GenresData,

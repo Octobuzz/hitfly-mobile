@@ -3,7 +3,7 @@ import React, { useCallback, useEffect } from 'react'
 import { withNavigation } from 'react-navigation'
 import { TracksSection } from '../components'
 import { GET_NEW_TRACKS, PlaylistData, Track } from 'src/apollo'
-import { useQueryWithPagination } from 'src/Hooks'
+import { useQueryWithPagination } from 'src/hooks'
 import { routes, names } from 'src/constants'
 
 const itemsSelector = (data?: PlaylistData) => L.get(data, 'playlist.items', [])

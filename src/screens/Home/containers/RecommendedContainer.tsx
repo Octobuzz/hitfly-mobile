@@ -2,7 +2,7 @@ import L from 'lodash'
 import React, { useCallback, useEffect } from 'react'
 import { CollectionSection } from '../components'
 import { Collection, GET_RECOMMENDED, CollectionsData } from 'src/apollo'
-import { useQueryWithPagination, useNavigation } from 'src/Hooks'
+import { useQueryWithPagination, useNavigation } from 'src/hooks'
 import { routes, names } from 'src/constants'
 
 const itemsSelector = (data?: CollectionsData) =>

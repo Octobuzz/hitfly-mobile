@@ -1,6 +1,6 @@
 import React from 'react'
 import { TrackMenu, TrackMenuProps } from 'src/components'
-import { useTrackActions } from 'src/Hooks'
+import { useTrackActions } from 'src/hooks'
 
 interface Props extends Omit<TrackMenuProps, 'onPressLike'> {}
 

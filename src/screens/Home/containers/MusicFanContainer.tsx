@@ -3,7 +3,7 @@ import React, { useCallback, useEffect } from 'react'
 import { CollectionSection } from '../components'
 import { routes, names } from 'src/constants'
 import { Collection, GET_MUSIC_FAN, CollectionsData } from 'src/apollo'
-import { useQueryWithPagination, useNavigation } from 'src/Hooks'
+import { useQueryWithPagination, useNavigation } from 'src/hooks'
 
 const itemsSelector = (data?: CollectionsData) =>
   L.get(data, 'collections.items', [])

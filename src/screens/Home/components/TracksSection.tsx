@@ -9,7 +9,7 @@ import {
   ListFooterLoader,
 } from 'src/components'
 import SectionWrapper from './SectionWrapper'
-import { useImageSource } from 'src/Hooks'
+import { useImageSource } from 'src/hooks'
 import styled from 'src/styled-components'
 
 const ITEM_WIDTH = 160

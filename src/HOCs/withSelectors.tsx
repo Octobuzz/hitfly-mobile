@@ -20,7 +20,7 @@ const withSelectors = <T extends SelectorsProps>(
 
     const selectGenre = useCallback(
       (genreId: number) => mutSelectGenre({ variables: { id: genreId } }),
-      [mutSelectGenre],
+      [],
     )
 
     return <WrappedComponent selectGenre={selectGenre} {...props} />

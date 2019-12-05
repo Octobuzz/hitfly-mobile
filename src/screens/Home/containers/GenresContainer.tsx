@@ -4,7 +4,7 @@ import { withNavigation } from 'react-navigation'
 import { GenresSection } from '../components'
 import { GET_GENRES, GenresData, Genre } from 'src/apollo'
 import { withSelectors } from 'src/HOCs'
-import { useQueryWithPagination } from 'src/Hooks'
+import { useQueryWithPagination } from 'src/hooks'
 import { routes, names } from 'src/constants'
 
 const hasMorePagesSelector = (data?: GenresData) =>

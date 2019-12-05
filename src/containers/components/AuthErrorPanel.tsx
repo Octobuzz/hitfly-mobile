@@ -2,7 +2,7 @@ import React, { useCallback, forwardRef } from 'react'
 import { ActionSheet, ActionSheetInstance } from 'src/components'
 import { routes } from 'src/constants'
 
-import { useNavigation } from 'src/Hooks'
+import { useNavigation } from 'src/hooks'
 
 const AuthErrorPanel = forwardRef<ActionSheetInstance>((_, ref) => {
   const navigation = useNavigation()

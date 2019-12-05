@@ -7,7 +7,7 @@ import {
   withDetailedTrackMenu,
   DetailedTrackMenuProps,
 } from 'src/HOCs'
-import { useQueryWithPagination } from 'src/Hooks'
+import { useQueryWithPagination } from 'src/hooks'
 import { GET_MY_TRACKS_WITH_FEEDBACK, TracksWithFeedbackData } from 'src/apollo'
 import { names } from 'src/constants'
 

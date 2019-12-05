@@ -4,7 +4,7 @@ import { DarkenImage, TextBase } from 'src/components'
 import { Profile, Role, AvatarSizeNames } from 'src/apollo'
 import { getNameForCount } from 'src/helpers'
 import { images, styles } from 'src/constants'
-import { useImageSource } from 'src/Hooks'
+import { useImageSource } from 'src/hooks'
 import styled from 'src/styled-components'
 
 const HeaderWrapper = styled.View`
