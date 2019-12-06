@@ -6,22 +6,7 @@ import {
   SET_PLAYER_PROPERTIES,
   RESET_PLAYER,
 } from 'src/apollo'
-import { disableSkips, getSkipOptions } from 'src/helpers'
-
-const setup = async (onSuccess: () => any) => {
-  await TrackPlayer.setupPlayer()
-  await TrackPlayer.updateOptions({
-    stopWithApp: true,
-    capabilities: [
-      TrackPlayer.CAPABILITY_PLAY,
-      TrackPlayer.CAPABILITY_PAUSE,
-      TrackPlayer.CAPABILITY_SEEK_TO,
-      TrackPlayer.CAPABILITY_SKIP_TO_NEXT,
-      TrackPlayer.CAPABILITY_SKIP_TO_PREVIOUS,
-    ],
-  })
-  onSuccess()
-}
+import { getSkipOptions } from 'src/helpers'
 
 const Player: React.FC = () => {
   const [setProperties] = useMutation<any, SetPlayerPropertiesVariables>(
@@ -33,7 +18,8 @@ const Player: React.FC = () => {
     let ended: TrackPlayer.EmitterSubscription
     let changed: TrackPlayer.EmitterSubscription
     let stateChanged: TrackPlayer.EmitterSubscription
-    setup(() => {
+
+    TrackPlayer.setupPlayer().then(() => {
       ended = TrackPlayer.addEventListener('playback-queue-ended', async () => {
         setProperties({ variables: { isPlaying: false } })
         await TrackPlayer.pause()
@@ -53,7 +39,6 @@ const Player: React.FC = () => {
               ...skipOptions,
             },
           })
-          disableSkips(skipOptions)
         },
       )
 
