@@ -1,6 +1,5 @@
 import L from 'lodash'
 import LFP from 'lodash/fp'
-import TrackPlayer from 'react-native-track-player'
 import { BonusProgramLevel, Image, ImageSizeNames } from 'src/apollo'
 import { images as localImages } from 'src/constants'
 

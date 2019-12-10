@@ -1,16 +1,19 @@
 import L from 'lodash'
 import React, { useEffect, useCallback } from 'react'
-import { withNavigation } from 'react-navigation'
 import { TracksSection } from '../components'
 import { routes, names } from 'src/constants'
-import { useQueryWithPagination } from 'src/hooks'
+import { useQueryWithPagination, useNavigation } from 'src/hooks'
 import { GET_TOP_WEEK_TRACKS, Track } from 'src/apollo'
+import { ToggleTrackProps, withTrackToggle } from 'src/HOCs'
+import { WithGetRefetcher } from './interfaces'
 
 const itemsSelector = (data: any) => L.get(data, 'playlist.items', [])
 const hasMorePagesSelector = (data: any) =>
   L.get(data, 'playlist.hasMorePages', false)
 
-const TopWeekContainer: React.FC<any> = ({ navigation, getRefetcher }) => {
+interface Props extends ToggleTrackProps, WithGetRefetcher {}
+
+const TopWeekContainer: React.FC<Props> = ({ toggleTrack, getRefetcher }) => {
   const {
     items,
     refetch,
@@ -30,13 +33,25 @@ const TopWeekContainer: React.FC<any> = ({ navigation, getRefetcher }) => {
     }
   }, [getRefetcher])
 
+  const navigation = useNavigation()
+
   const onPressHeader = useCallback(() => {
     navigation.navigate(routes.MAIN.TOP_WEEK_PLAYLIST)
   }, [])
 
-  const onPressTrack = useCallback((track: Track) => {
-    navigation.navigate(routes.MAIN.TOP_WEEK_PLAYLIST, { trackToPlay: track })
-  }, [])
+  const onPressTrack = useCallback(
+    (track: Track) => {
+      toggleTrack({
+        track,
+        playlistData: {
+          playlist: items,
+          playlistKey: `${names.PLAYLIST_KEYS.TOP_WEEK}:${items.length}`,
+        },
+      })
+      navigation.navigate(routes.MAIN.TOP_WEEK_PLAYLIST)
+    },
+    [toggleTrack, items],
+  )
 
   const isLoading = networkStatus === 4 || networkStatus === 1
 
@@ -54,4 +69,4 @@ const TopWeekContainer: React.FC<any> = ({ navigation, getRefetcher }) => {
   )
 }
 
-export default withNavigation(TopWeekContainer)
+export default withTrackToggle(TopWeekContainer)

@@ -1,8 +1,6 @@
 import L from 'lodash'
 import React, { useCallback } from 'react'
 import TrackPlayer, { Track as RNTrack } from 'react-native-track-player'
-// @ts-ignore больные ублюдки
-import { usePlaybackState } from 'react-native-track-player/lib/hooks'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import {
   Track,
@@ -77,7 +75,7 @@ const withTrackToggle = <T extends ToggleTrackProps>(
     }, [isPlaying, continueTrack])
 
     const playTrack = useCallback(
-      async ({ track, playlistData }: ToggleTrackOptions): Promise<void> => {
+      async ({ track, playlistData }: ToggleTrackOptions) => {
         // playlistKey служит для идентификации плейлиста
         // формат: key:id:items.length
         // key - уникальный ключ для плейлиста
@@ -89,7 +87,7 @@ const withTrackToggle = <T extends ToggleTrackProps>(
         } else if (playlistData) {
           const { playlist, playlistKey } = playlistData
           const skipOptions = getSkipOptions<number, Track>(track.id, playlist)
-          await setProperties({
+          setProperties({
             variables: {
               activePlaylist: playlist,
               activePlaylistKey: playlistKey,
@@ -98,10 +96,9 @@ const withTrackToggle = <T extends ToggleTrackProps>(
           })
           const newQueue = playlist.map(createTrack)
           await TrackPlayer.initQueue(newQueue, track.id.toString())
-          TrackPlayer.play()
         }
         setProperties({
-          variables: { activeTrackId: track.id },
+          variables: { activeTrackId: track.id, isPlaying: true },
         })
       },
       [activePlaylistKey],

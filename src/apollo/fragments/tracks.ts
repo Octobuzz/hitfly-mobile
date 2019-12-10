@@ -16,3 +16,17 @@ export const COMMON_TRACK = gql`
     isFavorite: userFavourite
   }
 `
+
+export const PLAYLIST_TRACK = gql`
+  fragment PlaylistTrack on Track {
+    id
+    title: trackName
+    cover(sizes: [size_32x32], factor: ${getAdjustedPixelRatio()}) {
+      sizeName: size
+      imageUrl: url
+    }
+    fileUrl: filename
+    singer
+    isFavorite: userFavourite
+  }
+`

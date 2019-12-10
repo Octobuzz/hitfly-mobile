@@ -67,17 +67,6 @@ class Playlist extends React.Component<Props, State> {
     playingTrack: null,
   }
 
-  componentDidMount() {
-    const { toggleTrack, navigation, playlistKey, tracks } = this.props
-    const trackToPlay = navigation.getParam('trackToPlay')
-    if (trackToPlay) {
-      toggleTrack({
-        track: trackToPlay,
-        playlistData: { playlist: tracks, playlistKey },
-      })
-    }
-  }
-
   // играемый трек может меняться, поэтому надо каждый раз проверять
   // что бы правильно отображать паузу на текущем экране
   static getDerivedStateFromProps = ({

@@ -1,5 +1,5 @@
 import { Track } from '../schemas'
-import { COMMON_TRACK } from '../fragments'
+import { COMMON_TRACK, PLAYLIST_TRACK } from '../fragments'
 import gql from 'graphql-tag'
 
 export interface ActiveTrackData {
@@ -30,14 +30,8 @@ export const GET_ACTIVE_PLAYLIST = gql`
   query ActivePlaylist {
     activePlaylistKey @client
     activePlaylist @client {
-      ...CommonTrack
+      ...PlaylistTrack
     }
   }
-  ${COMMON_TRACK}
-`
-
-export const GET_ACTIVE_PLAYLIST_IDS = gql`
-  query ActivePlaylistIds {
-    activePlaylistIds @client
-  }
+  ${PLAYLIST_TRACK}
 `

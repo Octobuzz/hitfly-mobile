@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import TrackPlayer from 'react-native-track-player'
 import { useMutation } from '@apollo/react-hooks'
 import {
@@ -14,18 +14,18 @@ const Player: React.FC = () => {
   )
   const [resetPlayer] = useMutation(RESET_PLAYER)
 
-  useEffect(() => {
-    let ended: TrackPlayer.EmitterSubscription
-    let changed: TrackPlayer.EmitterSubscription
-    let stateChanged: TrackPlayer.EmitterSubscription
-
-    TrackPlayer.setupPlayer().then(() => {
-      ended = TrackPlayer.addEventListener('playback-queue-ended', async () => {
+  const subscrubeToEvents = useCallback(() => {
+    const result: TrackPlayer.EmitterSubscription[] = []
+    result.push(
+      TrackPlayer.addEventListener('playback-queue-ended', async () => {
         setProperties({ variables: { isPlaying: false } })
         await TrackPlayer.pause()
         TrackPlayer.seekTo(0)
-      })
-      changed = TrackPlayer.addEventListener(
+      }),
+    )
+
+    result.push(
+      TrackPlayer.addEventListener(
         'playback-track-changed',
         async ({ nextTrack }) => {
           const queue = await TrackPlayer.getQueue()
@@ -40,32 +40,39 @@ const Player: React.FC = () => {
             },
           })
         },
-      )
+      ),
+    )
 
-      stateChanged = TrackPlayer.addEventListener(
-        'playback-state',
-        ({ state }) => {
-          switch (state) {
-            case TrackPlayer.STATE_PAUSED: {
-              setProperties({ variables: { isPlaying: false } })
-              break
-            }
-            case TrackPlayer.STATE_PLAYING: {
-              setProperties({ variables: { isPlaying: true } })
-              break
-            }
+    result.push(
+      TrackPlayer.addEventListener('playback-state', ({ state }) => {
+        switch (state) {
+          case TrackPlayer.STATE_PAUSED: {
+            setProperties({ variables: { isPlaying: false } })
+            break
           }
-        },
-      )
+          case TrackPlayer.STATE_PLAYING: {
+            setProperties({ variables: { isPlaying: true } })
+            break
+          }
+        }
+      }),
+    )
+
+    return result
+  }, [])
+
+  useEffect(() => {
+    let subs: TrackPlayer.EmitterSubscription[] = []
+
+    TrackPlayer.setupPlayer().then(() => {
+      subs = subscrubeToEvents()
     })
 
     return () => {
       resetPlayer()
       TrackPlayer.reset()
       TrackPlayer.destroy()
-      stateChanged.remove()
-      changed.remove()
-      ended.remove()
+      subs.forEach(sub => sub.remove())
     }
   }, [])
 

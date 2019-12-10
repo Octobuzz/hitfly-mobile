@@ -79,6 +79,7 @@ class TracksList extends React.Component<Props> {
       onEndReached,
       onRefresh,
     } = this.props
+
     return (
       <Scroll
         data={tracks}
