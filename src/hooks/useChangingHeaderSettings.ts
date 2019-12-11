@@ -24,7 +24,7 @@ const useChangingHeaderSettings = (nextSettings: Partial<HeaderSettings>) => {
     return () => {
       cb.remove()
     }
-  })
+  }, [])
 
   return null
 }
