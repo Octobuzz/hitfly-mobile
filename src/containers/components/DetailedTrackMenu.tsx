@@ -1,51 +1,33 @@
 import L from 'lodash'
-import React, { useCallback, forwardRef, PropsWithChildren } from 'react'
-import DrawerLayout from 'react-native-gesture-handler/DrawerLayout'
+import React, { useCallback, forwardRef } from 'react'
 import { GET_DETAILED_TRACK, NullableTrack } from 'src/apollo'
 import { useQuery } from '@apollo/react-hooks'
-import TrackMenu from './TrackMenu'
-import styled from 'src/styled-components'
+import { Modal, TrackMenu } from 'src/components'
+import { useTrackActions } from 'src/hooks'
 
-const Body = styled.View`
-  flex: 1;
-  justify-content: center;
-  background-color: ${({ theme }) => theme.colors.black};
-`
+const DetailedTrackMenu = forwardRef<Modal>((_, ref) => {
+  const { data } = useQuery(GET_DETAILED_TRACK)
+  const detailedTrack: NullableTrack = L.get(data, 'detailedTrack')
 
-const DetailedTrackMenu = forwardRef<DrawerLayout, PropsWithChildren<any>>(
-  ({ children }, ref) => {
-    const { data } = useQuery(GET_DETAILED_TRACK)
-    const detailedTrack: NullableTrack = L.get(data, 'detailedTrack')
+  const { toggleTrackToFavorites } = useTrackActions()
 
-    const hideMenu = useCallback(() => {
-      if (ref && typeof ref === 'object' && ref.current) {
-        ref.current.closeDrawer()
-      }
-    }, [])
+  const hide = useCallback(() => {
+    if (ref && typeof ref === 'object' && ref.current) {
+      ref.current.hide()
+    }
+  }, [])
 
-    const renderNavigationView = useCallback(
-      () =>
-        detailedTrack && (
-          <Body>
-            <TrackMenu onPressCancel={hideMenu} track={detailedTrack} />
-          </Body>
-        ),
-      [detailedTrack],
-    )
-
-    return (
-      <DrawerLayout
-        ref={ref}
-        edgeWidth={0}
-        drawerWidth={200}
-        drawerPosition="right"
-        drawerType="front"
-        renderNavigationView={renderNavigationView}
-      >
-        {children}
-      </DrawerLayout>
-    )
-  },
-)
+  return (
+    <Modal ref={ref} onClose={hide}>
+      {detailedTrack && (
+        <TrackMenu
+          onPressLike={toggleTrackToFavorites}
+          onPressCancel={hide}
+          track={detailedTrack}
+        />
+      )}
+    </Modal>
+  )
+})
 
 export default DetailedTrackMenu

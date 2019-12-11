@@ -2,9 +2,9 @@ import React from 'react'
 import { createStackNavigator } from 'react-navigation-stack'
 import {
   Player,
-  LogoutPanel,
+  LogoutModal,
   BottomPlayer,
-  AuthErrorPanel,
+  AuthErrorModal,
   DetailedTrackMenu,
   HeaderRightButtons,
   // screens
@@ -19,9 +19,9 @@ import {
   ListenedNowPlaylistScreen,
 } from 'src/containers'
 import {
-  LogoutPanelRef,
-  DetailedPanelRef,
-  AuthErrorPanelRef,
+  LogoutModalRef,
+  AuthErrorModalRef,
+  DetailedTrackMenuRef,
 } from 'src/globalRefs'
 import {
   HomeScreen,
@@ -191,15 +191,14 @@ const MainNavigator = createStackNavigator(
 )
 
 const Main: React.FC<any> = props => (
-  <DetailedTrackMenu ref={DetailedPanelRef.detaledPanelRef}>
-    <View noPadding addBottomSafePadding>
-      <MainNavigator {...props} />
-      <BottomPlayer />
-      <AuthErrorPanel ref={AuthErrorPanelRef.authPanelRef} />
-      <LogoutPanel ref={LogoutPanelRef.logoutPanelRef} />
-      <Player />
-    </View>
-  </DetailedTrackMenu>
+  <View noPadding addBottomSafePadding>
+    <MainNavigator {...props} />
+    <BottomPlayer />
+    <DetailedTrackMenu ref={DetailedTrackMenuRef.ref} />
+    <AuthErrorModal ref={AuthErrorModalRef.ref} />
+    <LogoutModal ref={LogoutModalRef.ref} />
+    <Player />
+  </View>
 )
 
 // @ts-ignore

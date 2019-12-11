@@ -1,14 +1,15 @@
 import React from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import SettingsScreen from './Settings'
-import { LogoutPanelRef } from 'src/globalRefs'
-import { useChangingHeaderSettings } from 'src/hooks'
+import { LogoutModalRef } from 'src/globalRefs'
+import { withChangingHeaderSettings } from 'src/HOCs'
 
 interface Props extends NavigationStackScreenProps {}
 
-const SettingsContainer: React.FC<Props> = props => {
-  useChangingHeaderSettings({ state: 'main', mode: 'dark' })
-  return <SettingsScreen {...props} onPressLogout={LogoutPanelRef.showPanel} />
-}
+const SettingsContainer: React.FC<Props> = props => (
+  <SettingsScreen {...props} onPressLogout={LogoutModalRef.show} />
+)
 
-export default SettingsContainer
+export default withChangingHeaderSettings({ state: 'main', mode: 'dark' })(
+  SettingsContainer,
+)
