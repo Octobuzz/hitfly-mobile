@@ -12,6 +12,7 @@ export * from './SlidingPanel'
 export * from './PlaylistTrack'
 export * from './NavigationList'
 
+export { default as Modal } from './Modal'
 export { default as Slider } from './Slider'
 export { default as Loader } from './Loader'
 export { default as TextBase } from './TextBase'

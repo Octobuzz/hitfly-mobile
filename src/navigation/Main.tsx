@@ -4,7 +4,7 @@ import {
   Player,
   LogoutPanel,
   BottomPlayer,
-  AuthErrorPanel,
+  AuthErrorModal,
   DetailedTrackMenu,
   HeaderRightButtons,
   // screens
@@ -21,7 +21,7 @@ import {
 import {
   LogoutPanelRef,
   DetailedPanelRef,
-  AuthErrorPanelRef,
+  AuthErrorModalRef,
 } from 'src/globalRefs'
 import {
   HomeScreen,
@@ -195,7 +195,7 @@ const Main: React.FC<any> = props => (
     <View noPadding addBottomSafePadding>
       <MainNavigator {...props} />
       <BottomPlayer />
-      <AuthErrorPanel ref={AuthErrorPanelRef.authPanelRef} />
+      <AuthErrorModal ref={AuthErrorModalRef.ref} />
       <LogoutPanel ref={LogoutPanelRef.logoutPanelRef} />
       <Player />
     </View>
