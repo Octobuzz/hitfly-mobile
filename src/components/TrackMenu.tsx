@@ -8,17 +8,22 @@ import { Track, NoAvatarSizeNames } from 'src/apollo'
 import { useImageSource } from 'src/hooks'
 import styled from 'src/styled-components'
 
-const TrackWrapper = styled.View``
+const TrackWrapper = styled.View`
+  flex-direction: row;
+  align-items: center;
+`
 
-// под размеры меню: 200 - 16 - 16
-// может стоит завести константы?
 const StyledImage = styled(Image)`
-  width: 168px;
-  height: 168px;
+  width: 32px;
+  height: 32px;
   border-radius: 4px;
   margin-bottom: 4px;
 `
 
+const CenterBlock = styled.View`
+  flex: 1;
+  margin-horizontal: 16px;
+`
 const TitleText = styled(TextBase)`
   font-size: 12px;
   line-height: 14px;
@@ -79,14 +84,16 @@ const TrackMenu: React.FC<TrackMenuProps> = ({
   }, [onPressLike, track])
   const { cover, singer, title } = track
 
-  const source = useImageSource(cover, NoAvatarSizeNames.S_235)
+  const source = useImageSource(cover, NoAvatarSizeNames.S_32)
 
   return (
     <View paddingBottom={32} noFill testID="like">
       <TrackWrapper>
         <StyledImage source={source} />
-        <TitleText>{title}</TitleText>
-        <SubtitleText>{singer}</SubtitleText>
+        <CenterBlock>
+          <TitleText>{title}</TitleText>
+          <SubtitleText>{singer}</SubtitleText>
+        </CenterBlock>
       </TrackWrapper>
       <Divider />
       <MenuItem onPress={handlePressLike} testID="summary">

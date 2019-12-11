@@ -1,7 +1,6 @@
 import React, { useCallback, forwardRef } from 'react'
 import { Link, Button, TextBase, Modal } from 'src/components'
-import { routes } from 'src/constants'
-import { useNavigation, useLogout } from 'src/hooks'
+import { useLogout } from 'src/hooks'
 import styled from 'src/styled-components'
 
 const LogoutText = styled(TextBase)`

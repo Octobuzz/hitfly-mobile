@@ -20,8 +20,8 @@ import {
 } from 'src/containers'
 import {
   LogoutModalRef,
-  DetailedPanelRef,
   AuthErrorModalRef,
+  DetailedTrackMenuRef,
 } from 'src/globalRefs'
 import {
   HomeScreen,
@@ -191,15 +191,14 @@ const MainNavigator = createStackNavigator(
 )
 
 const Main: React.FC<any> = props => (
-  <DetailedTrackMenu ref={DetailedPanelRef.detaledPanelRef}>
-    <View noPadding addBottomSafePadding>
-      <MainNavigator {...props} />
-      <BottomPlayer />
-      <AuthErrorModal ref={AuthErrorModalRef.ref} />
-      <LogoutModal ref={LogoutModalRef.ref} />
-      <Player />
-    </View>
-  </DetailedTrackMenu>
+  <View noPadding addBottomSafePadding>
+    <MainNavigator {...props} />
+    <BottomPlayer />
+    <DetailedTrackMenu ref={DetailedTrackMenuRef.ref} />
+    <AuthErrorModal ref={AuthErrorModalRef.ref} />
+    <LogoutModal ref={LogoutModalRef.ref} />
+    <Player />
+  </View>
 )
 
 // @ts-ignore
