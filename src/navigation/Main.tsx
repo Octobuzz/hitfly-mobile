@@ -2,7 +2,7 @@ import React from 'react'
 import { createStackNavigator } from 'react-navigation-stack'
 import {
   Player,
-  LogoutPanel,
+  LogoutModal,
   BottomPlayer,
   AuthErrorModal,
   DetailedTrackMenu,
@@ -19,7 +19,7 @@ import {
   ListenedNowPlaylistScreen,
 } from 'src/containers'
 import {
-  LogoutPanelRef,
+  LogoutModalRef,
   DetailedPanelRef,
   AuthErrorModalRef,
 } from 'src/globalRefs'
@@ -196,7 +196,7 @@ const Main: React.FC<any> = props => (
       <MainNavigator {...props} />
       <BottomPlayer />
       <AuthErrorModal ref={AuthErrorModalRef.ref} />
-      <LogoutPanel ref={LogoutPanelRef.logoutPanelRef} />
+      <LogoutModal ref={LogoutModalRef.ref} />
       <Player />
     </View>
   </DetailedTrackMenu>

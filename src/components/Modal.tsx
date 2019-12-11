@@ -12,7 +12,14 @@ const Inner = styled(View).attrs(() => ({
 
 interface Props
   extends Partial<
-    Omit<ModalProps, 'onBackButtonPress' | 'onBackdropPress' | 'isVisible'>
+    Omit<
+      ModalProps,
+      | 'isVisible'
+      | 'useNativeDriver'
+      | 'onBackdropPress'
+      | 'onBackButtonPress'
+      | 'hideModalContentWhileAnimating'
+    >
   > {
   onClose?: () => void
 }
@@ -39,6 +46,8 @@ class Modal extends React.Component<Props, State> {
     const { isVisible } = this.state
     return (
       <RNModal
+        useNativeDriver
+        hideModalContentWhileAnimating={true}
         isVisible={isVisible}
         onBackButtonPress={onClose}
         onBackdropPress={onClose}
