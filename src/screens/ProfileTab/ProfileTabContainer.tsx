@@ -5,9 +5,9 @@ import { NavigationStackScreenProps } from 'react-navigation-stack'
 import ProfileTabScreen from './ProfileTab'
 import { Profile, GET_PROFILE_HEAD } from 'src/apollo'
 import { Loader, TextBase, Button, Link, View } from 'src/components'
-import { useChangingHeaderSettings } from 'src/hooks'
-import styled from 'src/styled-components'
+import { withChangingHeaderSettings } from 'src/HOCs'
 import { routes } from 'src/constants'
+import styled from 'src/styled-components'
 
 const LogoutText = styled(TextBase)`
   text-align: center;
@@ -29,8 +29,6 @@ const Wrapper = styled(View)`
 interface Props extends NavigationStackScreenProps {}
 
 const ProfileTab: React.FC<Props> = ({ navigation, ...rest }) => {
-  useChangingHeaderSettings({ state: 'profile', mode: 'light' })
-
   const { data, loading } = useQuery<{ profile: Profile }>(GET_PROFILE_HEAD, {
     fetchPolicy: 'cache-and-network',
   })
@@ -62,4 +60,6 @@ const ProfileTab: React.FC<Props> = ({ navigation, ...rest }) => {
   return <ProfileTabScreen {...rest} profile={profile} />
 }
 
-export default ProfileTab
+export default withChangingHeaderSettings({ state: 'profile', mode: 'light' })(
+  ProfileTab,
+)

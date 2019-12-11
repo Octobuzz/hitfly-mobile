@@ -6,6 +6,3 @@ export { default as useNavigation } from './useNavigation'
 export { default as useImageSource } from './useImageSource'
 export { default as useTrackActions } from './useTrackActions'
 export { default as useQueryWithPagination } from './useQueryWithPagination'
-export {
-  default as useChangingHeaderSettings,
-} from './useChangingHeaderSettings'

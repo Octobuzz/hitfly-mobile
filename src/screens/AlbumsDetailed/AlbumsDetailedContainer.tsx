@@ -1,10 +1,11 @@
 import React, { useCallback } from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
-import AlbumsDetailedScreen from './AlbumsDetailed'
-import { useQueryWithPagination, useChangingHeaderSettings } from 'src/hooks'
+import { DocumentNode } from 'graphql'
+import { useQueryWithPagination } from 'src/hooks'
+import { withChangingHeaderSettings } from 'src/HOCs'
 import { routes, names } from 'src/constants'
 import { Album } from 'src/apollo'
-import { DocumentNode } from 'graphql'
+import AlbumsDetailedScreen from './AlbumsDetailed'
 
 interface Props extends NavigationStackScreenProps {
   query: DocumentNode
@@ -33,8 +34,6 @@ const AlbumsDetailedContainer: React.FC<Props> = ({
     notifyOnNetworkStatusChange: true,
   })
 
-  useChangingHeaderSettings({ state: 'main', mode: 'dark' })
-
   let albums = items
   if (transformer) {
     albums = albums.map(transformer)
@@ -61,4 +60,6 @@ const AlbumsDetailedContainer: React.FC<Props> = ({
   )
 }
 
-export default AlbumsDetailedContainer
+export default withChangingHeaderSettings({ state: 'main', mode: 'dark' })(
+  AlbumsDetailedContainer,
+)
