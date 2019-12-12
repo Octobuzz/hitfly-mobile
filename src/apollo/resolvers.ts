@@ -1,8 +1,7 @@
 import L from 'lodash'
-import { Platform, StatusBar } from 'react-native'
 import { InMemoryCache, IdGetter } from 'apollo-cache-inmemory'
 import ApolloClient, { Resolvers } from 'apollo-client'
-import { HeaderSettings, HeaderMode } from './commonTypes'
+import { HeaderSettings } from './commonTypes'
 import { GET_HEADER_SETTINGS } from './queries'
 import { SetPlayerPropertiesVariables } from './mutations'
 
@@ -10,15 +9,6 @@ interface ContextArgs {
   client: ApolloClient<InMemoryCache>
   cache: InMemoryCache
   getCacheKey: IdGetter
-}
-
-const setStatusBarColor = (mode: HeaderMode): void => {
-  if (Platform.OS === 'ios') {
-    StatusBar.setBarStyle(
-      mode === 'dark' ? 'dark-content' : 'light-content',
-      true,
-    )
-  }
 }
 
 export default {
@@ -42,9 +32,6 @@ export default {
       const newSettings = {
         ...L.get(result, 'headerSettings'),
         ...settings,
-      }
-      if (newSettings.mode) {
-        setStatusBarColor(newSettings.mode)
       }
       cache.writeData({ data: { headerSettings: newSettings } })
       return newSettings

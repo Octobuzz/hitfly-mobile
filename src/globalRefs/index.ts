@@ -1,3 +1,3 @@
-export { default as LogoutPanelRef } from './LogoutPanel'
-export { default as DetailedPanelRef } from './DetailedPanel'
-export { default as AuthErrorPanelRef } from './AuthErrorPanel'
+export { default as LogoutModalRef } from './LogoutModal'
+export { default as AuthErrorModalRef } from './AuthErrorModal'
+export { default as DetailedTrackMenuRef } from './DetailedTrackMenu'

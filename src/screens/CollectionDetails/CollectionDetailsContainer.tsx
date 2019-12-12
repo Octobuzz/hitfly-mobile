@@ -4,7 +4,8 @@ import { NavigationStackScreenProps } from 'react-navigation-stack'
 import CollectionDetailsScreen from './CollectionDetails'
 import { Pagination, Collection } from 'src/apollo'
 import { routes, names } from 'src/constants'
-import { useQueryWithPagination, useChangingHeaderSettings } from 'src/hooks'
+import { useQueryWithPagination } from 'src/hooks'
+import { withChangingHeaderSettings } from 'src/HOCs'
 import { DocumentNode } from 'graphql'
 
 interface CollectionsData {
@@ -34,8 +35,6 @@ const CollectionDetails: React.FC<Props> = ({ query, navigation, ...rest }) => {
     notifyOnNetworkStatusChange: true,
   })
 
-  useChangingHeaderSettings({ state: 'main', mode: 'dark' })
-
   const onPressItem = useCallback((collection: Collection) => {
     navigation.navigate(routes.MAIN.COLLECTION_PLAYLIST, {
       title: collection.title,
@@ -56,4 +55,6 @@ const CollectionDetails: React.FC<Props> = ({ query, navigation, ...rest }) => {
   )
 }
 
-export default CollectionDetails
+export default withChangingHeaderSettings({ state: 'main', mode: 'dark' })(
+  CollectionDetails,
+)

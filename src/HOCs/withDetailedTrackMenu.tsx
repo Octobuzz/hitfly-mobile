@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react'
 import {
   Track,
-  SELECT_DETAILED_TRACK,
   SelectDetailedTrackVariables,
+  SELECT_DETAILED_TRACK,
 } from 'src/apollo'
-import { DetailedPanelRef } from 'src/globalRefs'
+import { DetailedTrackMenuRef } from 'src/globalRefs'
 import { useMutation } from '@apollo/react-hooks'
 
 export interface DetailedTrackMenuProps {
@@ -13,17 +13,16 @@ export interface DetailedTrackMenuProps {
 
 const withDetailedTrackMenu = (
   WrappedComponent: React.ComponentType<DetailedTrackMenuProps>,
-) => {
-  return (props: any): JSX.Element => {
-    const [selectTrack] = useMutation<void, SelectDetailedTrackVariables>(
-      SELECT_DETAILED_TRACK,
-    )
-    const showDetailedTrack = useCallback(async (track: Track) => {
-      await selectTrack({ variables: { id: track.id } })
-      DetailedPanelRef.showPanel()
-    }, [])
-    return <WrappedComponent showDetailedTrack={showDetailedTrack} {...props} />
-  }
+) => (props: any): JSX.Element => {
+  const [selectTrack] = useMutation<void, SelectDetailedTrackVariables>(
+    SELECT_DETAILED_TRACK,
+  )
+  const showDetailedTrack = useCallback(async (track: Track) => {
+    await selectTrack({ variables: { id: track.id } })
+    DetailedTrackMenuRef.show()
+  }, [])
+
+  return <WrappedComponent showDetailedTrack={showDetailedTrack} {...props} />
 }
 
 export default withDetailedTrackMenu
