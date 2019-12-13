@@ -3,7 +3,13 @@ import { FlatList, ListRenderItem } from 'react-native'
 import { Track } from 'src/apollo'
 import PeriodToggle from './PeriodToggle'
 import TrackWithFeedback from './TrackWithFeedback'
-import { RefreshControl, Loader, View, ListFooterLoader } from 'src/components'
+import {
+  View,
+  Loader,
+  TextBase,
+  RefreshControl,
+  ListFooterLoader,
+} from 'src/components'
 import { DetailedTrackMenuProps, ToggleTrackProps } from 'src/HOCs'
 import styled from 'src/styled-components'
 
@@ -18,6 +24,12 @@ const Scroll = styled(FlatList as new () => FlatList<Track>).attrs(() => ({
 
 const Divider = styled.View`
   height: 16px;
+`
+
+const ListEmptyText = styled(TextBase)`
+  color: ${({ theme }) => theme.colors.textAlt};
+  text-align: center;
+  padding-vertical: 50px;
 `
 
 export type FeedbackPeriod = 'year' | 'month' | 'week'
@@ -89,6 +101,7 @@ class TracksFeedback extends React.Component<Props> {
             onEndReached={onEndReached}
             onEndReachedThreshold={0.9}
             ItemSeparatorComponent={Divider}
+            ListEmptyComponent={<ListEmptyText>Пока отзывов нет</ListEmptyText>}
             ListFooterComponent={<ListFooterLoader isShown={isFetchingMore} />}
             refreshControl={
               <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
