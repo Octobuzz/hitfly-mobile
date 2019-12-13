@@ -3,15 +3,17 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloLink } from 'apollo-link'
 import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
-import { names } from 'src/constants'
+import { names, storageKeys } from 'src/constants'
 import initCache, { defaults, typeDefs } from './cache'
-import { getToken } from './storage'
+import { getToken, getItem } from './storage'
 import errorLink from './errorLink'
 import resolvers from './resolvers'
 
 async function createApolloClient(): Promise<ApolloClient<InMemoryCache>> {
+  const uri = (await getItem<string>(storageKeys.BASE_URL, names.BASE_URL))!
+
   const httpLink = createHttpLink({
-    uri: names.BASE_URL,
+    uri,
     headers: {
       Accept: 'application/json',
     },

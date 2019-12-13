@@ -7,6 +7,7 @@ import NavigationService from './navigationService'
 import { WelcomeScreen } from 'src/screens'
 import AuthNavigator from './Auth'
 import MainNavigator from './Main'
+import EasterEggNavigator from './EasterEgg'
 import Storybook from '../../storybook'
 import styled from 'src/styled-components'
 import { styles, storageKeys, routes } from 'src/constants'
@@ -20,6 +21,7 @@ const SwitchRoutes = {
   [routes.APP.AUTH]: AuthNavigator,
   [routes.APP.MAIN]: MainNavigator,
   [routes.APP.STORYBOOK]: Storybook,
+  [routes.APP.EASTER_EGG]: EasterEggNavigator,
 }
 
 const AppContainer = createAppContainer(

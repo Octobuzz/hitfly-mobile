@@ -3,8 +3,6 @@ import { storageKeys } from 'src/constants'
 
 type Item = string | number | object | boolean
 
-type DefaultItem = Item | Item[] | void
-
 let token = ''
 export const getToken = async (): Promise<string> => {
   if (!token) {
@@ -21,14 +19,16 @@ export const setToken = async (newToken: string): Promise<void> => {
 export const setItem = (key: string, item: Item | Item[]) =>
   AsyncStorage.setItem(key, JSON.stringify(item))
 
-export const getItem = async (
+export const getItem = async <T>(
   key: string,
-  defaultItem?: DefaultItem,
-): Promise<DefaultItem> => {
+  defaultItem?: T,
+): Promise<T | undefined> => {
   try {
     const item = await AsyncStorage.getItem(key)
     if (item) {
       return JSON.parse(item)
+    } else {
+      return defaultItem
     }
   } catch {
     return defaultItem
