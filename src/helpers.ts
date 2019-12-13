@@ -229,19 +229,3 @@ export const getImageForSize = (
   }
   return image
 }
-
-interface Options {
-  canPlayNext: boolean
-  canPlayPrev: boolean
-}
-
-export const getSkipOptions = <ID, TRACK extends { id: ID }>(
-  trackId: ID,
-  playlist: TRACK[],
-): Options => {
-  const index = playlist.findIndex(({ id }) => trackId === id)
-  return {
-    canPlayNext: index !== -1 && index < playlist.length - 1,
-    canPlayPrev: index > 0,
-  }
-}

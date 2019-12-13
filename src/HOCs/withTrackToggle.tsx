@@ -12,7 +12,7 @@ import {
   SET_PLAYER_PROPERTIES,
 } from 'src/apollo'
 import { images } from 'src/constants'
-import { randomString, getSkipOptions } from 'src/helpers'
+import { randomString } from 'src/helpers'
 
 interface ToggleTrackOptions {
   track: Track
@@ -82,23 +82,28 @@ const withTrackToggle = <T extends ToggleTrackProps>(
         // id - еще один уникальный ключ (может не быть) - возможно не надо разделять через ':' ?
         // items.length - определяет количество треков в плейлисте
         // нужен для изменения ключа при пагинации плейлиста
+        const variables: SetPlayerPropertiesVariables = {
+          activeTrackId: track.id,
+          isPlaying: true,
+        }
         if (!playlistData || playlistData.playlistKey === activePlaylistKey) {
-          TrackPlayer.skip(track.id.toString())
+          const result = await TrackPlayer.skip(track.id.toString())
+          variables.canPlayNext = result.canPlayNext
+          variables.canPlayPrev = result.canPlayPrev
         } else if (playlistData) {
           const { playlist, playlistKey } = playlistData
-          const skipOptions = getSkipOptions<number, Track>(track.id, playlist)
-          setProperties({
-            variables: {
-              activePlaylist: playlist,
-              activePlaylistKey: playlistKey,
-              ...skipOptions,
-            },
-          })
           const newQueue = playlist.map(createTrack)
-          await TrackPlayer.initQueue(newQueue, track.id.toString())
+          const result = await TrackPlayer.initQueue(
+            newQueue,
+            track.id.toString(),
+          )
+          variables.canPlayNext = result.canPlayNext
+          variables.canPlayPrev = result.canPlayPrev
+          variables.activePlaylist = playlist
+          variables.activePlaylistKey = playlistKey
         }
         setProperties({
-          variables: { activeTrackId: track.id, isPlaying: true },
+          variables,
         })
       },
       [activePlaylistKey],
@@ -141,14 +146,38 @@ const withTrackToggle = <T extends ToggleTrackProps>(
       TrackPlayer.pause()
     }, [])
 
-    const nextTrack = useCallback((): void => {
+    const nextTrack = useCallback(async () => {
       if (canPlayNext) {
-        TrackPlayer.skipToNext()
+        const {
+          currentTrack,
+          canPlayNext: CPN,
+          canPlayPrev: CPP,
+        } = await TrackPlayer.skipToNext()
+
+        setProperties({
+          variables: {
+            canPlayNext: CPN,
+            canPlayPrev: CPP,
+            activeTrackId: +currentTrack,
+          },
+        })
       }
     }, [canPlayNext])
-    const prevTrack = useCallback((): void => {
+    const prevTrack = useCallback(async () => {
       if (canPlayPrev) {
-        TrackPlayer.skipToPrevious()
+        const {
+          currentTrack,
+          canPlayNext: CPN,
+          canPlayPrev: CPP,
+        } = await TrackPlayer.skipToPrevious()
+
+        setProperties({
+          variables: {
+            canPlayNext: CPN,
+            canPlayPrev: CPP,
+            activeTrackId: +currentTrack,
+          },
+        })
       }
     }, [canPlayPrev])
 
