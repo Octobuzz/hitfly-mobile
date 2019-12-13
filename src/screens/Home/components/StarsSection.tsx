@@ -56,7 +56,7 @@ const StarsSection: React.FC<Props> = ({ isLoading, users }) => {
   }
   return (
     <SectionWrapper>
-      <SectionHeader title="Звездные эксперты" />
+      <SectionHeader title="Звёздные эксперты" />
       {isLoading ? (
         <Loader size={150} />
       ) : (

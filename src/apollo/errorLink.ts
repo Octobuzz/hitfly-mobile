@@ -2,7 +2,7 @@ import { Alert } from 'react-native'
 import { Operation } from 'apollo-link'
 import { GraphQLError } from 'graphql'
 import { onError } from 'apollo-link-error'
-import { AuthErrorPanelRef } from 'src/globalRefs'
+import { AuthErrorModalRef } from 'src/globalRefs'
 
 const handle401Error = (error: GraphQLError, operation: Operation) => {
   // FIXME: это костыль так как я не понял почему не вытаскивает профиль
@@ -10,7 +10,7 @@ const handle401Error = (error: GraphQLError, operation: Operation) => {
   if (operation.operationName === 'ProfileAvatar') {
     return
   }
-  AuthErrorPanelRef.showPanel()
+  AuthErrorModalRef.show()
 }
 
 const handleGraphQLErrors = (
