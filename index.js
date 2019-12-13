@@ -7,4 +7,4 @@ import App from 'src/App'
 
 AppRegistry.registerComponent(names.APP_NAME, () => App)
 
-TrackPlayer.registerPlaybackService(() => {})
+TrackPlayer.registerPlaybackService(() => require('./no-task'))
