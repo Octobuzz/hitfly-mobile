@@ -7,6 +7,10 @@ import { storage, GET_SOCIAL_LINKS } from 'src/apollo'
 import styled from 'src/styled-components'
 import { graphql } from '@apollo/react-hoc'
 
+const LogoWrapper = styled.TouchableWithoutFeedback.attrs(() => ({
+  delayLongPress: 2000,
+}))``
+
 const Logo = styled.Image.attrs(() => ({
   source: images.WELCOME_LOGO,
   resizeMode: 'contain',
@@ -14,6 +18,7 @@ const Logo = styled.Image.attrs(() => ({
   flex: 20;
   max-height: 365px;
   margin-bottom: 12px;
+  max-height: 365px;
   align-self: center;
 `
 
@@ -37,6 +42,11 @@ class Welcome extends React.Component<NavigationStackScreenProps> {
     },
   ]
 
+  private navigateToEgg = (): void => {
+    const { navigation } = this.props
+    navigation.navigate(routes.APP.EASTER_EGG)
+  }
+
   private navigateToNext = () => {
     const { navigation } = this.props
     storage.setItem(storageKeys.SKIP_WELCOME, true)
@@ -47,7 +57,9 @@ class Welcome extends React.Component<NavigationStackScreenProps> {
     return (
       <SafeView>
         <View paddingHorizontal={38}>
-          <Logo />
+          <LogoWrapper onLongPress={this.navigateToEgg}>
+            <Logo />
+          </LogoWrapper>
           <Features features={this.features} />
           <Stretcher />
           <Button

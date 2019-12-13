@@ -4,6 +4,7 @@ const APP = {
   PLAYER: 'player',
   WELCOME: 'welcome',
   STORYBOOK: 'storybook',
+  EASTER_EGG: 'easter_egg',
 }
 
 export default {
@@ -47,5 +48,10 @@ export default {
   PLAYER: {
     MODAL_PLAYER: `${APP.PLAYER}/modal_player`,
     MODAL_PLAYLIST: `${APP.PLAYER}/modal_playlist`,
+  },
+
+  EASTER_EGG: {
+    EGG_LOGIN: `${APP.EASTER_EGG}/egg_login`,
+    EGG_MAIN: `${APP.EASTER_EGG}/egg_main`,
   },
 }
