@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { Genre } from 'src/apollo'
 import { TextBase, CheckBoxUI } from 'src/components'
 import styled from 'src/styled-components'
@@ -20,7 +20,9 @@ const GenreText = styled(TextBase)`
   color: ${({ theme }) => theme.colors.white};
 `
 
-const RightBlock = styled.View``
+const RightBlock = styled.View`
+  flex: 1;
+`
 
 interface Props {
   upperTitle: string
@@ -40,11 +42,18 @@ const GenreCheckBox: React.FC<Props> = ({
     onPress(genre)
   }, [onPress, genre])
 
+  // это своего рода костыль, потому что в вебе решили что название
+  // рутового жанра должно быть в названии каждого поджанра
+  // однако здесь название рутового жанра выводится в <UpperText>{upperTitle}</UpperText>
+  const validTitle = useMemo(() => {
+    return title.replace(/.*\s*–\s*/, '')
+  }, [title])
+
   return (
     <StyledCheckBox onPress={handlePress} isChecked={isSelected}>
       <RightBlock>
         <UpperText>{upperTitle}</UpperText>
-        <GenreText>{title}</GenreText>
+        <GenreText>{validTitle}</GenreText>
       </RightBlock>
     </StyledCheckBox>
   )
