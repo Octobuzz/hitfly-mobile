@@ -6,6 +6,7 @@ import {
   SET_PLAYER_PROPERTIES,
   RESET_PLAYER,
 } from 'src/apollo'
+import { Platform } from 'react-native'
 
 interface SkipOptions {
   canPlayNext: boolean
@@ -59,9 +60,12 @@ const Player: React.FC = () => {
       TrackPlayer.addEventListener('remote-previous', updateSkipProps),
     )
 
-    result.push(
-      TrackPlayer.addEventListener('remote-progress-ended', updateSkipProps),
-    )
+    // это только для андроидского плеера теперь (возможно костыль)
+    if (Platform.OS === 'android') {
+      result.push(
+        TrackPlayer.addEventListener('remote-progress-ended', updateSkipProps),
+      )
+    }
 
     return result
   }, [])
