@@ -10,7 +10,6 @@ import {
 } from 'src/components'
 import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/HOCs'
 import ControlButton from './ControlButton'
-import ShuffleButton from './ShuffleButton'
 import PlaylistInfoPanel from './PlaylistInfoPanel'
 import { getImageForSize } from 'src/helpers'
 import { styles } from 'src/constants'
@@ -20,6 +19,7 @@ const CoverWrapper = styled.View`
   height: ${styles.COVER_HEIGHT}px;
   justify-content: center;
   border-bottom-left-radius: 28px;
+  border-bottom-right-radius: 28px;
   overflow: hidden;
   background-color: ${({ theme }) => theme.colors.white};
 `
@@ -30,13 +30,6 @@ const Cover = styled(DarkenImage)`
   width: 100%;
   top: 0;
   left: 0;
-`
-
-const PositionedShuffleButton = styled(ShuffleButton)`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 80%;
 `
 
 const PositionedControlButton = styled(ControlButton)`
@@ -129,7 +122,6 @@ class Playlist extends React.Component<Props, State> {
               isPlaying={!!playingTrack && rest.isPlaying}
             />
           )}
-          <PositionedShuffleButton onPress={this.handlePressShuffle} />
         </CoverWrapper>
         {isLoading ? (
           <Loader isFilled />
@@ -138,6 +130,7 @@ class Playlist extends React.Component<Props, State> {
             <PlaylistInfoPanel
               favouritesCount={favouritesCount}
               playlist={tracks}
+              onPressShuffle={this.handlePressShuffle}
             />
             <TracksFlatList playlistTitle={title} {...rest} tracks={tracks} />
           </>

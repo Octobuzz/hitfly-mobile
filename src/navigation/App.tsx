@@ -64,7 +64,7 @@ class AppNavigator extends React.Component {
     if (Platform.OS === 'ios') {
       StatusBar.setBarStyle('dark-content', true)
     } else {
-      StatusBar.setBarStyle('light-content', true)
+      StatusBar.setBackgroundColor('#000000', true)
     }
   }
 
