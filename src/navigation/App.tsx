@@ -61,11 +61,8 @@ const StorybookButton = styled(DebugButton).attrs(() => ({
 class AppNavigator extends React.Component {
   constructor(props: any) {
     super(props)
-    if (Platform.OS === 'ios') {
-      StatusBar.setBarStyle('dark-content', true)
-    } else {
-      StatusBar.setBarStyle('light-content', true)
-    }
+    StatusBar.setBarStyle('dark-content', true)
+    StatusBar.setBackgroundColor('#000000', true)
   }
 
   componentDidMount() {
