@@ -1,9 +1,7 @@
-import React, { useMemo, useCallback } from 'react'
+import React, { useCallback } from 'react'
 import { ViewStyle } from 'react-native'
-import TextBase from './TextBase'
 import { Image } from './Image'
 import { Collection, NoAvatarSizeNames } from 'src/apollo'
-import { formatTracksCount } from 'src/helpers'
 import { useImageSource } from 'src/hooks'
 import { styles } from 'src/constants'
 import styled from 'src/styled-components'
@@ -26,17 +24,6 @@ const BackgroundImage = styled(Image).attrs(() => ({
   top: 0;
   right: 0;
   bottom: 0;
-`
-
-const TopText = styled(TextBase)`
-  font-family: ${({ theme }) => theme.fonts.bold};
-  color: ${({ theme }) => theme.colors.textWhite};
-  font-size: 12px;
-`
-
-const BottomText = styled(TextBase)`
-  color: ${({ theme }) => theme.colors.textWhite};
-  font-size: 12px;
 `
 
 interface Sized {
@@ -63,10 +50,7 @@ const CollectionItem: React.FC<CollectionItemProps> = ({
     }
   }, [onPress, collection])
 
-  const { tracksCountInPlaylist, title, image } = collection
-  const bottomText = useMemo(() => formatTracksCount(tracksCountInPlaylist), [
-    tracksCountInPlaylist,
-  ])
+  const { image } = collection
 
   const source = useImageSource(image, NoAvatarSizeNames.S_160)
 
@@ -78,8 +62,6 @@ const CollectionItem: React.FC<CollectionItemProps> = ({
       onPress={handlePress}
     >
       <BackgroundImage source={source} />
-      <TopText>{title}</TopText>
-      <BottomText>{bottomText}</BottomText>
     </ItemWrapper>
   )
 }
