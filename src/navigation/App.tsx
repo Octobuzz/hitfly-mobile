@@ -1,5 +1,5 @@
 import React from 'react'
-import { StatusBar, Platform } from 'react-native'
+import { StatusBar } from 'react-native'
 import createAnimatedSwitchNavigator from 'react-navigation-animated-switch'
 import { createAppContainer } from 'react-navigation'
 import SplashScreen from 'react-native-splash-screen'

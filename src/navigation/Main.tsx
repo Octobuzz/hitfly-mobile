@@ -64,51 +64,27 @@ const MainNavigator = createStackNavigator(
     },
     [routes.MAIN.COLLECTION_PLAYLIST]: {
       screen: CollectionPlaylistScreen,
-      navigationOptions: ({ navigation }) => {
-        const title = navigation.getParam('title')
-        return {
-          title,
-          ...playlistConfig,
-        }
-      },
+      navigationOptions: playlistConfig,
     },
     [routes.MAIN.TOP_50_PLAYLIST]: {
       screen: Top50PlaylistScreen,
-      navigationOptions: {
-        title: 'Топ 50',
-        ...playlistConfig,
-      },
+      navigationOptions: playlistConfig,
     },
     [routes.MAIN.LISTENED_NOW_PLAYLIST]: {
       screen: ListenedNowPlaylistScreen,
-      navigationOptions: {
-        title: 'Слушают сейчас',
-        ...playlistConfig,
-      },
+      navigationOptions: playlistConfig,
     },
     [routes.MAIN.NEW_PLAYLIST]: {
       screen: NewPlaylistScreen,
-      navigationOptions: {
-        title: 'Новое',
-        ...playlistConfig,
-      },
+      navigationOptions: playlistConfig,
     },
     [routes.MAIN.TOP_WEEK_PLAYLIST]: {
       screen: TopWeekPlaylistScreen,
-      navigationOptions: {
-        title: 'Открытие недели',
-        ...playlistConfig,
-      },
+      navigationOptions: playlistConfig,
     },
     [routes.MAIN.GENRE_PLAYLIST]: {
       screen: GenrePlaylistScreen,
-      navigationOptions: ({ navigation }) => {
-        const title = navigation.getParam('title')
-        return {
-          title,
-          ...playlistConfig,
-        }
-      },
+      navigationOptions: playlistConfig,
     },
     [routes.MAIN.GENRES_DETAILED]: {
       screen: GenresDetailedScreen,
@@ -126,13 +102,7 @@ const MainNavigator = createStackNavigator(
     },
     [routes.MAIN.ALBUM_PLAYLIST]: {
       screen: AlbumPlaylistScreen,
-      navigationOptions: ({ navigation }) => {
-        const title = navigation.getParam('title')
-        return {
-          title,
-          ...playlistConfig,
-        }
-      },
+      navigationOptions: playlistConfig,
     },
     [routes.MAIN.SETTINGS]: {
       screen: SettingsScreen,
@@ -173,11 +143,11 @@ const MainNavigator = createStackNavigator(
     },
     [routes.MAIN.MY_MUSIC_PLAYLIST]: {
       screen: MyMusicPlaylistScreen,
-      navigationOptions: { title: 'Мои песни', ...playlistConfig },
+      navigationOptions: playlistConfig,
     },
     [routes.MAIN.LIKED_MUSIC_PLAYLIST]: {
       screen: LikedMusicPlaylistScreen,
-      navigationOptions: { title: 'Любимые песни', ...playlistConfig },
+      navigationOptions: playlistConfig,
     },
   },
   {
