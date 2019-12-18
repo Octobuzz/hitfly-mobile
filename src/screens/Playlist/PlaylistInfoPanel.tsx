@@ -6,6 +6,7 @@ import { TextBase } from 'src/components'
 import { Playlist } from 'src/apollo'
 import { formatTracksCount, formatTimeDurationForPlaylist } from 'src/helpers'
 import styled from 'src/styled-components'
+import { images, styles } from 'src/constants'
 
 const Wrapper = styled.View`
   flex-direction: row;
@@ -15,6 +16,7 @@ const Wrapper = styled.View`
 
 const Text = styled(TextBase)`
   font-size: 12px;
+  line-height: 12px;
   color: ${({ theme }) => theme.colors.textAlt};
 `
 
@@ -22,23 +24,42 @@ const FullText = styled(Text)`
   flex: 1;
 `
 
+const LikesWrapper = styled.View`
+  flex-direction: row;
+  align-items: baseline;
+`
+
 const HeartIcon = styled(Icon).attrs(({ theme }) => ({
-  color: theme.colors.textMain,
-  size: 12,
+  color: theme.colors.textAlt,
+  size: 16,
   name: 'heart',
 }))`
   margin-right: 8px;
 `
 
+const ShuffleIcon = styled.Image.attrs(() => ({
+  source: images.SHUFFLE,
+}))`
+  tint-color: ${({ theme }) => theme.colors.textMain};
+`
+
+const ShuffleIconWrapper = styled.TouchableOpacity.attrs(() => ({
+  hitSlop: styles.HIT_SLOP,
+}))`
+  margin-left: 32px;
+`
+
 interface Props {
   style?: ViewStyle
   playlist: Playlist
+  onPressShuffle: () => void
   favouritesCount: number
 }
 
 const PlaylistInfoPanel: React.FC<Props> = ({
   style,
   playlist,
+  onPressShuffle,
   favouritesCount,
 }) => {
   const playlistInfo = React.useMemo(() => {
@@ -50,16 +71,22 @@ const PlaylistInfoPanel: React.FC<Props> = ({
     if (!fullLength) {
       return count
     }
-    const formattedTime = formatTimeDurationForPlaylist(fullLength)
+    const formattedTime = formatTimeDurationForPlaylist(fullLength, {
+      withSeconds: false,
+    })
     return `${count}, ${formattedTime}`
   }, [playlist])
 
   return (
     <Wrapper style={style}>
       <FullText>{playlistInfo}</FullText>
-      <Text>
-        <HeartIcon /> {favouritesCount}
-      </Text>
+      <LikesWrapper>
+        <HeartIcon />
+        <Text>{favouritesCount}</Text>
+      </LikesWrapper>
+      <ShuffleIconWrapper onPress={onPressShuffle}>
+        <ShuffleIcon />
+      </ShuffleIconWrapper>
     </Wrapper>
   )
 }

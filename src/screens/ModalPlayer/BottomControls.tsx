@@ -1,6 +1,7 @@
 import React from 'react'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { TextBase } from 'src/components'
+import { images } from 'src/constants'
 import styled from 'src/styled-components'
 
 const Row = styled.View`
@@ -21,6 +22,12 @@ const ControlWrapper = styled.TouchableOpacity.attrs(() => ({
 }))`
   flex-direction: row;
   align-items: baseline;
+`
+
+const ShuffleIcon = styled.Image.attrs(() => ({
+  source: images.SHUFFLE,
+}))`
+  tint-color: ${({ theme }) => theme.colors.white};
 `
 
 const ControlIcon = styled(Icon).attrs(({ theme }) => ({
@@ -53,7 +60,7 @@ const BottomControls: React.FC<Props> = ({
 }) => (
   <Row>
     <ControlWrapper onPress={onPressShuffle}>
-      <ControlIcon name="shuffle-variant" />
+      <ShuffleIcon />
     </ControlWrapper>
     <ControlWrapper onPress={onPressLike}>
       <LikeIcon isActive={isLiked} name="heart" />
