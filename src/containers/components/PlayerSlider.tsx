@@ -6,7 +6,6 @@ import TrackPlayer from 'react-native-track-player'
 import { useTrackPlayerProgress } from 'react-native-track-player/lib/hooks'
 import { ActiveTrackData, GET_ACTIVE_TRACK } from 'src/apollo'
 import { StyledSlider, TextBase } from 'src/components'
-import { addSeconds, format } from 'date-fns'
 import styled from 'src/styled-components'
 
 const Wrapper = styled.View.attrs(() => ({
@@ -25,12 +24,34 @@ const TimeText = styled(TextBase)`
   color: ${({ theme }) => theme.colors.white};
 `
 
-interface Props {}
+const formatDuration = (
+  initialSeconds: number,
+  forceAddHours?: boolean,
+): [string, boolean] => {
+  const result: string[] = []
+  const hours = Math.trunc(initialSeconds / 3600)
 
-const formatDuration = (seconds: number): string => {
-  const helperDate = addSeconds(new Date(0), seconds)
-  return format(helperDate, 'mm:ss')
+  let hoursAdded = false
+  if (hours > 0) {
+    hoursAdded = true
+    const paddedHours = `${hours < 10 ? '0' : ''}${hours}`
+    result.push(paddedHours)
+  } else if (forceAddHours) {
+    result.push('00')
+  }
+
+  const minutes = Math.trunc((initialSeconds % 3600) / 60)
+  const paddedMinutes = `${minutes < 10 ? '0' : ''}${minutes}`
+  result.push(paddedMinutes)
+
+  const seconds = Math.trunc(initialSeconds % 60)
+  const paddedSeconds = `${seconds < 10 ? '0' : ''}${seconds}`
+  result.push(paddedSeconds)
+
+  return [result.join(':'), hoursAdded]
 }
+
+interface Props {}
 
 const PlayerSlider: React.FC<Props> = () => {
   const { duration = 1, position = 0 } = useTrackPlayerProgress()
@@ -45,18 +66,16 @@ const PlayerSlider: React.FC<Props> = () => {
 
   const recentDuration = (activeTrack && activeTrack.length) || duration
 
+  const [textDuration, hoursAdded] = useMemo(
+    () => formatDuration(recentDuration),
+    [duration, recentDuration],
+  )
+
   // тут есть баг, из-за которого иногда прогресс больше всей длинны
   const textProgress = useMemo(
-    () =>
-      position < recentDuration
-        ? formatDuration(position)
-        : formatDuration(recentDuration),
+    () => formatDuration(Math.min(position, recentDuration), hoursAdded),
     [position, recentDuration],
   )
-  const textDuration = useMemo(() => formatDuration(recentDuration), [
-    duration,
-    recentDuration,
-  ])
 
   return (
     <Wrapper>

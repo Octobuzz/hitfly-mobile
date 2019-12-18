@@ -67,8 +67,8 @@ const ModalPlayer: React.FC<Props> = ({
       <View addTopNavigationHeaderPadding>
         <Cover source={{ uri: imageUrl }} />
         <Stretcher />
-        <TitleText>{title}</TitleText>
-        <SubTitleText>{singer}</SubTitleText>
+        <TitleText numberOfLines={2}>{title}</TitleText>
+        <SubTitleText numberOfLines={1}>{singer}</SubTitleText>
         <Stretcher gravity={3} />
         <Controls {...toggleTrackProps} />
         <Stretcher gravity={3} />

@@ -44,7 +44,7 @@ const GrayText = styled(TextBase)`
 
 const TimeText = styled(GrayText)`
   margin-left: 16px;
-  width: 36px;
+  width: 40px;
   text-align: right;
 `
 

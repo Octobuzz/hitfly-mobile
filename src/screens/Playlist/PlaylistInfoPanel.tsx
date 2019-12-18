@@ -5,13 +5,13 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { TextBase } from 'src/components'
 import { Playlist } from 'src/apollo'
 import { formatTracksCount, formatTimeDurationForPlaylist } from 'src/helpers'
-import styled from 'src/styled-components'
 import { images, styles } from 'src/constants'
+import styled from 'src/styled-components'
 
 const Wrapper = styled.View`
   flex-direction: row;
   align-items: center;
-  padding: 16px 16px 0px;
+  padding: 16px;
 `
 
 const Text = styled(TextBase)`
