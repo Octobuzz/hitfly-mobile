@@ -1,5 +1,5 @@
 import React from 'react'
-import { StatusBar } from 'react-native'
+import { StatusBar, Platform } from 'react-native'
 import createAnimatedSwitchNavigator from 'react-navigation-animated-switch'
 import { createAppContainer } from 'react-navigation'
 import SplashScreen from 'react-native-splash-screen'
@@ -61,8 +61,11 @@ const StorybookButton = styled(DebugButton).attrs(() => ({
 class AppNavigator extends React.Component {
   constructor(props: any) {
     super(props)
-    StatusBar.setBarStyle('dark-content', true)
-    StatusBar.setBackgroundColor('#000000', true)
+    if (Platform.OS === 'ios') {
+      StatusBar.setBarStyle('dark-content', true)
+    } else {
+      StatusBar.setBackgroundColor('#000000', true)
+    }
   }
 
   componentDidMount() {
