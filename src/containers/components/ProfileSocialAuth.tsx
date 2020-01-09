@@ -7,13 +7,15 @@ import {
   withNavigationFocus,
   NavigationFocusInjectedProps,
 } from 'react-navigation'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/react-hooks'
 import { SocialButton } from 'src/components'
 import { routes } from 'src/constants'
 import {
   SocialConnect,
   SocialLinksData,
   GET_PROFILE_SOCIAL_LINKS,
+  REMOVE_SOCIAL_LINK,
+  RemoveSocialLinkVariables,
 } from 'src/apollo'
 import styled from 'src/styled-components'
 
@@ -51,6 +53,29 @@ const ProfileSocialAuth: React.FC<Props> = ({
     })
   }, [])
 
+  const [removeConnectionMutation] = useMutation<
+    any,
+    RemoveSocialLinkVariables
+  >(REMOVE_SOCIAL_LINK)
+
+  const removeConnection = useCallback(
+    ({ type }: SocialConnect) => {
+      removeConnectionMutation({ variables: { type } })
+    },
+    [removeConnectionMutation],
+  )
+
+  const handlePressSocialButton = useCallback(
+    (socialConnectData: SocialConnect) => {
+      if (socialConnectData.isLinked) {
+        removeConnection(socialConnectData)
+      } else {
+        navigateToSocialAuth(socialConnectData)
+      }
+    },
+    [navigateToSocialAuth, removeConnection],
+  )
+
   let socialData: SocialConnect[] = L.get(data, 'socialConnect', [])
 
   // FIXME: времено, пока не починят инстаграмм
@@ -65,7 +90,7 @@ const ProfileSocialAuth: React.FC<Props> = ({
       {socialData.map(buttonData => (
         <SocialButton
           useFading
-          onPress={navigateToSocialAuth}
+          onPress={handlePressSocialButton}
           key={buttonData.type}
           buttonData={buttonData}
         />
