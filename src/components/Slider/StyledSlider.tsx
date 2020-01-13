@@ -17,7 +17,7 @@ const customMinimumTrack = <Gradient />
 const StyledSlider = styled(Slider).attrs(({ theme }) => ({
   customMinimumTrack,
   minimumTrackTintColor: theme.colors.brandPink,
-  maximumTrackTintColor: theme.colors.gray,
+  maximumTrackTintColor: theme.colors.inputBorder,
   trackStyle: {
     height: 8,
     borderRadius: 0,
