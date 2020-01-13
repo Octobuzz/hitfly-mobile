@@ -1,6 +1,6 @@
 export const APP_NAME = 'hitfly'
-export const DOMAIN_URL = 'https://digico.itech-test.ru/' // - тестовый
-// export const DOMAIN_URL = 'https://myhitfly.ru/'
+// export const DOMAIN_URL = 'https://digico.itech-test.ru/' // - тестовый
+export const DOMAIN_URL = 'https://myhitfly.ru/'
 export const BASE_URL = `${DOMAIN_URL}graphql`
 
 export const SERVER_DATE_FORMAT = 'yyyy-MM-dd HH:mm:ss'
