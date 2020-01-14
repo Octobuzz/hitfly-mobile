@@ -7,7 +7,7 @@ export interface RemoveSocialLinkVariables {
 
 export const REMOVE_SOCIAL_LINK = gql`
   mutation RemoveSocialLink($type: SocialLinksTypeEnum) {
-    RemoveSocialConnect(social: $type) {
+    RemoveSocialConnect(social: $type, filters: { mobile: true }) {
       isLinked: connected
       ...CommonSocialLink
     }

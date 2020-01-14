@@ -5,7 +5,7 @@ import { names } from 'src/constants'
 interface Props {}
 
 const Policy: React.FC<Props> = () => (
-  <HTMLScreen url={`${names.DOMAIN_URL}/policy-mobile`} />
+  <HTMLScreen url={`${names.DOMAIN_URL}policy-mobile`} />
 )
 
 export default Policy
