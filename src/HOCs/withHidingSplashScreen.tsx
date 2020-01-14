@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
-import SplashScreen from 'react-native-splash-screen'
+import { hideSplashScreenWithTimeout } from 'src/helpers'
 
 const withHidingSplashScreen = (WrappedComponent: React.ComponentType<any>) => (
   props: any,
 ) => {
   useEffect(() => {
-    SplashScreen.hide()
+    hideSplashScreenWithTimeout()
   }, [])
 
   return <WrappedComponent {...props} />
