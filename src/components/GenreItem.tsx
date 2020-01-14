@@ -29,6 +29,7 @@ const GenreImage = styled(FastImage)`
 const TitleText = styled(TextBase)`
   position: absolute;
   text-align: center;
+  font-size: 12px;
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.white};
 `
