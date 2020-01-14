@@ -35,11 +35,12 @@ const ControlIcon = styled(Icon).attrs(({ theme }) => ({
   size: 30,
 }))``
 
-// @ts-ignore
-const LikeIcon = styled(Icon).attrs(({ theme, isActive }) => ({
-  color: isActive ? theme.colors.brandPink : theme.colors.white,
-  size: 20,
+const LikeIcon = styled.Image.attrs(() => ({
+  source: images.HEART,
 }))<{ isActive: boolean }>`
+  overflow: visible;
+  ${({ isActive, theme }) =>
+    !isActive && `tint-color: ${theme.colors.textWhite}`}
   margin-right: 8px;
 `
 
@@ -63,7 +64,7 @@ const BottomControls: React.FC<Props> = ({
       <ShuffleIcon />
     </ControlWrapper>
     <ControlWrapper onPress={onPressLike}>
-      <LikeIcon isActive={isLiked} name="heart" />
+      <LikeIcon isActive={isLiked} />
       <Text>{likesCount}</Text>
     </ControlWrapper>
     <ControlWrapper onPress={onPressPlaylist}>

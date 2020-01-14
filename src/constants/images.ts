@@ -1,5 +1,6 @@
-// player
-export const SHUFFLE = require('../assets/images/player/shuffle.png')
+// icons
+export const HEART = require('../assets/images/icons/heart.png')
+export const SHUFFLE = require('../assets/images/icons/shuffle.png')
 
 // bonus program level
 export const CHILD = require('../assets/images/bonus_program_level/child.png')

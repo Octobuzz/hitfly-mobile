@@ -1,10 +1,9 @@
 import React from 'react'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Track, NoAvatarSizeNames } from 'src/apollo'
 import { Playable } from './interfaces'
 import { CenterBlock, TitleWhiteText, SubTitleWhiteText } from './styles'
 import TrackImage from './TrackImage'
-import { styles } from 'src/constants'
+import { styles, images } from 'src/constants'
 import { useImageSource } from 'src/hooks'
 import styled from 'src/styled-components'
 
@@ -14,12 +13,13 @@ const Wrapper = styled.TouchableOpacity`
   padding: 12px 16px;
 `
 
-// @ts-ignore
-const LikeIcon = styled(Icon).attrs(({ theme, isActive }) => ({
-  color: isActive ? theme.colors.brandPink : theme.colors.white,
-  size: 20,
-  name: 'heart',
-}))<{ isActive: boolean }>``
+const LikeIcon = styled.Image.attrs(() => ({
+  source: images.HEART,
+}))<{ isActive: boolean }>`
+  overflow: visible;
+  ${({ isActive, theme }) =>
+    !isActive && `tintColor: ${theme.colors.textWhite}`}
+`
 
 const LikeWrapper = styled.TouchableOpacity.attrs(() => ({
   activeOpacity: 0.8,
