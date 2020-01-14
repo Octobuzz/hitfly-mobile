@@ -1,6 +1,7 @@
 import L from 'lodash'
 import LFP from 'lodash/fp'
 import { BonusProgramLevel, Image, ImageSizeNames } from 'src/apollo'
+import SplashScreen from 'react-native-splash-screen'
 import { images as localImages } from 'src/constants'
 
 export const delay = (ms: number): Promise<void> =>
@@ -228,4 +229,11 @@ export const getImageForSize = (
     image = images.find(img => img.sizeName === size) || image
   }
   return image
+}
+
+// так как используется анимированный Switch, нужна задержка перед скрытием сплеша
+// 400 - дефолт анимация сплеша, 100 - на всякий случай
+export const hideSplashScreenWithTimeout = async (): Promise<void> => {
+  await delay(500)
+  SplashScreen.hide()
 }

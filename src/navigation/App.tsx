@@ -2,7 +2,6 @@ import React from 'react'
 import { StatusBar, Platform } from 'react-native'
 import createAnimatedSwitchNavigator from 'react-navigation-animated-switch'
 import { createAppContainer } from 'react-navigation'
-import SplashScreen from 'react-native-splash-screen'
 import NavigationService from './navigationService'
 import { WelcomeScreen } from 'src/screens'
 import AuthNavigator from './Auth'
@@ -12,6 +11,7 @@ import Storybook from '../../storybook'
 import styled from 'src/styled-components'
 import { styles, storageKeys, routes } from 'src/constants'
 import { storage } from 'src/apollo'
+import { hideSplashScreenWithTimeout } from 'src/helpers'
 
 const SwitchRoutes = {
   [routes.APP.WELCOME]: {
@@ -82,7 +82,7 @@ class AppNavigator extends React.Component {
     } else if (skipWelcome) {
       NavigationService.navigate({ routeName: routes.APP.AUTH })
     } else {
-      SplashScreen.hide()
+      hideSplashScreenWithTimeout()
     }
   }
 
