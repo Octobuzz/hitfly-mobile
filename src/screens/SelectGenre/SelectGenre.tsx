@@ -26,14 +26,18 @@ const Scroll = styled(FlatList as new () => FlatList<Genre>).attrs(() => ({
   numColumns: 3,
   initialNumToRender: 12,
   columnWrapperStyle: {
-    justifyContent: 'space-between',
     marginBottom: styles.VIEW_HORIZONTAL_INDENTATION / 2,
   },
   contentContainerStyle: {
-    paddingHorizontal: styles.VIEW_HORIZONTAL_INDENTATION,
+    paddingVertical: styles.VIEW_VERTICAL_INDENTATION,
+    paddingHorizontal: (styles.VIEW_HORIZONTAL_INDENTATION / 4) * 3,
   },
 }))`
   flex: 1;
+`
+
+const Col = styled.View`
+  padding-horizontal: ${styles.VIEW_HORIZONTAL_INDENTATION / 4};
 `
 
 interface Props {
@@ -86,12 +90,14 @@ class SelectGenre extends React.Component<Props, State> {
     const { selectedGenres } = this.state
     const isSelected = selectedGenres[item.id]
     return (
-      <SelectableGenreItem
-        item={item}
-        isSelected={isSelected}
-        onPress={this.toggleGenre}
-        onPressSubGenres={this.showSubGenres}
-      />
+      <Col>
+        <SelectableGenreItem
+          item={item}
+          isSelected={isSelected}
+          onPress={this.toggleGenre}
+          onPressSubGenres={this.showSubGenres}
+        />
+      </Col>
     )
   }
 
