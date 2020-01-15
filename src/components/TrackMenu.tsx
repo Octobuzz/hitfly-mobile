@@ -1,11 +1,11 @@
 import React, { useCallback } from 'react'
-import Icon from 'react-native-vector-icons/FontAwesome'
 import Button from './buttons/Button'
 import { Image } from './Image'
 import View from './views/View'
 import TextBase from './TextBase'
 import { Track, NoAvatarSizeNames } from 'src/apollo'
 import { useImageSource } from 'src/hooks'
+import { images } from 'src/constants'
 import styled from 'src/styled-components'
 
 const TrackWrapper = styled.View`
@@ -51,21 +51,25 @@ export const MenuItem = styled.TouchableOpacity`
   margin-bottom: 34px;
 `
 
-const StyledIcon = styled(Icon).attrs<{ isActive: boolean }>(
-  ({ theme, isActive }) => ({
-    color: isActive ? theme.colors.brandPink : theme.colors.white,
-    size: 14,
-  }),
-)<{ isActive: boolean }>`
+const LikeIcon = styled.Image.attrs(() => ({
+  source: images.HEART,
+}))<{ isActive: boolean }>`
+  overflow: visible;
+  ${({ isActive, theme }) =>
+    !isActive && `tint-color: ${theme.colors.textWhite}`}
+`
+
+const IconWrapper = styled.View`
+  width: 30px;
+  justify-content: center;
+  align-items: center;
   margin-right: 11px;
-  text-align: center;
-  width: 32px;
 `
 
 const MenuItemText = styled(TextBase)`
   font-size: 14px;
   line-height: 14px;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.textWhite};
 `
 
 export interface TrackMenuProps {
@@ -97,7 +101,9 @@ const TrackMenu: React.FC<TrackMenuProps> = ({
       </TrackWrapper>
       <Divider />
       <MenuItem onPress={handlePressLike} testID="summary">
-        <StyledIcon isActive={track.isFavorite} name="heart-o" />
+        <IconWrapper>
+          <LikeIcon isActive={track.isFavorite} />
+        </IconWrapper>
         <MenuItemText>Понравилось</MenuItemText>
       </MenuItem>
       <Button onPress={onPressCancel} title="Отмена" type="outline-black" />
