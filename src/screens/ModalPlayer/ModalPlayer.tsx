@@ -18,8 +18,8 @@ const TitleText = styled(TextBase)`
   text-align: center;
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.white};
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 18px;
+  line-height: 20px;
 `
 
 const SubTitleText = styled(TextBase)`
@@ -67,7 +67,7 @@ const ModalPlayer: React.FC<Props> = ({
       <View addTopNavigationHeaderPadding>
         <Cover source={{ uri: imageUrl }} />
         <Stretcher />
-        <TitleText numberOfLines={2}>{title}</TitleText>
+        <TitleText numberOfLines={1}>{title}</TitleText>
         <SubTitleText numberOfLines={1}>{singer}</SubTitleText>
         <Stretcher gravity={3} />
         <Controls {...toggleTrackProps} />
