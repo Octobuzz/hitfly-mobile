@@ -15,8 +15,8 @@ const Wrapper = styled.TouchableOpacity`
 
 const LikeIcon = styled.Image.attrs(() => ({
   source: images.HEART,
+  resizeMode: 'contain',
 }))<{ isActive: boolean }>`
-  overflow: visible;
   ${({ isActive, theme }) =>
     !isActive && `tintColor: ${theme.colors.textWhite}`}
 `
