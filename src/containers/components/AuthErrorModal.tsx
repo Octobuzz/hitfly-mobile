@@ -1,7 +1,7 @@
 import React, { useCallback, forwardRef } from 'react'
 import { Link, Button, TextBase, Modal } from 'src/components'
 import { routes } from 'src/constants'
-import { useNavigation } from 'src/hooks'
+import { useNavigation, useModalHideListener } from 'src/hooks'
 import styled from 'src/styled-components'
 
 const LogoutText = styled(TextBase)`
@@ -23,19 +23,24 @@ const AuthErrorModal = forwardRef<Modal>((_, ref) => {
     navigation.navigate(routes.APP.AUTH)
   }, [])
 
-  const hide = useCallback((): void => {
+  const hide = useCallback(() => {
     if (typeof ref === 'object' && ref && ref.current) {
       ref.current.hide()
     }
   }, [])
 
+  const { handleModalHide, handlePress } = useModalHideListener({
+    hideModal: hide,
+    action: navigateToLogin,
+  })
+
   return (
-    <Modal onClose={hide} ref={ref}>
+    <Modal onModalHide={handleModalHide} onClose={hide} ref={ref}>
       <LogoutText>
         Для выполнения следующего действия требуется{' '}
         <LogoutBoldText>Авторизация</LogoutBoldText>
       </LogoutText>
-      <IndetedButton onPress={navigateToLogin} title="Войти" />
+      <IndetedButton onPress={handlePress} title="Войти" />
       <Link type="dark" title="Отмена" onPress={hide} />
     </Modal>
   )

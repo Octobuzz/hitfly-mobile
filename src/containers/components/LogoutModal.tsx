@@ -1,6 +1,6 @@
 import React, { useCallback, forwardRef } from 'react'
 import { Link, Button, TextBase, Modal } from 'src/components'
-import { useLogout } from 'src/hooks'
+import { useLogout, useModalHideListener } from 'src/hooks'
 import styled from 'src/styled-components'
 
 const LogoutText = styled(TextBase)`
@@ -22,10 +22,15 @@ const LogoutModal = forwardRef<Modal>((_, ref) => {
     }
   }, [])
 
+  const { handleModalHide, handlePress } = useModalHideListener({
+    hideModal: hide,
+    action: logout,
+  })
+
   return (
-    <Modal onClose={hide} ref={ref}>
+    <Modal onModalHide={handleModalHide} onClose={hide} ref={ref}>
       <LogoutText>Вы уверены, что хотите выйти из аккаута?</LogoutText>
-      <IndetedButton onPress={logout} title="Выйти" />
+      <IndetedButton onPress={handlePress} title="Выйти" />
       <Link type="dark" title="Отмена" onPress={hide} />
     </Modal>
   )
