@@ -2,14 +2,20 @@ import { Alert } from 'react-native'
 import { Operation } from 'apollo-link'
 import { GraphQLError } from 'graphql'
 import { onError } from 'apollo-link-error'
-import { AuthErrorModalRef } from 'src/globalRefs'
+import {
+  AuthErrorModalRef,
+  closeOpenedModalsForAuthModal,
+} from 'src/globalRefs'
 
-const handle401Error = (error: GraphQLError, operation: Operation) => {
+const handle401Error = async (error: GraphQLError, operation: Operation) => {
   // FIXME: это костыль так как я не понял почему не вытаскивает профиль
   // пришедший после мутации логина
   if (operation.operationName === 'ProfileAvatar') {
     return
   }
+
+  await closeOpenedModalsForAuthModal()
+
   AuthErrorModalRef.show()
 }
 

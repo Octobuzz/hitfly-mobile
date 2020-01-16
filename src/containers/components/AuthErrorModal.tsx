@@ -23,7 +23,7 @@ const AuthErrorModal = forwardRef<Modal>((_, ref) => {
     navigation.navigate(routes.APP.AUTH)
   }, [])
 
-  const hide = useCallback((): void => {
+  const hide = useCallback(() => {
     if (typeof ref === 'object' && ref && ref.current) {
       ref.current.hide()
     }
