@@ -53,8 +53,8 @@ export const MenuItem = styled.TouchableOpacity`
 
 const LikeIcon = styled.Image.attrs(() => ({
   source: images.HEART,
+  resizeMode: 'contain',
 }))<{ isActive: boolean }>`
-  overflow: visible;
   ${({ isActive, theme }) =>
     !isActive && `tint-color: ${theme.colors.textWhite}`}
 `

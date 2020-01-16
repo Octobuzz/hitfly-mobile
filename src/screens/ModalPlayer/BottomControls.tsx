@@ -37,8 +37,8 @@ const ControlIcon = styled(Icon).attrs(({ theme }) => ({
 
 const LikeIcon = styled.Image.attrs(() => ({
   source: images.HEART,
+  resizeMode: 'contain',
 }))<{ isActive: boolean }>`
-  overflow: visible;
   ${({ isActive, theme }) =>
     !isActive && `tint-color: ${theme.colors.textWhite}`}
   margin-right: 8px;
