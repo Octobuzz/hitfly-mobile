@@ -47,7 +47,7 @@ class Modal extends React.Component<Props, State> {
     return (
       <RNModal
         useNativeDriver
-        hideModalContentWhileAnimating={true}
+        hideModalContentWhileAnimating
         isVisible={isVisible}
         onBackButtonPress={onClose}
         onBackdropPress={onClose}

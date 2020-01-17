@@ -1,7 +1,7 @@
 import React from 'react'
 import { StatusBar, Platform } from 'react-native'
 import createAnimatedSwitchNavigator from 'react-navigation-animated-switch'
-import { createAppContainer } from 'react-navigation'
+import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import NavigationService from './navigationService'
 import { WelcomeScreen } from 'src/screens'
 import AuthNavigator from './Auth'
@@ -24,9 +24,13 @@ const SwitchRoutes = {
   [routes.APP.EASTER_EGG]: EasterEggNavigator,
 }
 
+// на андроиде плохо работает анимация
+const createSwitch =
+  Platform.OS === 'ios' ? createAnimatedSwitchNavigator : createSwitchNavigator
+
 const AppContainer = createAppContainer(
   // @ts-ignore
-  createAnimatedSwitchNavigator(SwitchRoutes, {
+  createSwitch(SwitchRoutes, {
     initialRouteName: routes.APP.WELCOME,
   }),
 )
