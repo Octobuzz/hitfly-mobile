@@ -15,6 +15,8 @@ export interface ThemeColors {
   transparent10: string
   transparentWhite50: string
   buttonUnderlayColor: string
+  tabbarInactive: string
+  tabbarBorder: string
 }
 
 export interface ThemeFonts {
@@ -33,10 +35,11 @@ const {
   default: styled,
   css,
   withTheme,
+  ThemeContext,
   ThemeProvider,
 } = styledComponents as styledComponents.ReactNativeThemedStyledComponentsModule<
   ITheme
 >
 
-export { css, ThemeProvider, withTheme }
+export { css, withTheme, ThemeProvider, ThemeContext }
 export default styled

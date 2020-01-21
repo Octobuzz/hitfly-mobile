@@ -1,3 +1,6 @@
+// tabs
+export const TAB_LOGO = require('../assets/images/tabs/tab_logo.png')
+
 // icons
 export const HEART = require('../assets/images/icons/heart.png')
 export const SHUFFLE = require('../assets/images/icons/shuffle.png')

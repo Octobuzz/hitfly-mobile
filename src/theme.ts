@@ -19,6 +19,8 @@ const theme: ITheme = {
     inputBorder: '#E4E4E4',
 
     buttonUnderlayColor: '#414141',
+    tabbarInactive: '#a6a6a6',
+    tabbarBorder: '#a0a0a0',
   },
 
   fonts: {

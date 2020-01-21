@@ -1,7 +1,7 @@
 import React from 'react'
 import { createStackNavigator } from 'react-navigation-stack'
 import {
-  HeaderRightButtons,
+  HeaderRightWithSettings,
   // screens
   AlbumPlaylistScreen,
   MyMusicPlaylistScreen,
@@ -29,6 +29,7 @@ const ProfileNavigator = createStackNavigator(
       navigationOptions: {
         headerTransparent: true,
         headerTintColor: 'white',
+        headerRight: <HeaderRightWithSettings />,
       },
     },
     [routes.PROFILE.ALBUM_PLAYLIST]: {
@@ -84,10 +85,7 @@ const ProfileNavigator = createStackNavigator(
   {
     initialRouteName: routes.PROFILE.PROFILE,
     headerMode: 'screen',
-    defaultNavigationOptions: {
-      ...stackDefaultOptions,
-      headerRight: <HeaderRightButtons />,
-    },
+    defaultNavigationOptions: stackDefaultOptions,
   },
 )
 

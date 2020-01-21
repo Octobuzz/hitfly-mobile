@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import ProfileTabScreen from './ProfileTab'
 import { Profile, GET_PROFILE_HEAD } from 'src/apollo'
-import { Loader, TextBase, Button, Link, View } from 'src/components'
+import { Loader, TextBase, Button, View } from 'src/components'
 import { withChangingHeaderSettings } from 'src/HOCs'
 import { routes } from 'src/constants'
 import styled from 'src/styled-components'
@@ -38,9 +38,6 @@ const ProfileTab: React.FC<Props> = ({ navigation, ...rest }) => {
   const navigateToLogin = useCallback(() => {
     navigation.navigate(routes.APP.AUTH)
   }, [])
-  const goBack = useCallback(() => {
-    navigation.goBack()
-  }, [])
 
   if (loading) {
     return <Loader isAbsolute />
@@ -49,11 +46,10 @@ const ProfileTab: React.FC<Props> = ({ navigation, ...rest }) => {
     return (
       <Wrapper>
         <LogoutText>
-          Для выполнения следующего действия требуется{' '}
+          Войдите чтобы увидеть данные профиля{' '}
           <LogoutBoldText>Авторизация</LogoutBoldText>
         </LogoutText>
         <IndetedButton onPress={navigateToLogin} title="Войти" />
-        <Link title="Назад" onPress={goBack} />
       </Wrapper>
     )
   }

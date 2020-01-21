@@ -32,13 +32,13 @@ class Settings extends React.Component<Props> {
       {
         title: 'Список любимых жанров',
         onPress: () => {
-          navigation.navigate(routes.MAIN.MY_GENRES)
+          navigation.navigate(routes.PROFILE.MY_GENRES)
         },
       },
       {
         title: 'Настройка входа',
         onPress: () => {
-          navigation.navigate(routes.MAIN.AUTH_SETTINGS)
+          navigation.navigate(routes.PROFILE.AUTH_SETTINGS)
         },
       },
       // {

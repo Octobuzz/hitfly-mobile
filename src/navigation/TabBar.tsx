@@ -1,4 +1,5 @@
 import React from 'react'
+import { Image } from 'react-native'
 import { createStackNavigator } from 'react-navigation-stack'
 import { createBottomTabNavigator, BottomTabBar } from 'react-navigation-tabs'
 import {
@@ -16,8 +17,23 @@ import {
 import MainNavigator from './Main'
 import PlayerNavigator from './Player'
 import ProfileNavigator from './Profile'
-import { routes } from 'src/constants'
+import { routes, images } from 'src/constants'
 import { View } from 'src/components'
+import theme from 'src/theme'
+
+const getTabBarIcon = (source: number) => ({
+  tintColor,
+  focused,
+}: {
+  focused: boolean
+  tintColor?: string
+  horizontal?: boolean
+}) => (
+  <Image
+    source={source}
+    style={{ tintColor: focused ? undefined : tintColor }}
+  />
+)
 
 const TabBarNavigator = createBottomTabNavigator(
   {
@@ -25,12 +41,14 @@ const TabBarNavigator = createBottomTabNavigator(
       screen: MainNavigator,
       navigationOptions: {
         title: 'Главное',
+        tabBarIcon: getTabBarIcon(images.TAB_LOGO),
       },
     },
     [routes.TABS.PROFILE]: {
       screen: ProfileNavigator,
       navigationOptions: {
         title: 'Профиль',
+        tabBarIcon: getTabBarIcon(images.TAB_LOGO),
       },
     },
   },
@@ -41,6 +59,13 @@ const TabBarNavigator = createBottomTabNavigator(
         <BottomTabBar {...props} />
       </>
     ),
+    tabBarOptions: {
+      activeTintColor: theme.colors.brandPink,
+      inactiveTintColor: theme.colors.tabbarInactive,
+      style: {
+        shadowColor: theme.colors.tabbarBorder,
+      },
+    },
     initialRouteName: routes.TABS.HOME,
   },
 )

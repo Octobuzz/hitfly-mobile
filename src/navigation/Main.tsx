@@ -1,5 +1,8 @@
+import React from 'react'
 import { createStackNavigator } from 'react-navigation-stack'
 import {
+  HeaderRightWithProfile,
+  // screens
   NewPlaylistScreen,
   GenrePlaylistScreen,
   Top50PlaylistScreen,
@@ -68,7 +71,10 @@ const MainNavigator = createStackNavigator(
   {
     initialRouteName: routes.MAIN.HOME,
     headerMode: 'screen',
-    defaultNavigationOptions: stackDefaultOptions,
+    defaultNavigationOptions: {
+      ...stackDefaultOptions,
+      headerRight: <HeaderRightWithProfile />,
+    },
   },
 )
 
