@@ -9,6 +9,7 @@ import {
   AuthErrorModal,
   DetailedTrackMenu,
 } from 'src/containers'
+import { LifehacksScreen } from 'src/screens'
 import {
   LogoutModalRef,
   AuthErrorModalRef,
@@ -45,7 +46,7 @@ const TabBarNavigator = createBottomTabNavigator(
       },
     },
     [routes.TABS.LIFEHACKS]: {
-      screen: () => null, //  заготовка, в след задаче сделаю
+      screen: LifehacksScreen,
       navigationOptions: {
         title: 'Лайфхаки',
         tabBarIcon: getTabBarIcon(images.TAB_LIFEHACKS),
