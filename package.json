@@ -71,6 +71,7 @@
     "react-navigation-animated-switch": "^0.4.1",
     "react-navigation-header-buttons": "^3.0.4",
     "react-navigation-stack": "^1.10.3",
+    "react-navigation-tabs": "^2.7.0",
     "rn-sliding-up-panel": "^2.3.3",
     "styled-components": "^4.4.1",
     "url": "^0.11.0",

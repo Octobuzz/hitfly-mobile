@@ -16,7 +16,7 @@ const MyGenres: React.FC<Props> = ({ navigation }) => {
   const genres: Genre[] = L.get(data, 'profile.favouriteGenres', [])
 
   const onChange = useCallback(() => {
-    navigation.navigate(routes.MAIN.SELECT_GENRE)
+    navigation.navigate(routes.PROFILE.SELECT_GENRE)
   }, [])
 
   return (

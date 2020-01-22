@@ -34,7 +34,7 @@ const AuthSettingsContainer: React.FC<Props> = props => {
   const onSubmit = useCallback(values => updateEmail({ variables: values }), [])
 
   const onPressChangePassword = useCallback(() => {
-    props.navigation.navigate(routes.MAIN.CHANGE_PASSWORD)
+    props.navigation.navigate(routes.PROFILE.CHANGE_PASSWORD)
   }, [])
 
   return (

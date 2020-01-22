@@ -56,7 +56,9 @@ const SelectGenre: React.FC<Props> = ({
     async (selectedGenresIds: string[]): Promise<void> => {
       try {
         await updateGenres({ variables: { genresIds: selectedGenresIds } })
-        const submitRoute = isEditMode ? routes.MAIN.MY_GENRES : routes.APP.MAIN
+        const submitRoute = isEditMode
+          ? routes.PROFILE.MY_GENRES
+          : routes.APP.MAIN
         navigation.navigate(submitRoute)
       } catch (e) {
         // TODO: добавить обработчик

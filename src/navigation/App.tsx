@@ -5,7 +5,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import NavigationService from './navigationService'
 import { WelcomeScreen } from 'src/screens'
 import AuthNavigator from './Auth'
-import MainNavigator from './Main'
+import TabBarNavigator from './TabBar'
 import EasterEggNavigator from './EasterEgg'
 import Storybook from '../../storybook'
 import styled from 'src/styled-components'
@@ -19,7 +19,7 @@ const SwitchRoutes = {
     navigationOptions: { header: null },
   },
   [routes.APP.AUTH]: AuthNavigator,
-  [routes.APP.MAIN]: MainNavigator,
+  [routes.APP.MAIN]: TabBarNavigator,
   [routes.APP.STORYBOOK]: Storybook,
   [routes.APP.EASTER_EGG]: EasterEggNavigator,
 }

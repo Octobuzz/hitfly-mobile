@@ -1,6 +1,5 @@
 import L from 'lodash'
 import React, { useCallback } from 'react'
-import { withNavigation, NavigationInjectedProps } from 'react-navigation'
 import { useQuery } from '@apollo/react-hooks'
 import Icon from 'react-native-vector-icons/Ionicons'
 import {
@@ -16,9 +15,10 @@ import {
   GetProfileAvatarData,
   AvatarSizeNames,
 } from 'src/apollo'
-import styled, { withTheme, ITheme } from 'src/styled-components'
+import styled from 'src/styled-components'
+import { useImageSource, useNavigation } from 'src/hooks'
 import { Image } from 'src/components'
-import { useImageSource } from 'src/hooks'
+import theme from 'src/theme'
 
 const AvatarButton = styled.TouchableOpacity`
   width: 42px;
@@ -35,18 +35,37 @@ const IoniconsHeaderButton = (passMeFurther: any) => (
   <HeaderButton {...passMeFurther} IconComponent={Icon} />
 )
 
-interface Props extends NavigationInjectedProps {
-  theme: ITheme
-}
-
-const HeaderRightButtons: React.FC<Props> = ({ navigation, theme }) => {
-  const navigateToProfile = useCallback((): void => {
-    navigation.navigate(routes.MAIN.PROFILE)
-  }, [])
+export const HeaderRightWithSettings: React.FC = () => {
+  const navigation = useNavigation()
 
   const navigateToSettings = useCallback((): void => {
-    navigation.navigate(routes.MAIN.SETTINGS)
+    navigation.navigate(routes.PROFILE.SETTINGS)
   }, [])
+
+  const data = useQuery<HeaderSettingsData>(GET_HEADER_SETTINGS)
+  const mode = L.get(data, 'data.headerSettings.mode', 'dark')
+  const color = mode === 'dark' ? theme.colors.black : theme.colors.white
+
+  return (
+    <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
+      <Item
+        color={color}
+        iconSize={23}
+        title="Настройки"
+        iconName="md-cog"
+        onPress={navigateToSettings}
+      />
+    </HeaderButtons>
+  )
+}
+
+export const HeaderRightWithProfile: React.FC = () => {
+  const navigation = useNavigation()
+
+  const navigateToProfile = useCallback((): void => {
+    navigation.navigate(routes.PROFILE.PROFILE)
+  }, [])
+
   // FIXME: смотри костыль в src/apollo/errorLink.tsx
   const profileData = useQuery<GetProfileAvatarData>(GET_PROFILE_AVATAR)
   const avatar = L.get(profileData, 'data.profile.avatar', [])
@@ -54,44 +73,28 @@ const HeaderRightButtons: React.FC<Props> = ({ navigation, theme }) => {
 
   const { data } = useQuery<HeaderSettingsData>(GET_HEADER_SETTINGS)
   const mode = L.get(data, 'headerSettings.mode', 'dark')
-  const state = L.get(data, 'headerSettings.state', 'main')
   const color = mode === 'dark' ? theme.colors.black : theme.colors.white
 
   return (
     <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-      {state === 'main' ? (
-        source.uri ? (
-          <Item
-            title="Профиль"
-            ButtonElement={
-              <AvatarButton onPress={navigateToProfile}>
-                <AvatarImage source={source} />
-              </AvatarButton>
-            }
-          />
-        ) : (
-          <Item
-            color={color}
-            iconSize={23}
-            title="Профиль"
-            iconName="md-contact"
-            onPress={navigateToProfile}
-          />
-        )
+      {source.uri ? (
+        <Item
+          title="Профиль"
+          ButtonElement={
+            <AvatarButton onPress={navigateToProfile}>
+              <AvatarImage source={source} />
+            </AvatarButton>
+          }
+        />
       ) : (
         <Item
           color={color}
           iconSize={23}
-          title="Настройки"
-          iconName="md-cog"
-          onPress={navigateToSettings}
+          title="Профиль"
+          iconName="md-contact"
+          onPress={navigateToProfile}
         />
       )}
     </HeaderButtons>
   )
 }
-
-export default L.flowRight(
-  withNavigation,
-  withTheme,
-)(HeaderRightButtons)
