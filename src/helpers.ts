@@ -113,27 +113,11 @@ export const formatTracksCount = (count: number): string => {
 }
 
 export const formatTimeDurationForTrack = (initialSeconds: number): string => {
-  const result: string[] = []
   const hours = Math.trunc(initialSeconds / 3600)
-
-  let withHours = false
-  if (hours > 0) {
-    withHours = true
-    result.push(hours.toString())
-  }
   const minutes = Math.trunc((initialSeconds % 3600) / 60)
-
-  if (withHours) {
-    const paddedMinutes = `${minutes < 10 ? '0' : ''}${minutes}`
-    result.push(paddedMinutes)
-  } else {
-    result.push(minutes.toString())
-  }
   const seconds = Math.trunc(initialSeconds % 60)
-  const paddedSeconds = `${seconds < 10 ? '0' : ''}${seconds}`
-  result.push(paddedSeconds)
 
-  return result.join(':')
+  return `${hours} ч. ${minutes} мин. ${seconds} сек.`
 }
 
 interface BonusProgramTexts {
