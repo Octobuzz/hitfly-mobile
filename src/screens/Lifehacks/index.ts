@@ -1,1 +1,1 @@
-export { default } from './Lifehacks'
+export { default } from './LifehacksContainer'

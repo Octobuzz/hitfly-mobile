@@ -10,6 +10,7 @@ export const SERVER_DATE_FORMAT = 'yyyy-MM-dd HH:mm:ss'
 export const PLAYLIST_LIMIT = 20
 export const HOME_SECTION_LIMIT = 10
 export const DETAILED_LIMIT = 30
+export const LIFEHACKS_LIMIT = 30
 
 export const PLAYLIST_KEYS = {
   TRACKS_FEEDBACK: 'tracks_feedback',
