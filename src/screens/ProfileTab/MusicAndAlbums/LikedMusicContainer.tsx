@@ -14,11 +14,11 @@ const trackTransformer = LFP.get('track')
 
 const LikedMusicContainer: React.FC<Props> = props => {
   const onPressTracksHeader = useCallback(() => {
-    props.navigation.navigate(routes.MAIN.LIKED_MUSIC_PLAYLIST)
+    props.navigation.navigate(routes.PROFILE.LIKED_MUSIC_PLAYLIST)
   }, [])
 
   const onPressAlbumsHeader = useCallback(() => {
-    props.navigation.navigate(routes.MAIN.LIKED_ALBUMS_DETAILED)
+    props.navigation.navigate(routes.PROFILE.LIKED_ALBUMS_DETAILED)
   }, [])
 
   return (
