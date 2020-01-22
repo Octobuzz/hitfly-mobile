@@ -228,3 +228,9 @@ export interface FacoriteAlbum extends Favorite {
 export interface FacoriteCollection extends Favorite {
   collection: Collection
 }
+
+export interface Lifehack {
+  id: number
+  title: string
+  image: Image[]
+}

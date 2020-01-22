@@ -88,7 +88,7 @@ const MusicAndAlbumsContainer: React.FC<HOCsProps> = ({
   }, [])
 
   const navigateToAlbumPlaylist = useCallback((album: Album): void => {
-    navigation.navigate(routes.MAIN.ALBUM_PLAYLIST, {
+    navigation.navigate(routes.PROFILE.ALBUM_PLAYLIST, {
       title: album.title,
       albumId: album.id,
     })
