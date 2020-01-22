@@ -35,6 +35,7 @@ export default {
   TABS: {
     HOME: 'tab/home',
     PROFILE: 'tab/profile',
+    LIFEHACKS: 'tab/lifehacks',
   },
 
   PROFILE: {

@@ -1,5 +1,7 @@
 // tabs
 export const TAB_LOGO = require('../assets/images/tabs/tab_logo.png')
+export const TAB_PROFILE = require('../assets/images/tabs/tab_profile.png')
+export const TAB_LIFEHACKS = require('../assets/images/tabs/tab_lifehacks.png')
 
 // icons
 export const HEART = require('../assets/images/icons/heart.png')
