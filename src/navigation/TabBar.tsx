@@ -44,11 +44,18 @@ const TabBarNavigator = createBottomTabNavigator(
         tabBarIcon: getTabBarIcon(images.TAB_LOGO),
       },
     },
+    [routes.TABS.LIFEHACKS]: {
+      screen: () => null, //  заготовка, в след задаче сделаю
+      navigationOptions: {
+        title: 'Лайфхаки',
+        tabBarIcon: getTabBarIcon(images.TAB_LIFEHACKS),
+      },
+    },
     [routes.TABS.PROFILE]: {
       screen: ProfileNavigator,
       navigationOptions: {
         title: 'Профиль',
-        tabBarIcon: getTabBarIcon(images.TAB_LOGO),
+        tabBarIcon: getTabBarIcon(images.TAB_PROFILE),
       },
     },
   },
@@ -60,7 +67,7 @@ const TabBarNavigator = createBottomTabNavigator(
       </>
     ),
     tabBarOptions: {
-      activeTintColor: theme.colors.brandPink,
+      activeTintColor: theme.colors.textMain,
       inactiveTintColor: theme.colors.tabbarInactive,
       style: {
         shadowColor: theme.colors.tabbarBorder,
