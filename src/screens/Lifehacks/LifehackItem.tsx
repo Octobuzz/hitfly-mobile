@@ -12,6 +12,7 @@ const IMAGE_SIZE = width - styles.VIEW_HORIZONTAL_INDENTATION
 const LifehackImage = styled(Image)`
   width: ${IMAGE_SIZE}px;
   height: ${IMAGE_SIZE}px;
+  border-radius: 4px;
 `
 
 interface LifehackItemProps {
