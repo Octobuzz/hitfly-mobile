@@ -7,7 +7,7 @@ import { styles } from 'src/constants'
 import styled from 'src/styled-components'
 
 const { width } = Dimensions.get('window')
-const IMAGE_SIZE = width - styles.VIEW_HORIZONTAL_INDENTATION
+const IMAGE_SIZE = width - styles.VIEW_HORIZONTAL_INDENTATION * 2
 
 const LifehackImage = styled(Image)`
   width: ${IMAGE_SIZE}px;

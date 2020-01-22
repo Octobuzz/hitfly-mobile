@@ -11,8 +11,13 @@ import {
 } from 'src/components'
 import styled from 'src/styled-components'
 
+const Divider = styled.View`
+  height: ${styles.VIEW_HORIZONTAL_INDENTATION}px;
+`
+
 const Scroll = styled(FlatList as new () => FlatList<Lifehack>).attrs(() => ({
   initialNumToRender: 4,
+  ItemSeparatorComponent: Divider,
   contentContainerStyle: {
     paddingHorizontal: styles.VIEW_HORIZONTAL_INDENTATION,
     paddingVertical: styles.VIEW_HORIZONTAL_INDENTATION,

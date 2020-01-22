@@ -6,9 +6,9 @@ import { useQueryWithPagination } from 'src/hooks'
 import { names } from 'src/constants'
 
 const hasMorePagesSelector = (data?: LifehacksData) =>
-  L.get(data, 'lifehacks.hasMorePages')
+  L.get(data, 'lifehack.hasMorePages')
 const itemsSelector = (data?: LifehacksData) =>
-  L.get(data, 'lifehacks.items', [])
+  L.get(data, 'lifehack.items', [])
 
 interface Props {}
 
