@@ -57,7 +57,7 @@ const Lifehacks: React.FC<Props> = ({
       refreshControl={
         <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
       }
-      ListEmptyComponent={<ListEmptyText>Пока данных нет</ListEmptyText>}
+      ListEmptyComponent={<ListEmptyText>Пока здесь пусто</ListEmptyText>}
       ListFooterComponent={<ListFooterLoader isShown={isFetchingMore} />}
       data={lifehacks}
       renderItem={renderItem}

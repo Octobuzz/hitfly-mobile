@@ -12,10 +12,10 @@ const tracksSelector = LFP.getOr([], 'tracks.items')
 
 const MyMusicContainer: React.FC<Props> = props => {
   const onPressTracksHeader = useCallback(() => {
-    props.navigation.navigate(routes.MAIN.MY_MUSIC_PLAYLIST)
+    props.navigation.navigate(routes.PROFILE.MY_MUSIC_PLAYLIST)
   }, [])
   const onPressAlbumsHeader = useCallback(() => {
-    props.navigation.navigate(routes.MAIN.MY_ALBUMS_DETAILED)
+    props.navigation.navigate(routes.PROFILE.MY_ALBUMS_DETAILED)
   }, [])
 
   return (

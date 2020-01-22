@@ -9,7 +9,6 @@ import {
   AuthErrorModal,
   DetailedTrackMenu,
 } from 'src/containers'
-import { LifehacksScreen } from 'src/screens'
 import {
   LogoutModalRef,
   AuthErrorModalRef,
@@ -18,6 +17,7 @@ import {
 import MainNavigator from './Main'
 import PlayerNavigator from './Player'
 import ProfileNavigator from './Profile'
+import LifehacksNavigator from './Lifehacks'
 import { routes, images } from 'src/constants'
 import { View } from 'src/components'
 import theme from 'src/theme'
@@ -46,7 +46,7 @@ const TabBarNavigator = createBottomTabNavigator(
       },
     },
     [routes.TABS.LIFEHACKS]: {
-      screen: LifehacksScreen,
+      screen: LifehacksNavigator,
       navigationOptions: {
         title: 'Лайфхаки',
         tabBarIcon: getTabBarIcon(images.TAB_LIFEHACKS),
