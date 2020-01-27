@@ -44,7 +44,7 @@ const GrayText = styled(TextBase)`
 
 const TimeText = styled(GrayText)`
   margin-left: 16px;
-  width: 40px;
+  width: 100px;
   text-align: right;
 `
 
@@ -96,7 +96,7 @@ const PlaylistTrack: React.FC<PlaylistTrackProps> & Sized = ({
       <TrackImage isPlaying={isPlaying} imageUrl={source.uri} />
       <CenterBlock>
         <BlackText numberOfLines={1}>{title}</BlackText>
-        <GrayText numberOfLines={1}>{singer}</GrayText>
+        {!!singer && <GrayText numberOfLines={1}>{singer}</GrayText>}
       </CenterBlock>
       <More onPress={handlePressMore} />
       <TimeText>{trackLength}</TimeText>

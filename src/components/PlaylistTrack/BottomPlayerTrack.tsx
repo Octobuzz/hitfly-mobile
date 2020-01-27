@@ -50,8 +50,8 @@ const BottomPlayerTrack: React.FC<Props> = ({
     <Wrapper onPress={onPress}>
       <TrackImage source={source} />
       <CenterBlock>
-        <TitleText numberOfLines={2}>{title}</TitleText>
-        <SubTitleText numberOfLines={2}>{singer}</SubTitleText>
+        <TitleText numberOfLines={1}>{title}</TitleText>
+        {!!singer && <SubTitleText numberOfLines={1}>{singer}</SubTitleText>}
       </CenterBlock>
       <PlayerButton onPress={onPressControl}>
         <PlayerIcon name={isPlaying ? 'pause' : 'play'} />
