@@ -15,7 +15,9 @@ exports[`AlbumItem it renders correctly 1`] = `
     activeOpacity={0.2}
     style={
       Array [
-        Object {},
+        Object {
+          "width": 351,
+        },
       ]
     }
   >
@@ -28,7 +30,7 @@ exports[`AlbumItem it renders correctly 1`] = `
           Array [
             Object {
               "borderRadius": 4,
-              "height": 160,
+              "height": 351,
               "marginBottom": 14,
               "width": "100%",
             },
@@ -128,7 +130,7 @@ Object {
               Array [
                 Object {
                   "borderRadius": 4,
-                  "height": 160,
+                  "height": 351,
                   "marginBottom": 14,
                   "width": "100%",
                 },
@@ -177,7 +179,9 @@ Object {
         "accessibilityRole": "summary",
         "activeOpacity": 0.2,
         "style": Array [
-          Object {},
+          Object {
+            "width": 351,
+          },
         ],
       },
       "type": "TouchableOpacity",
