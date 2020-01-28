@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react'
 import { TextInputProps } from 'react-native'
-// @ts-ignore
 import { OutlinedTextField } from 'react-native-material-textfield'
 import { InputBase } from './interfaces'
 import styled from 'src/styled-components'
@@ -26,7 +25,7 @@ const TextInputUI: React.FC<InputBase & TextInputProps> = ({
 }) => {
   const renderRightAccessory = (): JSX.Element => RightIcon
 
-  const ref = useRef()
+  const ref = useRef(null)
 
   useEffect(() => {
     if (forwardRef) {

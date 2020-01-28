@@ -65,34 +65,6 @@ exports[`CollectionItem renders correctly 1`] = `
         }
       />
     </View>
-    <Text
-      style={
-        Array [
-          Object {
-            "color": "#ffffff",
-            "fontFamily": "GothamPro-Bold",
-            "fontSize": 12,
-            "lineHeight": 20,
-          },
-        ]
-      }
-    >
-      title
-    </Text>
-    <Text
-      style={
-        Array [
-          Object {
-            "color": "#ffffff",
-            "fontFamily": "GothamPro",
-            "fontSize": 12,
-            "lineHeight": 20,
-          },
-        ]
-      }
-    >
-      10 песен
-    </Text>
   </TouchableOpacity>
 </View>
 `;
@@ -164,34 +136,6 @@ exports[`CollectionItem renders correctly with sizes 1`] = `
         }
       />
     </View>
-    <Text
-      style={
-        Array [
-          Object {
-            "color": "#ffffff",
-            "fontFamily": "GothamPro-Bold",
-            "fontSize": 12,
-            "lineHeight": 20,
-          },
-        ]
-      }
-    >
-      title
-    </Text>
-    <Text
-      style={
-        Array [
-          Object {
-            "color": "#ffffff",
-            "fontFamily": "GothamPro",
-            "fontSize": 12,
-            "lineHeight": 20,
-          },
-        ]
-      }
-    >
-      10 песен
-    </Text>
   </TouchableOpacity>
 </View>
 `;

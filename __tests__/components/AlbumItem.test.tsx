@@ -1,9 +1,7 @@
 import React from 'react'
-import { fireEvent, render } from '@testing-library/react-native'
+import { fireEvent, render } from '../../jest/test-utils'
 import AlbumItem from 'src/components/AlbumItem'
 import { Album } from 'src/apollo'
-import { ThemeProvider } from 'src/styled-components'
-import theme from 'src/theme'
 
 describe('AlbumItem', () => {
   const item = {
@@ -12,29 +10,23 @@ describe('AlbumItem', () => {
     author: 'author',
   } as Album
 
-  const props = {
-    item,
-    onPress: jest.fn,
-  }
-
-  it('it renders correctly', () => {
-    const { asJSON } = render(
-      <ThemeProvider theme={theme}>
-        <AlbumItem {...props} />
-      </ThemeProvider>,
-    )
+  it('renders correctly', () => {
+    const props = {
+      item,
+    }
+    const { asJSON } = render(<AlbumItem {...props} />)
 
     expect(asJSON()).toMatchSnapshot()
   })
-  it('it renders correctly when AlbumItem has been pressed', () => {
-    const { asJSON, getByRole } = render(
-      <ThemeProvider theme={theme}>
-        <AlbumItem {...props} />
-      </ThemeProvider>,
-    )
-    const firstRender = asJSON()
 
-    fireEvent.press(getByRole('summary'))
-    expect(firstRender).toMatchSnapshot(asJSON())
+  it('AlbumItem has been pressed', () => {
+    const props = {
+      item,
+      onPress: jest.fn(),
+    }
+    const { getByTestId } = render(<AlbumItem {...props} />)
+
+    fireEvent.press(getByTestId('wrapper'))
+    expect(props.onPress).toHaveBeenCalled()
   })
 })

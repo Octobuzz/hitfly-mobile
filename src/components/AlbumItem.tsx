@@ -50,7 +50,7 @@ const AlbumItem: React.FC<Props> = ({ item, onPress }) => {
   const source = useImageSource(cover, NoAvatarSizeNames.S_160)
 
   return (
-    <Wrapper onPress={handlePress} accessibilityRole="summary">
+    <Wrapper onPress={handlePress} testID="wrapper">
       <AlbumImage source={source} />
       <TitleText>{title}</TitleText>
       <SubTitleText>{author}</SubTitleText>
