@@ -1,6 +1,6 @@
-import { TracksView } from '../../src/components'
-import { render } from '../../jest/test-utils'
 import React from 'react'
+import { TracksView, TracksViewProps } from '../../src/components'
+import { render } from '../../jest/test-utils'
 import { Track } from '../../src/apollo'
 
 describe('TrackView', () => {
@@ -12,26 +12,28 @@ describe('TrackView', () => {
     cover: [{}],
   } as Track
 
-  const props = {
-    tracks: [item],
-    activeTrack: item,
-    toggleTrack: jest.fn(),
-    showDetailedTrack: jest.fn(),
-  }
-
-  const emptyProps = {
-    tracks: [],
-    activeTrack: null,
-    toggleTrack: jest.fn(),
-    showDetailedTrack: jest.fn(),
-  }
-
   it('renders correctly', () => {
+    const props: TracksViewProps = {
+      tracks: [item],
+      isPlaying: true,
+      activeTrack: item,
+      playlistKey: 'playlistKey',
+      toggleTrack: jest.fn(),
+      showDetailedTrack: jest.fn(),
+    }
+
     const { asJSON } = render(<TracksView {...props} />)
     expect(asJSON()).toMatchSnapshot()
   })
   it('renders correctly with empty props', () => {
-    const { asJSON } = render(<TracksView {...emptyProps} />)
+    const props: TracksViewProps = {
+      tracks: [],
+      isPlaying: true,
+      playlistKey: 'playlistKey',
+      toggleTrack: jest.fn(),
+      showDetailedTrack: jest.fn(),
+    }
+    const { asJSON } = render(<TracksView {...props} />)
     expect(asJSON()).toMatchSnapshot()
   })
 })

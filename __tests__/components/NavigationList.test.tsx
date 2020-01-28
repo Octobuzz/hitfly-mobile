@@ -1,27 +1,44 @@
-import { render } from '../../jest/test-utils'
-import { NavigationList } from 'src/components'
 import React from 'react'
-import { fireEvent } from '@testing-library/react-native'
+import { render, fireEvent } from '../../jest/test-utils'
+import { NavigationList } from 'src/components'
 
 describe('NavigationList', () => {
-  const props = {
-    items: [
-      {
-        title: 'title',
-        onPress: jest.fn(),
-      },
-    ],
-  }
-
   it('renders correctly with props', () => {
-    const { asJSON, getByRole } = render(<NavigationList {...props} />)
-    const firstRender = asJSON()
+    const props = {
+      items: [
+        {
+          title: 'title',
+          onPress: jest.fn(),
+        },
+      ],
+    }
 
-    fireEvent.press(getByRole('summary'))
-    expect(firstRender).toMatchSnapshot(asJSON())
+    const { getAllByTestId } = render(<NavigationList {...props} />)
+
+    fireEvent.press(getAllByTestId('item')[0])
+    expect(props.items[0].onPress).toBeCalled()
   })
-  it('renders correctly with empty array as props', () => {
+
+  it('renders correctly with empty items', () => {
     const { asJSON } = render(<NavigationList items={[]} />)
+
+    expect(asJSON()).toMatchSnapshot()
+  })
+
+  it('renders correctly with 2 items', () => {
+    const props = {
+      items: [
+        {
+          title: 'title',
+          onPress: jest.fn(),
+        },
+        {
+          title: 'title2',
+          onPress: jest.fn(),
+        },
+      ],
+    }
+    const { asJSON } = render(<NavigationList {...props} />)
 
     expect(asJSON()).toMatchSnapshot()
   })

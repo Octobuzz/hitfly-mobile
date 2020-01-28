@@ -25,7 +25,7 @@ const TextInputUI: React.FC<InputBase & TextInputProps> = ({
 }) => {
   const renderRightAccessory = (): JSX.Element => RightIcon
 
-  const ref = useRef(null)
+  const ref = useRef<OutlinedTextField>(null)
 
   useEffect(() => {
     if (forwardRef) {
@@ -34,9 +34,7 @@ const TextInputUI: React.FC<InputBase & TextInputProps> = ({
   }, [forwardRef])
 
   useEffect(() => {
-    if (ref.current) {
-      ref.current.setValue(value)
-    }
+    ref.current?.setValue(value)
   }, [value])
 
   return (

@@ -7,6 +7,7 @@ export * from './buttons'
 export * from './TextBase'
 export * from './GenreItem'
 export * from './TrackMenu'
+export * from './TracksView'
 export * from './PlaylistTrack'
 export * from './NavigationList'
 

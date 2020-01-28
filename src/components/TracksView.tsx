@@ -4,14 +4,14 @@ import { Track } from 'src/apollo'
 import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/HOCs'
 import PlaylistTrack from 'src/components/PlaylistTrack'
 
-interface Props
+export interface TracksViewProps
   extends Pick<ToggleTrackProps, 'toggleTrack' | 'isPlaying' | 'activeTrack'>,
     DetailedTrackMenuProps {
   tracks: Track[]
   playlistKey: string
 }
 
-class TracksView extends React.Component<Props> {
+class TracksView extends React.Component<TracksViewProps> {
   private renderTrack = (item: Track, index: number): React.ReactNode => {
     const { showDetailedTrack } = this.props
     const isPlaying = this.isTrackPlaying(item)
