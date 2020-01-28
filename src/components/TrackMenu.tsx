@@ -74,7 +74,7 @@ const MenuItemText = styled(TextBase)`
 
 export interface TrackMenuProps {
   track: Track
-  onPressLike: (track: Track) => void
+  onPressLike?: (track: Track) => void
   onPressCancel?: () => void
 }
 
@@ -84,14 +84,14 @@ const TrackMenu: React.FC<TrackMenuProps> = ({
   onPressCancel,
 }) => {
   const handlePressLike = useCallback(() => {
-    onPressLike(track)
+    onPressLike?.(track)
   }, [onPressLike, track])
   const { cover, singer, title } = track
 
   const source = useImageSource(cover, NoAvatarSizeNames.S_32)
 
   return (
-    <View paddingBottom={32} noFill testID="like">
+    <View paddingBottom={32} noFill>
       <TrackWrapper>
         <StyledImage source={source} />
         <CenterBlock>
@@ -100,13 +100,18 @@ const TrackMenu: React.FC<TrackMenuProps> = ({
         </CenterBlock>
       </TrackWrapper>
       <Divider />
-      <MenuItem onPress={handlePressLike} testID="summary">
+      <MenuItem onPress={handlePressLike} testID="like">
         <IconWrapper>
           <LikeIcon isActive={track.isFavorite} />
         </IconWrapper>
         <MenuItemText>Понравилось</MenuItemText>
       </MenuItem>
-      <Button onPress={onPressCancel} title="Отмена" type="outline-black" />
+      <Button
+        onPress={onPressCancel}
+        title="Отмена"
+        type="outline-black"
+        testID="cancel"
+      />
     </View>
   )
 }

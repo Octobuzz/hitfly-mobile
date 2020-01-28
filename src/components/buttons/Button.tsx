@@ -72,18 +72,12 @@ interface Props extends ColorType, ButtonBase, IndentedHorizontal, Loadable {}
 const Button: React.FC<Props> = ({
   type,
   title,
-  style,
-  onPress,
   isLoading,
   isDisabled,
   withoutMargin,
+  ...rest
 }) => (
-  <Wrapper
-    disabled={isDisabled}
-    withoutMargin={withoutMargin}
-    onPress={onPress}
-    style={style}
-  >
+  <Wrapper disabled={isDisabled} withoutMargin={withoutMargin} {...rest}>
     <Gradient>
       <Inner isLoading={isLoading} type={type}>
         {isLoading ? <Loader size={61.7} /> : <Text type={type}>{title}</Text>}

@@ -27,8 +27,8 @@ const LikeWrapper = styled.TouchableOpacity.attrs(() => ({
 }))``
 
 export interface TrackWithLikesProps extends Playable {
-  onPress: (track: Track) => void
-  onPressLike: (track: Track) => void
+  onPress?: (track: Track) => void
+  onPressLike?: (track: Track) => void
   track: Track
 }
 
@@ -41,23 +41,23 @@ const TrackWithLikes: React.FC<TrackWithLikesProps> = ({
   const { cover, title, singer } = track
 
   const handlePressTrack = React.useCallback(() => {
-    onPress(track)
+    onPress?.(track)
   }, [onPress, track])
 
   const handlePressLike = React.useCallback(() => {
-    onPressLike(track)
+    onPressLike?.(track)
   }, [onPressLike, track])
 
   const source = useImageSource(cover, NoAvatarSizeNames.S_32)
 
   return (
-    <Wrapper onPress={handlePressTrack}>
+    <Wrapper onPress={handlePressTrack} testID="wrapper">
       <TrackImage isPlaying={isPlaying} imageUrl={source.uri} />
       <CenterBlock>
         <TitleWhiteText numberOfLines={1}>{title}</TitleWhiteText>
         <SubTitleWhiteText numberOfLines={1}>{singer}</SubTitleWhiteText>
       </CenterBlock>
-      <LikeWrapper onPress={handlePressLike}>
+      <LikeWrapper onPress={handlePressLike} testID="like">
         <LikeIcon isActive={track.isFavorite} />
       </LikeWrapper>
     </Wrapper>

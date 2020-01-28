@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from '../../jest/test-utils'
+import { render, fireEvent } from '../../../jest/test-utils'
 import { PlaylistTrack } from 'src/components'
 import { Track } from 'src/apollo'
 

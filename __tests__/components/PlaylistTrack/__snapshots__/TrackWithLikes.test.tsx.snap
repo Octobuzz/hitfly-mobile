@@ -1,0 +1,467 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TrackWithLikes renders correctly 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "paddingBottom": 12,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+          "paddingTop": 12,
+        },
+      ]
+    }
+    testID="wrapper"
+  >
+    <View
+      style={
+        Array [
+          Object {},
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "overflow": "hidden",
+            },
+            Array [
+              Object {
+                "borderRadius": 4,
+                "height": 32,
+                "width": 32,
+              },
+            ],
+          ]
+        }
+      >
+        <FastImageView
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "some url",
+            }
+          }
+          style={
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "marginHorizontal": 16,
+          },
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontFamily": "GothamPro-Bold",
+              "fontSize": 12,
+              "lineHeight": 18,
+            },
+          ]
+        }
+      >
+        Some track title
+      </Text>
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontFamily": "GothamPro",
+              "fontSize": 10,
+              "lineHeight": 12,
+            },
+          ]
+        }
+      />
+    </View>
+    <TouchableOpacity
+      activeOpacity={0.8}
+      hitSlop={
+        Object {
+          "bottom": 10,
+          "left": 10,
+          "right": 10,
+          "top": 10,
+        }
+      }
+      style={
+        Array [
+          Object {},
+        ]
+      }
+      testID="like"
+    >
+      <Image
+        resizeMode="contain"
+        source={
+          Object {
+            "testUri": "../../../src/assets/images/icons/heart.png",
+          }
+        }
+        style={
+          Array [
+            Object {
+              "tintColor": "#ffffff",
+            },
+          ]
+        }
+      />
+    </TouchableOpacity>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`TrackWithLikes renders correctly in playing state 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "paddingBottom": 12,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+          "paddingTop": 12,
+        },
+      ]
+    }
+    testID="wrapper"
+  >
+    <View
+      style={
+        Array [
+          Object {},
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "overflow": "hidden",
+            },
+            Array [
+              Object {
+                "borderRadius": 4,
+                "height": 32,
+                "width": 32,
+              },
+            ],
+          ]
+        }
+      >
+        <FastImageView
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "some url",
+            }
+          }
+          style={
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "rgba(49, 49, 49, 0.7)",
+              "borderRadius": 4,
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+          ]
+        }
+      >
+        <Icon
+          color="#ffffff"
+          name="pause"
+          size={16}
+          style={
+            Array [
+              Object {},
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "marginHorizontal": 16,
+          },
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontFamily": "GothamPro-Bold",
+              "fontSize": 12,
+              "lineHeight": 18,
+            },
+          ]
+        }
+      >
+        Some track title
+      </Text>
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontFamily": "GothamPro",
+              "fontSize": 10,
+              "lineHeight": 12,
+            },
+          ]
+        }
+      />
+    </View>
+    <TouchableOpacity
+      activeOpacity={0.8}
+      hitSlop={
+        Object {
+          "bottom": 10,
+          "left": 10,
+          "right": 10,
+          "top": 10,
+        }
+      }
+      style={
+        Array [
+          Object {},
+        ]
+      }
+      testID="like"
+    >
+      <Image
+        resizeMode="contain"
+        source={
+          Object {
+            "testUri": "../../../src/assets/images/icons/heart.png",
+          }
+        }
+        style={
+          Array [
+            Object {
+              "tintColor": "#ffffff",
+            },
+          ]
+        }
+      />
+    </TouchableOpacity>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`TrackWithLikes renders correctly when liked 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "paddingBottom": 12,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+          "paddingTop": 12,
+        },
+      ]
+    }
+    testID="wrapper"
+  >
+    <View
+      style={
+        Array [
+          Object {},
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "overflow": "hidden",
+            },
+            Array [
+              Object {
+                "borderRadius": 4,
+                "height": 32,
+                "width": 32,
+              },
+            ],
+          ]
+        }
+      >
+        <FastImageView
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "some url",
+            }
+          }
+          style={
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "marginHorizontal": 16,
+          },
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontFamily": "GothamPro-Bold",
+              "fontSize": 12,
+              "lineHeight": 18,
+            },
+          ]
+        }
+      >
+        Some track title
+      </Text>
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontFamily": "GothamPro",
+              "fontSize": 10,
+              "lineHeight": 12,
+            },
+          ]
+        }
+      />
+    </View>
+    <TouchableOpacity
+      activeOpacity={0.8}
+      hitSlop={
+        Object {
+          "bottom": 10,
+          "left": 10,
+          "right": 10,
+          "top": 10,
+        }
+      }
+      style={
+        Array [
+          Object {},
+        ]
+      }
+      testID="like"
+    >
+      <Image
+        resizeMode="contain"
+        source={
+          Object {
+            "testUri": "../../../src/assets/images/icons/heart.png",
+          }
+        }
+        style={
+          Array [
+            Object {
+              "tintColor": "#ffffff",
+            },
+          ]
+        }
+      />
+    </TouchableOpacity>
+  </TouchableOpacity>
+</View>
+`;
