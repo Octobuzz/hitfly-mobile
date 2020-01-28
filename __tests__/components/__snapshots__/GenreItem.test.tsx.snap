@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`GenreItem renders correctly 1`] = `
+exports[`GenreItem disabled without onPress 1`] = `
 <View
   collapsable={true}
   pointerEvents="box-none"
@@ -12,7 +12,7 @@ exports[`GenreItem renders correctly 1`] = `
 >
   <TouchableOpacity
     activeOpacity={0.2}
-    disabled={false}
+    disabled={true}
     style={
       Array [
         Object {
@@ -23,6 +23,7 @@ exports[`GenreItem renders correctly 1`] = `
         },
       ]
     }
+    testID="wrapper"
   >
     <View
       style={
@@ -77,7 +78,100 @@ exports[`GenreItem renders correctly 1`] = `
             Object {
               "color": "#ffffff",
               "fontFamily": "GothamPro-Bold",
-              "fontSize": 16,
+              "fontSize": 12,
+              "lineHeight": 20,
+              "position": "absolute",
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        title
+      </Text>
+    </View>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`GenreItem renders correctly 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    disabled={false}
+    style={
+      Array [
+        Object {
+          "borderRadius": 4,
+          "height": 234,
+          "overflow": "hidden",
+          "width": 234,
+        },
+      ]
+    }
+    testID="wrapper"
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "overflow": "hidden",
+          },
+          Array [
+            Object {
+              "height": "100%",
+              "position": "absolute",
+              "width": "100%",
+            },
+          ],
+        ]
+      }
+    >
+      <FastImageView
+        resizeMode="cover"
+        source={
+          Object {
+            "uri": "url",
+          }
+        }
+        style={
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontFamily": "GothamPro-Bold",
+              "fontSize": 12,
               "lineHeight": 20,
               "position": "absolute",
               "textAlign": "center",
@@ -114,6 +208,7 @@ exports[`SelectableGenreItem renders correctly 1`] = `
         },
       ]
     }
+    testID="wrapper"
   >
     <View
       style={
@@ -184,7 +279,7 @@ exports[`SelectableGenreItem renders correctly 1`] = `
             Object {
               "color": "#ffffff",
               "fontFamily": "GothamPro-Bold",
-              "fontSize": 16,
+              "fontSize": 12,
               "lineHeight": 20,
               "position": "absolute",
               "textAlign": "center",
@@ -221,6 +316,7 @@ exports[`SelectableGenreItem renders correctly in selected state 1`] = `
         },
       ]
     }
+    testID="wrapper"
   >
     <View
       style={
@@ -292,7 +388,7 @@ exports[`SelectableGenreItem renders correctly in selected state 1`] = `
             Object {
               "color": "#ffffff",
               "fontFamily": "GothamPro-Bold",
-              "fontSize": 16,
+              "fontSize": 12,
               "lineHeight": 20,
               "position": "absolute",
               "textAlign": "center",
@@ -307,7 +403,7 @@ exports[`SelectableGenreItem renders correctly in selected state 1`] = `
 </View>
 `;
 
-exports[`SelectableGenreItem renders correctly in unselected state 1`] = `
+exports[`SelectableGenreItem renders correctly with subgenres 1`] = `
 <View
   collapsable={true}
   pointerEvents="box-none"
@@ -329,6 +425,7 @@ exports[`SelectableGenreItem renders correctly in unselected state 1`] = `
         },
       ]
     }
+    testID="wrapper"
   >
     <View
       style={
@@ -365,10 +462,10 @@ exports[`SelectableGenreItem renders correctly in unselected state 1`] = `
       />
     </View>
     <Image
-      isSelected={false}
+      isSelected={true}
       source={
         Object {
-          "testUri": "../../../src/assets/images/genres/genre_inactive.png",
+          "testUri": "../../../src/assets/images/genres/genre_active.png",
         }
       }
       style={
@@ -400,7 +497,7 @@ exports[`SelectableGenreItem renders correctly in unselected state 1`] = `
             Object {
               "color": "#ffffff",
               "fontFamily": "GothamPro-Bold",
-              "fontSize": 16,
+              "fontSize": 12,
               "lineHeight": 20,
               "position": "absolute",
               "textAlign": "center",
@@ -411,6 +508,34 @@ exports[`SelectableGenreItem renders correctly in unselected state 1`] = `
         title
       </Text>
     </View>
+    <TouchableOpacity
+      activeOpacity={0.8}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "#ffffff",
+            "paddingVertical": 12,
+          },
+        ]
+      }
+      testID="optionalChild"
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#C461DD",
+              "fontFamily": "GothamPro",
+              "fontSize": 14,
+              "lineHeight": 14,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        + Поджанры
+      </Text>
+    </TouchableOpacity>
   </TouchableOpacity>
 </View>
 `;
