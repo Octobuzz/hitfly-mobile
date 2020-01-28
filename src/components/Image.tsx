@@ -9,7 +9,7 @@ import styled from 'src/styled-components'
 
 interface SvgImageProps {
   uri: string
-  style: any
+  style?: any
 }
 
 export const SvgImage: React.FC<SvgImageProps> = ({ uri, style }) => {
@@ -21,6 +21,7 @@ export const SvgImage: React.FC<SvgImageProps> = ({ uri, style }) => {
       .toLowerCase()
       .split('.svg')![0]
     switch (imageName) {
+      default:
       case 'default_track': {
         setSource(images.DEFAULT_TRACK)
         break
@@ -36,10 +37,6 @@ export const SvgImage: React.FC<SvgImageProps> = ({ uri, style }) => {
       case 'default_musicgroup':
       case 'default_playlist': {
         setSource(images.DEFAULT_GROUP)
-        break
-      }
-      default: {
-        setSource(images.DEFAULT_TRACK)
         break
       }
     }
