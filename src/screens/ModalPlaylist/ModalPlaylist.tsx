@@ -64,7 +64,7 @@ const ModalPlaylist: React.FC<Props> = ({
 
   return (
     <Wrapper>
-      <Scroll data={activePlaylist!} renderItem={renderTrack} />
+      <Scroll data={activePlaylist} renderItem={renderTrack} />
     </Wrapper>
   )
 }

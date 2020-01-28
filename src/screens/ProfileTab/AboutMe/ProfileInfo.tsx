@@ -15,7 +15,7 @@ const StyledIcon = styled(Icon).attrs(({ theme }) => ({
 const Row = styled.View<Indentable>`
   flex-direction: row;
   align-items: center;
-  ${({ withMargin }) => withMargin && `margin-top: 24px;`}
+  ${({ withMargin }) => withMargin && 'margin-top: 24px;'}
 `
 
 const NoInfoText = styled(TextBase)`

@@ -9,7 +9,7 @@ const Wrapper = styled.TouchableOpacity`
 `
 
 const Text = styled(TextBase)<ColorType>`
-  ${({ type }) => type === 'dark' && `opacity: 0.5;`}
+  ${({ type }) => type === 'dark' && 'opacity: 0.5;'}
   color: ${({ theme, type = 'brand' }) =>
     type === 'brand' ? theme.colors.brandPink : theme.colors.white};
   text-align: center;

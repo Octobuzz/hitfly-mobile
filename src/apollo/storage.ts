@@ -11,9 +11,9 @@ export const getToken = async (): Promise<string> => {
   return token
 }
 
-export const setToken = async (newToken: string): Promise<void> => {
+export const setToken = (newToken: string): Promise<void> => {
   token = newToken
-  AsyncStorage.setItem(storageKeys.AUTH_TOKEN, newToken)
+  return AsyncStorage.setItem(storageKeys.AUTH_TOKEN, newToken)
 }
 
 export const setItem = (key: string, item: Item | Item[]) =>

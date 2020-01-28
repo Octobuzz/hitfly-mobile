@@ -16,13 +16,5 @@
     "target": "esnext",
     "baseUrl": "."
   },
-  "exclude": [
-    "setup.js",
-    "node_modules/**",
-    "babel.config.js",
-    "metro.config.js",
-    "jest.config.js",
-    "reactotron.config.js",
-    "no-task.js"
-  ]
+  "include": ["src", "__tests__", "storybook", "index.js", "babel.config.js"]
 }

@@ -6,12 +6,12 @@ import { ButtonBase } from './interfaces'
 import styled, { css } from 'src/styled-components'
 
 export const disabledStyle = css`
-  ${({ disabled }: { disabled?: boolean }) => disabled && `opacity: 0.4;`}
+  ${({ disabled }: { disabled?: boolean }) => disabled && 'opacity: 0.4;'}
 `
 
 const Wrapper = styled.TouchableOpacity<IndentedHorizontal>`
   ${disabledStyle}
-  ${({ withoutMargin }) => !withoutMargin && `margin-horizontal: 20px;`}
+  ${({ withoutMargin }) => !withoutMargin && 'margin-horizontal: 20px;'}
 `
 
 const Inner = styled.View<ColorType & Loadable>`

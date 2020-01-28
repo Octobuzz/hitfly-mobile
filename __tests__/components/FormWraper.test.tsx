@@ -21,7 +21,7 @@ describe('FormWrapper', () => {
     })
     expect(getByTestId('formWrapper').props.scrollEnabled).toBe(false)
   })
-  // TODO/FIXME не передается contentHeight
+  // FIXME: не передается contentHeight
   // it('scrollEnabled should be true', () => {
   //   const { getByTestId, debug } = render(
   //     <FormWrapper style={{ height: 400 }} testID="formWrapper">

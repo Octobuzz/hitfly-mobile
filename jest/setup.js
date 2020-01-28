@@ -45,6 +45,7 @@ jest.mock('react-native-track-player', () => {
 })
 
 jest.mock('react-native-gesture-handler', () => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const View = require('react-native/Libraries/Components/View/View')
   return {
     Swipeable: View,

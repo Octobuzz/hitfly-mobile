@@ -35,7 +35,6 @@ const TextInputUI: React.FC<InputBase & TextInputProps> = ({
 
   useEffect(() => {
     if (ref.current) {
-      // @ts-ignore
       ref.current.setValue(value)
     }
   }, [value])

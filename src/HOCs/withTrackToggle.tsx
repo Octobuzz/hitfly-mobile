@@ -48,10 +48,17 @@ const withTrackToggle = <T extends ToggleTrackProps>(
     const { data: activeTrackData } = useQuery<ActiveTrackData>(
       GET_ACTIVE_TRACK,
     )
-    const { activeTrack, isPlaying, canPlayNext, canPlayPrev } = L.pick(
-      activeTrackData,
-      ['activeTrack', 'isPlaying', 'canPlayNext', 'canPlayPrev'],
-    )
+    const {
+      activeTrack,
+      isPlaying,
+      canPlayNext,
+      canPlayPrev,
+    } = L.pick(activeTrackData, [
+      'activeTrack',
+      'isPlaying',
+      'canPlayNext',
+      'canPlayPrev',
+    ])
 
     const { data: activePlaylistData } = useQuery<ActivePlaylistData>(
       GET_ACTIVE_PLAYLIST,

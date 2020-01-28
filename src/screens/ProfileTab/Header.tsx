@@ -92,6 +92,8 @@ const Header: React.FC<Props> = ({
       listener: 0,
       performer: 1,
       critic: 2,
+      // так с бэка приходит
+      // eslint-disable-next-line @typescript-eslint/camelcase
       prof_critic: 3,
       star: 4,
     }

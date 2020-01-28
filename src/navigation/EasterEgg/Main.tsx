@@ -24,8 +24,9 @@ const Main: React.FC<Props> = ({ navigation }) => {
       .then(setDomain)
   }, [])
 
-  const handleSave = useCallback(() => {
-    if (Linking.canOpenURL(serverDomain)) {
+  const handleSave = useCallback(async () => {
+    const canOpen = await Linking.canOpenURL(serverDomain)
+    if (canOpen) {
       storage.setItem(storageKeys.BASE_URL, serverDomain)
     }
   }, [serverDomain])

@@ -1,0 +1,16 @@
+node_modules
+vendor
+coverage
+ios
+android
+fastlane
+cache
+.bundle
+.vscode
+src/components/Slider/Slider.tsx
+rn-debugger.config.js
+jest.config.js
+metro.config.js
+react-native.config.js
+no-task.js
+setup.js

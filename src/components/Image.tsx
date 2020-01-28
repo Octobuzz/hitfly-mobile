@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Image as RNImage } from 'react-native'
 import FastImage, {
   FastImageSource,
@@ -80,9 +80,12 @@ const Overlay = styled.View`
   background-color: ${({ theme }) => theme.colors.transparent10};
 `
 
-export const DarkenImage: React.FC<ImageProps> = ({ style, ...rest }) => (
-  <Wrapper style={style}>
-    <Image style={{ width: '100%', height: '100%' }} {...rest} />
-    <Overlay />
-  </Wrapper>
-)
+export const DarkenImage: React.FC<ImageProps> = ({ style, ...rest }) => {
+  const imageStyle = useMemo(() => ({ width: '100%', height: '100%' }), [])
+  return (
+    <Wrapper style={style}>
+      <Image style={imageStyle} {...rest} />
+      <Overlay />
+    </Wrapper>
+  )
+}

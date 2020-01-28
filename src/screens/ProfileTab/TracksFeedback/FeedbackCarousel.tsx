@@ -34,7 +34,7 @@ const ArrowButtonsDivider = styled.View`
 const ArrowButton = styled.TouchableOpacity.attrs(() => ({
   hitSlop: styles.HIT_SLOP,
 }))`
-  ${({ disabled }) => disabled && `opacity: 0.6;`}
+  ${({ disabled }) => disabled && 'opacity: 0.6;'}
   justify-content: center;
   align-items: center;
   padding: 10px;
@@ -135,7 +135,7 @@ class FeedbackCarousel extends React.Component<Props, State> {
     const {
       comment,
       createdAt,
-      createdBy: { userName, avatar },
+      createdBy: { userName },
     } = comments[currentPage]
     const source = this.getAvatarSource()
     return (

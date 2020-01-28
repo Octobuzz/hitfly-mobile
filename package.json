@@ -17,7 +17,7 @@
     "coverage": "jest --verbose --coverage && open ./coverage/lcov-report/index.html",
     "clean": "rm -rf $TMPDIR/react-* && watchman watch-del-all && npm cache clean --force",
     "newclear": "rm -rf $TMPDIR/react-* && watchman watch-del-all && rm -rf ios/build && rm -rf node_modules/ && npm cache clean --force && npm i",
-    "lint": "npx tslint --project tsconfig.json",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "android:beta": "bundle exec fastlane android beta",
     "ios:beta": "bundle exec fastlane ios beta",
     "fastlane:beta": "yarn android:beta && yarn ios:beta",
@@ -86,6 +86,7 @@
     "@graphql-codegen/typescript": "1.11.2",
     "@graphql-codegen/typescript-operations": "1.11.2",
     "@graphql-codegen/typescript-react-apollo": "1.11.2",
+    "@react-native-community/eslint-config": "^0.0.7",
     "@storybook/react-native": "^5.3.9",
     "@testing-library/react-native": "^5.0.0",
     "@types/jest": "^25.1.0",
@@ -98,8 +99,13 @@
     "@types/react-test-renderer": "^16.9.2",
     "@types/styled-components": "^4.1.21",
     "@types/yup": "^0.26.28",
+    "@typescript-eslint/eslint-plugin": "^2.18.0",
+    "@typescript-eslint/parser": "^2.18.0",
     "babel-jest": "^25.1.0",
     "babel-loader": "^8.0.6",
+    "eslint": "^6.8.0",
+    "eslint-plugin-jest": "^23.6.0",
+    "eslint-plugin-prettier": "^3.1.2",
     "husky": "^3.0.9",
     "jest": "^25.1.0",
     "jest-styled-components": "^6.3.3",
@@ -112,11 +118,6 @@
     "react-native-typescript-transformer": "^1.2.13",
     "react-test-renderer": "16.12.0",
     "ts-jest": "^25.0.0",
-    "tslint": "^6.0.0",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-eslint-rules": "^5.4.0",
-    "tslint-react": "^4.2.0",
-    "tslint-react-hooks": "^2.2.1",
     "typescript": "^3.7.2"
   },
   "husky": {
@@ -127,7 +128,7 @@
   "lint-staged": {
     "*.{ts,tsx}": [
       "prettier --write",
-      "tslint --fix --project tsconfig.json",
+      "eslint --fix --max-warnings 0",
       "git add"
     ]
   }

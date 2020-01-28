@@ -99,7 +99,4 @@ const ProfileSocialAuth: React.FC<Props> = ({
   )
 }
 
-export default L.flow(
-  withNavigation,
-  withNavigationFocus,
-)(ProfileSocialAuth)
+export default L.flow(withNavigation, withNavigationFocus)(ProfileSocialAuth)

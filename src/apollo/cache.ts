@@ -54,7 +54,7 @@ export default async (): Promise<InMemoryCache> => {
           return `SocialConnectType:${object.type}`
         // MyProfile - единственный в своем роде
         case 'MyProfile':
-          return `MyProfile`
+          return 'MyProfile'
         default:
           return defaultDataIdFromObject(object)
       }
