@@ -2,10 +2,11 @@ import { StyleProp, ViewStyle } from 'react-native'
 
 export interface InputBase {
   onPress?: () => void
+  value?: string
   defaultValue?: string
   editable?: boolean
-  RightIcon: JSX.Element
-  label: string
+  RightIcon?: JSX.Element
+  label?: string
   error?: string
   style?: any
   containerStyle?: StyleProp<ViewStyle>
