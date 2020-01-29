@@ -2,21 +2,11 @@ import React from 'react'
 import { FlatList, ListRenderItem } from 'react-native'
 import { Track } from 'src/apollo'
 import { ToggleTrackProps, DetailedTrackMenuProps } from 'src/HOCs'
+import TextBase from './TextBase'
 import PlaylistTrack from './PlaylistTrack'
 import RefreshControl from './RefreshControl'
 import { ListFooterLoader } from './Loader'
 import styled from 'src/styled-components'
-import TextBase from './TextBase'
-
-interface Props extends ToggleTrackProps, DetailedTrackMenuProps {
-  tracks: Track[]
-  playlistTitle: string
-  playlistKey: string
-  onRefresh: () => void
-  onEndReached: () => void
-  isRefreshing: boolean
-  isFetchingMore: boolean
-}
 
 const ListEmptyText = styled(TextBase)`
   color: ${({ theme }) => theme.colors.textAlt};
@@ -30,7 +20,19 @@ const Scroll = styled(FlatList as new () => FlatList<Track>).attrs(() => ({
   flex: 1;
 `
 
-class TracksList extends React.Component<Props> {
+export interface TracksFlatListProps
+  extends Pick<ToggleTrackProps, 'isPlaying' | 'activeTrack' | 'toggleTrack'>,
+    DetailedTrackMenuProps {
+  tracks: Track[]
+  playlistTitle: string
+  playlistKey: string
+  onRefresh: () => void
+  onEndReached: () => void
+  isRefreshing: boolean
+  isFetchingMore: boolean
+}
+
+class TracksFlatList extends React.Component<TracksFlatListProps> {
   private renderTrack: ListRenderItem<Track> = ({ item, index }) => {
     const { showDetailedTrack } = this.props
     const isPlaying = this.isTrackPlaying(item)
@@ -99,4 +101,4 @@ class TracksList extends React.Component<Props> {
   }
 }
 
-export default TracksList
+export default TracksFlatList

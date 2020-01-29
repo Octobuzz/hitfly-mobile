@@ -10,6 +10,7 @@ export * from './TrackMenu'
 export * from './TracksView'
 export * from './PlaylistTrack'
 export * from './NavigationList'
+export * from './TracksFlatList'
 
 export { default as Modal } from './Modal'
 export { default as Slider } from './Slider'

@@ -4,6 +4,8 @@ module.exports = {
   preset: '@testing-library/react-native',
   setupFiles: [...jestPreset.setupFiles],
   setupFilesAfterEnv: ['./jest/setup.js'],
+  timers: 'fake',
+  testEnvironment: 'jsdom',
   cacheDirectory: './cache',
   transform: {
     '^.+\\.js$': '<rootDir>/node_modules/react-native/jest/preprocessor.js',

@@ -1,10 +1,10 @@
-import { render } from '../../jest/test-utils'
-import { TracksFlatList } from 'src/components'
 import React from 'react'
+import { render } from '../../jest/test-utils'
+import { TracksFlatList, TracksFlatListProps } from 'src/components'
 import { Track } from 'src/apollo'
 
 describe('TrackFlatList', () => {
-  const items = {
+  const item = {
     title: 'title',
     songText: 'song text',
     singer: 'singer',
@@ -12,14 +12,20 @@ describe('TrackFlatList', () => {
     cover: [{}],
   } as Track
 
-  const props = {
-    toggleTrack: jest.fn(),
-    showDetailedTrack: jest.fn(),
-    activeTrack: null,
-    tracks: [items],
-  }
+  it('renders correctly in default state', () => {
+    const props: TracksFlatListProps = {
+      toggleTrack: jest.fn(),
+      showDetailedTrack: jest.fn(),
+      tracks: [item],
+      playlistTitle: 'title',
+      onRefresh: jest.fn(),
+      onEndReached: jest.fn(),
+      isRefreshing: false,
+      isFetchingMore: false,
+      playlistKey: 'key',
+      isPlaying: false,
+    }
 
-  it('renders correctly', () => {
     const { asJSON } = render(<TracksFlatList {...props} />)
     expect(asJSON()).toMatchSnapshot()
   })
