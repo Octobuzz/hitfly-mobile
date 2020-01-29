@@ -50,6 +50,7 @@ class FormWrapper extends React.Component<Props> {
         onContentSizeChange={this.handleSizeChange}
         onKeyboardWillShow={this.handleKeyboardWillShow}
         onKeyboardDidHide={this.handleKeyboardDidHide}
+        testID="scrollView"
       />
     )
   }

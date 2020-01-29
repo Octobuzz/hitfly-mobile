@@ -46,6 +46,7 @@ exports[`FormWrapper renders correctly 1`] = `
         },
       ]
     }
+    testID="scrollView"
     viewIsInsideTabBar={false}
   />
 </View>
