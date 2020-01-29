@@ -19,7 +19,7 @@ describe('AlbumItem', () => {
     expect(asJSON()).toMatchSnapshot()
   })
 
-  it('AlbumItem has been pressed', () => {
+  it('can be pressed', () => {
     const props = {
       item,
       onPress: jest.fn(),
