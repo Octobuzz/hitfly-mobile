@@ -3,9 +3,9 @@ import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { DocumentNode } from 'graphql'
 import { useQueryWithPagination } from 'src/hooks'
 import { withChangingHeaderSettings } from 'src/HOCs'
+import AlbumsDetailedScreen from './AlbumsDetailed'
 import { routes, names } from 'src/constants'
 import { Album } from 'src/apollo'
-import AlbumsDetailedScreen from './AlbumsDetailed'
 
 interface Props extends NavigationStackScreenProps {
   query: DocumentNode
@@ -40,7 +40,7 @@ const AlbumsDetailedContainer: React.FC<Props> = ({
   }
 
   const onPressAlbum = useCallback((album: Album) => {
-    navigation.navigate(routes.MAIN.ALBUM_PLAYLIST, {
+    navigation.navigate(routes.PROFILE.ALBUM_PLAYLIST, {
       title: album.title,
       albumId: album.id,
     })

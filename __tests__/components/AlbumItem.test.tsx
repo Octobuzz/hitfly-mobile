@@ -5,6 +5,7 @@ import { Album } from 'src/apollo'
 
 describe('AlbumItem', () => {
   const item = {
+    id: 1,
     title: 'title',
     cover: [{ imageUrl: 'url' }],
     author: 'author',
@@ -26,7 +27,7 @@ describe('AlbumItem', () => {
     }
     const { getByTestId } = render(<AlbumItem {...props} />)
 
-    fireEvent.press(getByTestId('wrapper'))
+    fireEvent.press(getByTestId('albumItem'))
     expect(props.onPress).toHaveBeenCalled()
   })
 })

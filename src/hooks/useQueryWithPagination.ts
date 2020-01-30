@@ -30,10 +30,10 @@ function useQueryWithPagination<TData = any>(
     variables,
     itemsSelector,
     hasMorePagesSelector,
-    ...originalOprions
+    ...originalOptions
   } = options
   const queryResult = useQuery<TData, PaginationVariables>(query, {
-    ...originalOprions,
+    ...originalOptions,
     variables: { ...variables, limit },
   })
 
@@ -60,7 +60,7 @@ function useQueryWithPagination<TData = any>(
     }
   }, [hasMorePages, items, limit, loading])
 
-  return { ...queryResult, items, onEndReached }
+  return { ...queryResult, items, onEndReached, data }
 }
 
 export default useQueryWithPagination

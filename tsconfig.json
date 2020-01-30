@@ -3,7 +3,7 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "resolveJsonModule": true,
     "noUnusedLocals": true,
     "checkJs": false,
@@ -16,5 +16,13 @@
     "target": "esnext",
     "baseUrl": "."
   },
-  "include": ["src", "__tests__", "storybook", "index.js", "babel.config.js"]
+  "include": [
+    "src",
+    "__tests__",
+    "storybook",
+    "index.js",
+    "babel.config.js",
+    "TestNavigator.tsx",
+    "types"
+  ]
 }

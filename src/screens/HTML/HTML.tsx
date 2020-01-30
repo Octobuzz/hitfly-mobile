@@ -1,6 +1,5 @@
 import React from 'react'
 import { Dimensions } from 'react-native'
-// @ts-ignore
 import HTMLComponent from 'react-native-render-html'
 import { ScrollView } from 'src/components'
 import theme from 'src/theme'

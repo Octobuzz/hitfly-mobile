@@ -1,6 +1,8 @@
 import 'jest-styled-components'
 import mockAsyncStorage from '@react-native-community/async-storage/jest/async-storage-mock'
 
+jest.mock('react-native/Libraries/YellowBox/YellowBox')
+
 jest.mock('react-native-vector-icons/Foundation', () => 'Icon')
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon')
 jest.mock('react-native-vector-icons/Feather', () => 'Icon')
