@@ -18,8 +18,21 @@ describe('LikedAlbumsDetailedScreen', () => {
     __typename: 'Album',
   } as unknown) as Album
 
+  const albumsData = {
+    albums: {
+      items: [
+        {
+          id: 1,
+          album,
+          __typename: 'FavouriteAlbum',
+        },
+      ],
+      hasMorePages: true,
+      __typename: 'FavouriteAlbumPagination',
+    },
+  }
   const mockNavigation = {} as NavigationStackScreenProps
-  const mock: MockedResponse = {
+  const mockRequest: MockedResponse = {
     request: {
       query: GET_LIKED_ALBUMS,
       variables: {
@@ -28,44 +41,37 @@ describe('LikedAlbumsDetailedScreen', () => {
       },
     },
     result: {
+      data: albumsData,
+    },
+  }
+  const mockFetchMore = {
+    request: {
+      query: GET_LIKED_ALBUMS,
+      variables: {
+        page: 2,
+        limit: names.DETAILED_LIMIT,
+      },
+    },
+    result: {
       data: {
-        albums: {
-          items: [
-            {
-              id: 1,
-              album: { ...album, __typename: 'Album' },
-              __typename: 'FavouriteAlbum',
-            },
-          ],
-          hasMorePages: true,
-          __typename: 'FavouriteAlbumPagination',
-        },
+        ...albumsData,
+        albums: { ...albumsData.albums, hasMorePages: false },
       },
     },
   }
 
-  it('renders in loading state', () => {
+  it('renders correctly in all states', async () => {
     const { asJSON } = render(
       <TestNavigator>
-        <MockedProvider mocks={[mock]}>
+        <MockedProvider mocks={[mockRequest, mockFetchMore]}>
           <LikedAlbumsDetailedScreen {...mockNavigation} />
         </MockedProvider>
       </TestNavigator>,
     )
 
     expect(asJSON()).toMatchSnapshot()
-  })
 
-  it('renders album', async () => {
-    const { asJSON } = render(
-      <TestNavigator>
-        <MockedProvider mocks={[mock]}>
-          <LikedAlbumsDetailedScreen {...mockNavigation} />
-        </MockedProvider>
-      </TestNavigator>,
-    )
-
-    return await wait(() => {
+    await wait(() => {
       expect(asJSON()).toMatchSnapshot()
     })
   })

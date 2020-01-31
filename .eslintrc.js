@@ -17,6 +17,7 @@ module.exports = {
   plugins: ['@typescript-eslint', 'jest'],
   rules: {
     semi: ['warn', 'never'],
+    'react/jsx-curly-brace-presence': ['warn', 'never'],
     'jest/no-commented-out-tests': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
