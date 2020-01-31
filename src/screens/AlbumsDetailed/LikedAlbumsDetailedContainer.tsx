@@ -7,7 +7,7 @@ import { GET_LIKED_ALBUMS } from 'src/apollo'
 interface Props extends NavigationStackScreenProps {}
 
 const itemsSelector = LFP.getOr([], 'albums.items')
-const hasMorePagesSelector = LFP.get('albums.hasMorePagesSelector')
+const hasMorePagesSelector = LFP.get('albums.hasMorePages')
 const transformer = LFP.get('album')
 
 const LikedAlbumsDetailedContainer: React.FC<Props> = props => (

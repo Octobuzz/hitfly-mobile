@@ -42,6 +42,7 @@ function useQueryWithPagination<TData = any>(
   const items = itemsSelector(data)
   const hasMorePages = hasMorePagesSelector(data)
 
+  console.log('HERE', hasMorePages, data)
   const onEndReached = useCallback(() => {
     if (hasMorePages && !loading) {
       // + 1, потому что для бэка 1 и 0 - одно и то же

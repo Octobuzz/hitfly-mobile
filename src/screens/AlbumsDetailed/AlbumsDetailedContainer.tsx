@@ -34,10 +34,7 @@ const AlbumsDetailedContainer: React.FC<Props> = ({
     notifyOnNetworkStatusChange: true,
   })
 
-  let albums = items
-  if (transformer) {
-    albums = albums.map(transformer)
-  }
+  const albums = transformer ? items.map(transformer) : items
 
   const onPressAlbum = useCallback((album: Album) => {
     navigation.navigate(routes.PROFILE.ALBUM_PLAYLIST, {

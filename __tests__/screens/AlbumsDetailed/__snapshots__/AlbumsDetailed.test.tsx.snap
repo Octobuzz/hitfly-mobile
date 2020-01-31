@@ -74,6 +74,7 @@ exports[`AlbumsDetailedScreen renders correctly 1`] = `
           },
         ]
       }
+      testID="albumsScroll"
       updateCellsBatchingPeriod={50}
       viewabilityConfigCallbackPairs={Array []}
       windowSize={21}
@@ -254,6 +255,7 @@ exports[`AlbumsDetailedScreen renders correctly in fetchingMore state 1`] = `
           },
         ]
       }
+      testID="albumsScroll"
       updateCellsBatchingPeriod={50}
       viewabilityConfigCallbackPairs={Array []}
       windowSize={21}
@@ -562,6 +564,7 @@ exports[`AlbumsDetailedScreen renders correctly in refreshing state 1`] = `
           },
         ]
       }
+      testID="albumsScroll"
       updateCellsBatchingPeriod={50}
       viewabilityConfigCallbackPairs={Array []}
       windowSize={21}
@@ -729,6 +732,7 @@ exports[`AlbumsDetailedScreen renders correctly without albums 1`] = `
           },
         ]
       }
+      testID="albumsScroll"
       updateCellsBatchingPeriod={50}
       viewabilityConfigCallbackPairs={Array []}
       windowSize={21}

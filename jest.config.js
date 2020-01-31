@@ -2,7 +2,7 @@ const jestPreset = require('@testing-library/react-native/jest-preset')
 
 module.exports = {
   preset: '@testing-library/react-native',
-  setupFiles: [...jestPreset.setupFiles],
+  setupFiles: jestPreset.setupFiles,
   setupFilesAfterEnv: ['./jest/setup.js'],
   testEnvironment: 'jsdom',
   cacheDirectory: './cache',

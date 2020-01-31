@@ -1,11 +1,20 @@
 import React from 'react'
+import L from 'lodash'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { MockedProvider, MockedResponse } from '@apollo/react-testing'
 import TestNavigator from '../../../jest/TestNavigator'
-import { render, wait } from '../../../jest/test-utils'
+import {
+  wait,
+  render,
+  fireEvent,
+  NativeTestEvent,
+} from '../../../jest/test-utils'
 import { LikedAlbumsDetailedScreen } from 'src/screens/AlbumsDetailed'
 import { Album, GET_LIKED_ALBUMS } from 'src/apollo'
 import { names } from 'src/constants'
+
+// TODO: нужно сделать мок для AlbumItem и Loader
+// чтобы сократить снапшот (UI для них уже протестирован отдельно)
 
 describe('LikedAlbumsDetailedScreen', () => {
   const album = ({
@@ -18,20 +27,22 @@ describe('LikedAlbumsDetailedScreen', () => {
     __typename: 'Album',
   } as unknown) as Album
 
-  const albumsData = {
-    albums: {
-      items: [
-        {
-          id: 1,
-          album,
-          __typename: 'FavouriteAlbum',
-        },
-      ],
-      hasMorePages: true,
-      __typename: 'FavouriteAlbumPagination',
-    },
-  }
   const mockNavigation = {} as NavigationStackScreenProps
+
+  const firstPageItems = L.range(0, names.DETAILED_LIMIT).map(id => ({
+    album: { ...album, id },
+    id,
+    __typename: 'FavouriteAlbum',
+  }))
+  const secondPageItems = L.range(
+    names.DETAILED_LIMIT,
+    names.DETAILED_LIMIT + 5,
+  ).map(id => ({
+    album: { ...album, id },
+    id,
+    __typename: 'FavouriteAlbum',
+  }))
+
   const mockRequest: MockedResponse = {
     request: {
       query: GET_LIKED_ALBUMS,
@@ -41,10 +52,16 @@ describe('LikedAlbumsDetailedScreen', () => {
       },
     },
     result: {
-      data: albumsData,
+      data: {
+        albums: {
+          items: firstPageItems,
+          hasMorePages: true,
+          __typename: 'FavouriteAlbumPagination',
+        },
+      },
     },
   }
-  const mockFetchMore = {
+  const mockFetchMore: MockedResponse = {
     request: {
       query: GET_LIKED_ALBUMS,
       variables: {
@@ -54,23 +71,37 @@ describe('LikedAlbumsDetailedScreen', () => {
     },
     result: {
       data: {
-        ...albumsData,
-        albums: { ...albumsData.albums, hasMorePages: false },
+        albums: {
+          items: [...firstPageItems, ...secondPageItems],
+          hasMorePages: false,
+          __typename: 'FavouriteAlbumPagination',
+        },
       },
     },
   }
 
   it('renders correctly in all states', async () => {
-    const { asJSON } = render(
+    const { asJSON, getByTestId } = render(
       <TestNavigator>
         <MockedProvider mocks={[mockRequest, mockFetchMore]}>
           <LikedAlbumsDetailedScreen {...mockNavigation} />
         </MockedProvider>
       </TestNavigator>,
     )
-
+    // загрузка
     expect(asJSON()).toMatchSnapshot()
 
+    // рендер после загрузки
+    await wait(() => {
+      expect(asJSON()).toMatchSnapshot()
+    })
+
+    fireEvent(getByTestId('albumsScroll'), new NativeTestEvent('endReached'))
+
+    // загрузка следующей страницы
+    expect(asJSON()).toMatchSnapshot()
+
+    // рендер следующей страницы
     await wait(() => {
       expect(asJSON()).toMatchSnapshot()
     })

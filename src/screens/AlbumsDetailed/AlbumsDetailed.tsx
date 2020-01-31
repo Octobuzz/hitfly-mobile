@@ -62,6 +62,7 @@ const AlbumsDetailedScreen: React.FC<AlbumsDetailedScreenProps> = ({
           }
           renderItem={renderGenre}
           data={albums}
+          testID="albumsScroll"
         />
       )}
     </SafeView>
