@@ -9,6 +9,7 @@ import { Album } from 'src/apollo'
 
 interface Props extends NavigationStackScreenProps {
   query: DocumentNode
+  limit?: number
   transformer?: (data?: any) => Album
   itemsSelector: (data: any) => Album[]
   hasMorePagesSelector: (data: any) => boolean
@@ -20,6 +21,7 @@ const AlbumsDetailedContainer: React.FC<Props> = ({
   transformer,
   itemsSelector,
   hasMorePagesSelector,
+  limit = names.DETAILED_LIMIT,
   ...rest
 }) => {
   const {
@@ -28,9 +30,9 @@ const AlbumsDetailedContainer: React.FC<Props> = ({
     onEndReached,
     networkStatus,
   } = useQueryWithPagination(query, {
+    limit,
     itemsSelector,
     hasMorePagesSelector,
-    limit: names.DETAILED_LIMIT,
     notifyOnNetworkStatusChange: true,
   })
 

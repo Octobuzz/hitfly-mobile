@@ -11,7 +11,6 @@ import {
 } from '../../../jest/test-utils'
 import { LikedAlbumsDetailedScreen } from 'src/screens/AlbumsDetailed'
 import { Album, GET_LIKED_ALBUMS } from 'src/apollo'
-import { names } from 'src/constants'
 import { AlbumItem } from 'src/components'
 
 jest.mock('src/components/AlbumItem')
@@ -30,15 +29,15 @@ describe('LikedAlbumsDetailedScreen', () => {
 
   const mockNavigation = {} as NavigationStackScreenProps
 
-  const firstPageItems = L.range(0, names.DETAILED_LIMIT).map(id => ({
+  const LIMIT = 1
+  const NEXT_PAGE_OFFSET = 1
+
+  const firstPageItems = L.range(0, LIMIT).map(id => ({
     album: { ...album, id },
     id,
     __typename: 'FavouriteAlbum',
   }))
-  const secondPageItems = L.range(
-    names.DETAILED_LIMIT,
-    names.DETAILED_LIMIT + 5,
-  ).map(id => ({
+  const secondPageItems = L.range(LIMIT, LIMIT + NEXT_PAGE_OFFSET).map(id => ({
     album: { ...album, id },
     id,
     __typename: 'FavouriteAlbum',
@@ -49,7 +48,7 @@ describe('LikedAlbumsDetailedScreen', () => {
       query: GET_LIKED_ALBUMS,
       variables: {
         page: 1,
-        limit: names.DETAILED_LIMIT,
+        limit: LIMIT,
       },
     },
     result: {
@@ -67,7 +66,7 @@ describe('LikedAlbumsDetailedScreen', () => {
       query: GET_LIKED_ALBUMS,
       variables: {
         page: 2,
-        limit: names.DETAILED_LIMIT,
+        limit: LIMIT,
       },
     },
     result: {
@@ -85,7 +84,7 @@ describe('LikedAlbumsDetailedScreen', () => {
     const { asJSON, getByTestId } = render(
       <TestNavigator>
         <MockedProvider mocks={[mockRequest, mockFetchMore]}>
-          <LikedAlbumsDetailedScreen {...mockNavigation} />
+          <LikedAlbumsDetailedScreen limit={LIMIT} {...mockNavigation} />
         </MockedProvider>
       </TestNavigator>,
     )

@@ -4,7 +4,9 @@ import { NavigationStackScreenProps } from 'react-navigation-stack'
 import AlbumsDetailedContainer from './AlbumsDetailedContainer'
 import { GET_LIKED_ALBUMS } from 'src/apollo'
 
-interface Props extends NavigationStackScreenProps {}
+interface Props extends NavigationStackScreenProps {
+  limit?: number // для удобства тестирования
+}
 
 const itemsSelector = LFP.getOr([], 'albums.items')
 const hasMorePagesSelector = LFP.get('albums.hasMorePages')

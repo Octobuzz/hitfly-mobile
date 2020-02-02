@@ -11,18 +11,13 @@ import {
 } from '../../../jest/test-utils'
 import { MyAlbumsDetailedScreen } from 'src/screens/AlbumsDetailed'
 import { Album, GET_MY_ALBUMS } from 'src/apollo'
-import { names } from 'src/constants'
 import { AlbumItem } from 'src/components'
+
+// для уменьшения размера снапшота
 jest.mock('src/components/AlbumItem')
 ;(AlbumItem as jest.Mock).mockImplementation(() => 'AlbumItem')
 
 describe('MyAlbumsDetailedScreen', () => {
-  // beforeAll(() => {
-  // })
-  // afterAll(() => {
-  //   mockedItem.mockReset()
-  // })
-
   const album = ({
     id: 1,
     title: 'title',
@@ -33,16 +28,16 @@ describe('MyAlbumsDetailedScreen', () => {
     __typename: 'Album',
   } as unknown) as Album
 
+  const LIMIT = 1
+  const NEXT_PAGE_OFFSET = 1
+
   const mockNavigation = {} as NavigationStackScreenProps
 
-  const firstPageItems = L.range(0, names.DETAILED_LIMIT).map(id => ({
+  const firstPageItems = L.range(0, LIMIT).map(id => ({
     ...album,
     id,
   }))
-  const secondPageItems = L.range(
-    names.DETAILED_LIMIT,
-    names.DETAILED_LIMIT + 5,
-  ).map(id => ({
+  const secondPageItems = L.range(LIMIT, LIMIT + NEXT_PAGE_OFFSET).map(id => ({
     ...album,
     id,
   }))
@@ -52,7 +47,7 @@ describe('MyAlbumsDetailedScreen', () => {
       query: GET_MY_ALBUMS,
       variables: {
         page: 1,
-        limit: names.DETAILED_LIMIT,
+        limit: LIMIT,
       },
     },
     result: {
@@ -70,7 +65,7 @@ describe('MyAlbumsDetailedScreen', () => {
       query: GET_MY_ALBUMS,
       variables: {
         page: 2,
-        limit: names.DETAILED_LIMIT,
+        limit: LIMIT,
       },
     },
     result: {
@@ -88,7 +83,7 @@ describe('MyAlbumsDetailedScreen', () => {
     const { asJSON, getByTestId } = render(
       <TestNavigator>
         <MockedProvider mocks={[mockRequest, mockFetchMore]}>
-          <MyAlbumsDetailedScreen {...mockNavigation} />
+          <MyAlbumsDetailedScreen limit={LIMIT} {...mockNavigation} />
         </MockedProvider>
       </TestNavigator>,
     )
