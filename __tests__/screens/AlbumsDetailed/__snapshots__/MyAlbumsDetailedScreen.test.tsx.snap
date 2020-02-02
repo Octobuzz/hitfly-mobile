@@ -1,0 +1,2483 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MyAlbumsDetailedScreen renders correctly in all states 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <SafeAreaView
+    style={
+      Array [
+        Object {
+          "flexBasis": 0,
+          "flexGrow": 1,
+          "flexShrink": 1,
+        },
+      ]
+    }
+  >
+    <View
+      isFilled={true}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "justifyContent": "center",
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "aspectRatio": 1,
+            },
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            Array [
+              Object {},
+            ],
+          ]
+        }
+      >
+        <View
+          autoPlay={true}
+          enableMergePathsAndroidForKitKatAndAbove={false}
+          loop={true}
+          progress={0}
+          resizeMode="contain"
+          sourceJson="{\\"v\\":\\"5.5.5\\",\\"fr\\":30,\\"ip\\":20,\\"op\\":56,\\"w\\":100,\\"h\\":100,\\"nm\\":\\"播放音频\\",\\"ddd\\":0,\\"assets\\":[],\\"layers\\":[{\\"ddd\\":0,\\"ind\\":1,\\"ty\\":4,\\"nm\\":\\"Line_5\\",\\"sr\\":1,\\"ks\\":{\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":11},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":10},\\"p\\":{\\"a\\":0,\\"k\\":[65.996,50,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100,100],\\"ix\\":6}},\\"ao\\":0,\\"shapes\\":[{\\"ty\\":\\"gr\\",\\"it\\":[{\\"ty\\":\\"rc\\",\\"d\\":1,\\"s\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":20,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":29,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":38,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":47,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":56,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":65,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":74,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":83,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"t\\":92}],\\"ix\\":2},\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":2,\\"ix\\":4},\\"nm\\":\\"矩形路径 1\\",\\"mn\\":\\"ADBE Vector Shape - Rect\\",\\"hd\\":false},{\\"ty\\":\\"fl\\",\\"c\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":12,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":13,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":31,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":47,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":48,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"t\\":66}],\\"ix\\":4},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":5},\\"r\\":1,\\"bm\\":0,\\"nm\\":\\"填充 1\\",\\"mn\\":\\"ADBE Vector Graphic - Fill\\",\\"hd\\":false},{\\"ty\\":\\"tr\\",\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":6},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":7},\\"sk\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":4},\\"sa\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":5},\\"nm\\":\\"变换\\"}],\\"nm\\":\\"矩形 1\\",\\"np\\":3,\\"cix\\":2,\\"bm\\":0,\\"ix\\":1,\\"mn\\":\\"ADBE Vector Group\\",\\"hd\\":false}],\\"ip\\":20,\\"op\\":920,\\"st\\":20,\\"bm\\":0},{\\"ddd\\":0,\\"ind\\":2,\\"ty\\":4,\\"nm\\":\\"Line_4\\",\\"sr\\":1,\\"ks\\":{\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":11},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":10},\\"p\\":{\\"a\\":0,\\"k\\":[58.004,50,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100,100],\\"ix\\":6}},\\"ao\\":0,\\"shapes\\":[{\\"ty\\":\\"gr\\",\\"it\\":[{\\"ty\\":\\"rc\\",\\"d\\":1,\\"s\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":15,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":24,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":33,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":42,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":51,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":60,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":69,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":78,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"t\\":87}],\\"ix\\":2},\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":2,\\"ix\\":4},\\"nm\\":\\"矩形路径 1\\",\\"mn\\":\\"ADBE Vector Shape - Rect\\",\\"hd\\":false},{\\"ty\\":\\"fl\\",\\"c\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":5,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":6,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":24,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":40,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":41,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"t\\":59}],\\"ix\\":4},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":5},\\"r\\":1,\\"bm\\":0,\\"nm\\":\\"填充 1\\",\\"mn\\":\\"ADBE Vector Graphic - Fill\\",\\"hd\\":false},{\\"ty\\":\\"tr\\",\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":6},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":7},\\"sk\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":4},\\"sa\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":5},\\"nm\\":\\"变换\\"}],\\"nm\\":\\"矩形 1\\",\\"np\\":3,\\"cix\\":2,\\"bm\\":0,\\"ix\\":1,\\"mn\\":\\"ADBE Vector Group\\",\\"hd\\":false}],\\"ip\\":15,\\"op\\":915,\\"st\\":15,\\"bm\\":0},{\\"ddd\\":0,\\"ind\\":3,\\"ty\\":4,\\"nm\\":\\"Line_3\\",\\"sr\\":1,\\"ks\\":{\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":11},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":10},\\"p\\":{\\"a\\":0,\\"k\\":[50.004,50,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100,100],\\"ix\\":6}},\\"ao\\":0,\\"shapes\\":[{\\"ty\\":\\"gr\\",\\"it\\":[{\\"ty\\":\\"rc\\",\\"d\\":1,\\"s\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":10,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":19,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":28,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":37,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":46,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":55,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":64,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":73,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"t\\":82}],\\"ix\\":2},\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":2,\\"ix\\":4},\\"nm\\":\\"矩形路径 1\\",\\"mn\\":\\"ADBE Vector Shape - Rect\\",\\"hd\\":false},{\\"ty\\":\\"fl\\",\\"c\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":33,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":34,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"t\\":52}],\\"ix\\":4},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":5},\\"r\\":1,\\"bm\\":0,\\"nm\\":\\"填充 1\\",\\"mn\\":\\"ADBE Vector Graphic - Fill\\",\\"hd\\":false},{\\"ty\\":\\"tr\\",\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":6},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":7},\\"sk\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":4},\\"sa\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":5},\\"nm\\":\\"变换\\"}],\\"nm\\":\\"矩形 1\\",\\"np\\":3,\\"cix\\":2,\\"bm\\":0,\\"ix\\":1,\\"mn\\":\\"ADBE Vector Group\\",\\"hd\\":false}],\\"ip\\":10,\\"op\\":910,\\"st\\":10,\\"bm\\":0},{\\"ddd\\":0,\\"ind\\":4,\\"ty\\":4,\\"nm\\":\\"Line_2\\",\\"sr\\":1,\\"ks\\":{\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":11},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":10},\\"p\\":{\\"a\\":0,\\"k\\":[42.004,50,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100,100],\\"ix\\":6}},\\"ao\\":0,\\"shapes\\":[{\\"ty\\":\\"gr\\",\\"it\\":[{\\"ty\\":\\"rc\\",\\"d\\":1,\\"s\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":5,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":14,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":23,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":32,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":41,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":50,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":59,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":68,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"t\\":77}],\\"ix\\":2},\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":2,\\"ix\\":4},\\"nm\\":\\"矩形路径 1\\",\\"mn\\":\\"ADBE Vector Shape - Rect\\",\\"hd\\":false},{\\"ty\\":\\"fl\\",\\"c\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":26,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":27,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"t\\":45}],\\"ix\\":4},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":5},\\"r\\":1,\\"bm\\":0,\\"nm\\":\\"填充 1\\",\\"mn\\":\\"ADBE Vector Graphic - Fill\\",\\"hd\\":false},{\\"ty\\":\\"tr\\",\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":6},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":7},\\"sk\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":4},\\"sa\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":5},\\"nm\\":\\"变换\\"}],\\"nm\\":\\"矩形 1\\",\\"np\\":3,\\"cix\\":2,\\"bm\\":0,\\"ix\\":1,\\"mn\\":\\"ADBE Vector Group\\",\\"hd\\":false}],\\"ip\\":5,\\"op\\":905,\\"st\\":5,\\"bm\\":0},{\\"ddd\\":0,\\"ind\\":5,\\"ty\\":4,\\"nm\\":\\"Line_1\\",\\"sr\\":1,\\"ks\\":{\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":11},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":10},\\"p\\":{\\"a\\":0,\\"k\\":[34.004,50,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100,100],\\"ix\\":6}},\\"ao\\":0,\\"shapes\\":[{\\"ty\\":\\"gr\\",\\"it\\":[{\\"ty\\":\\"rc\\",\\"d\\":1,\\"s\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":0,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":9,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":18,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":27,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":36,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":45,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":54,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":63,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"t\\":72}],\\"ix\\":2},\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":2,\\"ix\\":4},\\"nm\\":\\"矩形路径 1\\",\\"mn\\":\\"ADBE Vector Shape - Rect\\",\\"hd\\":false},{\\"ty\\":\\"fl\\",\\"c\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":19,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":20,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"t\\":38}],\\"ix\\":4},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":5},\\"r\\":1,\\"bm\\":0,\\"nm\\":\\"填充 1\\",\\"mn\\":\\"ADBE Vector Graphic - Fill\\",\\"hd\\":false},{\\"ty\\":\\"tr\\",\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":6},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":7},\\"sk\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":4},\\"sa\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":5},\\"nm\\":\\"变换\\"}],\\"nm\\":\\"矩形 1\\",\\"np\\":3,\\"cix\\":2,\\"bm\\":0,\\"ix\\":1,\\"mn\\":\\"ADBE Vector Group\\",\\"hd\\":false}],\\"ip\\":0,\\"op\\":900,\\"st\\":0,\\"bm\\":0}],\\"markers\\":[]}"
+          speed={1}
+          style={
+            Object {
+              "aspectRatio": 1,
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+        />
+      </View>
+    </View>
+  </SafeAreaView>
+</View>
+`;
+
+exports[`MyAlbumsDetailedScreen renders correctly in all states 2`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <SafeAreaView
+    style={
+      Array [
+        Object {
+          "flexBasis": 0,
+          "flexGrow": 1,
+          "flexShrink": 1,
+        },
+      ]
+    }
+  >
+    <ScrollView
+      ListFooterComponent={
+        <Unknown
+          isShown={false}
+        />
+      }
+      columnWrapperStyle={
+        Object {
+          "justifyContent": "space-between",
+          "marginBottom": 16,
+        }
+      }
+      data={
+        Array [
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 0,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 1,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 2,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 3,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 4,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 5,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 6,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 7,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 8,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 9,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 10,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 11,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 12,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 13,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 14,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 15,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 16,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 17,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 18,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 19,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 20,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 21,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 22,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 23,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 24,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 25,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 26,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 27,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 28,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 29,
+            "title": "title",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={8}
+      maxToRenderPerBatch={10}
+      numColumns={2}
+      onEndReachedThreshold={0.8}
+      refreshControl={
+        <Styled(RefreshControl)
+          onRefresh={[Function]}
+          refreshing={false}
+        />
+      }
+      removeClippedSubviews={false}
+      scrollEventThrottle={50}
+      stickyHeaderIndices={Array []}
+      style={
+        Array [
+          Object {
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "paddingBottom": 16,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "paddingTop": 16,
+          },
+        ]
+      }
+      testID="albumsScroll"
+      updateCellsBatchingPeriod={50}
+      viewabilityConfigCallbackPairs={Array []}
+      windowSize={21}
+    >
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "height": 0,
+          }
+        }
+      />
+      <View />
+    </ScrollView>
+  </SafeAreaView>
+</View>
+`;
+
+exports[`MyAlbumsDetailedScreen renders correctly in all states 3`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <SafeAreaView
+    style={
+      Array [
+        Object {
+          "flexBasis": 0,
+          "flexGrow": 1,
+          "flexShrink": 1,
+        },
+      ]
+    }
+  >
+    <ScrollView
+      ListFooterComponent={
+        <Unknown
+          isShown={true}
+        />
+      }
+      columnWrapperStyle={
+        Object {
+          "justifyContent": "space-between",
+          "marginBottom": 16,
+        }
+      }
+      data={
+        Array [
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 0,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 1,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 2,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 3,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 4,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 5,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 6,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 7,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 8,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 9,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 10,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 11,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 12,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 13,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 14,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 15,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 16,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 17,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 18,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 19,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 20,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 21,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 22,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 23,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 24,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 25,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 26,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 27,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 28,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 29,
+            "title": "title",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={8}
+      maxToRenderPerBatch={10}
+      numColumns={2}
+      onEndReachedThreshold={0.8}
+      refreshControl={
+        <Styled(RefreshControl)
+          onRefresh={[Function]}
+          refreshing={false}
+        />
+      }
+      removeClippedSubviews={false}
+      scrollEventThrottle={50}
+      stickyHeaderIndices={Array []}
+      style={
+        Array [
+          Object {
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "paddingBottom": 16,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "paddingTop": 16,
+          },
+        ]
+      }
+      testID="albumsScroll"
+      updateCellsBatchingPeriod={50}
+      viewabilityConfigCallbackPairs={Array []}
+      windowSize={21}
+    >
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "height": 0,
+          }
+        }
+      />
+      <View>
+        <View
+          isFilled={true}
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "flexBasis": 0,
+                "flexGrow": 1,
+                "flexShrink": 1,
+                "justifyContent": "center",
+              },
+            ]
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "aspectRatio": 1,
+                },
+                undefined,
+                Array [
+                  Object {
+                    "height": 100,
+                  },
+                ],
+              ]
+            }
+          >
+            <View
+              autoPlay={true}
+              enableMergePathsAndroidForKitKatAndAbove={false}
+              loop={true}
+              progress={0}
+              resizeMode="contain"
+              size={100}
+              sourceJson="{\\"v\\":\\"5.5.5\\",\\"fr\\":30,\\"ip\\":20,\\"op\\":56,\\"w\\":100,\\"h\\":100,\\"nm\\":\\"播放音频\\",\\"ddd\\":0,\\"assets\\":[],\\"layers\\":[{\\"ddd\\":0,\\"ind\\":1,\\"ty\\":4,\\"nm\\":\\"Line_5\\",\\"sr\\":1,\\"ks\\":{\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":11},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":10},\\"p\\":{\\"a\\":0,\\"k\\":[65.996,50,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100,100],\\"ix\\":6}},\\"ao\\":0,\\"shapes\\":[{\\"ty\\":\\"gr\\",\\"it\\":[{\\"ty\\":\\"rc\\",\\"d\\":1,\\"s\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":20,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":29,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":38,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":47,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":56,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":65,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":74,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":83,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"t\\":92}],\\"ix\\":2},\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":2,\\"ix\\":4},\\"nm\\":\\"矩形路径 1\\",\\"mn\\":\\"ADBE Vector Shape - Rect\\",\\"hd\\":false},{\\"ty\\":\\"fl\\",\\"c\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":12,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":13,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":31,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":47,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":48,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"t\\":66}],\\"ix\\":4},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":5},\\"r\\":1,\\"bm\\":0,\\"nm\\":\\"填充 1\\",\\"mn\\":\\"ADBE Vector Graphic - Fill\\",\\"hd\\":false},{\\"ty\\":\\"tr\\",\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":6},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":7},\\"sk\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":4},\\"sa\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":5},\\"nm\\":\\"变换\\"}],\\"nm\\":\\"矩形 1\\",\\"np\\":3,\\"cix\\":2,\\"bm\\":0,\\"ix\\":1,\\"mn\\":\\"ADBE Vector Group\\",\\"hd\\":false}],\\"ip\\":20,\\"op\\":920,\\"st\\":20,\\"bm\\":0},{\\"ddd\\":0,\\"ind\\":2,\\"ty\\":4,\\"nm\\":\\"Line_4\\",\\"sr\\":1,\\"ks\\":{\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":11},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":10},\\"p\\":{\\"a\\":0,\\"k\\":[58.004,50,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100,100],\\"ix\\":6}},\\"ao\\":0,\\"shapes\\":[{\\"ty\\":\\"gr\\",\\"it\\":[{\\"ty\\":\\"rc\\",\\"d\\":1,\\"s\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":15,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":24,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":33,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":42,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":51,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":60,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":69,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":78,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"t\\":87}],\\"ix\\":2},\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":2,\\"ix\\":4},\\"nm\\":\\"矩形路径 1\\",\\"mn\\":\\"ADBE Vector Shape - Rect\\",\\"hd\\":false},{\\"ty\\":\\"fl\\",\\"c\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":5,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":6,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":24,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":40,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":41,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"t\\":59}],\\"ix\\":4},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":5},\\"r\\":1,\\"bm\\":0,\\"nm\\":\\"填充 1\\",\\"mn\\":\\"ADBE Vector Graphic - Fill\\",\\"hd\\":false},{\\"ty\\":\\"tr\\",\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":6},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":7},\\"sk\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":4},\\"sa\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":5},\\"nm\\":\\"变换\\"}],\\"nm\\":\\"矩形 1\\",\\"np\\":3,\\"cix\\":2,\\"bm\\":0,\\"ix\\":1,\\"mn\\":\\"ADBE Vector Group\\",\\"hd\\":false}],\\"ip\\":15,\\"op\\":915,\\"st\\":15,\\"bm\\":0},{\\"ddd\\":0,\\"ind\\":3,\\"ty\\":4,\\"nm\\":\\"Line_3\\",\\"sr\\":1,\\"ks\\":{\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":11},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":10},\\"p\\":{\\"a\\":0,\\"k\\":[50.004,50,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100,100],\\"ix\\":6}},\\"ao\\":0,\\"shapes\\":[{\\"ty\\":\\"gr\\",\\"it\\":[{\\"ty\\":\\"rc\\",\\"d\\":1,\\"s\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":10,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":19,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":28,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":37,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":46,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":55,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":64,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":73,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"t\\":82}],\\"ix\\":2},\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":2,\\"ix\\":4},\\"nm\\":\\"矩形路径 1\\",\\"mn\\":\\"ADBE Vector Shape - Rect\\",\\"hd\\":false},{\\"ty\\":\\"fl\\",\\"c\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":33,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":34,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"t\\":52}],\\"ix\\":4},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":5},\\"r\\":1,\\"bm\\":0,\\"nm\\":\\"填充 1\\",\\"mn\\":\\"ADBE Vector Graphic - Fill\\",\\"hd\\":false},{\\"ty\\":\\"tr\\",\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":6},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":7},\\"sk\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":4},\\"sa\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":5},\\"nm\\":\\"变换\\"}],\\"nm\\":\\"矩形 1\\",\\"np\\":3,\\"cix\\":2,\\"bm\\":0,\\"ix\\":1,\\"mn\\":\\"ADBE Vector Group\\",\\"hd\\":false}],\\"ip\\":10,\\"op\\":910,\\"st\\":10,\\"bm\\":0},{\\"ddd\\":0,\\"ind\\":4,\\"ty\\":4,\\"nm\\":\\"Line_2\\",\\"sr\\":1,\\"ks\\":{\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":11},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":10},\\"p\\":{\\"a\\":0,\\"k\\":[42.004,50,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100,100],\\"ix\\":6}},\\"ao\\":0,\\"shapes\\":[{\\"ty\\":\\"gr\\",\\"it\\":[{\\"ty\\":\\"rc\\",\\"d\\":1,\\"s\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":5,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":14,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":23,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":32,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":41,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":50,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":59,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":68,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"t\\":77}],\\"ix\\":2},\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":2,\\"ix\\":4},\\"nm\\":\\"矩形路径 1\\",\\"mn\\":\\"ADBE Vector Shape - Rect\\",\\"hd\\":false},{\\"ty\\":\\"fl\\",\\"c\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":26,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":27,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"t\\":45}],\\"ix\\":4},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":5},\\"r\\":1,\\"bm\\":0,\\"nm\\":\\"填充 1\\",\\"mn\\":\\"ADBE Vector Graphic - Fill\\",\\"hd\\":false},{\\"ty\\":\\"tr\\",\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":6},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":7},\\"sk\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":4},\\"sa\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":5},\\"nm\\":\\"变换\\"}],\\"nm\\":\\"矩形 1\\",\\"np\\":3,\\"cix\\":2,\\"bm\\":0,\\"ix\\":1,\\"mn\\":\\"ADBE Vector Group\\",\\"hd\\":false}],\\"ip\\":5,\\"op\\":905,\\"st\\":5,\\"bm\\":0},{\\"ddd\\":0,\\"ind\\":5,\\"ty\\":4,\\"nm\\":\\"Line_1\\",\\"sr\\":1,\\"ks\\":{\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":11},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":10},\\"p\\":{\\"a\\":0,\\"k\\":[34.004,50,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100,100],\\"ix\\":6}},\\"ao\\":0,\\"shapes\\":[{\\"ty\\":\\"gr\\",\\"it\\":[{\\"ty\\":\\"rc\\",\\"d\\":1,\\"s\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":0,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":9,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":18,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":27,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":36,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":45,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":54,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":63,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"t\\":72}],\\"ix\\":2},\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":2,\\"ix\\":4},\\"nm\\":\\"矩形路径 1\\",\\"mn\\":\\"ADBE Vector Shape - Rect\\",\\"hd\\":false},{\\"ty\\":\\"fl\\",\\"c\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":19,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":20,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"t\\":38}],\\"ix\\":4},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":5},\\"r\\":1,\\"bm\\":0,\\"nm\\":\\"填充 1\\",\\"mn\\":\\"ADBE Vector Graphic - Fill\\",\\"hd\\":false},{\\"ty\\":\\"tr\\",\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":6},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":7},\\"sk\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":4},\\"sa\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":5},\\"nm\\":\\"变换\\"}],\\"nm\\":\\"矩形 1\\",\\"np\\":3,\\"cix\\":2,\\"bm\\":0,\\"ix\\":1,\\"mn\\":\\"ADBE Vector Group\\",\\"hd\\":false}],\\"ip\\":0,\\"op\\":900,\\"st\\":0,\\"bm\\":0}],\\"markers\\":[]}"
+              speed={1}
+              style={
+                Object {
+                  "aspectRatio": 1,
+                  "height": 100,
+                  "width": "100%",
+                }
+              }
+            />
+          </View>
+        </View>
+      </View>
+    </ScrollView>
+  </SafeAreaView>
+</View>
+`;
+
+exports[`MyAlbumsDetailedScreen renders correctly in all states 4`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <SafeAreaView
+    style={
+      Array [
+        Object {
+          "flexBasis": 0,
+          "flexGrow": 1,
+          "flexShrink": 1,
+        },
+      ]
+    }
+  >
+    <ScrollView
+      ListFooterComponent={
+        <Unknown
+          isShown={false}
+        />
+      }
+      columnWrapperStyle={
+        Object {
+          "justifyContent": "space-between",
+          "marginBottom": 16,
+        }
+      }
+      data={
+        Array [
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 0,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 1,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 2,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 3,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 4,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 5,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 6,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 7,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 8,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 9,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 10,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 11,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 12,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 13,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 14,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 15,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 16,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 17,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 18,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 19,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 20,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 21,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 22,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 23,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 24,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 25,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 26,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 27,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 28,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 29,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 0,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 1,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 2,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 3,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 4,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 5,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 6,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 7,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 8,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 9,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 10,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 11,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 12,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 13,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 14,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 15,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 16,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 17,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 18,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 19,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 20,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 21,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 22,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 23,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 24,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 25,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 26,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 27,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 28,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 29,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 30,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 31,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 32,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 33,
+            "title": "title",
+          },
+          Object {
+            "__typename": "Album",
+            "author": "author",
+            "cover": Array [
+              Object {
+                "__typename": "ImageSizeType",
+                "imageUrl": "url",
+                "sizeName": "s300x300",
+              },
+            ],
+            "id": 34,
+            "title": "title",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      horizontal={false}
+      initialNumToRender={8}
+      maxToRenderPerBatch={10}
+      numColumns={2}
+      onEndReachedThreshold={0.8}
+      refreshControl={
+        <Styled(RefreshControl)
+          onRefresh={[Function]}
+          refreshing={false}
+        />
+      }
+      removeClippedSubviews={false}
+      scrollEventThrottle={50}
+      stickyHeaderIndices={Array []}
+      style={
+        Array [
+          Object {
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "paddingBottom": 16,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "paddingTop": 16,
+          },
+        ]
+      }
+      testID="albumsScroll"
+      updateCellsBatchingPeriod={50}
+      viewabilityConfigCallbackPairs={Array []}
+      windowSize={21}
+    >
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={null}
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "flexDirection": "row",
+              },
+              Object {
+                "justifyContent": "space-between",
+                "marginBottom": 16,
+              },
+            ]
+          }
+        >
+          AlbumItem
+          AlbumItem
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "height": 0,
+          }
+        }
+      />
+      <View />
+    </ScrollView>
+  </SafeAreaView>
+</View>
+`;
