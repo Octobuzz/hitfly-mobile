@@ -1,4 +1,3 @@
-// test-utils.js
 import React, { ReactElement, FC } from 'react'
 import { render, RenderOptions } from '@testing-library/react-native'
 import theme from 'src/theme'

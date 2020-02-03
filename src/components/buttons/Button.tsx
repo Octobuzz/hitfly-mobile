@@ -6,12 +6,12 @@ import { ButtonBase } from './interfaces'
 import styled, { css } from 'src/styled-components'
 
 export const disabledStyle = css`
-  ${({ disabled }: { disabled?: boolean }) => disabled && `opacity: 0.4;`}
+  ${({ disabled }: { disabled?: boolean }) => disabled && 'opacity: 0.4;'}
 `
 
 const Wrapper = styled.TouchableOpacity<IndentedHorizontal>`
   ${disabledStyle}
-  ${({ withoutMargin }) => !withoutMargin && `margin-horizontal: 20px;`}
+  ${({ withoutMargin }) => !withoutMargin && 'margin-horizontal: 20px;'}
 `
 
 const Inner = styled.View<ColorType & Loadable>`
@@ -72,18 +72,12 @@ interface Props extends ColorType, ButtonBase, IndentedHorizontal, Loadable {}
 const Button: React.FC<Props> = ({
   type,
   title,
-  style,
-  onPress,
   isLoading,
   isDisabled,
   withoutMargin,
+  ...rest
 }) => (
-  <Wrapper
-    disabled={isDisabled}
-    withoutMargin={withoutMargin}
-    onPress={onPress}
-    style={style}
-  >
+  <Wrapper disabled={isDisabled} withoutMargin={withoutMargin} {...rest}>
     <Gradient>
       <Inner isLoading={isLoading} type={type}>
         {isLoading ? <Loader size={61.7} /> : <Text type={type}>{title}</Text>}

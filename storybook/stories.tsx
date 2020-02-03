@@ -10,7 +10,6 @@ import {
   DatePicker,
   CheckBoxUI,
   SocialButton,
-  SlidingPanel,
   PlaylistTrack,
   TextWithLines,
   SelectableGenreItem,
@@ -19,26 +18,6 @@ import { PlaylistScreen } from 'src/screens'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import styled from 'src/styled-components'
 import { Track, Genre } from 'src/apollo'
-
-const SlidingPanelStory: React.FC = () => {
-  const panel = React.useRef(null)
-
-  const openPanel = () => {
-    // @ts-ignore
-    panel.current.show()
-  }
-
-  return (
-    <>
-      <Button onPress={openPanel} title="Open panel" />
-      <SlidingPanel ref={panel}>
-        <Button title="Gradient" type="gradient" />
-      </SlidingPanel>
-    </>
-  )
-}
-
-storiesOf('SlidingPanel', module).add('Default', () => <SlidingPanelStory />)
 
 storiesOf('Button', module)
   .add('Gradient', () => <Button title="Gradient" type="gradient" />)
@@ -52,6 +31,7 @@ storiesOf('Button', module)
   ))
   .add('Gradient with Loader', () => <Button isLoading title="Gradient" />)
 storiesOf('More', module).add('Default', () => (
+  // eslint-disable-next-line react-native/no-inline-styles
   <More style={{ backgroundColor: 'green' }} />
 ))
 storiesOf('Link', module).add('Default', () => <Link title="Link" />)
@@ -128,7 +108,10 @@ storiesOf('Inputs', module)
   .add('Dropdown', () => (
     <Dropdown
       label="label"
-      options={[{ value: 'm', title: 'Male' }, { value: 'f', title: 'Female' }]}
+      options={[
+        { value: 'm', title: 'Male' },
+        { value: 'f', title: 'Female' },
+      ]}
       {...formikBag}
     />
   ))
@@ -146,6 +129,7 @@ const GenreItemStory = () => {
     <SelectableGenreItem
       item={genre}
       onPress={() => setSelected(!isSelected)}
+      onPressSubGenres={() => {}}
       isSelected={isSelected}
     />
   )
@@ -187,6 +171,6 @@ storiesOf('PlaylistScreen', module).add('Default', () => (
         'https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823_960_720.jpg',
     }}
     tracks={getMockPlaylist()}
-    favouriteCount={100}
+    favouritesCount={100}
   />
 ))

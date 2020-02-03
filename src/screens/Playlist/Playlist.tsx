@@ -39,7 +39,7 @@ const PositionedControlButton = styled(ControlButton)`
 interface Props
   extends ToggleTrackProps,
     DetailedTrackMenuProps,
-    NavigationStackScreenProps<{ trackToPlay?: Track; title: string }> {
+    NavigationStackScreenProps<{ trackToPlay?: Track; title?: string }> {
   cover: SourceType
   tracks: Track[]
   favouritesCount: number

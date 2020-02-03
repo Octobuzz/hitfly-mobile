@@ -1,6 +1,4 @@
 import React, { useRef, useEffect } from 'react'
-import { TextInputProps } from 'react-native'
-// @ts-ignore
 import { OutlinedTextField } from 'react-native-material-textfield'
 import { InputBase } from './interfaces'
 import styled from 'src/styled-components'
@@ -12,21 +10,23 @@ const TextInput = styled(OutlinedTextField).attrs(({ theme }) => ({
   labelTextStyle: {
     fontFamily: theme.fonts.regular,
   },
-}))`
-  color: ${({ theme }) => theme.colors.textMain};
-  font-family: ${({ theme }) => theme.fonts.regular};
-  font-size: 12px;
-`
+  titleTextStyle: {
+    fontFamily: theme.fonts.regular,
+    fontSize: 12,
+  },
+}))``
 
-const TextInputUI: React.FC<InputBase & TextInputProps> = ({
+const TextInputUI: React.FC<InputBase> = ({
   value,
   forwardRef,
   RightIcon,
   ...rest
 }) => {
-  const renderRightAccessory = (): JSX.Element => RightIcon
+  const renderRightAccessory = RightIcon
+    ? (): JSX.Element => RightIcon
+    : undefined
 
-  const ref = useRef()
+  const ref = useRef<OutlinedTextField>(null)
 
   useEffect(() => {
     if (forwardRef) {
@@ -35,10 +35,7 @@ const TextInputUI: React.FC<InputBase & TextInputProps> = ({
   }, [forwardRef])
 
   useEffect(() => {
-    if (ref.current) {
-      // @ts-ignore
-      ref.current.setValue(value)
-    }
+    ref.current?.setValue(value)
   }, [value])
 
   return (

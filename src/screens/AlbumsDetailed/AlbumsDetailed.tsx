@@ -24,17 +24,17 @@ const Scroll = styled(FlatList as new () => FlatList<Album>).attrs(() => ({
     ${styles.VIEW_HORIZONTAL_INDENTATION}px;
 `
 
-interface Props {
+export interface AlbumsDetailedScreenProps {
   albums: Album[]
   isLoading: boolean
   isRefreshing: boolean
   isFetchingMore: boolean
-  onRefresh: () => void
-  onEndReached: () => void
-  onPressAlbum: (album: Album) => void
+  onRefresh?: () => void
+  onEndReached?: () => void
+  onPressAlbum?: (album: Album) => void
 }
 
-const AlbumsDetailed: React.FC<Props> = ({
+const AlbumsDetailedScreen: React.FC<AlbumsDetailedScreenProps> = ({
   albums,
   isLoading,
   onRefresh,
@@ -62,10 +62,11 @@ const AlbumsDetailed: React.FC<Props> = ({
           }
           renderItem={renderGenre}
           data={albums}
+          testID="albumsScroll"
         />
       )}
     </SafeView>
   )
 }
 
-export default AlbumsDetailed
+export default AlbumsDetailedScreen

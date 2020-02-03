@@ -15,7 +15,7 @@ import { Track } from 'src/apollo'
 import { names } from 'src/constants'
 
 interface Props
-  extends NavigationStackScreenProps<{ trackToPlay?: Track; title: string }> {
+  extends NavigationStackScreenProps<{ trackToPlay?: Track; title?: string }> {
   query: DocumentNode
   variables?: Record<string, any>
   playlistKey: string

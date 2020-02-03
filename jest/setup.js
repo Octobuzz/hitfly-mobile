@@ -1,6 +1,8 @@
 import 'jest-styled-components'
 import mockAsyncStorage from '@react-native-community/async-storage/jest/async-storage-mock'
 
+jest.mock('react-native/Libraries/YellowBox/YellowBox')
+
 jest.mock('react-native-vector-icons/Foundation', () => 'Icon')
 jest.mock('react-native-vector-icons/MaterialCommunityIcons', () => 'Icon')
 jest.mock('react-native-vector-icons/Feather', () => 'Icon')
@@ -41,5 +43,40 @@ jest.mock('react-native-track-player', () => {
     getBufferedPosition: jest.fn(),
     getState: jest.fn(),
     getRate: jest.fn(),
+  }
+})
+
+jest.mock('react-native-gesture-handler', () => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const View = require('react-native/Libraries/Components/View/View')
+  return {
+    Swipeable: View,
+    DrawerLayout: View,
+    State: {},
+    ScrollView: View,
+    Slider: View,
+    Switch: View,
+    TextInput: View,
+    ToolbarAndroid: View,
+    ViewPagerAndroid: View,
+    DrawerLayoutAndroid: View,
+    WebView: View,
+    NativeViewGestureHandler: View,
+    TapGestureHandler: View,
+    FlingGestureHandler: View,
+    ForceTouchGestureHandler: View,
+    LongPressGestureHandler: View,
+    PanGestureHandler: View,
+    PinchGestureHandler: View,
+    RotationGestureHandler: View,
+    /* Buttons */
+    RawButton: View,
+    BaseButton: View,
+    RectButton: View,
+    BorderlessButton: View,
+    /* Other */
+    FlatList: View,
+    gestureHandlerRootHOC: jest.fn(),
+    Directions: {},
   }
 })

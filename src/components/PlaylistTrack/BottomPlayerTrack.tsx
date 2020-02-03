@@ -5,6 +5,7 @@ import { styles } from 'src/constants'
 import { Track, NoAvatarSizeNames } from 'src/apollo'
 import { useImageSource } from 'src/hooks'
 import { CenterBlock, TitleText, SubTitleText } from './styles'
+import { Playable } from './interfaces'
 import styled from 'src/styled-components'
 
 const Wrapper = styled.TouchableOpacity.attrs(() => ({
@@ -31,11 +32,10 @@ const PlayerIcon = styled(Icon).attrs(({ theme }) => ({
   size: 36,
 }))``
 
-interface Props {
+interface Props extends Playable {
   track: Track
-  isPlaying: boolean
-  onPress: () => void
-  onPressControl: () => void
+  onPress?: () => void
+  onPressControl?: () => void
 }
 
 const BottomPlayerTrack: React.FC<Props> = ({
@@ -47,13 +47,13 @@ const BottomPlayerTrack: React.FC<Props> = ({
   const source = useImageSource(cover, NoAvatarSizeNames.S_32)
 
   return (
-    <Wrapper onPress={onPress}>
+    <Wrapper onPress={onPress} testID="wrapper">
       <TrackImage source={source} />
       <CenterBlock>
         <TitleText numberOfLines={1}>{title}</TitleText>
         {!!singer && <SubTitleText numberOfLines={1}>{singer}</SubTitleText>}
       </CenterBlock>
-      <PlayerButton onPress={onPressControl}>
+      <PlayerButton onPress={onPressControl} testID="control">
         <PlayerIcon name={isPlaying ? 'pause' : 'play'} />
       </PlayerButton>
     </Wrapper>

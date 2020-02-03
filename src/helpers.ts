@@ -4,6 +4,7 @@ import { BonusProgramLevel, Image, ImageSizeNames } from 'src/apollo'
 import SplashScreen from 'react-native-splash-screen'
 import { images as localImages } from 'src/constants'
 
+/* istanbul ignore next */
 export const delay = (ms: number): Promise<void> =>
   new Promise(res => setTimeout(res, ms))
 
@@ -43,11 +44,12 @@ export const getNameForCount = L.curry(
     }: { nominative: string; genitive: string; genitiveMultiple: string },
     count: number,
   ) => {
-    if (count > 10 && count < 20) {
+    const absCount = Math.abs(count)
+    if (absCount > 10 && absCount < 20) {
       return genitiveMultiple
     }
 
-    const mod10 = count % 10
+    const mod10 = absCount % 10
     return mod10 === 1
       ? nominative
       : [2, 3, 4].includes(mod10)
@@ -184,6 +186,7 @@ export const getNextBonusProgramHumanReadable = (
   }
 }
 
+/* istanbul ignore next */
 const customizer = (objValue: any, srcValue: any): any => {
   if (L.isArray(objValue)) {
     return srcValue.concat(objValue)
@@ -196,6 +199,7 @@ export const mergeRight = (source: object, obj: object): object => {
   return LFP.mergeWith(customizer, obj, source)
 }
 
+/* istanbul ignore next */
 export const randomString = (): string =>
   Math.random()
     .toString(36)
@@ -217,6 +221,7 @@ export const getImageForSize = (
 
 // так как используется анимированный Switch, нужна задержка перед скрытием сплеша
 // 400 - дефолт анимация сплеша, 100 - на всякий случай
+/* istanbul ignore next */
 export const hideSplashScreenWithTimeout = async (): Promise<void> => {
   await delay(500)
   SplashScreen.hide()

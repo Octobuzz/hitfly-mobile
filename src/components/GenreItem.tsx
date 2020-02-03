@@ -34,7 +34,7 @@ const TitleText = styled(TextBase)`
   color: ${({ theme }) => theme.colors.white};
 `
 
-interface GenreItemProps {
+export interface GenreItemProps {
   item: Genre
   onPress?: (item: Genre) => void
 }
@@ -49,13 +49,11 @@ export const GenreItem: React.FC<GenreItemProps> & Sized = ({
 }) => {
   const { imageUrl, title } = item
   const handlePress = (): void => {
-    if (onPress) {
-      onPress(item)
-    }
+    onPress?.(item)
   }
 
   return (
-    <Wrapper disabled={!onPress} onPress={handlePress}>
+    <Wrapper disabled={!onPress} onPress={handlePress} testID="wrapper">
       <GenreImage source={{ uri: imageUrl }} />
       <TitleTextWrapper>
         <TitleText>{title}</TitleText>
@@ -63,6 +61,8 @@ export const GenreItem: React.FC<GenreItemProps> & Sized = ({
     </Wrapper>
   )
 }
+
+GenreItem.size = ITEM_SIZE
 
 // TODO: возможно стоит вынести в общее место
 interface Selectable {
@@ -91,8 +91,8 @@ const SubGenresText = styled(TextBase)`
   text-align: center;
 `
 
-interface SelectableGenreItemProps extends GenreItemProps, Selectable {
-  onPressSubGenres: (genre: Genre) => void
+export interface SelectableGenreItemProps extends GenreItemProps, Selectable {
+  onPressSubGenres?: (genre: Genre) => void
 }
 
 export const SelectableGenreItem: React.FC<SelectableGenreItemProps> = ({
@@ -103,26 +103,24 @@ export const SelectableGenreItem: React.FC<SelectableGenreItemProps> = ({
 }) => {
   const { imageUrl, title, hasSubGenres } = item
   const handlePress = (): void => {
-    onPress!(item)
+    onPress?.(item)
   }
   const handlePressSubGenres = (): void => {
-    onPressSubGenres(item)
+    onPressSubGenres?.(item)
   }
 
   return (
-    <Wrapper onPress={handlePress}>
+    <Wrapper onPress={handlePress} testID="wrapper">
       <GenreImage source={{ uri: imageUrl }} />
       <CornerImage isSelected={isSelected} />
       <TitleTextWrapper>
         <TitleText>{title}</TitleText>
       </TitleTextWrapper>
       {hasSubGenres && (
-        <SubGenresWrapper onPress={handlePressSubGenres}>
+        <SubGenresWrapper onPress={handlePressSubGenres} testID="optionalChild">
           <SubGenresText>+ Поджанры</SubGenresText>
         </SubGenresWrapper>
       )}
     </Wrapper>
   )
 }
-
-GenreItem.size = ITEM_SIZE

@@ -1,0 +1,568 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlaylistTrack renders correctly in paused state 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#ffffff",
+          "flexDirection": "row",
+          "paddingBottom": 12,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+          "paddingTop": 12,
+        },
+      ]
+    }
+    testID="wrapper"
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#313131",
+            "fontFamily": "GothamPro",
+            "fontSize": 12,
+            "lineHeight": 20,
+            "marginRight": 12,
+            "width": 24,
+          },
+        ]
+      }
+    >
+      2
+    </Text>
+    <View
+      style={
+        Array [
+          Object {},
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "overflow": "hidden",
+            },
+            Array [
+              Object {
+                "borderRadius": 4,
+                "height": 32,
+                "width": 32,
+              },
+            ],
+          ]
+        }
+      >
+        <FastImageView
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "some url",
+            }
+          }
+          style={
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "marginHorizontal": 16,
+          },
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#313131",
+              "fontFamily": "GothamPro-Bold",
+              "fontSize": 12,
+              "lineHeight": 14,
+            },
+          ]
+        }
+      >
+        Some track title
+      </Text>
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#606060",
+              "fontFamily": "GothamPro",
+              "fontSize": 10,
+              "lineHeight": 12,
+            },
+          ]
+        }
+      />
+    </View>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#ffffff",
+            "borderRadius": 16,
+            "height": 32,
+            "justifyContent": "center",
+            "width": 32,
+          },
+        ]
+      }
+    >
+      <Icon
+        color="#313131"
+        name="dots-horizontal"
+        size={20}
+        style={
+          Array [
+            Object {
+              "top": 1,
+            },
+          ]
+        }
+      />
+    </TouchableOpacity>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#606060",
+            "fontFamily": "GothamPro",
+            "fontSize": 10,
+            "lineHeight": 12,
+            "marginLeft": 16,
+            "textAlign": "right",
+            "width": 40,
+          },
+        ]
+      }
+    >
+      0:00
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`PlaylistTrack renders correctly in played state 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    isPlaying={true}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#f0f0f0",
+          "flexDirection": "row",
+          "paddingBottom": 12,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+          "paddingTop": 12,
+        },
+      ]
+    }
+    testID="wrapper"
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#313131",
+            "fontFamily": "GothamPro",
+            "fontSize": 12,
+            "lineHeight": 20,
+            "marginRight": 12,
+            "width": 24,
+          },
+        ]
+      }
+    >
+      2
+    </Text>
+    <View
+      style={
+        Array [
+          Object {},
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "overflow": "hidden",
+            },
+            Array [
+              Object {
+                "borderRadius": 4,
+                "height": 32,
+                "width": 32,
+              },
+            ],
+          ]
+        }
+      >
+        <FastImageView
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "some url",
+            }
+          }
+          style={
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "rgba(49, 49, 49, 0.7)",
+              "borderRadius": 4,
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+          ]
+        }
+      >
+        <Icon
+          color="#ffffff"
+          name="pause"
+          size={16}
+          style={
+            Array [
+              Object {},
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "marginHorizontal": 16,
+          },
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#313131",
+              "fontFamily": "GothamPro-Bold",
+              "fontSize": 12,
+              "lineHeight": 14,
+            },
+          ]
+        }
+      >
+        Some track title
+      </Text>
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#606060",
+              "fontFamily": "GothamPro",
+              "fontSize": 10,
+              "lineHeight": 12,
+            },
+          ]
+        }
+      />
+    </View>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#ffffff",
+            "borderRadius": 16,
+            "height": 32,
+            "justifyContent": "center",
+            "width": 32,
+          },
+        ]
+      }
+    >
+      <Icon
+        color="#313131"
+        name="dots-horizontal"
+        size={20}
+        style={
+          Array [
+            Object {
+              "top": 1,
+            },
+          ]
+        }
+      />
+    </TouchableOpacity>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#606060",
+            "fontFamily": "GothamPro",
+            "fontSize": 10,
+            "lineHeight": 12,
+            "marginLeft": 16,
+            "textAlign": "right",
+            "width": 40,
+          },
+        ]
+      }
+    >
+      0:00
+    </Text>
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`PlaylistTrack renders without index 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    isPlaying={true}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#f0f0f0",
+          "flexDirection": "row",
+          "paddingBottom": 12,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+          "paddingTop": 12,
+        },
+      ]
+    }
+    testID="wrapper"
+  >
+    <View
+      style={
+        Array [
+          Object {},
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "overflow": "hidden",
+            },
+            Array [
+              Object {
+                "borderRadius": 4,
+                "height": 32,
+                "width": 32,
+              },
+            ],
+          ]
+        }
+      >
+        <FastImageView
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "some url",
+            }
+          }
+          style={
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "rgba(49, 49, 49, 0.7)",
+              "borderRadius": 4,
+              "bottom": 0,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+          ]
+        }
+      >
+        <Icon
+          color="#ffffff"
+          name="pause"
+          size={16}
+          style={
+            Array [
+              Object {},
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "marginHorizontal": 16,
+          },
+        ]
+      }
+    >
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#313131",
+              "fontFamily": "GothamPro-Bold",
+              "fontSize": 12,
+              "lineHeight": 14,
+            },
+          ]
+        }
+      >
+        Some track title
+      </Text>
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#606060",
+              "fontFamily": "GothamPro",
+              "fontSize": 10,
+              "lineHeight": 12,
+            },
+          ]
+        }
+      />
+    </View>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#ffffff",
+            "borderRadius": 16,
+            "height": 32,
+            "justifyContent": "center",
+            "width": 32,
+          },
+        ]
+      }
+    >
+      <Icon
+        color="#313131"
+        name="dots-horizontal"
+        size={20}
+        style={
+          Array [
+            Object {
+              "top": 1,
+            },
+          ]
+        }
+      />
+    </TouchableOpacity>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#606060",
+            "fontFamily": "GothamPro",
+            "fontSize": 10,
+            "lineHeight": 12,
+            "marginLeft": 16,
+            "textAlign": "right",
+            "width": 40,
+          },
+        ]
+      }
+    >
+      0:00
+    </Text>
+  </TouchableOpacity>
+</View>
+`;

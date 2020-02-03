@@ -20,6 +20,7 @@ exports[`CheckBoxUI renders correctly in checked state 1`] = `
         },
       ]
     }
+    testID="wrapper"
   >
     <Image
       isChecked={true}
@@ -61,9 +62,9 @@ exports[`CheckBoxUI renders correctly in unchecked state 1`] = `
         },
       ]
     }
+    testID="wrapper"
   >
     <Image
-      isChecked={false}
       source={
         Object {
           "testUri": "../../../src/assets/images/checkbox/checkbox_inactive.png",

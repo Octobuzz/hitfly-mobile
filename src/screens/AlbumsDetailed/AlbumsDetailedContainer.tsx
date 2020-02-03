@@ -3,12 +3,13 @@ import { NavigationStackScreenProps } from 'react-navigation-stack'
 import { DocumentNode } from 'graphql'
 import { useQueryWithPagination } from 'src/hooks'
 import { withChangingHeaderSettings } from 'src/HOCs'
+import AlbumsDetailedScreen from './AlbumsDetailed'
 import { routes, names } from 'src/constants'
 import { Album } from 'src/apollo'
-import AlbumsDetailedScreen from './AlbumsDetailed'
 
 interface Props extends NavigationStackScreenProps {
   query: DocumentNode
+  limit?: number
   transformer?: (data?: any) => Album
   itemsSelector: (data: any) => Album[]
   hasMorePagesSelector: (data: any) => boolean
@@ -20,6 +21,7 @@ const AlbumsDetailedContainer: React.FC<Props> = ({
   transformer,
   itemsSelector,
   hasMorePagesSelector,
+  limit = names.DETAILED_LIMIT,
   ...rest
 }) => {
   const {
@@ -28,19 +30,16 @@ const AlbumsDetailedContainer: React.FC<Props> = ({
     onEndReached,
     networkStatus,
   } = useQueryWithPagination(query, {
+    limit,
     itemsSelector,
     hasMorePagesSelector,
-    limit: names.DETAILED_LIMIT,
     notifyOnNetworkStatusChange: true,
   })
 
-  let albums = items
-  if (transformer) {
-    albums = albums.map(transformer)
-  }
+  const albums = transformer ? items.map(transformer) : items
 
   const onPressAlbum = useCallback((album: Album) => {
-    navigation.navigate(routes.MAIN.ALBUM_PLAYLIST, {
+    navigation.navigate(routes.PROFILE.ALBUM_PLAYLIST, {
       title: album.title,
       albumId: album.id,
     })

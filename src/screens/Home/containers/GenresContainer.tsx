@@ -59,7 +59,4 @@ const GenresContainer: React.FC<any> = ({
   )
 }
 
-export default L.flowRight(
-  withNavigation,
-  withSelectors,
-)(GenresContainer)
+export default L.flowRight(withNavigation, withSelectors)(GenresContainer)

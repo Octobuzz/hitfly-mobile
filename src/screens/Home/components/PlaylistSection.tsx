@@ -47,13 +47,14 @@ const PlaylistSection: React.FC<Props> = ({
   tracksCount,
   playlist = [],
 }) => {
-  if (!isLoading && tracksCount === 0) {
-    return null
-  }
   const bottomText = React.useMemo(() => formatTracksCount(tracksCount), [
     playlist,
     tracksCount,
   ])
+
+  if (!isLoading && tracksCount === 0) {
+    return null
+  }
 
   return (
     <SectionWrapper withPadding>

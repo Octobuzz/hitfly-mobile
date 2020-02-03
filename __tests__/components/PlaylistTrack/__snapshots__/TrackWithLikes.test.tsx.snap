@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PlaylistTrack renders correctly in paused state 1`] = `
+exports[`TrackWithLikes renders correctly 1`] = `
 <View
   collapsable={true}
   pointerEvents="box-none"
@@ -16,7 +16,6 @@ exports[`PlaylistTrack renders correctly in paused state 1`] = `
       Array [
         Object {
           "alignItems": "center",
-          "backgroundColor": "#ffffff",
           "flexDirection": "row",
           "paddingBottom": 12,
           "paddingLeft": 16,
@@ -25,32 +24,12 @@ exports[`PlaylistTrack renders correctly in paused state 1`] = `
         },
       ]
     }
+    testID="wrapper"
   >
-    <Text
-      style={
-        Array [
-          Object {
-            "color": "#313131",
-            "fontFamily": "GothamPro",
-            "fontSize": 12,
-            "lineHeight": 20,
-            "marginRight": 12,
-            "width": 24,
-          },
-        ]
-      }
-    >
-      2
-    </Text>
     <View
       style={
         Array [
-          Object {
-            "borderRadius": 4,
-            "height": 32,
-            "overflow": "hidden",
-            "width": 32,
-          },
+          Object {},
         ]
       }
     >
@@ -62,9 +41,9 @@ exports[`PlaylistTrack renders correctly in paused state 1`] = `
             },
             Array [
               Object {
-                "flexBasis": 0,
-                "flexGrow": 1,
-                "flexShrink": 1,
+                "borderRadius": 4,
+                "height": 32,
+                "width": 32,
               },
             ],
           ]
@@ -74,7 +53,7 @@ exports[`PlaylistTrack renders correctly in paused state 1`] = `
           resizeMode="cover"
           source={
             Object {
-              "uri": "https://images.unsplash.com/photo-1541233349642-6e425fe6190e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
+              "uri": "some url",
             }
           }
           style={
@@ -106,10 +85,10 @@ exports[`PlaylistTrack renders correctly in paused state 1`] = `
         style={
           Array [
             Object {
-              "color": "#313131",
+              "color": "#ffffff",
               "fontFamily": "GothamPro-Bold",
               "fontSize": 12,
-              "lineHeight": 14,
+              "lineHeight": 18,
             },
           ]
         }
@@ -121,67 +100,53 @@ exports[`PlaylistTrack renders correctly in paused state 1`] = `
         style={
           Array [
             Object {
-              "color": "#606060",
+              "color": "#ffffff",
               "fontFamily": "GothamPro",
               "fontSize": 10,
               "lineHeight": 12,
             },
           ]
         }
-      >
-        Some group title
-      </Text>
+      />
     </View>
     <TouchableOpacity
-      activeOpacity={0.2}
+      activeOpacity={0.8}
+      hitSlop={
+        Object {
+          "bottom": 10,
+          "left": 10,
+          "right": 10,
+          "top": 10,
+        }
+      }
       style={
         Array [
-          Object {
-            "alignItems": "center",
-            "backgroundColor": "#ffffff",
-            "borderRadius": 16,
-            "height": 32,
-            "justifyContent": "center",
-            "width": 32,
-          },
+          Object {},
         ]
       }
+      testID="like"
     >
-      <Icon
-        color="#313131"
-        name="dots-horizontal"
-        size={20}
+      <Image
+        resizeMode="contain"
+        source={
+          Object {
+            "testUri": "../../../src/assets/images/icons/heart.png",
+          }
+        }
         style={
           Array [
             Object {
-              "top": 1,
+              "tintColor": "#ffffff",
             },
           ]
         }
       />
     </TouchableOpacity>
-    <Text
-      style={
-        Array [
-          Object {
-            "color": "#606060",
-            "fontFamily": "GothamPro",
-            "fontSize": 10,
-            "lineHeight": 12,
-            "marginLeft": 16,
-            "textAlign": "right",
-            "width": 30,
-          },
-        ]
-      }
-    >
-      0:00
-    </Text>
   </TouchableOpacity>
 </View>
 `;
 
-exports[`PlaylistTrack renders correctly in played state 1`] = `
+exports[`TrackWithLikes renders correctly in playing state 1`] = `
 <View
   collapsable={true}
   pointerEvents="box-none"
@@ -193,12 +158,10 @@ exports[`PlaylistTrack renders correctly in played state 1`] = `
 >
   <TouchableOpacity
     activeOpacity={0.2}
-    isPlaying={true}
     style={
       Array [
         Object {
           "alignItems": "center",
-          "backgroundColor": "#f0f0f0",
           "flexDirection": "row",
           "paddingBottom": 12,
           "paddingLeft": 16,
@@ -207,32 +170,12 @@ exports[`PlaylistTrack renders correctly in played state 1`] = `
         },
       ]
     }
+    testID="wrapper"
   >
-    <Text
-      style={
-        Array [
-          Object {
-            "color": "#313131",
-            "fontFamily": "GothamPro",
-            "fontSize": 12,
-            "lineHeight": 20,
-            "marginRight": 12,
-            "width": 24,
-          },
-        ]
-      }
-    >
-      2
-    </Text>
     <View
       style={
         Array [
-          Object {
-            "borderRadius": 4,
-            "height": 32,
-            "overflow": "hidden",
-            "width": 32,
-          },
+          Object {},
         ]
       }
     >
@@ -244,9 +187,9 @@ exports[`PlaylistTrack renders correctly in played state 1`] = `
             },
             Array [
               Object {
-                "flexBasis": 0,
-                "flexGrow": 1,
-                "flexShrink": 1,
+                "borderRadius": 4,
+                "height": 32,
+                "width": 32,
               },
             ],
           ]
@@ -256,7 +199,7 @@ exports[`PlaylistTrack renders correctly in played state 1`] = `
           resizeMode="cover"
           source={
             Object {
-              "uri": "https://images.unsplash.com/photo-1541233349642-6e425fe6190e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
+              "uri": "some url",
             }
           }
           style={
@@ -276,6 +219,7 @@ exports[`PlaylistTrack renders correctly in played state 1`] = `
             Object {
               "alignItems": "center",
               "backgroundColor": "rgba(49, 49, 49, 0.7)",
+              "borderRadius": 4,
               "bottom": 0,
               "justifyContent": "center",
               "left": 0,
@@ -315,10 +259,10 @@ exports[`PlaylistTrack renders correctly in played state 1`] = `
         style={
           Array [
             Object {
-              "color": "#313131",
+              "color": "#ffffff",
               "fontFamily": "GothamPro-Bold",
               "fontSize": 12,
-              "lineHeight": 14,
+              "lineHeight": 18,
             },
           ]
         }
@@ -330,62 +274,194 @@ exports[`PlaylistTrack renders correctly in played state 1`] = `
         style={
           Array [
             Object {
-              "color": "#606060",
+              "color": "#ffffff",
               "fontFamily": "GothamPro",
               "fontSize": 10,
               "lineHeight": 12,
             },
           ]
         }
-      >
-        Some group title
-      </Text>
+      />
     </View>
     <TouchableOpacity
-      activeOpacity={0.2}
+      activeOpacity={0.8}
+      hitSlop={
+        Object {
+          "bottom": 10,
+          "left": 10,
+          "right": 10,
+          "top": 10,
+        }
+      }
       style={
         Array [
-          Object {
-            "alignItems": "center",
-            "backgroundColor": "#ffffff",
-            "borderRadius": 16,
-            "height": 32,
-            "justifyContent": "center",
-            "width": 32,
-          },
+          Object {},
         ]
       }
+      testID="like"
     >
-      <Icon
-        color="#313131"
-        name="dots-horizontal"
-        size={20}
+      <Image
+        resizeMode="contain"
+        source={
+          Object {
+            "testUri": "../../../src/assets/images/icons/heart.png",
+          }
+        }
         style={
           Array [
             Object {
-              "top": 1,
+              "tintColor": "#ffffff",
             },
           ]
         }
       />
     </TouchableOpacity>
-    <Text
+  </TouchableOpacity>
+</View>
+`;
+
+exports[`TrackWithLikes renders correctly when liked 1`] = `
+<View
+  collapsable={true}
+  pointerEvents="box-none"
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "paddingBottom": 12,
+          "paddingLeft": 16,
+          "paddingRight": 16,
+          "paddingTop": 12,
+        },
+      ]
+    }
+    testID="wrapper"
+  >
+    <View
+      style={
+        Array [
+          Object {},
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "overflow": "hidden",
+            },
+            Array [
+              Object {
+                "borderRadius": 4,
+                "height": 32,
+                "width": 32,
+              },
+            ],
+          ]
+        }
+      >
+        <FastImageView
+          resizeMode="cover"
+          source={
+            Object {
+              "uri": "some url",
+            }
+          }
+          style={
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+        />
+      </View>
+    </View>
+    <View
       style={
         Array [
           Object {
-            "color": "#606060",
-            "fontFamily": "GothamPro",
-            "fontSize": 10,
-            "lineHeight": 12,
-            "marginLeft": 16,
-            "textAlign": "right",
-            "width": 30,
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "marginHorizontal": 16,
           },
         ]
       }
     >
-      0:00
-    </Text>
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontFamily": "GothamPro-Bold",
+              "fontSize": 12,
+              "lineHeight": 18,
+            },
+          ]
+        }
+      >
+        Some track title
+      </Text>
+      <Text
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "#ffffff",
+              "fontFamily": "GothamPro",
+              "fontSize": 10,
+              "lineHeight": 12,
+            },
+          ]
+        }
+      />
+    </View>
+    <TouchableOpacity
+      activeOpacity={0.8}
+      hitSlop={
+        Object {
+          "bottom": 10,
+          "left": 10,
+          "right": 10,
+          "top": 10,
+        }
+      }
+      style={
+        Array [
+          Object {},
+        ]
+      }
+      testID="like"
+    >
+      <Image
+        resizeMode="contain"
+        source={
+          Object {
+            "testUri": "../../../src/assets/images/icons/heart.png",
+          }
+        }
+        style={
+          Array [
+            Object {
+              "tintColor": "#ffffff",
+            },
+          ]
+        }
+      />
+    </TouchableOpacity>
   </TouchableOpacity>
 </View>
 `;

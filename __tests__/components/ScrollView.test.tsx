@@ -1,6 +1,6 @@
-import { render } from '../../jest/test-utils'
-import { ScrollView } from '../../src/components/views'
 import React from 'react'
+import { render } from '../../jest/test-utils'
+import { ScrollView } from 'src/components/views'
 
 describe('ScrollView', () => {
   const props = {
@@ -14,6 +14,7 @@ describe('ScrollView', () => {
     const { asJSON } = render(<ScrollView />)
     expect(asJSON()).toMatchSnapshot()
   })
+
   it('renders with noFill === false and noPadding === false', () => {
     const { asJSON } = render(
       <ScrollView noFill={false} noPadding={false} {...props} />,
@@ -21,9 +22,7 @@ describe('ScrollView', () => {
     expect(asJSON()).toMatchSnapshot()
   })
   it('renders with noFill === true and noPadding === true', () => {
-    const { asJSON } = render(
-      <ScrollView noFill={true} noPadding={true} {...props} />,
-    )
+    const { asJSON } = render(<ScrollView noFill noPadding {...props} />)
     expect(asJSON()).toMatchSnapshot()
   })
   it('renders with no vertical and horizontal padding', () => {
@@ -38,11 +37,7 @@ describe('ScrollView', () => {
   })
   it('renders with vertical and horizontal padding', () => {
     const { asJSON } = render(
-      <ScrollView
-        noVerticalPadding={true}
-        noHorizontalPadding={true}
-        {...props}
-      />,
+      <ScrollView noVerticalPadding noHorizontalPadding {...props} />,
     )
     expect(asJSON()).toMatchSnapshot()
   })
@@ -53,9 +48,7 @@ describe('ScrollView', () => {
     expect(asJSON()).toMatchSnapshot()
   })
   it('renders with addBottomSafePadding === true', () => {
-    const { asJSON } = render(
-      <ScrollView addBottomSafePadding={true} {...props} />,
-    )
+    const { asJSON } = render(<ScrollView addBottomSafePadding {...props} />)
     expect(asJSON()).toMatchSnapshot()
   })
 })

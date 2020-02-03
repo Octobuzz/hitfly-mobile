@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import styled from 'src/styled-components'
-import { colors, password } from './settings'
+import { password } from './settings'
 import { routes } from 'src/constants'
 
 import { Wrapper, TextBase, Input, Button } from './Components'

@@ -91,7 +91,7 @@ const PlaylistTrack: React.FC<PlaylistTrackProps> & Sized = ({
   const source = useImageSource(cover, NoAvatarSizeNames.S_32)
 
   return (
-    <Wrapper isPlaying={isPlaying} onPress={handlePressTrack}>
+    <Wrapper isPlaying={isPlaying} onPress={handlePressTrack} testID="wrapper">
       {!hideIndex && <TrackNumberText>{index + 1}</TrackNumberText>}
       <TrackImage isPlaying={isPlaying} imageUrl={source.uri} />
       <CenterBlock>

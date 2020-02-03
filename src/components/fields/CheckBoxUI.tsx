@@ -24,7 +24,7 @@ interface Props extends Checkable, CheckBoxProps {
 }
 
 const CheckBoxUI = ({ isChecked, children, onPress, style }: Props) => (
-  <Wrapper style={style} onPress={onPress}>
+  <Wrapper style={style} onPress={onPress} testID="wrapper">
     <Icon isChecked={isChecked} />
     {children}
   </Wrapper>
