@@ -196,7 +196,7 @@ exports[`TrackView renders correctly 1`] = `
               "lineHeight": 12,
               "marginLeft": 16,
               "textAlign": "right",
-              "width": 40,
+              "width": 100,
             },
           ]
         }

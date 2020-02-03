@@ -73,7 +73,7 @@ exports[`BottomPlayerTrack renders correctly 1`] = `
       }
     >
       <Text
-        numberOfLines={2}
+        numberOfLines={1}
         style={
           Array [
             Object {
@@ -87,19 +87,6 @@ exports[`BottomPlayerTrack renders correctly 1`] = `
       >
         Some track title
       </Text>
-      <Text
-        numberOfLines={2}
-        style={
-          Array [
-            Object {
-              "color": "#606060",
-              "fontFamily": "GothamPro",
-              "fontSize": 10,
-              "lineHeight": 12,
-            },
-          ]
-        }
-      />
     </View>
     <TouchableOpacity
       activeOpacity={0.2}
@@ -201,7 +188,7 @@ exports[`BottomPlayerTrack renders correctly in playing state 1`] = `
       }
     >
       <Text
-        numberOfLines={2}
+        numberOfLines={1}
         style={
           Array [
             Object {
@@ -215,19 +202,6 @@ exports[`BottomPlayerTrack renders correctly in playing state 1`] = `
       >
         Some track title
       </Text>
-      <Text
-        numberOfLines={2}
-        style={
-          Array [
-            Object {
-              "color": "#606060",
-              "fontFamily": "GothamPro",
-              "fontSize": 10,
-              "lineHeight": 12,
-            },
-          ]
-        }
-      />
     </View>
     <TouchableOpacity
       activeOpacity={0.2}

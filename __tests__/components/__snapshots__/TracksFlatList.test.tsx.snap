@@ -222,7 +222,7 @@ exports[`TrackFlatList renders correctly in default state 1`] = `
                 "lineHeight": 12,
                 "marginLeft": 16,
                 "textAlign": "right",
-                "width": 40,
+                "width": 100,
               },
             ]
           }
@@ -458,7 +458,7 @@ exports[`TrackFlatList renders correctly in fetching more state 1`] = `
                 "lineHeight": 12,
                 "marginLeft": 16,
                 "textAlign": "right",
-                "width": 40,
+                "width": 100,
               },
             ]
           }
@@ -771,7 +771,7 @@ exports[`TrackFlatList renders correctly in playing state 1`] = `
                 "lineHeight": 12,
                 "marginLeft": 16,
                 "textAlign": "right",
-                "width": 40,
+                "width": 100,
               },
             ]
           }
@@ -1007,7 +1007,7 @@ exports[`TrackFlatList renders correctly in refreshing state 1`] = `
                 "lineHeight": 12,
                 "marginLeft": 16,
                 "textAlign": "right",
-                "width": 40,
+                "width": 100,
               },
             ]
           }

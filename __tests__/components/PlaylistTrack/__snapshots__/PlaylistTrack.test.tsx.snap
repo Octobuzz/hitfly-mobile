@@ -112,19 +112,6 @@ exports[`PlaylistTrack renders correctly in paused state 1`] = `
       >
         Some track title
       </Text>
-      <Text
-        numberOfLines={1}
-        style={
-          Array [
-            Object {
-              "color": "#606060",
-              "fontFamily": "GothamPro",
-              "fontSize": 10,
-              "lineHeight": 12,
-            },
-          ]
-        }
-      />
     </View>
     <TouchableOpacity
       activeOpacity={0.2}
@@ -164,7 +151,7 @@ exports[`PlaylistTrack renders correctly in paused state 1`] = `
             "lineHeight": 12,
             "marginLeft": 16,
             "textAlign": "right",
-            "width": 40,
+            "width": 100,
           },
         ]
       }
@@ -316,19 +303,6 @@ exports[`PlaylistTrack renders correctly in played state 1`] = `
       >
         Some track title
       </Text>
-      <Text
-        numberOfLines={1}
-        style={
-          Array [
-            Object {
-              "color": "#606060",
-              "fontFamily": "GothamPro",
-              "fontSize": 10,
-              "lineHeight": 12,
-            },
-          ]
-        }
-      />
     </View>
     <TouchableOpacity
       activeOpacity={0.2}
@@ -368,7 +342,7 @@ exports[`PlaylistTrack renders correctly in played state 1`] = `
             "lineHeight": 12,
             "marginLeft": 16,
             "textAlign": "right",
-            "width": 40,
+            "width": 100,
           },
         ]
       }
@@ -504,19 +478,6 @@ exports[`PlaylistTrack renders without index 1`] = `
       >
         Some track title
       </Text>
-      <Text
-        numberOfLines={1}
-        style={
-          Array [
-            Object {
-              "color": "#606060",
-              "fontFamily": "GothamPro",
-              "fontSize": 10,
-              "lineHeight": 12,
-            },
-          ]
-        }
-      />
     </View>
     <TouchableOpacity
       activeOpacity={0.2}
@@ -556,7 +517,7 @@ exports[`PlaylistTrack renders without index 1`] = `
             "lineHeight": 12,
             "marginLeft": 16,
             "textAlign": "right",
-            "width": 40,
+            "width": 100,
           },
         ]
       }
