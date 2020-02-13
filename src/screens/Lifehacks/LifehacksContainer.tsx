@@ -98,6 +98,7 @@ const LifehacksContainer: React.FC<Props> = () => {
       bookmarkItem={bookmarkItem}
       onRefresh={() => {}}
       onEndReached={() => {}}
+      showBookmarked
       isFetchingMore={false}
       isLoading={false}
       isRefreshing={false}

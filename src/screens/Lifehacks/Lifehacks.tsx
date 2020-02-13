@@ -13,6 +13,7 @@ import styled from 'src/styled-components'
 
 const Divider = styled.View`
   height: ${styles.VIEW_HORIZONTAL_INDENTATION}px;
+  width: ${styles.VIEW_HORIZONTAL_INDENTATION}px;
 `
 
 const Scroll = styled(FlatList as new () => FlatList<Lifehack>).attrs(() => ({
@@ -32,6 +33,18 @@ const ListEmptyText = styled(TextBase)`
   padding-vertical: 50px;
 `
 
+const HorizontalScroll = styled(FlatList as new () => FlatList<Lifehack>).attrs(
+  () => ({
+    horizontal: true,
+    showsHorizontalScrollIndicator: false,
+    initialNumToRender: 4,
+    ItemSeparatorComponent: Divider,
+    contentContainerStyle: {
+      paddingVertical: styles.VIEW_HORIZONTAL_INDENTATION,
+    },
+  }),
+)``
+
 interface Props {
   lifehacks: Lifehack[]
   onRefresh: () => void
@@ -42,6 +55,7 @@ interface Props {
   isLoading: boolean
   isRefreshing: boolean
   isFetchingMore: boolean
+  showBookmarked?: boolean
 }
 
 const Lifehacks: React.FC<Props> = ({
@@ -54,6 +68,7 @@ const Lifehacks: React.FC<Props> = ({
   likeItem,
   shareItem,
   bookmarkItem,
+  showBookmarked,
 }) => {
   const renderItem: ListRenderItem<Lifehack> = useCallback(
     ({ item }) => (
@@ -64,8 +79,22 @@ const Lifehacks: React.FC<Props> = ({
         lifehack={item}
       />
     ),
-    [],
+    [likeItem, shareItem, bookmarkItem],
   )
+  const renderBookmarkedItem: ListRenderItem<Lifehack> = useCallback(
+    ({ item }) => (
+      <LifehackItem
+        size={155}
+        onPressLike={likeItem}
+        onPressShare={shareItem}
+        onPressBookmark={bookmarkItem}
+        lifehack={item}
+      />
+    ),
+    [likeItem, shareItem, bookmarkItem],
+  )
+
+  const bookmarked = lifehacks.filter(({ isBookmarked }) => isBookmarked)
 
   return isLoading ? (
     <Loader isFilled />
@@ -74,6 +103,14 @@ const Lifehacks: React.FC<Props> = ({
       onEndReached={onEndReached}
       refreshControl={
         <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
+      }
+      ListHeaderComponent={
+        showBookmarked && !!bookmarked.length ? (
+          <HorizontalScroll
+            data={bookmarked}
+            renderItem={renderBookmarkedItem}
+          />
+        ) : null
       }
       ListEmptyComponent={<ListEmptyText>Пока здесь пусто</ListEmptyText>}
       ListFooterComponent={<ListFooterLoader isShown={isFetchingMore} />}
