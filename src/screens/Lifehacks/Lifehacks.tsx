@@ -49,6 +49,7 @@ interface Props {
   lifehacks: Lifehack[]
   onRefresh: () => void
   onEndReached: () => void
+  onPressItem?: (item: Lifehack) => void
   likeItem?: (item: Lifehack) => void
   shareItem?: (item: Lifehack) => void
   bookmarkItem?: (item: Lifehack) => void
@@ -69,6 +70,7 @@ const Lifehacks: React.FC<Props> = ({
   shareItem,
   bookmarkItem,
   showBookmarked,
+  onPressItem,
 }) => {
   const renderItem: ListRenderItem<Lifehack> = useCallback(
     ({ item }) => (
@@ -76,6 +78,7 @@ const Lifehacks: React.FC<Props> = ({
         onPressLike={likeItem}
         onPressShare={shareItem}
         onPressBookmark={bookmarkItem}
+        onPress={onPressItem}
         lifehack={item}
       />
     ),
@@ -85,6 +88,7 @@ const Lifehacks: React.FC<Props> = ({
     ({ item }) => (
       <LifehackItem
         size={155}
+        onPress={onPressItem}
         onPressLike={likeItem}
         onPressShare={shareItem}
         onPressBookmark={bookmarkItem}

@@ -2,8 +2,10 @@
 import LFP from 'lodash/fp'
 import React, { useState } from 'react'
 import { Share } from 'react-native'
+import { NavigationStackScreenProps } from 'react-navigation-stack'
 import LifehacksScreen from './Lifehacks'
 import { /* GET_LIFEHACKS, LifehacksData, */ Lifehack } from 'src/apollo'
+import { routes } from 'src/constants'
 // import { useQueryWithPagination } from 'src/hooks'
 // import { names } from 'src/constants'
 
@@ -12,7 +14,8 @@ import { /* GET_LIFEHACKS, LifehacksData, */ Lifehack } from 'src/apollo'
 // const itemsSelector = (data?: LifehacksData) =>
 //   L.get(data, 'lifehack.items', [])
 
-interface Props {}
+interface Props extends NavigationStackScreenProps {}
+
 const lifehackMocks = [
   {
     id: 1,
@@ -58,7 +61,7 @@ const lifehackMocks = [
   },
 ] as Lifehack[]
 
-const LifehacksContainer: React.FC<Props> = () => {
+const LifehacksContainer: React.FC<Props> = ({ navigation }) => {
   // FIXME: тут все временно
   const [items, setItems] = useState(lifehackMocks)
 
@@ -90,12 +93,17 @@ const LifehacksContainer: React.FC<Props> = () => {
     })
   }
 
+  const navigateToDetails = (lifehack: Lifehack) => {
+    navigation.navigate(routes.LIFEHACKS.LIFEHACK_DETAILED, { lifehack })
+  }
+
   return (
     <LifehacksScreen
       lifehacks={items}
       likeItem={likeItem}
       shareItem={shareItem}
       bookmarkItem={bookmarkItem}
+      onPressItem={navigateToDetails}
       onRefresh={() => {}}
       onEndReached={() => {}}
       showBookmarked
