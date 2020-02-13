@@ -36,6 +36,9 @@ interface Props {
   lifehacks: Lifehack[]
   onRefresh: () => void
   onEndReached: () => void
+  likeItem?: (item: Lifehack) => void
+  shareItem?: (item: Lifehack) => void
+  bookmarkItem?: (item: Lifehack) => void
   isLoading: boolean
   isRefreshing: boolean
   isFetchingMore: boolean
@@ -48,9 +51,19 @@ const Lifehacks: React.FC<Props> = ({
   onEndReached,
   isRefreshing,
   isFetchingMore,
+  likeItem,
+  shareItem,
+  bookmarkItem,
 }) => {
   const renderItem: ListRenderItem<Lifehack> = useCallback(
-    ({ item }) => <LifehackItem lifehack={item} />,
+    ({ item }) => (
+      <LifehackItem
+        onPressLike={likeItem}
+        onPressShare={shareItem}
+        onPressBookmark={bookmarkItem}
+        lifehack={item}
+      />
+    ),
     [],
   )
 
