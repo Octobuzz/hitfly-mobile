@@ -4,6 +4,7 @@ const APP = {
   PLAYER: 'player',
   PROFILE: 'profile',
   LIFEHACKS: 'lifehacks',
+  LIFEHACKS2: 'lifehacks2',
   WELCOME: 'welcome',
   STORYBOOK: 'storybook',
   EASTER_EGG: 'easter_egg',
@@ -37,11 +38,16 @@ export default {
     HOME: 'tab/home',
     PROFILE: 'tab/profile',
     LIFEHACKS: 'tab/lifehacks',
+    LIFEHACKS2: 'tab/lifehacks2',
   },
 
   LIFEHACKS: {
     LIFEHACKS: `${APP.LIFEHACKS}/lifehacks`,
     LIFEHACK_DETAILED: `${APP.LIFEHACKS}/lifehack_detailed`,
+  },
+
+  LIFEHACKS2: {
+    LIFEHACKS: `${APP.LIFEHACKS}/lifehacks`,
   },
 
   PROFILE: {

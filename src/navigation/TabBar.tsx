@@ -18,6 +18,7 @@ import MainNavigator from './Main'
 import PlayerNavigator from './Player'
 import ProfileNavigator from './Profile'
 import LifehacksNavigator from './Lifehacks'
+import Lifehacks2Navigator from './Lifehacks2'
 import { routes, images } from 'src/constants'
 import { View } from 'src/components'
 import theme from 'src/theme'
@@ -49,6 +50,13 @@ const TabBarNavigator = createBottomTabNavigator(
       screen: LifehacksNavigator,
       navigationOptions: {
         title: 'Лайфхаки',
+        tabBarIcon: getTabBarIcon(images.TAB_LIFEHACKS),
+      },
+    },
+    [routes.TABS.LIFEHACKS2]: {
+      screen: Lifehacks2Navigator,
+      navigationOptions: {
+        title: 'Лайфхаки2',
         tabBarIcon: getTabBarIcon(images.TAB_LIFEHACKS),
       },
     },

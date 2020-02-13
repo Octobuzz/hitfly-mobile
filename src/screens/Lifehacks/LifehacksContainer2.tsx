@@ -2,19 +2,19 @@
 import LFP from 'lodash/fp'
 import React, { useState } from 'react'
 import { Share } from 'react-native'
-import { NavigationStackScreenProps } from 'react-navigation-stack'
 import LifehacksScreen from './Lifehacks'
 import { /* GET_LIFEHACKS, LifehacksData, */ Lifehack } from 'src/apollo'
-import { routes } from 'src/constants'
 // import { useQueryWithPagination } from 'src/hooks'
 // import { names } from 'src/constants'
+import styled from 'src/styled-components'
+import { Button } from 'src/components'
 
 // const hasMorePagesSelector = (data?: LifehacksData) =>
 //   L.get(data, 'lifehack.hasMorePages')
 // const itemsSelector = (data?: LifehacksData) =>
 //   L.get(data, 'lifehack.items', [])
 
-interface Props extends NavigationStackScreenProps {}
+interface Props {}
 
 const lifehackMocks = [
   {
@@ -61,7 +61,21 @@ const lifehackMocks = [
   },
 ] as Lifehack[]
 
-const LifehacksContainer: React.FC<Props> = ({ navigation }) => {
+const TabsWrapper = styled.View`
+  padding: 24px 16px 8px;
+  flex-direction: row;
+`
+
+const Divider = styled.View`
+  width: 16px;
+`
+
+const FadedButton = styled(Button)<{ isActive?: boolean }>`
+  opacity: ${({ isActive }) => (isActive ? 1 : 0.6)};
+  flex: 1;
+`
+
+const LifehacksContainer: React.FC<Props> = () => {
   // FIXME: тут все временно
   const [items, setItems] = useState(lifehackMocks)
 
@@ -93,24 +107,60 @@ const LifehacksContainer: React.FC<Props> = ({ navigation }) => {
     })
   }
 
-  const navigateToDetails = (lifehack: Lifehack) => {
-    navigation.navigate(routes.LIFEHACKS.LIFEHACK_DETAILED, { lifehack })
-  }
+  const [mode, setMode] = useState<'all' | 'bookmarks'>('all')
 
   return (
-    <LifehacksScreen
-      lifehacks={items}
-      likeItem={likeItem}
-      shareItem={shareItem}
-      bookmarkItem={bookmarkItem}
-      onPressItem={navigateToDetails}
-      onRefresh={() => {}}
-      onEndReached={() => {}}
-      showBookmarked="slider"
-      isFetchingMore={false}
-      isLoading={false}
-      isRefreshing={false}
-    />
+    <React.Fragment key={mode}>
+      <TabsWrapper>
+        <FadedButton
+          onPress={() => {
+            setMode('all')
+          }}
+          title="Все"
+          withoutMargin
+          verticalPadding={10}
+          type="outline"
+          isActive={mode === 'all'}
+        />
+        <Divider />
+        <FadedButton
+          onPress={() => {
+            setMode('bookmarks')
+          }}
+          title="Избранное"
+          withoutMargin
+          verticalPadding={10}
+          type="outline"
+          isActive={mode === 'bookmarks'}
+        />
+      </TabsWrapper>
+      {mode === 'all' ? (
+        <LifehacksScreen
+          lifehacks={items}
+          likeItem={likeItem}
+          shareItem={shareItem}
+          bookmarkItem={bookmarkItem}
+          onRefresh={() => {}}
+          onEndReached={() => {}}
+          isFetchingMore={false}
+          isLoading={false}
+          isRefreshing={false}
+        />
+      ) : (
+        <LifehacksScreen
+          lifehacks={items}
+          likeItem={likeItem}
+          shareItem={shareItem}
+          bookmarkItem={bookmarkItem}
+          onRefresh={() => {}}
+          onEndReached={() => {}}
+          isFetchingMore={false}
+          showBookmarked="tab"
+          isLoading={false}
+          isRefreshing={false}
+        />
+      )}
+    </React.Fragment>
   )
 
   // const {

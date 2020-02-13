@@ -56,7 +56,7 @@ interface Props {
   isLoading: boolean
   isRefreshing: boolean
   isFetchingMore: boolean
-  showBookmarked?: boolean
+  showBookmarked?: 'tab' | 'slider'
 }
 
 const Lifehacks: React.FC<Props> = ({
@@ -99,6 +99,7 @@ const Lifehacks: React.FC<Props> = ({
   )
 
   const bookmarked = lifehacks.filter(({ isBookmarked }) => isBookmarked)
+  const data = showBookmarked === 'tab' ? bookmarked : lifehacks
 
   return isLoading ? (
     <Loader isFilled />
@@ -109,7 +110,7 @@ const Lifehacks: React.FC<Props> = ({
         <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
       }
       ListHeaderComponent={
-        showBookmarked && !!bookmarked.length ? (
+        showBookmarked === 'slider' && !!bookmarked.length ? (
           <HorizontalScroll
             data={bookmarked}
             renderItem={renderBookmarkedItem}
@@ -118,7 +119,7 @@ const Lifehacks: React.FC<Props> = ({
       }
       ListEmptyComponent={<ListEmptyText>Пока здесь пусто</ListEmptyText>}
       ListFooterComponent={<ListFooterLoader isShown={isFetchingMore} />}
-      data={lifehacks}
+      data={data}
       renderItem={renderItem}
     />
   )
