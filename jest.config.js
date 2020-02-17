@@ -5,7 +5,8 @@ module.exports = {
   setupFiles: jestPreset.setupFiles,
   setupFilesAfterEnv: ['./jest/setup.js'],
   testEnvironment: 'jsdom',
-  cacheDirectory: './cache',
+  cacheDirectory: './jest/cache',
+  coverageDirectory: './jest/coverage',
   transform: {
     '^.+\\.js$': '<rootDir>/node_modules/react-native/jest/preprocessor.js',
     '^.+\\.(js|jsx)?$': '<rootDir>/node_modules/babel-jest',
