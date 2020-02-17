@@ -1,92 +1,82 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AlbumItem renders correctly 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
+<TouchableOpacity
+  activeOpacity={0.2}
   style={
-    Object {
-      "flex": 1,
-    }
+    Array [
+      Object {
+        "width": 351,
+      },
+    ]
   }
+  testID="albumItem"
 >
-  <TouchableOpacity
-    activeOpacity={0.2}
+  <View
     style={
       Array [
         Object {
-          "width": 351,
+          "overflow": "hidden",
+        },
+        Array [
+          Object {
+            "borderRadius": 4,
+            "height": 351,
+            "marginBottom": 14,
+            "width": "100%",
+          },
+        ],
+      ]
+    }
+  >
+    <FastImageView
+      resizeMode="cover"
+      source={
+        Object {
+          "uri": "url",
+        }
+      }
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    />
+  </View>
+  <Text
+    numberOfLines={1}
+    style={
+      Array [
+        Object {
+          "color": "#313131",
+          "fontFamily": "GothamPro-Medium",
+          "fontSize": 16,
+          "lineHeight": 16,
+          "marginBottom": 8,
         },
       ]
     }
-    testID="albumItem"
   >
-    <View
-      style={
-        Array [
-          Object {
-            "overflow": "hidden",
-          },
-          Array [
-            Object {
-              "borderRadius": 4,
-              "height": 351,
-              "marginBottom": 14,
-              "width": "100%",
-            },
-          ],
-        ]
-      }
-    >
-      <FastImageView
-        resizeMode="cover"
-        source={
-          Object {
-            "uri": "url",
-          }
-        }
-        style={
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          }
-        }
-      />
-    </View>
-    <Text
-      numberOfLines={1}
-      style={
-        Array [
-          Object {
-            "color": "#313131",
-            "fontFamily": "GothamPro-Medium",
-            "fontSize": 16,
-            "lineHeight": 16,
-            "marginBottom": 8,
-          },
-        ]
-      }
-    >
-      title
-    </Text>
-    <Text
-      numberOfLines={1}
-      style={
-        Array [
-          Object {
-            "color": "#606060",
-            "fontFamily": "GothamPro",
-            "fontSize": 12,
-            "lineHeight": 12,
-          },
-        ]
-      }
-    >
-      author
-    </Text>
-  </TouchableOpacity>
-</View>
+    title
+  </Text>
+  <Text
+    numberOfLines={1}
+    style={
+      Array [
+        Object {
+          "color": "#606060",
+          "fontFamily": "GothamPro",
+          "fontSize": 12,
+          "lineHeight": 12,
+        },
+      ]
+    }
+  >
+    author
+  </Text>
+</TouchableOpacity>
 `;

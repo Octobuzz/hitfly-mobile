@@ -1,11 +1,16 @@
 import React from 'react'
-import { render, fireEvent, NativeTestEvent } from '../../jest/test-utils'
+import {
+  render,
+  fireEvent,
+  NativeTestEvent,
+  ReactTestInstanceExtended,
+} from '../../jest/test-utils'
 import { FormWrapper } from 'src/components/views'
 
 describe('FormWrapper', () => {
   it('renders correctly', () => {
-    const { asJSON } = render(<FormWrapper />)
-    expect(asJSON()).toMatchSnapshot()
+    const { container } = render(<FormWrapper />)
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('scrollEnabled should be false', () => {

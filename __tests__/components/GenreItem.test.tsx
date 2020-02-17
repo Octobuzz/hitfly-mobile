@@ -1,9 +1,13 @@
 import React from 'react'
-import { render, fireEvent } from '../../jest/test-utils'
+import {
+  render,
+  fireEvent,
+  ReactTestInstanceExtended,
+} from '../../jest/test-utils'
 import {
   GenreItem,
-  SelectableGenreItem,
   GenreItemProps,
+  SelectableGenreItem,
   SelectableGenreItemProps,
 } from 'src/components'
 import { Genre } from 'src/apollo'
@@ -14,9 +18,9 @@ describe('SelectableGenreItem', () => {
     const props: SelectableGenreItemProps = {
       item,
     }
-    const { asJSON } = render(<SelectableGenreItem {...props} />)
+    const { container } = render(<SelectableGenreItem {...props} />)
 
-    expect(asJSON()).toMatchSnapshot()
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('renders correctly in selected state', () => {
@@ -24,9 +28,9 @@ describe('SelectableGenreItem', () => {
     const props: SelectableGenreItemProps = {
       item,
     }
-    const { asJSON } = render(<SelectableGenreItem isSelected {...props} />)
+    const { container } = render(<SelectableGenreItem isSelected {...props} />)
 
-    expect(asJSON()).toMatchSnapshot()
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('renders correctly with subgenres', () => {
@@ -38,8 +42,8 @@ describe('SelectableGenreItem', () => {
     const props: SelectableGenreItemProps = {
       item,
     }
-    const { asJSON } = render(<SelectableGenreItem isSelected {...props} />)
-    expect(asJSON()).toMatchSnapshot()
+    const { container } = render(<SelectableGenreItem isSelected {...props} />)
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('can be pressed on the wrapper and the child', () => {
@@ -72,17 +76,17 @@ describe('GenreItem', () => {
       item,
       onPress: jest.fn(),
     }
-    const { asJSON } = render(<GenreItem {...props} />)
+    const { container } = render(<GenreItem {...props} />)
 
-    expect(asJSON()).toMatchSnapshot()
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
   it('disabled without onPress', () => {
     const props: GenreItemProps = {
       item,
     }
-    const { asJSON } = render(<GenreItem {...props} />)
+    const { container } = render(<GenreItem {...props} />)
 
-    expect(asJSON()).toMatchSnapshot()
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('can be pressed', () => {

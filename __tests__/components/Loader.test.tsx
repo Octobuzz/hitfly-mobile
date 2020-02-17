@@ -4,18 +4,18 @@ import { render, ReactTestInstanceExtended } from '../../jest/test-utils'
 
 describe('Loader', () => {
   it('renders correctly', () => {
-    const { asJSON } = render(<Loader />)
-    expect(asJSON()).toMatchSnapshot()
+    const { container } = render(<Loader />)
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('renders correctly in absolute state', () => {
-    const { asJSON } = render(<Loader isAbsolute />)
-    expect(asJSON()).toMatchSnapshot()
+    const { container } = render(<Loader isAbsolute />)
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('renders correctly in filled state', () => {
-    const { asJSON } = render(<Loader isFilled />)
-    expect(asJSON()).toMatchSnapshot()
+    const { container } = render(<Loader isFilled />)
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 })
 

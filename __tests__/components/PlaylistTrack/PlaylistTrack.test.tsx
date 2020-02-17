@@ -1,5 +1,9 @@
 import React from 'react'
-import { render, fireEvent } from '../../../jest/test-utils'
+import {
+  render,
+  fireEvent,
+  ReactTestInstanceExtended,
+} from '../../../jest/test-utils'
 import { PlaylistTrack } from 'src/components'
 import { Track } from 'src/apollo'
 
@@ -18,22 +22,22 @@ describe('PlaylistTrack', () => {
   } as Track
 
   it('renders correctly in paused state', () => {
-    const { asJSON } = render(<PlaylistTrack track={track} index={1} />)
-    expect(asJSON()).toMatchSnapshot()
+    const { container } = render(<PlaylistTrack track={track} index={1} />)
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('renders correctly in played state', () => {
-    const { asJSON } = render(
+    const { container } = render(
       <PlaylistTrack isPlaying track={track} index={1} />,
     )
-    expect(asJSON()).toMatchSnapshot()
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('renders without index', () => {
-    const { asJSON } = render(
+    const { container } = render(
       <PlaylistTrack isPlaying hideIndex track={track} index={1} />,
     )
-    expect(asJSON()).toMatchSnapshot()
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('can be pressed', () => {

@@ -1,10 +1,10 @@
 import React from 'react'
-import { render } from '../../jest/test-utils'
+import { render, ReactTestInstanceExtended } from '../../jest/test-utils'
 import { Stretcher } from 'src/components/views'
 
 describe('Stretcher', () => {
   it('renders correctly', () => {
-    const { asJSON } = render(<Stretcher />)
-    expect(asJSON()).toMatchSnapshot()
+    const { container } = render(<Stretcher />)
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 })
