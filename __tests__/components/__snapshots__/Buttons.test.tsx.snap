@@ -251,6 +251,7 @@ exports[`Button renders as gradient with loader 1`] = `
               },
             ]
           }
+          testID="loader"
         >
           <View
             style={

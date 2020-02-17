@@ -481,6 +481,7 @@ exports[`TrackFlatList renders correctly in fetching more state 1`] = `
             },
           ]
         }
+        testID="loader"
       >
         <View
           style={

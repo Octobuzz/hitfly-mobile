@@ -19,6 +19,7 @@ exports[`Loader renders correctly 1`] = `
         },
       ]
     }
+    testID="loader"
   >
     <View
       style={
@@ -88,6 +89,7 @@ exports[`Loader renders correctly in absolute state 1`] = `
         },
       ]
     }
+    testID="loader"
   >
     <View
       style={
@@ -155,6 +157,7 @@ exports[`Loader renders correctly in filled state 1`] = `
         },
       ]
     }
+    testID="loader"
   >
     <View
       style={

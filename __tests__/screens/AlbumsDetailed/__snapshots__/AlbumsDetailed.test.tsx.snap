@@ -370,6 +370,7 @@ exports[`AlbumsDetailedScreen renders correctly in fetchingMore state 1`] = `
               },
             ]
           }
+          testID="loader"
         >
           <View
             style={
@@ -445,6 +446,7 @@ exports[`AlbumsDetailedScreen renders correctly in loading state 1`] = `
           },
         ]
       }
+      testID="loader"
     >
       <View
         style={

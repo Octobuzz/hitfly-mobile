@@ -5,7 +5,6 @@
     "esModuleInterop": true,
     "isolatedModules": false,
     "resolveJsonModule": true,
-    "noUnusedLocals": true,
     "checkJs": false,
     "module": "esnext",
     "jsx": "react-native",

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Loader } from 'src/components'
-import { render } from '../../jest/test-utils'
+import { Loader, ListFooterLoader } from 'src/components'
+import { render, ReactTestInstanceExtended } from '../../jest/test-utils'
 
 describe('Loader', () => {
   it('renders correctly', () => {
@@ -16,5 +16,17 @@ describe('Loader', () => {
   it('renders correctly in filled state', () => {
     const { asJSON } = render(<Loader isFilled />)
     expect(asJSON()).toMatchSnapshot()
+  })
+})
+
+describe('ListFooterLoader', () => {
+  it('shows loader', () => {
+    const { getByTestId } = render(<ListFooterLoader isShown />)
+    expect(getByTestId('loader')).toBeTruthy()
+  })
+
+  it('renders null', () => {
+    const { container } = render(<ListFooterLoader />)
+    expect(container.children[0] as ReactTestInstanceExtended).toBeFalsy()
   })
 })
