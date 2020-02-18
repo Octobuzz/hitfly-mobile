@@ -1,5 +1,9 @@
 import React from 'react'
-import { render, fireEvent } from '../../jest/test-utils'
+import {
+  render,
+  fireEvent,
+  ReactTestInstanceExtended,
+} from '../../jest/test-utils'
 import { TrackMenu } from 'src/components'
 import { Track } from 'src/apollo'
 
@@ -11,15 +15,15 @@ describe('TrackMenu', () => {
   } as Track
 
   it('renders correctly', () => {
-    const { asJSON } = render(<TrackMenu track={track} />)
-    expect(asJSON()).toMatchSnapshot()
+    const { container } = render(<TrackMenu track={track} />)
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('renders correctly with liked track', () => {
     const likedTrack = { ...track, isFavorite: true }
-    const { asJSON } = render(<TrackMenu track={likedTrack} />)
+    const { container } = render(<TrackMenu track={likedTrack} />)
 
-    expect(asJSON()).toMatchSnapshot()
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('can be liked', () => {

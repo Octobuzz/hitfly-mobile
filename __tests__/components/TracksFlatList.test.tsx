@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '../../jest/test-utils'
+import { render, ReactTestInstanceExtended } from '../../jest/test-utils'
 import { TracksFlatList, TracksFlatListProps } from 'src/components'
 import { Track } from 'src/apollo'
 
@@ -26,8 +26,8 @@ describe('TrackFlatList', () => {
   }
 
   it('renders correctly in default state', () => {
-    const { asJSON } = render(<TracksFlatList {...staticProps} />)
-    expect(asJSON()).toMatchSnapshot()
+    const { container } = render(<TracksFlatList {...staticProps} />)
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('renders correctly in playing state', () => {
@@ -37,8 +37,8 @@ describe('TrackFlatList', () => {
       activeTrack: item,
     }
 
-    const { asJSON } = render(<TracksFlatList {...props} />)
-    expect(asJSON()).toMatchSnapshot()
+    const { container } = render(<TracksFlatList {...props} />)
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('renders correctly in fetching more state', () => {
@@ -47,8 +47,8 @@ describe('TrackFlatList', () => {
       isFetchingMore: true,
     }
 
-    const { asJSON } = render(<TracksFlatList {...props} />)
-    expect(asJSON()).toMatchSnapshot()
+    const { container } = render(<TracksFlatList {...props} />)
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('renders correctly in refreshing state', () => {
@@ -57,8 +57,8 @@ describe('TrackFlatList', () => {
       isRefreshing: true,
     }
 
-    const { asJSON } = render(<TracksFlatList {...props} />)
-    expect(asJSON()).toMatchSnapshot()
+    const { container } = render(<TracksFlatList {...props} />)
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('renders correctly without items', () => {
@@ -67,7 +67,7 @@ describe('TrackFlatList', () => {
       tracks: [],
     }
 
-    const { asJSON } = render(<TracksFlatList {...props} />)
-    expect(asJSON()).toMatchSnapshot()
+    const { container } = render(<TracksFlatList {...props} />)
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 })

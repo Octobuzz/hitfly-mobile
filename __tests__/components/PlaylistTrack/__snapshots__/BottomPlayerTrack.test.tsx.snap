@@ -1,231 +1,237 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BottomPlayerTrack renders correctly 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
+<TouchableOpacity
+  activeOpacity={0.8}
   style={
-    Object {
-      "flex": 1,
-    }
+    Array [
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "paddingBottom": 16,
+        "paddingLeft": 16,
+        "paddingRight": 16,
+        "paddingTop": 16,
+      },
+    ]
   }
+  testID="wrapper"
 >
+  <View
+    style={
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Array [
+          Object {
+            "borderRadius": 4,
+            "height": 24,
+            "width": 24,
+          },
+        ],
+      ]
+    }
+  >
+    <FastImageView
+      resizeMode="cover"
+      source={
+        Object {
+          "uri": "some url",
+        }
+      }
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "flexBasis": 0,
+          "flexGrow": 1,
+          "flexShrink": 1,
+          "marginHorizontal": 16,
+        },
+      ]
+    }
+  >
+    <Text
+      numberOfLines={2}
+      style={
+        Array [
+          Object {
+            "color": "#313131",
+            "fontFamily": "GothamPro-Bold",
+            "fontSize": 12,
+            "lineHeight": 18,
+          },
+        ]
+      }
+    >
+      Some track title
+    </Text>
+    <Text
+      numberOfLines={2}
+      style={
+        Array [
+          Object {
+            "color": "#606060",
+            "fontFamily": "GothamPro",
+            "fontSize": 10,
+            "lineHeight": 12,
+          },
+        ]
+      }
+    />
+  </View>
   <TouchableOpacity
-    activeOpacity={0.8}
+    activeOpacity={0.2}
     style={
       Array [
         Object {
           "alignItems": "center",
-          "flexDirection": "row",
-          "paddingBottom": 16,
-          "paddingLeft": 16,
-          "paddingRight": 16,
-          "paddingTop": 16,
+          "width": 34,
         },
       ]
     }
-    testID="wrapper"
+    testID="control"
   >
-    <View
+    <Icon
+      color="#313131"
+      name="play"
+      size={36}
       style={
         Array [
-          Object {
-            "overflow": "hidden",
-          },
-          Array [
-            Object {
-              "borderRadius": 4,
-              "height": 24,
-              "width": 24,
-            },
-          ],
+          Object {},
         ]
       }
-    >
-      <FastImageView
-        resizeMode="cover"
-        source={
-          Object {
-            "uri": "some url",
-          }
-        }
-        style={
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          }
-        }
-      />
-    </View>
-    <View
-      style={
-        Array [
-          Object {
-            "flexBasis": 0,
-            "flexGrow": 1,
-            "flexShrink": 1,
-            "marginHorizontal": 16,
-          },
-        ]
-      }
-    >
-      <Text
-        numberOfLines={1}
-        style={
-          Array [
-            Object {
-              "color": "#313131",
-              "fontFamily": "GothamPro-Bold",
-              "fontSize": 12,
-              "lineHeight": 18,
-            },
-          ]
-        }
-      >
-        Some track title
-      </Text>
-    </View>
-    <TouchableOpacity
-      activeOpacity={0.2}
-      style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "width": 34,
-          },
-        ]
-      }
-      testID="control"
-    >
-      <Icon
-        color="#313131"
-        name="play"
-        size={36}
-        style={
-          Array [
-            Object {},
-          ]
-        }
-      />
-    </TouchableOpacity>
+    />
   </TouchableOpacity>
-</View>
+</TouchableOpacity>
 `;
 
 exports[`BottomPlayerTrack renders correctly in playing state 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
+<TouchableOpacity
+  activeOpacity={0.8}
   style={
-    Object {
-      "flex": 1,
-    }
+    Array [
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "paddingBottom": 16,
+        "paddingLeft": 16,
+        "paddingRight": 16,
+        "paddingTop": 16,
+      },
+    ]
   }
+  testID="wrapper"
 >
+  <View
+    style={
+      Array [
+        Object {
+          "overflow": "hidden",
+        },
+        Array [
+          Object {
+            "borderRadius": 4,
+            "height": 24,
+            "width": 24,
+          },
+        ],
+      ]
+    }
+  >
+    <FastImageView
+      resizeMode="cover"
+      source={
+        Object {
+          "uri": "some url",
+        }
+      }
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "flexBasis": 0,
+          "flexGrow": 1,
+          "flexShrink": 1,
+          "marginHorizontal": 16,
+        },
+      ]
+    }
+  >
+    <Text
+      numberOfLines={2}
+      style={
+        Array [
+          Object {
+            "color": "#313131",
+            "fontFamily": "GothamPro-Bold",
+            "fontSize": 12,
+            "lineHeight": 18,
+          },
+        ]
+      }
+    >
+      Some track title
+    </Text>
+    <Text
+      numberOfLines={2}
+      style={
+        Array [
+          Object {
+            "color": "#606060",
+            "fontFamily": "GothamPro",
+            "fontSize": 10,
+            "lineHeight": 12,
+          },
+        ]
+      }
+    />
+  </View>
   <TouchableOpacity
-    activeOpacity={0.8}
+    activeOpacity={0.2}
     style={
       Array [
         Object {
           "alignItems": "center",
-          "flexDirection": "row",
-          "paddingBottom": 16,
-          "paddingLeft": 16,
-          "paddingRight": 16,
-          "paddingTop": 16,
+          "width": 34,
         },
       ]
     }
-    testID="wrapper"
+    testID="control"
   >
-    <View
+    <Icon
+      color="#313131"
+      name="pause"
+      size={36}
       style={
         Array [
-          Object {
-            "overflow": "hidden",
-          },
-          Array [
-            Object {
-              "borderRadius": 4,
-              "height": 24,
-              "width": 24,
-            },
-          ],
+          Object {},
         ]
       }
-    >
-      <FastImageView
-        resizeMode="cover"
-        source={
-          Object {
-            "uri": "some url",
-          }
-        }
-        style={
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          }
-        }
-      />
-    </View>
-    <View
-      style={
-        Array [
-          Object {
-            "flexBasis": 0,
-            "flexGrow": 1,
-            "flexShrink": 1,
-            "marginHorizontal": 16,
-          },
-        ]
-      }
-    >
-      <Text
-        numberOfLines={1}
-        style={
-          Array [
-            Object {
-              "color": "#313131",
-              "fontFamily": "GothamPro-Bold",
-              "fontSize": 12,
-              "lineHeight": 18,
-            },
-          ]
-        }
-      >
-        Some track title
-      </Text>
-    </View>
-    <TouchableOpacity
-      activeOpacity={0.2}
-      style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "width": 34,
-          },
-        ]
-      }
-      testID="control"
-    >
-      <Icon
-        color="#313131"
-        name="pause"
-        size={36}
-        style={
-          Array [
-            Object {},
-          ]
-        }
-      />
-    </TouchableOpacity>
+    />
   </TouchableOpacity>
-</View>
+</TouchableOpacity>
 `;

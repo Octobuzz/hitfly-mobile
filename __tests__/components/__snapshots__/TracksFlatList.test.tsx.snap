@@ -1,484 +1,99 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TrackFlatList renders correctly in default state 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
-  style={
-    Object {
-      "flex": 1,
-    }
+<ScrollView
+  ListEmptyComponent={
+    <Styled(Styled(Text))>
+      Плейлист "title" пуст
+    </Styled(Styled(Text))>
   }
+  ListFooterComponent={
+    <Unknown
+      isShown={false}
+    />
+  }
+  data={
+    Array [
+      Object {
+        "cover": Array [
+          Object {},
+        ],
+        "id": 2,
+        "singer": "singer",
+        "songText": "song text",
+        "title": "title",
+      },
+    ]
+  }
+  disableVirtualization={false}
+  horizontal={false}
+  initialNumToRender={10}
+  maxToRenderPerBatch={10}
+  numColumns={1}
+  onEndReachedThreshold={0.9}
+  refreshControl={
+    <Styled(RefreshControl)
+      onRefresh={[MockFunction]}
+      refreshing={false}
+    />
+  }
+  removeClippedSubviews={false}
+  scrollEventThrottle={50}
+  stickyHeaderIndices={Array []}
+  style={
+    Array [
+      Object {
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+    ]
+  }
+  updateCellsBatchingPeriod={50}
+  viewabilityConfigCallbackPairs={Array []}
+  windowSize={21}
 >
-  <ScrollView
-    ListEmptyComponent={
-      <Styled(Styled(Text))>
-        Плейлист "title" пуст
-      </Styled(Styled(Text))>
-    }
-    ListFooterComponent={
-      <Unknown
-        isShown={false}
-      />
-    }
-    data={
-      Array [
-        Object {
-          "cover": Array [
-            Object {},
-          ],
-          "id": 2,
-          "singer": "singer",
-          "songText": "song text",
-          "title": "title",
-        },
-      ]
-    }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={0.9}
-    refreshControl={
-      <Styled(RefreshControl)
-        onRefresh={[MockFunction]}
-        refreshing={false}
-      />
-    }
-    removeClippedSubviews={false}
-    scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
-    style={
-      Array [
-        Object {
-          "flexBasis": 0,
-          "flexGrow": 1,
-          "flexShrink": 1,
-        },
-      ]
-    }
-    updateCellsBatchingPeriod={50}
-    viewabilityConfigCallbackPairs={Array []}
-    windowSize={21}
+  <View
+    style={null}
   >
-    <View
-      style={null}
+    <TouchableOpacity
+      activeOpacity={0.2}
+      isPlaying={false}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#ffffff",
+            "flexDirection": "row",
+            "paddingBottom": 12,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "paddingTop": 12,
+          },
+        ]
+      }
+      testID="wrapper"
     >
-      <TouchableOpacity
-        activeOpacity={0.2}
-        isPlaying={false}
+      <Text
         style={
           Array [
             Object {
-              "alignItems": "center",
-              "backgroundColor": "#ffffff",
-              "flexDirection": "row",
-              "paddingBottom": 12,
-              "paddingLeft": 16,
-              "paddingRight": 16,
-              "paddingTop": 12,
+              "color": "#313131",
+              "fontFamily": "GothamPro",
+              "fontSize": 12,
+              "lineHeight": 20,
+              "marginRight": 12,
+              "width": 24,
             },
           ]
         }
-        testID="wrapper"
       >
-        <Text
-          style={
-            Array [
-              Object {
-                "color": "#313131",
-                "fontFamily": "GothamPro",
-                "fontSize": 12,
-                "lineHeight": 20,
-                "marginRight": 12,
-                "width": 24,
-              },
-            ]
-          }
-        >
-          1
-        </Text>
-        <View
-          style={
-            Array [
-              Object {},
-            ]
-          }
-        >
-          <View
-            style={
-              Array [
-                Object {
-                  "overflow": "hidden",
-                },
-                Array [
-                  Object {
-                    "borderRadius": 4,
-                    "height": 32,
-                    "width": 32,
-                  },
-                ],
-              ]
-            }
-          >
-            <FastImageView
-              resizeMode="cover"
-              source={
-                Object {
-                  "uri": undefined,
-                }
-              }
-              style={
-                Object {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                }
-              }
-            />
-          </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "flexBasis": 0,
-                "flexGrow": 1,
-                "flexShrink": 1,
-                "marginHorizontal": 16,
-              },
-            ]
-          }
-        >
-          <Text
-            numberOfLines={1}
-            style={
-              Array [
-                Object {
-                  "color": "#313131",
-                  "fontFamily": "GothamPro-Bold",
-                  "fontSize": 12,
-                  "lineHeight": 14,
-                },
-              ]
-            }
-          >
-            title
-          </Text>
-          <Text
-            numberOfLines={1}
-            style={
-              Array [
-                Object {
-                  "color": "#606060",
-                  "fontFamily": "GothamPro",
-                  "fontSize": 10,
-                  "lineHeight": 12,
-                },
-              ]
-            }
-          >
-            singer
-          </Text>
-        </View>
-        <TouchableOpacity
-          activeOpacity={0.2}
-          style={
-            Array [
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "#ffffff",
-                "borderRadius": 16,
-                "height": 32,
-                "justifyContent": "center",
-                "width": 32,
-              },
-            ]
-          }
-        >
-          <Icon
-            color="#313131"
-            name="dots-horizontal"
-            size={20}
-            style={
-              Array [
-                Object {
-                  "top": 1,
-                },
-              ]
-            }
-          />
-        </TouchableOpacity>
-        <Text
-          style={
-            Array [
-              Object {
-                "color": "#606060",
-                "fontFamily": "GothamPro",
-                "fontSize": 10,
-                "lineHeight": 12,
-                "marginLeft": 16,
-                "textAlign": "right",
-                "width": 100,
-              },
-            ]
-          }
-        >
-          0:00
-        </Text>
-      </TouchableOpacity>
-    </View>
-    <View />
-  </ScrollView>
-</View>
-`;
-
-exports[`TrackFlatList renders correctly in fetching more state 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
->
-  <ScrollView
-    ListEmptyComponent={
-      <Styled(Styled(Text))>
-        Плейлист "title" пуст
-      </Styled(Styled(Text))>
-    }
-    ListFooterComponent={
-      <Unknown
-        isShown={true}
-      />
-    }
-    data={
-      Array [
-        Object {
-          "cover": Array [
-            Object {},
-          ],
-          "id": 2,
-          "singer": "singer",
-          "songText": "song text",
-          "title": "title",
-        },
-      ]
-    }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={0.9}
-    refreshControl={
-      <Styled(RefreshControl)
-        onRefresh={[MockFunction]}
-        refreshing={false}
-      />
-    }
-    removeClippedSubviews={false}
-    scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
-    style={
-      Array [
-        Object {
-          "flexBasis": 0,
-          "flexGrow": 1,
-          "flexShrink": 1,
-        },
-      ]
-    }
-    updateCellsBatchingPeriod={50}
-    viewabilityConfigCallbackPairs={Array []}
-    windowSize={21}
-  >
-    <View
-      style={null}
-    >
-      <TouchableOpacity
-        activeOpacity={0.2}
-        isPlaying={false}
-        style={
-          Array [
-            Object {
-              "alignItems": "center",
-              "backgroundColor": "#ffffff",
-              "flexDirection": "row",
-              "paddingBottom": 12,
-              "paddingLeft": 16,
-              "paddingRight": 16,
-              "paddingTop": 12,
-            },
-          ]
-        }
-        testID="wrapper"
-      >
-        <Text
-          style={
-            Array [
-              Object {
-                "color": "#313131",
-                "fontFamily": "GothamPro",
-                "fontSize": 12,
-                "lineHeight": 20,
-                "marginRight": 12,
-                "width": 24,
-              },
-            ]
-          }
-        >
-          1
-        </Text>
-        <View
-          style={
-            Array [
-              Object {},
-            ]
-          }
-        >
-          <View
-            style={
-              Array [
-                Object {
-                  "overflow": "hidden",
-                },
-                Array [
-                  Object {
-                    "borderRadius": 4,
-                    "height": 32,
-                    "width": 32,
-                  },
-                ],
-              ]
-            }
-          >
-            <FastImageView
-              resizeMode="cover"
-              source={
-                Object {
-                  "uri": undefined,
-                }
-              }
-              style={
-                Object {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                }
-              }
-            />
-          </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "flexBasis": 0,
-                "flexGrow": 1,
-                "flexShrink": 1,
-                "marginHorizontal": 16,
-              },
-            ]
-          }
-        >
-          <Text
-            numberOfLines={1}
-            style={
-              Array [
-                Object {
-                  "color": "#313131",
-                  "fontFamily": "GothamPro-Bold",
-                  "fontSize": 12,
-                  "lineHeight": 14,
-                },
-              ]
-            }
-          >
-            title
-          </Text>
-          <Text
-            numberOfLines={1}
-            style={
-              Array [
-                Object {
-                  "color": "#606060",
-                  "fontFamily": "GothamPro",
-                  "fontSize": 10,
-                  "lineHeight": 12,
-                },
-              ]
-            }
-          >
-            singer
-          </Text>
-        </View>
-        <TouchableOpacity
-          activeOpacity={0.2}
-          style={
-            Array [
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "#ffffff",
-                "borderRadius": 16,
-                "height": 32,
-                "justifyContent": "center",
-                "width": 32,
-              },
-            ]
-          }
-        >
-          <Icon
-            color="#313131"
-            name="dots-horizontal"
-            size={20}
-            style={
-              Array [
-                Object {
-                  "top": 1,
-                },
-              ]
-            }
-          />
-        </TouchableOpacity>
-        <Text
-          style={
-            Array [
-              Object {
-                "color": "#606060",
-                "fontFamily": "GothamPro",
-                "fontSize": 10,
-                "lineHeight": 12,
-                "marginLeft": 16,
-                "textAlign": "right",
-                "width": 100,
-              },
-            ]
-          }
-        >
-          0:00
-        </Text>
-      </TouchableOpacity>
-    </View>
-    <View>
+        1
+      </Text>
       <View
-        isFilled={true}
         style={
           Array [
-            Object {
-              "alignItems": "center",
-              "flexBasis": 0,
-              "flexGrow": 1,
-              "flexShrink": 1,
-              "justifyContent": "center",
-            },
+            Object {},
           ]
         }
       >
@@ -486,282 +101,66 @@ exports[`TrackFlatList renders correctly in fetching more state 1`] = `
           style={
             Array [
               Object {
-                "aspectRatio": 1,
+                "overflow": "hidden",
               },
-              undefined,
               Array [
                 Object {
-                  "height": 100,
+                  "borderRadius": 4,
+                  "height": 32,
+                  "width": 32,
                 },
               ],
             ]
           }
         >
-          <View
-            autoPlay={true}
-            enableMergePathsAndroidForKitKatAndAbove={false}
-            loop={true}
-            progress={0}
-            resizeMode="contain"
-            size={100}
-            sourceJson="{\\"v\\":\\"5.5.5\\",\\"fr\\":30,\\"ip\\":20,\\"op\\":56,\\"w\\":100,\\"h\\":100,\\"nm\\":\\"播放音频\\",\\"ddd\\":0,\\"assets\\":[],\\"layers\\":[{\\"ddd\\":0,\\"ind\\":1,\\"ty\\":4,\\"nm\\":\\"Line_5\\",\\"sr\\":1,\\"ks\\":{\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":11},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":10},\\"p\\":{\\"a\\":0,\\"k\\":[65.996,50,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100,100],\\"ix\\":6}},\\"ao\\":0,\\"shapes\\":[{\\"ty\\":\\"gr\\",\\"it\\":[{\\"ty\\":\\"rc\\",\\"d\\":1,\\"s\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":20,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":29,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":38,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":47,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":56,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":65,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":74,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":83,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"t\\":92}],\\"ix\\":2},\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":2,\\"ix\\":4},\\"nm\\":\\"矩形路径 1\\",\\"mn\\":\\"ADBE Vector Shape - Rect\\",\\"hd\\":false},{\\"ty\\":\\"fl\\",\\"c\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":12,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":13,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":31,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":47,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":48,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"t\\":66}],\\"ix\\":4},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":5},\\"r\\":1,\\"bm\\":0,\\"nm\\":\\"填充 1\\",\\"mn\\":\\"ADBE Vector Graphic - Fill\\",\\"hd\\":false},{\\"ty\\":\\"tr\\",\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":6},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":7},\\"sk\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":4},\\"sa\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":5},\\"nm\\":\\"变换\\"}],\\"nm\\":\\"矩形 1\\",\\"np\\":3,\\"cix\\":2,\\"bm\\":0,\\"ix\\":1,\\"mn\\":\\"ADBE Vector Group\\",\\"hd\\":false}],\\"ip\\":20,\\"op\\":920,\\"st\\":20,\\"bm\\":0},{\\"ddd\\":0,\\"ind\\":2,\\"ty\\":4,\\"nm\\":\\"Line_4\\",\\"sr\\":1,\\"ks\\":{\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":11},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":10},\\"p\\":{\\"a\\":0,\\"k\\":[58.004,50,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100,100],\\"ix\\":6}},\\"ao\\":0,\\"shapes\\":[{\\"ty\\":\\"gr\\",\\"it\\":[{\\"ty\\":\\"rc\\",\\"d\\":1,\\"s\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":15,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":24,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":33,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":42,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":51,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":60,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":69,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":78,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"t\\":87}],\\"ix\\":2},\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":2,\\"ix\\":4},\\"nm\\":\\"矩形路径 1\\",\\"mn\\":\\"ADBE Vector Shape - Rect\\",\\"hd\\":false},{\\"ty\\":\\"fl\\",\\"c\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":5,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":6,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":24,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":40,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":41,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"t\\":59}],\\"ix\\":4},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":5},\\"r\\":1,\\"bm\\":0,\\"nm\\":\\"填充 1\\",\\"mn\\":\\"ADBE Vector Graphic - Fill\\",\\"hd\\":false},{\\"ty\\":\\"tr\\",\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":6},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":7},\\"sk\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":4},\\"sa\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":5},\\"nm\\":\\"变换\\"}],\\"nm\\":\\"矩形 1\\",\\"np\\":3,\\"cix\\":2,\\"bm\\":0,\\"ix\\":1,\\"mn\\":\\"ADBE Vector Group\\",\\"hd\\":false}],\\"ip\\":15,\\"op\\":915,\\"st\\":15,\\"bm\\":0},{\\"ddd\\":0,\\"ind\\":3,\\"ty\\":4,\\"nm\\":\\"Line_3\\",\\"sr\\":1,\\"ks\\":{\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":11},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":10},\\"p\\":{\\"a\\":0,\\"k\\":[50.004,50,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100,100],\\"ix\\":6}},\\"ao\\":0,\\"shapes\\":[{\\"ty\\":\\"gr\\",\\"it\\":[{\\"ty\\":\\"rc\\",\\"d\\":1,\\"s\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":10,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":19,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":28,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":37,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":46,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":55,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":64,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":73,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"t\\":82}],\\"ix\\":2},\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":2,\\"ix\\":4},\\"nm\\":\\"矩形路径 1\\",\\"mn\\":\\"ADBE Vector Shape - Rect\\",\\"hd\\":false},{\\"ty\\":\\"fl\\",\\"c\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":33,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":34,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"t\\":52}],\\"ix\\":4},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":5},\\"r\\":1,\\"bm\\":0,\\"nm\\":\\"填充 1\\",\\"mn\\":\\"ADBE Vector Graphic - Fill\\",\\"hd\\":false},{\\"ty\\":\\"tr\\",\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":6},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":7},\\"sk\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":4},\\"sa\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":5},\\"nm\\":\\"变换\\"}],\\"nm\\":\\"矩形 1\\",\\"np\\":3,\\"cix\\":2,\\"bm\\":0,\\"ix\\":1,\\"mn\\":\\"ADBE Vector Group\\",\\"hd\\":false}],\\"ip\\":10,\\"op\\":910,\\"st\\":10,\\"bm\\":0},{\\"ddd\\":0,\\"ind\\":4,\\"ty\\":4,\\"nm\\":\\"Line_2\\",\\"sr\\":1,\\"ks\\":{\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":11},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":10},\\"p\\":{\\"a\\":0,\\"k\\":[42.004,50,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100,100],\\"ix\\":6}},\\"ao\\":0,\\"shapes\\":[{\\"ty\\":\\"gr\\",\\"it\\":[{\\"ty\\":\\"rc\\",\\"d\\":1,\\"s\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":5,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":14,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":23,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":32,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":41,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":50,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":59,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":68,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"t\\":77}],\\"ix\\":2},\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":2,\\"ix\\":4},\\"nm\\":\\"矩形路径 1\\",\\"mn\\":\\"ADBE Vector Shape - Rect\\",\\"hd\\":false},{\\"ty\\":\\"fl\\",\\"c\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":26,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":27,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"t\\":45}],\\"ix\\":4},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":5},\\"r\\":1,\\"bm\\":0,\\"nm\\":\\"填充 1\\",\\"mn\\":\\"ADBE Vector Graphic - Fill\\",\\"hd\\":false},{\\"ty\\":\\"tr\\",\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":6},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":7},\\"sk\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":4},\\"sa\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":5},\\"nm\\":\\"变换\\"}],\\"nm\\":\\"矩形 1\\",\\"np\\":3,\\"cix\\":2,\\"bm\\":0,\\"ix\\":1,\\"mn\\":\\"ADBE Vector Group\\",\\"hd\\":false}],\\"ip\\":5,\\"op\\":905,\\"st\\":5,\\"bm\\":0},{\\"ddd\\":0,\\"ind\\":5,\\"ty\\":4,\\"nm\\":\\"Line_1\\",\\"sr\\":1,\\"ks\\":{\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":11},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":10},\\"p\\":{\\"a\\":0,\\"k\\":[34.004,50,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100,100],\\"ix\\":6}},\\"ao\\":0,\\"shapes\\":[{\\"ty\\":\\"gr\\",\\"it\\":[{\\"ty\\":\\"rc\\",\\"d\\":1,\\"s\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":0,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":9,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":18,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":27,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":36,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":45,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":54,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":63,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"t\\":72}],\\"ix\\":2},\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":2,\\"ix\\":4},\\"nm\\":\\"矩形路径 1\\",\\"mn\\":\\"ADBE Vector Shape - Rect\\",\\"hd\\":false},{\\"ty\\":\\"fl\\",\\"c\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":19,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":20,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"t\\":38}],\\"ix\\":4},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":5},\\"r\\":1,\\"bm\\":0,\\"nm\\":\\"填充 1\\",\\"mn\\":\\"ADBE Vector Graphic - Fill\\",\\"hd\\":false},{\\"ty\\":\\"tr\\",\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":6},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":7},\\"sk\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":4},\\"sa\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":5},\\"nm\\":\\"变换\\"}],\\"nm\\":\\"矩形 1\\",\\"np\\":3,\\"cix\\":2,\\"bm\\":0,\\"ix\\":1,\\"mn\\":\\"ADBE Vector Group\\",\\"hd\\":false}],\\"ip\\":0,\\"op\\":900,\\"st\\":0,\\"bm\\":0}],\\"markers\\":[]}"
-            speed={1}
+          <FastImageView
+            resizeMode="cover"
+            source={
+              Object {
+                "uri": undefined,
+              }
+            }
             style={
               Object {
-                "aspectRatio": 1,
-                "height": 100,
-                "width": "100%",
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
               }
             }
           />
         </View>
       </View>
-    </View>
-  </ScrollView>
-</View>
-`;
-
-exports[`TrackFlatList renders correctly in playing state 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
->
-  <ScrollView
-    ListEmptyComponent={
-      <Styled(Styled(Text))>
-        Плейлист "title" пуст
-      </Styled(Styled(Text))>
-    }
-    ListFooterComponent={
-      <Unknown
-        isShown={false}
-      />
-    }
-    data={
-      Array [
-        Object {
-          "cover": Array [
-            Object {},
-          ],
-          "id": 2,
-          "singer": "singer",
-          "songText": "song text",
-          "title": "title",
-        },
-      ]
-    }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={0.9}
-    refreshControl={
-      <Styled(RefreshControl)
-        onRefresh={[MockFunction]}
-        refreshing={false}
-      />
-    }
-    removeClippedSubviews={false}
-    scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
-    style={
-      Array [
-        Object {
-          "flexBasis": 0,
-          "flexGrow": 1,
-          "flexShrink": 1,
-        },
-      ]
-    }
-    updateCellsBatchingPeriod={50}
-    viewabilityConfigCallbackPairs={Array []}
-    windowSize={21}
-  >
-    <View
-      style={null}
-    >
-      <TouchableOpacity
-        activeOpacity={0.2}
-        isPlaying={true}
+      <View
         style={
           Array [
             Object {
-              "alignItems": "center",
-              "backgroundColor": "#f0f0f0",
-              "flexDirection": "row",
-              "paddingBottom": 12,
-              "paddingLeft": 16,
-              "paddingRight": 16,
-              "paddingTop": 12,
+              "flexBasis": 0,
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "marginHorizontal": 16,
             },
           ]
         }
-        testID="wrapper"
       >
         <Text
+          numberOfLines={1}
           style={
             Array [
               Object {
                 "color": "#313131",
-                "fontFamily": "GothamPro",
+                "fontFamily": "GothamPro-Bold",
                 "fontSize": 12,
-                "lineHeight": 20,
-                "marginRight": 12,
-                "width": 24,
+                "lineHeight": 14,
               },
             ]
           }
         >
-          1
+          title
         </Text>
-        <View
-          style={
-            Array [
-              Object {},
-            ]
-          }
-        >
-          <View
-            style={
-              Array [
-                Object {
-                  "overflow": "hidden",
-                },
-                Array [
-                  Object {
-                    "borderRadius": 4,
-                    "height": 32,
-                    "width": 32,
-                  },
-                ],
-              ]
-            }
-          >
-            <FastImageView
-              resizeMode="cover"
-              source={
-                Object {
-                  "uri": undefined,
-                }
-              }
-              style={
-                Object {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                }
-              }
-            />
-          </View>
-          <View
-            style={
-              Array [
-                Object {
-                  "alignItems": "center",
-                  "backgroundColor": "rgba(49, 49, 49, 0.7)",
-                  "borderRadius": 4,
-                  "bottom": 0,
-                  "justifyContent": "center",
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                },
-              ]
-            }
-          >
-            <Icon
-              color="#ffffff"
-              name="pause"
-              size={16}
-              style={
-                Array [
-                  Object {},
-                ]
-              }
-            />
-          </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "flexBasis": 0,
-                "flexGrow": 1,
-                "flexShrink": 1,
-                "marginHorizontal": 16,
-              },
-            ]
-          }
-        >
-          <Text
-            numberOfLines={1}
-            style={
-              Array [
-                Object {
-                  "color": "#313131",
-                  "fontFamily": "GothamPro-Bold",
-                  "fontSize": 12,
-                  "lineHeight": 14,
-                },
-              ]
-            }
-          >
-            title
-          </Text>
-          <Text
-            numberOfLines={1}
-            style={
-              Array [
-                Object {
-                  "color": "#606060",
-                  "fontFamily": "GothamPro",
-                  "fontSize": 10,
-                  "lineHeight": 12,
-                },
-              ]
-            }
-          >
-            singer
-          </Text>
-        </View>
-        <TouchableOpacity
-          activeOpacity={0.2}
-          style={
-            Array [
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "#ffffff",
-                "borderRadius": 16,
-                "height": 32,
-                "justifyContent": "center",
-                "width": 32,
-              },
-            ]
-          }
-        >
-          <Icon
-            color="#313131"
-            name="dots-horizontal"
-            size={20}
-            style={
-              Array [
-                Object {
-                  "top": 1,
-                },
-              ]
-            }
-          />
-        </TouchableOpacity>
         <Text
+          numberOfLines={1}
           style={
             Array [
               Object {
@@ -769,235 +168,225 @@ exports[`TrackFlatList renders correctly in playing state 1`] = `
                 "fontFamily": "GothamPro",
                 "fontSize": 10,
                 "lineHeight": 12,
-                "marginLeft": 16,
-                "textAlign": "right",
-                "width": 100,
               },
             ]
           }
         >
-          0:00
+          singer
         </Text>
-      </TouchableOpacity>
-    </View>
-    <View />
-  </ScrollView>
-</View>
-`;
-
-exports[`TrackFlatList renders correctly in refreshing state 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
->
-  <ScrollView
-    ListEmptyComponent={
-      <Styled(Styled(Text))>
-        Плейлист "title" пуст
-      </Styled(Styled(Text))>
-    }
-    ListFooterComponent={
-      <Unknown
-        isShown={false}
-      />
-    }
-    data={
-      Array [
-        Object {
-          "cover": Array [
-            Object {},
-          ],
-          "id": 2,
-          "singer": "singer",
-          "songText": "song text",
-          "title": "title",
-        },
-      ]
-    }
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={0.9}
-    refreshControl={
-      <Styled(RefreshControl)
-        onRefresh={[MockFunction]}
-        refreshing={true}
-      />
-    }
-    removeClippedSubviews={false}
-    scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
-    style={
-      Array [
-        Object {
-          "flexBasis": 0,
-          "flexGrow": 1,
-          "flexShrink": 1,
-        },
-      ]
-    }
-    updateCellsBatchingPeriod={50}
-    viewabilityConfigCallbackPairs={Array []}
-    windowSize={21}
-  >
-    <View
-      style={null}
-    >
+      </View>
       <TouchableOpacity
         activeOpacity={0.2}
-        isPlaying={false}
         style={
           Array [
             Object {
               "alignItems": "center",
               "backgroundColor": "#ffffff",
-              "flexDirection": "row",
-              "paddingBottom": 12,
-              "paddingLeft": 16,
-              "paddingRight": 16,
-              "paddingTop": 12,
+              "borderRadius": 16,
+              "height": 32,
+              "justifyContent": "center",
+              "width": 32,
             },
           ]
         }
-        testID="wrapper"
+      >
+        <Icon
+          color="#313131"
+          name="dots-horizontal"
+          size={20}
+          style={
+            Array [
+              Object {
+                "top": 1,
+              },
+            ]
+          }
+        />
+      </TouchableOpacity>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#606060",
+              "fontFamily": "GothamPro",
+              "fontSize": 10,
+              "lineHeight": 12,
+              "marginLeft": 16,
+              "textAlign": "right",
+              "width": 40,
+            },
+          ]
+        }
+      >
+        0:00
+      </Text>
+    </TouchableOpacity>
+  </View>
+  <View />
+</ScrollView>
+`;
+
+exports[`TrackFlatList renders correctly in fetching more state 1`] = `
+<ScrollView
+  ListEmptyComponent={
+    <Styled(Styled(Text))>
+      Плейлист "title" пуст
+    </Styled(Styled(Text))>
+  }
+  ListFooterComponent={
+    <Unknown
+      isShown={true}
+    />
+  }
+  data={
+    Array [
+      Object {
+        "cover": Array [
+          Object {},
+        ],
+        "id": 2,
+        "singer": "singer",
+        "songText": "song text",
+        "title": "title",
+      },
+    ]
+  }
+  disableVirtualization={false}
+  horizontal={false}
+  initialNumToRender={10}
+  maxToRenderPerBatch={10}
+  numColumns={1}
+  onEndReachedThreshold={0.9}
+  refreshControl={
+    <Styled(RefreshControl)
+      onRefresh={[MockFunction]}
+      refreshing={false}
+    />
+  }
+  removeClippedSubviews={false}
+  scrollEventThrottle={50}
+  stickyHeaderIndices={Array []}
+  style={
+    Array [
+      Object {
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+    ]
+  }
+  updateCellsBatchingPeriod={50}
+  viewabilityConfigCallbackPairs={Array []}
+  windowSize={21}
+>
+  <View
+    style={null}
+  >
+    <TouchableOpacity
+      activeOpacity={0.2}
+      isPlaying={false}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#ffffff",
+            "flexDirection": "row",
+            "paddingBottom": 12,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "paddingTop": 12,
+          },
+        ]
+      }
+      testID="wrapper"
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#313131",
+              "fontFamily": "GothamPro",
+              "fontSize": 12,
+              "lineHeight": 20,
+              "marginRight": 12,
+              "width": 24,
+            },
+          ]
+        }
+      >
+        1
+      </Text>
+      <View
+        style={
+          Array [
+            Object {},
+          ]
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "overflow": "hidden",
+              },
+              Array [
+                Object {
+                  "borderRadius": 4,
+                  "height": 32,
+                  "width": 32,
+                },
+              ],
+            ]
+          }
+        >
+          <FastImageView
+            resizeMode="cover"
+            source={
+              Object {
+                "uri": undefined,
+              }
+            }
+            style={
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          />
+        </View>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "flexBasis": 0,
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "marginHorizontal": 16,
+            },
+          ]
+        }
       >
         <Text
+          numberOfLines={1}
           style={
             Array [
               Object {
                 "color": "#313131",
-                "fontFamily": "GothamPro",
+                "fontFamily": "GothamPro-Bold",
                 "fontSize": 12,
-                "lineHeight": 20,
-                "marginRight": 12,
-                "width": 24,
+                "lineHeight": 14,
               },
             ]
           }
         >
-          1
+          title
         </Text>
-        <View
-          style={
-            Array [
-              Object {},
-            ]
-          }
-        >
-          <View
-            style={
-              Array [
-                Object {
-                  "overflow": "hidden",
-                },
-                Array [
-                  Object {
-                    "borderRadius": 4,
-                    "height": 32,
-                    "width": 32,
-                  },
-                ],
-              ]
-            }
-          >
-            <FastImageView
-              resizeMode="cover"
-              source={
-                Object {
-                  "uri": undefined,
-                }
-              }
-              style={
-                Object {
-                  "bottom": 0,
-                  "left": 0,
-                  "position": "absolute",
-                  "right": 0,
-                  "top": 0,
-                }
-              }
-            />
-          </View>
-        </View>
-        <View
-          style={
-            Array [
-              Object {
-                "flexBasis": 0,
-                "flexGrow": 1,
-                "flexShrink": 1,
-                "marginHorizontal": 16,
-              },
-            ]
-          }
-        >
-          <Text
-            numberOfLines={1}
-            style={
-              Array [
-                Object {
-                  "color": "#313131",
-                  "fontFamily": "GothamPro-Bold",
-                  "fontSize": 12,
-                  "lineHeight": 14,
-                },
-              ]
-            }
-          >
-            title
-          </Text>
-          <Text
-            numberOfLines={1}
-            style={
-              Array [
-                Object {
-                  "color": "#606060",
-                  "fontFamily": "GothamPro",
-                  "fontSize": 10,
-                  "lineHeight": 12,
-                },
-              ]
-            }
-          >
-            singer
-          </Text>
-        </View>
-        <TouchableOpacity
-          activeOpacity={0.2}
-          style={
-            Array [
-              Object {
-                "alignItems": "center",
-                "backgroundColor": "#ffffff",
-                "borderRadius": 16,
-                "height": 32,
-                "justifyContent": "center",
-                "width": 32,
-              },
-            ]
-          }
-        >
-          <Icon
-            color="#313131"
-            name="dots-horizontal"
-            size={20}
-            style={
-              Array [
-                Object {
-                  "top": 1,
-                },
-              ]
-            }
-          />
-        </TouchableOpacity>
         <Text
+          numberOfLines={1}
           style={
             Array [
               Object {
@@ -1005,89 +394,651 @@ exports[`TrackFlatList renders correctly in refreshing state 1`] = `
                 "fontFamily": "GothamPro",
                 "fontSize": 10,
                 "lineHeight": 12,
-                "marginLeft": 16,
-                "textAlign": "right",
-                "width": 100,
               },
             ]
           }
         >
-          0:00
+          singer
         </Text>
+      </View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#ffffff",
+              "borderRadius": 16,
+              "height": 32,
+              "justifyContent": "center",
+              "width": 32,
+            },
+          ]
+        }
+      >
+        <Icon
+          color="#313131"
+          name="dots-horizontal"
+          size={20}
+          style={
+            Array [
+              Object {
+                "top": 1,
+              },
+            ]
+          }
+        />
       </TouchableOpacity>
-    </View>
-    <View />
-  </ScrollView>
-</View>
-`;
-
-exports[`TrackFlatList renders correctly without items 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
->
-  <ScrollView
-    ListEmptyComponent={
-      <Styled(Styled(Text))>
-        Плейлист "title" пуст
-      </Styled(Styled(Text))>
-    }
-    ListFooterComponent={
-      <Unknown
-        isShown={false}
-      />
-    }
-    data={Array []}
-    disableVirtualization={false}
-    horizontal={false}
-    initialNumToRender={10}
-    maxToRenderPerBatch={10}
-    numColumns={1}
-    onEndReachedThreshold={0.9}
-    refreshControl={
-      <Styled(RefreshControl)
-        onRefresh={[MockFunction]}
-        refreshing={false}
-      />
-    }
-    removeClippedSubviews={false}
-    scrollEventThrottle={50}
-    stickyHeaderIndices={Array []}
-    style={
-      Array [
-        Object {
-          "flexBasis": 0,
-          "flexGrow": 1,
-          "flexShrink": 1,
-        },
-      ]
-    }
-    updateCellsBatchingPeriod={50}
-    viewabilityConfigCallbackPairs={Array []}
-    windowSize={21}
-  >
-    <Text
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#606060",
+              "fontFamily": "GothamPro",
+              "fontSize": 10,
+              "lineHeight": 12,
+              "marginLeft": 16,
+              "textAlign": "right",
+              "width": 40,
+            },
+          ]
+        }
+      >
+        0:00
+      </Text>
+    </TouchableOpacity>
+  </View>
+  <View>
+    <View
+      isFilled={true}
       style={
         Array [
           Object {
-            "color": "#606060",
-            "fontFamily": "GothamPro",
-            "fontSize": 16,
-            "lineHeight": 20,
-            "paddingVertical": 50,
-            "textAlign": "center",
+            "alignItems": "center",
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "justifyContent": "center",
           },
         ]
       }
+      testID="loader"
     >
+      <View
+        style={
+          Array [
+            Object {
+              "aspectRatio": 1,
+            },
+            undefined,
+            Array [
+              Object {
+                "height": 100,
+              },
+            ],
+          ]
+        }
+      >
+        <View
+          autoPlay={true}
+          enableMergePathsAndroidForKitKatAndAbove={false}
+          loop={true}
+          progress={0}
+          resizeMode="contain"
+          size={100}
+          sourceJson="{\\"v\\":\\"5.5.5\\",\\"fr\\":30,\\"ip\\":20,\\"op\\":56,\\"w\\":100,\\"h\\":100,\\"nm\\":\\"播放音频\\",\\"ddd\\":0,\\"assets\\":[],\\"layers\\":[{\\"ddd\\":0,\\"ind\\":1,\\"ty\\":4,\\"nm\\":\\"Line_5\\",\\"sr\\":1,\\"ks\\":{\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":11},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":10},\\"p\\":{\\"a\\":0,\\"k\\":[65.996,50,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100,100],\\"ix\\":6}},\\"ao\\":0,\\"shapes\\":[{\\"ty\\":\\"gr\\",\\"it\\":[{\\"ty\\":\\"rc\\",\\"d\\":1,\\"s\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":20,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":29,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":38,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":47,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":56,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":65,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":74,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":83,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"t\\":92}],\\"ix\\":2},\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":2,\\"ix\\":4},\\"nm\\":\\"矩形路径 1\\",\\"mn\\":\\"ADBE Vector Shape - Rect\\",\\"hd\\":false},{\\"ty\\":\\"fl\\",\\"c\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":12,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":13,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":31,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":47,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":48,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"t\\":66}],\\"ix\\":4},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":5},\\"r\\":1,\\"bm\\":0,\\"nm\\":\\"填充 1\\",\\"mn\\":\\"ADBE Vector Graphic - Fill\\",\\"hd\\":false},{\\"ty\\":\\"tr\\",\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":6},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":7},\\"sk\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":4},\\"sa\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":5},\\"nm\\":\\"变换\\"}],\\"nm\\":\\"矩形 1\\",\\"np\\":3,\\"cix\\":2,\\"bm\\":0,\\"ix\\":1,\\"mn\\":\\"ADBE Vector Group\\",\\"hd\\":false}],\\"ip\\":20,\\"op\\":920,\\"st\\":20,\\"bm\\":0},{\\"ddd\\":0,\\"ind\\":2,\\"ty\\":4,\\"nm\\":\\"Line_4\\",\\"sr\\":1,\\"ks\\":{\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":11},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":10},\\"p\\":{\\"a\\":0,\\"k\\":[58.004,50,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100,100],\\"ix\\":6}},\\"ao\\":0,\\"shapes\\":[{\\"ty\\":\\"gr\\",\\"it\\":[{\\"ty\\":\\"rc\\",\\"d\\":1,\\"s\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":15,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":24,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":33,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":42,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":51,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":60,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":69,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":78,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"t\\":87}],\\"ix\\":2},\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":2,\\"ix\\":4},\\"nm\\":\\"矩形路径 1\\",\\"mn\\":\\"ADBE Vector Shape - Rect\\",\\"hd\\":false},{\\"ty\\":\\"fl\\",\\"c\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":5,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":6,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":24,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":40,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":41,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"t\\":59}],\\"ix\\":4},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":5},\\"r\\":1,\\"bm\\":0,\\"nm\\":\\"填充 1\\",\\"mn\\":\\"ADBE Vector Graphic - Fill\\",\\"hd\\":false},{\\"ty\\":\\"tr\\",\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":6},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":7},\\"sk\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":4},\\"sa\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":5},\\"nm\\":\\"变换\\"}],\\"nm\\":\\"矩形 1\\",\\"np\\":3,\\"cix\\":2,\\"bm\\":0,\\"ix\\":1,\\"mn\\":\\"ADBE Vector Group\\",\\"hd\\":false}],\\"ip\\":15,\\"op\\":915,\\"st\\":15,\\"bm\\":0},{\\"ddd\\":0,\\"ind\\":3,\\"ty\\":4,\\"nm\\":\\"Line_3\\",\\"sr\\":1,\\"ks\\":{\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":11},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":10},\\"p\\":{\\"a\\":0,\\"k\\":[50.004,50,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100,100],\\"ix\\":6}},\\"ao\\":0,\\"shapes\\":[{\\"ty\\":\\"gr\\",\\"it\\":[{\\"ty\\":\\"rc\\",\\"d\\":1,\\"s\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":10,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":19,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":28,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":37,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":46,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":55,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":64,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":73,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"t\\":82}],\\"ix\\":2},\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":2,\\"ix\\":4},\\"nm\\":\\"矩形路径 1\\",\\"mn\\":\\"ADBE Vector Shape - Rect\\",\\"hd\\":false},{\\"ty\\":\\"fl\\",\\"c\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":33,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":34,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"t\\":52}],\\"ix\\":4},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":5},\\"r\\":1,\\"bm\\":0,\\"nm\\":\\"填充 1\\",\\"mn\\":\\"ADBE Vector Graphic - Fill\\",\\"hd\\":false},{\\"ty\\":\\"tr\\",\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":6},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":7},\\"sk\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":4},\\"sa\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":5},\\"nm\\":\\"变换\\"}],\\"nm\\":\\"矩形 1\\",\\"np\\":3,\\"cix\\":2,\\"bm\\":0,\\"ix\\":1,\\"mn\\":\\"ADBE Vector Group\\",\\"hd\\":false}],\\"ip\\":10,\\"op\\":910,\\"st\\":10,\\"bm\\":0},{\\"ddd\\":0,\\"ind\\":4,\\"ty\\":4,\\"nm\\":\\"Line_2\\",\\"sr\\":1,\\"ks\\":{\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":11},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":10},\\"p\\":{\\"a\\":0,\\"k\\":[42.004,50,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100,100],\\"ix\\":6}},\\"ao\\":0,\\"shapes\\":[{\\"ty\\":\\"gr\\",\\"it\\":[{\\"ty\\":\\"rc\\",\\"d\\":1,\\"s\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":5,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":14,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":23,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":32,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":41,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":50,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":59,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":68,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"t\\":77}],\\"ix\\":2},\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":2,\\"ix\\":4},\\"nm\\":\\"矩形路径 1\\",\\"mn\\":\\"ADBE Vector Shape - Rect\\",\\"hd\\":false},{\\"ty\\":\\"fl\\",\\"c\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":26,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":27,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"t\\":45}],\\"ix\\":4},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":5},\\"r\\":1,\\"bm\\":0,\\"nm\\":\\"填充 1\\",\\"mn\\":\\"ADBE Vector Graphic - Fill\\",\\"hd\\":false},{\\"ty\\":\\"tr\\",\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":6},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":7},\\"sk\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":4},\\"sa\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":5},\\"nm\\":\\"变换\\"}],\\"nm\\":\\"矩形 1\\",\\"np\\":3,\\"cix\\":2,\\"bm\\":0,\\"ix\\":1,\\"mn\\":\\"ADBE Vector Group\\",\\"hd\\":false}],\\"ip\\":5,\\"op\\":905,\\"st\\":5,\\"bm\\":0},{\\"ddd\\":0,\\"ind\\":5,\\"ty\\":4,\\"nm\\":\\"Line_1\\",\\"sr\\":1,\\"ks\\":{\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":11},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":10},\\"p\\":{\\"a\\":0,\\"k\\":[34.004,50,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100,100],\\"ix\\":6}},\\"ao\\":0,\\"shapes\\":[{\\"ty\\":\\"gr\\",\\"it\\":[{\\"ty\\":\\"rc\\",\\"d\\":1,\\"s\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":0,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":9,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":18,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":27,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":36,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":45,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":54,\\"s\\":[4.009,40],\\"e\\":[4.009,12]},{\\"i\\":{\\"x\\":[0.667,0.667],\\"y\\":[1,1]},\\"o\\":{\\"x\\":[0.333,0.333],\\"y\\":[0,0]},\\"t\\":63,\\"s\\":[4.009,12],\\"e\\":[4.009,40]},{\\"t\\":72}],\\"ix\\":2},\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":2,\\"ix\\":4},\\"nm\\":\\"矩形路径 1\\",\\"mn\\":\\"ADBE Vector Shape - Rect\\",\\"hd\\":false},{\\"ty\\":\\"fl\\",\\"c\\":{\\"a\\":1,\\"k\\":[{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":19,\\"s\\":[0.686274509804,0.803921568627,1,1],\\"e\\":[1,1,1,1]},{\\"i\\":{\\"x\\":[0.833],\\"y\\":[0.833]},\\"o\\":{\\"x\\":[0.167],\\"y\\":[0.167]},\\"t\\":20,\\"s\\":[1,1,1,1],\\"e\\":[0.686274509804,0.803921568627,1,1]},{\\"t\\":38}],\\"ix\\":4},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":5},\\"r\\":1,\\"bm\\":0,\\"nm\\":\\"填充 1\\",\\"mn\\":\\"ADBE Vector Graphic - Fill\\",\\"hd\\":false},{\\"ty\\":\\"tr\\",\\"p\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":2},\\"a\\":{\\"a\\":0,\\"k\\":[0,0],\\"ix\\":1},\\"s\\":{\\"a\\":0,\\"k\\":[100,100],\\"ix\\":3},\\"r\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":6},\\"o\\":{\\"a\\":0,\\"k\\":100,\\"ix\\":7},\\"sk\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":4},\\"sa\\":{\\"a\\":0,\\"k\\":0,\\"ix\\":5},\\"nm\\":\\"变换\\"}],\\"nm\\":\\"矩形 1\\",\\"np\\":3,\\"cix\\":2,\\"bm\\":0,\\"ix\\":1,\\"mn\\":\\"ADBE Vector Group\\",\\"hd\\":false}],\\"ip\\":0,\\"op\\":900,\\"st\\":0,\\"bm\\":0}],\\"markers\\":[]}"
+          speed={1}
+          style={
+            Object {
+              "aspectRatio": 1,
+              "height": 100,
+              "width": "100%",
+            }
+          }
+        />
+      </View>
+    </View>
+  </View>
+</ScrollView>
+`;
+
+exports[`TrackFlatList renders correctly in playing state 1`] = `
+<ScrollView
+  ListEmptyComponent={
+    <Styled(Styled(Text))>
       Плейлист "title" пуст
-    </Text>
-    <View />
-  </ScrollView>
-</View>
+    </Styled(Styled(Text))>
+  }
+  ListFooterComponent={
+    <Unknown
+      isShown={false}
+    />
+  }
+  data={
+    Array [
+      Object {
+        "cover": Array [
+          Object {},
+        ],
+        "id": 2,
+        "singer": "singer",
+        "songText": "song text",
+        "title": "title",
+      },
+    ]
+  }
+  disableVirtualization={false}
+  horizontal={false}
+  initialNumToRender={10}
+  maxToRenderPerBatch={10}
+  numColumns={1}
+  onEndReachedThreshold={0.9}
+  refreshControl={
+    <Styled(RefreshControl)
+      onRefresh={[MockFunction]}
+      refreshing={false}
+    />
+  }
+  removeClippedSubviews={false}
+  scrollEventThrottle={50}
+  stickyHeaderIndices={Array []}
+  style={
+    Array [
+      Object {
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+    ]
+  }
+  updateCellsBatchingPeriod={50}
+  viewabilityConfigCallbackPairs={Array []}
+  windowSize={21}
+>
+  <View
+    style={null}
+  >
+    <TouchableOpacity
+      activeOpacity={0.2}
+      isPlaying={true}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#f0f0f0",
+            "flexDirection": "row",
+            "paddingBottom": 12,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "paddingTop": 12,
+          },
+        ]
+      }
+      testID="wrapper"
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#313131",
+              "fontFamily": "GothamPro",
+              "fontSize": 12,
+              "lineHeight": 20,
+              "marginRight": 12,
+              "width": 24,
+            },
+          ]
+        }
+      >
+        1
+      </Text>
+      <View
+        style={
+          Array [
+            Object {},
+          ]
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "overflow": "hidden",
+              },
+              Array [
+                Object {
+                  "borderRadius": 4,
+                  "height": 32,
+                  "width": 32,
+                },
+              ],
+            ]
+          }
+        >
+          <FastImageView
+            resizeMode="cover"
+            source={
+              Object {
+                "uri": undefined,
+              }
+            }
+            style={
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          />
+        </View>
+        <View
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "rgba(49, 49, 49, 0.7)",
+                "borderRadius": 4,
+                "bottom": 0,
+                "justifyContent": "center",
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              },
+            ]
+          }
+        >
+          <Icon
+            color="#ffffff"
+            name="pause"
+            size={16}
+            style={
+              Array [
+                Object {},
+              ]
+            }
+          />
+        </View>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "flexBasis": 0,
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "marginHorizontal": 16,
+            },
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#313131",
+                "fontFamily": "GothamPro-Bold",
+                "fontSize": 12,
+                "lineHeight": 14,
+              },
+            ]
+          }
+        >
+          title
+        </Text>
+        <Text
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#606060",
+                "fontFamily": "GothamPro",
+                "fontSize": 10,
+                "lineHeight": 12,
+              },
+            ]
+          }
+        >
+          singer
+        </Text>
+      </View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#ffffff",
+              "borderRadius": 16,
+              "height": 32,
+              "justifyContent": "center",
+              "width": 32,
+            },
+          ]
+        }
+      >
+        <Icon
+          color="#313131"
+          name="dots-horizontal"
+          size={20}
+          style={
+            Array [
+              Object {
+                "top": 1,
+              },
+            ]
+          }
+        />
+      </TouchableOpacity>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#606060",
+              "fontFamily": "GothamPro",
+              "fontSize": 10,
+              "lineHeight": 12,
+              "marginLeft": 16,
+              "textAlign": "right",
+              "width": 40,
+            },
+          ]
+        }
+      >
+        0:00
+      </Text>
+    </TouchableOpacity>
+  </View>
+  <View />
+</ScrollView>
+`;
+
+exports[`TrackFlatList renders correctly in refreshing state 1`] = `
+<ScrollView
+  ListEmptyComponent={
+    <Styled(Styled(Text))>
+      Плейлист "title" пуст
+    </Styled(Styled(Text))>
+  }
+  ListFooterComponent={
+    <Unknown
+      isShown={false}
+    />
+  }
+  data={
+    Array [
+      Object {
+        "cover": Array [
+          Object {},
+        ],
+        "id": 2,
+        "singer": "singer",
+        "songText": "song text",
+        "title": "title",
+      },
+    ]
+  }
+  disableVirtualization={false}
+  horizontal={false}
+  initialNumToRender={10}
+  maxToRenderPerBatch={10}
+  numColumns={1}
+  onEndReachedThreshold={0.9}
+  refreshControl={
+    <Styled(RefreshControl)
+      onRefresh={[MockFunction]}
+      refreshing={true}
+    />
+  }
+  removeClippedSubviews={false}
+  scrollEventThrottle={50}
+  stickyHeaderIndices={Array []}
+  style={
+    Array [
+      Object {
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+    ]
+  }
+  updateCellsBatchingPeriod={50}
+  viewabilityConfigCallbackPairs={Array []}
+  windowSize={21}
+>
+  <View
+    style={null}
+  >
+    <TouchableOpacity
+      activeOpacity={0.2}
+      isPlaying={false}
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#ffffff",
+            "flexDirection": "row",
+            "paddingBottom": 12,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "paddingTop": 12,
+          },
+        ]
+      }
+      testID="wrapper"
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#313131",
+              "fontFamily": "GothamPro",
+              "fontSize": 12,
+              "lineHeight": 20,
+              "marginRight": 12,
+              "width": 24,
+            },
+          ]
+        }
+      >
+        1
+      </Text>
+      <View
+        style={
+          Array [
+            Object {},
+          ]
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "overflow": "hidden",
+              },
+              Array [
+                Object {
+                  "borderRadius": 4,
+                  "height": 32,
+                  "width": 32,
+                },
+              ],
+            ]
+          }
+        >
+          <FastImageView
+            resizeMode="cover"
+            source={
+              Object {
+                "uri": undefined,
+              }
+            }
+            style={
+              Object {
+                "bottom": 0,
+                "left": 0,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          />
+        </View>
+      </View>
+      <View
+        style={
+          Array [
+            Object {
+              "flexBasis": 0,
+              "flexGrow": 1,
+              "flexShrink": 1,
+              "marginHorizontal": 16,
+            },
+          ]
+        }
+      >
+        <Text
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#313131",
+                "fontFamily": "GothamPro-Bold",
+                "fontSize": 12,
+                "lineHeight": 14,
+              },
+            ]
+          }
+        >
+          title
+        </Text>
+        <Text
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#606060",
+                "fontFamily": "GothamPro",
+                "fontSize": 10,
+                "lineHeight": 12,
+              },
+            ]
+          }
+        >
+          singer
+        </Text>
+      </View>
+      <TouchableOpacity
+        activeOpacity={0.2}
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#ffffff",
+              "borderRadius": 16,
+              "height": 32,
+              "justifyContent": "center",
+              "width": 32,
+            },
+          ]
+        }
+      >
+        <Icon
+          color="#313131"
+          name="dots-horizontal"
+          size={20}
+          style={
+            Array [
+              Object {
+                "top": 1,
+              },
+            ]
+          }
+        />
+      </TouchableOpacity>
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#606060",
+              "fontFamily": "GothamPro",
+              "fontSize": 10,
+              "lineHeight": 12,
+              "marginLeft": 16,
+              "textAlign": "right",
+              "width": 40,
+            },
+          ]
+        }
+      >
+        0:00
+      </Text>
+    </TouchableOpacity>
+  </View>
+  <View />
+</ScrollView>
+`;
+
+exports[`TrackFlatList renders correctly without items 1`] = `
+<ScrollView
+  ListEmptyComponent={
+    <Styled(Styled(Text))>
+      Плейлист "title" пуст
+    </Styled(Styled(Text))>
+  }
+  ListFooterComponent={
+    <Unknown
+      isShown={false}
+    />
+  }
+  data={Array []}
+  disableVirtualization={false}
+  horizontal={false}
+  initialNumToRender={10}
+  maxToRenderPerBatch={10}
+  numColumns={1}
+  onEndReachedThreshold={0.9}
+  refreshControl={
+    <Styled(RefreshControl)
+      onRefresh={[MockFunction]}
+      refreshing={false}
+    />
+  }
+  removeClippedSubviews={false}
+  scrollEventThrottle={50}
+  stickyHeaderIndices={Array []}
+  style={
+    Array [
+      Object {
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+    ]
+  }
+  updateCellsBatchingPeriod={50}
+  viewabilityConfigCallbackPairs={Array []}
+  windowSize={21}
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#606060",
+          "fontFamily": "GothamPro",
+          "fontSize": 16,
+          "lineHeight": 20,
+          "paddingVertical": 50,
+          "textAlign": "center",
+        },
+      ]
+    }
+  >
+    Плейлист "title" пуст
+  </Text>
+  <View />
+</ScrollView>
 `;

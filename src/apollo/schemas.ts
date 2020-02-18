@@ -1,6 +1,11 @@
 // Типы обявлены с их алиасами (в комментах), поэтому не забывай их добавлять в запросы.
 // алиасы добавлены, потому что мне не нравятся названия переменных с бэка
-export interface Genre {
+
+interface WithTypename<T extends string = ''> {
+  __typename: T
+}
+
+export interface Genre extends WithTypename {
   id: number
   title: string // name
   imageUrl: string // image
@@ -16,13 +21,13 @@ export type SocialType =
   | 'instagram'
   | 'odnoklassniki'
 
-export interface SocialConnect {
+export interface SocialConnect extends WithTypename {
   url: string // link
   type: SocialType // social_type
   isLinked: boolean // connected
 }
 
-export interface MusicGroup {
+export interface MusicGroup extends WithTypename {
   id: number
   title: string // name
   cover: Image[] // avatarGroup
@@ -38,7 +43,7 @@ export interface MusicGroup {
   isWatching: boolean // iWatch
 }
 
-export interface Track {
+export interface Track extends WithTypename {
   id: number
   title: string // trackName
   genres: Genre[]
@@ -60,7 +65,7 @@ export interface Track {
   commentedByMe: boolean
 }
 
-export interface TrackComment {
+export interface TrackComment extends WithTypename {
   id: number
   comment: string
   createdBy: User // user
@@ -68,7 +73,7 @@ export interface TrackComment {
   estimation: number
 }
 
-export interface Album {
+export interface Album extends WithTypename {
   id: number
   title: string
   genres: Genre[]
@@ -90,12 +95,18 @@ export interface FavouriteBase {
   createdAt: string
 }
 
-export interface FavouriteTrack extends FavouriteBase {
+export interface FavouriteTrack extends FavouriteBase, WithTypename {
   track: Track
 }
 
-export interface FavouriteAlbum extends FavouriteBase {
+export interface FavouriteAlbum
+  extends FavouriteBase,
+    WithTypename<'FavouriteAlbum'> {
   album: Album
+}
+
+export interface FavouriteCollection extends FavouriteBase, WithTypename {
+  collection: Collection
 }
 
 export type Playlist = Track[]
@@ -123,12 +134,12 @@ export enum AvatarSizeNames {
 
 export type ImageSizeNames = NoAvatarSizeNames | AvatarSizeNames
 
-export interface Image {
+export interface Image extends WithTypename {
   sizeName: ImageSizeNames // size
   imageUrl: string // url
 }
 
-export interface Pagination<T> {
+export interface Pagination<T> extends WithTypename {
   items: T[] // data
   total: number
   limit: number // per_page
@@ -144,7 +155,7 @@ export interface PaginationVariables {
   limit?: number
 }
 
-export interface Collection {
+export interface Collection extends WithTypename {
   id: number
   title: string
   isCreatedByAdmin: boolean // is_admin
@@ -162,18 +173,18 @@ export interface Collection {
 
 export type Gender = 'M' | 'F'
 
-export interface City {
+export interface City extends WithTypename {
   id: number
   title: string
   region: string // area_region
 }
 
-export interface Role {
+export interface Role extends WithTypename {
   title: string
   slug: string
 }
 
-export interface User {
+export interface User extends WithTypename {
   id: number
   userName: string // username
   registrationDate: string // dateRegister
@@ -211,25 +222,7 @@ export interface Profile extends User {
   myTracksTime: number
 }
 
-interface Favorite {
-  id: number
-  userId: number
-  createdAt: string
-}
-
-export interface FacoriteTrack extends Favorite {
-  track: Track
-}
-
-export interface FacoriteAlbum extends Favorite {
-  album: Album
-}
-
-export interface FacoriteCollection extends Favorite {
-  collection: Collection
-}
-
-export interface Lifehack {
+export interface Lifehack extends WithTypename {
   id: number
   title: string
   image: Image[]

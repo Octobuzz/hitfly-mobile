@@ -36,7 +36,7 @@ interface Props extends Sized {
 }
 
 const Loader: React.FC<Props> = ({ size, ...props }) => (
-  <Wrapper {...props}>
+  <Wrapper {...props} testID="loader">
     <StyledLottie size={size} />
   </Wrapper>
 )

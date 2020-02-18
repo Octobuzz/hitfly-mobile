@@ -2,131 +2,111 @@
 
 exports[`NavigationList renders correctly with 2 items 1`] = `
 <View
-  collapsable={true}
-  pointerEvents="box-none"
   style={
-    Object {
-      "flex": 1,
-    }
+    Array [
+      Object {},
+    ]
   }
 >
-  <View
+  <TouchableOpacity
+    activeOpacity={0.2}
     style={
       Array [
-        Object {},
+        Object {
+          "alignItems": "center",
+          "borderBottomColor": "#E4E4E4",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "paddingVertical": 28,
+        },
       ]
     }
+    testID="item"
   >
-    <TouchableOpacity
-      activeOpacity={0.2}
+    <Text
       style={
         Array [
           Object {
-            "alignItems": "center",
-            "borderBottomColor": "#E4E4E4",
-            "borderBottomWidth": 1,
-            "flexDirection": "row",
-            "paddingVertical": 28,
+            "color": "#313131",
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "fontFamily": "GothamPro",
+            "fontSize": 16,
+            "lineHeight": 20,
+            "paddingRight": 16,
           },
         ]
       }
-      testID="item"
     >
-      <Text
-        style={
-          Array [
-            Object {
-              "color": "#313131",
-              "flexBasis": 0,
-              "flexGrow": 1,
-              "flexShrink": 1,
-              "fontFamily": "GothamPro",
-              "fontSize": 16,
-              "lineHeight": 20,
-              "paddingRight": 16,
-            },
-          ]
-        }
-      >
-        title
-      </Text>
-      <Icon
-        name="arrow-forward"
-        size={20}
-        style={
-          Array [
-            Object {
-              "color": "#313131",
-            },
-          ]
-        }
-      />
-    </TouchableOpacity>
-    <TouchableOpacity
-      activeOpacity={0.2}
+      title
+    </Text>
+    <Icon
+      name="arrow-forward"
+      size={20}
       style={
         Array [
           Object {
-            "alignItems": "center",
-            "borderBottomColor": "#E4E4E4",
-            "borderBottomWidth": 1,
-            "flexDirection": "row",
-            "paddingVertical": 28,
+            "color": "#313131",
           },
         ]
       }
-      testID="item"
+    />
+  </TouchableOpacity>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "borderBottomColor": "#E4E4E4",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "paddingVertical": 28,
+        },
+      ]
+    }
+    testID="item"
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#313131",
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "fontFamily": "GothamPro",
+            "fontSize": 16,
+            "lineHeight": 20,
+            "paddingRight": 16,
+          },
+        ]
+      }
     >
-      <Text
-        style={
-          Array [
-            Object {
-              "color": "#313131",
-              "flexBasis": 0,
-              "flexGrow": 1,
-              "flexShrink": 1,
-              "fontFamily": "GothamPro",
-              "fontSize": 16,
-              "lineHeight": 20,
-              "paddingRight": 16,
-            },
-          ]
-        }
-      >
-        title2
-      </Text>
-      <Icon
-        name="arrow-forward"
-        size={20}
-        style={
-          Array [
-            Object {
-              "color": "#313131",
-            },
-          ]
-        }
-      />
-    </TouchableOpacity>
-  </View>
+      title2
+    </Text>
+    <Icon
+      name="arrow-forward"
+      size={20}
+      style={
+        Array [
+          Object {
+            "color": "#313131",
+          },
+        ]
+      }
+    />
+  </TouchableOpacity>
 </View>
 `;
 
 exports[`NavigationList renders correctly with empty items 1`] = `
 <View
-  collapsable={true}
-  pointerEvents="box-none"
   style={
-    Object {
-      "flex": 1,
-    }
+    Array [
+      Object {},
+    ]
   }
->
-  <View
-    style={
-      Array [
-        Object {},
-      ]
-    }
-  />
-</View>
+/>
 `;

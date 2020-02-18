@@ -1,5 +1,9 @@
 import React from 'react'
-import { fireEvent, render } from '../../jest/test-utils'
+import {
+  render,
+  fireEvent,
+  ReactTestInstanceExtended,
+} from '../../jest/test-utils'
 import AlbumItem from 'src/components/AlbumItem'
 import { Album } from 'src/apollo'
 
@@ -15,9 +19,9 @@ describe('AlbumItem', () => {
     const props = {
       item,
     }
-    const { asJSON } = render(<AlbumItem {...props} />)
+    const { container } = render(<AlbumItem {...props} />)
 
-    expect(asJSON()).toMatchSnapshot()
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('can be pressed', () => {

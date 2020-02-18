@@ -1,7 +1,7 @@
 import React from 'react'
-import { TracksView, TracksViewProps } from '../../src/components'
-import { render } from '../../jest/test-utils'
-import { Track } from '../../src/apollo'
+import { TracksView, TracksViewProps } from 'src/components'
+import { render, ReactTestInstanceExtended } from '../../jest/test-utils'
+import { Track } from 'src/apollo'
 
 describe('TrackView', () => {
   const item = {
@@ -22,8 +22,8 @@ describe('TrackView', () => {
       showDetailedTrack: jest.fn(),
     }
 
-    const { asJSON } = render(<TracksView {...props} />)
-    expect(asJSON()).toMatchSnapshot()
+    const { container } = render(<TracksView {...props} />)
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
   it('renders correctly with empty props', () => {
     const props: TracksViewProps = {
@@ -33,7 +33,7 @@ describe('TrackView', () => {
       toggleTrack: jest.fn(),
       showDetailedTrack: jest.fn(),
     }
-    const { asJSON } = render(<TracksView {...props} />)
-    expect(asJSON()).toMatchSnapshot()
+    const { container } = render(<TracksView {...props} />)
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 })

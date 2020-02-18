@@ -1,5 +1,9 @@
 import React from 'react'
-import { render, fireEvent } from '../../jest/test-utils'
+import {
+  render,
+  fireEvent,
+  ReactTestInstanceExtended,
+} from '../../jest/test-utils'
 import { NavigationList } from 'src/components'
 
 describe('NavigationList', () => {
@@ -20,9 +24,9 @@ describe('NavigationList', () => {
   })
 
   it('renders correctly with empty items', () => {
-    const { asJSON } = render(<NavigationList items={[]} />)
+    const { container } = render(<NavigationList items={[]} />)
 
-    expect(asJSON()).toMatchSnapshot()
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('renders correctly with 2 items', () => {
@@ -38,8 +42,8 @@ describe('NavigationList', () => {
         },
       ],
     }
-    const { asJSON } = render(<NavigationList {...props} />)
+    const { container } = render(<NavigationList {...props} />)
 
-    expect(asJSON()).toMatchSnapshot()
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 })
