@@ -3,8 +3,9 @@ import LinearGradient from 'react-native-linear-gradient'
 import TextBase from 'src/components/TextBase'
 import styled from 'src/styled-components'
 
-const Wrapper = styled.TouchableOpacity`
+const Wrapper = styled.TouchableOpacity<{ isFirst?: boolean }>`
   flex: 1;
+  margin-left: ${({ isFirst }) => (isFirst ? 0 : 16)}px;
 `
 
 const Inner = styled.View`
@@ -33,6 +34,7 @@ const Gradient = styled(LinearGradient).attrs(({ theme, isActive }) => ({
 interface Props {
   onPress: () => void
   isActive?: boolean
+  isFirst?: boolean
   title: string
 }
 
