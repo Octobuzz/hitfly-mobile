@@ -8,6 +8,7 @@ import { /* GET_LIFEHACKS, LifehacksData, */ Lifehack } from 'src/apollo'
 // import { useQueryWithPagination } from 'src/hooks'
 // import { names } from 'src/constants'
 import FadeTabs, { TabValue } from './FadeTabs'
+import { withAuthorizedCheck } from 'src/HOCs'
 
 // const hasMorePagesSelector = (data?: LifehacksData) =>
 //   L.get(data, 'lifehack.hasMorePages')
@@ -163,4 +164,7 @@ const LifehacksContainer: React.FC<Props> = () => {
   // )
 }
 
-export default LifehacksContainer
+export default withAuthorizedCheck({
+  passProfile: true,
+  logoutText: 'Войдите чтобы увидеть данные профиля',
+})(LifehacksContainer)
