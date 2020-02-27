@@ -36,15 +36,14 @@ const IconWrapper = styled.TouchableOpacity`
   padding-horizontal: 8px;
 `
 
-const LifehackImage = styled(Image)<{ size?: number }>`
-  width: ${({ size }) => size || IMAGE_SIZE}px;
-  height: ${({ size }) => size || IMAGE_SIZE}px;
+const LifehackImage = styled(Image)`
+  width: ${IMAGE_SIZE}px;
+  height: ${IMAGE_SIZE}px;
   border-radius: 4px;
 `
 
 interface LifehackItemProps {
   lifehack: Lifehack
-  size?: number
   onPress?: (lifehack: Lifehack) => void
   onPressLike?: (lifehack: Lifehack) => void
   onPressShare?: (lifehack: Lifehack) => void
@@ -52,7 +51,6 @@ interface LifehackItemProps {
 }
 
 const LifehackItem: React.FC<LifehackItemProps> = ({
-  size,
   lifehack,
   onPress,
   onPressLike,
@@ -64,7 +62,7 @@ const LifehackItem: React.FC<LifehackItemProps> = ({
 
   return (
     <Wrapper disabled={!onPress} onPress={() => onPress?.(lifehack)}>
-      <LifehackImage size={size} source={source} />
+      <LifehackImage source={source} />
       <BottomRow>
         <IconWrapper onPress={() => onPressLike?.(lifehack)}>
           <Icon isActive={isFavorite} source={images.HEART} />

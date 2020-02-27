@@ -1,20 +1,20 @@
 // import L from 'lodash'
 import LFP from 'lodash/fp'
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Share } from 'react-native'
-import { NavigationStackScreenProps } from 'react-navigation-stack'
 import LifehacksScreen from './Lifehacks'
 import { /* GET_LIFEHACKS, LifehacksData, */ Lifehack } from 'src/apollo'
-import { routes } from 'src/constants'
 // import { useQueryWithPagination } from 'src/hooks'
 // import { names } from 'src/constants'
+import styled from 'src/styled-components'
+import { Button } from 'src/components'
 
 // const hasMorePagesSelector = (data?: LifehacksData) =>
 //   L.get(data, 'lifehack.hasMorePages')
 // const itemsSelector = (data?: LifehacksData) =>
 //   L.get(data, 'lifehack.items', [])
 
-interface Props extends NavigationStackScreenProps {}
+interface Props {}
 
 const lifehackMocks = [
   {
@@ -61,11 +61,25 @@ const lifehackMocks = [
   },
 ] as Lifehack[]
 
-const LifehacksContainer: React.FC<Props> = ({ navigation }) => {
+const TabsWrapper = styled.View`
+  padding: 24px 16px 8px;
+  flex-direction: row;
+`
+
+const Divider = styled.View`
+  width: 16px;
+`
+
+const FadedButton = styled(Button)<{ isActive?: boolean }>`
+  opacity: ${({ isActive }) => (isActive ? 1 : 0.6)};
+  flex: 1;
+`
+
+const LifehacksContainer: React.FC<Props> = () => {
   // FIXME: тут все временно
   const [items, setItems] = useState(lifehackMocks)
 
-  const bookmarkItem = (item: Lifehack): void => {
+  const addToBookmarks = (item: Lifehack): void => {
     const index = LFP.findIndex(({ id }) => id === item.id, items)
     const newItem = LFP.set('isBookmarked', !item.isBookmarked, item)
     const newItems = LFP.set(index, newItem, items)
@@ -93,24 +107,51 @@ const LifehacksContainer: React.FC<Props> = ({ navigation }) => {
     })
   }
 
-  const navigateToDetails = (lifehack: Lifehack) => {
-    navigation.navigate(routes.LIFEHACKS.LIFEHACK_DETAILED, { lifehack })
-  }
+  const [mode, setMode] = useState<'all' | 'bookmarks'>('all')
+
+  const lifehacks = useMemo(() => {
+    return mode === 'all'
+      ? items
+      : items.filter(({ isBookmarked }) => isBookmarked)
+  }, [mode, items])
 
   return (
-    <LifehacksScreen
-      lifehacks={items}
-      likeItem={likeItem}
-      shareItem={shareItem}
-      bookmarkItem={bookmarkItem}
-      onPressItem={navigateToDetails}
-      onRefresh={() => {}}
-      onEndReached={() => {}}
-      showBookmarked="slider"
-      isFetchingMore={false}
-      isLoading={false}
-      isRefreshing={false}
-    />
+    <React.Fragment key={mode}>
+      <TabsWrapper>
+        <FadedButton
+          onPress={() => {
+            setMode('all')
+          }}
+          title="Все"
+          withoutMargin
+          verticalPadding={10}
+          type="outline"
+          isActive={mode === 'all'}
+        />
+        <Divider />
+        <FadedButton
+          onPress={() => {
+            setMode('bookmarks')
+          }}
+          title="Избранное"
+          withoutMargin
+          verticalPadding={10}
+          type="outline"
+          isActive={mode === 'bookmarks'}
+        />
+      </TabsWrapper>
+      <LifehacksScreen
+        lifehacks={lifehacks}
+        likeItem={likeItem}
+        shareItem={shareItem}
+        addToBookmarks={addToBookmarks}
+        onRefresh={() => {}}
+        onEndReached={() => {}}
+        isFetchingMore={false}
+        isLoading={false}
+        isRefreshing={false}
+      />
+    </React.Fragment>
   )
 
   // const {
