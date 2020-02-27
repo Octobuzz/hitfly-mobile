@@ -88,6 +88,7 @@ const LifehacksContainer: React.FC<Props> = () => {
     setItems(newItems)
   }
 
+  // FIXME: заполнить и проверить
   const shareItem = (item: Lifehack) => {
     Share.share({
       message: 'message',

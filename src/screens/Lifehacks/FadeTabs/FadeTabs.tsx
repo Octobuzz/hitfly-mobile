@@ -33,9 +33,9 @@ const FadeTabs = <T extends any>({
   const handlePressWithFade = useCallback(
     async (newValue: T) => {
       setActiveTab(newValue)
-      await animatedRef.current?.fadeOut?.(300)
+      await animatedRef.current?.fadeOut?.(200)
       onPressTab(newValue)
-      await animatedRef.current?.fadeIn?.(300)
+      await animatedRef.current?.fadeIn?.(200)
     },
     [onPressTab],
   )
