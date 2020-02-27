@@ -2,6 +2,7 @@
 import LFP from 'lodash/fp'
 import React, { useState, useMemo } from 'react'
 import { Share } from 'react-native'
+import { showMessage } from 'react-native-flash-message'
 import LifehacksScreen from './Lifehacks'
 import { /* GET_LIFEHACKS, LifehacksData, */ Lifehack } from 'src/apollo'
 // import { useQueryWithPagination } from 'src/hooks'
@@ -71,6 +72,12 @@ const LifehacksContainer: React.FC<Props> = () => {
     const index = LFP.findIndex(({ id }) => id === item.id, items)
     const newItem = LFP.set('isBookmarked', !item.isBookmarked, item)
     const newItems = LFP.set(index, newItem, items)
+    if (!item.isBookmarked) {
+      showMessage({
+        message: `Лайфхак ${item.title} добавлен в закладки`,
+        hideStatusBar: true,
+      })
+    }
     setItems(newItems)
   }
 

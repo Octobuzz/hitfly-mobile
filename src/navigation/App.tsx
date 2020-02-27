@@ -2,6 +2,7 @@ import React from 'react'
 import { StatusBar, Platform } from 'react-native'
 import createAnimatedSwitchNavigator from 'react-navigation-animated-switch'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
+import FlashMessage from 'react-native-flash-message'
 import NavigationService from './navigationService'
 import { WelcomeScreen } from 'src/screens'
 import AuthNavigator from './Auth'
@@ -34,6 +35,15 @@ const AppContainer = createAppContainer(
     initialRouteName: routes.APP.WELCOME,
   }),
 )
+
+const StyledFlash = styled(FlashMessage).attrs(({ theme }) => ({
+  titleStyle: {
+    color: theme.colors.white,
+    fontFamily: theme.fonts.regular,
+  },
+}))`
+  background-color: ${({ theme }) => theme.colors.black};
+`
 
 const DevTools = styled.View`
   flex-direction: row;
@@ -100,6 +110,7 @@ class AppNavigator extends React.Component {
           </DevTools>
         )}
         <AppContainer ref={NavigationService.setTopLevelNavigator} />
+        <StyledFlash />
       </>
     )
   }
