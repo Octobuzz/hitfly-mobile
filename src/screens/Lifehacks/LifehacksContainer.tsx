@@ -7,7 +7,7 @@ import { /* GET_LIFEHACKS, LifehacksData, */ Lifehack } from 'src/apollo'
 // import { useQueryWithPagination } from 'src/hooks'
 // import { names } from 'src/constants'
 import styled from 'src/styled-components'
-import { Button } from 'src/components'
+import FadedButton from './FadedButton'
 
 // const hasMorePagesSelector = (data?: LifehacksData) =>
 //   L.get(data, 'lifehack.hasMorePages')
@@ -70,15 +70,11 @@ const Divider = styled.View`
   width: 16px;
 `
 
-const FadedButton = styled(Button)<{ isActive?: boolean }>`
-  opacity: ${({ isActive }) => (isActive ? 1 : 0.6)};
-  flex: 1;
-`
-
 const LifehacksContainer: React.FC<Props> = () => {
   // FIXME: тут все временно
   const [items, setItems] = useState(lifehackMocks)
 
+  // TODO: мутация
   const addToBookmarks = (item: Lifehack): void => {
     const index = LFP.findIndex(({ id }) => id === item.id, items)
     const newItem = LFP.set('isBookmarked', !item.isBookmarked, item)
@@ -86,6 +82,7 @@ const LifehacksContainer: React.FC<Props> = () => {
     setItems(newItems)
   }
 
+  // TODO: мутация
   const likeItem = (item: Lifehack): void => {
     const index = LFP.findIndex(({ id }) => id === item.id, items)
     const newItem = LFP.pipe(
@@ -123,9 +120,6 @@ const LifehacksContainer: React.FC<Props> = () => {
             setMode('all')
           }}
           title="Все"
-          withoutMargin
-          verticalPadding={10}
-          type="outline"
           isActive={mode === 'all'}
         />
         <Divider />
@@ -134,9 +128,6 @@ const LifehacksContainer: React.FC<Props> = () => {
             setMode('bookmarks')
           }}
           title="Избранное"
-          withoutMargin
-          verticalPadding={10}
-          type="outline"
           isActive={mode === 'bookmarks'}
         />
       </TabsWrapper>
