@@ -1,7 +1,8 @@
 // import L from 'lodash'
 import LFP from 'lodash/fp'
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useRef, useCallback } from 'react'
 import { Share } from 'react-native'
+import * as Animated from 'react-native-animatable'
 import LifehacksScreen from './Lifehacks'
 import { /* GET_LIFEHACKS, LifehacksData, */ Lifehack } from 'src/apollo'
 // import { useQueryWithPagination } from 'src/hooks'
@@ -15,6 +16,8 @@ import FadedButton from './FadedButton'
 //   L.get(data, 'lifehack.items', [])
 
 interface Props {}
+
+type Mode = 'all' | 'bookmarks'
 
 const lifehackMocks = [
   {
@@ -70,6 +73,10 @@ const Divider = styled.View`
   width: 16px;
 `
 
+const AnimatedView = styled(Animated.View)`
+  flex: 1;
+`
+
 const LifehacksContainer: React.FC<Props> = () => {
   // FIXME: тут все временно
   const [items, setItems] = useState(lifehackMocks)
@@ -104,7 +111,7 @@ const LifehacksContainer: React.FC<Props> = () => {
     })
   }
 
-  const [mode, setMode] = useState<'all' | 'bookmarks'>('all')
+  const [mode, setMode] = useState<Mode>('all')
 
   const lifehacks = useMemo(() => {
     return mode === 'all'
@@ -112,36 +119,42 @@ const LifehacksContainer: React.FC<Props> = () => {
       : items.filter(({ isBookmarked }) => isBookmarked)
   }, [mode, items])
 
+  const animatedRef = useRef<Animated.View>(null)
+  const changeModeWithFade = useCallback(async (newMode: Mode) => {
+    await animatedRef.current?.fadeOut?.(300)
+    setMode(newMode)
+    await animatedRef.current?.fadeIn?.(300)
+  }, [])
+
   return (
     <React.Fragment key={mode}>
       <TabsWrapper>
         <FadedButton
-          onPress={() => {
-            setMode('all')
-          }}
+          onPress={() => changeModeWithFade('all')}
           title="Все"
           isActive={mode === 'all'}
         />
         <Divider />
         <FadedButton
-          onPress={() => {
-            setMode('bookmarks')
-          }}
+          onPress={() => changeModeWithFade('bookmarks')}
           title="Избранное"
           isActive={mode === 'bookmarks'}
         />
       </TabsWrapper>
-      <LifehacksScreen
-        lifehacks={lifehacks}
-        likeItem={likeItem}
-        shareItem={shareItem}
-        addToBookmarks={addToBookmarks}
-        onRefresh={() => {}}
-        onEndReached={() => {}}
-        isFetchingMore={false}
-        isLoading={false}
-        isRefreshing={false}
-      />
+      {/* FIXME: https://github.com/oblador/react-native-animatable/pull/301 */}
+      <AnimatedView ref={animatedRef as any}>
+        <LifehacksScreen
+          lifehacks={lifehacks}
+          likeItem={likeItem}
+          shareItem={shareItem}
+          addToBookmarks={addToBookmarks}
+          onRefresh={() => {}}
+          onEndReached={() => {}}
+          isFetchingMore={false}
+          isLoading={false}
+          isRefreshing={false}
+        />
+      </AnimatedView>
     </React.Fragment>
   )
 
