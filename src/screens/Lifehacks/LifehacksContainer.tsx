@@ -91,9 +91,7 @@ const LifehacksContainer: React.FC<Props> = () => {
   // FIXME: заполнить и проверить
   const shareItem = (item: Lifehack) => {
     Share.share({
-      message: 'message',
-      title: 'title',
-      url: item.image[0].imageUrl,
+      message: `${item.title} ${item.image[0].imageUrl}`,
     })
   }
 
