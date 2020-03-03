@@ -13,6 +13,7 @@ import styled from 'src/styled-components'
 
 const Divider = styled.View`
   height: ${styles.VIEW_HORIZONTAL_INDENTATION}px;
+  width: ${styles.VIEW_HORIZONTAL_INDENTATION}px;
 `
 
 const Scroll = styled(FlatList as new () => FlatList<Lifehack>).attrs(() => ({
@@ -36,6 +37,10 @@ interface Props {
   lifehacks: Lifehack[]
   onRefresh: () => void
   onEndReached: () => void
+  onPressItem?: (item: Lifehack) => void
+  likeItem?: (item: Lifehack) => void
+  shareItem?: (item: Lifehack) => void
+  addToBookmarks?: (item: Lifehack) => void
   isLoading: boolean
   isRefreshing: boolean
   isFetchingMore: boolean
@@ -48,21 +53,37 @@ const Lifehacks: React.FC<Props> = ({
   onEndReached,
   isRefreshing,
   isFetchingMore,
+  likeItem,
+  shareItem,
+  addToBookmarks,
+  onPressItem,
 }) => {
   const renderItem: ListRenderItem<Lifehack> = useCallback(
-    ({ item }) => <LifehackItem lifehack={item} />,
-    [],
+    ({ item }) => (
+      <LifehackItem
+        onPressLike={likeItem}
+        onPressShare={shareItem}
+        onPressBookmark={addToBookmarks}
+        onPress={onPressItem}
+        lifehack={item}
+      />
+    ),
+    [likeItem, shareItem, addToBookmarks],
   )
 
-  return isLoading ? (
-    <Loader isFilled />
-  ) : (
+  return (
     <Scroll
       onEndReached={onEndReached}
       refreshControl={
         <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
       }
-      ListEmptyComponent={<ListEmptyText>Пока здесь пусто</ListEmptyText>}
+      ListEmptyComponent={
+        isLoading ? (
+          <Loader isFilled />
+        ) : (
+          <ListEmptyText>Пока здесь пусто</ListEmptyText>
+        )
+      }
       ListFooterComponent={<ListFooterLoader isShown={isFetchingMore} />}
       data={lifehacks}
       renderItem={renderItem}

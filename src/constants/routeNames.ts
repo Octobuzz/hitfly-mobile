@@ -41,6 +41,7 @@ export default {
 
   LIFEHACKS: {
     LIFEHACKS: `${APP.LIFEHACKS}/lifehacks`,
+    LIFEHACK_DETAILED: `${APP.LIFEHACKS}/lifehack_detailed`,
   },
 
   PROFILE: {

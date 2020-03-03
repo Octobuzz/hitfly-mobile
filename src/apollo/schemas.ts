@@ -226,4 +226,7 @@ export interface Lifehack extends WithTypename {
   id: number
   title: string
   image: Image[]
+  isFavorite: boolean
+  favouritesCount: number
+  isBookmarked: boolean
 }

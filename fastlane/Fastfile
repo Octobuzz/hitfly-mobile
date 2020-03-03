@@ -44,7 +44,9 @@ platform :ios do
       notification(subtitle: 'iOS', message: "#{APP_NAME} Finished Building")
 
       IOS_IPA = "#{APP_NAME}.ipa"
-      pilot(ipa: IOS_IPA, skip_waiting_for_build_processing: true)
+      # если нужно пропустить апрув
+      # pilot(ipa: IOS_IPA, skip_waiting_for_build_processing: true)
+      pilot(ipa: IOS_IPA)
       notification(subtitle: 'iOS', message: "#{APP_NAME} Uploaded to TestFlight")
 
       clean_build_artifacts

@@ -6,6 +6,8 @@ export const TAB_PROFILE = require('../assets/images/tabs/tab_profile.png')
 export const TAB_LIFEHACKS = require('../assets/images/tabs/tab_lifehacks.png')
 
 // icons
+export const SHARE = require('../assets/images/icons/share.png')
+export const BOOKMARK = require('../assets/images/icons/bookmark.png')
 export const HEART = require('../assets/images/icons/heart.png')
 export const SHUFFLE = require('../assets/images/icons/shuffle.png')
 
