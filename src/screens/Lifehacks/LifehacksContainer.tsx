@@ -9,6 +9,7 @@ import { /* GET_LIFEHACKS, LifehacksData, */ Lifehack } from 'src/apollo'
 // import { names } from 'src/constants'
 import FadeTabs, { TabValue } from './FadeTabs'
 import { withAuthorizedCheck } from 'src/HOCs'
+import firebase from 'react-native-firebase'
 
 // const hasMorePagesSelector = (data?: LifehacksData) =>
 //   L.get(data, 'lifehack.hasMorePages')
@@ -96,11 +97,27 @@ const LifehacksContainer: React.FC<Props> = () => {
     setItems(newItems)
   }
 
-  // FIXME: заполнить и проверить
   const shareItem = (item: Lifehack) => {
-    Share.share({
-      message: `${item.title} ${item.image[0].imageUrl}`,
-    })
+    const link = new firebase.links.DynamicLink(
+      `https://digico.itech-test.ru/life-hacks#${item.id}`,
+      'https://hitfly.page.link',
+    ).android
+      .setPackageName('com.zebrains.hitfly')
+      .ios.setBundleId('team.zebrains.hitfly')
+      .ios.setAppStoreId('1477498408')
+      .social.setTitle('Лайфхаки')
+      .social.setImageUrl(item.image[0].imageUrl)
+      .social.setDescriptionText(item.title)
+
+    firebase
+      .links()
+      .createDynamicLink(link)
+      .then(url => {
+        Share.share({
+          message: `${item.title}`,
+          url: `${url}`,
+        })
+      })
   }
 
   const [mode, setMode] = useState<Mode>('all')
