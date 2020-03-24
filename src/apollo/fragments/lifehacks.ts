@@ -5,9 +5,7 @@ export const COMMON_LIFEHACK = gql`
   fragment CommonLifehack on LifehackType {
     id
     title
-    isFavorite 
-    isBookmarked 
-    favouritesCount 
+    hasFavorite 
     image(sizes: [size_300x300], factor: ${getAdjustedPixelRatio()}) {
       sizeName: size
       imageUrl: url

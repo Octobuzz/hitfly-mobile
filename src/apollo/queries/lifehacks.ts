@@ -17,3 +17,15 @@ export const GET_LIFEHACKS = gql`
   }
   ${COMMON_LIFEHACK}
 `
+
+export const GET_LIKED_LIFEHACKS = gql`
+  query LikedLifehack($limit: Int = 20, $page: Int = 1) {
+    favouriteLifehack(limit: $limit, page: $page) {
+      items: data {
+        ...CommonLifehack
+      }
+      hasMorePages: has_more_pages
+    }
+  }
+  ${COMMON_LIFEHACK}
+`
