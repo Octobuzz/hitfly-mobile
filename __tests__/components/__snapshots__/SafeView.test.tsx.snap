@@ -1,25 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SafeView renders correctly 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
+<SafeAreaView
   style={
-    Object {
-      "flex": 1,
-    }
+    Array [
+      Object {
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+    ]
   }
->
-  <SafeAreaView
-    style={
-      Array [
-        Object {
-          "flexBasis": 0,
-          "flexGrow": 1,
-          "flexShrink": 1,
-        },
-      ]
-    }
-  />
-</View>
+/>
 `;

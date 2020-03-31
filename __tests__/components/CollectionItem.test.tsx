@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '../../jest/test-utils'
+import { render, ReactTestInstanceExtended } from '../../jest/test-utils'
 import { CollectionItem } from 'src/components'
 import { Collection } from 'src/apollo'
 
@@ -15,9 +15,9 @@ describe('CollectionItem', () => {
       collection: item,
       onPress: jest.fn(),
     }
-    const { asJSON } = render(<CollectionItem {...props} />)
+    const { container } = render(<CollectionItem {...props} />)
 
-    expect(asJSON()).toMatchSnapshot()
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('renders correctly with sizes', () => {
@@ -28,8 +28,8 @@ describe('CollectionItem', () => {
       height: 100,
     }
 
-    const { asJSON } = render(<CollectionItem {...props} />)
+    const { container } = render(<CollectionItem {...props} />)
 
-    expect(asJSON()).toMatchSnapshot()
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 })

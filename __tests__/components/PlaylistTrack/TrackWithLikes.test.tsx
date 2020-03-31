@@ -1,5 +1,9 @@
 import React from 'react'
-import { render, fireEvent } from '../../../jest/test-utils'
+import {
+  render,
+  fireEvent,
+  ReactTestInstanceExtended,
+} from '../../../jest/test-utils'
 import { TrackWithLikes } from 'src/components'
 import { Track } from 'src/apollo'
 
@@ -18,19 +22,19 @@ describe('TrackWithLikes', () => {
   } as Track
 
   it('renders correctly', () => {
-    const { asJSON } = render(<TrackWithLikes track={track} />)
-    expect(asJSON()).toMatchSnapshot()
+    const { container } = render(<TrackWithLikes track={track} />)
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('renders correctly in playing state', () => {
-    const { asJSON } = render(<TrackWithLikes isPlaying track={track} />)
-    expect(asJSON()).toMatchSnapshot()
+    const { container } = render(<TrackWithLikes isPlaying track={track} />)
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('renders correctly when liked', () => {
     const likedTrack = { ...track, isFavourite: true } as Track
-    const { asJSON } = render(<TrackWithLikes track={likedTrack} />)
-    expect(asJSON()).toMatchSnapshot()
+    const { container } = render(<TrackWithLikes track={likedTrack} />)
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('can be pressed', () => {

@@ -1,84 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`CheckBoxUI renders correctly in checked state 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
+<TouchableOpacity
+  activeOpacity={0.2}
   style={
-    Object {
-      "flex": 1,
-    }
+    Array [
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+      },
+    ]
   }
+  testID="wrapper"
 >
-  <TouchableOpacity
-    activeOpacity={0.2}
+  <Image
+    isChecked={true}
+    source={
+      Object {
+        "testUri": "../../../src/assets/images/checkbox/checkbox_active.png",
+      }
+    }
     style={
       Array [
         Object {
-          "alignItems": "center",
-          "flexDirection": "row",
+          "marginRight": 16,
         },
       ]
     }
-    testID="wrapper"
-  >
-    <Image
-      isChecked={true}
-      source={
-        Object {
-          "testUri": "../../../src/assets/images/checkbox/checkbox_active.png",
-        }
-      }
-      style={
-        Array [
-          Object {
-            "marginRight": 16,
-          },
-        ]
-      }
-    />
-    test
-  </TouchableOpacity>
-</View>
+  />
+  test
+</TouchableOpacity>
 `;
 
 exports[`CheckBoxUI renders correctly in unchecked state 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
+<TouchableOpacity
+  activeOpacity={0.2}
   style={
-    Object {
-      "flex": 1,
-    }
+    Array [
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+      },
+    ]
   }
+  testID="wrapper"
 >
-  <TouchableOpacity
-    activeOpacity={0.2}
+  <Image
+    source={
+      Object {
+        "testUri": "../../../src/assets/images/checkbox/checkbox_inactive.png",
+      }
+    }
     style={
       Array [
         Object {
-          "alignItems": "center",
-          "flexDirection": "row",
+          "marginRight": 16,
         },
       ]
     }
-    testID="wrapper"
-  >
-    <Image
-      source={
-        Object {
-          "testUri": "../../../src/assets/images/checkbox/checkbox_inactive.png",
-        }
-      }
-      style={
-        Array [
-          Object {
-            "marginRight": 16,
-          },
-        ]
-      }
-    />
-    test
-  </TouchableOpacity>
-</View>
+  />
+  test
+</TouchableOpacity>
 `;

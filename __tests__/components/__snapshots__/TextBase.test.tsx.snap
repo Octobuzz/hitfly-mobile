@@ -1,111 +1,71 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Text Base renders correctly 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
+<Text
   style={
-    Object {
-      "flex": 1,
-    }
+    Array [
+      Object {
+        "color": "#313131",
+        "fontFamily": "GothamPro",
+        "fontSize": 16,
+        "lineHeight": 20,
+      },
+    ]
   }
 >
-  <Text
-    style={
-      Array [
-        Object {
-          "color": "#313131",
-          "fontFamily": "GothamPro",
-          "fontSize": 16,
-          "lineHeight": 20,
-        },
-      ]
-    }
-  >
-    test
-  </Text>
-</View>
+  test
+</Text>
 `;
 
 exports[`Text H1 renders correctly 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
+<Text
   style={
-    Object {
-      "flex": 1,
-    }
+    Array [
+      Object {
+        "color": "#313131",
+        "fontFamily": "GothamPro-Bold",
+        "fontSize": 20,
+        "lineHeight": 20,
+      },
+    ]
   }
 >
-  <Text
-    style={
-      Array [
-        Object {
-          "color": "#313131",
-          "fontFamily": "GothamPro-Bold",
-          "fontSize": 20,
-          "lineHeight": 20,
-        },
-      ]
-    }
-  >
-    test
-  </Text>
-</View>
+  test
+</Text>
 `;
 
 exports[`Text H2 renders correctly 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
+<Text
   style={
-    Object {
-      "flex": 1,
-    }
+    Array [
+      Object {
+        "color": "#313131",
+        "fontFamily": "GothamPro-Bold",
+        "fontSize": 16,
+        "lineHeight": 20,
+      },
+    ]
   }
 >
-  <Text
-    style={
-      Array [
-        Object {
-          "color": "#313131",
-          "fontFamily": "GothamPro-Bold",
-          "fontSize": 16,
-          "lineHeight": 20,
-        },
-      ]
-    }
-  >
-    test
-  </Text>
-</View>
+  test
+</Text>
 `;
 
 exports[`Text Helper renders correctly 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
+<Text
   style={
-    Object {
-      "flex": 1,
-    }
+    Array [
+      Object {
+        "color": "#606060",
+        "fontFamily": "GothamPro",
+        "fontSize": 16,
+        "lineHeight": 20,
+        "marginVertical": 40,
+        "textAlign": "center",
+      },
+    ]
   }
 >
-  <Text
-    style={
-      Array [
-        Object {
-          "color": "#606060",
-          "fontFamily": "GothamPro",
-          "fontSize": 16,
-          "lineHeight": 20,
-          "marginVertical": 40,
-          "textAlign": "center",
-        },
-      ]
-    }
-  >
-    test
-  </Text>
-</View>
+  test
+</Text>
 `;

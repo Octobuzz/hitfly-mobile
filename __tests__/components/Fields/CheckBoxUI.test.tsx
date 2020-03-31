@@ -1,18 +1,22 @@
 import React from 'react'
 import { CheckBoxUI } from 'src/components'
-import { render, fireEvent } from '../../../jest/test-utils'
+import {
+  render,
+  fireEvent,
+  ReactTestInstanceExtended,
+} from '../../../jest/test-utils'
 
 describe('CheckBoxUI', () => {
   it('renders correctly in checked state', () => {
-    const { asJSON } = render(<CheckBoxUI isChecked>test</CheckBoxUI>)
+    const { container } = render(<CheckBoxUI isChecked>test</CheckBoxUI>)
 
-    expect(asJSON()).toMatchSnapshot()
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('renders correctly in unchecked state', () => {
-    const { asJSON } = render(<CheckBoxUI>test</CheckBoxUI>)
+    const { container } = render(<CheckBoxUI>test</CheckBoxUI>)
 
-    expect(asJSON()).toMatchSnapshot()
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('can be pressed in checked state', () => {

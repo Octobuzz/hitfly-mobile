@@ -2,23 +2,24 @@
 
 exports[`TrackMenu renders correctly 1`] = `
 <View
-  collapsable={true}
-  pointerEvents="box-none"
+  noFill={true}
+  paddingBottom={32}
   style={
-    Object {
-      "flex": 1,
-    }
+    Array [
+      Object {
+        "paddingBottom": 32,
+        "paddingHorizontal": 16,
+        "paddingTop": 16,
+      },
+    ]
   }
 >
   <View
-    noFill={true}
-    paddingBottom={32}
     style={
       Array [
         Object {
-          "paddingBottom": 32,
-          "paddingHorizontal": 16,
-          "paddingTop": 16,
+          "alignItems": "center",
+          "flexDirection": "row",
         },
       ]
     }
@@ -27,257 +28,247 @@ exports[`TrackMenu renders correctly 1`] = `
       style={
         Array [
           Object {
-            "alignItems": "center",
-            "flexDirection": "row",
+            "overflow": "hidden",
           },
+          Array [
+            Object {
+              "borderRadius": 4,
+              "height": 32,
+              "marginBottom": 4,
+              "width": 32,
+            },
+          ],
         ]
       }
     >
-      <View
-        style={
-          Array [
-            Object {
-              "overflow": "hidden",
-            },
-            Array [
-              Object {
-                "borderRadius": 4,
-                "height": 32,
-                "marginBottom": 4,
-                "width": 32,
-              },
-            ],
-          ]
+      <FastImageView
+        resizeMode="cover"
+        source={
+          Object {
+            "uri": undefined,
+          }
         }
-      >
-        <FastImageView
-          resizeMode="cover"
-          source={
-            Object {
-              "uri": undefined,
-            }
-          }
-          style={
-            Object {
-              "bottom": 0,
-              "left": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            }
-          }
-        />
-      </View>
-      <View
         style={
-          Array [
-            Object {
-              "flexBasis": 0,
-              "flexGrow": 1,
-              "flexShrink": 1,
-              "marginHorizontal": 16,
-            },
-          ]
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
         }
-      >
-        <Text
-          style={
-            Array [
-              Object {
-                "color": "#ffffff",
-                "fontFamily": "GothamPro-Bold",
-                "fontSize": 12,
-                "lineHeight": 14,
-              },
-            ]
-          }
-        >
-          title
-        </Text>
-        <Text
-          style={
-            Array [
-              Object {
-                "color": "#ffffff",
-                "fontFamily": "GothamPro",
-                "fontSize": 10,
-                "lineHeight": 12,
-                "opacity": 0.6,
-              },
-            ]
-          }
-        />
-      </View>
+      />
     </View>
     <View
       style={
         Array [
           Object {
-            "backgroundColor": "rgba(255, 255, 255, 0.5)",
-            "height": 1,
-            "marginBottom": 34,
-            "marginTop": 24,
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "marginHorizontal": 16,
           },
         ]
       }
-    />
-    <TouchableOpacity
-      activeOpacity={0.2}
-      style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "marginBottom": 34,
-          },
-        ]
-      }
-      testID="like"
     >
-      <View
+      <Text
         style={
           Array [
             Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-              "marginRight": 11,
-              "width": 30,
+              "color": "#ffffff",
+              "fontFamily": "GothamPro-Bold",
+              "fontSize": 12,
+              "lineHeight": 14,
             },
           ]
         }
       >
-        <Image
-          resizeMode="contain"
-          source={
-            Object {
-              "testUri": "../../../src/assets/images/icons/heart.png",
-            }
-          }
-          style={
-            Array [
-              Object {
-                "tintColor": "#ffffff",
-              },
-            ]
-          }
-        />
-      </View>
+        title
+      </Text>
       <Text
         style={
           Array [
             Object {
               "color": "#ffffff",
               "fontFamily": "GothamPro",
-              "fontSize": 14,
-              "lineHeight": 14,
+              "fontSize": 10,
+              "lineHeight": 12,
+              "opacity": 0.6,
             },
           ]
         }
-      >
-        Понравилось
-      </Text>
-    </TouchableOpacity>
-    <TouchableOpacity
-      activeOpacity={0.2}
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "rgba(255, 255, 255, 0.5)",
+          "height": 1,
+          "marginBottom": 34,
+          "marginTop": 24,
+        },
+      ]
+    }
+  />
+  <TouchableOpacity
+    activeOpacity={0.2}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "marginBottom": 34,
+        },
+      ]
+    }
+    testID="like"
+  >
+    <View
       style={
         Array [
           Object {
-            "marginHorizontal": 20,
+            "alignItems": "center",
+            "justifyContent": "center",
+            "marginRight": 11,
+            "width": 30,
           },
         ]
       }
-      testID="cancel"
     >
-      <BVLinearGradient
-        colors={
-          Array [
-            4282554366,
-            4291060189,
-          ]
-        }
-        endPoint={
+      <Image
+        resizeMode="contain"
+        source={
           Object {
-            "x": 0.5,
-            "y": 1,
-          }
-        }
-        locations={null}
-        startPoint={
-          Object {
-            "x": 0.5,
-            "y": 0,
+            "testUri": "../../../src/assets/images/icons/heart.png",
           }
         }
         style={
           Array [
             Object {
-              "borderRadius": 28,
+              "tintColor": "#ffffff",
             },
           ]
         }
+      />
+    </View>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#ffffff",
+            "fontFamily": "GothamPro",
+            "fontSize": 14,
+            "lineHeight": 14,
+          },
+        ]
+      }
+    >
+      Понравилось
+    </Text>
+  </TouchableOpacity>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    style={
+      Array [
+        Object {
+          "marginHorizontal": 20,
+        },
+      ]
+    }
+    testID="cancel"
+  >
+    <BVLinearGradient
+      colors={
+        Array [
+          4282554366,
+          4291060189,
+        ]
+      }
+      endPoint={
+        Object {
+          "x": 0.5,
+          "y": 1,
+        }
+      }
+      locations={null}
+      startPoint={
+        Object {
+          "x": 0.5,
+          "y": 0,
+        }
+      }
+      style={
+        Array [
+          Object {
+            "borderRadius": 28,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "backgroundColor": "#313131",
+              "borderRadius": 28,
+              "marginBottom": 1,
+              "marginLeft": 1,
+              "marginRight": 1,
+              "marginTop": 1,
+              "paddingBottom": 20,
+              "paddingLeft": 29,
+              "paddingRight": 29,
+              "paddingTop": 20,
+            },
+          ]
+        }
+        type="outline-black"
       >
-        <View
+        <Text
           style={
             Array [
               Object {
-                "backgroundColor": "#313131",
-                "borderRadius": 28,
-                "marginBottom": 1,
-                "marginLeft": 1,
-                "marginRight": 1,
-                "marginTop": 1,
-                "paddingBottom": 20,
-                "paddingLeft": 29,
-                "paddingRight": 29,
-                "paddingTop": 20,
+                "color": "#ffffff",
+                "fontFamily": "GothamPro",
+                "fontSize": 16,
+                "lineHeight": 20,
+                "overflow": "hidden",
+                "textAlign": "center",
               },
             ]
           }
           type="outline-black"
         >
-          <Text
-            style={
-              Array [
-                Object {
-                  "color": "#ffffff",
-                  "fontFamily": "GothamPro",
-                  "fontSize": 16,
-                  "lineHeight": 20,
-                  "overflow": "hidden",
-                  "textAlign": "center",
-                },
-              ]
-            }
-            type="outline-black"
-          >
-            Отмена
-          </Text>
-        </View>
-      </BVLinearGradient>
-    </TouchableOpacity>
-  </View>
+          Отмена
+        </Text>
+      </View>
+    </BVLinearGradient>
+  </TouchableOpacity>
 </View>
 `;
 
 exports[`TrackMenu renders correctly with liked track 1`] = `
 <View
-  collapsable={true}
-  pointerEvents="box-none"
+  noFill={true}
+  paddingBottom={32}
   style={
-    Object {
-      "flex": 1,
-    }
+    Array [
+      Object {
+        "paddingBottom": 32,
+        "paddingHorizontal": 16,
+        "paddingTop": 16,
+      },
+    ]
   }
 >
   <View
-    noFill={true}
-    paddingBottom={32}
     style={
       Array [
         Object {
-          "paddingBottom": 32,
-          "paddingHorizontal": 16,
-          "paddingTop": 16,
+          "alignItems": "center",
+          "flexDirection": "row",
         },
       ]
     }
@@ -286,233 +277,222 @@ exports[`TrackMenu renders correctly with liked track 1`] = `
       style={
         Array [
           Object {
-            "alignItems": "center",
-            "flexDirection": "row",
+            "overflow": "hidden",
           },
+          Array [
+            Object {
+              "borderRadius": 4,
+              "height": 32,
+              "marginBottom": 4,
+              "width": 32,
+            },
+          ],
         ]
       }
     >
-      <View
-        style={
-          Array [
-            Object {
-              "overflow": "hidden",
-            },
-            Array [
-              Object {
-                "borderRadius": 4,
-                "height": 32,
-                "marginBottom": 4,
-                "width": 32,
-              },
-            ],
-          ]
+      <FastImageView
+        resizeMode="cover"
+        source={
+          Object {
+            "uri": undefined,
+          }
         }
-      >
-        <FastImageView
-          resizeMode="cover"
-          source={
-            Object {
-              "uri": undefined,
-            }
-          }
-          style={
-            Object {
-              "bottom": 0,
-              "left": 0,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
-            }
-          }
-        />
-      </View>
-      <View
         style={
-          Array [
-            Object {
-              "flexBasis": 0,
-              "flexGrow": 1,
-              "flexShrink": 1,
-              "marginHorizontal": 16,
-            },
-          ]
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
         }
-      >
-        <Text
-          style={
-            Array [
-              Object {
-                "color": "#ffffff",
-                "fontFamily": "GothamPro-Bold",
-                "fontSize": 12,
-                "lineHeight": 14,
-              },
-            ]
-          }
-        >
-          title
-        </Text>
-        <Text
-          style={
-            Array [
-              Object {
-                "color": "#ffffff",
-                "fontFamily": "GothamPro",
-                "fontSize": 10,
-                "lineHeight": 12,
-                "opacity": 0.6,
-              },
-            ]
-          }
-        />
-      </View>
+      />
     </View>
     <View
       style={
         Array [
           Object {
-            "backgroundColor": "rgba(255, 255, 255, 0.5)",
-            "height": 1,
-            "marginBottom": 34,
-            "marginTop": 24,
+            "flexBasis": 0,
+            "flexGrow": 1,
+            "flexShrink": 1,
+            "marginHorizontal": 16,
           },
         ]
       }
-    />
-    <TouchableOpacity
-      activeOpacity={0.2}
-      style={
-        Array [
-          Object {
-            "alignItems": "center",
-            "flexDirection": "row",
-            "marginBottom": 34,
-          },
-        ]
-      }
-      testID="like"
     >
-      <View
+      <Text
         style={
           Array [
             Object {
-              "alignItems": "center",
-              "justifyContent": "center",
-              "marginRight": 11,
-              "width": 30,
+              "color": "#ffffff",
+              "fontFamily": "GothamPro-Bold",
+              "fontSize": 12,
+              "lineHeight": 14,
             },
           ]
         }
       >
-        <Image
-          isActive={true}
-          resizeMode="contain"
-          source={
-            Object {
-              "testUri": "../../../src/assets/images/icons/heart.png",
-            }
-          }
-          style={
-            Array [
-              Object {},
-            ]
-          }
-        />
-      </View>
+        title
+      </Text>
       <Text
         style={
           Array [
             Object {
               "color": "#ffffff",
               "fontFamily": "GothamPro",
-              "fontSize": 14,
-              "lineHeight": 14,
+              "fontSize": 10,
+              "lineHeight": 12,
+              "opacity": 0.6,
             },
           ]
         }
-      >
-        Понравилось
-      </Text>
-    </TouchableOpacity>
-    <TouchableOpacity
-      activeOpacity={0.2}
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "rgba(255, 255, 255, 0.5)",
+          "height": 1,
+          "marginBottom": 34,
+          "marginTop": 24,
+        },
+      ]
+    }
+  />
+  <TouchableOpacity
+    activeOpacity={0.2}
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "marginBottom": 34,
+        },
+      ]
+    }
+    testID="like"
+  >
+    <View
       style={
         Array [
           Object {
-            "marginHorizontal": 20,
+            "alignItems": "center",
+            "justifyContent": "center",
+            "marginRight": 11,
+            "width": 30,
           },
         ]
       }
-      testID="cancel"
     >
-      <BVLinearGradient
-        colors={
-          Array [
-            4282554366,
-            4291060189,
-          ]
-        }
-        endPoint={
+      <Image
+        isActive={true}
+        resizeMode="contain"
+        source={
           Object {
-            "x": 0.5,
-            "y": 1,
-          }
-        }
-        locations={null}
-        startPoint={
-          Object {
-            "x": 0.5,
-            "y": 0,
+            "testUri": "../../../src/assets/images/icons/heart.png",
           }
         }
         style={
           Array [
+            Object {},
+          ]
+        }
+      />
+    </View>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#ffffff",
+            "fontFamily": "GothamPro",
+            "fontSize": 14,
+            "lineHeight": 14,
+          },
+        ]
+      }
+    >
+      Понравилось
+    </Text>
+  </TouchableOpacity>
+  <TouchableOpacity
+    activeOpacity={0.2}
+    style={
+      Array [
+        Object {
+          "marginHorizontal": 20,
+        },
+      ]
+    }
+    testID="cancel"
+  >
+    <BVLinearGradient
+      colors={
+        Array [
+          4282554366,
+          4291060189,
+        ]
+      }
+      endPoint={
+        Object {
+          "x": 0.5,
+          "y": 1,
+        }
+      }
+      locations={null}
+      startPoint={
+        Object {
+          "x": 0.5,
+          "y": 0,
+        }
+      }
+      style={
+        Array [
+          Object {
+            "borderRadius": 28,
+          },
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
             Object {
+              "backgroundColor": "#313131",
               "borderRadius": 28,
+              "marginBottom": 1,
+              "marginLeft": 1,
+              "marginRight": 1,
+              "marginTop": 1,
+              "paddingBottom": 20,
+              "paddingLeft": 29,
+              "paddingRight": 29,
+              "paddingTop": 20,
             },
           ]
         }
+        type="outline-black"
       >
-        <View
+        <Text
           style={
             Array [
               Object {
-                "backgroundColor": "#313131",
-                "borderRadius": 28,
-                "marginBottom": 1,
-                "marginLeft": 1,
-                "marginRight": 1,
-                "marginTop": 1,
-                "paddingBottom": 20,
-                "paddingLeft": 29,
-                "paddingRight": 29,
-                "paddingTop": 20,
+                "color": "#ffffff",
+                "fontFamily": "GothamPro",
+                "fontSize": 16,
+                "lineHeight": 20,
+                "overflow": "hidden",
+                "textAlign": "center",
               },
             ]
           }
           type="outline-black"
         >
-          <Text
-            style={
-              Array [
-                Object {
-                  "color": "#ffffff",
-                  "fontFamily": "GothamPro",
-                  "fontSize": 16,
-                  "lineHeight": 20,
-                  "overflow": "hidden",
-                  "textAlign": "center",
-                },
-              ]
-            }
-            type="outline-black"
-          >
-            Отмена
-          </Text>
-        </View>
-      </BVLinearGradient>
-    </TouchableOpacity>
-  </View>
+          Отмена
+        </Text>
+      </View>
+    </BVLinearGradient>
+  </TouchableOpacity>
 </View>
 `;

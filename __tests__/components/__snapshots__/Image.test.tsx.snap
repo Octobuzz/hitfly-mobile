@@ -2,72 +2,10 @@
 
 exports[`DarkenImage renders correctly 1`] = `
 <View
-  collapsable={true}
-  pointerEvents="box-none"
   style={
-    Object {
-      "flex": 1,
-    }
-  }
->
-  <View
-    style={
-      Array [
-        Object {},
-      ]
-    }
-  >
-    <View
-      style={
-        Array [
-          Object {
-            "overflow": "hidden",
-          },
-          Object {
-            "height": "100%",
-            "width": "100%",
-          },
-        ]
-      }
-    >
-      <FastImageView
-        resizeMode="cover"
-        source={null}
-        style={
-          Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          }
-        }
-      />
-    </View>
-    <View
-      style={
-        Array [
-          Object {
-            "backgroundColor": "rgba(49, 49, 49, 0.1)",
-            "height": "100%",
-            "position": "absolute",
-            "width": "100%",
-          },
-        ]
-      }
-    />
-  </View>
-</View>
-`;
-
-exports[`Image renders correctly with not svg source 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
-  style={
-    Object {
-      "flex": 1,
-    }
+    Array [
+      Object {},
+    ]
   }
 >
   <View
@@ -76,48 +14,10 @@ exports[`Image renders correctly with not svg source 1`] = `
         Object {
           "overflow": "hidden",
         },
-        undefined,
-      ]
-    }
-  >
-    <FastImageView
-      resizeMode="cover"
-      source={
         Object {
-          "uri": "not svg",
-        }
-      }
-      style={
-        Object {
-          "bottom": 0,
-          "left": 0,
-          "position": "absolute",
-          "right": 0,
-          "top": 0,
-        }
-      }
-    />
-  </View>
-</View>
-`;
-
-exports[`Image renders correctly with number source 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
-  style={
-    Object {
-      "flex": 1,
-    }
-  }
->
-  <View
-    style={
-      Array [
-        Object {
-          "overflow": "hidden",
+          "height": "100%",
+          "width": "100%",
         },
-        undefined,
       ]
     }
   >
@@ -135,105 +35,125 @@ exports[`Image renders correctly with number source 1`] = `
       }
     />
   </View>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "rgba(49, 49, 49, 0.1)",
+          "height": "100%",
+          "position": "absolute",
+          "width": "100%",
+        },
+      ]
+    }
+  />
+</View>
+`;
+
+exports[`Image renders correctly with not svg source 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "overflow": "hidden",
+      },
+      undefined,
+    ]
+  }
+>
+  <FastImageView
+    resizeMode="cover"
+    source={
+      Object {
+        "uri": "not svg",
+      }
+    }
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
+</View>
+`;
+
+exports[`Image renders correctly with number source 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "overflow": "hidden",
+      },
+      undefined,
+    ]
+  }
+>
+  <FastImageView
+    resizeMode="cover"
+    source={null}
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  />
 </View>
 `;
 
 exports[`SvgImage renders correctly with default_album 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
-  style={
+<Image
+  source={
     Object {
-      "flex": 1,
+      "testUri": "../../../src/assets/images/default_images/album.png",
     }
   }
->
-  <Image
-    source={
-      Object {
-        "testUri": "../../../src/assets/images/default_images/album.png",
-      }
-    }
-  />
-</View>
+/>
 `;
 
 exports[`SvgImage renders correctly with default_musicgroup 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
-  style={
+<Image
+  source={
     Object {
-      "flex": 1,
+      "testUri": "../../../src/assets/images/default_images/group.png",
     }
   }
->
-  <Image
-    source={
-      Object {
-        "testUri": "../../../src/assets/images/default_images/group.png",
-      }
-    }
-  />
-</View>
+/>
 `;
 
 exports[`SvgImage renders correctly with default_playlist 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
-  style={
+<Image
+  source={
     Object {
-      "flex": 1,
+      "testUri": "../../../src/assets/images/default_images/group.png",
     }
   }
->
-  <Image
-    source={
-      Object {
-        "testUri": "../../../src/assets/images/default_images/group.png",
-      }
-    }
-  />
-</View>
+/>
 `;
 
 exports[`SvgImage renders correctly with default_profile 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
-  style={
+<Image
+  source={
     Object {
-      "flex": 1,
+      "testUri": "../../../src/assets/images/default_images/profile.png",
     }
   }
->
-  <Image
-    source={
-      Object {
-        "testUri": "../../../src/assets/images/default_images/profile.png",
-      }
-    }
-  />
-</View>
+/>
 `;
 
 exports[`SvgImage renders correctly with default_track 1`] = `
-<View
-  collapsable={true}
-  pointerEvents="box-none"
-  style={
+<Image
+  source={
     Object {
-      "flex": 1,
+      "testUri": "../../../src/assets/images/default_images/music.png",
     }
   }
->
-  <Image
-    source={
-      Object {
-        "testUri": "../../../src/assets/images/default_images/music.png",
-      }
-    }
-  />
-</View>
+/>
 `;

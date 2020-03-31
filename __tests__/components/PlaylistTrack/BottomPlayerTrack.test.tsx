@@ -1,5 +1,9 @@
 import React from 'react'
-import { render, fireEvent } from '../../../jest/test-utils'
+import {
+  render,
+  fireEvent,
+  ReactTestInstanceExtended,
+} from '../../../jest/test-utils'
 import { BottomPlayerTrack } from 'src/components'
 import { Track } from 'src/apollo'
 
@@ -18,13 +22,13 @@ describe('BottomPlayerTrack', () => {
   } as Track
 
   it('renders correctly', () => {
-    const { asJSON } = render(<BottomPlayerTrack track={track} />)
-    expect(asJSON()).toMatchSnapshot()
+    const { container } = render(<BottomPlayerTrack track={track} />)
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('renders correctly in playing state', () => {
-    const { asJSON } = render(<BottomPlayerTrack isPlaying track={track} />)
-    expect(asJSON()).toMatchSnapshot()
+    const { container } = render(<BottomPlayerTrack isPlaying track={track} />)
+    expect(container.children[0] as ReactTestInstanceExtended).toMatchSnapshot()
   })
 
   it('can be pressed', () => {
