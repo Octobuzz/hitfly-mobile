@@ -39,8 +39,8 @@ class App extends React.Component {
   }
 
   //TODO: пока нет детального вида лайфхака, но ID их ссылки все равно берем
-  private async initFirebaseLinks() {
-    const [token] = await Promise.all([storage.getToken()])
+  private initFirebaseLinks() {
+    const token = Promise.all([storage.getToken()])
     firebase
       .links()
       .getInitialLink()
