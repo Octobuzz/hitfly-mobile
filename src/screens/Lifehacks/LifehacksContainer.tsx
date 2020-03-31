@@ -1,7 +1,7 @@
 import L from 'lodash'
 import LFP from 'lodash/fp'
 import React, { useState, useMemo } from 'react'
-import { Alert, Share } from 'react-native'
+import { Share } from 'react-native'
 import { showMessage } from 'react-native-flash-message'
 import LifehacksScreen from './Lifehacks'
 import {
@@ -9,7 +9,7 @@ import {
   /* GET_LIFEHACKS, LifehacksData, */ Lifehack,
   LifehacksData,
 } from 'src/apollo'
-import { useQueryWithPagination } from 'src/hooks'
+import { useQueryWithPagination, useLifehackActions } from 'src/hooks'
 import { names } from 'src/constants'
 import FadeTabs, { TabValue } from './FadeTabs'
 import { withAuthorizedCheck } from 'src/HOCs'
@@ -29,51 +29,6 @@ interface Props extends NavigationStackScreenProps {
 }
 
 type Mode = 'all' | 'bookmarks'
-
-const lifehackMocks = [
-  {
-    //   id: 1,
-    //   title: 'title 1',
-    //   image: [
-    //     {
-    //       sizeName: 'size_300x300',
-    //       imageUrl:
-    //         'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
-    //     },
-    //   ],
-    //   isFavorite: false,
-    //   favouritesCount: 0,
-    //   isBookmarked: false,
-    // },
-    // {
-    //   id: 2,
-    //   title: 'title 2',
-    //   image: [
-    //     {
-    //       sizeName: 'size_300x300',
-    //       imageUrl:
-    //         'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
-    //     },
-    //   ],
-    //   isFavorite: false,
-    //   favouritesCount: 0,
-    //   isBookmarked: false,
-    // },
-    // {
-    //   id: 3,
-    //   title: 'title 3',
-    //   image: [
-    //     {
-    //       sizeName: 'size_300x300',
-    //       imageUrl:
-    //         'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
-    //     },
-    //   ],
-    //   isFavorite: false,
-    //   favouritesCount: 0,
-    //   isBookmarked: false,
-  },
-] as Lifehack[]
 
 const LifehacksContainer: React.FC<Props> = ({
   query,
@@ -95,14 +50,21 @@ const LifehacksContainer: React.FC<Props> = ({
     fetchPolicy: 'cache-and-network',
   })
 
-  const [{}, setItems] = useState(lifehackMocks)
+  const [{}, setItems] = useState(items)
 
-  // TODO: мутация
+  const {
+    useLifehackLikedActions,
+    useLifehackFavoriteActions,
+  } = useLifehackActions
+  const { toggleLifehackToFavorites } = useLifehackFavoriteActions()
+  const { toggleLifehackToLiked } = useLifehackLikedActions()
+
   const addToBookmarks = (item: Lifehack): void => {
+    toggleLifehackToFavorites(item)
     const index = LFP.findIndex(({ id }) => id === item.id, items)
-    const newItem = LFP.set('isBookmarked', !item.isBookmarked, item)
+    const newItem = LFP.set('hasFavorite', !item.hasFavorite, item)
     const newItems = LFP.set(index, newItem, items)
-    if (!item.isBookmarked) {
+    if (!item.hasFavorite) {
       showMessage({
         message: `Лайфхак ${item.title} добавлен в закладки`,
         hideStatusBar: true,
@@ -113,12 +75,13 @@ const LifehacksContainer: React.FC<Props> = ({
 
   // TODO: мутация
   const likeItem = (item: Lifehack): void => {
+    toggleLifehackToLiked(item)
     const index = LFP.findIndex(({ id }) => id === item.id, items)
     const newItem = LFP.pipe(
-      LFP.set('hasFavorite', !item.hasFavorite),
+      LFP.set('hasLike', !item.hasLike),
       LFP.set(
         'favouritesCount',
-        item.hasFavorite ? item.favouritesCount - 1 : item.favouritesCount + 1,
+        item.hasLike ? item.countLike - 1 : item.countLike + 1,
       ),
     )(item)
     const newItems = LFP.set(index, newItem, items)
@@ -136,24 +99,22 @@ const LifehacksContainer: React.FC<Props> = ({
       .social.setTitle('Лайфхаки')
       .social.setImageUrl(item.image[0].imageUrl)
       .social.setDescriptionText(item.title)
-
     firebase
       .links()
       .createShortDynamicLink(link, 'UNGUESSABLE')
-      .then(url => {
+      .then(shortUrl => {
         Share.share({
           message: `${item.title}`,
-          url: `${url}`,
+          url: `${shortUrl}`,
         })
       })
   }
 
   const [mode, setMode] = useState<Mode>('all')
-  Alert.alert('title', items.toString())
   const lifehacks = useMemo(() => {
     return mode === 'all'
       ? items
-      : items.filter(({ isBookmarked }) => isBookmarked)
+      : items.filter(({ hasFavorite }) => hasFavorite)
   }, [mode, items])
 
   const values: TabValue<Mode>[] = useMemo(

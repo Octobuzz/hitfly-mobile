@@ -6,6 +6,8 @@ export const COMMON_LIFEHACK = gql`
     id
     title
     hasFavorite 
+    hasLike
+    countLike
     image(sizes: [size_300x300], factor: ${getAdjustedPixelRatio()}) {
       sizeName: size
       imageUrl: url

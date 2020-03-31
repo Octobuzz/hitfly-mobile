@@ -238,6 +238,7 @@ export interface Lifehack {
   title: string
   image: Image[]
   hasFavorite: boolean
-  favouritesCount: number
+  hasLike: boolean
+  countLike: number
   isBookmarked: boolean
 }

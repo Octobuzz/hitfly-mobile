@@ -12,12 +12,11 @@ export interface LifehackFavoritesVariables {
 export const ADD_LIFEHACK_TO_FAVORITES = gql`
   mutation AddLifehackToFavorites($id: Int!) {
     addToFavourites(
-      Favourite: { favouriteableId: $id, favouritableType: lifehack }
+      Favourite: { favouriteableId: $id, favouritableType: life_hack }
     ) {
-      ... on Lifehack {
+      ... on LifehackType {
         id
-        favouritesCount
-        hasFavorite: userFavourite
+        hasFavorite: hasFavorite
       }
     }
   }
@@ -26,12 +25,11 @@ export const ADD_LIFEHACK_TO_FAVORITES = gql`
 export const DELETE_LIFEHACK_FROM_FAVORITES = gql`
   mutation DeleteLifehackFromFavorites($id: Int!) {
     deleteFromFavourite(
-      Favourite: { favouriteableId: $id, favouritableType: track }
+      Favourite: { favouriteableId: $id, favouritableType: life_hack }
     ) {
-      ... on Lifehack {
+      ... on LifehackType {
         id
-        favouritesCount
-        hasFavorite: userFavourite
+        hasFavorite: hasFavorite
       }
     }
   }
@@ -46,11 +44,11 @@ export interface LifehackLikedVariables {
 
 export const ADD_LIFEHACK_TO_LIKED = gql`
   mutation AddLifehackToLiked($id: Int!) {
-    addToLiked(Liked: { likedId: $id, likedType: lifehack }) {
-      ... on Lifehack {
+    addLike(Like: { likeableId: $id, likeableType: life_hack }) {
+      ... on LifehackType {
         id
-        favouritesCount
-        hasFavorite: userFavourite
+        countLike
+        hasLike: hasLike
       }
     }
   }
@@ -58,11 +56,11 @@ export const ADD_LIFEHACK_TO_LIKED = gql`
 
 export const DELETE_LIFEHACK_FROM_LIKED = gql`
   mutation DeleteLifehackFromLiked($id: Int!) {
-    deleteFromLiked(Favourite: { likedId: $id, likedType: track }) {
-      ... on Lifehack {
+    unLikeMutation(Like: { likeableId: $id, likeableType: life_hack }) {
+      ... on LifehackType {
         id
-        favouritesCount
-        hasFavorite: userFavourite
+        countLike
+        hasLike: hasLike
       }
     }
   }

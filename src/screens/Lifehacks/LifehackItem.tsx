@@ -57,7 +57,7 @@ const LifehackItem: React.FC<LifehackItemProps> = ({
   onPressShare,
   onPressBookmark,
 }) => {
-  const { image, isFavorite, favouritesCount = 0, isBookmarked } = lifehack
+  const { image, hasFavorite, countLike, hasLike } = lifehack
   const source = useImageSource(image, NoAvatarSizeNames.S_300)
 
   return (
@@ -65,15 +65,15 @@ const LifehackItem: React.FC<LifehackItemProps> = ({
       <LifehackImage source={source} />
       <BottomRow>
         <IconWrapper onPress={() => onPressLike?.(lifehack)}>
-          <Icon isActive={isFavorite} source={images.HEART} />
-          <LikeText>{favouritesCount}</LikeText>
+          <Icon isActive={hasLike} source={images.HEART} />
+          <LikeText>{countLike}</LikeText>
         </IconWrapper>
         <IconWrapper onPress={() => onPressShare?.(lifehack)}>
           <Icon source={images.SHARE} />
         </IconWrapper>
         <Stretcher />
         <IconWrapper onPress={() => onPressBookmark?.(lifehack)}>
-          <Icon isActive={isBookmarked} source={images.BOOKMARK} />
+          <Icon isActive={hasFavorite} source={images.BOOKMARK} />
         </IconWrapper>
       </BottomRow>
     </Wrapper>
