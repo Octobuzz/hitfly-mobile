@@ -109,6 +109,10 @@ export interface FavouriteCollection extends FavouriteBase, WithTypename {
   collection: Collection
 }
 
+export interface FavouriteLifehack extends FavouriteBase {
+  lifehack: Lifehack
+}
+
 export type Playlist = Track[]
 
 export enum NoAvatarSizeNames {
@@ -226,7 +230,8 @@ export interface Lifehack extends WithTypename {
   id: number
   title: string
   image: Image[]
-  isFavorite: boolean
-  favouritesCount: number
+  hasFavorite: boolean
+  hasLike: boolean
+  countLike: number
   isBookmarked: boolean
 }

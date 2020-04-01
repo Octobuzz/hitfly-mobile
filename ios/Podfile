@@ -43,8 +43,12 @@ target 'hitfly' do
   pod 'Crashlytics', '~> 3.14.0'
 
   pod 'Firebase/Analytics'
+  pod 'Firebase/Core', '~> 6.13.0'
+  pod 'Firebase/DynamicLinks', '~> 6.13.0'
 
   use_native_modules!
 
+
+  pod 'RNFirebase', :path => '../node_modules/react-native-firebase/ios'
 
 end

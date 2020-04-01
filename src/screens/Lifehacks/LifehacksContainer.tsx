@@ -1,79 +1,70 @@
-// import L from 'lodash'
+import L from 'lodash'
 import LFP from 'lodash/fp'
 import React, { useState, useMemo } from 'react'
 import { Share } from 'react-native'
 import { showMessage } from 'react-native-flash-message'
 import LifehacksScreen from './Lifehacks'
-import { /* GET_LIFEHACKS, LifehacksData, */ Lifehack } from 'src/apollo'
-// import { useQueryWithPagination } from 'src/hooks'
-// import { names } from 'src/constants'
+import {
+  GET_LIFEHACKS,
+  /* GET_LIFEHACKS, LifehacksData, */ Lifehack,
+  LifehacksData,
+} from 'src/apollo'
+import { useQueryWithPagination, useLifehackActions } from 'src/hooks'
+import { names } from 'src/constants'
 import FadeTabs, { TabValue } from './FadeTabs'
 import { withAuthorizedCheck } from 'src/HOCs'
+import firebase from 'react-native-firebase'
+import { NavigationStackScreenProps } from 'react-navigation-stack'
+import { DocumentNode } from 'graphql'
 
-// const hasMorePagesSelector = (data?: LifehacksData) =>
-//   L.get(data, 'lifehack.hasMorePages')
-// const itemsSelector = (data?: LifehacksData) =>
-//   L.get(data, 'lifehack.items', [])
+const hasMorePagesSelector = (data?: LifehacksData) =>
+  L.get(data, 'lifehack.hasMorePages')
+const itemsSelector = (data?: LifehacksData) =>
+  L.get(data, 'lifehack.items', [])
 
-interface Props {}
+interface Props extends NavigationStackScreenProps {
+  query: DocumentNode
+  limit?: number
+  transformer?: (data?: any) => Lifehack
+}
 
 type Mode = 'all' | 'bookmarks'
 
-const lifehackMocks = [
-  {
-    id: 1,
-    title: 'title 1',
-    image: [
-      {
-        sizeName: 'size_300x300',
-        imageUrl:
-          'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
-      },
-    ],
-    isFavorite: false,
-    favouritesCount: 0,
-    isBookmarked: false,
-  },
-  {
-    id: 2,
-    title: 'title 2',
-    image: [
-      {
-        sizeName: 'size_300x300',
-        imageUrl:
-          'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
-      },
-    ],
-    isFavorite: false,
-    favouritesCount: 0,
-    isBookmarked: false,
-  },
-  {
-    id: 3,
-    title: 'title 3',
-    image: [
-      {
-        sizeName: 'size_300x300',
-        imageUrl:
-          'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
-      },
-    ],
-    isFavorite: false,
-    favouritesCount: 0,
-    isBookmarked: false,
-  },
-] as Lifehack[]
-
-const LifehacksContainer: React.FC<Props> = () => {
+const LifehacksContainer: React.FC<Props> = ({
+  query,
+  navigation,
+  transformer,
+  ...rest
+}) => {
   // FIXME: тут все временно
-  const [items, setItems] = useState(lifehackMocks)
 
-  // TODO: мутация
+  const {
+    items,
+    refetch,
+    onEndReached,
+    networkStatus,
+  } = useQueryWithPagination<LifehacksData>(GET_LIFEHACKS, {
+    itemsSelector,
+    hasMorePagesSelector,
+    limit: names.LIFEHACKS_LIMIT,
+    fetchPolicy: 'cache-and-network',
+  })
+
+  const [{}, setItems] = useState(items)
+
+  const {
+    useLifehackLikedActions,
+    useLifehackFavoriteActions,
+  } = useLifehackActions
+  const { toggleLifehackToFavorites } = useLifehackFavoriteActions()
+  const { toggleLifehackToLiked } = useLifehackLikedActions()
+
   const addToBookmarks = (item: Lifehack): void => {
+    toggleLifehackToFavorites(item)
     const index = LFP.findIndex(({ id }) => id === item.id, items)
-    const newItem = LFP.set('isBookmarked', !item.isBookmarked, item)
+    const newItem = LFP.set('hasFavorite', !item.hasFavorite, item)
     const newItems = LFP.set(index, newItem, items)
-    if (!item.isBookmarked) {
+    if (!item.hasFavorite) {
       showMessage({
         message: `Лайфхак ${item.title} добавлен в закладки`,
         hideStatusBar: true,
@@ -84,31 +75,46 @@ const LifehacksContainer: React.FC<Props> = () => {
 
   // TODO: мутация
   const likeItem = (item: Lifehack): void => {
+    toggleLifehackToLiked(item)
     const index = LFP.findIndex(({ id }) => id === item.id, items)
     const newItem = LFP.pipe(
-      LFP.set('isFavorite', !item.isFavorite),
+      LFP.set('hasLike', !item.hasLike),
       LFP.set(
         'favouritesCount',
-        item.isFavorite ? item.favouritesCount - 1 : item.favouritesCount + 1,
+        item.hasLike ? item.countLike - 1 : item.countLike + 1,
       ),
     )(item)
     const newItems = LFP.set(index, newItem, items)
     setItems(newItems)
   }
 
-  // FIXME: заполнить и проверить
   const shareItem = (item: Lifehack) => {
-    Share.share({
-      message: `${item.title} ${item.image[0].imageUrl}`,
-    })
+    const link = new firebase.links.DynamicLink(
+      `${names.DOMAIN_URL}life-hacks#${item.id}`,
+      'https://hitfly.page.link',
+    ).android
+      .setPackageName('com.zebrains.hitfly')
+      .ios.setBundleId('team.zebrains.hitfly')
+      .ios.setAppStoreId('1477498408')
+      .social.setTitle('Лайфхаки')
+      .social.setImageUrl(item.image[0].imageUrl)
+      .social.setDescriptionText(item.title)
+    firebase
+      .links()
+      .createShortDynamicLink(link, 'UNGUESSABLE')
+      .then(shortUrl => {
+        Share.share({
+          message: `${item.title}`,
+          url: `${shortUrl}`,
+        })
+      })
   }
 
   const [mode, setMode] = useState<Mode>('all')
-
   const lifehacks = useMemo(() => {
     return mode === 'all'
       ? items
-      : items.filter(({ isBookmarked }) => isBookmarked)
+      : items.filter(({ hasFavorite }) => hasFavorite)
   }, [mode, items])
 
   const values: TabValue<Mode>[] = useMemo(
@@ -132,36 +138,15 @@ const LifehacksContainer: React.FC<Props> = () => {
         likeItem={likeItem}
         shareItem={shareItem}
         addToBookmarks={addToBookmarks}
-        onRefresh={() => {}}
-        onEndReached={() => {}}
-        isFetchingMore={false}
-        isLoading={false}
-        isRefreshing={false}
+        isRefreshing={networkStatus === 4}
+        isLoading={networkStatus === 1}
+        isFetchingMore={networkStatus === 3}
+        onRefresh={refetch}
+        onEndReached={onEndReached}
+        {...rest}
       />
     </FadeTabs>
   )
-
-  // const {
-  //   items,
-  //   refetch,
-  //   onEndReached,
-  //   networkStatus,
-  // } = useQueryWithPagination<LifehacksData>(GET_LIFEHACKS, {
-  //   itemsSelector,
-  //   hasMorePagesSelector,
-  //   limit: names.LIFEHACKS_LIMIT,
-  //   fetchPolicy: 'cache-and-network',
-  // })
-  // return (
-  //   <LifehacksScreen
-  //     lifehacks={items}
-  //     onRefresh={refetch}
-  //     onEndReached={onEndReached}
-  //     isFetchingMore={networkStatus === 3}
-  //     isLoading={networkStatus === 1}
-  //     isRefreshing={networkStatus === 4}
-  //   />
-  // )
 }
 
 export default withAuthorizedCheck({
