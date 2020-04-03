@@ -88,7 +88,7 @@ const LifehacksContainer: React.FC<Props> = ({
     setItems(newItems)
   }
 
-  const shareItem = (item: Lifehack) => {
+  const shareItem = async (item: Lifehack) => {
     const link = new firebase.links.DynamicLink(
       `${names.DOMAIN_URL}life-hacks#${item.id}`,
       'https://hitfly.page.link',
@@ -99,7 +99,7 @@ const LifehacksContainer: React.FC<Props> = ({
       .social.setTitle('Лайфхаки')
       .social.setImageUrl(item.image[0].imageUrl)
       .social.setDescriptionText(item.title)
-    firebase
+    await firebase
       .links()
       .createShortDynamicLink(link, 'UNGUESSABLE')
       .then(shortUrl => {

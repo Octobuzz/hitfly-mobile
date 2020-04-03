@@ -1,7 +1,5 @@
-import React from 'react'
 import { createStackNavigator } from 'react-navigation-stack'
 import {
-  HeaderRightWithProfile,
   // screens
   NewPlaylistScreen,
   GenrePlaylistScreen,
@@ -73,7 +71,6 @@ const MainNavigator = createStackNavigator(
     headerMode: 'screen',
     defaultNavigationOptions: {
       ...stackDefaultOptions,
-      headerRight: <HeaderRightWithProfile />,
     },
   },
 )
