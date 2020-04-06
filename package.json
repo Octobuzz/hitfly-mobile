@@ -22,8 +22,7 @@
     "ios:beta": "bundle exec fastlane ios beta",
     "fastlane:beta": "yarn android:beta && yarn ios:beta",
     "generate": "graphql-codegen --config codegen.yml",
-    "build-android": "cd android && ./gradlew assembleRelease && cd ..",
-    "build-ios": "react-native bundle --entry-file='index.js' --bundle-output='./ios/main.jsbundle' --dev=false --platform='ios'"
+    "build-android": "cd android && ./gradlew assembleRelease && cd .."
   },
   "dependencies": {
     "@apollo/react-components": "^3.1.3",
