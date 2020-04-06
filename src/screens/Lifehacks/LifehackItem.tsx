@@ -27,7 +27,8 @@ const Icon = styled.Image.attrs(() => ({
 const LikeText = styled(TextBase)`
   font-size: 12px;
   line-height: 12px;
-  margin-left: 8px;
+  padding-left: 8px;
+  min-width: 30px;
 `
 
 const IconWrapper = styled.TouchableOpacity`

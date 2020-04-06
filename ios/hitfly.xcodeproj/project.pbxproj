@@ -340,9 +340,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = hitfly/hitfly.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 38;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 68GTLQ6C42;
 				INFOPLIST_FILE = hitfly/Info.plist;
@@ -354,7 +354,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = team.zebrains.hitfly;
 				PRODUCT_NAME = hitfly;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development team.zebrains.hitfly";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore team.zebrains.hitfly 1585902572";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hitfly-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -369,9 +369,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = hitfly/hitfly.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_TEAM = 68GTLQ6C42;
 				INFOPLIST_FILE = hitfly/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -382,7 +382,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = team.zebrains.hitfly;
 				PRODUCT_NAME = hitfly;
-				PROVISIONING_PROFILE_SPECIFIER = "match Development team.zebrains.hitfly";
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore team.zebrains.hitfly 1585902572";
 				SWIFT_OBJC_BRIDGING_HEADER = "Hitfly-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";

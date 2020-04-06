@@ -137,7 +137,7 @@ android {
         applicationId "com.zebrains.hitfly"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 42
+        versionCode 43
         versionName "1.0"
         multiDexEnabled true
     }
@@ -191,6 +191,7 @@ android {
 
 
 dependencies {
+    implementation project(':react-native-share')
     implementation project(':react-native-firebase')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
@@ -199,6 +200,8 @@ dependencies {
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     implementation "com.google.android.gms:play-services-base:17.0.0"
     implementation 'com.google.firebase:firebase-core:16.0.9'
+    implementation "com.google.firebase:firebase-dynamic-links:17.0.0"
+    implementation "com.google.firebase:firebase-invites:17.0.0"
     implementation 'com.android.support:multidex:1.0.3'
     if (enableHermes) {
       def hermesPath = "../../node_modules/hermes-engine/android/";

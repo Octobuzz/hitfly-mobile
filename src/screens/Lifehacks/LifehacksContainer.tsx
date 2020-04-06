@@ -1,7 +1,7 @@
 import L from 'lodash'
 import LFP from 'lodash/fp'
 import React, { useState, useMemo } from 'react'
-import { Share } from 'react-native'
+import Share from 'react-native-share'
 import { showMessage } from 'react-native-flash-message'
 import LifehacksScreen from './Lifehacks'
 import {
@@ -88,7 +88,7 @@ const LifehacksContainer: React.FC<Props> = ({
     setItems(newItems)
   }
 
-  const shareItem = (item: Lifehack) => {
+  const shareItem = async (item: Lifehack) => {
     const link = new firebase.links.DynamicLink(
       `${names.DOMAIN_URL}life-hacks#${item.id}`,
       'https://hitfly.page.link',
@@ -99,13 +99,18 @@ const LifehacksContainer: React.FC<Props> = ({
       .social.setTitle('Лайфхаки')
       .social.setImageUrl(item.image[0].imageUrl)
       .social.setDescriptionText(item.title)
-    firebase
+    const sharedMessage = `${item.title}
+                          ${item.image[0].imageUrl}
+                          `
+    await firebase
       .links()
       .createShortDynamicLink(link, 'UNGUESSABLE')
       .then(shortUrl => {
-        Share.share({
-          message: `${item.title}`,
+        Share.open({
+          title: 'Лайфхаки',
+          message: sharedMessage,
           url: `${shortUrl}`,
+          subject: 'приложение Hitfly',
         })
       })
   }

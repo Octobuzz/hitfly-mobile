@@ -51,4 +51,6 @@ target 'hitfly' do
 
   pod 'RNFirebase', :path => '../node_modules/react-native-firebase/ios'
 
+  pod 'RNShare', :path => '../node_modules/react-native-share'
+
 end
