@@ -1,6 +1,6 @@
 {
   "name": "hitfly",
-  "version": "1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "postuninstall": "yarn run infinite-flatlist-patch",

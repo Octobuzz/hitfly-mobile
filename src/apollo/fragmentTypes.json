@@ -52,6 +52,9 @@
           },
           {
             "name": "Collection"
+          },
+          {
+            "name": "LifehackType"
           }
         ]
       },
@@ -64,6 +67,15 @@
           },
           {
             "name": "FollowMusicGroup"
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "LikeResult",
+        "possibleTypes": [
+          {
+            "name": "LifehackType"
           }
         ]
       },

@@ -1,5 +1,5 @@
 overwrite: true
-schema: 'http://digico.itech-test.ru/graphql'
+schema: 'https://dev-php-hitfly.tmweb.ru/graphql'
 generates:
   src/apollo/fragmentTypes.json:
     plugins:
