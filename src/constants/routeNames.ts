@@ -46,6 +46,7 @@ export default {
 
   PROFILE: {
     PROFILE: `${APP.PROFILE}/profile`,
+    PROFILE_SETTINGS: `${APP.PROFILE}/profile_settings`,
     SETTINGS: `${APP.PROFILE}/settings`,
     ALBUM_PLAYLIST: `${APP.PROFILE}/album_playlist`,
     REMOVE_ACCOUNT: `${APP.PROFILE}/remove_account`,

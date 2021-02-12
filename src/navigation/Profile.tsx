@@ -18,6 +18,7 @@ import {
   MyAlbumsDetailedScreen,
   LikedAlbumsDetailedScreen,
   SelectGenreForProfileScreen,
+  ProfileSettingsScreen,
 } from 'src/screens'
 import { stackDefaultOptions, playlistConfig } from './configs'
 import { routes } from 'src/constants'
@@ -40,6 +41,12 @@ const ProfileNavigator = createStackNavigator(
       screen: SettingsScreen,
       navigationOptions: {
         title: 'Настройки',
+      },
+    },
+    [routes.PROFILE.PROFILE_SETTINGS]: {
+      screen: ProfileSettingsScreen,
+      navigationOptions: {
+        title: 'Настройки профиля',
       },
     },
     [routes.PROFILE.REMOVE_ACCOUNT]: {

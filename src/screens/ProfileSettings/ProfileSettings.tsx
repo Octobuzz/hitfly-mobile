@@ -3,9 +3,8 @@ import * as Yup from 'yup'
 import { Field, FormikProps, withFormik } from 'formik'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
-
 import { View, SafeView, Button, Stretcher, Input } from 'src/components'
-import { ProfileSocialAuth } from 'src/containers/components'
+// import { ProfileSocialAuth } from 'src/containers/components'
 import styled from 'src/styled-components'
 import { transformFormErrors } from 'src/helpers'
 import { strings } from 'src/constants'
@@ -15,18 +14,18 @@ const ChangePasswordButton = styled(Button)`
 `
 
 interface Values {
-  email: string
+  userName: string
 }
 
 interface OuterProps extends NavigationStackScreenProps {
-  email: string
+  userName: string
   onPressChangePassword: () => void
   onSubmit: (values: Values) => Promise<any>
 }
 
 interface Props extends FormikProps<Values>, OuterProps {}
 
-const AuthSettings: React.FC<Props> = ({
+const ProfileSettings: React.FC<Props> = ({
   isValid,
   handleSubmit,
   isSubmitting,
@@ -36,26 +35,30 @@ const AuthSettings: React.FC<Props> = ({
     <SafeView>
       <View>
         <Field
-          name="email"
-          label="E-mail"
+          name="userName"
+          label="Имя"
           component={Input}
           returnKeyType="send"
-          textContentType="emailAddress"
-          autoCompleteType="email"
+          textContentType="username"
           keyboardType="email-address"
           onSubmitEditing={handleSubmit}
           RightIcon={<MaterialIcon size={20} name="mail-outline" />}
         />
-        <ChangePasswordButton
-          onPress={onPressChangePassword}
-          type="outline"
-          title="Изменить пароль"
-        />
-        <ProfileSocialAuth />
+        {/*<Field*/}
+        {/*  name="city"*/}
+        {/*  label="Город"*/}
+        {/*  component={Input}*/}
+        {/*  returnKeyType="send"*/}
+        {/*  textContentType="addressCity"*/}
+        {/*  keyboardType="email-address"*/}
+        {/*  onSubmitEditing={handleSubmit}*/}
+        {/*  RightIcon={<MaterialIcon size={20} name="mail-outline" />}*/}
+        {/*/>*/}
+
         <Stretcher />
         <Button
           onPress={handleSubmit}
-          isDisabled={!isValid || isSubmitting}
+          // isDisabled={!isValid || isSubmitting}
           isLoading={isSubmitting}
           title="Сохранить изменения"
         />
@@ -65,23 +68,24 @@ const AuthSettings: React.FC<Props> = ({
 }
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .required(strings.validation.required)
-    .email(strings.validation.wrongEmail),
+  userName: Yup.string()
+    // .required(strings.validation.required)
+    // .email(strings.validation.wrongEmail),
 })
 
 export default withFormik<OuterProps, Values>({
   validationSchema,
   validateOnMount: true,
-  mapPropsToValues: ({ email }) => ({ email }),
+  mapPropsToValues: ({ userName }) => ({ userName }),
   handleSubmit: async (
     values,
     { props: { onSubmit, navigation, email }, setSubmitting, setErrors },
   ) => {
     try {
-      if (values.email !== email) {
+      debugger;
+      // if (values.userName !== userName) {
         await onSubmit(values)
-      }
+      // }
       navigation.goBack()
     } catch (error) {
       const formErrors = transformFormErrors(error)
@@ -90,4 +94,4 @@ export default withFormik<OuterProps, Values>({
       setSubmitting(false)
     }
   },
-})(AuthSettings)
+})(ProfileSettings)

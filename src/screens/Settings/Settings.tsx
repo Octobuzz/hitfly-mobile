@@ -26,9 +26,13 @@ class Settings extends React.Component<Props> {
     // закоменченный код пусть пока будет здесь
     // в первом релизе решили убрать эти экраны (или ссылки на веб)
     const items: NavigationItem[] = [
-      // {
-      //   title: 'Редактировать профиль',
-      // },
+      {
+        title: 'Редактировать профиль',
+        onPress: () => {
+          navigation.navigate(routes.PROFILE.PROFILE_SETTINGS)
+        },
+      },
+
       {
         title: 'Список любимых жанров',
         onPress: () => {
