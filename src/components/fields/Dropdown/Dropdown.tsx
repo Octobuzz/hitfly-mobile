@@ -48,6 +48,7 @@ class Dropdown extends React.Component<Props, State> {
   }
 
   private selectItem = (option: Option): void => {
+    debugger
     const {
       form: { setFieldValue },
       field: { name },

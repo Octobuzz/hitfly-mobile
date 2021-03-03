@@ -28,53 +28,6 @@ const GET_NAME = gql`
     }
   }
 `
-// ${PROFILE_AVATAR}
-
-// todo => delete
-// const GET_PROFILE_FOR_ABOUT = gql`
-//   query {
-//     profile: myProfile {
-//       userName: username
-//       followersCount
-//       ...ProfileAvatar
-//       roles {
-//         slug
-//       }
-//       playsInGenres: genresPlay {
-//         id
-//         title: name
-//       }
-//       location {
-//         title
-//       }
-//       description
-//       careerStartDate: careerStart
-//       bonusProgramLevel: bpLevelBonusProgram
-//       bonusProgramPoints: bpPoints
-//       daysInBonusProgram: bpDaysInProgram
-//       favouritesTracksCount: favouritesTrackCount
-//       musicGroups {
-//         id
-//         title: name
-//         followersCount
-//         cover: avatarGroup(sizes: [size_32x32]) {
-//           imageUrl: url
-//         }
-//       }
-//     }
-//   }
-//   ${PROFILE_AVATAR}
-// `
-
-
-
-const UPDATE_EMAIL = gql`
-  mutation updateEmail($email: String!) {
-    updateMyProfile(profile: { email: $email }) {
-      email
-    }
-  }
-`
 
 const UPDATE_USERNAME = gql`
   mutation updateUsername($userName: String!) {
@@ -85,8 +38,8 @@ const UPDATE_USERNAME = gql`
 `
 
 const UPDATE_CITY = gql`
-  mutation updateCity($city: String!) {
-    updateMyProfile(profile: { location: { title: $city } }) {
+  mutation updateCity($city: Int!) {
+    updateMyProfile(profile: { cityId: $city }) {
       location {
         title
       }
@@ -94,32 +47,65 @@ const UPDATE_CITY = gql`
   }
 `
 
+const GET_CITIES = gql`
+  query getCities($query: String, $limit: Int!, $page: Int!) {
+    locations(q: $query, limit: $limit, page: $page) {
+      data {
+        id
+        area_region
+        title
+      }
+    }
+  }
+`
 
 interface Props extends NavigationStackScreenProps {}
 
 const ProfileSettingsContainer: React.FC<Props> = props => {
-  // debugger;
   const { data } = useQuery(GET_PROFILE)
+  const { data: dataCities } = useQuery(GET_CITIES, {
+    variables: {
+      limit: 100,
+      page: 1,
+    },
+  })
 
-  const email = L.get(data, 'profile.email', '')
   const userName = L.get(data, 'profile.userName', '')
-  const city = L.get(data, 'profile.location.title', '')
+  const city = L.get(data, 'profile.location.title', '') // текущее значение
+  const cities = L.get(dataCities, 'locations.data', []).map(el => {
+    // список городов - словарь
+    return {
+      ...el,
+      value: el.id,
+    }
+  })
+  // Ставим город на первое место, чтобы он отображался как дефолтный из-за реализации Dropdown
+  if (city !== '') {
+    cities.forEach((el, i, arr) => {
+      debugger
+      if (el.title === city) {
+        const currentCity = arr.splice(i, 1)
+        arr.unshift(currentCity[0])
+      }
+    })
+  }
 
-  const [updateEmail] = useMutation(UPDATE_EMAIL)
   const [updateUsername] = useMutation(UPDATE_USERNAME)
   const [updateCity] = useMutation(UPDATE_CITY)
 
-  // const onSubmit = useCallback(values => updateEmail({ variables: values }), [])
-  const onSubmit = useCallback(values => updateUsername({ variables: values }), [])
-
-  // const onPressChangePassword = useCallback(() => {
-  //   props.navigation.navigate(routes.PROFILE.CHANGE_PASSWORD)
-  // }, [])
+  const onSubmit = useCallback(values => {
+    return Promise.all([
+      updateUsername({ variables: values }),
+      updateCity({ variables: values }),
+    ])
+  }, [])
 
   return (
     <AuthSettingsScreen
       onSubmit={onSubmit}
       userName={userName}
+      cities={cities}
+      city={city}
       {...props}
     />
   )

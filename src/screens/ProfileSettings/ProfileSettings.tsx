@@ -3,11 +3,23 @@ import * as Yup from 'yup'
 import { Field, FormikProps, withFormik } from 'formik'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
-import { View, SafeView, Button, Stretcher, Input } from 'src/components'
-// import { ProfileSocialAuth } from 'src/containers/components'
+
+const indentAttrs = () => ({
+  containerStyle: { marginBottom: 16 },
+})
+
+const IndentedDropdown = styled(Dropdown).attrs(indentAttrs)``
+
+import {
+  Dropdown,
+  View,
+  SafeView,
+  Button,
+  Stretcher,
+  Input,
+} from 'src/components'
 import styled from 'src/styled-components'
 import { transformFormErrors } from 'src/helpers'
-import { strings } from 'src/constants'
 
 const ChangePasswordButton = styled(Button)`
   margin-vertical: 24px;
@@ -15,11 +27,15 @@ const ChangePasswordButton = styled(Button)`
 
 interface Values {
   userName: string
+  cities: any
+  city: any
 }
 
 interface OuterProps extends NavigationStackScreenProps {
   userName: string
-  onPressChangePassword: () => void
+  cities: any
+  city: any
+
   onSubmit: (values: Values) => Promise<any>
 }
 
@@ -29,7 +45,8 @@ const ProfileSettings: React.FC<Props> = ({
   isValid,
   handleSubmit,
   isSubmitting,
-  onPressChangePassword,
+  cities,
+  city,
 }) => {
   return (
     <SafeView>
@@ -44,16 +61,14 @@ const ProfileSettings: React.FC<Props> = ({
           onSubmitEditing={handleSubmit}
           RightIcon={<MaterialIcon size={20} name="mail-outline" />}
         />
-        {/*<Field*/}
-        {/*  name="city"*/}
-        {/*  label="Город"*/}
-        {/*  component={Input}*/}
-        {/*  returnKeyType="send"*/}
-        {/*  textContentType="addressCity"*/}
-        {/*  keyboardType="email-address"*/}
-        {/*  onSubmitEditing={handleSubmit}*/}
-        {/*  RightIcon={<MaterialIcon size={20} name="mail-outline" />}*/}
-        {/*/>*/}
+        <Field
+          component={IndentedDropdown}
+          name="city"
+          label="Город"
+          options={cities}
+          onSubmitEditing={handleSubmit}
+          RightIcon={<MaterialIcon size={20} name="mail-outline" />}
+        />
 
         <Stretcher />
         <Button
@@ -68,24 +83,36 @@ const ProfileSettings: React.FC<Props> = ({
 }
 
 const validationSchema = Yup.object().shape({
-  userName: Yup.string()
-    // .required(strings.validation.required)
-    // .email(strings.validation.wrongEmail),
+  userName: Yup.string(),
+  // .required(strings.validation.required)
+  // .email(strings.validation.wrongEmail),
+  cities: Yup.array(),
+  city: Yup.string(),
 })
 
 export default withFormik<OuterProps, Values>({
   validationSchema,
   validateOnMount: true,
-  mapPropsToValues: ({ userName }) => ({ userName }),
+  mapPropsToValues: ({ userName, cities, city }) => ({
+    userName,
+    cities,
+    city,
+  }),
   handleSubmit: async (
     values,
-    { props: { onSubmit, navigation, email }, setSubmitting, setErrors },
+    {
+      props: { onSubmit, navigation, email, userName },
+      setSubmitting,
+      setErrors,
+    },
   ) => {
     try {
-      debugger;
-      // if (values.userName !== userName) {
+      console.log('values', values)
+      debugger
+      if (values.userName !== userName) {
+        // if (values.city !== city) {
         await onSubmit(values)
-      // }
+      }
       navigation.goBack()
     } catch (error) {
       const formErrors = transformFormErrors(error)
