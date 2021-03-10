@@ -135,7 +135,7 @@ android {
 
     defaultConfig {
         applicationId "com.zebrains.hitfly"
-        minSdkVersion rootProject.ext.minSdkVersion
+        minSdkVersion 21
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 43
         versionName "1.0"

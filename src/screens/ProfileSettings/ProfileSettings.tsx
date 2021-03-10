@@ -4,6 +4,8 @@ import { Field, FormikProps, withFormik } from 'formik'
 import { NavigationStackScreenProps } from 'react-navigation-stack'
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
+import ImagePicker from './ImagePicker'
+
 const indentAttrs = () => ({
   containerStyle: { marginBottom: 16 },
 })
@@ -67,13 +69,15 @@ const ProfileSettings: React.FC<Props> = ({
           label="Город"
           options={cities}
           onSubmitEditing={handleSubmit}
-          RightIcon={<MaterialIcon size={20} name="mail-outline" />}
+          RightIcon={<MaterialIcon size={20} name="fence" />}
         />
+
+        {/*<ImagePicker />*/}
 
         <Stretcher />
         <Button
           onPress={handleSubmit}
-          // isDisabled={!isValid || isSubmitting}
+          isDisabled={!isValid || isSubmitting}
           isLoading={isSubmitting}
           title="Сохранить изменения"
         />
@@ -108,9 +112,7 @@ export default withFormik<OuterProps, Values>({
   ) => {
     try {
       console.log('values', values)
-      debugger
-      if (values.userName !== userName) {
-        // if (values.city !== city) {
+      if (values.userName !== userName && values.city !== city) {
         await onSubmit(values)
       }
       navigation.goBack()

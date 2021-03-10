@@ -82,8 +82,7 @@ const ProfileSettingsContainer: React.FC<Props> = props => {
   // Ставим город на первое место, чтобы он отображался как дефолтный из-за реализации Dropdown
   if (city !== '') {
     cities.forEach((el, i, arr) => {
-      debugger
-      if (el.title === city) {
+      if (el && el.title === city) {
         const currentCity = arr.splice(i, 1)
         arr.unshift(currentCity[0])
       }
