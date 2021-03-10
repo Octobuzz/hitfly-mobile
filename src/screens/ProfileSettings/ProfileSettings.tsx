@@ -105,7 +105,7 @@ export default withFormik<OuterProps, Values>({
   handleSubmit: async (
     values,
     {
-      props: { onSubmit, navigation, email, userName },
+      props: { onSubmit, navigation, email, userName, city },
       setSubmitting,
       setErrors,
     },
