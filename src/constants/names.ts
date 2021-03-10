@@ -1,6 +1,6 @@
 export const APP_NAME = 'hitfly'
 // export const DOMAIN_URL = 'https://digico.itech-test.ru/' // - тестовый
-export const DOMAIN_URL = 'https://hitfly.maxinteam.ru/'
+export const DOMAIN_URL = 'https://dev-php-hitfly.tmweb.ru/'
 // export const DOMAIN_URL = 'https://myhitfly.ru/' - старый прод
 export const BASE_URL = `${DOMAIN_URL}graphql`
 

@@ -69,7 +69,7 @@ const ProfileSettings: React.FC<Props> = ({
           label="Город"
           options={cities}
           onSubmitEditing={handleSubmit}
-          RightIcon={<MaterialIcon size={20} name="fence" />}
+          RightIcon={<MaterialIcon size={20} name="location-city" />}
         />
 
         {/*<ImagePicker />*/}
